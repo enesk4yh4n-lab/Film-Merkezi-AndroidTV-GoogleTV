@@ -17,6 +17,7 @@ class DistributionProbeRunner:Instrumentation() {
                 "seed"->MigrationTransferProbe().seedVerificationData()
                 "import"->MigrationTransferProbe().importPreviouslyExportedData()
                 "worker"->{val test=PluginWorkerTest();test.allThirtyTwoSignedEntriesStartInWorker();test.parserRunsAcrossPipeAndMatchesJvmSchema();test.independentPublisherTypedErrorAndUncooperativeCancellation();test.setValidationRejectsMissingDependencyAndRecoverRestoresWholeSet()}
+                "timeout"->PluginWorkerTest().independentPublisherTypedErrorAndUncooperativeCancellation()
                 "download"->DistributionSmokeTest().githubRepositoryDownloadsAndStagesSignedDependencySet()
                 "ui"->DistributionSmokeTest().emptyHomeOpensClassicNativeUpdatePanelAndBackReturnsFocus()
                 "playback"->PublicationPlaybackTest().signedModulesAndMedia3PreserveCookieHeadersAndProgress()

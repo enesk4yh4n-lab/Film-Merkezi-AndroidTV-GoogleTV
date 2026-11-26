@@ -1,0 +1,116 @@
+{
+  "date": "2026-11-26",
+  "platform": "x86_64 emulator",
+  "actualArmDevice": false,
+  "compileSdk": 37,
+  "minSdk": 23,
+  "targetSdk": 36,
+  "release": {
+    "schemaVersion": 1,
+    "packageName": "app.filmmerkezi.tv",
+    "versionCode": 36,
+    "versionName": "0.12.0",
+    "minSdk": 23,
+    "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.12.0/Film-Merkezi-Android-TV-0.12.0.apk",
+    "size": 5302593,
+    "sha256": "bf1cb1f93e9178828ee2e3c4bbf1bca39b8d3946e0abb807a8507cf288922af8",
+    "certificateSha256": "73753d46c206a8f651067541b12f5e038a5d207cca4bee21f8f984a27ed197ed",
+    "notes": "Film Merkezi 0.12.0: native çekirdek ve ayrı imzalı site/çözümleyici paketleri.\n\nGüncelleme Merkezi, GitHub depo keşfi, kullanıcı tarafından yayıncı güveni, bağımlılık denetimi, paket geri dönüşü ve kayıt aktarımı eklendi. 16 site için 32 paket ayrı eklenti deposundadır. Hiçbir depo önceden seçilmez.\n\nKontroller otomatik; indirme ve uygulama kullanıcı seçimiyledir. Klasik arayüz, logo, kayıtlar ve tek Media3 korunur. Yalnız site/çözümleyici güncellemeleri APK değiştirmeden yapılabilir; native özellikler APK güncellemesi gerektirir.\n\nEski deneme imzalı kurulumlarda önce 0.11.5 aktarım APK'sını kurup yedeği uygulama dışına kaydedin. Yedeği doğrulamadan eski uygulamayı kaldırmayın. Kalıcı imzaya ilk geçiş farklı sertifika nedeniyle normal üzerine kurulum değildir. Ayrıntılar: docs/android-signing-migration.md.\n\nEmülatör doğrulamaları yapılmıştır; gerçek ARM TV kabulü henüz yapılmadı. Eklenti yayıncıları güvenilir olmalıdır; yardımcı süreç kötü niyetli kod için güvenlik sandbox'ı değildir."
+  },
+  "moduleSet": {
+    "tag": "builtin-v1.0.0",
+    "commit": "7b10a12",
+    "sites": 16,
+    "packages": 32,
+    "sharedArtifactBytes": 123649
+  },
+  "ci": {
+    "run": 45860939534,
+    "tests": 304,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1,
+    "skippedCase": "SourceFixtureTest/babam-home-service"
+  },
+  "jvm": {
+    "adapterCases": 102,
+    "adapterPassed": 101,
+    "adapterSkipped": 1,
+    "protocolPassed": 5,
+    "cookiePassed": 1,
+    "lastKernelPassed": 10
+  },
+  "devices": {
+    "api24": {
+      "tests": 7,
+      "seconds": 38.882
+    },
+    "api26": {
+      "workerProbe": "PASS",
+      "upgrade34to35": "PASS"
+    },
+    "api29": {
+      "workerTests": 4,
+      "workerSeconds": 7.133,
+      "transferTests": 4,
+      "releaseWorker": "PASS",
+      "githubDownload": "PASS",
+      "classicUi": "PASS"
+    },
+    "api35": {
+      "tests": 7,
+      "seconds": 33.182
+    }
+  },
+  "debugPlayback": {
+    "firstFrame": true,
+    "positionMs": 20204,
+    "firstFrameMs": 1359,
+    "combinedPeakPssKiB": 125445,
+    "rebufferCount": 0,
+    "rebufferMs": 0,
+    "engineInstancesUsed": 1,
+    "sourceSwitches": 0
+  },
+  "releaseCandidatePlayback": {
+    "firstFrame": true,
+    "positionMs": 20842,
+    "firstFrameMs": 10734,
+    "combinedPeakPssKiB": 85350,
+    "rebufferCount": 0,
+    "rebufferMs": 0,
+    "engineInstancesUsed": 1,
+    "sourceSwitches": 0
+  },
+  "migration": {
+    "identicalPayload": true,
+    "from": "0.11.5 old debug certificate",
+    "to": "0.12.0 permanent certificate",
+    "tables": {
+      "film-library.db": {
+        "library": 1,
+        "searches": 1,
+        "playback_journal": 0
+      },
+      "film-works.db": {
+        "works": 1,
+        "sources": 1,
+        "tokens": 3,
+        "redirects": 0,
+        "discovery": 0
+      },
+      "film-series.db": {
+        "series": 1,
+        "marks": 1
+      },
+      "film-playback-preferences.db": {
+        "overrides": 1
+      }
+    }
+  },
+  "restart": {
+    "Before": "4855",
+    "After": "4970",
+    "Restarted": true
+  }
+}

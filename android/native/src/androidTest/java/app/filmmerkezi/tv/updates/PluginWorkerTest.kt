@@ -72,6 +72,9 @@ class PluginWorkerTest {
         delay(250)
         assertTrue(client.probe(key,JSONObject().put("site",m.site)).getBoolean("independent"))
         assertTrue(android.os.Process.myPid()>0)
+        // Exercise the actual 10-second native watchdog, without a caller timeout.
+        try{client.probe(key,JSONObject().put("site",m.site).put("spin",true));fail()}catch(e:DataFailure){assertEquals(FailureKind.TIMEOUT,e.kind);assertEquals("plugin",e.stage)}
+        assertTrue(client.probe(key,JSONObject().put("site",m.site)).getBoolean("independent"))
     }}
     @Test fun setValidationRejectsMissingDependencyAndRecoverRestoresWholeSet()=runBlocking{withSet{_->
         val before=manager.store.snapshot();val original=before.getJSONObject("packages")
