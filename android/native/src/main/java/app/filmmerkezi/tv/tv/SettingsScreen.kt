@@ -74,6 +74,8 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
                 v.siteOrder.forEach{id->val site=Sites.get(id);rows.add(Row("site:$id",site.name,context.getString(R.string.settings_site_state,on(id !in v.disabledCatalog),on(v.sourceAllowed(id)))){site(id)})}
             }
             "about"->{
+                row("updates",R.string.updates_title){DistributionPanel(activity,scope,maintenance.playing).open()}
+                row("transfer",R.string.transfer_title,help=s(R.string.transfer_help)){(activity as TvActivity).openDataTransfer()}
                 row("about",R.string.settings_licenses){information(R.string.settings_licenses){maintenance.licenses()}}
                 row("device",R.string.settings_device,android.os.Build.MODEL+" · API "+android.os.Build.VERSION.SDK_INT){information(R.string.settings_device){maintenance.deviceInfo()}}
                 row("diagnostics",R.string.tv_player_diagnostics,on(v.diagnostics)){update{it.copy(diagnostics=!it.diagnostics)}}

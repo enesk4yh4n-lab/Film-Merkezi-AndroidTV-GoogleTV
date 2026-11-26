@@ -40,12 +40,13 @@ data class Subtitle(val url: String, val label: String = "Altyazı", val languag
 data class MediaProfile(val videoCodec: String? = null, val audioCodec: String? = null, val width: Int? = null, val height: Int? = null)
 data class MediaAudio(val url:String,val language:String="",val label:String="",val mimeType:String="audio/mp4")
 data class MediaVariant(val id:String,val url:String,val height:Int,val width:Int=0,val audio:List<MediaAudio> = emptyList(),val codec:String="",val fps:Int=0,val mimeType:String="video/mp4")
+data class SessionCookie(val name:String,val value:String,val domain:String,val path:String,val expiresAt:Long,val secure:Boolean,val httpOnly:Boolean,val hostOnly:Boolean)
 data class ResolvedSource(
     val id: String, val label: String, val url: String, val type: StreamType,
     val referer: String = "", val userAgent: String = "", val cookie: String = "",
     val headers: Map<String, String> = emptyMap(), val subtitles: List<Subtitle> = emptyList(),
     val playbackRequirements: Set<String> = emptySet(), val mediaProfile: MediaProfile? = null,
-    val expiresAt: Long? = null, val audioStreams:List<MediaAudio> = emptyList(), val variants:List<MediaVariant> = emptyList()
+    val expiresAt: Long? = null, val audioStreams:List<MediaAudio> = emptyList(), val variants:List<MediaVariant> = emptyList(),val sessionCookies:List<SessionCookie> = emptyList()
 )
 enum class FailureKind { NETWORK, TIMEOUT, HTTP, ACCESS, PARSE, UNSUPPORTED, LIMIT, STORAGE }
 class DataFailure(

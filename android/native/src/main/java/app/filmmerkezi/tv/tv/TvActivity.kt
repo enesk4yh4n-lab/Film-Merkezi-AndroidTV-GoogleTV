@@ -34,6 +34,10 @@ class TvActivity:FragmentActivity() {
     private lateinit var data:TvData
     private lateinit var settings:app.filmmerkezi.tv.settings.SettingsRepository
     private var settingsScreen:SettingsScreen?=null
+    private var transferPanel:DataTransferPanel?=null
+    internal fun openDataTransfer(){transferPanel=DataTransferPanel(this,scope,{::playback.isInitialized&&playback.active}).also{it.open()}}
+    @Deprecated("Framework file picker bridge")
+    override fun onActivityResult(requestCode:Int,resultCode:Int,data:android.content.Intent?){if(transferPanel?.result(requestCode,resultCode,data)==true)return;super.onActivityResult(requestCode,resultCode,data)}
     private var playbackOverrides=app.filmmerkezi.tv.settings.PlaybackOverrides()
     private var preferenceRevision=0
     private var adultBlocked=false
@@ -124,6 +128,7 @@ class TvActivity:FragmentActivity() {
 
     override fun onCreate(savedInstanceState:Bundle?) {
         super.onCreate(savedInstanceState)
+        if(dataFactoryForTests==null)try{app.filmmerkezi.tv.updates.DataTransferStore(this).applyPending()?.let{Toast.makeText(this,it,Toast.LENGTH_LONG).show()}}catch(e:Exception){Toast.makeText(this,e.message,Toast.LENGTH_LONG).show()}
         @Suppress("DEPRECATION")
         window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         services=TvServices.get(this);data=dataFactoryForTests?.invoke(this)?:services;settings=services.settings;settings.reload()
@@ -150,6 +155,13 @@ class TvActivity:FragmentActivity() {
         if(savedInstanceState?.getBoolean("interfaceSetup")==true||!UiPreferences(this).configured&&(dataFactoryForTests==null||forceSetupForTests))showInterfaceSetup()else render(restored)
         scope.launch{while(isActive){delay(15000);if(foreground&&playback.active)saveProgress()}}
         scope.launch{while(isActive){delay(1000);if(sleepExpired()&&playback.active&&!finishBusy&&!exitOpen)finishForSleep()}}
+        if(dataFactoryForTests==null){
+            val distribution=app.filmmerkezi.tv.updates.DistributionManager.get(this)
+            scope.launch{while(isActive){if(foreground)distribution.foreground(playback.active);delay(60000)}}
+            scope.launch{distribution.status.collect{v->
+                if(v.release!=null||v.moduleUpdates>0)findViewById<Button>(R.id.tv_nav_about)?.apply{text=getString(R.string.updates_new_badge);setTextColor(ClassicUi.gold)}
+            }}
+        }
         scope.launch{var previous=settings.value;settings.changes.collect{v->
             if(playback.active){applyPlayerSettings()
                 if(v.disabledSources!=previous.disabledSources||v.crossSiteSources!=previous.crossSiteSources||v.automaticSources!=previous.automaticSources)sourceSettingsChanged()
@@ -170,6 +182,12 @@ class TvActivity:FragmentActivity() {
             catch(e:CancellationException){throw e}catch(e:Exception){if(active(token)){if((e as? DataFailure)?.stage=="adult-filter"){
                 status.setText(R.string.settings_filtered);grid?.show(listOf(statusTile(R.string.settings_filtered,"settings")))
             }else showError()}}}.also{work.add(it)}
+    }
+    internal suspend fun quiesceForDistribution(){
+        check(!playback.active)
+        val pending=work.toList();cancelWork();pending.joinAll()
+        val sources=listOfNotNull(sourcePoolJob,sourceStartJob,sourceDeadlineJob,neighbourJob,entryJob)
+        sources.forEach{it.cancel()};sources.joinAll()
     }
     private fun cancelWork(){generation++;work.forEach{it.cancel()};work.clear()}
     private fun navigate(next:TvNav,push:Boolean=false) {
@@ -195,6 +213,7 @@ class TvActivity:FragmentActivity() {
                 if(queryView?.hasFocus()==true)(navigation[current.screen]?:navigation[TvScreen.HOME])?.requestFocus()else focusAboveContent()
             }
         navigation.clear();navigation.putAll(shell.navigation);queryView=shell.query
+        if(dataFactoryForTests==null){val update=app.filmmerkezi.tv.updates.DistributionManager.get(this).status.value;if(update.release!=null||update.moduleUpdates>0)shell.root.findViewById<Button>(R.id.tv_nav_about)?.apply{text=getString(R.string.updates_new_badge);setTextColor(ClassicUi.gold)}}
         ui.addView(shell.root,LinearLayout.LayoutParams(-1,dp(88)))
         body=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setPadding(dp(37),0,dp(37),0)}
         ui.addView(body,LinearLayout.LayoutParams(-1,0,1f))
@@ -216,7 +235,11 @@ class TvActivity:FragmentActivity() {
         footer.addView(ClassicUi.text(this,getString(R.string.classic_enjoy),10f,0xFFA69370.toInt()).apply{gravity=Gravity.CENTER_VERTICAL},FrameLayout.LayoutParams(-2,dp(22),Gravity.RIGHT or Gravity.BOTTOM))
         ui.addView(footer,LinearLayout.LayoutParams(-1,dp(26)))
         playerView?.apply{useController=false;keepScreenOn=false;isFocusable=false;descendantFocusability=android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS}
-        when(state.screen){
+        val needsRepository=dataFactoryForTests==null&&!app.filmmerkezi.tv.BuildConfig.MIGRATION&&Sites.all.isEmpty()&&state.screen in setOf(TvScreen.HOME,TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER,TvScreen.SEARCH)
+        if(needsRepository){
+            body.addView(label(R.string.updates_no_sites,18f));body.addView(label(R.string.updates_no_sites_help,12f))
+            body.addView(button(getString(R.string.updates_add_repository)){DistributionPanel(this,scope,{playback.active}).open()},LinearLayout.LayoutParams(dp(260),dp(38)))
+        }else when(state.screen){
             TvScreen.HOME->home()
             TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER->catalog()
             TvScreen.SEARCH->search()
@@ -492,8 +515,8 @@ class TvActivity:FragmentActivity() {
     }
     private fun recentSearches(){launchScreen{token->val values=data.searches();if(active(token))dialog=ClassicDialog.Builder(this@TvActivity).setTitle(R.string.tv_search_history)
         .setItems(values.toTypedArray()){_,i->submitSearch(values[i])}.setNegativeButton(R.string.tv_cancel,null).create().also{it.show()}}}
-    private fun classicOptions(){dialog=ClassicDialog.Builder(this).setTitle(R.string.classic_options).setItems(arrayOf(getString(R.string.settings_title),getString(R.string.pool_settings),getString(R.string.tv_about),getString(R.string.tv_exit))){_,i->
-        when(i){0->showSettings();1->sourceSettings();2->navigate(TvNav(TvScreen.ABOUT));3->askAppExit()}
+    private fun classicOptions(){dialog=ClassicDialog.Builder(this).setTitle(R.string.classic_options).setItems(arrayOf(getString(R.string.settings_title),getString(R.string.pool_settings),getString(R.string.updates_title),getString(R.string.tv_about),getString(R.string.tv_exit))){_,i->
+        when(i){0->showSettings();1->sourceSettings();2->DistributionPanel(this,scope,{playback.active}).open();3->navigate(TvNav(TvScreen.ABOUT));4->askAppExit()}
     }.setNegativeButton(R.string.tv_cancel,null).create().also{it.show()}}
     private fun showInterfaceSetup(){
         setupShowing=true;cancelWork();if(::ui.isInitialized)host.removeView(ui)

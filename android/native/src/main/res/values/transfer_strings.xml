@@ -1,0 +1,11 @@
+<resources>
+    <string name="transfer_title">Kayıt aktarımı</string>
+    <string name="transfer_export">Kayıtları dosyaya aktar</string>
+    <string name="transfer_import">Aktarım dosyasını aç</string>
+    <string name="transfer_help">Listem, geçmiş, devam, dizi işaretleri ve ayarlar aktarılır. Çerezler ve eklenti yayıncı güvenleri aktarılmaz. Kalıcı imzaya geçerken eski uygulamayı kaldırmadan önce dosyanın dışarı kaydedildiğini doğrulayın.</string>
+    <string name="transfer_confirm">%1$d kayıt hazırlandı. Mevcut izleme kayıtları ve ayarlar bu dosyadakilerle değiştirilecek. Uygulama yeniden açılacak.</string>
+    <string name="transfer_apply">Aktar ve yeniden aç</string>
+    <string name="transfer_saved">Aktarım dosyası dışarı kaydedildi.</string>
+    <string name="transfer_working">Kayıt aktarımı hazırlanıyor…</string>
+    <string name="transfer_picker_missing">Bu TV’de dosya seçici yok. Bilgisayardan ADB ile aktarım kullanılabilir. Dosya: %1$s</string>
+</resources>

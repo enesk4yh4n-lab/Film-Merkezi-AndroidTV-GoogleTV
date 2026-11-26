@@ -22,11 +22,12 @@ data class WebResponse(val url: String, val body: String, val code: Int = 200, v
 interface WebTransport { suspend fun request(request: WebRequest): WebResponse }
 
 /** Application-owned metadata transport. Cancellation affects only the caller's Call. */
-class ProviderNetwork(context: Context) : WebTransport {
+class ProviderNetwork(context: Context,private val originPolicy:((HttpUrl)->Unit)?=null,sharedPool:ConnectionPool?=null,private val cookies:MutableList<Cookie> = mutableListOf()) : WebTransport {
     private val slots = Semaphore(2)
-    private val cookies = mutableListOf<Cookie>()
     val client: OkHttpClient = LegacyTls.configure(context.applicationContext, OkHttpClient.Builder()
-        .connectionPool(ConnectionPool(3,1,TimeUnit.MINUTES))
+        .connectionPool(sharedPool?:ConnectionPool(3,1,TimeUnit.MINUTES))
+        .addNetworkInterceptor{chain->try{originPolicy?.invoke(chain.request().url)}catch(e:Exception){throw IOException(e.message,e)};chain.proceed(chain.request())}
+        .dns(object:Dns{override fun lookup(hostname:String)=Dns.SYSTEM.lookup(hostname).also{addresses->if(originPolicy!=null&&addresses.any{it.isAnyLocalAddress||it.isLoopbackAddress||it.isSiteLocalAddress||it.isLinkLocalAddress||it.isMulticastAddress||it.address.size==16&&(it.address[0].toInt()and 0xfe)==0xfc})throw IOException("Yerel ağ adresine paket isteği reddedildi")}})
         .connectTimeout(8,TimeUnit.SECONDS).readTimeout(12,TimeUnit.SECONDS)
         .addInterceptor { chain ->
             val r=chain.request()

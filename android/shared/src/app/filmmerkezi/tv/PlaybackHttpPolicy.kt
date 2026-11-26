@@ -27,7 +27,7 @@ internal object PlaybackHttpPolicy {
         val explicit=(cookieKey?.let{extra?.optString(it)}?:source.optString("cookie")).orEmpty().takeIf{it.isNotBlank()&&it!="null"}
         // BridgeInterceptor would otherwise replace an explicit source Cookie with its jar.
         val mediaBase=mediaTransport(source,base,android.os.Build.VERSION.SDK_INT)
-        val transport=if(explicit==null)mediaBase else mediaBase.newBuilder().cookieJar(object:CookieJar{
+        val transport=if(explicit==null){if((source.optJSONArray("sessionCookies")?.length()?:0)>0)mediaBase.newBuilder().cookieJar(SessionCookies(source)).build()else mediaBase}else mediaBase.newBuilder().cookieJar(object:CookieJar{
             override fun loadForRequest(url:HttpUrl)=emptyList<Cookie>()
             override fun saveFromResponse(url:HttpUrl,cookies:List<Cookie>){base.cookieJar.saveFromResponse(url,cookies)}
         }).build()

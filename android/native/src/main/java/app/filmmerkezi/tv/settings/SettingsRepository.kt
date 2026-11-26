@@ -35,7 +35,7 @@ object SettingsCodec {
         fun b(k:String,d:Boolean)=values.b(k,legacy.b(k,d))
         fun i(k:String,d:Int)=values.i(k,legacy.i(k,d))
         fun s(k:String,d:String)=values.s(k,legacy.s(k,d))
-        val sites=Sites.all.map{it.id};fun ids(k:String)=(values[k]as? Set<*>)?.filterIsInstance<String>()?.filter{it in sites}?.toSet().orEmpty()
+        val sites=Sites.known.map{it.id};fun ids(k:String)=(values[k]as? Set<*>)?.filterIsInstance<String>()?.filter{it in sites}?.toSet().orEmpty()
         fun order(k:String,all:List<String>)=(values.s(k,"").split('|').filter{it in all}.distinct()+all).distinct()
         val rows=listOf("continue","following","movies","series","library")
         val textMode=en(values.s("subtitlePolicy",if(legacy.b("textEnabled",true))"AUTO"else "OFF"),SubtitlePolicy.AUTO)

@@ -8,3 +8,16 @@
 -dontwarn jdk.dynalink.**
 -keep class org.schabi.newpipe.extractor.timeago.patterns.** { *; }
 -keepclassmembers class * extends com.google.protobuf.GeneratedMessageLite { <fields>; }
+# Native adapter ABI v1. External DEX packages compile against these host helpers.
+-keep class app.filmmerkezi.tv.pluginapi.** { *; }
+-keep class app.filmmerkezi.tv.updates.** { *; }
+-keep class app.filmmerkezi.tv.NativeMainActivity { *; }
+-keep class app.filmmerkezi.addon.** { *; }
+-keep class app.filmmerkezi.tv.core.** { *; }
+-keep class app.filmmerkezi.tv.JsonKt { *; }
+-keep class app.filmmerkezi.tv.SiteHttpPolicy { *; }
+-keep class kotlin.** { *; }
+-keep class kotlinx.coroutines.** { *; }
+-keep class org.jsoup.** { *; }
+-keep class okhttp3.** { *; }
+-keep class okio.** { *; }

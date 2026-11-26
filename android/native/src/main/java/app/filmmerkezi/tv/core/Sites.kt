@@ -86,11 +86,17 @@ object Sites {
             contentPattern=Regex("^/(?:film/[a-z0-9-]+/|dizi/[a-z0-9-]+/(?:sezon-\\d+/bolum-\\d+/)?)$"))
     )
     private data class Configuration(val addresses:Map<String,SiteAddress>,val sites:List<SiteSpec>,val revision:Long)
+    private var templates=defaults
+    @Volatile private var available:Set<String>?=null
     @Volatile private var configuration=Configuration(emptyMap(),defaults,0)
-    val all:List<SiteSpec> get()=configuration.sites
+    val all:List<SiteSpec> get()=configuration.sites.filter{available?.contains(it.id)!=false}
+    val known:List<SiteSpec> get()=configuration.sites
+    @Synchronized fun installed(sites:List<SiteSpec>){templates=(sites+defaults).distinctBy{it.id};available=sites.map{it.id}.toSet();configuration=Configuration(configuration.addresses,templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},configuration.revision+1)}
+    @Synchronized fun updateMetadata(site:SiteSpec){templates=(listOf(site)+templates).distinctBy{it.id};configuration=Configuration(configuration.addresses,templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},configuration.revision+1)}
+    @Synchronized fun remember(sites:List<SiteSpec>){templates=(templates+sites).distinctBy{it.id};configuration=Configuration(configuration.addresses,templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},configuration.revision+1)}
     val revision:Long get()=configuration.revision
-    @Synchronized fun configure(addresses:Map<String,SiteAddress>){if(addresses!=configuration.addresses)configuration=Configuration(addresses.toMap(),defaults.map{SiteAddresses.apply(it,addresses[it.id])},configuration.revision+1)}
+    @Synchronized fun configure(addresses:Map<String,SiteAddress>){if(addresses!=configuration.addresses)configuration=Configuration(addresses.toMap(),templates.map{SiteAddresses.apply(it,addresses[it.id])},configuration.revision+1)}
     fun current(site:SiteSpec)=SiteAddresses.apply(site,configuration.addresses[site.id])
-    fun default(id:String)=defaults.singleOrNull{it.id==id}?:throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")
-    fun get(id: String): SiteSpec = all.singleOrNull { it.id == id } ?: throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")
+    fun default(id:String)=templates.singleOrNull{it.id==id}?:throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")
+    fun get(id: String): SiteSpec = known.singleOrNull { it.id == id } ?: throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")
 }

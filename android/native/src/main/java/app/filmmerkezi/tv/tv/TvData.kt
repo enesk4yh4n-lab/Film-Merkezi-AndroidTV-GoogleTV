@@ -165,10 +165,10 @@ internal class TvServices private constructor(context:Context):TvData {
     override suspend fun clearPlaybackPreferences()=playbackOverrides.clear()
     override suspend fun remember(query:String)=library.rememberSearch(query)
     override suspend fun searches()=library.searches()
-    fun trim()=repository.trim()
+    fun trim(){repository.trim();app.filmmerkezi.tv.updates.ModuleRuntime.trim()}
     companion object {
         @Volatile private var instance:TvServices?=null
-        fun get(context:Context):TvServices=instance?:synchronized(this){instance?:TvServices(context.applicationContext).also{instance=it}}
+        fun get(context:Context):TvServices=instance?:synchronized(this){instance?:run{if(TvActivity.dataFactoryForTests==null)app.filmmerkezi.tv.updates.ModuleRuntime.prepare(context);TvServices(context.applicationContext).also{instance=it}}}
     }
 }
 

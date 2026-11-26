@@ -2,7 +2,7 @@ package app.filmmerkezi.tv.core
 
 object EpisodeMerge {
     /** Filmci Baba's numeric WordPress parts do not independently prove episode numbers. */
-    fun explicit(e:Episode)=e.card.ref.siteId!="filmcibaba"||CatalogParser.episodeNumber("",e.card.ref.pageUrl)==e.number
+    fun explicit(e:Episode)=e.card.ref.siteId!="filmcibaba"||EpisodeNumbers.episodeNumber("",e.card.ref.pageUrl)==e.number
     fun combine(groups:List<List<Episode>>,parent:String,preferredSite:String,failures:List<SiteFailure> = emptyList()):SeriesEpisodes {
         val all=groups.flatten()
         val verified=all.filter(::explicit).groupBy{it.number.season}.mapValues{(_,v)->v.map{it.number.number}.toSet()}

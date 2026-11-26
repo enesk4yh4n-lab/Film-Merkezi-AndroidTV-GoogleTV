@@ -41,6 +41,7 @@ object Contracts {
         .put("type",v.type.name.lowercase(Locale.ROOT)).put("referer",v.referer).put("userAgent",v.userAgent).put("cookie",v.cookie)
         .put("headers",JSONObject(v.headers)).put("subtitles",JSONArray(v.subtitles.map{s->JSONObject().put("url",s.url).put("label",s.label).put("language",s.language).put("format",s.format)}))
         .put("playbackRequirements",JSONArray(v.playbackRequirements.toList())).put("expiresAt",v.expiresAt?:JSONObject.NULL)
+        .put("sessionCookies",JSONArray(v.sessionCookies.map{c->JSONObject().put("name",c.name).put("value",c.value).put("domain",c.domain).put("path",c.path).put("expiresAt",c.expiresAt).put("secure",c.secure).put("httpOnly",c.httpOnly).put("hostOnly",c.hostOnly)}))
         .put("audioStreams",audio(v.audioStreams)).put("variants",JSONArray(v.variants.map{p->JSONObject().put("id",p.id).put("url",p.url)
             .put("height",p.height).put("width",p.width).put("codec",p.codec).put("fps",p.fps).put("mimeType",p.mimeType).put("audioStreams",audio(p.audio))}))
         .put("mediaProfile",v.mediaProfile?.let{p->JSONObject().put("videoCodec",p.videoCodec?:JSONObject.NULL).put("audioCodec",p.audioCodec?:JSONObject.NULL)

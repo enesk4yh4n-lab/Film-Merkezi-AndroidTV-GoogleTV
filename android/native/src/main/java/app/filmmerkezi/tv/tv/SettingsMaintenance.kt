@@ -24,7 +24,7 @@ internal class SettingsMaintenance(private val context:Context,private val data:
         val test=app.filmmerkezi.tv.core.SiteAddresses.apply(Sites.default(site.id),app.filmmerkezi.tv.core.SiteAddress(base,site.name,app.filmmerkezi.tv.core.SiteAddresses.hosts(site)))
         val path=if(site.id in setOf("dizibox","diziboxum","ddizi"))site.seriesPath?:site.list else site.list
         val response=transport.request(app.filmmerkezi.tv.core.WebRequest(base+path,base+"/",headers=mapOf("User-Agent" to app.filmmerkezi.tv.core.SiteAddresses.userAgent(site.base.toHttpUrl()))))
-        val count=withContext(Dispatchers.Default){app.filmmerkezi.tv.core.CatalogParser(test).list(response.body,base+path).cards.size}
+        val count=app.filmmerkezi.tv.core.NativeSiteProvider(test,transport,Dispatchers.Default).parseList(response.body,base+path).cards.size
         if(count==0)throw IllegalStateException(context.getString(app.filmmerkezi.tv.R.string.site_manager_no_cards))
         return context.getString(app.filmmerkezi.tv.R.string.site_manager_test_ok,count)
     }

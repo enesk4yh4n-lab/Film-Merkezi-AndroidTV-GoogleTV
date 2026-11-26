@@ -1,0 +1,28 @@
+{
+  "id": "independent-example",
+  "version": "1.0.0",
+  "type": "site",
+  "name": "Independent SDK fixture",
+  "minAppVersionCode": 36,
+  "minSdk": 23,
+  "entryClass": "app.filmmerkezi.addon.Independent",
+  "site": {
+    "id": "independent-example",
+    "name": "Independent fixture",
+    "base": "https://example.com"
+  },
+  "dependencies": [],
+  "origins": [
+    "https://example.com"
+  ],
+  "schemaVersion": 1,
+  "platform": "android",
+  "runtime": "kotlin-dex-v1",
+  "sdkMin": 1,
+  "sdkMax": 2,
+  "artifact": {
+    "path": "packages/independent-example/1.0.0/plugin.jar",
+    "size": 1113,
+    "sha256": "2823a26650ea26f869da45d32b9db0574901dd593c69e424477ed9ac751597e3"
+  }
+}

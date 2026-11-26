@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "platform": "android",
+  "runtime": "kotlin-dex-v1",
+  "id": "independent-test",
+  "name": "SDK fixture publisher",
+  "publicKey": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAlXnlC/LXXLYZMkuPrFDYwkrJg+WOI/lzdHXZAaimZWncvtvQLBoxXj2y4OgKoY5yc1ObbJudY8rxTrak3OoIi672YEYltc6UtLNsqUGErtCrb9OWAO3S7DSk8X1zz8SWcMuSGOcZLw9H2Wzqdndw4YtMase6taUJ7O7BvAsMklwMmX3dPxmkJhXcvr97EuqhU11awowklUlfD60bZH1cb9pipoq4WmI+YKK7vAKlwo1HF60pBb34od5KJKQqgFJbTDlqEqZZaCye5g5Vg4MrRaZDzaT8oX/dnHaox2KD3tPXSK/RA+9vaq+/g4iI8ZD8H3tunSfk4s5R0FadDulFlQIDAQAB",
+  "revision": 1,
+  "packages": [
+    {
+      "id": "independent-example",
+      "type": "site",
+      "name": "Independent SDK fixture",
+      "version": "1.0.0",
+      "minAppVersionCode": 36,
+      "manifest": "packages/independent-example/1.0.0/manifest.json",
+      "manifestSha256": "cb1e567a6c5fe09e534c3a29ea9838cbfa3706190d10318f24f0c3c21eb569d4"
+    }
+  ]
+}
