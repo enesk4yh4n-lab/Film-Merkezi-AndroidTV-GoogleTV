@@ -137,7 +137,11 @@
     },
     "build": "PASS",
     "lint": "PASS",
-    "playerRetested": false
+    "playerRetested": false,
+    "nativeApkDownloadSameSigner": "PASS",
+    "legacySignerGuard": "PASS",
+    "githubReleaseDownloadedAndHashMatched": true,
+    "signedFeedPublished": true
   },
   "nativeRemoteFeedVerified": true,
   "realLegacyUpdateBadge": true,

@@ -23,6 +23,8 @@ Derleme ve lint: `BUILD SUCCESSFUL`. Kalıcı imzalı R8 APK 0.12.0 üzerine kur
 
 0.11.5'in yayımlanmış feed'i native tarafta doğruladığı ve gerçek “Güncelleme var” rozeti gösterdiği kontrol edildi. Önceki teslimde GitHub'dan indirilen iki APK tekrar hash karşılaştırmasıyla doğrulandı; yayın dosyaları immutable tutulur.
 
+Son 0.12.1 APK da Release'ten indirilip yerel imzalı dosyayla hash karşılaştırmasından geçti. İmzalı feed kökte yayımlandı. Native indirme doğrulayıcısı iki yönde sınandı: aynı sertifikalı gerçek APK kabul edildi; eski deneme sertifikasında geçiş/yedek mesajıyla kurulum engellendi (`PASS: download-apk`, API 29 ve API 26). Pozitif testte mevcut APK yalnız test sürecinde teklif edildi; sahte yeni sürüm yayımlanmadı. Sistem izin/kurulum ekranı atlanmadı.
+
 Oynatıcı ve tüm site matrisi tekrar çalıştırılmadı. 0.12.0'ın [303 geçen / 1 fixture atlanan CI sonucu](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/actions/runs/45863735307), DEX/aktarım/oynatım ölçümleri ana rapordadır. Gerçek ARM TV kontrolü cihaz bulunduğunda yapılmalıdır. 10,7 saniyelik önceki soğuk ilk görüntü ölçümü hızlı açılış hedefi karşılandı şeklinde sunulmaz.
 
 ## Kullanıcının yapacakları

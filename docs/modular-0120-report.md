@@ -2,6 +2,8 @@
 
 26 Kasım 2026. Native çekirdek ve ayrı imzalı Kotlin/DEX site/çözümleyici paketleri uygulandı. Modern arayüz ve bütün native çekirdeği uzaktan değiştirme kapsam dışıdır.
 
+Güncel teslim [0.12.1 / 37](modular-0121-report.md); bu sayfa ana modüler teslimin ölçüm ve kayıt geçişi raporudur.
+
 ## Uygulanan yapı
 
 Native APK + imzalı Kotlin/DEX site ve çözümleyici paketleri. Klasik arayüz, kayıtlar ve tek Media3 korunur. Kullanıcı depo/yayıncı seçer; otomatik kontrol indirme veya uygulama onayı değildir. Ayrı süreç güvenilmeyen kod için sandbox değildir.
@@ -68,6 +70,7 @@ GitHub adı/kullanıcı adı veya doğrudan HTTPS adresiyle keşif vardır. READ
 | Uygula ve yeniden aç | PID 4855 → 4970; iki paket etkin, bekleyen set kaldırıldı |
 | 0.11.4 / 34 → 0.11.5 / 35 | API 26'da kaldırmadan üzerine kurulum ve export geçti |
 | Eski imza → kalıcı imza | API 29'da harici yedek/import sonrası mantıksal veri **birebir aynı** |
+| Native 10 sn deadline / yeniden çağrı | son kalıcı imzalı APK'da `PASS: timeout`; hata türü TIMEOUT/plugin |
 
 32 giriş noktası gerçek DEX/ClassLoader üzerinden, farklı Android sürecinde açıldı. Bağımsız yayıncı örneği yalnız Java SDK ve Android'e karşı derlendi. Türü belirli hata korundu; iptali dinlemeyen CPU işinde yardımcı süreç sonlandırıldı ve sonraki çağrı çalıştı. Eksik bağımlılık reddedildi; eski paket setine bütün olarak dönüş sınandı.
 
