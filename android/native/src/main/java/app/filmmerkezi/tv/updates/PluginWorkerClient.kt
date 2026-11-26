@@ -54,8 +54,9 @@ class PluginWorkerClient(private val context:Context,private val manager:Distrib
     private suspend fun request(identity:String,operation:String,payload:JSONObject,timeout:Long):JSONObject {
         val b=binder();val id=ids.incrementAndGet();val raw=payload.toString().toByteArray(Charsets.UTF_8);require(raw.size<=4*1024*1024)
         val done=java.util.concurrent.atomic.AtomicBoolean(false)
+        val timedOut=java.util.concurrent.atomic.AtomicBoolean(false)
         val watchdogScope=CoroutineScope(SupervisorJob()+Dispatchers.IO)
-        val watchdog=watchdogScope.launch{delay(timeout);if(!done.get())stop()}
+        val watchdog=watchdogScope.launch{delay(timeout);if(!done.get()){timedOut.set(true);stop()}}
         val cancellation=currentCoroutineContext()[Job]?.invokeOnCompletion(onCancelling=true,invokeImmediately=true){cause->if(cause!=null){
             val cancel=Parcel.obtain();try{cancel.writeInterfaceToken(PluginWorkerService.TOKEN);cancel.writeLong(id);b.transact(PluginWorkerService.CANCEL,cancel,null,IBinder.FLAG_ONEWAY)}catch(_:Exception){}finally{cancel.recycle()}
             watchdogScope.launch{delay(500);if(!done.get())stop()}
@@ -67,7 +68,9 @@ class PluginWorkerClient(private val context:Context,private val manager:Distrib
                 data.writeInterfaceToken(PluginWorkerService.TOKEN);data.writeLong(id);data.writeString(identity);data.writeString(operation);data.writeParcelable(input[0],0)
                 check(b.transact(PluginWorkerService.CALL,data,reply,0));reply.readException()
                 @Suppress("DEPRECATION") val output=reply.readParcelable<ParcelFileDescriptor>(javaClass.classLoader)!!
-                val result=withContext(Dispatchers.IO){ParcelFileDescriptor.AutoCloseInputStream(output).use{stream->val out=java.io.ByteArrayOutputStream();val bytes=ByteArray(16384);while(true){ensureActive();val n=stream.read(bytes);if(n<0)break;require(out.size()+n<=4*1024*1024);out.write(bytes,0,n)};JSONObject(out.toString("UTF-8"))}}
+                val result=withContext(Dispatchers.IO){ParcelFileDescriptor.AutoCloseInputStream(output).use{stream->val out=java.io.ByteArrayOutputStream();val bytes=ByteArray(16384);while(true){ensureActive();val n=stream.read(bytes);if(n<0)break;require(out.size()+n<=4*1024*1024);out.write(bytes,0,n)}
+                    if(out.size()==0)throw DataFailure(if(timedOut.get())FailureKind.TIMEOUT else FailureKind.NETWORK,if(timedOut.get())"Eklenti zaman aşımına uğradı; yeniden deneyin"else"Eklenti süreci kapandı; yeniden deneyin","plugin")
+                    JSONObject(out.toString("UTF-8"))}}
                 writer.await();if(!result.getBoolean("ok"))throw DataFailure(runCatching{FailureKind.valueOf(result.getString("kind"))}.getOrDefault(FailureKind.PARSE),result.optString("message"),result.optString("stage"),result.optInt("httpCode").takeIf{it>0})
                 result.getJSONObject("result")
             }finally{input[0].close();writer.cancel();data.recycle();reply.recycle()}

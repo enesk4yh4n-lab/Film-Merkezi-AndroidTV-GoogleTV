@@ -25,6 +25,12 @@ class DistributionProbeRunner:Instrumentation() {
                     val installer=PackageInstaller(manager);val plan=installer.plan(probe.fingerprint+"/"+probe.index.id,"site-filmcibaba");installer.install(plan)
                 }
                 "check-state"->{val manager=DistributionManager.get(targetContext);val state=manager.store.snapshot();check(state.getJSONObject("packages").length()==2);check(!state.has("pending"));result.putString("state",state.toString())}
+                "check-feed"->kotlinx.coroutines.runBlocking{
+                    val manager=DistributionManager.get(targetContext);manager.check()
+                    check(manager.store.snapshot().optInt("appHighestCode")==36){manager.status.value.message}
+                    result.putString("feedStatus",manager.status.value.message)
+                    if(arguments.getBoolean("expectUpdate"))check(manager.status.value.release?.code==36)
+                }
                 else->error("Choose an explicit probe action")
             }
             result.putString("stream","PASS: "+arguments.getString("action")+"\n");finish(-1,result)
