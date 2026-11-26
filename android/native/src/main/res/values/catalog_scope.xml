@@ -1,0 +1,12 @@
+<resources>
+    <item type="id" name="tv_site_picker" />
+    <item type="id" name="tv_site_status" />
+    <string name="tv_sites">Siteler</string>
+    <string name="tv_all_sites">Tüm Siteler</string>
+    <string name="tv_site_brand">Film Merkezi\n%1$s ▾</string>
+    <string name="tv_sites_progress">%1$d/%2$d site · %3$d içerik · %4$d erişim hatası</string>
+    <string name="tv_sites_status">Site sonuçları</string>
+    <string name="tv_site_count">%1$d site</string>
+    <string name="tv_site_no_results">Henüz içerik yok</string>
+    <string name="tv_site_loading">Yükleniyor</string>
+</resources>

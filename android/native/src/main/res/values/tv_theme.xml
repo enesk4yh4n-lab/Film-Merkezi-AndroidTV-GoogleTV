@@ -1,0 +1,23 @@
+<resources>
+    <style name="FilmTvTheme" parent="Theme.Leanback">
+        <item name="android:windowBackground">#0B101B</item>
+        <item name="android:colorAccent">#EDC365</item>
+        <item name="android:fontFamily">sans</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+    <item name="tv_content" type="id"/>
+    <item name="tv_nav_home" type="id"/>
+    <item name="tv_nav_movies" type="id"/>
+    <item name="tv_nav_series" type="id"/>
+    <item name="tv_nav_search" type="id"/>
+    <item name="tv_nav_library" type="id"/>
+    <item name="tv_nav_about" type="id"/>
+    <item name="tv_query" type="id"/>
+    <item name="tv_search_submit" type="id"/>
+    <item name="tv_hero_action" type="id"/>
+    <item name="tv_play_action" type="id"/>
+    <item name="tv_list_action" type="id"/>
+    <item name="tv_season" type="id"/>
+</resources>

@@ -1,0 +1,92 @@
+[
+  {
+    "file": "baba-house-1.html",
+    "bytes": 74564,
+    "sha256": "61e3b19ef81d47e6d26358c676a89a314f4facd252909cde63f6ddf0a5b49548",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "baba-house-2.html",
+    "bytes": 72493,
+    "sha256": "ce46f1954427887b3f0caf752affd0181145ddd868171050c505f4fed8809e93",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "baba-house-3.html",
+    "bytes": 69888,
+    "sha256": "6e1a6b314aefd619eeffeb1175b31600a22de661873508a68d75de1a97471c28",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "baba-search.html",
+    "bytes": 45818,
+    "sha256": "511621302c292247d6122407abb8b88e4eda58a754efc473eafee7edbc020082",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "delisi-house.html",
+    "bytes": 563832,
+    "sha256": "50d95bff71933e32914077755f130b2052c6de57e2b18dcdf6d48b63c4f82594",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "dizibox-empty-series.html",
+    "bytes": 795223,
+    "sha256": "b2bde1a8d7cd58556d5a9ce341e5c8ac3b033014867c76edc9c94e88f72cc717",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "filmifull-empty.html",
+    "bytes": 22767,
+    "sha256": "761fdd08f09517c424f2f75a70eeba87b482cba51b578de40d5281e7092d22b5",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "fix-empty.html",
+    "bytes": 134394,
+    "sha256": "1fbf72dd8815663dbf6c0e55ef8246898fab659e5930ba6e15ac6d30826fe80a",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "love-house.html",
+    "bytes": 77225,
+    "sha256": "877140521e686c1dab524c4fca94552e94643849b6e77479655f8f922b75d669",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "love-search.html",
+    "bytes": 51198,
+    "sha256": "4f209fb0d3f239079473231d448fd52268af6d75da548e948fe0e990e179cc04",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "love-series.html",
+    "bytes": 81345,
+    "sha256": "46ebde36c7b565f91e5b22da3e68fca97e994a5a2412172cf0d380143355d39e",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "love-tv-first.html",
+    "bytes": 60555,
+    "sha256": "161f20830976dcf55a79444dff3534b9a86323b38936d4cdbb4647bdb6cb5373",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "love-tv-house.html",
+    "bytes": 60810,
+    "sha256": "efb78442a62a3992d41f47aecebc26d08d2103c2a2f3d35c7a107e9e0573f7d9",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "makinesi-house.html",
+    "bytes": 86859,
+    "sha256": "b271e1569bc6ab2b8ff604015ec075bb4c9cea55909c652af9608a31102fd74f",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  },
+  {
+    "file": "makinesi-series.html",
+    "bytes": 72395,
+    "sha256": "f428e0de4b0d78b1de76577775e84d5e854c3d42038b8ff5bae340fa2624c136",
+    "provenance": "local captured site responses 2026-11-05; see reports/series-097/research and before/requests.json"
+  }
+]

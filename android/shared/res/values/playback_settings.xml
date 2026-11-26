@@ -1,0 +1,4 @@
+<resources>
+    <string name="player_quality_limit">Otomatik kalite sınırına uygun parça yok. Kalite menüsünden elle seçim yapabilirsin.</string>
+    <string name="player_source_disabled">Bu sitenin kaynakları ayarlardan kapatılmış.</string>
+</resources>

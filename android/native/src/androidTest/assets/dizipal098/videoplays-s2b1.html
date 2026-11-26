@@ -1,0 +1,2480 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Video Player</title>
+
+    <style>
+        * { box-sizing: border-box; }
+        /* Hide the player skin until the video.js web components are defined so
+           the raw <video> never flashes unstyled while scripts load. */
+        video-player:not(:defined) { visibility: hidden; }
+
+        /* Loading cover: masks the whole player until the skin is fixed up and
+           the custom controls are mounted, so the default video.js skin never
+           flashes ("oval" look) before snapping to the final design. */
+        .player-loading {
+            position: absolute; inset: 0; z-index: 40;
+            display: flex; align-items: center; justify-content: center;
+            background: #000; transition: opacity .25s ease;
+        }
+        .player-loading.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .player-spinner {
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, .22); border-top-color: #fff;
+            animation: player-spin .8s linear infinite;
+        }
+        @keyframes player-spin { to { transform: rotate(360deg); } }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            background: #000;
+            overflow: hidden;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .player-wrap {
+            position: fixed;
+            inset: -2px;
+            background: #000;
+            overflow: hidden;
+        }
+
+        body.is-video-fullscreen .player-wrap {
+            inset: 0;
+        }
+
+        video-skin:fullscreen,
+        video-skin:fullscreen #videojsMedia {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            max-height: none !important;
+            background: #000 !important;
+            border-radius: 0 !important;
+            outline: 0 !important;
+            box-shadow: none !important;
+        }
+
+        video-skin::backdrop,
+        video-skin:fullscreen::backdrop,
+        #videojsMedia::backdrop {
+            background: #000 !important;
+        }
+
+        video-player,
+        video-skin,
+        #videojsMedia {
+            display: block;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        #videojsMedia {
+            object-fit: contain;
+            border-radius: 0 !important;
+            outline: 0 !important;
+            box-shadow: none !important;
+        }
+
+        .center-play-button {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 20;
+            width: 82px;
+            height: 82px;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%);
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            border-radius: 999px;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.40);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.50);
+            cursor: pointer;
+            transition: opacity 160ms ease, transform 160ms ease, background 160ms ease;
+        }
+
+        .center-play-button:hover {
+            transform: translate(-50%, -50%) scale(1.06);
+            background: rgba(0, 0, 0, 0.56);
+        }
+
+        .center-play-button.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .center-play-button svg {
+            width: 34px;
+            height: 34px;
+            margin-left: 5px;
+            fill: currentColor;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.34));
+        }
+
+        .vast-ad-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 60;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+        }
+
+        .vast-ad-video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
+
+        .vast-ad-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            z-index: 65;
+            padding: 7px 10px;
+            color: #fff;
+            background: rgba(0,0,0,0.72);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            pointer-events: none;
+        }
+
+        .vast-skip-btn {
+            position: absolute;
+            right: 14px;
+            bottom: 72px;
+            z-index: 65;
+            padding: 9px 13px;
+            color: #fff;
+            background: rgba(0,0,0,0.78);
+            border: 1px solid rgba(255,255,255,0.28);
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .vast-skip-btn:disabled {
+            cursor: default;
+            opacity: 0.72;
+        }
+
+        .extra-controls {
+            position: absolute;
+            right: 72px;
+            bottom: 22px;
+            z-index: 25;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 180ms ease;
+        }
+
+        .extra-controls.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .control-group {
+            position: relative;
+        }
+
+        .control-button {
+            min-width: 42px;
+            height: 34px;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .control-button:hover,
+        .control-button.active {
+            background: rgba(255,255,255,0.18);
+        }
+
+        .control-menu {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            right: 0;
+            display: none;
+            min-width: 170px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 10px;
+            background: rgba(7,10,15,0.96);
+            box-shadow: 0 16px 36px rgba(0,0,0,0.45);
+            backdrop-filter: blur(16px);
+        }
+
+        .control-menu.open {
+            display: block;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            min-height: 38px;
+            padding: 9px 12px;
+            border: 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: transparent;
+            color: #eef3ff;
+            text-align: left;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        .menu-item:last-child {
+            border-bottom: 0;
+        }
+
+        .menu-item:hover,
+        .menu-item.active {
+            background: rgba(255,255,255,0.12);
+        }
+
+        .menu-item.active::after {
+            content: "✓";
+            color: #fff;
+            font-weight: 800;
+        }
+
+        .error {
+            position: absolute;
+            inset: 0;
+            z-index: 30;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 24px;
+            color: #fff;
+            text-align: center;
+            background: #000;
+        }
+
+        .error.hidden {
+            display: none;
+        }
+
+        .error i {
+            color: #ff1744;
+            font-size: 42px;
+        }
+
+        .error h3 {
+            margin: 0;
+            font-size: 22px;
+        }
+
+        .error p {
+            margin: 0;
+            max-width: 560px;
+            color: #d7dbe3;
+            line-height: 1.45;
+        }
+
+        @media (max-width: 640px) {
+            .extra-controls {
+                right: 50px;
+                bottom: 15px;
+                gap: 4px;
+            }
+
+            .control-button {
+                min-width: 38px;
+                height: 30px;
+                padding: 0 9px;
+                font-size: 11px;
+            }
+
+            .control-menu {
+                min-width: 148px;
+            }
+
+            .center-play-button {
+                width: 74px;
+                height: 74px;
+                border: 0;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            .center-play-button:hover {
+                transform: translate(-50%, -50%) scale(1.04);
+                box-shadow: none;
+            }
+
+            .center-play-button svg {
+                width: 58px;
+                height: 58px;
+                margin-left: 4px;
+                filter: drop-shadow(0 4px 12px rgba(0,0,0,0.65));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="player-wrap">
+        <div class="player-loading" id="playerLoading"><div class="player-spinner"></div></div>
+        <video-player id="videojsPlayer" autohide="4">
+            <video-skin>
+                <video id="videojsMedia" preload="metadata" playsinline crossorigin="anonymous"></video>
+            </video-skin>
+        </video-player>
+
+        <button class="center-play-button" id="centerPlayButton" type="button" aria-label="Oynat" title="Oynat">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 5v14l11-7z"></path>
+            </svg>
+        </button>
+
+        <div class="extra-controls" id="extraControls">
+            <div class="control-group" id="qualityGroup" hidden>
+                <button class="control-button" id="qualityButton" type="button" title="Kalite">Kalite</button>
+                <div class="control-menu" id="qualityMenu"></div>
+            </div>
+            <div class="control-group" id="audioGroup" hidden>
+                <button class="control-button icon-button" id="audioButton" type="button" title="Ses" aria-label="Ses">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M4 13v-1a8 8 0 0 1 16 0v1"></path>
+                        <path d="M4 13v4a2 2 0 0 0 2 2h2v-8H6a2 2 0 0 0-2 2Z"></path>
+                        <path d="M20 13v4a2 2 0 0 1-2 2h-2v-8h2a2 2 0 0 1 2 2Z"></path>
+                    </svg>
+                </button>
+                <div class="control-menu" id="audioMenu"></div>
+            </div>
+            <div class="control-group" id="subtitleGroup" hidden>
+                <button class="control-button" id="subtitleButton" type="button" title="Altyazı">CC</button>
+                <div class="control-menu" id="subtitleMenu"></div>
+            </div>
+            <div class="control-group" id="settingsGroup">
+                <button class="control-button icon-button" id="settingsButton" type="button" title="Ayarlar" aria-label="Ayarlar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+                <div class="control-menu settings-menu" id="settingsMenu">
+                    <div class="settings-home" id="settingsHome"></div>
+                    <div class="settings-header" id="settingsHeader" hidden>
+                        <button class="settings-back" id="settingsBack" type="button" aria-label="Geri">‹</button>
+                        <span id="settingsTitle"></span>
+                    </div>
+                    <div class="settings-page" id="speedMenu" hidden></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="error hidden" id="err">
+            <svg width="42" height="42" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <h3>Hata</h3>
+            <p id="errTxt"></p>
+        </div>
+    </div>
+
+    <script type="module" src="vendor/videojs/video.js"></script>
+    <script src="vendor/hlsjs/hls.min.js"></script>
+    <script src="scripts/api.js?v=20260615-referrer-only"></script>
+    <script>
+        let videoId = null;
+        let hls = null;
+        let vastPrerollMedia = [];
+        let vastPrerollDone = false;
+        let vastPrerollRunning = false;
+        let resumeState = { enabled: false, key: '', restored: false, lastSave: 0 };
+        let playerSkinMounted = false;
+        let playerTracksReady = false;
+
+        const playerWrap = document.querySelector('.player-wrap');
+        const mediaElement = document.getElementById('videojsMedia');
+        const centerPlayButton = document.getElementById('centerPlayButton');
+        const extraControls = document.getElementById('extraControls');
+        const errorOverlay = document.getElementById('err');
+        const errorText = document.getElementById('errTxt');
+
+        const qualityGroup = document.getElementById('qualityGroup');
+        const qualityButton = document.getElementById('qualityButton');
+        const qualityMenu = document.getElementById('qualityMenu');
+        const audioGroup = document.getElementById('audioGroup');
+        const audioButton = document.getElementById('audioButton');
+        const audioMenu = document.getElementById('audioMenu');
+        const subtitleGroup = document.getElementById('subtitleGroup');
+        const subtitleButton = document.getElementById('subtitleButton');
+        const subtitleMenu = document.getElementById('subtitleMenu');
+        const settingsButton = document.getElementById('settingsButton');
+        const settingsMenu = document.getElementById('settingsMenu');
+        const settingsHome = document.getElementById('settingsHome');
+        const settingsHeader = document.getElementById('settingsHeader');
+        const settingsTitle = document.getElementById('settingsTitle');
+        const speedMenu = document.getElementById('speedMenu');
+
+        // Quality, audio and subtitles live as pages inside the gear menu. The
+        // setup*Menu functions keep filling the same elements; the groups' hidden
+        // flag still says whether a page has anything to offer.
+        [qualityMenu, audioMenu, subtitleMenu].forEach(menu => {
+            menu.classList.remove('control-menu');
+            menu.classList.add('settings-page');
+            menu.hidden = true;
+            settingsMenu.appendChild(menu);
+        });
+
+        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('fullscreenchange', syncFullscreenState);
+        document.addEventListener('webkitfullscreenchange', syncFullscreenState);
+        document.addEventListener('click', event => {
+            const path = event.composedPath ? event.composedPath() : [];
+            const clickedControl = path.some(node => node?.classList?.contains('control-group') || node?.id === 'extraControls');
+            if (!clickedControl) closeMenus();
+        });
+        centerPlayButton.addEventListener('click', () => {
+            mediaElement.play().catch(() => {});
+        });
+
+        // Mobile: keep controls on screen ~4s after a tap. The skin hides them
+        // almost instantly on touch, so we force them visible for our own window.
+        let hlsControlsTimer = null;
+        function keepControlsVisibleAfterTap() {
+            const skinRoot = document.querySelector('video-skin')?.shadowRoot;
+            const controls = skinRoot?.querySelector('media-controls');
+            if (!controls) return;
+            controls.classList.add('hls-force-show');
+            skinRoot.host?.classList?.add('hls-force-show');
+            clearTimeout(hlsControlsTimer);
+            hlsControlsTimer = setTimeout(() => {
+                controls.classList.remove('hls-force-show');
+                skinRoot.host?.classList?.remove('hls-force-show');
+            }, 4000);
+        }
+        playerWrap.addEventListener('touchstart', keepControlsVisibleAfterTap, { passive: true });
+        playerWrap.addEventListener('touchend', keepControlsVisibleAfterTap, { passive: true });
+
+        function syncFullscreenState() {
+            const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+            document.body.classList.toggle('is-video-fullscreen', Boolean(fullscreenElement));
+        }
+
+        async function init() {
+            // Safety net: never leave the loading cover up indefinitely.
+            setTimeout(hidePlayerLoading, 12000);
+
+            const params = new URLSearchParams(window.location.search);
+            videoId = params.get('video');
+
+            if (!videoId) {
+                showError('Video ID yok');
+                return;
+            }
+
+            try {
+                // Settings and video metadata are independent — fetch them
+                // concurrently instead of one after another to cut startup latency.
+                const [apiSettings, videoData] = await Promise.all([
+                    API.getSettings(),
+                    API.getVideo(videoId),
+                ]);
+                if (videoData.status !== 'completed') {
+                    showError('Video hazır değil');
+                    return;
+                }
+
+                const tokenData = await getVideoToken(videoId);
+                const playlistUrl = API.getPlaylistUrl(videoId, tokenData.token, apiSettings, tokenData);
+
+                if (apiSettings.ads_enabled && apiSettings.ads_url) {
+                    vastPrerollMedia = await loadVastPrerollMedia(apiSettings.ads_url);
+                }
+
+                initVideoJs(playlistUrl, videoData.subtitles || [], apiSettings);
+                startControlTranslation();
+                mountControlsIntoVideoSkin();
+            } catch (error) {
+                console.error(error);
+                showError('Yükleme hatası: ' + error.message);
+            }
+        }
+
+        async function getVideoToken(videoId) {
+            const params = new URLSearchParams();
+            // iOS Safari leaves document.referrer empty for cross-origin iframes,
+            // so the token endpoint couldn't see the embed domain and 403'd
+            // ("Playback domain is not allowed"). Fall back to ancestorOrigins,
+            // a WebKit/Blink feature that still exposes the parent origin there.
+            let embedRef = document.referrer;
+            if (!embedRef && window.location.ancestorOrigins && window.location.ancestorOrigins.length) {
+                embedRef = window.location.ancestorOrigins[0];
+            }
+            if (embedRef) params.set('embed_referrer', embedRef);
+
+            const query = params.toString() ? `?${params.toString()}` : '';
+            const response = await fetch(`${window.location.origin}/api/videos/${videoId}/token${query}`);
+            if (!response.ok) {
+                let detail = response.statusText;
+                try {
+                    const data = await response.json();
+                    detail = data.detail || detail;
+                } catch (error) {
+                    // Keep HTTP status text.
+                }
+                throw new Error(`Failed to get token: ${detail}`);
+            }
+            return await response.json();
+        }
+
+        function initVideoJs(source, subtitles, apiSettings = {}) {
+            mediaElement.innerHTML = '';
+            addSubtitles(subtitles);
+            setupSubtitleMenu();
+
+            mediaElement.addEventListener('play', updateCenterPlayButton);
+            mediaElement.addEventListener('pause', updateCenterPlayButton);
+            mediaElement.addEventListener('ended', updateCenterPlayButton);
+            mediaElement.addEventListener('loadedmetadata', updateCenterPlayButton);
+            updateCenterPlayButton();
+            setupVastPrerollGate();
+            setupResumePlayback(apiSettings);
+
+            mediaElement.addEventListener('canplay', () => {
+                extraControls.classList.add('visible');
+                mountControlsIntoVideoSkin();
+            }, { once: true });
+
+            // Native HLS (Safari/iOS) has no hls.js MANIFEST_PARSED; treat the
+            // media metadata being ready as "tracks ready" so the cover lifts
+            // only after menus are settled on that path too.
+            mediaElement.addEventListener('loadedmetadata', () => {
+                playerTracksReady = true;
+                setupLanguageButtons();
+                maybeRevealPlayer();
+            });
+
+            mediaElement.addEventListener('error', () => {
+                showError(mediaElement.error?.message || 'Oynatma hatası oluştu');
+            });
+
+            trackPlaybackStalls();
+
+            if (window.Hls && Hls.isSupported()) {
+                hls = new Hls({
+                    enableWorker: true,
+                    lowLatencyMode: false,
+                    // These streams carry audio as a separate rendition, where hls.js
+                    // is known to stall on small buffer holes. Let it step over tiny
+                    // gaps and retry loads instead of sitting there forever.
+                    maxBufferHole: 0.5,
+                    nudgeMaxRetry: 8,
+                    fragLoadingMaxRetry: 6,
+                    levelLoadingMaxRetry: 6,
+                    manifestLoadingMaxRetry: 4
+                });
+
+                hls.loadSource(source);
+                hls.attachMedia(mediaElement);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    setupQualityMenu();
+                    setupAudioMenu();
+                    extraControls.classList.add('visible');
+                    mountControlsIntoVideoSkin();
+                    setupLanguageButtons();
+                    playerTracksReady = true;
+                    maybeRevealPlayer();
+                });
+                hls.on(Hls.Events.AUDIO_TRACKS_UPDATED, () => { setupAudioMenu(); setupLanguageButtons(); });
+                hls.on(Hls.Events.LEVEL_SWITCHED, setupQualityMenu);
+                hls.on(Hls.Events.AUDIO_TRACK_SWITCHED, () => { setupAudioMenu(); updateLangButtonsActive(); });
+                hls.on(Hls.Events.ERROR, (event, data) => handleHlsError(data));
+                hls.on(Hls.Events.FRAG_LOADED, (event, data) => recordSegment(data.frag));
+                // hls.js only updates its speed estimate when a segment finishes, so on
+                // a very slow line it stays stale. Track the one still downloading.
+                hls.on(Hls.Events.FRAG_LOADING, (event, data) => {
+                    if (data.frag.type === 'main') playbackStats.segmentStart = Date.now();
+                });
+                // Safari's ManagedMediaSource tells hls.js to stop loading once the
+                // buffer is full and may not say to resume after a seek past it.
+                mediaElement.addEventListener('seeking', () => hls.resumeBuffering());
+                startStallWatchdog();
+                return;
+            }
+
+            const sourceElement = document.createElement('source');
+            sourceElement.src = source;
+            sourceElement.type = 'application/x-mpegURL';
+            mediaElement.appendChild(sourceElement);
+            mediaElement.load();
+            extraControls.classList.add('visible');
+        }
+
+        function updateCenterPlayButton() {
+            centerPlayButton.classList.toggle('hidden', !mediaElement.paused && !mediaElement.ended);
+        }
+
+        function resumeSiteKey(apiSettings) {
+            if (apiSettings.active_site_domain) return apiSettings.active_site_domain;
+            try {
+                return document.referrer ? new URL(document.referrer).hostname.replace(/^www\./, '') : 'default';
+            } catch (error) {
+                return 'default';
+            }
+        }
+
+        function setupResumePlayback(apiSettings) {
+            resumeState.enabled = Boolean(apiSettings.resume_playback);
+            resumeState.key = `hls_resume:${resumeSiteKey(apiSettings)}:${videoId}`;
+            resumeState.restored = false;
+            resumeState.lastSave = 0;
+            if (!resumeState.enabled) {
+                try { localStorage.removeItem(resumeState.key); } catch (error) {}
+                return;
+            }
+
+            mediaElement.addEventListener('loadedmetadata', restorePlaybackPosition);
+            mediaElement.addEventListener('canplay', restorePlaybackPosition);
+            mediaElement.addEventListener('timeupdate', savePlaybackPosition);
+            mediaElement.addEventListener('ended', clearPlaybackPosition);
+        }
+
+        function restorePlaybackPosition() {
+            if (!resumeState.enabled || resumeState.restored || !Number.isFinite(mediaElement.duration)) return;
+            resumeState.restored = true;
+            try {
+                const saved = Number(localStorage.getItem(resumeState.key) || 0);
+                if (saved > 5 && saved < Math.max(0, mediaElement.duration - 10)) {
+                    mediaElement.currentTime = saved;
+                }
+            } catch (error) {}
+        }
+
+        function savePlaybackPosition() {
+            if (!resumeState.enabled || vastPrerollRunning || !Number.isFinite(mediaElement.duration)) return;
+            const now = Date.now();
+            if (now - resumeState.lastSave < 5000) return;
+            resumeState.lastSave = now;
+
+            const current = mediaElement.currentTime || 0;
+            if (current > 5 && current < Math.max(0, mediaElement.duration - 10)) {
+                try { localStorage.setItem(resumeState.key, String(Math.floor(current))); } catch (error) {}
+            }
+        }
+
+        function clearPlaybackPosition() {
+            if (!resumeState.key) return;
+            try { localStorage.removeItem(resumeState.key); } catch (error) {}
+        }
+
+        function vastText(node, tagName) {
+            return (node.getElementsByTagName(tagName)[0]?.textContent || '').trim();
+        }
+
+        function parseVastDuration(value) {
+            const parts = String(value || '').split(':').map(Number);
+            if (parts.length !== 3 || parts.some(Number.isNaN)) return 0;
+            return (parts[0] * 3600) + (parts[1] * 60) + parts[2];
+        }
+
+        function pickVastMediaFiles(xmlText) {
+            const doc = new DOMParser().parseFromString(xmlText, 'text/xml');
+            if (doc.getElementsByTagName('parsererror').length) return [];
+
+            return Array.from(doc.getElementsByTagName('Ad'))
+                .map((ad, index) => {
+                    const mediaFiles = Array.from(ad.getElementsByTagName('MediaFile'));
+                    if (!mediaFiles.length) return null;
+
+                    const preferred = mediaFiles.find(node => {
+                        const url = (node.textContent || '').trim();
+                        const type = (node.getAttribute('type') || node.getAttribute('mimeType') || '').toLowerCase();
+                        return url && (url.includes('.m3u8') || type.includes('mpegurl') || type.includes('mp4'));
+                    }) || mediaFiles[0];
+
+                    const linear = preferred.closest?.('Linear') || ad.getElementsByTagName('Linear')[0];
+                    return {
+                        url: (preferred.textContent || '').trim(),
+                        type: (preferred.getAttribute('type') || preferred.getAttribute('mimeType') || '').toLowerCase(),
+                        clickThrough: vastText(ad, 'ClickThrough'),
+                        skipAfter: parseVastDuration(linear?.getAttribute('skipoffset') || '00:00:05') || 5,
+                        sequence: Number(ad.getAttribute('sequence') || index + 1)
+                    };
+                })
+                .filter(media => media?.url)
+                .sort((a, b) => a.sequence - b.sequence);
+        }
+
+        async function loadVastPrerollMedia(vastUrl) {
+            try {
+                const response = await fetch(vastUrl, { cache: 'no-store' });
+                if (!response.ok) throw new Error(`VAST ${response.status}`);
+                return pickVastMediaFiles(await response.text());
+            } catch (error) {
+                console.error('VAST preload failed:', error);
+                return [];
+            }
+        }
+
+        function setupVastPrerollGate() {
+            if (!vastPrerollMedia.length || mediaElement.dataset.vastPrerollBound) return;
+            mediaElement.dataset.vastPrerollBound = '1';
+            mediaElement.addEventListener('play', async () => {
+                if (vastPrerollDone || vastPrerollRunning || !vastPrerollMedia.length) return;
+                vastPrerollRunning = true;
+                // The class alone does not hold: pausing the main video below
+                // fires updateCenterPlayButton(), which toggles 'hidden' back off
+                // because the main video is paused for the whole ad. Use the same
+                // inline visibility the report modal uses, which the class toggle
+                // cannot undo, and restore it however the ad sequence ends.
+                centerPlayButton.style.visibility = 'hidden';
+                mediaElement.pause();
+                try {
+                    await playVastPrerollSequence(vastPrerollMedia);
+                } finally {
+                    centerPlayButton.style.visibility = '';
+                    vastPrerollDone = true;
+                    vastPrerollRunning = false;
+                }
+                mediaElement.play().catch(() => {});
+            });
+        }
+
+        async function playVastPrerollSequence(mediaItems) {
+            for (let index = 0; index < mediaItems.length; index += 1) {
+                await playVastPreroll(mediaItems[index], index + 1, mediaItems.length);
+            }
+        }
+
+        // The fullscreen element is <video-skin>, so anything appended to
+        // .player-wrap sits OUTSIDE the fullscreen subtree and is never painted
+        // there: the ad kept playing its audio while the screen stayed black,
+        // and the skip button was unreachable. Mount the ad layer in the same
+        // parent as media-controls, exactly like mountTopOverlay does, and carry
+        // its CSS in with it because a shadow root does not inherit document CSS.
+        // The .player-wrap fallback keeps the ad working (windowed only) if the
+        // skin has not upgraded yet; that is why the document-level .vast-* rules
+        // are still needed alongside this copy.
+        function getAdMountPoint() {
+            const skinRoot = document.querySelector('video-skin')?.shadowRoot;
+            if (!skinRoot) return playerWrap;
+
+            if (!skinRoot.getElementById('vast-ad-style')) {
+                const style = document.createElement('style');
+                style.id = 'vast-ad-style';
+                style.textContent = `
+                    .vast-ad-overlay{position:absolute;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:#000;}
+                    .vast-ad-video{width:100%;height:100%;object-fit:contain;background:#000;}
+                    .vast-ad-badge{position:absolute;top:14px;left:14px;z-index:65;padding:7px 10px;color:#fff;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.2);border-radius:6px;font-size:13px;font-weight:700;pointer-events:none;}
+                    .vast-skip-btn{position:absolute;right:14px;bottom:72px;z-index:65;padding:9px 13px;color:#fff;background:rgba(0,0,0,.78);border:1px solid rgba(255,255,255,.28);border-radius:6px;font-size:13px;font-weight:700;cursor:pointer;}
+                    .vast-skip-btn:disabled{cursor:default;opacity:.72;}
+                    /* On a phone the control bar is hidden for most of the ad, so the
+                       72px reserved for it just leaves the button floating; sit it in
+                       the corner instead and scale it down like the other overlays. */
+                    @media (max-width:640px){
+                        .vast-ad-badge{top:10px;left:10px;padding:5px 8px;font-size:11px;}
+                        .vast-skip-btn{right:10px;bottom:18px;padding:8px 11px;font-size:12px;}
+                    }
+                `;
+                skinRoot.appendChild(style);
+            }
+
+            const controls = skinRoot.querySelector('media-controls');
+            const mediaController = skinRoot.querySelector('media-controller') || skinRoot;
+            return (controls && controls.parentElement) || mediaController;
+        }
+
+        // The ad layer now sits inside the player's own container, which carries
+        // the click-to-play gesture. Without this a click on the ad both opened
+        // the advertiser and started the main video behind it. The ad's own
+        // handlers still run: they are on descendants, so they fire before this.
+        function sealAdClicks(el) {
+            ['pointerdown', 'pointerup', 'click'].forEach(type =>
+                el.addEventListener(type, event => event.stopPropagation()));
+        }
+
+        async function playVastPreroll(media, adIndex = 1, adTotal = 1) {
+            let adHls = null;
+            let completed = false;
+            let skipTimer = null;
+            // Held in this scope so cleanup can remove them wherever they were
+            // mounted; a shadow-root element is invisible to document.getElementById.
+            let badge = null;
+            let skipBtn = null;
+            const adMount = getAdMountPoint();
+            const overlay = document.createElement('div');
+            overlay.className = 'vast-ad-overlay';
+            overlay.innerHTML = '<video class="vast-ad-video" playsinline autoplay></video>';
+            adMount.appendChild(overlay);
+            sealAdClicks(overlay);
+            const adVideo = overlay.querySelector('video');
+
+            const cleanup = () => {
+                clearInterval(skipTimer);
+                badge?.remove();
+                skipBtn?.remove();
+                if (adHls) {
+                    try { adHls.destroy(); } catch (error) {}
+                    adHls = null;
+                }
+                adVideo.pause();
+                overlay.remove();
+            };
+
+            const finish = () => {
+                if (completed) return;
+                completed = true;
+                cleanup();
+            };
+
+            try {
+                return await new Promise(resolve => {
+                    badge = document.createElement('div');
+                    badge.id = 'vastAdBadge';
+                    badge.className = 'vast-ad-badge';
+                    badge.textContent = adTotal > 1 ? `Reklam ${adIndex}/${adTotal}` : 'Reklam';
+                    if (media.clickThrough) {
+                        badge.style.pointerEvents = 'auto';
+                        badge.style.cursor = 'pointer';
+                        badge.title = 'Reklama git';
+                        badge.addEventListener('click', () => window.open(media.clickThrough, '_blank', 'noopener'));
+                    }
+                    adMount.appendChild(badge);
+                    sealAdClicks(badge);
+
+                    skipBtn = document.createElement('button');
+                    skipBtn.id = 'vastSkipBtn';
+                    skipBtn.className = 'vast-skip-btn';
+                    skipBtn.type = 'button';
+                    skipBtn.disabled = true;
+                    adMount.appendChild(skipBtn);
+                    sealAdClicks(skipBtn);
+
+                    const startedAt = Date.now();
+                    const updateSkip = () => {
+                        const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+                        const remain = Math.max(0, media.skipAfter - elapsed);
+                        if (remain > 0) {
+                            skipBtn.textContent = `${remain} sn sonra gec`;
+                            skipBtn.disabled = true;
+                        } else {
+                            skipBtn.textContent = 'Reklami gec';
+                            skipBtn.disabled = false;
+                        }
+                    };
+                    updateSkip();
+                    skipTimer = setInterval(updateSkip, 250);
+
+                    const done = () => {
+                        finish();
+                        resolve(true);
+                    };
+                    const showAdError = detail => {
+                        console.error('VAST ad playback failed:', detail);
+                        skipBtn.textContent = 'Reklami gec';
+                        skipBtn.disabled = false;
+                        clearInterval(skipTimer);
+                    };
+
+                    skipBtn.addEventListener('click', () => {
+                        if (!skipBtn.disabled) done();
+                    });
+                    adVideo.addEventListener('ended', done, { once: true });
+                    adVideo.addEventListener('error', () => showAdError(adVideo.error?.message || 'video error'), { once: true });
+                    adVideo.addEventListener('click', () => {
+                        if (media.clickThrough) window.open(media.clickThrough, '_blank', 'noopener');
+                    });
+
+                    const isHlsAd = media.url.includes('.m3u8') || media.type.includes('mpegurl');
+                    if (isHlsAd && window.Hls && Hls.isSupported()) {
+                        adHls = new Hls();
+                        adHls.loadSource(media.url);
+                        adHls.attachMedia(adVideo);
+                        adHls.on(Hls.Events.MANIFEST_PARSED, () => {
+                            const playPromise = adVideo.play();
+                            if (playPromise) playPromise.catch(() => showAdError('autoplay blocked'));
+                        });
+                        adHls.on(Hls.Events.ERROR, (event, data) => {
+                            if (data?.fatal) showAdError(`${data.type || 'hls'} ${data.details || ''}`);
+                        });
+                    } else {
+                        adVideo.src = media.url;
+                        const playPromise = adVideo.play();
+                        if (playPromise) playPromise.catch(() => showAdError('autoplay blocked'));
+                    }
+                });
+            } catch (error) {
+                console.error('VAST preroll failed:', error);
+                cleanup();
+                return false;
+            }
+        }
+
+        // Measurements sent with a "Sorun Bildir" report, so a freeze complaint can be
+        // told apart: viewer's connection, viewer's device, or our servers.
+        const playbackStats = {
+            startedAt: Date.now(),
+            playbackBegan: false,
+            stalls: 0,
+            stallMs: 0,
+            stallStart: 0,
+            segmentStart: 0,
+            segments: 0,
+            slowSegments: 0,
+            lastSegment: null,
+            hlsErrors: 0,
+            lastError: null
+        };
+
+        function trackPlaybackStalls() {
+            mediaElement.addEventListener('waiting', () => {
+                if (playbackStats.playbackBegan && !playbackStats.stallStart) {
+                    playbackStats.stallStart = Date.now();
+                }
+            });
+            const stallEnded = () => {
+                if (!playbackStats.stallStart) return;
+                const stalled = Date.now() - playbackStats.stallStart;
+                playbackStats.stallStart = 0;
+                // Under a second is a normal seek or a blip, not a freeze.
+                if (stalled >= 1000) {
+                    playbackStats.stalls++;
+                    playbackStats.stallMs += stalled;
+                }
+            };
+            mediaElement.addEventListener('playing', () => {
+                playbackStats.playbackBegan = true;
+                stallEnded();
+            });
+            mediaElement.addEventListener('pause', stallEnded);
+        }
+
+        function recordSegment(frag) {
+            if (!frag || frag.type !== 'main' || !frag.stats) return;
+            playbackStats.segmentStart = 0;
+            const seconds = (frag.stats.loading.end - frag.stats.loading.start) / 1000;
+            playbackStats.segments++;
+            // Slower than real time: this segment took longer to fetch than to play.
+            if (seconds > frag.duration) playbackStats.slowSegments++;
+            let host = '';
+            try { host = new URL(frag.url).hostname; } catch (e) {}
+            playbackStats.lastSegment = {
+                host,
+                seconds: Math.round(seconds * 100) / 100,
+                bytes: frag.stats.total,
+                duration: Math.round(frag.duration * 100) / 100
+            };
+        }
+
+        function collectPlaybackDiagnostics() {
+            const video = mediaElement;
+            let buffer = 0;
+            for (let i = 0; i < video.buffered.length; i++) {
+                if (video.buffered.start(i) <= video.currentTime && video.currentTime <= video.buffered.end(i)) {
+                    buffer = video.buffered.end(i) - video.currentTime;
+                }
+            }
+            const levels = hls && Array.isArray(hls.levels) ? hls.levels : [];
+            const level = levels[hls ? hls.currentLevel : -1];
+            const frames = video.getVideoPlaybackQuality ? video.getVideoPlaybackQuality() : null;
+            const connection = navigator.connection || {};
+            const now = Date.now();
+            const openStall = playbackStats.stallStart ? now - playbackStats.stallStart : 0;
+            return {
+                position: Math.round(video.currentTime),
+                duration: Math.round(video.duration) || null,
+                paused: video.paused,
+                seeking: video.seeking,
+                buffering_enabled: hls ? hls.bufferingEnabled : null,
+                buffer_seconds: Math.round(buffer * 10) / 10,
+                watched_seconds: Math.round((now - playbackStats.startedAt) / 1000),
+                stalled_now: openStall >= 1000,
+                stalls: playbackStats.stalls + (openStall >= 1000 ? 1 : 0),
+                stall_seconds: Math.round((playbackStats.stallMs + openStall) / 1000),
+                quality_mode: hls ? (hls.autoLevelEnabled ? 'auto' : 'manual') : 'native',
+                quality_height: level ? level.height : null,
+                quality_bitrate: level ? level.bitrate : null,
+                lowest_bitrate: levels.length ? Math.min(...levels.map(item => item.bitrate)) : null,
+                available_heights: levels.map(item => item.height),
+                bandwidth_bps: hls ? Math.round(hls.bandwidthEstimate) || null : null,
+                pending_segment_seconds: playbackStats.segmentStart ? Math.round((now - playbackStats.segmentStart) / 1000) : 0,
+                segments: playbackStats.segments,
+                slow_segments: playbackStats.slowSegments,
+                last_segment: playbackStats.lastSegment,
+                hls_errors: playbackStats.hlsErrors,
+                last_error: playbackStats.lastError,
+                dropped_frames: frames ? frames.droppedVideoFrames : null,
+                total_frames: frames ? frames.totalVideoFrames : null,
+                connection_type: connection.effectiveType || null,
+                downlink_mbps: connection.downlink ?? null,
+                rtt_ms: connection.rtt ?? null,
+                save_data: connection.saveData ?? null,
+                cpu_cores: navigator.hardwareConcurrency || null,
+                memory_gb: navigator.deviceMemory || null,
+                screen: `${screen.width}x${screen.height}@${window.devicePixelRatio || 1}`
+            };
+        }
+
+        function setupQualityMenu() {
+            if (!hls || !Array.isArray(hls.levels) || hls.levels.length === 0) {
+                qualityGroup.hidden = true;
+                return;
+            }
+
+            const levels = hls.levels
+                .map((level, index) => ({ index, height: level.height || 0, bitrate: level.bitrate || 0 }))
+                .sort((a, b) => b.height - a.height || b.bitrate - a.bitrate);
+
+            qualityGroup.hidden = false;
+            qualityMenu.innerHTML = '';
+            qualityMenu.appendChild(menuItem('Otomatik', hls.currentLevel === -1, () => {
+                hls.currentLevel = -1;
+                qualityButton.textContent = 'Kalite';
+                setupQualityMenu();
+            }));
+
+            levels.forEach(level => {
+                const label = level.height ? `${level.height}p` : `${Math.round(level.bitrate / 1000)} kbps`;
+                qualityMenu.appendChild(menuItem(label, hls.currentLevel === level.index, () => {
+                    hls.currentLevel = level.index;
+                    qualityButton.textContent = 'Kalite';
+                    setupQualityMenu();
+                }));
+            });
+
+            qualityButton.textContent = 'Kalite';
+        }
+
+        function setupAudioMenu() {
+            if (!hls || !Array.isArray(hls.audioTracks) || hls.audioTracks.length <= 1) {
+                audioGroup.hidden = true;
+                return;
+            }
+
+            audioGroup.hidden = false;
+            audioMenu.innerHTML = '';
+
+            hls.audioTracks.forEach((track, index) => {
+                const label = cleanTrackLabel(track.name || track.lang || `Ses ${index + 1}`);
+                audioMenu.appendChild(menuItem(label, hls.audioTrack === index, () => {
+                    hls.audioTrack = index;
+                    setupAudioMenu();
+                }));
+            });
+        }
+
+        function setupSubtitleMenu() {
+            const tracks = Array.from(mediaElement.textTracks || []).filter(track => track.kind === 'subtitles' || track.kind === 'captions');
+            if (!tracks.length) {
+                subtitleGroup.hidden = true;
+                return;
+            }
+
+            subtitleGroup.hidden = false;
+            subtitleMenu.innerHTML = '';
+            subtitleMenu.appendChild(menuItem('Kapalı', tracks.every(track => track.mode !== 'showing'), () => {
+                tracks.forEach(track => { track.mode = 'disabled'; });
+                subtitleButton.textContent = 'CC';
+                setupSubtitleMenu();
+            }));
+
+            tracks.forEach(track => {
+                subtitleMenu.appendChild(menuItem(track.label || 'Altyazı', track.mode === 'showing', () => {
+                    tracks.forEach(item => { item.mode = item === track ? 'showing' : 'disabled'; });
+                    subtitleButton.textContent = 'CC';
+                    setupSubtitleMenu();
+                }));
+            });
+        }
+
+        function addSubtitles(subtitles) {
+            subtitles.forEach((subtitle, index) => {
+                const url = normalizeSubtitleUrl(subtitle.url || '');
+                if (!url) return;
+
+                const track = document.createElement('track');
+                track.kind = 'subtitles';
+                track.src = url;
+                track.srclang = subtitleLangCode(subtitle.lang, index);
+                track.label = cleanSubtitleLabel(subtitle.lang || `Altyazı ${index + 1}`);
+                track.default = false;
+                mediaElement.appendChild(track);
+            });
+
+            Array.from(mediaElement.textTracks || []).forEach(track => {
+                track.mode = 'disabled';
+            });
+        }
+
+        function menuItem(label, isActive, onClick) {
+            const item = document.createElement('button');
+            item.type = 'button';
+            item.className = `menu-item${isActive ? ' active' : ''}`;
+            item.textContent = label;
+            item.addEventListener('click', event => {
+                event.stopPropagation();
+                onClick();
+                closeMenus();
+            });
+            return item;
+        }
+
+        const PLAYBACK_SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2];
+
+        function speedLabel(rate) {
+            return rate === 1 ? 'Normal' : `${rate}x`;
+        }
+
+        function setupSpeedMenu() {
+            speedMenu.innerHTML = '';
+            PLAYBACK_SPEEDS.forEach(rate => {
+                speedMenu.appendChild(menuItem(speedLabel(rate), mediaElement.playbackRate === rate, () => {
+                    mediaElement.playbackRate = rate;
+                }));
+            });
+        }
+
+        function currentQualityLabel() {
+            const level = hls && Array.isArray(hls.levels) ? hls.levels[hls.currentLevel] : null;
+            const height = level && level.height ? `${level.height}p` : '';
+            if (hls && hls.autoLevelEnabled) return height ? `Otomatik (${height})` : 'Otomatik';
+            return height;
+        }
+
+        function currentAudioLabel() {
+            const track = hls && Array.isArray(hls.audioTracks) ? hls.audioTracks[hls.audioTrack] : null;
+            return track ? cleanTrackLabel(track.name || track.lang || '') : '';
+        }
+
+        function currentSubtitleLabel() {
+            const showing = Array.from(mediaElement.textTracks || []).find(track => track.mode === 'showing');
+            return showing ? (showing.label || 'Altyazı') : 'Kapalı';
+        }
+
+        const settingsPages = [
+            { title: 'Kalite', menu: qualityMenu, available: () => !qualityGroup.hidden, value: currentQualityLabel },
+            { title: 'Ses', menu: audioMenu, available: () => !audioGroup.hidden, value: currentAudioLabel },
+            { title: 'Altyazı', menu: subtitleMenu, available: () => !subtitleGroup.hidden, value: currentSubtitleLabel },
+            { title: 'Hız', menu: speedMenu, available: () => true, value: () => speedLabel(mediaElement.playbackRate) }
+        ];
+
+        function showSettingsHome() {
+            settingsHome.innerHTML = '';
+            settingsPages.filter(page => page.available()).forEach(page => {
+                const entry = document.createElement('button');
+                entry.type = 'button';
+                entry.className = 'settings-entry';
+                const name = document.createElement('span');
+                name.textContent = page.title;
+                const value = document.createElement('span');
+                value.className = 'settings-value';
+                value.textContent = `${page.value() || ''} ›`;
+                entry.append(name, value);
+                entry.addEventListener('click', event => {
+                    event.stopPropagation();
+                    showSettingsPage(page);
+                });
+                settingsHome.appendChild(entry);
+            });
+            settingsHome.hidden = false;
+            settingsHeader.hidden = true;
+            settingsPages.forEach(page => { page.menu.hidden = true; });
+        }
+
+        function showSettingsPage(page) {
+            settingsHome.hidden = true;
+            settingsHeader.hidden = false;
+            settingsTitle.textContent = page.title;
+            settingsPages.forEach(item => { item.menu.hidden = item !== page; });
+        }
+
+        settingsButton.addEventListener('click', event => {
+            event.stopPropagation();
+            const willOpen = !settingsMenu.classList.contains('open');
+            closeMenus();
+            if (!willOpen) return;
+            showSettingsHome();
+            settingsMenu.classList.add('open');
+            settingsButton.classList.add('active');
+        });
+
+        document.getElementById('settingsBack').addEventListener('click', event => {
+            event.stopPropagation();
+            showSettingsHome();
+        });
+
+        mediaElement.addEventListener('ratechange', setupSpeedMenu);
+        setupSpeedMenu();
+
+        function closeMenus() {
+            extraControls.querySelectorAll('.control-menu.open').forEach(menu => menu.classList.remove('open'));
+            extraControls.querySelectorAll('.control-button.active').forEach(button => button.classList.remove('active'));
+        }
+
+        function mountControlsIntoVideoSkin() {
+            const skinRoot = document.querySelector('video-skin')?.shadowRoot;
+            if (!skinRoot) {
+                setTimeout(mountControlsIntoVideoSkin, 250);
+                return;
+            }
+
+            injectVideoSkinFixes(skinRoot);
+
+            // Keep the controls on screen longer after a tap (default ~2s felt
+            // like they vanished instantly on mobile). media-chrome reads the
+            // `autohide` attribute (seconds) on its controller.
+            const controller = skinRoot.querySelector('media-controller')
+                || document.querySelector('video-player')
+                || skinRoot.host;
+            try { controller?.setAttribute('autohide', '4'); } catch (e) {}
+
+            const controls = skinRoot.querySelector('media-controls');
+            if (!controls) {
+                setTimeout(mountControlsIntoVideoSkin, 250);
+                return;
+            }
+
+            const nativeCaptions = skinRoot.querySelector('media-captions-button');
+            const targetGroup = nativeCaptions?.parentElement || skinRoot.querySelector('media-cast-button')?.parentElement || controls;
+
+            if (buildControlLayout(skinRoot, controls)) {
+                // extraControls now sits in the new right-hand button group.
+            } else if (extraControls.parentNode !== targetGroup) {
+                const insertBefore = nativeCaptions?.nextSibling || skinRoot.querySelector('media-cast-button') || skinRoot.querySelector('media-pip-button') || skinRoot.querySelector('media-fullscreen-button');
+                if (insertBefore && insertBefore.parentElement === targetGroup) {
+                    targetGroup.insertBefore(extraControls, insertBefore);
+                } else {
+                    targetGroup.appendChild(extraControls);
+                }
+            }
+
+            extraControls.classList.add('visible');
+            translateControlText();
+            mountTopOverlay(skinRoot);
+            mountCenterPlayButton(skinRoot);
+            playerSkinMounted = true;
+            maybeRevealPlayer();
+        }
+
+        // The centre play button shipped in .player-wrap, i.e. outside <video-skin>,
+        // which is the element that goes fullscreen - so pausing in fullscreen showed
+        // no play button at all. Move the existing node into the fullscreen subtree
+        // (its CSS has to come along; a shadow root does not inherit document styles).
+        // Every script reference goes through the const captured at startup, so moving
+        // the node keeps all of them working.
+        function mountCenterPlayButton(skinRoot) {
+            if (!skinRoot || skinRoot.getElementById('hls-center-play-style')) return;
+
+            const style = document.createElement('style');
+            style.id = 'hls-center-play-style';
+            style.textContent = `
+                .center-play-button{position:absolute;left:50%;top:50%;z-index:20;width:82px;height:82px;padding:0;display:inline-flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.55);border-radius:999px;color:#fff;background:rgba(0,0,0,.4);box-shadow:0 8px 30px rgba(0,0,0,.5);cursor:pointer;transition:opacity 160ms ease,transform 160ms ease,background 160ms ease;}
+                .center-play-button:hover{transform:translate(-50%,-50%) scale(1.06);background:rgba(0,0,0,.56);}
+                .center-play-button.hidden{opacity:0;pointer-events:none;}
+                .center-play-button svg{width:34px;height:34px;margin-left:5px;fill:currentColor;}
+                @media (max-width:640px){
+                    .center-play-button{width:74px;height:74px;border:0;background:transparent;box-shadow:none;}
+                    .center-play-button:hover{transform:translate(-50%,-50%) scale(1.04);box-shadow:none;}
+                    .center-play-button svg{width:58px;height:58px;margin-left:4px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.65));}
+                }
+            `;
+            skinRoot.appendChild(style);
+
+            const controls = skinRoot.querySelector('media-controls');
+            const parent = (controls && controls.parentElement) || skinRoot;
+            parent.appendChild(centerPlayButton);
+            // It now lives inside the player container, so a tap on it would also
+            // reach the player's own click-to-play gesture and cancel itself out.
+            sealAdClicks(centerPlayButton);
+        }
+
+        // Top overlay (Sorun Bildir + Türkçe Dublaj/Altyazı) lives INSIDE the
+        // skin's shadow root so it also renders in fullscreen (the fullscreen
+        // element is <video-skin>). It is a fully isolated layer with its own
+        // <style>; it never touches media-controls, so it can't destabilise
+        // playback the way editing the skin's own control CSS did.
+        function mountTopOverlay(skinRoot) {
+            if (!skinRoot || skinRoot.getElementById('hls-top-overlay')) return;
+
+            const style = document.createElement('style');
+            style.id = 'hls-top-overlay-style';
+            style.textContent = `
+                .hls-topbar{position:absolute;top:0;left:0;right:0;z-index:40;display:flex;align-items:center;gap:10px;padding:14px 16px;box-sizing:border-box;background:linear-gradient(to bottom,rgba(0,0,0,.55),rgba(0,0,0,0));transition:opacity .2s ease;pointer-events:none;}
+                .hls-topbar.is-hidden{opacity:0;}
+                .hls-topbar .hls-lang{display:flex;gap:8px;margin-left:auto;}
+                .hls-tb-btn{pointer-events:auto;cursor:pointer;display:inline-flex;align-items:center;gap:7px;white-space:nowrap;background:rgba(28,28,30,.82);color:#fff;border:1px solid rgba(255,255,255,.14);border-radius:9px;padding:8px 13px;font:600 13px/1 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);transition:background .15s,border-color .15s;}
+                .hls-tb-btn:hover{background:rgba(48,48,52,.9);}
+                .hls-tb-btn svg{width:15px;height:15px;flex:0 0 auto;}
+                .hls-tb-btn[hidden]{display:none;}
+                .hls-tb-btn.active{background:#e01e2b;border-color:#e01e2b;color:#fff;}
+                .hls-modal{position:absolute;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.5);padding:16px;box-sizing:border-box;}
+                .hls-modal[hidden]{display:none;}
+                .hls-card{width:min(560px,100%);max-height:92%;overflow:auto;background:#1c1c1f;color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:20px 22px;box-shadow:0 20px 60px rgba(0,0,0,.6);box-sizing:border-box;font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;}
+                .hls-card-head{display:flex;align-items:center;justify-content:space-between;}
+                .hls-card-head h3{margin:0;font-size:18px;font-weight:700;}
+                .hls-close{background:none;border:none;color:#aaa;font-size:22px;line-height:1;cursor:pointer;}
+                .hls-close:hover{color:#fff;}
+                .hls-sub{margin:8px 0 16px;color:#9a9a9e;font-size:13px;}
+                .hls-types{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+                .hls-type{display:flex;align-items:center;gap:10px;cursor:pointer;background:#2a2a2e;border:1px solid transparent;color:#e6e6e6;border-radius:9px;padding:11px 13px;font-size:13px;text-align:left;font-family:inherit;}
+                .hls-type .hls-dot{width:15px;height:15px;border-radius:50%;border:2px solid #6a6a70;flex:0 0 auto;position:relative;}
+                .hls-type.sel{border-color:#e01e2b;}
+                .hls-type.sel .hls-dot{border-color:#e01e2b;}
+                .hls-type.sel .hls-dot::after{content:"";position:absolute;inset:2px;border-radius:50%;background:#e01e2b;}
+                .hls-detail{width:100%;margin-top:14px;resize:vertical;min-height:64px;background:#2a2a2e;border:1px solid rgba(255,255,255,.1);color:#fff;border-radius:9px;padding:11px 13px;font-size:13px;font-family:inherit;box-sizing:border-box;}
+                .hls-detail::placeholder{color:#7a7a7e;}
+                .hls-send{width:100%;margin-top:16px;cursor:pointer;background:#e01e2b;color:#fff;border:none;border-radius:9px;padding:13px;font-size:14px;font-weight:700;transition:background .15s;}
+                .hls-send:hover{background:#c4121e;}
+                .hls-send:disabled{opacity:.6;cursor:default;}
+                .hls-toast{position:absolute;bottom:78px;left:50%;transform:translateX(-50%);z-index:70;background:rgba(20,20,22,.95);color:#fff;border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:11px 18px;font:600 13px/1.3 system-ui,sans-serif;max-width:80%;text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.5);}
+                .hls-toast[hidden]{display:none;}
+                @media (max-width:640px){.hls-types{grid-template-columns:1fr;}.hls-topbar{padding:8px 9px;gap:6px;}.hls-topbar .hls-lang{gap:6px;}.hls-tb-btn{padding:6px 9px;font-size:11px;gap:5px;border-radius:8px;}.hls-tb-btn svg{width:13px;height:13px;}}
+                @media (max-width:430px){.hls-tb-btn{padding:5px 7px;font-size:10px;gap:4px;}.hls-tb-btn svg{width:12px;height:12px;}.hls-topbar{padding:7px 7px;gap:5px;}}
+            `;
+            skinRoot.appendChild(style);
+
+            const layer = document.createElement('div');
+            layer.id = 'hls-top-overlay';
+            layer.innerHTML = `
+                <div class="hls-topbar is-hidden" id="hlsTopbar">
+                    <button class="hls-tb-btn" id="hlsReportBtn" type="button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 21V4h11l-1 3h6l-2 5 2 5h-9l-1-2H4z"/></svg>
+                        Sorun Bildir
+                    </button>
+                    <div class="hls-lang">
+                        <button class="hls-tb-btn" id="hlsDubBtn" type="button" hidden>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 13v-1a8 8 0 0 1 16 0v1"/><path d="M4 13v4a2 2 0 0 0 2 2h2v-8H6a2 2 0 0 0-2 2Z"/><path d="M20 13v4a2 2 0 0 1-2 2h-2v-8h2a2 2 0 0 1 2 2Z"/></svg>
+                            Türkçe Dublaj
+                        </button>
+                        <button class="hls-tb-btn" id="hlsSubBtn" type="button" hidden>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 15h4M13 15h3"/></svg>
+                            Türkçe Altyazı
+                        </button>
+                    </div>
+                </div>
+                <div class="hls-modal" id="hlsModal" hidden>
+                    <div class="hls-card">
+                        <div class="hls-card-head"><h3>Bir Sorun Bildirin</h3><button class="hls-close" id="hlsClose" type="button" aria-label="Kapat">&times;</button></div>
+                        <p class="hls-sub">Lütfen yaşadığınız sorunu seçin. Ekibimiz en kısa sürede inceleyecektir.</p>
+                        <div class="hls-types">
+                            <button class="hls-type" data-type="ses" type="button"><span class="hls-dot"></span>Ses sorunu</button>
+                            <button class="hls-type" data-type="altyazi" type="button"><span class="hls-dot"></span>Altyazı sorunu</button>
+                            <button class="hls-type" data-type="goruntu" type="button"><span class="hls-dot"></span>Görüntü kalitesi</button>
+                            <button class="hls-type" data-type="yanlis-icerik" type="button"><span class="hls-dot"></span>Yanlış içerik</button>
+                            <button class="hls-type" data-type="bozuk" type="button"><span class="hls-dot"></span>Bozuk video</button>
+                            <button class="hls-type" data-type="donma" type="button"><span class="hls-dot"></span>Donma &amp; takılma</button>
+                            <button class="hls-type" data-type="reklam" type="button"><span class="hls-dot"></span>Reklam sorunu</button>
+                            <button class="hls-type" data-type="diger" type="button"><span class="hls-dot"></span>Başka bir şey</button>
+                        </div>
+                        <textarea class="hls-detail" id="hlsDetail" placeholder="Lütfen sorunu detaylı açıklayın (En az 15 karakter)..."></textarea>
+                        <button class="hls-send" id="hlsSend" type="button">Gönder</button>
+                    </div>
+                </div>
+                <div class="hls-toast" id="hlsToast" hidden></div>
+            `;
+            // Put the overlay in the SAME parent as media-controls (the bottom
+            // bar that already renders in fullscreen), so it shares exactly that
+            // element's fullscreen visibility. Appending anywhere else left it
+            // outside the fullscreen subtree and it vanished there.
+            const controls = skinRoot.querySelector('media-controls');
+            const mediaController = skinRoot.querySelector('media-controller') || skinRoot;
+            const overlayParent = (controls && controls.parentElement) || mediaController;
+            overlayParent.appendChild(layer);
+
+            const topbar = skinRoot.getElementById('hlsTopbar');
+            const modal = skinRoot.getElementById('hlsModal');
+            const toast = skinRoot.getElementById('hlsToast');
+            const detailEl = skinRoot.getElementById('hlsDetail');
+            const sendEl = skinRoot.getElementById('hlsSend');
+            let selectedType = null;
+
+            function showToast(msg) {
+                toast.textContent = msg;
+                toast.hidden = false;
+                clearTimeout(toast._t);
+                toast._t = setTimeout(() => { toast.hidden = true; }, 3000);
+            }
+
+            layer.querySelectorAll('.hls-type').forEach(btn => btn.addEventListener('click', () => {
+                layer.querySelectorAll('.hls-type').forEach(b => b.classList.remove('sel'));
+                btn.classList.add('sel');
+                selectedType = btn.dataset.type;
+            }));
+            function openReport() {
+                modal.hidden = false;
+                try { mediaElement.pause(); } catch (e) {}
+                centerPlayButton.style.visibility = 'hidden';  // keep it from sitting over the modal
+            }
+            function closeReport() {
+                modal.hidden = true;
+                centerPlayButton.style.visibility = '';
+            }
+            skinRoot.getElementById('hlsReportBtn').addEventListener('click', openReport);
+            skinRoot.getElementById('hlsClose').addEventListener('click', closeReport);
+            modal.addEventListener('click', e => { if (e.target === modal) closeReport(); });
+
+            // The modal sits inside media-controller, whose click-to-play and
+            // keyboard hotkeys would otherwise steal the textarea's focus and
+            // eat keystrokes (space = play, etc.). Keep these events inside the
+            // modal so the form behaves like a normal form.
+            ['pointerdown', 'pointerup', 'mousedown', 'mouseup', 'click', 'dblclick', 'keydown', 'keyup', 'keypress'].forEach(evt =>
+                modal.addEventListener(evt, e => e.stopPropagation())
+            );
+
+            sendEl.addEventListener('click', async () => {
+                const detail = (detailEl.value || '').trim();
+                if (!selectedType) { showToast('Lütfen bir sorun türü seçin'); return; }
+                if (detail.length < 15) { showToast('Açıklama en az 15 karakter olmalı'); return; }
+                sendEl.disabled = true;
+                let diagnostics = null;
+                try { diagnostics = collectPlaybackDiagnostics(); } catch (e) {}
+                try {
+                    const res = await fetch(`${window.location.origin}/api/report-problem`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            video_id: videoId ? Number(videoId) : null,
+                            problem_type: selectedType,
+                            detail,
+                            embed_referrer: document.referrer || null,
+                            diagnostics
+                        })
+                    });
+                    if (!res.ok) { const j = await res.json().catch(() => ({})); throw new Error(j.detail || 'Gönderilemedi'); }
+                    closeReport();
+                    detailEl.value = '';
+                    selectedType = null;
+                    layer.querySelectorAll('.hls-type').forEach(b => b.classList.remove('sel'));
+                    showToast('Bildiriminiz alındı, teşekkürler');
+                } catch (err) { showToast(err.message || 'Bir hata oluştu'); }
+                finally { sendEl.disabled = false; }
+            });
+
+            // Mirror the skin's control visibility: the top bar shows/hides
+            // exactly when the bottom controls do (including in fullscreen).
+            let hoverKeep = false;
+            function syncTopbar() {
+                let visible = true;
+                if (controls) visible = controls.hasAttribute('data-visible') || controls.classList.contains('hls-force-show');
+                if (hoverKeep) visible = true;
+                topbar.classList.toggle('is-hidden', !visible);
+            }
+            if (controls) new MutationObserver(syncTopbar).observe(controls, { attributes: true, attributeFilter: ['data-visible', 'class'] });
+            // The buttons capture pointer events, so media-chrome stops seeing
+            // activity and hides the controls right as the cursor reaches them.
+            // Keep our bar up on hover and forward activity so the controls stay.
+            topbar.addEventListener('pointerenter', () => { hoverKeep = true; syncTopbar(); });
+            topbar.addEventListener('pointerleave', () => { hoverKeep = false; syncTopbar(); });
+            // Forward pointer activity to every element media-chrome might watch,
+            // so hovering our buttons keeps the controls (and thus this bar) alive
+            // in sync, instead of the controls timing out while our bar stays.
+            const activityTargets = [
+                skinRoot.querySelector('media-controller'),
+                document.querySelector('video-player'),
+                skinRoot.host,
+                mediaElement
+            ].filter(Boolean);
+            topbar.addEventListener('pointermove', () => {
+                activityTargets.forEach(t => { try { t.dispatchEvent(new PointerEvent('pointermove', { bubbles: true, composed: true })); } catch (e) {} });
+            });
+            syncTopbar();
+
+            // Language buttons are wired by setupLanguageButtons() (feature 2);
+            // they stay hidden until a Turkish audio track / subtitle is found.
+            window.__hlsTopOverlay = { skinRoot, showToast };
+            if (window.setupLanguageButtons) window.setupLanguageButtons();
+        }
+
+        // --- Türkçe Dublaj / Türkçe Altyazı mode buttons ---------------------
+        // Two mutually-exclusive shortcuts in the top overlay:
+        //   Dublaj  -> Turkish audio track, subtitles off (default when a
+        //              Turkish audio track exists).
+        //   Altyazı -> original (non-Turkish) audio + Turkish subtitle on.
+        // Each button only appears when its track exists, and both ride the
+        // top overlay (so they hide with the controls, in fullscreen too).
+        let langDefaultApplied = false;
+
+        function langIsTurkish(value) {
+            const s = (value || '').toString().toLowerCase();
+            return s.includes('türk') || s.includes('turk') || s.includes('türkçe')
+                || s.includes('turkce') || s === 'tr' || s.startsWith('tr-') || s.startsWith('tr_');
+        }
+
+        function getLangTracks() {
+            let trAudio = -1, origAudio = -1;
+            if (hls && Array.isArray(hls.audioTracks)) {
+                hls.audioTracks.forEach((t, i) => {
+                    if (langIsTurkish(t.name) || langIsTurkish(t.lang)) {
+                        if (trAudio < 0) trAudio = i;
+                    } else if (origAudio < 0) {
+                        origAudio = i;
+                    }
+                });
+            }
+            let trSub = null;
+            Array.from(mediaElement.textTracks || []).forEach(t => {
+                if ((t.kind === 'subtitles' || t.kind === 'captions')
+                    && (langIsTurkish(t.label) || langIsTurkish(t.language)) && !trSub) {
+                    trSub = t;
+                }
+            });
+            return { trAudio, origAudio, trSub };
+        }
+
+        function updateLangButtonsActive() {
+            const root = window.__hlsTopOverlay && window.__hlsTopOverlay.skinRoot;
+            if (!root) return;
+            const dub = root.getElementById('hlsDubBtn');
+            const sub = root.getElementById('hlsSubBtn');
+            const { trAudio, trSub } = getLangTracks();
+            const audioTurkish = hls && trAudio >= 0 && hls.audioTrack === trAudio;
+            const subShowing = !!(trSub && trSub.mode === 'showing');
+            if (dub) dub.classList.toggle('active', audioTurkish && !subShowing);
+            if (sub) sub.classList.toggle('active', subShowing);
+        }
+
+        function applyLangMode(mode) {
+            const { trAudio, origAudio, trSub } = getLangTracks();
+            if (mode === 'dub') {
+                if (hls && trAudio >= 0) hls.audioTrack = trAudio;
+                Array.from(mediaElement.textTracks || []).forEach(t => {
+                    if (t.kind === 'subtitles' || t.kind === 'captions') t.mode = 'disabled';
+                });
+            } else if (mode === 'sub') {
+                if (hls && origAudio >= 0) hls.audioTrack = origAudio;
+                Array.from(mediaElement.textTracks || []).forEach(t => {
+                    t.mode = (t === trSub) ? 'showing' : 'disabled';
+                });
+            }
+            updateLangButtonsActive();
+            if (typeof setupSubtitleMenu === 'function') setupSubtitleMenu();
+        }
+
+        function setupLanguageButtons() {
+            const root = window.__hlsTopOverlay && window.__hlsTopOverlay.skinRoot;
+            if (!root) return;
+            const dub = root.getElementById('hlsDubBtn');
+            const sub = root.getElementById('hlsSubBtn');
+            if (!dub || !sub) return;
+
+            const { trAudio, trSub } = getLangTracks();
+            dub.hidden = !(trAudio >= 0);
+            sub.hidden = !trSub;
+            dub.onclick = () => applyLangMode('dub');
+            sub.onclick = () => applyLangMode('sub');
+
+            // Start in Dublaj once, if a Turkish audio track is available.
+            if (!langDefaultApplied && trAudio >= 0) {
+                langDefaultApplied = true;
+                applyLangMode('dub');
+            } else {
+                updateLangButtonsActive();
+            }
+        }
+
+        function hidePlayerLoading() {
+            document.getElementById('playerLoading')?.classList.add('hidden');
+        }
+
+        // Reveal only once the skin is mounted AND the quality/audio/subtitle
+        // menus have been populated, so the bottom controls are already in place
+        // when the player appears (no late pop-in).
+        function maybeRevealPlayer() {
+            if (playerSkinMounted && playerTracksReady) hidePlayerLoading();
+        }
+
+        // Rearranges the skin's own control elements into three rows: times,
+        // a full-width progress bar, then buttons (play, seek, volume on the
+        // left; settings and fullscreen on the right). The video.js elements are
+        // only moved, never replaced, so they keep driving playback themselves.
+        // Returns false and leaves the default layout alone if the skin does not
+        // look the way this expects.
+        function buildControlLayout(skinRoot, controls) {
+            if (skinRoot.querySelector('.hls-bar-rows')) return true;
+
+            const host = controls.querySelector('media-tooltip-group') || controls;
+            const play = skinRoot.querySelector('media-play-button');
+            const slider = skinRoot.querySelector('media-time-slider');
+            const fullscreen = skinRoot.querySelector('media-fullscreen-button');
+            if (!play || !slider || !fullscreen) return false;
+
+            const current = skinRoot.querySelector('media-time[type="current"]');
+            const duration = skinRoot.querySelector('media-time[type="duration"]');
+            const mute = skinRoot.querySelector('media-mute-button');
+            const volume = skinRoot.querySelector('media-volume-slider');
+            const leftovers = Array.from(host.children);
+
+            const block = className => {
+                const el = document.createElement('div');
+                el.className = className;
+                return el;
+            };
+            const rows = block('hls-bar-rows');
+            const times = block('hls-bar-times');
+            const progress = block('hls-bar-progress');
+            const buttons = block('hls-bar-buttons');
+            const left = block('hls-bar-left');
+            const right = block('hls-bar-right');
+
+            // Each button's tooltip is referenced by its commandfor id; keep the
+            // pair together so the tooltip still renders next to its button.
+            const addWithTooltip = (parent, el) => {
+                if (!el) return;
+                parent.appendChild(el);
+                const tooltip = skinRoot.getElementById(el.getAttribute('commandfor') || '');
+                if (tooltip && tooltip.tagName === 'MEDIA-TOOLTIP') parent.appendChild(tooltip);
+            };
+
+            if (current) times.appendChild(current);
+            if (duration) times.appendChild(duration);
+            progress.appendChild(slider);
+
+            addWithTooltip(left, play);
+            skinRoot.querySelectorAll('media-seek-button').forEach(button => addWithTooltip(left, button));
+            if (mute) {
+                // The volume slider leaves its hover popover and sits inline.
+                const popover = skinRoot.getElementById(mute.getAttribute('commandfor') || '');
+                mute.removeAttribute('commandfor');
+                left.appendChild(mute);
+                if (volume) {
+                    volume.setAttribute('orientation', 'horizontal');
+                    volume.classList.add('hls-volume');
+                    left.appendChild(volume);
+                }
+                if (popover && popover.tagName === 'MEDIA-POPOVER') popover.remove();
+            }
+
+            right.appendChild(extraControls);
+            addWithTooltip(right, fullscreen);
+
+            buttons.append(left, right);
+            rows.append(times, progress, buttons);
+            // Speed now lives in the settings menu; cast, PiP and the native
+            // captions button are not offered.
+            leftovers.forEach(el => el.classList.add('hls-bar-leftover'));
+            host.appendChild(rows);
+            return true;
+        }
+
+        function injectVideoSkinFixes(root) {
+            if (root.getElementById('hls-videojs-skin-fixes')) return;
+
+            const style = document.createElement('style');
+            style.id = 'hls-videojs-skin-fixes';
+            style.textContent = `
+                /* Force controls visible during our own post-tap window (mobile
+                   otherwise hides them almost instantly on touch). */
+                media-controls.hls-force-show,
+                :host(.hls-force-show) media-controls {
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    pointer-events: auto !important;
+                }
+
+                :host,
+                media-container,
+                .media-default-skin,
+                .media-default-skin--video {
+                    border-radius: 0 !important;
+                    outline: 0 !important;
+                    box-shadow: none !important;
+                    background: #000 !important;
+                    overflow: hidden !important;
+                }
+
+                :host(:fullscreen),
+                :host(:fullscreen) media-container,
+                :host(:fullscreen) .media-default-skin,
+                :host(:fullscreen) .media-default-skin--video,
+                :host(:fullscreen) ::slotted(video) {
+                    position: fixed !important;
+                    inset: 0 !important;
+                    width: 100vw !important;
+                    height: 100vh !important;
+                    max-width: none !important;
+                    max-height: none !important;
+                    border-radius: 0 !important;
+                    outline: 0 !important;
+                    box-shadow: none !important;
+                    background: #000 !important;
+                    overflow: hidden !important;
+                }
+
+                :host(:fullscreen)::backdrop {
+                    background: #000 !important;
+                }
+
+                :host(:fullscreen) media-container::before,
+                :host(:fullscreen) media-container::after,
+                media-container::before,
+                media-container::after,
+                :host(:fullscreen) .media-default-skin::before,
+                :host(:fullscreen) .media-default-skin::after,
+                .media-default-skin::before,
+                .media-default-skin::after,
+                :host(:fullscreen) .media-default-skin--video::before,
+                :host(:fullscreen) .media-default-skin--video::after,
+                .media-default-skin--video::before,
+                .media-default-skin--video::after {
+                    content: none !important;
+                    display: none !important;
+                    box-shadow: none !important;
+                    background: transparent !important;
+                }
+
+                slot,
+                slot[name="media"],
+                ::slotted(video) {
+                    border-radius: 0 !important;
+                    outline: 0 !important;
+                    box-shadow: none !important;
+                }
+
+                media-poster,
+                .media-overlay,
+                .media-input-feedback {
+                    display: none !important;
+                }
+
+                media-captions-button {
+                    display: none !important;
+                }
+
+                .extra-controls {
+                    position: static !important;
+                    right: auto !important;
+                    bottom: auto !important;
+                    z-index: auto !important;
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 0 !important;
+                    opacity: 1 !important;
+                    pointer-events: auto !important;
+                    transition: none !important;
+                }
+
+                .control-group {
+                    position: relative !important;
+                    display: inline-flex !important;
+                    align-items: center !important;
+                }
+
+                .control-group[hidden],
+                .extra-controls[hidden] {
+                    display: none !important;
+                }
+
+                .control-button {
+                    min-width: 42px !important;
+                    height: 34px !important;
+                    padding: 0 10px !important;
+                    border: 0 !important;
+                    border-radius: 6px !important;
+                    background: transparent !important;
+                    color: #fff !important;
+                    font: inherit !important;
+                    font-size: 12px !important;
+                    font-weight: 700 !important;
+                    line-height: 1 !important;
+                    cursor: pointer !important;
+                }
+
+                .control-button:hover,
+                .control-button.active {
+                    background: rgba(255,255,255,0.14) !important;
+                }
+
+                .control-menu {
+                    position: absolute !important;
+                    right: 0 !important;
+                    bottom: calc(100% + 10px) !important;
+                    display: none !important;
+                    min-width: 170px !important;
+                    overflow: hidden !important;
+                    border: 1px solid rgba(255,255,255,0.14) !important;
+                    border-radius: 8px !important;
+                    background: rgba(7,10,15,0.96) !important;
+                    box-shadow: 0 16px 36px rgba(0,0,0,0.45) !important;
+                }
+
+                .control-menu.open {
+                    display: block !important;
+                }
+
+                .menu-item {
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: space-between !important;
+                    width: 100% !important;
+                    min-height: 38px !important;
+                    padding: 9px 12px !important;
+                    border: 0 !important;
+                    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+                    background: transparent !important;
+                    color: #eef3ff !important;
+                    text-align: left !important;
+                    font-size: 13px !important;
+                    cursor: pointer !important;
+                }
+
+                .menu-item:last-child {
+                    border-bottom: 0 !important;
+                }
+
+                .menu-item:hover,
+                .menu-item.active {
+                    background: rgba(255,255,255,0.12) !important;
+                }
+
+                .menu-item.active::after {
+                    content: "✓";
+                    color: #fff;
+                    font-weight: 800;
+                }
+
+                .icon-button {
+                    width: 42px !important;
+                    min-width: 42px !important;
+                    padding: 0 !important;
+                }
+
+                .icon-button svg {
+                    display: block !important;
+                    width: 21px !important;
+                    height: 21px !important;
+                    margin: 0 auto !important;
+                    fill: none !important;
+                    stroke: currentColor !important;
+                    stroke-width: 2.15 !important;
+                    stroke-linecap: round !important;
+                    stroke-linejoin: round !important;
+                }
+
+                /* Control bar layout built by buildControlLayout(): times on
+                   top, full-width progress bar, then the button row. Plain
+                   (non-nested) CSS so older browsers apply it too. */
+                media-controls {
+                    left: 0 !important;
+                    right: 0 !important;
+                    bottom: 0 !important;
+                    inset-inline: 0 !important;
+                    width: auto !important;
+                    max-width: none !important;
+                    margin: 0 !important;
+                    padding: 32px 18px 6px !important;
+                    display: block !important;
+                    border: 0 !important;
+                    border-radius: 0 !important;
+                    box-shadow: none !important;
+                    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.88) 100%) !important;
+                    -webkit-backdrop-filter: none !important;
+                    backdrop-filter: none !important;
+                    text-shadow: none !important;
+                }
+
+                media-controls::before,
+                media-controls::after {
+                    display: none !important;
+                }
+
+                /* The skin shows/hides the bar by scaling it from 95% (plus a
+                   blur on desktop), which reads as a zoom "pop" on phones.
+                   Fade and slide up from the bottom instead. */
+                media-controls {
+                    scale: 1 !important;
+                    filter: none !important;
+                    translate: 0 0;
+                    will-change: opacity, translate !important;
+                    transition-property: opacity, translate !important;
+                    transition-duration: 0.25s !important;
+                    transition-timing-function: ease-out !important;
+                }
+
+                media-controls:not([data-visible]) {
+                    scale: 1 !important;
+                    filter: none !important;
+                    translate: 0 14px !important;
+                }
+
+                media-controls.hls-force-show,
+                :host(.hls-force-show) media-controls {
+                    translate: 0 0 !important;
+                }
+
+                media-controls > media-tooltip-group {
+                    display: block !important;
+                }
+
+                .hls-bar-leftover,
+                #qualityGroup,
+                #audioGroup,
+                #subtitleGroup {
+                    display: none !important;
+                }
+
+                .hls-bar-rows {
+                    display: flex;
+                    flex-direction: column;
+                    width: 100%;
+                }
+
+                .hls-bar-times {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0 2px;
+                }
+
+                .hls-bar-times media-time {
+                    width: auto !important;
+                    min-width: 0 !important;
+                    padding: 0 !important;
+                    color: #fff !important;
+                    font-size: 14px !important;
+                    font-variant-numeric: tabular-nums;
+                    line-height: 20px !important;
+                }
+
+                .hls-bar-progress {
+                    width: 100%;
+                }
+
+                .hls-bar-progress media-time-slider {
+                    width: 100% !important;
+                    min-width: 0 !important;
+                    height: 20px !important;
+                    margin: 0 !important;
+                    padding: 0 !important;
+                }
+
+                .hls-bar-progress media-slider-track {
+                    height: 5px !important;
+                    border-radius: 0 !important;
+                    background: rgba(255,255,255,0.3) !important;
+                }
+
+                .hls-bar-progress media-slider-buffer {
+                    background: rgba(255,255,255,0.5) !important;
+                }
+
+                /* The buffer bar comes after the fill in the DOM; lift the fill
+                   so the buffered range does not wash the red out. */
+                .hls-bar-progress media-slider-fill {
+                    z-index: 1 !important;
+                    background: #e50914 !important;
+                }
+
+                .hls-bar-progress media-slider-thumb {
+                    width: 13px !important;
+                    height: 13px !important;
+                    border: 0 !important;
+                    background: #e50914 !important;
+                    box-shadow: none !important;
+                    opacity: 1 !important;
+                }
+
+                /* The skin sets the fill width with nested CSS, which older
+                   browsers (Chrome < 112, iOS < 16.5) ignore. Same rule, flat. */
+                media-slider-fill[data-orientation="horizontal"] {
+                    width: var(--media-slider-fill);
+                }
+
+                media-slider-fill[data-orientation="vertical"] {
+                    height: var(--media-slider-fill);
+                }
+
+                .hls-bar-buttons {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    gap: 8px;
+                    margin-top: 2px;
+                }
+
+                .hls-bar-left,
+                .hls-bar-right {
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    min-width: 0;
+                }
+
+                .hls-bar-buttons .media-button,
+                .hls-bar-buttons .control-button {
+                    width: 42px !important;
+                    min-width: 42px !important;
+                    height: 42px !important;
+                    padding: 0 !important;
+                    color: #fff !important;
+                    background: transparent !important;
+                    border-radius: 6px !important;
+                }
+
+                .hls-bar-buttons .media-button:hover,
+                .hls-bar-buttons .control-button:hover,
+                .hls-bar-buttons .control-button.active {
+                    background: rgba(255,255,255,0.12) !important;
+                }
+
+                .hls-bar-buttons .media-icon,
+                .hls-bar-buttons .icon-button svg {
+                    width: 28px !important;
+                    height: 28px !important;
+                }
+
+                .hls-bar-buttons .media-icon__label {
+                    font-size: 10px !important;
+                }
+
+                media-volume-slider.hls-volume {
+                    width: 72px !important;
+                    min-width: 72px !important;
+                    height: 24px !important;
+                    margin: 0 4px 0 0 !important;
+                }
+
+                .hls-volume media-slider-track {
+                    height: 4px !important;
+                    background: rgba(255,255,255,0.3) !important;
+                }
+
+                .hls-volume media-slider-fill {
+                    background: #fff !important;
+                }
+
+                .hls-volume media-slider-thumb {
+                    width: 11px !important;
+                    height: 11px !important;
+                    background: #fff !important;
+                    border: 0 !important;
+                }
+
+                .settings-menu {
+                    right: 0 !important;
+                    min-width: 240px !important;
+                    max-height: calc(100vh - 110px) !important;
+                    overflow-y: auto !important;
+                    padding: 6px 0 !important;
+                }
+
+                .settings-home[hidden],
+                .settings-header[hidden],
+                .settings-page[hidden] {
+                    display: none !important;
+                }
+
+                .settings-entry {
+                    display: flex !important;
+                    align-items: center !important;
+                    justify-content: space-between !important;
+                    gap: 18px !important;
+                    width: 100% !important;
+                    min-height: 40px !important;
+                    padding: 9px 16px !important;
+                    border: 0 !important;
+                    background: transparent !important;
+                    color: #fff !important;
+                    font: inherit !important;
+                    font-size: 14px !important;
+                    text-align: left !important;
+                    cursor: pointer !important;
+                }
+
+                .settings-entry:hover {
+                    background: rgba(255,255,255,0.12) !important;
+                }
+
+                .settings-value {
+                    color: rgba(255,255,255,0.65) !important;
+                    white-space: nowrap !important;
+                }
+
+                .settings-header {
+                    display: flex !important;
+                    align-items: center !important;
+                    gap: 6px !important;
+                    padding: 2px 10px 6px !important;
+                    border-bottom: 1px solid rgba(255,255,255,0.12) !important;
+                    color: #fff !important;
+                    font-size: 14px !important;
+                    font-weight: 700 !important;
+                }
+
+                .settings-back {
+                    width: 30px !important;
+                    height: 30px !important;
+                    padding: 0 !important;
+                    border: 0 !important;
+                    border-radius: 6px !important;
+                    background: transparent !important;
+                    color: #fff !important;
+                    font-size: 22px !important;
+                    line-height: 1 !important;
+                    cursor: pointer !important;
+                }
+
+                .settings-back:hover {
+                    background: rgba(255,255,255,0.12) !important;
+                }
+
+                @media (max-width: 640px) {
+                    media-controls {
+                        padding: 22px 10px 2px !important;
+                    }
+
+                    .hls-bar-times media-time {
+                        font-size: 12px !important;
+                        line-height: 16px !important;
+                    }
+
+                    .hls-bar-progress media-time-slider {
+                        height: 16px !important;
+                    }
+
+                    .hls-bar-progress media-slider-track {
+                        height: 4px !important;
+                    }
+
+                    .hls-bar-progress media-slider-thumb {
+                        width: 11px !important;
+                        height: 11px !important;
+                    }
+
+                    .hls-bar-left,
+                    .hls-bar-right {
+                        gap: 2px;
+                    }
+
+                    .hls-bar-buttons .media-button,
+                    .hls-bar-buttons .control-button {
+                        width: 36px !important;
+                        min-width: 36px !important;
+                        height: 36px !important;
+                    }
+
+                    .hls-bar-buttons .media-icon,
+                    .hls-bar-buttons .icon-button svg {
+                        width: 23px !important;
+                        height: 23px !important;
+                    }
+
+                    media-volume-slider.hls-volume {
+                        display: none !important;
+                    }
+
+                    .settings-menu {
+                        min-width: 200px !important;
+                        max-height: calc(100vh - 70px) !important;
+                        padding: 3px 0 !important;
+                    }
+
+                    .settings-entry {
+                        min-height: 32px !important;
+                        padding: 5px 12px !important;
+                        font-size: 13px !important;
+                    }
+                }
+            `;
+            root.appendChild(style);
+        }
+
+        function normalizeSubtitleUrl(url) {
+            if (!url) return '';
+            if (/^https?:\/\//i.test(url)) return url;
+            return `${window.location.origin}${url.startsWith('/') ? '' : '/'}${url}`;
+        }
+
+        function subtitleLangCode(label, index) {
+            const value = String(label || '').toLowerCase();
+            if (value.includes('turkish') || value.includes('türk') || value.includes('tur')) return 'tr';
+            if (value.includes('english') || value.includes('ingiliz') || value.includes('eng')) return 'en';
+            return `sub-${index + 1}`;
+        }
+
+        function cleanSubtitleLabel(label) {
+            const parts = String(label || '').split(' - ').map(part => part.trim()).filter(Boolean);
+            if (parts.length >= 2 && parts[0].toLowerCase() === parts[1].toLowerCase()) {
+                return parts[0];
+            }
+            return label || 'Altyazı';
+        }
+
+        function cleanTrackLabel(label) {
+            const value = cleanSubtitleLabel(label);
+            if (/^tur$/i.test(value)) return 'Türkçe';
+            if (/^eng$/i.test(value)) return 'English';
+            return value;
+        }
+
+        function startControlTranslation() {
+            translateControlText();
+            setTimeout(translateControlText, 500);
+            setTimeout(translateControlText, 1500);
+            let ticks = 0;
+            const timer = setInterval(() => {
+                translateControlText();
+                ticks += 1;
+                if (ticks >= 8) clearInterval(timer);
+            }, 1000);
+
+            const observer = new MutationObserver(() => translateControlText());
+            observer.observe(document.documentElement, {
+                childList: true,
+                subtree: true,
+                characterData: true,
+                attributes: true,
+                attributeFilter: ['aria-label', 'title', 'label']
+            });
+        }
+
+        function translateControlText() {
+            const dictionary = {
+                'Play': 'Oynat',
+                'Pause': 'Duraklat',
+                'Mute': 'Sesi kapat',
+                'Unmute': 'Sesi aç',
+                'Fullscreen': 'Tam ekran',
+                'Exit fullscreen': 'Tam ekrandan çık',
+                'Enter fullscreen': 'Tam ekran',
+                'Picture-in-picture': 'Resim içinde resim',
+                'Playback Rate': 'Hız',
+                'Playback rate': 'Hız',
+                'Captions': 'Altyazı',
+                'Closed captions': 'Altyazı',
+                'Subtitles': 'Altyazı',
+                'Off': 'Kapalı',
+                'On': 'Açık',
+                'Volume': 'Ses',
+                'Current Time': 'Geçen süre',
+                'Duration': 'Süre',
+                'Remaining Time': 'Kalan süre',
+                'Seek': 'Sardır',
+                'Seek backward': 'Geri sar',
+                'Seek forward': 'İleri sar',
+                'Settings': 'Ayarlar',
+                'Auto': 'Otomatik',
+                'Normal': 'Normal'
+            };
+
+            const roots = [document];
+            document.querySelectorAll('*').forEach(element => {
+                if (element.shadowRoot) roots.push(element.shadowRoot);
+            });
+
+            roots.forEach(root => {
+                root.querySelectorAll('*').forEach(element => {
+                    ['aria-label', 'title', 'label'].forEach(attr => {
+                        const value = element.getAttribute?.(attr);
+                        if (value && dictionary[value]) element.setAttribute(attr, dictionary[value]);
+                    });
+
+                    if (element.childNodes.length === 1 && element.firstChild.nodeType === Node.TEXT_NODE) {
+                        const text = element.textContent.trim();
+                        if (dictionary[text]) element.textContent = dictionary[text];
+                    }
+                });
+            });
+        }
+
+        function translateControlText() {
+            const dictionary = {
+                'Play': 'Oynat',
+                'Play Video': 'Videoyu oynat',
+                'Play video': 'Videoyu oynat',
+                'Play (k)': 'Oynat',
+                'Pause': 'Duraklat',
+                'Pause (k)': 'Duraklat',
+                'Mute': 'Sesi kapat',
+                'Mute (m)': 'Sesi kapat',
+                'Unmute': 'Sesi aç',
+                'Unmute (m)': 'Sesi aç',
+                'Muted': 'Sessiz',
+                'Fullscreen': 'Tam ekran',
+                'Full screen': 'Tam ekran',
+                'Exit fullscreen': 'Tam ekrandan çık',
+                'Exit full screen': 'Tam ekrandan çık',
+                'Enter fullscreen': 'Tam ekran',
+                'Enter full screen': 'Tam ekran',
+                'Picture-in-picture': 'Resim içinde resim',
+                'Picture in Picture': 'Resim içinde resim',
+                'Playback Rate': 'Hız',
+                'Playback rate': 'Hız',
+                'Playback speed': 'Hız',
+                'Captions': 'Altyazı',
+                'Closed captions': 'Altyazı',
+                'Subtitles': 'Altyazı',
+                'Off': 'Kapalı',
+                'On': 'Açık',
+                'Volume': 'Ses',
+                'Current Time': 'Geçen süre',
+                'Duration': 'Süre',
+                'Remaining Time': 'Kalan süre',
+                'Seek': 'Sardır',
+                'Seek backward': 'Geri sar',
+                'Seek back': 'Geri sar',
+                'Seek forward': 'İleri sar',
+                'Settings': 'Ayarlar',
+                'Auto': 'Otomatik',
+                'Normal': 'Normal'
+            };
+
+            const roots = [document];
+            document.querySelectorAll('*').forEach(element => {
+                if (element.shadowRoot) roots.push(element.shadowRoot);
+            });
+
+            roots.forEach(root => {
+                root.querySelectorAll('*').forEach(element => {
+                    ['aria-label', 'title', 'label'].forEach(attr => {
+                        const value = element.getAttribute?.(attr);
+                        if (!value) return;
+                        const translated = dictionary[value] || dictionary[value.trim()];
+                        if (translated) element.setAttribute(attr, translated);
+                    });
+
+                    if (element.childNodes.length === 1 && element.firstChild.nodeType === Node.TEXT_NODE) {
+                        const text = element.textContent.trim();
+                        if (dictionary[text]) element.textContent = dictionary[text];
+                    }
+                });
+
+                const buttonLabels = [
+                    ['media-play-button', 'Oynat'],
+                    ['media-mute-button', 'Ses'],
+                    ['media-fullscreen-button', 'Tam ekran'],
+                    ['media-pip-button', 'Resim içinde resim'],
+                    ['media-playback-rate-menu-trigger', 'Hız'],
+                    ['media-captions-button', 'Altyazı']
+                ];
+
+                buttonLabels.forEach(([selector, label]) => {
+                    root.querySelectorAll(selector).forEach(element => {
+                        element.setAttribute('aria-label', label);
+                        element.setAttribute('title', label);
+                    });
+                });
+            });
+        }
+
+        // --- Playback recovery -------------------------------------------------
+        // Previously any hls.js error was either ignored (non-fatal) or turned
+        // straight into an error message (fatal), with no attempt to recover. A
+        // single transient hiccup — a slow fragment, a small buffer hole in the
+        // separate audio rendition — therefore killed playback permanently, which
+        // is exactly what viewers describe ("stuck in the same spot"). On a fast,
+        // stable line these hiccups almost never happen, which is why it never
+        // reproduces here. Recover the way hls.js documents instead.
+        let hlsRecoverCount = 0;
+        let hlsRecoverWindowStart = 0;
+
+        function handleHlsError(data) {
+            if (!data) return;
+            playbackStats.hlsErrors++;
+            playbackStats.lastError = String(data.details || data.type || '').slice(0, 80);
+            // Non-fatal errors are left to hls.js / the stall watchdog below.
+            if (!data.fatal) return;
+
+            const now = Date.now();
+            if (!hlsRecoverWindowStart || now - hlsRecoverWindowStart > 60000) {
+                hlsRecoverWindowStart = now;
+                hlsRecoverCount = 0;
+            }
+            hlsRecoverCount++;
+
+            // Only give up after repeated failures inside one minute.
+            if (hlsRecoverCount > 6) {
+                showError('Oynatma hatası oluştu');
+                return;
+            }
+
+            try {
+                if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
+                    hls.startLoad();
+                } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
+                    if (hlsRecoverCount > 2) {
+                        try { hls.swapAudioCodec(); } catch (e) {}
+                    }
+                    hls.recoverMediaError();
+                } else {
+                    showError('Oynatma hatası oluştu');
+                }
+            } catch (e) {
+                showError('Oynatma hatası oluştu');
+            }
+        }
+
+        // Watchdog: if the media element says it is playing but the clock is not
+        // moving, nudge it over the gap; escalate to a reload if it stays stuck.
+        let stallWatchdogTimer = null;
+        function startStallWatchdog() {
+            if (stallWatchdogTimer) return;
+            let lastTime = -1;
+            let stalledSeconds = 0;
+            stallWatchdogTimer = setInterval(() => {
+                if (!mediaElement || mediaElement.paused || mediaElement.ended || mediaElement.seeking || mediaElement.readyState === 0) {
+                    lastTime = -1;
+                    stalledSeconds = 0;
+                    return;
+                }
+                const t = mediaElement.currentTime;
+                if (lastTime >= 0 && Math.abs(t - lastTime) < 0.01) {
+                    stalledSeconds++;
+                    if (stalledSeconds === 3) nudgePlayback();
+                    else if (stalledSeconds >= 8) {
+                        stalledSeconds = 0;
+                        try { hls && hls.startLoad(); } catch (e) {}
+                        nudgePlayback();
+                    }
+                } else {
+                    stalledSeconds = 0;
+                }
+                lastTime = t;
+            }, 1000);
+        }
+
+        function nudgePlayback() {
+            try {
+                const t = mediaElement.currentTime;
+                const buffered = mediaElement.buffered;
+                // Jump to the start of the next buffered range if we are sitting in a hole.
+                for (let i = 0; i < buffered.length; i++) {
+                    const start = buffered.start(i);
+                    if (start > t && start - t < 10) {
+                        mediaElement.currentTime = start + 0.1;
+                        mediaElement.play().catch(() => {});
+                        return;
+                    }
+                }
+                mediaElement.currentTime = t + 0.1;
+                mediaElement.play().catch(() => {});
+            } catch (e) {}
+        }
+
+        function showError(message) {
+            hidePlayerLoading();
+            errorText.textContent = message;
+            errorOverlay.classList.remove('hidden');
+        }
+    </script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon='{"version":"2024.11.0","token":"792ac3d6e00a4abb83bdc7e58ffe3c88","r":1,"spa":2}' crossorigin="anonymous"></script>
+</body>
+</html>

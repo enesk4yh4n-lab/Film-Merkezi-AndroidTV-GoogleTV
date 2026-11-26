@@ -1,0 +1,154 @@
+[
+  {
+    "file": "vladimir.html",
+    "url": "https://filmizle.ink/vladimir-i2/",
+    "sha256": "62404c0d4a28663bf216d7ec372eb0990cadcb20bde79dc133e09d6e2bb441db",
+    "bytes": 70111,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "ddizi.html",
+    "url": "https://www.ddizi.tel/diziler/1815/dark-hd1",
+    "sha256": "797b3e08ae82042d56826d323a5143ee81eb5ad5e99d60bd29bfc1b61b649ff5",
+    "bytes": 28608,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "ddizi-1.html",
+    "url": "https://www.ddizi.tel/diziler/1815/dark-hd1/sayfa-1",
+    "sha256": "ae124b927290bfd32177f71e5358b36def4606175f19861d0a1750c989232d97",
+    "bytes": 28524,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "ddizi-2.html",
+    "url": "https://www.ddizi.tel/diziler/1815/dark-hd1/sayfa-2",
+    "sha256": "7ad295ecbd83ffa25df9860395e86606e63d614dbf51e694b3518b647fa5fa74",
+    "bytes": 26089,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "dizibox.html",
+    "url": "https://www.dizibox.live/diziler/visionquest/",
+    "sha256": "367faa996d3a3fee2409ab21afb67e2f6ed68bee73d1fa7f95fe1fec3f898555",
+    "bytes": 813131,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "delisi.html",
+    "url": "https://hdfilmdelisi.one/dizi/breaking-bad",
+    "sha256": "4db5ecf7c416ab105582b5c617183516153484464d41a73a3e94f60b2489dbc6",
+    "bytes": 583753,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "dizibox-multi.html",
+    "url": "https://www.dizibox.live/diziler/12-monkeys-izle-1/",
+    "sha256": "5e6acfad66d2afd57273ea293e43d24bf6a2b1303f7609aa2959524ea0fb1762",
+    "bytes": 891261,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "delisi-multi.html",
+    "url": "https://hdfilmdelisi1.com/dizi/the-mentalist",
+    "sha256": "a27e5b4e2c487765ae9dc3ecfbdc8fe20cd3bfb3cb184648f8e53f83ffc1ee4b",
+    "bytes": 713967,
+    "capturedDate": "2026-11-05",
+    "kind": "live HTML; test only"
+  },
+  {
+    "file": "babam-1.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/",
+    "sha256": "d9d860f0800dad6e36743c363c656e5e225e6bac2a43d2b4da13abdd36bd792b",
+    "bytes": 287602,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\series.html"
+  },
+  {
+    "file": "babam-2.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/?sezon=2",
+    "sha256": "a758f76adbeb0ecc2ba8488bd54a18b01e3209b969490a987e1817be2f17d0cb",
+    "bytes": 287643,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\season-2.html"
+  },
+  {
+    "file": "babam-3.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/?sezon=3",
+    "sha256": "49255e7da71cf5bbb24361d3f3e5a7d28c3dbc3bf32837952ed938608a3a1f08",
+    "bytes": 289189,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\season-3.html"
+  },
+  {
+    "file": "babam-4.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/?sezon=4",
+    "sha256": "efdc880e1f88a53b4f75f0364c0f9e68b12671556aa7414b38b0eeba79f7930a",
+    "bytes": 289358,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\season-4.html"
+  },
+  {
+    "file": "babam-5.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/?sezon=5",
+    "sha256": "532e52a31a8534ae6f81af3de6468a42b705771c92e5ea74be479ff1b0172cc6",
+    "bytes": 286371,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\season-5.html"
+  },
+  {
+    "file": "babam-6.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/?sezon=6",
+    "sha256": "9b7e13c00aa55542b316a9e37cca9ad1534f4b18e014bf89fde965046fbd6e91",
+    "bytes": 286239,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\season-6.html"
+  },
+  {
+    "file": "babam-7.html",
+    "url": "https://www.filmizlebabam.com/dizi/the-mentalist/?sezon=7",
+    "sha256": "6ee6c8879ca2559953b2530fbb2b44bf7073fd728a53a180415f71740c4ba6c2",
+    "bytes": 273336,
+    "kind": "historical captured HTML from Tizen research",
+    "source": "multisite0140\\filmizlebabam\\season-7.html"
+  },
+  {
+    "file": "dizibox-season-1.html",
+    "url": "https://www.dizibox.live/dizi/12-monkeys/1-sezon-12-monkeys/",
+    "finalUrl": "https://www.dizibox.live/dizi/12-monkeys/1-sezon-12-monkeys/",
+    "bytes": 802417,
+    "sha256": "b856c19dde88086956027a23cca5c5e817cc34f0fa8410f99e58e42af30f3468",
+    "capturedDate": "2026-11-05"
+  },
+  {
+    "file": "dizibox-season-2.html",
+    "url": "https://www.dizibox.live/dizi/12-monkeys/2-sezon-12-monkeys/",
+    "finalUrl": "https://www.dizibox.live/dizi/12-monkeys/2-sezon-12-monkeys/",
+    "bytes": 802435,
+    "sha256": "eda6b11e54e3ca5268c5f7b085e2c511c2776ec4f9e51e20ff95d746427dba25",
+    "capturedDate": "2026-11-05"
+  },
+  {
+    "file": "dizibox-season-3.html",
+    "url": "https://www.dizibox.live/dizi/12-monkeys/3-sezon-12-monkeys/",
+    "finalUrl": "https://www.dizibox.live/dizi/12-monkeys/3-sezon-12-monkeys/",
+    "bytes": 799763,
+    "sha256": "df725f027de961c7fe3d4405c7fa32bb37cec2841bc43141084cd8070138024b",
+    "capturedDate": "2026-11-05"
+  },
+  {
+    "file": "dizibox-season-4.html",
+    "url": "https://www.dizibox.live/dizi/12-monkeys/4-sezon-12-monkeys/",
+    "finalUrl": "https://www.dizibox.live/dizi/12-monkeys/4-sezon-12-monkeys/",
+    "bytes": 800703,
+    "sha256": "96899ea521a76d4fe92e6c7059a504be747f1e3e20fed75ad1e8af51d26d9c6a",
+    "capturedDate": "2026-11-05"
+  }
+]

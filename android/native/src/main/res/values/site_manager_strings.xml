@@ -1,0 +1,12 @@
+<resources>
+    <string name="site_manager_title">Site yönetimi</string>
+    <string name="site_manager_help">Mevcut sitenin adı ve ana adresi değiştirilebilir. Ayrıştırıcı aynı kalır; farklı yapıda yeni site eklenmez. Listem ve izleme kayıtları korunur.</string>
+    <string name="site_manager_name">Görünen site adı</string>
+    <string name="site_manager_address">Site adresi (HTTPS)</string>
+    <string name="site_manager_test">Adresi dene</string>
+    <string name="site_manager_default">Varsayılana dön</string>
+    <string name="site_manager_pending">Değişiklikleri kaydetmek için Uygula düğmesini kullanın.</string>
+    <string name="site_manager_test_ok">Katalog yanıt verdi: %1$d içerik ayrıştırıldı. Henüz kaydedilmedi.</string>
+    <string name="site_manager_test_failed">Adres doğrulanamadı: %1$s. Erişim engeli veya sayfa yapısı değişikliği olabilir.</string>
+    <string name="site_manager_no_cards">Katalogda içerik doğrulanamadı.</string>
+</resources>

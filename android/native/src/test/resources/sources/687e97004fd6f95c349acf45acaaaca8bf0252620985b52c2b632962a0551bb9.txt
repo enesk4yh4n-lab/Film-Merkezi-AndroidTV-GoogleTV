@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" href="data:,"><!-- favicon yok: tarayıcının /favicon.ico isteyip 404 üretmesini önler -->
+<title>Men in Black 3 2012 1080p DUAL NF WEB-DL x264 EAC3 5.1 - HdT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://play2.pilavyerplay.top/assets/css/tokens.css?v=1782531984">
+<link rel="stylesheet" href="https://play2.pilavyerplay.top/assets/css/player.css?v=1785015825">
+<style>:root{--accent: #706b6f;}</style>
+<!-- İnceleme caydırıcısı (F12/DevTools): sayfa gövdesinden ÖNCE yüklenir.
+     Bu yalnızca caydırıcılıktır; gerçek koruma token + origin kilidi + PHP proxy'dir. -->
+<script>window.__G__ = {"lvl":"aggressive","brand":"Pilavyer"};</script>
+<script src="https://play2.pilavyerplay.top/assets/js/guard.js?v=1782806962"></script>
+</head>
+<body class="sv-body">
+<div id="sv" class="sv" data-state="idle">
+    <video id="sv-video" class="sv-video" playsinline preload="metadata"
+           poster="https://play2.pilavyerplay.top/api/thumb.php?v=0aba3d2c9d6974f4e86472ac709ee395&amp;token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7"
+           controlslist="nodownload noremoteplayback noplaybackrate"
+           x-webkit-airplay="deny"></video>
+
+    
+    
+    <!-- Yüklenme spinner -->
+    <div class="sv-spinner" id="sv-spinner" aria-hidden="true">
+        <span class="sv-ring"><span class="sv-ring-inner"></span></span>
+    </div>
+
+    <!-- "Kaldığın yerden devam et" çubuğu (JS localStorage'tan doldurur) -->
+    <div class="sv-resume" id="sv-resume" hidden>
+        <span class="sv-resume-txt" id="sv-resume-txt"></span>
+        <button class="sv-resume-go" id="sv-resume-go" type="button">Devam et</button>
+        <button class="sv-resume-x" id="sv-resume-x" type="button" aria-label="Baştan başla">×</button>
+    </div>
+
+    <!-- Büyük orta play overlay: gözleri kapalı kedi; mouse ile üzerine gelince gözler açılır -->
+    <button class="sv-bigplay" id="sv-bigplay" aria-label="Oynat">
+        <svg class="sv-cat" viewBox="0 0 64 64" aria-hidden="true">
+            <!-- Kulaklar -->
+            <path class="cat-line" d="M19 24 L15 7 L31 19"/>
+            <path class="cat-line" d="M45 24 L49 7 L33 19"/>
+            <path class="cat-fill" d="M20.5 21 L17.5 11 L27 18.5 Z"/>
+            <path class="cat-fill" d="M43.5 21 L46.5 11 L37 18.5 Z"/>
+            <!-- Yüz -->
+            <circle class="cat-line" cx="32" cy="38" r="18"/>
+            <!-- Kapalı gözler (uyuyan/gülen kavis) -->
+            <g class="cat-eyes-closed">
+                <path class="cat-line" d="M20 37 Q24.5 41.5 29 37"/>
+                <path class="cat-line" d="M35 37 Q39.5 41.5 44 37"/>
+            </g>
+            <!-- Açık gözler -->
+            <g class="cat-eyes-open">
+                <circle class="cat-eyeball" cx="24.5" cy="36" r="4.4"/>
+                <circle class="cat-eyeball" cx="39.5" cy="36" r="4.4"/>
+                <circle class="cat-pupil" cx="24.5" cy="36" r="1.9"/>
+                <circle class="cat-pupil" cx="39.5" cy="36" r="1.9"/>
+            </g>
+            <!-- Burun -->
+            <path class="cat-fill" d="M29.5 43 L34.5 43 L32 46 Z"/>
+            <!-- Ağız -->
+            <path class="cat-line" d="M32 46 Q32 49 28.5 49 M32 46 Q32 49 35.5 49"/>
+            <!-- Bıyıklar -->
+            <path class="cat-line cat-whisker" d="M23 42 L5 39 M23 45 L4 45 M23 48 L5 51"/>
+            <path class="cat-line cat-whisker" d="M41 42 L59 39 M41 45 L60 45 M41 48 L59 51"/>
+        </svg>
+    </button>
+
+    <!-- Çift dokunuş seek ipuçları (mobil) -->
+    <div class="sv-seekhint sv-seekhint-left" id="sv-seek-left" aria-hidden="true">
+        <span class="sv-seekhint-ic">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1L7 6l5 5V7a6 6 0 11-6 6H4a8 8 0 108-8z"/></svg>
+        </span>
+        <span class="sv-seekhint-txt">10<small>sn</small></span>
+    </div>
+    <div class="sv-seekhint sv-seekhint-right" id="sv-seek-right" aria-hidden="true">
+        <span class="sv-seekhint-ic">
+            <svg viewBox="0 0 24 24"><path d="M12 5V1l5 5-5 5V7a6 6 0 106 6h2a8 8 0 11-8-8z"/></svg>
+        </span>
+        <span class="sv-seekhint-txt">10<small>sn</small></span>
+    </div>
+
+    <!-- Kontroller — Plyr layout: progress bar üstte, buton satırı altta -->
+    <div class="sv-controls" id="sv-controls">
+
+        <!-- Progress bar: tam genişlik, zaman gösterimi yanında değil -->
+        <div class="sv-progress" id="sv-progress"
+             role="slider" aria-label="İlerleme" tabindex="0"
+             aria-valuemin="0" aria-valuenow="0">
+            <!-- Seek önizleme tooltip (storyboard varsa görüntü + zaman) -->
+            <div class="sv-preview" id="sv-preview" hidden>
+                <div class="sv-preview-img" id="sv-preview-img"></div>
+                <span class="sv-preview-time" id="sv-preview-time">0:00</span>
+            </div>
+            <div class="sv-track">
+                <div class="sv-buffered" id="sv-buffered"></div>
+                <div class="sv-played"   id="sv-played"></div>
+                <div class="sv-scrub"    id="sv-scrub"></div>
+            </div>
+        </div>
+
+        <!-- Buton satırı: sol grup | sağ grup -->
+        <div class="sv-bar">
+            <!-- Sol: oynat, ses, zaman -->
+            <div class="sv-group sv-left">
+                <button class="sv-btn sv-play" id="sv-play" aria-label="Oynat / Duraklat" data-tooltip="Oynat / Duraklat">
+                    <svg class="i-play"  viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+                </button>
+
+                <button class="sv-btn" id="sv-mute" aria-label="Sesi aç/kapat" data-tooltip="Sesi aç/kapat">
+                    <svg class="i-vol"  viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4v8a4.5 4.5 0 002.5-4z"/></svg>
+                    <svg class="i-mute" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M16 9l5 6m0-6l-5 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                </button>
+
+                <!-- Ses kaydırıcı: hover'da genişler -->
+                <div class="sv-vol-slider" id="sv-vol-slider" aria-label="Ses düzeyi">
+                    <div class="sv-vol-fill" id="sv-vol-fill"></div>
+                </div>
+
+                <!-- Zaman: 0:00 / 0:00 -->
+                <div class="sv-time-wrap">
+                    <span class="sv-time" id="sv-cur">0:00</span>
+                    <span class="sv-time-sep" aria-hidden="true">/</span>
+                    <span class="sv-time sv-time-dur" id="sv-dur">0:00</span>
+                </div>
+            </div>
+
+            <!-- Sağ: altyazı, dil(ses), kalite, ayarlar(hız), PiP, tam ekran.
+                 .sv-ctl = paylaşımlı popover'ı açan kontrol; data-pop menü türünü belirler. -->
+            <div class="sv-group sv-right">
+                <!-- Altyazı (CC) — altyazı seçim menüsü açar -->
+                <button class="sv-btn sv-ctl" id="sv-cc" data-pop="cc"
+                        aria-label="Altyazı" aria-haspopup="menu" aria-expanded="false"
+                        data-tooltip="Altyazı" hidden>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 4H5a2 2 0 00-2 2v12a2 2 0 002 2h14a2 2 0 002-2V6a2 2 0 00-2-2zM9 11H7.5v-.5h-2v3h2V13H9v1a1 1 0 01-1 1H5a1 1 0 01-1-1v-4a1 1 0 011-1h3a1 1 0 011 1v1zm7 0h-1.5v-.5h-2v3h2V13H16v1a1 1 0 01-1 1h-3a1 1 0 01-1-1v-4a1 1 0 011-1h3a1 1 0 011 1v1z"/></svg>
+                </button>
+
+                <!-- Dil / Ses — ses parçası (dil) seçim menüsü açar -->
+                <button class="sv-btn sv-ctl" id="sv-audio" data-pop="audio"
+                        aria-label="Dil" aria-haspopup="menu" aria-expanded="false"
+                        data-tooltip="Dil" hidden>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.92 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a7.96 7.96 0 010-4h3.38a16.6 16.6 0 00-.14 2c0 .68.05 1.35.14 2H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.99 7.99 0 015.07 16zm2.95-8H5.07a7.99 7.99 0 014.33-3.56A15.65 15.65 0 008.02 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66a14.7 14.7 0 01-.16-2c0-.68.06-1.36.16-2h4.68c.1.64.16 1.32.16 2 0 .68-.06 1.35-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8 8 0 01-4.33 3.56zM16.36 14c.09-.65.14-1.32.14-2 0-.68-.05-1.35-.14-2h3.38a7.96 7.96 0 010 4h-3.38z"/></svg>
+                    <span class="sv-aud-label" id="sv-audio-label" aria-hidden="true"></span>
+                </button>
+
+                <!-- Görüntü kalitesi — kalite menüsü açar; güncel kalite rozeti gösterir -->
+                <button class="sv-btn sv-ctl sv-quality" id="sv-quality" data-pop="quality"
+                        aria-label="Görüntü kalitesi" aria-haspopup="menu" aria-expanded="false"
+                        data-tooltip="Görüntü kalitesi" hidden>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17v2h6v-2H3zM3 5v2h10V5H3zm10 16v-2h8v-2h-8v-2h-2v6h2zM7 9v2H3v2h4v2h2V9H7zm14 4v-2H11v2h10zm-6-4h2V7h4V5h-4V3h-2v6z"/></svg>
+                    <span class="sv-q-label" id="sv-q-label" aria-hidden="true"></span>
+                </button>
+
+                <!-- Ayarlar (dişli) — oynatma hızı -->
+                <button class="sv-btn sv-ctl" id="sv-settings" data-pop="settings"
+                        aria-label="Ayarlar" aria-haspopup="menu" aria-expanded="false"
+                        data-tooltip="Ayarlar">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.16-.12.21-.34.12-.52l-1.92-3.32c-.09-.18-.3-.24-.49-.18l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.2-.22-.34-.42-.34H8.34c-.2 0-.38.14-.42.34l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.19-.07-.4 0-.49.18L1.14 9.06c-.09.18-.04.39.12.52l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.16.12-.21.34-.12.52l1.92 3.32c.09.18.3.24.49.18l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.2.22.34.42.34h3.84c.2 0 .38-.14.42-.34l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.19.07.4 0 .49-.18l1.92-3.32c.09-.18.04-.39-.12-.52l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </button>
+
+                <button class="sv-btn" id="sv-pip" aria-label="Mini oynatıcı" data-tooltip="Mini oynatıcı">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 7h-8v6h8V7zm2-4H3a2 2 0 00-2 2v14a2 2 0 002 2h18a2 2 0 002-2V5a2 2 0 00-2-2zm0 16.01H3V4.98h18z"/></svg>
+                </button>
+
+                <button class="sv-btn" id="sv-full" aria-label="Tam ekran" data-tooltip="Tam ekran">
+                    <svg class="i-expand"   viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                    <svg class="i-compress" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Paylaşımlı popover menü (JS tarafından türüne göre doldurulur) -->
+        <div class="sv-menu" id="sv-menu" role="menu" aria-label="Oynatıcı menüsü" hidden></div>
+    </div>
+
+    <div class="sv-error" id="sv-error" hidden></div>
+</div>
+
+<script>window.__PLAYER__ = {"v":"0aba3d2c9d6974f4e86472ac709ee395","stream":"https://play2.pilavyerplay.top/api/stream.php?v=0aba3d2c9d6974f4e86472ac709ee395\u0026token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7","cdnProbe":"https://pilavyer5.top/cdn/ping","poster":"https://play2.pilavyerplay.top/api/thumb.php?v=0aba3d2c9d6974f4e86472ac709ee395\u0026token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7","tokenUrl":"https://play2.pilavyerplay.top/api/token.php?v=0aba3d2c9d6974f4e86472ac709ee395","accent":"#706b6f","brand":"Pilavyer","title":"Men in Black 3 2012 1080p DUAL NF WEB-DL x264 EAC3 5.1 - HdT","watermark":"","hls":"https://play2.pilavyerplay.top/assets/js/hls.min.js?v=1785507705","subs":[{"sid":"57dfa4b214a205fe899a593d836502d1","lang":"en","label":"İngilizce","source":"embedded","default":0,"src":"https://play2.pilavyerplay.top/api/sub.php?v=0aba3d2c9d6974f4e86472ac709ee395\u0026sid=57dfa4b214a205fe899a593d836502d1\u0026token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7"},{"sid":"efcc655a68ced123c375a387fa34c328","lang":"en","label":"İngilizce [CC]","source":"embedded","default":0,"src":"https://play2.pilavyerplay.top/api/sub.php?v=0aba3d2c9d6974f4e86472ac709ee395\u0026sid=efcc655a68ced123c375a387fa34c328\u0026token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7"},{"sid":"f53a3dbefee401da4f4a9d76ea575791","lang":"tr","label":"Türkçe","source":"embedded","default":0,"src":"https://play2.pilavyerplay.top/api/sub.php?v=0aba3d2c9d6974f4e86472ac709ee395\u0026sid=f53a3dbefee401da4f4a9d76ea575791\u0026token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7"}],"audios":[{"name":"a0","lang":"tr","label":"Türkçe","default":1},{"name":"a1","lang":"en","label":"İngilizce [Orijinal]","default":0}],"sb":{"count":100,"cols":10,"rows":10,"interval":64,"tileW":160,"tileH":90,"sprite":"https://play2.pilavyerplay.top/api/thumb.php?v=0aba3d2c9d6974f4e86472ac709ee395\u0026sb=1\u0026token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7"},"beatUrl":"https://play2.pilavyerplay.top/api/beat.php","token":"eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7","sid":"adb86d0159e4759b1573e5eb1ef3eb37","analytics":true,"accessCode":"","dur":6353.696};</script>
+<script src="https://play2.pilavyerplay.top/assets/js/hls.min.js?v=1785507705"></script>
+<script src="https://play2.pilavyerplay.top/assets/js/player.js?v=1791969266"></script>
+</body>
+</html>

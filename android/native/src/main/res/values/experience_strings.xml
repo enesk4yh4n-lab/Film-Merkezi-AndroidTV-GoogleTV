@@ -1,0 +1,20 @@
+<resources>
+    <string name="fm_follow">Takip et</string><string name="fm_unfollow">Takibi bırak</string>
+    <string name="fm_following">Takip ettiğim diziler</string><string name="fm_new_episodes">%1$d yeni bölüm</string>
+    <string name="fm_watched">İzlendi işaretle</string><string name="fm_unwatched">İzlenmedi işaretle</string>
+    <string name="fm_season_watched">Sezonu izlendi işaretle</string><string name="fm_season_unwatched">Sezonu izlenmedi işaretle</string>
+    <string name="fm_clear_new">Yeni bölüm işaretlerini temizle</string>
+    <string name="fm_genre">Tür</string><string name="fm_collections">Koleksiyonlar</string><string name="fm_collection">Koleksiyon</string>
+    <string name="fm_collection_member">%1$d. %2$s (%3$d)</string>
+    <string name="fm_find_member">Sitelerde bul</string><string name="fm_previous_member">‹ Önceki film</string><string name="fm_next_member">Sonraki film ›</string>
+    <string name="fm_collection_scope">Filmler makaledeki sırayla gösterilir. Eşleşmeyen filmi seçerek sitelerde arayabilirsiniz.</string>
+    <string name="fm_filter_scope">Desteklenen filtreler sitelere gönderilir. Diğer alanlar sınırlı taranır; kısmi kapsam sonuçta belirtilir.</string>
+    <string name="fm_partial_scope">Kısmi tarama: %1$d site · Sıralama: yüklenen sonuçlar</string>
+    <string name="fm_recommend_scope">Tür ve IMDb ölçütleri detay sayfasında doğrulanır. Başlanmış filmler ve son öneriler dışlanır.</string>
+    <string name="fm_recommend_progress">%1$d/%2$d site · %3$d detay doğrulandı</string>
+    <string name="fm_recommend_count">%1$d uygun film bulundu. Tarama süre ve istek sınırıyla tamamlandı.</string>
+    <string name="fm_alternatives_progress">%1$d/%2$d site · %3$d eşleşen site · %4$d hata</string>
+    <string name="fm_start_timeout">Kaynak açılış süresi doldu</string>
+    <item name="fm_find_sites" type="id"/><item name="fm_follow_series" type="id"/><item name="fm_collections" type="id"/>
+    <item name="fm_detail_sites" type="id"/><item name="fm_detail_progress" type="id"/>
+</resources>

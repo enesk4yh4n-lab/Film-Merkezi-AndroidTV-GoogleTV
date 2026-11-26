@@ -1,0 +1,23 @@
+<resources>
+    <string name="native_app_name">Film Merkezi</string>
+    <string name="native_notice">1. aşama • Bağımsız Kotlin veri katmanı</string>
+    <string name="native_query_hint">Film veya dizi adı</string>
+    <string name="native_search">Tüm sitelerde ara</string>
+    <string name="native_browse">Katalogları getir</string>
+    <string name="native_library">Listem ve geçmiş</string>
+    <string name="native_loading">Yükleniyor…</string>
+    <string name="native_results">%1$d içerik • %2$d site hatası</string>
+    <string name="native_detail">Detay ve kaynaklar</string>
+    <string name="native_episodes">Bölümler</string>
+    <string name="native_source_loading">Seçilen kaynak çözümleniyor…</string>
+    <string name="native_add_list">Listeme ekle</string>
+    <string name="native_remove_list">Listemden çıkar</string>
+    <string name="native_exit_question">Uygulamadan çıkılsın mı?</string>
+    <string name="native_exit">Çık</string>
+    <string name="native_no_sources">Bu içerikte desteklenen kaynak seçeneği bulunamadı.</string>
+    <string name="native_source_failed">%1$s: %2$s</string>
+    <string name="native_site_error">%1$s — %2$s</string>
+    <string name="native_empty">Kayıt bulunamadı.</string>
+    <string name="native_saved">Kaydedildi.</string>
+    <string name="native_resume">Kaldığım yerden devam et</string>
+</resources>

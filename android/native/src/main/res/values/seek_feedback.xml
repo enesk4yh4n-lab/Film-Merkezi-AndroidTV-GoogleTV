@@ -1,0 +1,13 @@
+<resources>
+    <item type="id" name="fm_seek_feedback"/>
+    <item type="id" name="fm_seek_delta"/>
+    <item type="id" name="fm_seek_time"/>
+    <item type="id" name="fm_seek_remaining"/>
+    <item type="id" name="fm_seek_progress"/>
+    <string name="seek_forward_delta">İleri · +%1$s</string>
+    <string name="seek_backward_delta">Geri · −%1$s</string>
+    <string name="seek_position_total">%1$s / %2$s</string>
+    <string name="seek_remaining">%1$s kaldı</string>
+    <string name="seek_unknown_time">--:--</string>
+    <string name="seek_duration_unknown">Toplam süre bilinmiyor</string>
+</resources>

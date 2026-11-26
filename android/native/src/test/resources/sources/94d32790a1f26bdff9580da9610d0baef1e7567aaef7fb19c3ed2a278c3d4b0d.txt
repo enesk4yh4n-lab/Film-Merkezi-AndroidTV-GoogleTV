@@ -1,0 +1,91 @@
+<html>
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="never"> 
+<meta name="referrer" content="no-referrer">
+<link rel="preload" href="/ifr/vod/jw-8.51.11/releases/f9e50a92b67a4940/jwplayer.js" as="script">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+</head>
+<body style="margin:0;padding:0;">
+
+<script>window._p8='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';</script>
+
+<div id="pMjAyNjExMDM"></div>
+
+<script src="/ifr/vod/jw-8.51.11/releases/f9e50a92b67a4940/jwplayer.js"></script>
+<script>jwplayer.key = "85J2cvcgcUWdzhlGv5CewuMXhaTMJ2tXGdmJmTkEC8P704kNcZ5leg==";</script>
+<script>window.atomPlayerAssetBase = "/ifr/vod/jw-8.51.11/releases/f9e50a92b67a4940/";</script>
+
+<style>
+[button="next10s"],[button="back10s"]{visibility:visible;}
+@media only screen and (max-width:768px){:not(:fullscreen) [button="next10s"],:not(:fullscreen) [button="back10s"]{visibility:hidden;}}
+*{-webkit-transition:none!important;transition:none!important;}
+.jw-tab-focus:focus,video:focus{outline:none;}
+.jw-icon-rewind{display:none;}
+.jw-controlbar .jw-option{position:relative;white-space:nowrap;cursor:pointer;list-style:none;height:1.95em;font-family:inherit;line-height:2em;padding:0 1.3em;font-size:.9em;margin:0;}
+.jw-option.jw-active-option{color:#fff!important;background-color:transparent!important;}
+.jw-slider-volume .jw-knob.jw-reset{width:13px!important;height:13px!important;margin-left:-1px;}
+.jw-icon-playback:before{color:#88d0ff!important;}
+.jw-display-icon-container .jw-icon{color:#fff!important;}
+.jw-selection-menu .jw-menu-selection-text{line-height:2.9em;}
+.jw-knob{background-color:#fff!important;height:18px!important;width:18px!important;}
+.jw-progress{background:#00b9f3!important;border-radius:3px;}
+.jw-knob:after{content:'';position:absolute;top:4px;left:4px;width:10px;height:10px;background:none;border-radius:100%;}
+.jw-rightclick-list{display:none!important;}
+.jw-logo{margin-top:55px!important;margin-right:30px;width:219px!important;height:55px!important;}
+.jw-settings-submenu .jw-submenu-topbar{margin:-8px -20px 13px -5px!important;}
+.jw-settings-menu{z-index:30;background:#333;}
+.jw-breakpoint-7 .jw-settings-menu{height:auto!important;width:20%!important;min-height:auto!important;z-index:999;}
+.jw-settings-submenu{padding:8px 20px 7px 5px!important;}
+.jw-settings-playbackRates,.jw-settings-captions{order:1!important;}
+.jw-settings-close{order:2!important;}
+.jw-breakpoint-4 .jw-settings-menu,.jw-breakpoint-3 .jw-settings-menu{height:auto!important;max-height:268px!important;}
+.jw-captions .jw-text-track-cue{line-height:1.15em!important;}
+[button="dilsec-btn"] .jw-button-image{-webkit-filter:invert(1);filter:invert(100%);zoom:.8;}
+.jw-slider-horizontal .jw-slider-container{height:9px;border-radius:3px;width:97.5%;margin:0 auto;}
+.jw-slider-horizontal.jw-chapter-slider-time .jw-slider-container .jw-timesegment-resetter{height:17px!important;}
+.jw-slider-horizontal.jw-chapter-slider-time .jw-slider-container .jw-timesegment:hover .jw-timesegment-resetter{transform:translate(0,-50%) scale(1,.6);}
+.jw-timesegment-background{background:rgba(255,255,255,.2)!important;}
+.jw-time-tip .jw-text{background:none;color:#fff;padding:6px 10px;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.jw-time-tip::after,.jw-controlbar .jw-tooltip::after,.jw-settings-menu .jw-tooltip::after{display:none!important;}
+.jw-time-tip,.jw-controlbar .jw-tooltip,.jw-settings-menu .jw-tooltip{box-shadow:none;}
+.jw-buffer,.jw-rail{border-radius:3px;}
+.jw-slider-time .jw-rail,.jw-horizontal-volume-container .jw-rail,.jw-slider-time .jw-buffer,.jw-horizontal-volume-container .jw-buffer,.jw-slider-time .jw-progress,.jw-horizontal-volume-container .jw-progress,.jw-slider-time .jw-cue,.jw-horizontal-volume-container .jw-cue{-webkit-transform:translate(0,-50%)!important;transform:translate(0,-50%)!important;}
+.jw-settings-content-item{font-size:14px;}
+.ql-ust-label{font-weight:normal;font-size:11px;top:-1px;margin-left:2px;padding:3px 5px;border-radius:5px;background:#00b9f3!important;color:#fff;position:relative;}
+.jw-breakpoint-4 .jw-display .jw-icon,.jw-breakpoint-5 .jw-display .jw-icon,.jw-breakpoint-6 .jw-display .jw-icon,.jw-breakpoint-7 .jw-display .jw-icon,.jw-breakpoint-4 .jw-display .jw-svg-icon,.jw-breakpoint-5 .jw-display .jw-svg-icon,.jw-breakpoint-6 .jw-display .jw-svg-icon,.jw-breakpoint-7 .jw-display .jw-svg-icon{width:130px;height:auto;padding:5px;}
+.jw-display-icon-container .jw-svg-icon-play{height:auto!important;border-radius:100px;color:#fff;border:none;background:#0fabf1!important;padding:15px!important;}
+.jw-preview{background-size:100% 100%!important;}
+.jw-controls-backdrop,.jw-state-idle .jw-controls{background:none!important;}
+.jw-breakpoint-1 .jw-display .jw-icon,.jw-breakpoint-1 .jw-display .jw-svg-icon{padding:10px!important;margin:-10px;}
+.btn{position:relative;cursor:pointer;font-family:Tahoma,Arial;font-size:.875rem;margin:3px 0 5px;padding:.33rem .8rem;text-decoration:none;font-weight:400;text-align:center!important;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid transparent;line-height:1.5;border-radius:.2rem;transition:background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out!important;-webkit-transition-duration:.4s;transition-duration:.4s;overflow:hidden;width:92px;}
+.btn:focus{outline:none;}
+@media (max-width:768px){.btn{padding:.10rem .4rem;}.ql{top:10px!important;}.track-btns{top:45px!important;}.mobhide{display:none;}}
+.track-btn{color:#cacaca;background-color:transparent;border-color:#cacaca;}
+.track-btn:hover{color:#fff;border-color:#fff;}
+.track-btn-selected{color:#fff;background-color:#06a0d0;border-color:transparent;}
+.track-btns{position:absolute;z-index:9;top:65px;right:20px;display:flex;flex-wrap:wrap!important;width:150px;float:right;justify-content:flex-end;}
+.jw-controls.jw-settings-open ~ .track-btns,.jw-settings-open .track-btns,.jwplayer:has(.jw-controls.jw-settings-open) .track-btns{display:none!important;visibility:hidden!important;pointer-events:none!important;}
+.jw-settings-submenu-items{display:flex;flex-wrap:wrap;}
+.jw-controlbar .jw-tooltip,.jw-settings-menu .jw-tooltip,.jw-time-tip{box-shadow:0 0 10px rgba(0,0,0,.4)!important;padding:0!important;margin:0;background-color:#0000009e;border-radius:4px;}
+.jw-controlbar .jw-tooltip-time .jw-overlay{transform:translate(-50%,0);}
+.jw-controlbar .jw-tooltip .jw-text,.jw-settings-menu .jw-tooltip .jw-text,.jw-time-tip .jw-text{min-height:1.9em;}
+.jw-flag-dragging .jw-slider-horizontal.jw-chapter-slider-time .jw-timesegment-resetter,.jw-flag-touch .jw-slider-horizontal.jw-chapter-slider-time .jw-timesegment-resetter{transform:translate(0,-50%) scale(1,.6);}
+.jw-flag-small-player .jw-controls{z-index:9!important;}
+.jw-logo-bottom-right{margin-bottom:50px;}
+.player-maintenance-alert{position:absolute;z-index:2147483646;top:max(14px,env(safe-area-inset-top));left:50%;width:max-content;max-width:calc(100% - 28px);box-sizing:border-box;padding:10px 14px;border:1px solid #bd3942;border-radius:4px;background:#d04a50;box-shadow:0 5px 18px rgba(0,0,0,.28);color:#fff;font:500 15px/1.5 Arial,sans-serif;text-align:center;pointer-events:none;opacity:0;transform:translate(-50%,-8px);animation:player-maintenance-notice 10s ease forwards!important;}
+@keyframes player-maintenance-notice{0%{opacity:0;transform:translate(-50%,-8px);}8%,75%{opacity:1;transform:translate(-50%,0);}100%{opacity:0;transform:translate(-50%,-6px);}}
+</style>
+
+<script src="/ifr/vod/js/core.920e1169d8a3bef0.js"></script>
+
+<script>
+(function(){var shown=false,playerBound=false,bindAttempts=0,mount=document.getElementById("pMjAyNjExMDM");function showMaintenanceNotice(){if(shown)return;shown=true;var root=document.querySelector('.jwplayer')||mount||document.body;var notice=document.createElement('div');notice.className='player-maintenance-alert';notice.setAttribute('role','status');notice.textContent='Sunucuda oluşan bir problem nedeniyle video oynatılamıyor. Hata bilgisi sistemimize iletildi.';root.appendChild(notice);window.setTimeout(function(){notice.remove();},10200);}function bindPlayerEvents(){if(playerBound)return;var player=null;try{player=typeof window.jwplayer==='function'?window.jwplayer():null;}catch(ignore){}if(!player||typeof player.on!=='function'){if(++bindAttempts<20)window.setTimeout(bindPlayerEvents,100);return;}playerBound=true;player.on('error',showMaintenanceNotice);player.on('setupError',showMaintenanceNotice);try{if(typeof player.getState==='function'&&player.getState()==='error')showMaintenanceNotice();}catch(ignore){}}bindPlayerEvents();})();
+</script>
+
+
+<script>window.atomCodecTelemetry={"mount":"pMjAyNjExMDM","vkey":"374e1a89","h264":"https:\/\/s48.cdnimg1865.shop\/md\/HKIyMJ4ho2LhqTuyYyWcozphZwNlAP5KEHVgERjhZGN4ZUNhESIOGP5VYwV2AP1VER0d0zxL2EhnJ1aZGt2AF5mnT9js0xi48vr1","av1":"https:\/\/s48.cdnimg1865.shop\/mi\/HKIyMJ4ho2LhqTuyYyWcozphZwNlAP5KEHVgERjhZGN4ZUNhESIOGP5VYwV2AP1VER0d0zxL2EhnJ1aZGt2AF5mnT9js0xi48avr1"};</script>
+<script src="/ifr/vod/js/codec.cb9d2d5382c3c8a3.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a549c68e4d079b4e',t:'MTc5MzY5MjA5NQ=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a549c68e4d079b4e',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

@@ -1,0 +1,34 @@
+<resources>
+    <string name="ux_selected">Seçili</string>
+    <string name="ux_panel_hint">↑ ↓ Seçenekler · OK Uygula · Geri Kapat</string>
+    <string name="ux_search_title">Arama: %1$s</string>
+    <string name="ux_all_count">Tümü (%1$d)</string>
+    <string name="ux_movies_count">Filmler (%1$d)</string>
+    <string name="ux_series_count">Diziler (%1$d)</string>
+    <string name="ux_collections_count">Koleksiyonlar (%1$d)</string>
+    <string name="ux_watch_site">İzlenecek site</string>
+    <string name="ux_start_title">Nasıl başlamak istersiniz?</string>
+    <string name="ux_last_position">Son izleme konumu %1$s</string>
+    <string name="ux_no_position">Kayıtlı devam konumu bulunmuyor.</string>
+    <string name="ux_continue">Devam et</string>
+    <string name="ux_continue_time">Devam et · %1$s</string>
+    <string name="ux_restart">Baştan başlat</string>
+    <string name="ux_exit_title">Ne yapmak istersiniz?</string>
+    <string name="ux_save_exit">Kaydet ve çık</string>
+    <string name="ux_discard_exit">Kaydetmeden çık</string>
+    <string name="ux_saving">Kayıt işlemi tamamlanıyor…</string>
+    <string name="ux_storage_retry">Kayıt işlemi tamamlanamadı. Yeniden deneyebilirsiniz.</string>
+    <string name="ux_sources">Sitelerin oynatma kaynakları</string>
+    <string name="ux_untried">Henüz denenmedi</string>
+    <string name="ux_resolving">Kaynak çözülüyor</string>
+    <string name="ux_ready">Hazır</string>
+    <string name="ux_playing">Oynatılıyor</string>
+    <string name="ux_paused">Duraklatıldı</string>
+    <string name="ux_no_subtitles">Bu kaynak altyazı bildirmiyor.</string>
+    <string name="ux_no_quality">Bu kaynak başka görüntü kalitesi bildirmiyor.</string>
+    <string name="ux_current_quality">Şu an: %1$s</string>
+    <string name="ux_episode_previous">Önceki bölüm</string>
+    <string name="ux_episode_next">Sonraki bölüm</string>
+    <string name="ux_episode_loading">Bölüm hazırlanıyor…</string>
+    <string name="ux_loaded_scope">Sayaçlar yüklenen birleşik sonuçları gösterir.</string>
+</resources>

@@ -1,0 +1,98 @@
+[
+  {
+    "name": "home",
+    "url": "https://www.fixfullfilmizle.net/",
+    "finalUrl": "https://www.fixfullfilmizle.net/",
+    "status": 200,
+    "bytes": 142403,
+    "sha256": "b56170c49ec9014531add561bfc37ba63fc6b1d8c9bb54a2ef8c870b167f2a42"
+  },
+  {
+    "name": "house",
+    "url": "https://www.fixfullfilmizle.net/?s=house",
+    "finalUrl": "https://www.fixfullfilmizle.net/?s=house",
+    "status": 200,
+    "bytes": 136020,
+    "sha256": "7b827e323ef7dfbdd75aae839a0251f6465ae50b732509c5739ac19e6628c892"
+  },
+  {
+    "name": "reacher",
+    "url": "https://www.fixfullfilmizle.net/?s=reacher",
+    "finalUrl": "https://www.fixfullfilmizle.net/?s=reacher",
+    "status": 200,
+    "bytes": 134237,
+    "sha256": "b610275b39feecdb16328fbf737c9837c8b7d9ba4eefc78cbe8fa624ec35166c"
+  },
+  {
+    "name": "black-search",
+    "url": "https://www.fixfullfilmizle.net/?s=black+mirror",
+    "finalUrl": "https://www.fixfullfilmizle.net/?s=black+mirror",
+    "status": 200,
+    "bytes": 137343,
+    "sha256": "51f509fad193cccceeb4065ae47d96f9ef17539045063f7893624df059b10316"
+  },
+  {
+    "name": "breaking-search",
+    "url": "https://www.fixfullfilmizle.net/?s=breaking+bad",
+    "finalUrl": "https://www.fixfullfilmizle.net/?s=breaking+bad",
+    "status": 200,
+    "bytes": 138026,
+    "sha256": "e2814c2a5a76633d7565147446b2ed2b1ebba4160d0a7d44247388ece37d645b"
+  },
+  {
+    "name": "black-series",
+    "url": "https://www.fixfullfilmizle.net/diziler/black-mirror/",
+    "finalUrl": "https://www.fixfullfilmizle.net/diziler/black-mirror/",
+    "status": 200,
+    "bytes": 143729,
+    "sha256": "d05661e0d7b257b7c14c12afe6c439c971246106928f48922d51d80bcbba114b"
+  },
+  {
+    "name": "breaking-series",
+    "url": "https://www.fixfullfilmizle.net/diziler/breaking-bad/",
+    "finalUrl": "https://www.fixfullfilmizle.net/diziler/breaking-bad/",
+    "status": 200,
+    "bytes": 144038,
+    "sha256": "d6a4b0958831b87a35ed6edaa4fdbd8532b235343f54dd191ced98b5c88dc930"
+  },
+  {
+    "name": "black-series-2",
+    "url": "https://www.fixfullfilmizle.net/diziler/black-mirror/page/2/",
+    "finalUrl": "https://www.fixfullfilmizle.net/diziler/black-mirror/page/2/",
+    "status": 200,
+    "bytes": 138793,
+    "sha256": "52925d9a563b35074e18755d085c117b402d9a5c3aad4e19af4dd17514f05238"
+  },
+  {
+    "name": "breaking-series-2",
+    "url": "https://www.fixfullfilmizle.net/diziler/breaking-bad/page/2/",
+    "finalUrl": "https://www.fixfullfilmizle.net/diziler/breaking-bad/page/2/",
+    "status": 200,
+    "bytes": 144191,
+    "sha256": "a9488376d3652d7d0988c30bd3033432c041de9ec1b3526f3373fa34898f86b4"
+  },
+  {
+    "name": "breaking-series-3",
+    "url": "https://www.fixfullfilmizle.net/diziler/breaking-bad/page/3/",
+    "finalUrl": "https://www.fixfullfilmizle.net/diziler/breaking-bad/page/3/",
+    "status": 200,
+    "bytes": 144245,
+    "sha256": "1dcacef26151792c68991c462b66ca12cb30e27205762690d23d2ffe853b3a43"
+  },
+  {
+    "name": "breaking-series-4",
+    "url": "https://www.fixfullfilmizle.net/diziler/breaking-bad/page/4/",
+    "finalUrl": "https://www.fixfullfilmizle.net/diziler/breaking-bad/page/4/",
+    "status": 200,
+    "bytes": 130268,
+    "sha256": "b3cbd16ee8dce15bb31ac79f0cbcbe27cba38a6c10d78c6ca47d855c3cfa9fa9"
+  },
+  {
+    "name": "black-search-2",
+    "url": "https://www.fixfullfilmizle.net/page/2/?s=black+mirror",
+    "finalUrl": "https://www.fixfullfilmizle.net/page/2/?s=black+mirror",
+    "status": 200,
+    "bytes": 137148,
+    "sha256": "ff179fc5dd46897cc8dab96087a9ecd1fb14819916cbe7f5e12cf4c1a54db950"
+  }
+]

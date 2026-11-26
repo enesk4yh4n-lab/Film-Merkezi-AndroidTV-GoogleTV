@@ -1,0 +1,34 @@
+<html>
+<head>
+</head>
+<body>
+<script type='text/javascript' src='//finisheddaysflamboyant.com/a1/ff/c6/a1ffc6001c8cc5574ad230ba9b375b34.js'></script>
+<script type='text/javascript' src='//finisheddaysflamboyant.com/7f/20/a7/7f20a7d2853e668186848c321f8f199f.js'></script>
+<head>  
+  <meta charset="utf-8">
+
+</head>
+ <link rel='stylesheet' type='text/css' href='https://cdn.staticmoly.me/css/playn.css'>
+<script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+<script language="JavaScript" type="text/javascript" CHARSET="UTF-8" src="https://cdn.staticmoly.me/static/jquery.min.js"></script>
+
+<body style="background: #151515;">
+<div id="lo_sda2">
+</div>
+    <div class='error-banner'>
+      <script>
+function lo_sda2(){$.ajax({url: "https://cdn.staticmoly.me/stac.php",cache: false,success: function(data){$("#lo_sda2").html(data);} });}$(document).ready(function(){lo_sda2();}); setInterval(lo_sda2,10000000);</script>
+  <script>
+  	function lo_sda3()
+{
+
+    $(".remove").remove();}
+</script>
+  <div class='error-message'>
+    <h2>Sorry</h2>
+    <p><span>This video not found!</span>
+   
+    </p>
+     <br><br><a target='_blank' href='https://vidmoly.me/'><img src='https://vidmoly.me/img/logo-main.png' style='opacity: 0.55;height: 50px;'></a>
+  </div>
+</div>

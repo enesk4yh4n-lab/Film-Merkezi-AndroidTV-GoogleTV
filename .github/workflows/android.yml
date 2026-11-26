@@ -1,0 +1,46 @@
+name: Android native
+on:
+  push:
+    paths: ['android/**', '.github/workflows/android.yml']
+  pull_request:
+    paths: ['android/**', '.github/workflows/android.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: android-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Install Android platform
+        run: sdkmanager 'platforms;android-37' 'build-tools;36.1.0'
+      - name: Lint, native contracts and deterministic JVM fixtures
+        run: bash android/gradlew -p android :native:lintRelease :native:testDebugUnitTest --no-daemon --console=plain
+      - name: Unsigned debug APK
+        run: bash android/gradlew -p android :native:assembleDebug -PunsignedDebug=true --no-daemon --console=plain
+      - name: Reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: native-test-reports
+          path: |
+            android/native/build/reports/
+            android/native/build/test-results/
+          retention-days: 7
+      - name: Unsigned APK
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: film-merkezi-unsigned-debug
+          path: android/native/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
+          retention-days: 7

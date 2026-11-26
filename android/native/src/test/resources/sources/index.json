@@ -1,0 +1,3663 @@
+[
+  {
+    "id": "babam-365",
+    "site": "filmizlebabam",
+    "page": "https://www.filmizlebabam.com/365-gun/",
+    "label": "365 Gün — tüm kaynaklar",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:26.954Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.filmizlebabam.com/365-gun/",
+        "finalUrl": "https://www.filmizlebabam.com/365-gun/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "e7facbb300c4c1b72472411a5c0bb12ec01a1208b127ed808d6987574ca5e90e.txt",
+        "sha256": "e7facbb300c4c1b72472411a5c0bb12ec01a1208b127ed808d6987574ca5e90e"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [],
+    "referenceOptions": [],
+    "referenceError": "Desteklenen aktif Pilavyer/Vidara oynatıcısı bulunamadı."
+  },
+  {
+    "id": "babam-home-service",
+    "site": "filmizlebabam",
+    "page": "https://www.filmizlebabam.com/home-service/",
+    "label": "Home Service — tüm kaynaklar",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:24.113Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.filmizlebabam.com/home-service/",
+        "finalUrl": "https://www.filmizlebabam.com/home-service/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "442b015421f6baf15bb625c135f08668cef0d46985a7277c06a653fedca2fd72.txt",
+        "sha256": "442b015421f6baf15bb625c135f08668cef0d46985a7277c06a653fedca2fd72"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidara.to/e/enCjIveXyFAaB",
+        "finalUrl": "https://vidara.to/e/enCjIveXyFAaB",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "d19c8fb18a3e8045162e8acd0a741fd3245b5199608f9d839df2b4dbf1d6d118.txt",
+        "sha256": "d19c8fb18a3e8045162e8acd0a741fd3245b5199608f9d839df2b4dbf1d6d118"
+      },
+      {
+        "method": "POST",
+        "url": "https://vidara.to/api/stream",
+        "finalUrl": "https://vidara.to/api/stream",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "file": "5eb0ed6bcb03200f4a3946bb0d344c9ffd2f5fa70223fcdbcec5d59099cd1bc2.txt",
+        "sha256": "5eb0ed6bcb03200f4a3946bb0d344c9ffd2f5fa70223fcdbcec5d59099cd1bc2"
+      },
+      {
+        "method": "GET",
+        "url": "https://s10-s501740.97bf1.com/hls/csAQdylnWMzM9OwpadJssl8MEaRq7lbQ/master.m3u8?token=b2cb7fe0620169b22a65edeb6bf24de1-1793716345-78.174.104.152-9beef73026cc12e72c8e73ee71c05eda8408b5b2d77b548ff680f9e30751dd8b",
+        "finalUrl": "https://s10-s501740.97bf1.com/hls/csAQdylnWMzM9OwpadJssl8MEaRq7lbQ/master.m3u8?token=b2cb7fe0620169b22a65edeb6bf24de1-1793716345-78.174.104.152-9beef73026cc12e72c8e73ee71c05eda8408b5b2d77b548ff680f9e30751dd8b",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "d185b891f48dd107fad3bbf1c142b4c14e47b00b78fdff0a4fb9f26fc0dd2fdf.txt",
+        "sha256": "d185b891f48dd107fad3bbf1c142b4c14e47b00b78fdff0a4fb9f26fc0dd2fdf"
+      },
+      {
+        "method": "GET",
+        "url": "https://s10-s501740.97bf1.com/hls/csAQdylnWMzM9OwpadJssl8MEaRq7lbQ/index_1920x1080.m3u8?token=b2cb7fe0620169b22a65edeb6bf24de1-1793716345-78.174.104.152-9beef73026cc12e72c8e73ee71c05eda8408b5b2d77b548ff680f9e30751dd8b",
+        "finalUrl": "https://s10-s501740.97bf1.com/hls/csAQdylnWMzM9OwpadJssl8MEaRq7lbQ/index_1920x1080.m3u8?token=b2cb7fe0620169b22a65edeb6bf24de1-1793716345-78.174.104.152-9beef73026cc12e72c8e73ee71c05eda8408b5b2d77b548ff680f9e30751dd8b",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "1e04bc230e7f8490066bd2972c75cbf379b88ebe212c0843448072dc395b31cc.txt",
+        "sha256": "1e04bc230e7f8490066bd2972c75cbf379b88ebe212c0843448072dc395b31cc"
+      }
+    ],
+    "fixtureIssue": "FIXTURE TUTARSIZ: original URL-only recorder overwrote POST response; embed https://vidara.to/e/enCjIveXyFAaB != response.filecode PnlMAIhVvxAcS",
+    "referenceSources": [
+      {
+        "id": "filmizlebabam-vidara-enCjIveXyFAaB",
+        "label": "Vidara",
+        "url": "https://s10-s501740.97bf1.com/hls/csAQdylnWMzM9OwpadJssl8MEaRq7lbQ/master.m3u8?token=b2cb7fe0620169b22a65edeb6bf24de1-1793716345-78.174.104.152-9beef73026cc12e72c8e73ee71c05eda8408b5b2d77b548ff680f9e30751dd8b",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidara.to/",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": "avplay"
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "filmizlebabam-vidara-enCjIveXyFAaB",
+        "label": "Vidara",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "babam-sex-drive",
+    "site": "filmizlebabam",
+    "page": "https://www.filmizlebabam.com/sex-drive/",
+    "label": "Sex Drive — tüm kaynaklar",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:29.421Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.filmizlebabam.com/sex-drive/",
+        "finalUrl": "https://www.filmizlebabam.com/sex-drive/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "2bde36c8d7061afb20333aa000a2ae12767dc2c6d9d013b6089ebad92f9ca260.txt",
+        "sha256": "2bde36c8d7061afb20333aa000a2ae12767dc2c6d9d013b6089ebad92f9ca260"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidara.to/e/PnlMAIhVvxAcS",
+        "finalUrl": "https://vidara.to/e/PnlMAIhVvxAcS",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "397d5a847439cd1492c678a3c01fbc57763fb82165315ef27fbde10183f3304c.txt",
+        "sha256": "397d5a847439cd1492c678a3c01fbc57763fb82165315ef27fbde10183f3304c"
+      },
+      {
+        "method": "POST",
+        "url": "https://vidara.to/api/stream",
+        "finalUrl": "https://vidara.to/api/stream",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "file": "5eb0ed6bcb03200f4a3946bb0d344c9ffd2f5fa70223fcdbcec5d59099cd1bc2.txt",
+        "sha256": "5eb0ed6bcb03200f4a3946bb0d344c9ffd2f5fa70223fcdbcec5d59099cd1bc2"
+      },
+      {
+        "method": "GET",
+        "url": "https://s10-s501740.97bf1.com/hls/kvZXwy3OKA8Vy8hAMrpT2IP7aCF2oYNK/master.m3u8?token=5fd51c3f2070198d88629df0448426a2-1793716350-78.174.104.152-06f3452c8f1db27d5dedfa49a801d0ca6d19262499c8c0841c55de02005a8cee",
+        "finalUrl": "https://s10-s501740.97bf1.com/hls/kvZXwy3OKA8Vy8hAMrpT2IP7aCF2oYNK/master.m3u8?token=5fd51c3f2070198d88629df0448426a2-1793716350-78.174.104.152-06f3452c8f1db27d5dedfa49a801d0ca6d19262499c8c0841c55de02005a8cee",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "9799dfba6a0a6da0c43cce02d8fc6be59aa9d9963b966bc64b7734b3c9e794b3.txt",
+        "sha256": "9799dfba6a0a6da0c43cce02d8fc6be59aa9d9963b966bc64b7734b3c9e794b3"
+      },
+      {
+        "method": "GET",
+        "url": "https://s10-s501740.97bf1.com/hls/kvZXwy3OKA8Vy8hAMrpT2IP7aCF2oYNK/index_1694x720.m3u8?token=5fd51c3f2070198d88629df0448426a2-1793716350-78.174.104.152-06f3452c8f1db27d5dedfa49a801d0ca6d19262499c8c0841c55de02005a8cee",
+        "finalUrl": "https://s10-s501740.97bf1.com/hls/kvZXwy3OKA8Vy8hAMrpT2IP7aCF2oYNK/index_1694x720.m3u8?token=5fd51c3f2070198d88629df0448426a2-1793716350-78.174.104.152-06f3452c8f1db27d5dedfa49a801d0ca6d19262499c8c0841c55de02005a8cee",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "24475418d676047c2ac2f58a12d2b89fb0cdb120f8b71ed6df44855b504d6a00.txt",
+        "sha256": "24475418d676047c2ac2f58a12d2b89fb0cdb120f8b71ed6df44855b504d6a00"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "filmizlebabam-vidara-PnlMAIhVvxAcS",
+        "label": "Vidara",
+        "url": "https://s10-s501740.97bf1.com/hls/kvZXwy3OKA8Vy8hAMrpT2IP7aCF2oYNK/master.m3u8?token=5fd51c3f2070198d88629df0448426a2-1793716350-78.174.104.152-06f3452c8f1db27d5dedfa49a801d0ca6d19262499c8c0841c55de02005a8cee",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidara.to/",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": "avplay"
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "filmizlebabam-vidara-PnlMAIhVvxAcS",
+        "label": "Vidara",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "babam-siyah",
+    "site": "filmizlebabam",
+    "page": "https://www.filmizlebabam.com/siyah-giyen-adamlar-3/",
+    "label": "Siyah Giyen Adamlar 3 — tüm kaynaklar",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:27.613Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.filmizlebabam.com/siyah-giyen-adamlar-3/",
+        "finalUrl": "https://www.filmizlebabam.com/siyah-giyen-adamlar-3/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "92004e96df2875c526d8a5dae9712b36eeffc949a0d79acdd80e20372c022d0b.txt",
+        "sha256": "92004e96df2875c526d8a5dae9712b36eeffc949a0d79acdd80e20372c022d0b"
+      },
+      {
+        "method": "GET",
+        "url": "https://play2.pilavyerplay.top/assets/js/s.php?s=jfc10aEsLKF57whaNGtxrw",
+        "finalUrl": "https://play2.pilavyerplay.top/assets/js/s.php?s=jfc10aEsLKF57whaNGtxrw",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "687e97004fd6f95c349acf45acaaaca8bf0252620985b52c2b632962a0551bb9.txt",
+        "sha256": "687e97004fd6f95c349acf45acaaaca8bf0252620985b52c2b632962a0551bb9"
+      },
+      {
+        "method": "GET",
+        "url": "https://play2.pilavyerplay.top/api/stream.php?v=0aba3d2c9d6974f4e86472ac709ee395&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+        "finalUrl": "https://play2.pilavyerplay.top/api/stream.php?v=0aba3d2c9d6974f4e86472ac709ee395&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "b2ef73b6971b5cf6d5a51736d45b84a3a1a246943d1312d80ade89c179904a00.txt",
+        "sha256": "b2ef73b6971b5cf6d5a51736d45b84a3a1a246943d1312d80ade89c179904a00"
+      },
+      {
+        "method": "GET",
+        "url": "https://play2.pilavyerplay.top/api/stream.php?v=0aba3d2c9d6974f4e86472ac709ee395&p=stream_v720%2Findex.m3u8&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+        "finalUrl": "https://play2.pilavyerplay.top/api/stream.php?v=0aba3d2c9d6974f4e86472ac709ee395&p=stream_v720%2Findex.m3u8&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "742b6a61186738f9a412d5cd71dcfa544b6d588bc860c9d3d7c579369855307e.txt",
+        "sha256": "742b6a61186738f9a412d5cd71dcfa544b6d588bc860c9d3d7c579369855307e"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "filmizlebabam-pv-play2-jfc10aEsLKF57whaNGtxrw",
+        "label": "Pilavyer (Play2)",
+        "url": "https://play2.pilavyerplay.top/api/stream.php?v=0aba3d2c9d6974f4e86472ac709ee395&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://play2.pilavyerplay.top/assets/js/s.php?s=jfc10aEsLKF57whaNGtxrw",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [
+          {
+            "id": "pilav-sub-0",
+            "url": "https://play2.pilavyerplay.top/api/sub.php?v=0aba3d2c9d6974f4e86472ac709ee395&sid=57dfa4b214a205fe899a593d836502d1&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+            "label": "İngilizce",
+            "language": "en",
+            "format": "vtt"
+          },
+          {
+            "id": "pilav-sub-1",
+            "url": "https://play2.pilavyerplay.top/api/sub.php?v=0aba3d2c9d6974f4e86472ac709ee395&sid=efcc655a68ced123c375a387fa34c328&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+            "label": "İngilizce [CC]",
+            "language": "en",
+            "format": "vtt"
+          },
+          {
+            "id": "pilav-sub-2",
+            "url": "https://play2.pilavyerplay.top/api/sub.php?v=0aba3d2c9d6974f4e86472ac709ee395&sid=f53a3dbefee401da4f4a9d76ea575791&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+            "label": "Türkçe",
+            "language": "tr",
+            "format": "vtt"
+          }
+        ],
+        "thumbnails": {
+          "type": "grid",
+          "url": "https://play2.pilavyerplay.top/api/thumb.php?v=0aba3d2c9d6974f4e86472ac709ee395&sb=1&token=eyJ2IjoiMGFiYTNkMmM5ZDY5NzRmNGU4NjQ3MmFjNzA5ZWUzOTUiLCJvIjoid3d3LmZpbG1pemxlYmFiYW0uY29tIiwiZXhwIjoxNzk0MjkyMzQ4LCJuIjoiNDNjZDk1MDQ2OTI2In0.67553b94f95eeaec136dea347cd6c2feacb82321087589aef5c6b7797cfb14c7",
+          "count": 100,
+          "cols": 10,
+          "rows": 10,
+          "width": 160,
+          "height": 90,
+          "interval": 64
+        },
+        "preferredEngine": null,
+        "fragmentByteLimit": 12582912
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "filmizlebabam-pv-play2-jfc10aEsLKF57whaNGtxrw",
+        "label": "Pilavyer (Play2)",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "ddizi-hls",
+    "site": "ddizi",
+    "page": "https://www.ddizi.tel/izle/92001/tasacak-bu-deniz-35-bolum-izle-hd2.htm",
+    "label": "DDizi HLS örneği",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:45.236Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/izle/92001/tasacak-bu-deniz-35-bolum-izle-hd2.htm",
+        "finalUrl": "https://www.ddizi.tel/izle/92001/tasacak-bu-deniz-35-bolum-izle-hd2.htm",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "7825c0e8f0c8d9d8ab63de7c78e9fa493b04583373dd0752811321e250cebaa4.txt",
+        "sha256": "7825c0e8f0c8d9d8ab63de7c78e9fa493b04583373dd0752811321e250cebaa4"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle",
+        "finalUrl": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "4f4a533f746092fc6d25fa6b553a6b9b531e344edf5edad98bfb0f6f4296a17f.txt",
+        "sha256": "4f4a533f746092fc6d25fa6b553a6b9b531e344edf5edad98bfb0f6f4296a17f"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle/sayfa-1",
+        "finalUrl": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle/sayfa-1",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "13c550b796a6ecf40a39e27995be9ccdcbc701823ce99f51366852f5bee637c1.txt",
+        "sha256": "13c550b796a6ecf40a39e27995be9ccdcbc701823ce99f51366852f5bee637c1"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle/sayfa-2",
+        "finalUrl": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle/sayfa-2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "e1ae121e967affec560684f00014a69346f47a117301ccc86dd791126f5a9cbb.txt",
+        "sha256": "e1ae121e967affec560684f00014a69346f47a117301ccc86dd791126f5a9cbb"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle/sayfa-3",
+        "finalUrl": "https://www.ddizi.tel/diziler/2127/tasacak-bu-deniz-150-son-bolum-izle/sayfa-3",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "90e4e6718530ae0d94d78cccfa45e9151ad0eb8361039cb9d3a063c29a417922.txt",
+        "sha256": "90e4e6718530ae0d94d78cccfa45e9151ad0eb8361039cb9d3a063c29a417922"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [],
+    "referenceOptions": [
+      {
+        "sourceId": "ddizi-0",
+        "label": "Tek Parça",
+        "pageUrl": "https://www.ddizi.tel/izle/92001/tasacak-bu-deniz-35-bolum-izle-hd2.htm",
+        "status": "error",
+        "stage": "decode",
+        "detail": "DDizi · Desteklenen aktif oynatıcı bulunamadı."
+      }
+    ],
+    "referenceError": "DDizi · Desteklenen aktif oynatıcı bulunamadı."
+  },
+  {
+    "id": "ddizi-youtube",
+    "site": "ddizi",
+    "page": "https://www.ddizi.tel/izle/91916/uzak-sehir-68-bolum-izle-hd1.htm",
+    "label": "YouTube — kapsam dışı kontrolü",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:46.538Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/izle/91916/uzak-sehir-68-bolum-izle-hd1.htm",
+        "finalUrl": "https://www.ddizi.tel/izle/91916/uzak-sehir-68-bolum-izle-hd1.htm",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5bcaaf63d9d195a069f0ba0e0dd6e16464b2df6d14674c20185a2ec8ebc1f107.txt",
+        "sha256": "5bcaaf63d9d195a069f0ba0e0dd6e16464b2df6d14674c20185a2ec8ebc1f107"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "52298c35ccfaa0f630593b0381de7935d1b054638e1764ac0ffb0128a7ffbd1a.txt",
+        "sha256": "52298c35ccfaa0f630593b0381de7935d1b054638e1764ac0ffb0128a7ffbd1a"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-1",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-1",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "c367167376ed7f512219f0717dfd183485a8250706b33f071ff8dc4732758cd6.txt",
+        "sha256": "c367167376ed7f512219f0717dfd183485a8250706b33f071ff8dc4732758cd6"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-2",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "a9bbcdfcd879b30b39f8658fe47eef84be4425dc805cfbb6e180aaec7e852b97.txt",
+        "sha256": "a9bbcdfcd879b30b39f8658fe47eef84be4425dc805cfbb6e180aaec7e852b97"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-3",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-3",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "19a2619a1f86c8ba25e43f241912f80e0bf9820ad8df0734bf89119b51ed527e.txt",
+        "sha256": "19a2619a1f86c8ba25e43f241912f80e0bf9820ad8df0734bf89119b51ed527e"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-4",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-4",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "a6a7c9c68f9865280b146718c1bc1baaea04a0b6f6651d833af2fcdf74e84c99.txt",
+        "sha256": "a6a7c9c68f9865280b146718c1bc1baaea04a0b6f6651d833af2fcdf74e84c99"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-5",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-5",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "4e09365e1f15260992499b12affce569ba351a8a5b95f71724e2d82e112ebd02.txt",
+        "sha256": "4e09365e1f15260992499b12affce569ba351a8a5b95f71724e2d82e112ebd02"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-6",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-6",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "b03aaf985ae9c5a678226fada42bc5a8784ff01b74ff52fdaf7456e80efb96f3.txt",
+        "sha256": "b03aaf985ae9c5a678226fada42bc5a8784ff01b74ff52fdaf7456e80efb96f3"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-7",
+        "finalUrl": "https://www.ddizi.tel/diziler/2078/uzak-sehir-40-son-bolum-izle/sayfa-7",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "3beb953be87507e15642df953ceb6a84d10b2724c821a5304ebcf668c65d522b.txt",
+        "sha256": "3beb953be87507e15642df953ceb6a84d10b2724c821a5304ebcf668c65d522b"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.ddizi.tel/player/telif/index.php?id=https://www.youtube.com/watch?v=5SAwvBpQuIw",
+        "finalUrl": "https://www.ddizi.tel/player/telif/index.php?id=https://www.youtube.com/watch?v=5SAwvBpQuIw",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "e65538a49a255b7f514f895956c10c333c9316192de66afb5727c40c2f74b403.txt",
+        "sha256": "e65538a49a255b7f514f895956c10c333c9316192de66afb5727c40c2f74b403"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [],
+    "referenceOptions": [
+      {
+        "sourceId": "ddizi-0",
+        "label": "Tek Parça",
+        "pageUrl": "https://www.ddizi.tel/izle/91916/uzak-sehir-68-bolum-izle-hd1.htm",
+        "status": "unsupported",
+        "stage": "unsupported",
+        "detail": "DDizi · YouTube çözümleyici modülü pakette bulunamadı."
+      }
+    ],
+    "referenceError": "DDizi · YouTube çözümleyici modülü pakette bulunamadı."
+  },
+  {
+    "id": "dizibox-alternatives",
+    "site": "dizibox",
+    "page": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/",
+    "label": "DBX Pro / Moly+ / Odnok",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:57.666Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/",
+        "finalUrl": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "8f602779d128d0b7bcd4bdabb7c5762cf4e7bdc31842e15d3d95f28c8eda3ade.txt",
+        "sha256": "8f602779d128d0b7bcd4bdabb7c5762cf4e7bdc31842e15d3d95f28c8eda3ade"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.dizibox.live/player/king/king.php?v=7bc25b8e88c523e771f5b760bd366c013959790ca763595d7563def4972e32e7440ba70a69bab614dc49ab8ce7595d68dd925cb0659e496295afefddc2098e1b",
+        "finalUrl": "https://www.dizibox.live/player/king/king.php?v=7bc25b8e88c523e771f5b760bd366c013959790ca763595d7563def4972e32e7440ba70a69bab614dc49ab8ce7595d68dd925cb0659e496295afefddc2098e1b",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "b53d0424ef4e756691f2c0d2b318913a14ebd60800abb6e1555df86222ffb9df.txt",
+        "sha256": "b53d0424ef4e756691f2c0d2b318913a14ebd60800abb6e1555df86222ffb9df"
+      },
+      {
+        "method": "GET",
+        "url": "https://dbx.molystream.org/embed/10505-6acedd5eb063bb2adefed5a5",
+        "finalUrl": "https://dbx.molystream.org/embed/10505-6acedd5eb063bb2adefed5a5",
+        "code": 403,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "af7851334d66acc3ab04dc791509419eed7ecab6b21c9a67a5d0e5760fa221a5.txt",
+        "sha256": "af7851334d66acc3ab04dc791509419eed7ecab6b21c9a67a5d0e5760fa221a5"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/2/",
+        "finalUrl": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/2/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "1b779fe77c113d6f926b5e7b2b5792d039cc3918ab0d318a3eb7d95146973dc7.txt",
+        "sha256": "1b779fe77c113d6f926b5e7b2b5792d039cc3918ab0d318a3eb7d95146973dc7"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.dizibox.live/player/moly/moly.php?h=349fc7ec060076ca9f144e3ef746edd8ecb76518ef73bec587229036455ab687",
+        "finalUrl": "https://www.dizibox.live/player/moly/moly.php?h=349fc7ec060076ca9f144e3ef746edd8ecb76518ef73bec587229036455ab687",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "41356be391e8d6ab1c333f502fad03ef6ac8f0863b66510cc3a354a31535d346.txt",
+        "sha256": "41356be391e8d6ab1c333f502fad03ef6ac8f0863b66510cc3a354a31535d346"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.biz/embed-i7a9k92q08vl.html",
+        "finalUrl": "https://vidmoly.biz/embed-i7a9k92q08vl.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "ab936f8ceda97470676f5a94028df25a66684e2d26f55e26317757976ace7a79.txt",
+        "sha256": "ab936f8ceda97470676f5a94028df25a66684e2d26f55e26317757976ace7a79"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-ps-s-2.vmpx.online/hls2/01/02995/i7a9k92q08vl_,n,l,.urlset/master.m3u8?t=HwryTcxdZlv1LHGU9GUk1MkdjMkhMb5o-LPKxff1wJY=&s=1793687580&e=43200&v=&srv=de-vud-cdps&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-ps-s-2.vmpx.online/hls2/01/02995/i7a9k92q08vl_,n,l,.urlset/master.m3u8?t=HwryTcxdZlv1LHGU9GUk1MkdjMkhMb5o-LPKxff1wJY=&s=1793687580&e=43200&v=&srv=de-vud-cdps&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "e93b6da5ddc5f69e5d67e9d47a6113fccef808efdb6e1121b0d3da2a150099e9.txt",
+        "sha256": "e93b6da5ddc5f69e5d67e9d47a6113fccef808efdb6e1121b0d3da2a150099e9"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/3/",
+        "finalUrl": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/3/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "693217e4826479ef80e434ba8ea8e09e94a727a882281c4f8d915b4c3d0bd572.txt",
+        "sha256": "693217e4826479ef80e434ba8ea8e09e94a727a882281c4f8d915b4c3d0bd572"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.dizibox.live/player/haydi.php?v=aHR0cHM6Ly9vay5ydS92aWRlby8xNjIwOTQxMTU3NDMxOQ==",
+        "finalUrl": "https://www.dizibox.live/player/haydi.php?v=aHR0cHM6Ly9vay5ydS92aWRlby8xNjIwOTQxMTU3NDMxOQ==",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "2530dd9111ffa2a5edacd6a2b87b5e48a50b74215837ef7217d5cf5de60a0433.txt",
+        "sha256": "2530dd9111ffa2a5edacd6a2b87b5e48a50b74215837ef7217d5cf5de60a0433"
+      },
+      {
+        "method": "GET",
+        "url": "https://ok.ru/videoembed/16209411574319",
+        "finalUrl": "https://ok.ru/videoembed/16209411574319",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "db8d3df4e33d2be8912627519288d334acb4f96455db526be3aeeb37da09b49d.txt",
+        "sha256": "db8d3df4e33d2be8912627519288d334acb4f96455db526be3aeeb37da09b49d"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd296.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793773981590&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=185.180.203.46&type=2&sig=UxE746WHFRE&ct=8&urls=95.163.35.41&clientType=0&id=18600675707439",
+        "finalUrl": "https://vd296.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793773981590&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=185.180.203.46&type=2&sig=UxE746WHFRE&ct=8&urls=95.163.35.41&clientType=0&id=18600675707439",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "d2d20dbe6189538784e1a5f8a769d38cc1cc7270cb8461cec2f1e7c7324ac88f.txt",
+        "sha256": "d2d20dbe6189538784e1a5f8a769d38cc1cc7270cb8461cec2f1e7c7324ac88f"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-ps-s-2.vmpx.online/hls2/01/02995/i7a9k92q08vl_n/index-v1-a1.m3u8?t=HwryTcxdZlv1LHGU9GUk1MkdjMkhMb5o-LPKxff1wJY=&s=1793687580&e=43200&v=&srv=de-vud-cdps&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-ps-s-2.vmpx.online/hls2/01/02995/i7a9k92q08vl_n/index-v1-a1.m3u8?t=HwryTcxdZlv1LHGU9GUk1MkdjMkhMb5o-LPKxff1wJY=&s=1793687580&e=43200&v=&srv=de-vud-cdps&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "eaeb2d45349514f1d1f23f1321b45c4f6eb9f4d6c897fb4a71dfb91c1f87b683.txt",
+        "sha256": "eaeb2d45349514f1d1f23f1321b45c4f6eb9f4d6c897fb4a71dfb91c1f87b683"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd296.okcdn.ru/expires/1793773981590/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/185.180.203.46/type/2/sig/UxE746WHFRE/ct/8/urls/95.163.35.41/clientType/0/id/18600675707439/video/",
+        "finalUrl": "https://vd296.okcdn.ru/expires/1793773981590/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/185.180.203.46/type/2/sig/UxE746WHFRE/ct/8/urls/95.163.35.41/clientType/0/id/18600675707439/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "328eb33604bebe580a9a22c19a55e5bd83128c8fa68759d9c2ba8f16e26231c6.txt",
+        "sha256": "328eb33604bebe580a9a22c19a55e5bd83128c8fa68759d9c2ba8f16e26231c6"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "label": "Moly+",
+        "url": "https://prx-ps-s-2.vmpx.online/hls2/01/02995/i7a9k92q08vl_,n,l,.urlset/master.m3u8?t=HwryTcxdZlv1LHGU9GUk1MkdjMkhMb5o-LPKxff1wJY=&s=1793687580&e=43200&v=&srv=de-vud-cdps&i=0.4&sp=0&asn=47331",
+        "referer": "https://vidmoly.biz/embed-i7a9k92q08vl.html",
+        "type": "hls",
+        "status": "ready",
+        "stability": null,
+        "playbackRequirements": {
+          "requiredHeaders": []
+        },
+        "transport": "native",
+        "destination": "downloads",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "id": "dizibox-1",
+        "order": 1
+      },
+      {
+        "label": "Odnok",
+        "url": "https://vd296.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793773981590&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=185.180.203.46&type=2&sig=UxE746WHFRE&ct=8&urls=95.163.35.41&clientType=0&id=18600675707439",
+        "referer": "https://ok.ru/videoembed/16209411574319",
+        "type": "hls",
+        "status": "ready",
+        "stability": {
+          "autoMaxHeight": 360
+        },
+        "playbackRequirements": {
+          "requiredHeaders": []
+        },
+        "transport": "native",
+        "destination": "downloads",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "id": "dizibox-2",
+        "order": 2
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "dizibox-0",
+        "label": "DBX Pro",
+        "pageUrl": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/",
+        "status": "error",
+        "stage": "embed",
+        "detail": "HTTP 403"
+      },
+      {
+        "sourceId": "dizibox-1",
+        "label": "Moly+",
+        "pageUrl": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/2/",
+        "status": "ready",
+        "stage": "",
+        "detail": "HLS erişimi doğrulandı"
+      },
+      {
+        "sourceId": "dizibox-2",
+        "label": "Odnok",
+        "pageUrl": "https://www.dizibox.live/visionquest-1-sezon-1-bolum-izle/3/",
+        "status": "ready",
+        "stage": "",
+        "detail": "HLS erişimi doğrulandı"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "filmifull-spider",
+    "site": "filmifullizle",
+    "page": "https://www.filmifullizle.news/film/orumcek-adam-yepyeni-bir-gun.html",
+    "label": "Sinefilm / Moly / OK",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T08:01:04.051Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/film/orumcek-adam-yepyeni-bir-gun.html",
+        "finalUrl": "https://www.filmifullizle.news/film/orumcek-adam-yepyeni-bir-gun.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "211912052f115b4492427d4ebc727d97822511b7022d3353058fa0f11d4f2e05.txt",
+        "sha256": "211912052f115b4492427d4ebc727d97822511b7022d3353058fa0f11d4f2e05"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/vid/5fbd6f281dbe72cbd0d6be6c6847c9df",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/vid/5fbd6f281dbe72cbd0d6be6c6847c9df",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "a283337c26bcd765b11715722f7c999760ed7c87ede879ccf4ecf602128fff4e.txt",
+        "sha256": "a283337c26bcd765b11715722f7c999760ed7c87ede879ccf4ecf602128fff4e"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/drive/5fbd6f281dbe72cbd0d6be6c6847c9df",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/drive/5fbd6f281dbe72cbd0d6be6c6847c9df",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "d3b6391bc6bea68c20bf6f06c21c7a6fc869d6293ee91dca731a945249293f90.txt",
+        "sha256": "d3b6391bc6bea68c20bf6f06c21c7a6fc869d6293ee91dca731a945249293f90"
+      },
+      {
+        "method": "GET",
+        "url": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad",
+        "finalUrl": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "f6dcb9378f4e685a8b3e43d7df8d18f24a59be6796d15a2f2bea55c41d72c82f.txt",
+        "sha256": "f6dcb9378f4e685a8b3e43d7df8d18f24a59be6796d15a2f2bea55c41d72c82f"
+      },
+      {
+        "method": "GET",
+        "url": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad/sheila",
+        "finalUrl": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad/sheila",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "22db0b4d967de50eabf2708907a49b8dc0499db697bac1ada6d561413928c8cb.txt",
+        "sha256": "22db0b4d967de50eabf2708907a49b8dc0499db697bac1ada6d561413928c8cb"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/embed2.php?vid=https://vidmoly.me/embed-btcftsaclhfj.html",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/embed2.php?vid=https://vidmoly.me/embed-btcftsaclhfj.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "788e967ded0a048ea7f6b0c66bbc2b7bdfd45c3a19c3275e02851515c124df40.txt",
+        "sha256": "788e967ded0a048ea7f6b0c66bbc2b7bdfd45c3a19c3275e02851515c124df40"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/vidmo/vid.php?v=QTg5MTJoMW0zcjFuMHNxWkdhc05XWXpSblpqUm5Z",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/vidmo/vid.php?v=QTg5MTJoMW0zcjFuMHNxWkdhc05XWXpSblpqUm5Z",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "279109fd9fe2c3f83c2034fb808f00367b865356cae7ce0a02db5d47d4718166.txt",
+        "sha256": "279109fd9fe2c3f83c2034fb808f00367b865356cae7ce0a02db5d47d4718166"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.biz/embed-sy3dpbw5zabk.html",
+        "finalUrl": "https://vidmoly.biz/embed-sy3dpbw5zabk.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "c955c87d1a124e89d07018a0c8702ec099b4b55933e89a05904ccbfac63c4840.txt",
+        "sha256": "c955c87d1a124e89d07018a0c8702ec099b4b55933e89a05904ccbfac63c4840"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_,n,l,.urlset/master.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_,n,l,.urlset/master.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "9b1b0670da447a5d5efdd7e2003f91d32a454377aa56d1a806b7a5b3b8b88348.txt",
+        "sha256": "9b1b0670da447a5d5efdd7e2003f91d32a454377aa56d1a806b7a5b3b8b88348"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/vid/4cf97c488af2c3122dcec2b861e0b0bc",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/vid/4cf97c488af2c3122dcec2b861e0b0bc",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "c61359d70c7c98775803b63fc2b1ef008d6b4639ea45bf58e8cbc76bf2b37dbc.txt",
+        "sha256": "c61359d70c7c98775803b63fc2b1ef008d6b4639ea45bf58e8cbc76bf2b37dbc"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/drive/4cf97c488af2c3122dcec2b861e0b0bc",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/drive/4cf97c488af2c3122dcec2b861e0b0bc",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "3a220db7c47b969a1db23350ec9ab9ea8101aab855f02430beaec3c90f5e9108.txt",
+        "sha256": "3a220db7c47b969a1db23350ec9ab9ea8101aab855f02430beaec3c90f5e9108"
+      },
+      {
+        "method": "GET",
+        "url": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b",
+        "finalUrl": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "1e51271bca129b74281ff4f5ad9eb87254a7e2aced8a12308c9efd6ad8ccb6c0.txt",
+        "sha256": "1e51271bca129b74281ff4f5ad9eb87254a7e2aced8a12308c9efd6ad8ccb6c0"
+      },
+      {
+        "method": "GET",
+        "url": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b/sheila",
+        "finalUrl": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b/sheila",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "5d6256397dced780d33dc025a4cd086b717bc36c900041a590b961bb672e34d0.txt",
+        "sha256": "5d6256397dced780d33dc025a4cd086b717bc36c900041a590b961bb672e34d0"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/embed2.php?vid=https://vidmoly.me/embed-t2sgkgsy1t14.html",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/embed2.php?vid=https://vidmoly.me/embed-t2sgkgsy1t14.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "8c06ce1e5b85954bdc70d439defab7365bf00003fb28822e9190f4f541291ed0.txt",
+        "sha256": "8c06ce1e5b85954bdc70d439defab7365bf00003fb28822e9190f4f541291ed0"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/vidmo/vid.php?v=QTg5MTJoMW0zcjFuMHMwRURkeGszY250Mlp6SkRk",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/vidmo/vid.php?v=QTg5MTJoMW0zcjFuMHMwRURkeGszY250Mlp6SkRk",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "838e6828ef0de7573d5e9126f67f7a83307b4064320d5521c743232b9dd89731.txt",
+        "sha256": "838e6828ef0de7573d5e9126f67f7a83307b4064320d5521c743232b9dd89731"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.biz/embed-ix57dfyf6bzt.html",
+        "finalUrl": "https://vidmoly.biz/embed-ix57dfyf6bzt.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "b1d16c12263baed972341df5cd1f7d8d0a7c9d23ca6906879051333e75496ecc.txt",
+        "sha256": "b1d16c12263baed972341df5cd1f7d8d0a7c9d23ca6906879051333e75496ecc"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1546-ant.vmpx.online/hls2/01/02977/t2sgkgsy1t14_,n,l,.urlset/master.m3u8?t=ZHyC-XaL9ckwH3a8BPyKVs1JJvd1j9C97NUijLESZ5k=&s=1793692869&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1546-ant.vmpx.online/hls2/01/02977/t2sgkgsy1t14_,n,l,.urlset/master.m3u8?t=ZHyC-XaL9ckwH3a8BPyKVs1JJvd1j9C97NUijLESZ5k=&s=1793692869&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "9f7be7ab6a75eb225ce0e6a1c339af7f4389fb11fc51645edb22768fd6d522b1.txt",
+        "sha256": "9f7be7ab6a75eb225ce0e6a1c339af7f4389fb11fc51645edb22768fd6d522b1"
+      },
+      {
+        "method": "GET",
+        "url": "https://www.filmifullizle.news/smplayer/vid/f52c2af2c9aa86a00d62a5756bc11cfa",
+        "finalUrl": "https://www.filmifullizle.news/smplayer/vid/f52c2af2c9aa86a00d62a5756bc11cfa",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "2e51c133ad1445f521beb4a85186505269a0358ef8ec0f22ba95224c0f272d56.txt",
+        "sha256": "2e51c133ad1445f521beb4a85186505269a0358ef8ec0f22ba95224c0f272d56"
+      },
+      {
+        "method": "GET",
+        "url": "https://ok.ru/videoembed/16587041147562",
+        "finalUrl": "https://ok.ru/videoembed/16587041147562",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "43086ba94a40c7920ed5770bb8225c57bb7a4f7f0866ed57291d2db76b9fe6a1.txt",
+        "sha256": "43086ba94a40c7920ed5770bb8225c57bb7a4f7f0866ed57291d2db76b9fe6a1"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/hls4_19054403324586.CKqVyMXf4gNAqrfS550RUApgBY97Mc3TT_ri.m3u8",
+        "finalUrl": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/hls4_19054403324586.CKqVyMXf4gNAqrfS550RUApgBY97Mc3TT_ri.m3u8",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "4f48791702b35ae5f132c7dc983904e313de50b31869e63c14ca11fb3d3e56f1.txt",
+        "sha256": "4f48791702b35ae5f132c7dc983904e313de50b31869e63c14ca11fb3d3e56f1"
+      },
+      {
+        "method": "GET",
+        "url": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad/q/1",
+        "finalUrl": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad/q/1",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "3719da0cabc739604dbc09f7e3d70302532fc0f18fbd89c54935b78e8b1560c3.txt",
+        "sha256": "3719da0cabc739604dbc09f7e3d70302532fc0f18fbd89c54935b78e8b1560c3"
+      },
+      {
+        "method": "GET",
+        "url": "https://lile18.22022144.xyz/v/6172-6ac4addc84536455dd642dad/1080p/sheila_000.png",
+        "finalUrl": "https://lile18.22022144.xyz/v/6172-6ac4addc84536455dd642dad/1080p/sheila_000.png",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "92586f0d4cf74f1dfc5cfefdadd4e8cc9ba289b77384c2042b6bf42b370b581d.txt",
+        "sha256": "92586f0d4cf74f1dfc5cfefdadd4e8cc9ba289b77384c2042b6bf42b370b581d"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_n/index-v1-a1.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_n/index-v1-a1.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "328d7636c7560bd879615938e014c045a44d28bdc5871c092973482c51b6a88d.txt",
+        "sha256": "328d7636c7560bd879615938e014c045a44d28bdc5871c092973482c51b6a88d"
+      },
+      {
+        "method": "GET",
+        "url": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b/q/1",
+        "finalUrl": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b/q/1",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "1efea2d2541a65f12961cc0c515b0b186f698270f1b3667f5118b75a77a61c81.txt",
+        "sha256": "1efea2d2541a65f12961cc0c515b0b186f698270f1b3667f5118b75a77a61c81"
+      },
+      {
+        "method": "GET",
+        "url": "https://lile18.87287396.xyz/v/1183-6ac4a6b15a1a0755f15ccd1b/1080p/sheila_000.png",
+        "finalUrl": "https://lile18.87287396.xyz/v/1183-6ac4a6b15a1a0755f15ccd1b/1080p/sheila_000.png",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "999a36573b781035d6d0964b56fee451848fb3858d85b1e0bb275de732fe2153.txt",
+        "sha256": "999a36573b781035d6d0964b56fee451848fb3858d85b1e0bb275de732fe2153"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1546-ant.vmpx.online/hls2/01/02977/t2sgkgsy1t14_n/index-v1-a1.m3u8?t=ZHyC-XaL9ckwH3a8BPyKVs1JJvd1j9C97NUijLESZ5k=&s=1793692869&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1546-ant.vmpx.online/hls2/01/02977/t2sgkgsy1t14_n/index-v1-a1.m3u8?t=ZHyC-XaL9ckwH3a8BPyKVs1JJvd1j9C97NUijLESZ5k=&s=1793692869&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "22560d3806696532c5776f7f3a303db72b1127bb25a16c9a2e30b7c81ac1746b.txt",
+        "sha256": "22560d3806696532c5776f7f3a303db72b1127bb25a16c9a2e30b7c81ac1746b"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/CKqVxJfHqgQSFAiqlcSXx6oEEKqVxJfHqgQYNyABGhQIqpXEl8eqBBCqlcSXx6oEGDcgAiABMAM4AnjrOqoBCAoGCIACEJABsgEECMTYAtIBBhACKBcwHtoBAggIotsbuYCHlV0/fn/track.m3u8",
+        "finalUrl": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/CKqVxJfHqgQSFAiqlcSXx6oEEKqVxJfHqgQYNyABGhQIqpXEl8eqBBCqlcSXx6oEGDcgAiABMAM4AnjrOqoBCAoGCIACEJABsgEECMTYAtIBBhACKBcwHtoBAggIotsbuYCHlV0/fn/track.m3u8",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "678148d6490aba1717c6e5d21f4febd43e38de9edfbebfecb2ec173c74601c29.txt",
+        "sha256": "678148d6490aba1717c6e5d21f4febd43e38de9edfbebfecb2ec173c74601c29"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/CKqVxJfHqgQSFAiqlcSXx6oEEKqVxJfHqgQYNyABGhQIqpXEl8eqBBCqlcSXx6oEGDcgAiABMAM4AnjrOqoBCAoGCIACEJABsgEECMTYAtIBBhACKBcwHtoBAggIotsbuYCHlV0/fn/s0.ts",
+        "finalUrl": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/CKqVxJfHqgQSFAiqlcSXx6oEEKqVxJfHqgQYNyABGhQIqpXEl8eqBBCqlcSXx6oEGDcgAiABMAM4AnjrOqoBCAoGCIACEJABsgEECMTYAtIBBhACKBcwHtoBAggIotsbuYCHlV0/fn/s0.ts",
+        "code": 200,
+        "headers": {
+          "Content-Type": "video/MP2T"
+        },
+        "file": "fd5bc6b75c5185f7ecab44d1aff980ed30157e8b822d068cfd6948c02c2f3399.txt",
+        "sha256": "fd5bc6b75c5185f7ecab44d1aff980ed30157e8b822d068cfd6948c02c2f3399"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "filmifullizle-source0",
+        "label": "Sinefilm · Türkçe Dublaj",
+        "url": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad/sheila",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://film.popcornvakti.net/embed/6172-6ac4addc84536455dd642dad",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "filmifullizle-source1",
+        "label": "Moly · Türkçe Dublaj",
+        "url": "https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_,n,l,.urlset/master.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidmoly.biz/embed-sy3dpbw5zabk.html",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "filmifullizle-source2",
+        "label": "Sinefilm · Türkçe Altyazılı",
+        "url": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b/sheila",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "filmifullizle-source3",
+        "label": "Moly · Türkçe Altyazılı",
+        "url": "https://prx-1546-ant.vmpx.online/hls2/01/02977/t2sgkgsy1t14_,n,l,.urlset/master.m3u8?t=ZHyC-XaL9ckwH3a8BPyKVs1JJvd1j9C97NUijLESZ5k=&s=1793692869&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidmoly.biz/embed-ix57dfyf6bzt.html",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "filmifullizle-source4",
+        "label": "OkRu · Türkçe Altyazılı",
+        "url": "https://vd296.okcdn.ru/expires/1793779269847/clientType/0/srcIp/78.174.104.152/type/2/mid/16587041147562/id/19054403324586/ms/185.180.203.46/srcAg/UNKNOWN/urls/176.112.172.39/oq/0/pr/10/scl/5/ct/28/sig/lNWo58kaE6s/ondemand/hls4_19054403324586.CKqVyMXf4gNAqrfS550RUApgBY97Mc3TT_ri.m3u8",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://ok.ru/videoembed/16587041147562",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "filmifullizle-source0",
+        "label": "Sinefilm · Türkçe Dublaj",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "filmifullizle-source1",
+        "label": "Moly · Türkçe Dublaj",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "filmifullizle-source2",
+        "label": "Sinefilm · Türkçe Altyazılı",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "filmifullizle-source3",
+        "label": "Moly · Türkçe Altyazılı",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "filmifullizle-source4",
+        "label": "OkRu · Türkçe Altyazılı",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "filmizle-american-psycho",
+    "site": "filmcibaba",
+    "page": "https://filmizle.ink/american-psycho-1-amerikan-sapigi-2000-izle/",
+    "label": "American Psycho / Hotstream",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:31:55.236Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://filmizle.ink/american-psycho-1-amerikan-sapigi-2000-izle/",
+        "finalUrl": "https://filmizle.ink/american-psycho-1-amerikan-sapigi-2000-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "acbb08c984885b69001a2b5bbbbbdcaed585751e7057126eef169f786c1817d3.txt",
+        "sha256": "acbb08c984885b69001a2b5bbbbbdcaed585751e7057126eef169f786c1817d3"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/embed/fOWlKSKXIF8dby1",
+        "finalUrl": "https://hotstream.club/embed/fOWlKSKXIF8dby1",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "da597f86bdec6f09b9502851b525a8803dfc0eb02a22c954e655ffac0a9eecb5.txt",
+        "sha256": "da597f86bdec6f09b9502851b525a8803dfc0eb02a22c954e655ffac0a9eecb5"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZXhEOXYrNERhdUIwZXlDdHN2QVY2bmZDVTEzN0swbk02WUtNOHV3b1pJc2xPTVJvUnpobnB0a2thOWdnbGFnUlk2dE5DSkxOZ3VqUnRKb2FLendoS2ZTUEVOajVRVFB4eFZpN3B6cG8xSDJyWnZEUW1GZ2xCMUZ2VXlyVzNHdnRVPQ==",
+        "finalUrl": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZXhEOXYrNERhdUIwZXlDdHN2QVY2bmZDVTEzN0swbk02WUtNOHV3b1pJc2xPTVJvUnpobnB0a2thOWdnbGFnUlk2dE5DSkxOZ3VqUnRKb2FLendoS2ZTUEVOajVRVFB4eFZpN3B6cG8xSDJyWnZEUW1GZ2xCMUZ2VXlyVzNHdnRVPQ==",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "01f77002819ab1abd3cf983eb6ac38b9e883c65575fbaf7ebfe0449ea121cd66.txt",
+        "sha256": "01f77002819ab1abd3cf983eb6ac38b9e883c65575fbaf7ebfe0449ea121cd66"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/m3u/UmhBV0Z4R01PRDdpUm5iRWowL2FNQ2hvcU9yMXBIL01mSHZWc3pMdEpOTEhGRnlNK3BrQWt1QjJaUmI1M1o0NmlSRm5jSTZSSGJEdExHYXdwUjlTd043b2k5SW1YTmtxYVVKUnRjK3l0eDlwQmJvMTdvTmZySjJVWmJhcjZKRXJDc3JxR05LL2ZoNnBVMUxkRFFab2d2aDR2cko3ZkxnZ2RmOHFVR1JFWDBEZVNpUGIrRGN4aHFWZmxsK2VZSXllMlhXZm12QzRpeDRQRFFJcjhvc3hieFhSVXVlWHdXUGlIQ1JLU0ZNeVA3NFgxWlVTOHlqZFlUTkcxMEdyR0hWNlFHNnB2WXBhZUhWeTRyMVFHa09pVWlMZGNETlQzakRVSCtGNG9ndzYyUlk9",
+        "finalUrl": "https://hotstream.club/m3u/UmhBV0Z4R01PRDdpUm5iRWowL2FNQ2hvcU9yMXBIL01mSHZWc3pMdEpOTEhGRnlNK3BrQWt1QjJaUmI1M1o0NmlSRm5jSTZSSGJEdExHYXdwUjlTd043b2k5SW1YTmtxYVVKUnRjK3l0eDlwQmJvMTdvTmZySjJVWmJhcjZKRXJDc3JxR05LL2ZoNnBVMUxkRFFab2d2aDR2cko3ZkxnZ2RmOHFVR1JFWDBEZVNpUGIrRGN4aHFWZmxsK2VZSXllMlhXZm12QzRpeDRQRFFJcjhvc3hieFhSVXVlWHdXUGlIQ1JLU0ZNeVA3NFgxWlVTOHlqZFlUTkcxMEdyR0hWNlFHNnB2WXBhZUhWeTRyMVFHa09pVWlMZGNETlQzakRVSCtGNG9ndzYyUlk9",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "90d117c2e35f7decd7e99ea56a33b5087a2dee5a3031920933c62255ca016ebd.txt",
+        "sha256": "90d117c2e35f7decd7e99ea56a33b5087a2dee5a3031920933c62255ca016ebd"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "hotstream-0",
+        "label": "Hotstream",
+        "sourcePageUrl": "https://filmizle.ink/american-psycho-1-amerikan-sapigi-2000-izle/",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZXhEOXYrNERhdUIwZXlDdHN2QVY2bmZDVTEzN0swbk02WUtNOHV3b1pJc2xPTVJvUnpobnB0a2thOWdnbGFnUlk2dE5DSkxOZ3VqUnRKb2FLendoS2ZTUEVOajVRVFB4eFZpN3B6cG8xSDJyWnZEUW1GZ2xCMUZ2VXlyVzNHdnRVPQ==",
+        "referer": "https://hotstream.club/embed/fOWlKSKXIF8dby1",
+        "userAgent": "Mozilla/5.0",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "hotstream-0",
+        "label": "Hotstream",
+        "pageUrl": "https://filmizle.ink/american-psycho-1-amerikan-sapigi-2000-izle/",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "filmizle-gorge-page2",
+    "site": "filmcibaba",
+    "page": "https://filmizle.ink/the-gorge-2025-izle/2/",
+    "label": "The Gorge — /2/ doğrudan giriş",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:31:52.228Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "finalUrl": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5a38aad98f76b621a64cbf9268f4be91bb8ed02cce17bcb0610171dcabffb11c.txt",
+        "sha256": "5a38aad98f76b621a64cbf9268f4be91bb8ed02cce17bcb0610171dcabffb11c"
+      },
+      {
+        "method": "GET",
+        "url": "https://filmizle.ink/the-gorge-2025-izle/",
+        "finalUrl": "https://filmizle.ink/the-gorge-2025-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "1e92143be914e0f8f18e3da8e996ab8901cdacc8a2f75535e53f4ce47578e2b0.txt",
+        "sha256": "1e92143be914e0f8f18e3da8e996ab8901cdacc8a2f75535e53f4ce47578e2b0"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/embed/2D4aKhUYU4uRetO",
+        "finalUrl": "https://hotstream.club/embed/2D4aKhUYU4uRetO",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "2db146e625b390c8d2f25395556029ea7b7fe7022c5184073382a965d2ea7ed0.txt",
+        "sha256": "2db146e625b390c8d2f25395556029ea7b7fe7022c5184073382a965d2ea7ed0"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJY2IxeVRVQ1NiQ2k5N3RmQms4SllscTY0dExPbnR6Z1l2ZWNINUk0KzgvRHNKbll2alBJekQxaStETjZHWGIzMTdPYis3Ym9Dc29qTlQ5d2o2amcxVHBhcUxiK0loSDVaUzNtTEFmL3VIcWJYMEw5anBVejZNR2V2OFAxbEo3OFlnPQ==",
+        "finalUrl": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJY2IxeVRVQ1NiQ2k5N3RmQms4SllscTY0dExPbnR6Z1l2ZWNINUk0KzgvRHNKbll2alBJekQxaStETjZHWGIzMTdPYis3Ym9Dc29qTlQ5d2o2amcxVHBhcUxiK0loSDVaUzNtTEFmL3VIcWJYMEw5anBVejZNR2V2OFAxbEo3OFlnPQ==",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "5115cbf5bc1c40d255b08e1c67b7d912641bc14fba0f1a0490c94acd434ba878.txt",
+        "sha256": "5115cbf5bc1c40d255b08e1c67b7d912641bc14fba0f1a0490c94acd434ba878"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/embed/sQyo7YKPCvqGm8r",
+        "finalUrl": "https://hotstream.club/embed/sQyo7YKPCvqGm8r",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "52c48298586798c79cd44f50d605425fbe1cae32f63dcfdc6931fb94aa3dd316.txt",
+        "sha256": "52c48298586798c79cd44f50d605425fbe1cae32f63dcfdc6931fb94aa3dd316"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZm5kelFGK05YMWE5Rm9aWTFUbEsxbmlOR3ZsZzExQXJ4ekh3SGZGeEFWU25iQkU1L0kweGxRQi9qVTVrTVJscXp0bmhRU1BhVHpjZHZHUTM4aitvd25QbVJGNlJyd0hORThSOGdoTUNUUmk0STFWbElPai82dmhubkJ0OWhpZWFFPQ==",
+        "finalUrl": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZm5kelFGK05YMWE5Rm9aWTFUbEsxbmlOR3ZsZzExQXJ4ekh3SGZGeEFWU25iQkU1L0kweGxRQi9qVTVrTVJscXp0bmhRU1BhVHpjZHZHUTM4aitvd25QbVJGNlJyd0hORThSOGdoTUNUUmk0STFWbElPai82dmhubkJ0OWhpZWFFPQ==",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "de625c7bb2b26ed6839bba13a3dfc1bebda50efd0291804305714dde239ae74e.txt",
+        "sha256": "de625c7bb2b26ed6839bba13a3dfc1bebda50efd0291804305714dde239ae74e"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/m3u/UmhBV0Z4R01PRDdpUm5iRWowL2FNQ2hvcU9yMXBIL01mSHZWc3pMdEpOSVVoWWhiVTBWR05BT3R2VFoxcWE0Ri9QV1Q1d1hoLzMyQVl1dGdEOThFaS9NNnlTNlJWN0ZaeEZ2ZlA5QXZlWVRLeEYzT0Mrd0RjUHN1VzZMWVlSSEtRdldSc0MyLzNuYUpBaVFidTNVd3FVakFUbmlJa1RLOXYyeEhISTNLYjdIRDdsVi80ak45Q3VHSDZrYkhrKzhUTkoweWxNYTlka0ZYRW9DRlJTL1VZU1U1WDhqTTkzczNFMDJuVEl2d0lHd1krS1NNRDM1MFdBRk5Ydzd0OGQ1anpJWG5UUkhXNzAyRmYrZ29VaW4xczRhZDBOSXpqMWpyN2pEZDJ2MnhDSTQ9",
+        "finalUrl": "https://hotstream.club/m3u/UmhBV0Z4R01PRDdpUm5iRWowL2FNQ2hvcU9yMXBIL01mSHZWc3pMdEpOSVVoWWhiVTBWR05BT3R2VFoxcWE0Ri9QV1Q1d1hoLzMyQVl1dGdEOThFaS9NNnlTNlJWN0ZaeEZ2ZlA5QXZlWVRLeEYzT0Mrd0RjUHN1VzZMWVlSSEtRdldSc0MyLzNuYUpBaVFidTNVd3FVakFUbmlJa1RLOXYyeEhISTNLYjdIRDdsVi80ak45Q3VHSDZrYkhrKzhUTkoweWxNYTlka0ZYRW9DRlJTL1VZU1U1WDhqTTkzczNFMDJuVEl2d0lHd1krS1NNRDM1MFdBRk5Ydzd0OGQ1anpJWG5UUkhXNzAyRmYrZ29VaW4xczRhZDBOSXpqMWpyN2pEZDJ2MnhDSTQ9",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "45a091d2462947a225b8703ac2b63c10a04fe26f88e6a19e30a88076fba4b196.txt",
+        "sha256": "45a091d2462947a225b8703ac2b63c10a04fe26f88e6a19e30a88076fba4b196"
+      },
+      {
+        "method": "GET",
+        "url": "https://seyret8.top/process/WkZrV1VBejFMM01UVlVTbEtKTFduRGtyVzVHL1BxSUNVNjdXUmFwTkJybHhNb0lHaHlNL01CckNlYXBualFGNnJpVERSRStjMmtlenE3ZWIzencrTmllS2gvTVhXVHpvcnlDcUFqZUprbHBHcnVTck9wQVpFZDlWUHlwS3l0R3M=",
+        "finalUrl": "https://seyret8.top/process/WkZrV1VBejFMM01UVlVTbEtKTFduRGtyVzVHL1BxSUNVNjdXUmFwTkJybHhNb0lHaHlNL01CckNlYXBualFGNnJpVERSRStjMmtlenE3ZWIzencrTmllS2gvTVhXVHpvcnlDcUFqZUprbHBHcnVTck9wQVpFZDlWUHlwS3l0R3M=",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "26ba942da29b17411d7a432a62f3f3e007046350a93dffcf6e6e6a3f432a6914.txt",
+        "sha256": "26ba942da29b17411d7a432a62f3f3e007046350a93dffcf6e6e6a3f432a6914"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/m3u/c1IwS1Zqc2Fpa08rekJDaDNScTRveHF6UFZXSVdiRjdWWXh5WnJvRzdWNWU5Y1B1aDhJSUxOekoxRXByYXVvYkxHdmdMRUVFeEpyK2Q3aCtHSW91bVBKMWJtUzd4SGdSVXVhSWhNT0QzYW83bTJHUDFOdjJ1Z3ZXZGphTTZDdWF2QnVVeDljVW91NFNvQjdsYytyZjJ5WVBEUHV1NjhXdVFLQWV2WVVPcFZFMTRPTm9aVFh3RjdGNzZMQzJNL3FERGRCZWN3Z0U5YXRrRWRUZXZXN1dpMmtDemN0c2VXdVVNRjBDR3JIU2NWcFAvellWVkVwL1RVQjd3RkJPM3VtUFF3d1dYdWxydzE5WTI1amUvdmZoNE1EMDU0L3Npb1ZZbnIxN3FNaVRydkE9",
+        "finalUrl": "https://hotstream.club/m3u/c1IwS1Zqc2Fpa08rekJDaDNScTRveHF6UFZXSVdiRjdWWXh5WnJvRzdWNWU5Y1B1aDhJSUxOekoxRXByYXVvYkxHdmdMRUVFeEpyK2Q3aCtHSW91bVBKMWJtUzd4SGdSVXVhSWhNT0QzYW83bTJHUDFOdjJ1Z3ZXZGphTTZDdWF2QnVVeDljVW91NFNvQjdsYytyZjJ5WVBEUHV1NjhXdVFLQWV2WVVPcFZFMTRPTm9aVFh3RjdGNzZMQzJNL3FERGRCZWN3Z0U5YXRrRWRUZXZXN1dpMmtDemN0c2VXdVVNRjBDR3JIU2NWcFAvellWVkVwL1RVQjd3RkJPM3VtUFF3d1dYdWxydzE5WTI1amUvdmZoNE1EMDU0L3Npb1ZZbnIxN3FNaVRydkE9",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "73702a6b830bab7e599027de88ae023fc23c2c4b3af66466a6ffdfbddf9f79d2.txt",
+        "sha256": "73702a6b830bab7e599027de88ae023fc23c2c4b3af66466a6ffdfbddf9f79d2"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "hotstream-page-2-0",
+        "label": "Hotstream 2",
+        "sourcePageUrl": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJY2IxeVRVQ1NiQ2k5N3RmQms4SllscTY0dExPbnR6Z1l2ZWNINUk0KzgvRHNKbll2alBJekQxaStETjZHWGIzMTdPYis3Ym9Dc29qTlQ5d2o2amcxVHBhcUxiK0loSDVaUzNtTEFmL3VIcWJYMEw5anBVejZNR2V2OFAxbEo3OFlnPQ==",
+        "referer": "https://hotstream.club/embed/2D4aKhUYU4uRetO",
+        "userAgent": "Mozilla/5.0",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      },
+      {
+        "id": "hotstream-0",
+        "label": "Hotstream",
+        "sourcePageUrl": "https://filmizle.ink/the-gorge-2025-izle/",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZm5kelFGK05YMWE5Rm9aWTFUbEsxbmlOR3ZsZzExQXJ4ekh3SGZGeEFWU25iQkU1L0kweGxRQi9qVTVrTVJscXp0bmhRU1BhVHpjZHZHUTM4aitvd25QbVJGNlJyd0hORThSOGdoTUNUUmk0STFWbElPai82dmhubkJ0OWhpZWFFPQ==",
+        "referer": "https://hotstream.club/embed/sQyo7YKPCvqGm8r",
+        "userAgent": "Mozilla/5.0",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "hotstream-page-2-0",
+        "label": "Hotstream 2",
+        "pageUrl": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      },
+      {
+        "sourceId": "hotstream-0",
+        "label": "Hotstream",
+        "pageUrl": "https://filmizle.ink/the-gorge-2025-izle/",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "filmizle-gorge",
+    "site": "filmcibaba",
+    "page": "https://filmizle.ink/the-gorge-2025-izle/",
+    "label": "The Gorge — kaynak sayfaları",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:31:47.736Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://filmizle.ink/the-gorge-2025-izle/",
+        "finalUrl": "https://filmizle.ink/the-gorge-2025-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "1e92143be914e0f8f18e3da8e996ab8901cdacc8a2f75535e53f4ce47578e2b0.txt",
+        "sha256": "1e92143be914e0f8f18e3da8e996ab8901cdacc8a2f75535e53f4ce47578e2b0"
+      },
+      {
+        "method": "GET",
+        "url": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "finalUrl": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5a38aad98f76b621a64cbf9268f4be91bb8ed02cce17bcb0610171dcabffb11c.txt",
+        "sha256": "5a38aad98f76b621a64cbf9268f4be91bb8ed02cce17bcb0610171dcabffb11c"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/embed/sQyo7YKPCvqGm8r",
+        "finalUrl": "https://hotstream.club/embed/sQyo7YKPCvqGm8r",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "52c48298586798c79cd44f50d605425fbe1cae32f63dcfdc6931fb94aa3dd316.txt",
+        "sha256": "52c48298586798c79cd44f50d605425fbe1cae32f63dcfdc6931fb94aa3dd316"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZm5kelFGK05YMWE5Rm9aWTFUbEsxbmlOR3ZsZzExQXJ4ekh3SGZGeEFWU25iQkU1L0kweGxRQi9qVTVrTVJscXp0bmhRU1BhVHpjZHZHUTM4aitvd25QbVJGNlJyd0hORThSOGdoTUNUUmk0STFWbElPai82dmhubkJ0OWhpZWFFPQ==",
+        "finalUrl": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZm5kelFGK05YMWE5Rm9aWTFUbEsxbmlOR3ZsZzExQXJ4ekh3SGZGeEFWU25iQkU1L0kweGxRQi9qVTVrTVJscXp0bmhRU1BhVHpjZHZHUTM4aitvd25QbVJGNlJyd0hORThSOGdoTUNUUmk0STFWbElPai82dmhubkJ0OWhpZWFFPQ==",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "de625c7bb2b26ed6839bba13a3dfc1bebda50efd0291804305714dde239ae74e.txt",
+        "sha256": "de625c7bb2b26ed6839bba13a3dfc1bebda50efd0291804305714dde239ae74e"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/embed/2D4aKhUYU4uRetO",
+        "finalUrl": "https://hotstream.club/embed/2D4aKhUYU4uRetO",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "2db146e625b390c8d2f25395556029ea7b7fe7022c5184073382a965d2ea7ed0.txt",
+        "sha256": "2db146e625b390c8d2f25395556029ea7b7fe7022c5184073382a965d2ea7ed0"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJY2IxeVRVQ1NiQ2k5N3RmQms4SllscTY0dExPbnR6Z1l2ZWNINUk0KzgvRHNKbll2alBJekQxaStETjZHWGIzMTdPYis3Ym9Dc29qTlQ5d2o2amcxVHBhcUxiK0loSDVaUzNtTEFmL3VIcWJYMEw5anBVejZNR2V2OFAxbEo3OFlnPQ==",
+        "finalUrl": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJY2IxeVRVQ1NiQ2k5N3RmQms4SllscTY0dExPbnR6Z1l2ZWNINUk0KzgvRHNKbll2alBJekQxaStETjZHWGIzMTdPYis3Ym9Dc29qTlQ5d2o2amcxVHBhcUxiK0loSDVaUzNtTEFmL3VIcWJYMEw5anBVejZNR2V2OFAxbEo3OFlnPQ==",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "5115cbf5bc1c40d255b08e1c67b7d912641bc14fba0f1a0490c94acd434ba878.txt",
+        "sha256": "5115cbf5bc1c40d255b08e1c67b7d912641bc14fba0f1a0490c94acd434ba878"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/m3u/c1IwS1Zqc2Fpa08rekJDaDNScTRveHF6UFZXSVdiRjdWWXh5WnJvRzdWNWU5Y1B1aDhJSUxOekoxRXByYXVvYkxHdmdMRUVFeEpyK2Q3aCtHSW91bVBKMWJtUzd4SGdSVXVhSWhNT0QzYW83bTJHUDFOdjJ1Z3ZXZGphTTZDdWF2QnVVeDljVW91NFNvQjdsYytyZjJ5WVBEUHV1NjhXdVFLQWV2WVVPcFZFMTRPTm9aVFh3RjdGNzZMQzJNL3FERGRCZWN3Z0U5YXRrRWRUZXZXN1dpMmtDemN0c2VXdVVNRjBDR3JIU2NWcFAvellWVkVwL1RVQjd3RkJPM3VtUFF3d1dYdWxydzE5WTI1amUvdmZoNE1EMDU0L3Npb1ZZbnIxN3FNaVRydkE9",
+        "finalUrl": "https://hotstream.club/m3u/c1IwS1Zqc2Fpa08rekJDaDNScTRveHF6UFZXSVdiRjdWWXh5WnJvRzdWNWU5Y1B1aDhJSUxOekoxRXByYXVvYkxHdmdMRUVFeEpyK2Q3aCtHSW91bVBKMWJtUzd4SGdSVXVhSWhNT0QzYW83bTJHUDFOdjJ1Z3ZXZGphTTZDdWF2QnVVeDljVW91NFNvQjdsYytyZjJ5WVBEUHV1NjhXdVFLQWV2WVVPcFZFMTRPTm9aVFh3RjdGNzZMQzJNL3FERGRCZWN3Z0U5YXRrRWRUZXZXN1dpMmtDemN0c2VXdVVNRjBDR3JIU2NWcFAvellWVkVwL1RVQjd3RkJPM3VtUFF3d1dYdWxydzE5WTI1amUvdmZoNE1EMDU0L3Npb1ZZbnIxN3FNaVRydkE9",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "73702a6b830bab7e599027de88ae023fc23c2c4b3af66466a6ffdfbddf9f79d2.txt",
+        "sha256": "73702a6b830bab7e599027de88ae023fc23c2c4b3af66466a6ffdfbddf9f79d2"
+      },
+      {
+        "method": "GET",
+        "url": "https://hotstream.club/m3u/UmhBV0Z4R01PRDdpUm5iRWowL2FNQ2hvcU9yMXBIL01mSHZWc3pMdEpOSVVoWWhiVTBWR05BT3R2VFoxcWE0Ri9QV1Q1d1hoLzMyQVl1dGdEOThFaS9NNnlTNlJWN0ZaeEZ2ZlA5QXZlWVRLeEYzT0Mrd0RjUHN1VzZMWVlSSEtRdldSc0MyLzNuYUpBaVFidTNVd3FVakFUbmlJa1RLOXYyeEhISTNLYjdIRDdsVi80ak45Q3VHSDZrYkhrKzhUTkoweWxNYTlka0ZYRW9DRlJTL1VZU1U1WDhqTTkzczNFMDJuVEl2d0lHd1krS1NNRDM1MFdBRk5Ydzd0OGQ1anpJWG5UUkhXNzAyRmYrZ29VaW4xczRhZDBOSXpqMWpyN2pEZDJ2MnhDSTQ9",
+        "finalUrl": "https://hotstream.club/m3u/UmhBV0Z4R01PRDdpUm5iRWowL2FNQ2hvcU9yMXBIL01mSHZWc3pMdEpOSVVoWWhiVTBWR05BT3R2VFoxcWE0Ri9QV1Q1d1hoLzMyQVl1dGdEOThFaS9NNnlTNlJWN0ZaeEZ2ZlA5QXZlWVRLeEYzT0Mrd0RjUHN1VzZMWVlSSEtRdldSc0MyLzNuYUpBaVFidTNVd3FVakFUbmlJa1RLOXYyeEhISTNLYjdIRDdsVi80ak45Q3VHSDZrYkhrKzhUTkoweWxNYTlka0ZYRW9DRlJTL1VZU1U1WDhqTTkzczNFMDJuVEl2d0lHd1krS1NNRDM1MFdBRk5Ydzd0OGQ1anpJWG5UUkhXNzAyRmYrZ29VaW4xczRhZDBOSXpqMWpyN2pEZDJ2MnhDSTQ9",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "45a091d2462947a225b8703ac2b63c10a04fe26f88e6a19e30a88076fba4b196.txt",
+        "sha256": "45a091d2462947a225b8703ac2b63c10a04fe26f88e6a19e30a88076fba4b196"
+      },
+      {
+        "method": "GET",
+        "url": "https://seyret8.top/process/WkZrV1VBejFMM01UVlVTbEtKTFduRGtyVzVHL1BxSUNVNjdXUmFwTkJybHhNb0lHaHlNL01CckNlYXBualFGNnJpVERSRStjMmtlenE3ZWIzencrTmllS2gvTVhXVHpvcnlDcUFqZUprbHBHcnVTck9wQVpFZDlWUHlwS3l0R3M=",
+        "finalUrl": "https://seyret8.top/process/WkZrV1VBejFMM01UVlVTbEtKTFduRGtyVzVHL1BxSUNVNjdXUmFwTkJybHhNb0lHaHlNL01CckNlYXBualFGNnJpVERSRStjMmtlenE3ZWIzencrTmllS2gvTVhXVHpvcnlDcUFqZUprbHBHcnVTck9wQVpFZDlWUHlwS3l0R3M=",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "26ba942da29b17411d7a432a62f3f3e007046350a93dffcf6e6e6a3f432a6914.txt",
+        "sha256": "26ba942da29b17411d7a432a62f3f3e007046350a93dffcf6e6e6a3f432a6914"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "hotstream-0",
+        "label": "Hotstream",
+        "sourcePageUrl": "https://filmizle.ink/the-gorge-2025-izle/",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJZm5kelFGK05YMWE5Rm9aWTFUbEsxbmlOR3ZsZzExQXJ4ekh3SGZGeEFWU25iQkU1L0kweGxRQi9qVTVrTVJscXp0bmhRU1BhVHpjZHZHUTM4aitvd25QbVJGNlJyd0hORThSOGdoTUNUUmk0STFWbElPai82dmhubkJ0OWhpZWFFPQ==",
+        "referer": "https://hotstream.club/embed/sQyo7YKPCvqGm8r",
+        "userAgent": "Mozilla/5.0",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      },
+      {
+        "id": "hotstream-page-2-0",
+        "label": "Hotstream 2",
+        "sourcePageUrl": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "url": "https://hotstream.club/list/N0VjWTBvb0ppbEo3bUdzeERNL09sNCtqWUVvWS85eDlZb2VEb2s4aWdJY2IxeVRVQ1NiQ2k5N3RmQms4SllscTY0dExPbnR6Z1l2ZWNINUk0KzgvRHNKbll2alBJekQxaStETjZHWGIzMTdPYis3Ym9Dc29qTlQ5d2o2amcxVHBhcUxiK0loSDVaUzNtTEFmL3VIcWJYMEw5anBVejZNR2V2OFAxbEo3OFlnPQ==",
+        "referer": "https://hotstream.club/embed/2D4aKhUYU4uRetO",
+        "userAgent": "Mozilla/5.0",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "hotstream-0",
+        "label": "Hotstream",
+        "pageUrl": "https://filmizle.ink/the-gorge-2025-izle/",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      },
+      {
+        "sourceId": "hotstream-page-2-0",
+        "label": "Hotstream 2",
+        "pageUrl": "https://filmizle.ink/the-gorge-2025-izle/2/",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "filmmakinesi-spider",
+    "site": "filmmakinesi",
+    "page": "https://filmmakinesi.to/film/orumcek-adam-yepyeni-bir-gun-2026-fmfxps/",
+    "label": "Dual Close / Dual Rapidrame",
+    "scope": "BROWSER_METADATA_AND_NODE_RESOLVER",
+    "at": "2026-11-03T07:48:18.257Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://filmmakinesi.to/film/orumcek-adam-yepyeni-bir-gun-2026-fmfxps/",
+        "finalUrl": "https://filmmakinesi.to/film/orumcek-adam-yepyeni-bir-gun-2026-fmfxps/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "a4956e354c2a4c903d6f58d412006d8c606d087c9f72e548912be7f1c50cf412.txt",
+        "sha256": "a4956e354c2a4c903d6f58d412006d8c606d087c9f72e548912be7f1c50cf412"
+      },
+      {
+        "method": "GET",
+        "url": "https://closeload.filmmakinesi.to/video/embed/EWeEdu0Ig0q/?imdb_id=tt22084616",
+        "finalUrl": "https://closeload.filmmakinesi.to/video/embed/EWeEdu0Ig0q/?imdb_id=tt22084616",
+        "code": 403,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "acafce819b32ff64482fabe27b66c47f8ad3cdb0643feb8749d93edf04eb6102.txt",
+        "sha256": "acafce819b32ff64482fabe27b66c47f8ad3cdb0643feb8749d93edf04eb6102"
+      },
+      {
+        "method": "GET",
+        "url": "https://rapid.filmmakinesi.to/embed-rsyi6h14btcs/",
+        "finalUrl": "https://rapid.filmmakinesi.to/embed-rsyi6h14btcs/",
+        "code": 403,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "844d59326ddddc2b83c28af8cca66d64871c2466f1833d218e1b15ca2b09f4d3.txt",
+        "sha256": "844d59326ddddc2b83c28af8cca66d64871c2466f1833d218e1b15ca2b09f4d3"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [],
+    "referenceOptions": [
+      {
+        "sourceId": "filmmakinesi-closeload--video-embed-EWeEdu0Ig0q-",
+        "label": "DUAL Close",
+        "status": "error",
+        "detail": "HTTP 403",
+        "stage": "embed"
+      },
+      {
+        "sourceId": "filmmakinesi-rapid--embed-rsyi6h14btcs-",
+        "label": "DUAL Rapid",
+        "status": "error",
+        "detail": "HTTP 403",
+        "stage": "embed"
+      }
+    ],
+    "referenceError": "HTTP 403"
+  },
+  {
+    "id": "fixfull-poseidon",
+    "site": "fixfullfilmizle",
+    "page": "https://www.fixfullfilmizle.net/poseidondan-kacis-full-hd-film-izle/",
+    "label": "Matrudas / Myplayersvideo / alternatifler",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:34.363Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.fixfullfilmizle.net/poseidondan-kacis-full-hd-film-izle/",
+        "finalUrl": "https://www.fixfullfilmizle.net/poseidondan-kacis-full-hd-film-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "f32ff8a76fa0d912da6368f12b8c2da83674ac4359d15a5992164c5300076b10.txt",
+        "sha256": "f32ff8a76fa0d912da6368f12b8c2da83674ac4359d15a5992164c5300076b10"
+      },
+      {
+        "method": "GET",
+        "url": "https://oynat.fixfullfilmizle.net/url/912dcb7dd52746d40917ed1c6fdb9de5",
+        "finalUrl": "https://oynat.fixfullfilmizle.net/url/912dcb7dd52746d40917ed1c6fdb9de5",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "1acfa422849bd350b0d4794caf81b389f197f5680e240220f36ac677f5804611.txt",
+        "sha256": "1acfa422849bd350b0d4794caf81b389f197f5680e240220f36ac677f5804611"
+      },
+      {
+        "method": "GET",
+        "url": "https://myplayersvideo.xyz/fireplayer/video/0fbce6c74ff376d18cb352e7fdc6273b",
+        "finalUrl": "https://myplayersvideo.xyz/fireplayer/video/0fbce6c74ff376d18cb352e7fdc6273b",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "6873927e573fc0796312d73fc552bc366d267e5be4c1c4c8ad064beaf4162f50.txt",
+        "sha256": "6873927e573fc0796312d73fc552bc366d267e5be4c1c4c8ad064beaf4162f50"
+      },
+      {
+        "method": "POST",
+        "url": "https://myplayersvideo.xyz/fireplayer/video/0fbce6c74ff376d18cb352e7fdc6273b?do=getVideo",
+        "finalUrl": "https://myplayersvideo.xyz/fireplayer/video/0fbce6c74ff376d18cb352e7fdc6273b?do=getVideo",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "2f27ad6d0f5c7e3b6da9c58fddad58c1e65add652cfab09438e88520f3d555c2.txt",
+        "sha256": "2f27ad6d0f5c7e3b6da9c58fddad58c1e65add652cfab09438e88520f3d555c2"
+      },
+      {
+        "method": "GET",
+        "url": "https://matrudas.com/video/4b17d3264fd9070a5be706c853ccd720",
+        "finalUrl": "https://matrudas.com/video/4b17d3264fd9070a5be706c853ccd720",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "8fd3bbe458ac1aa9a5fbd1b51752ed4a9ea46b6d2797202cb8b25f0849bf211d.txt",
+        "sha256": "8fd3bbe458ac1aa9a5fbd1b51752ed4a9ea46b6d2797202cb8b25f0849bf211d"
+      },
+      {
+        "method": "POST",
+        "url": "https://matrudas.com/player/index.php?data=4b17d3264fd9070a5be706c853ccd720&do=getVideo",
+        "finalUrl": "https://matrudas.com/player/index.php?data=4b17d3264fd9070a5be706c853ccd720&do=getVideo",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "67a87837b80678b4e01a136fc45b6cb4098013c6a0c0bfa7eee1b2be94e06188.txt",
+        "sha256": "67a87837b80678b4e01a136fc45b6cb4098013c6a0c0bfa7eee1b2be94e06188"
+      },
+      {
+        "method": "GET",
+        "url": "https://matrudas.com/cdn/hls/aa11e1130ee0f8853059d9474d277434/master.m3u8?md5=15NLbrNmhPwlkH8PP0pfeQ&expires=1793694755",
+        "finalUrl": "https://matrudas.com/cdn/hls/aa11e1130ee0f8853059d9474d277434/master.m3u8?md5=15NLbrNmhPwlkH8PP0pfeQ&expires=1793694755",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "5ff338af54ed17c19c9b5c19d3f3d393161920058d3cea8f7a4f0b163d836713.txt",
+        "sha256": "5ff338af54ed17c19c9b5c19d3f3d393161920058d3cea8f7a4f0b163d836713"
+      },
+      {
+        "method": "GET",
+        "url": "https://oynat.fixfullfilmizle.net/url/7d9b7f6e319f9fa90078c7c61ed9bd19",
+        "finalUrl": "https://oynat.fixfullfilmizle.net/url/7d9b7f6e319f9fa90078c7c61ed9bd19",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "eeb425c5f4ffc3e82496998a569e2343eacbe6232a5e68d37ca408bddc8bb6bc.txt",
+        "sha256": "eeb425c5f4ffc3e82496998a569e2343eacbe6232a5e68d37ca408bddc8bb6bc"
+      },
+      {
+        "method": "GET",
+        "url": "https://myplayersvideo.xyz/fireplayer/video/bd97d45d577a3870b66233f261c60ba2",
+        "finalUrl": "https://myplayersvideo.xyz/fireplayer/video/bd97d45d577a3870b66233f261c60ba2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "8ad49a7e62fcb410858b1470256e227c5ed4756325a6f56855a552fea71c4a57.txt",
+        "sha256": "8ad49a7e62fcb410858b1470256e227c5ed4756325a6f56855a552fea71c4a57"
+      },
+      {
+        "method": "POST",
+        "url": "https://myplayersvideo.xyz/fireplayer/video/bd97d45d577a3870b66233f261c60ba2?do=getVideo",
+        "finalUrl": "https://myplayersvideo.xyz/fireplayer/video/bd97d45d577a3870b66233f261c60ba2?do=getVideo",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "681a5517fec9dd039ea4383c90cdb96ef1083f269801f6d1d7c9db7ad9aef504.txt",
+        "sha256": "681a5517fec9dd039ea4383c90cdb96ef1083f269801f6d1d7c9db7ad9aef504"
+      },
+      {
+        "method": "GET",
+        "url": "https://vevocloud.com/play/index/e66eb43f7c2d2a2dcb3fd186",
+        "finalUrl": "https://vevocloud.com/play/index/e66eb43f7c2d2a2dcb3fd186",
+        "code": 521,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "6134108711b3ea022ac2e5ae0b6110740f8ca6dd17ef3566eb3d7e26a090283d.txt",
+        "sha256": "6134108711b3ea022ac2e5ae0b6110740f8ca6dd17ef3566eb3d7e26a090283d"
+      },
+      {
+        "method": "GET",
+        "url": "https://oynat.fixfullfilmizle.net/url/caec785d9e8e4f690ce7d9a4d37cb677",
+        "finalUrl": "https://oynat.fixfullfilmizle.net/url/caec785d9e8e4f690ce7d9a4d37cb677",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "d895b6092a7edc54c65b8d120b5cfb7a6fa304d2de1cd72d12441373e7d112bc.txt",
+        "sha256": "d895b6092a7edc54c65b8d120b5cfb7a6fa304d2de1cd72d12441373e7d112bc"
+      },
+      {
+        "method": "GET",
+        "url": "https://myplayersvideo.xyz/fireplayer/video/f40723ed94042ea9ea36bfb5ad4157b2",
+        "finalUrl": "https://myplayersvideo.xyz/bronze/index.php?id=https://hexload.com/3dj3wx4fk8sc",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "3e8eb7921e23614b6cb844435fc18947bb6cd68386a766543bdb5c9bff70fb7b.txt",
+        "sha256": "3e8eb7921e23614b6cb844435fc18947bb6cd68386a766543bdb5c9bff70fb7b"
+      },
+      {
+        "method": "GET",
+        "url": "https://ynll3vo5a4qr.drewimplemnt.top/d/gkzpwqloo7hvw4m6xwvij7sot7mcdcy4qlez6kmivb27ov4tbwuwogvc7z7mxghqgp7vqiz5/Poseidondan%20ka%C3%83%C2%A7%C3%84%C2%B1%C3%85%C2%9F%202006%20Filmi%20Full%20izle.mp4",
+        "finalUrl": "https://ynll3vo5a4qr.drewimplemnt.top/d/gkzpwqloo7hvw4m6xwvij7sot7mcdcy4qlez6kmivb27ov4tbwuwogvc7z7mxghqgp7vqiz5/Poseidondan%20ka%C3%83%C2%A7%C3%84%C2%B1%C3%85%C2%9F%202006%20Filmi%20Full%20izle.mp4",
+        "code": 206,
+        "headers": {
+          "Content-Type": "application/octet-stream"
+        },
+        "file": "3359639fbc1c0f5e74408099018613e0207f6b26ec6c173be8ae64482ce07c0f.txt",
+        "sha256": "3359639fbc1c0f5e74408099018613e0207f6b26ec6c173be8ae64482ce07c0f"
+      },
+      {
+        "method": "GET",
+        "url": "https://matrudas.com/hls/dk8rWllMYzBPdUJWcVovajNJZ0UwN2lPak1MUTFSL3BNUGdDWmYxdVhnL0w4R3RGdjZHT2FqVldBeitpZFVabmxVMXI5ejAwQ0s4MVV3Z1daUVpFT0xSakVDQzNJTFdHdmc4MkxLak5qQWdWNUZZQ3lMMUEzSENnVTgzbkJSVW11YUJyREQ3bGh5S3NHRmZEc0NyMjZYdTQ5VzZsUngwVVFCMEV6UTc1RG1jKzh1dlhiai9sc0diTnpkR0xVcFdkTk5yeDgrQWV2L2J2U0lqWkxWYkhjLyttK1M3UHlOUFNDTW5BME5BRC82NWJxRmw2bUlKRUF4V1lpYkIyakwxZnBPTnVlSDREVmpzSmNETzhnNXRrK2xjRzZnODEzVkxUK3dPMDIySUhES289",
+        "finalUrl": "https://matrudas.com/hls/dk8rWllMYzBPdUJWcVovajNJZ0UwN2lPak1MUTFSL3BNUGdDWmYxdVhnL0w4R3RGdjZHT2FqVldBeitpZFVabmxVMXI5ejAwQ0s4MVV3Z1daUVpFT0xSakVDQzNJTFdHdmc4MkxLak5qQWdWNUZZQ3lMMUEzSENnVTgzbkJSVW11YUJyREQ3bGh5S3NHRmZEc0NyMjZYdTQ5VzZsUngwVVFCMEV6UTc1RG1jKzh1dlhiai9sc0diTnpkR0xVcFdkTk5yeDgrQWV2L2J2U0lqWkxWYkhjLyttK1M3UHlOUFNDTW5BME5BRC82NWJxRmw2bUlKRUF4V1lpYkIyakwxZnBPTnVlSDREVmpzSmNETzhnNXRrK2xjRzZnODEzVkxUK3dPMDIySUhES289",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "d0eeab966faa71c24ab1e6c1dd8a56a3a5e6d228bdc05a735203b2e9abd51617.txt",
+        "sha256": "d0eeab966faa71c24ab1e6c1dd8a56a3a5e6d228bdc05a735203b2e9abd51617"
+      },
+      {
+        "method": "GET",
+        "url": "https://artiimage.com/i/K3DgoUyQZgE7wycCCTqa6Qxm8e5H6v1a4gmu3EQNWmKFHyKuKRU5yw50M6TBRAFoVeZuTyzL8nVU27GKGEFAL5xqMof2PxcSaKRWL19gIGQ.js",
+        "finalUrl": "https://artiimage.com/i/K3DgoUyQZgE7wycCCTqa6Qxm8e5H6v1a4gmu3EQNWmKFHyKuKRU5yw50M6TBRAFoVeZuTyzL8nVU27GKGEFAL5xqMof2PxcSaKRWL19gIGQ.js",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/javascript"
+        },
+        "file": "381f0197dfca3dd553a36f8d86c38a8989670a0012098a9633d863128dbf5e85.txt",
+        "sha256": "381f0197dfca3dd553a36f8d86c38a8989670a0012098a9633d863128dbf5e85"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "fixfull-0",
+        "label": "VIDMOLY",
+        "url": "https://matrudas.com/cdn/hls/aa11e1130ee0f8853059d9474d277434/master.m3u8?md5=15NLbrNmhPwlkH8PP0pfeQ&expires=1793694755",
+        "referer": "https://matrudas.com/video/4b17d3264fd9070a5be706c853ccd720",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0",
+        "type": "hls",
+        "preferredEngine": null,
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "order": 0
+      },
+      {
+        "id": "fixfull-2",
+        "label": "BRONZ",
+        "url": "https://ynll3vo5a4qr.drewimplemnt.top/d/gkzpwqloo7hvw4m6xwvij7sot7mcdcy4qlez6kmivb27ov4tbwuwogvc7z7mxghqgp7vqiz5/Poseidondan%20ka%C3%83%C2%A7%C3%84%C2%B1%C3%85%C2%9F%202006%20Filmi%20Full%20izle.mp4",
+        "referer": "https://myplayersvideo.xyz/fireplayer/video/f40723ed94042ea9ea36bfb5ad4157b2",
+        "type": "mp4",
+        "mp4Verified": false,
+        "engineSupport": {
+          "html5": "failed",
+          "avplay": "unknown"
+        },
+        "validation": {
+          "http": "verified"
+        },
+        "subtitles": [],
+        "order": 2
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "fixfull-0",
+        "label": "VIDMOLY",
+        "pageUrl": "https://www.fixfullfilmizle.net/poseidondan-kacis-full-hd-film-izle/",
+        "status": "ready",
+        "stage": "",
+        "detail": "HLS erişimi doğrulandı"
+      },
+      {
+        "sourceId": "fixfull-1",
+        "label": "FASTM",
+        "pageUrl": "https://www.fixfullfilmizle.net/poseidondan-kacis-full-hd-film-izle/",
+        "status": "error",
+        "stage": "host",
+        "detail": "HTTP 521"
+      },
+      {
+        "sourceId": "fixfull-2",
+        "label": "BRONZ",
+        "pageUrl": "https://www.fixfullfilmizle.net/poseidondan-kacis-full-hd-film-izle/",
+        "status": "candidate",
+        "stage": "",
+        "detail": "Aktif MP4 adayı; HTML5 hazırlığı doğrulanmadı, uygun motorla sınanacak"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "fullhd-arif",
+    "site": "fullhdfilmizlesene",
+    "page": "https://www.fullhdfilmizlesene.now/film/arif-v-216/",
+    "label": "Rapidvid.net",
+    "scope": "BROWSER_METADATA_AND_NODE_RESOLVER",
+    "at": "2026-11-03T07:48:19.506Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.fullhdfilmizlesene.now/film/arif-v-216/",
+        "finalUrl": "https://www.fullhdfilmizlesene.now/film/arif-v-216/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "41ff109042c315b7f6bd48d36e083b545ee54cb031c2b53879d1b4a4ad589a5b.txt",
+        "sha256": "41ff109042c315b7f6bd48d36e083b545ee54cb031c2b53879d1b4a4ad589a5b"
+      },
+      {
+        "method": "GET",
+        "url": "https://rapidvid.net/vod/v1x31b83899",
+        "finalUrl": "https://rapidvid.net/vod/v1x31b83899",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "8f6efc410f8fe1ec107e2789e0702c1fbd4995f152fe5717ccbdd3996cfd185a.txt",
+        "sha256": "8f6efc410f8fe1ec107e2789e0702c1fbd4995f152fe5717ccbdd3996cfd185a"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "fullhdfilmizlesene-atom",
+        "label": "Atom",
+        "url": "https://s19.static6737.shop/m2/DKWcMv5JYwVkAv4lZQR4YyqSDv1RGP4kZQtjpNd0zxp3EuqTywAwpmAl5mnT9js0xi19vr1",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://rapidvid.net/vod/v1x31b83899",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [
+          {
+            "url": "https://subs.rapidvid.org/31b83899/6cbb8291d9ff58c5/1.vtt",
+            "label": "Türkçe Altyazı",
+            "language": "",
+            "format": "vtt"
+          }
+        ],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "fullhdfilmizlesene-atom",
+        "label": "Atom",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "fullhd-queen",
+    "site": "fullhdfilmizlesene",
+    "page": "https://www.fullhdfilmizlesene.now/film/ringlerin-kralicesi-queen-of-the-ring/",
+    "label": "Rapidvid.org",
+    "scope": "BROWSER_METADATA_AND_NODE_RESOLVER",
+    "at": "2026-11-03T07:48:18.555Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.fullhdfilmizlesene.now/film/ringlerin-kralicesi-queen-of-the-ring/",
+        "finalUrl": "https://www.fullhdfilmizlesene.now/film/ringlerin-kralicesi-queen-of-the-ring/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "3aa69796fa78e4a11e0baa2d19217b591bb4a4f02e6b1b98133c561475c6082f.txt",
+        "sha256": "3aa69796fa78e4a11e0baa2d19217b591bb4a4f02e6b1b98133c561475c6082f"
+      },
+      {
+        "method": "GET",
+        "url": "https://rapidvid.org/vx/v1x374e1a89",
+        "finalUrl": "https://rapidvid.org/vx/v1x374e1a89",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "94d32790a1f26bdff9580da9610d0baef1e7567aaef7fb19c3ed2a278c3d4b0d.txt",
+        "sha256": "94d32790a1f26bdff9580da9610d0baef1e7567aaef7fb19c3ed2a278c3d4b0d"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "fullhdfilmizlesene-atom",
+        "label": "Atom",
+        "url": "https://s48.cdnimg1865.shop/md/HKIyMJ4ho2LhqTuyYyWcozphZwNlAP5KEHVgERjhZGN4ZUNhESIOGP5VYwV2AP1VER0d0zxL2EhnJ1aZGt2AF5mnT9js0xi48vr1",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://rapidvid.org/vx/v1x374e1a89",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [
+          {
+            "id": "atom-sub-0",
+            "url": "https://subs.rapidvid.org/374e1a89/a9676ae560ccea64/1.vtt",
+            "label": "Türkçe Altyazı",
+            "language": "",
+            "format": "vtt"
+          },
+          {
+            "id": "atom-sub-1",
+            "url": "https://subs.rapidvid.org/374e1a89/a9676ae560ccea64/2.vtt",
+            "label": "Forced",
+            "language": "",
+            "format": "vtt"
+          }
+        ],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "fullhdfilmizlesene-atom",
+        "label": "Atom",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "hdf-disclosure",
+    "site": "hdfilmcehennemi",
+    "page": "https://www.hdfilmcehennemi.nl/disclosure-day/",
+    "label": "Close / Rapidrame",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:43.230Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://www.hdfilmcehennemi.nl/disclosure-day/",
+        "finalUrl": "https://www.hdfilmcehennemi.nl/disclosure-day/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "file": "dd5a6490f4939c1757b90f9d023125ba0b525ca07c756857ee4808bfc0e9dcac.txt",
+        "sha256": "dd5a6490f4939c1757b90f9d023125ba0b525ca07c756857ee4808bfc0e9dcac"
+      },
+      {
+        "method": "GET",
+        "url": "https://hdfilmcehennemi.mobi/video/embed/MoDEXaHfsVY/?rapidrame_id=dc6xkw7mtjf0",
+        "finalUrl": "https://hdfilmcehennemi.mobi/video/embed/MoDEXaHfsVY/?rapidrame_id=dc6xkw7mtjf0",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "dd8c5ef44e4058064dc47d12951c6761436c94d24f29f87a03e8db56d4422798.txt",
+        "sha256": "dd8c5ef44e4058064dc47d12951c6761436c94d24f29f87a03e8db56d4422798"
+      },
+      {
+        "method": "GET",
+        "url": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/master.txt?s=AY2_PMWA8dwJ8XH1jQIgJC0QiaA2PkSU20gH6EUAOHdjBAszd3OdNdnF",
+        "finalUrl": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/master.txt?s=AY2_PMWA8dwJ8XH1jQIgJC0QiaA2PkSU20gH6EUAOHdjBAszd3OdNdnF",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "7bb76024faa89286113936b43bd3f1c553de55d0bfb8a633418090842ba53045.txt",
+        "sha256": "7bb76024faa89286113936b43bd3f1c553de55d0bfb8a633418090842ba53045"
+      },
+      {
+        "method": "GET",
+        "url": "https://hdfilmcehennemi.mobi/video/embed/MoDEXaHfsVY/?rapidrame_id=319189",
+        "finalUrl": "https://hdfilmcehennemi.mobi/video/embed/MoDEXaHfsVY/?rapidrame_id=319189",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "73c0750659236f456bfa49fb73df64b687ccfc17935ed4c34f6255bc8c8e53c7.txt",
+        "sha256": "73c0750659236f456bfa49fb73df64b687ccfc17935ed4c34f6255bc8c8e53c7"
+      },
+      {
+        "method": "GET",
+        "url": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/master.txt?s=AUhHR6EQi89UQEptYOyQ2ECoFEp2Ph3VQWCfh3JV4YuebqA9PxiQDztd",
+        "finalUrl": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/master.txt?s=AUhHR6EQi89UQEptYOyQ2ECoFEp2Ph3VQWCfh3JV4YuebqA9PxiQDztd",
+        "code": 404,
+        "headers": {
+          "Content-Type": "text/html"
+        },
+        "file": "f33c27745f2bd87344be790465ef984a972fd539dc83bd4f61d4242c607ef1ee.txt",
+        "sha256": "f33c27745f2bd87344be790465ef984a972fd539dc83bd4f61d4242c607ef1ee"
+      },
+      {
+        "method": "GET",
+        "url": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/sublist_2.txt",
+        "finalUrl": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/sublist_2.txt",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "89efdc7f7d9fb48c5f68fa1d9722cdc07bbd9ac082ed23482c879f1713f20a54.txt",
+        "sha256": "89efdc7f7d9fb48c5f68fa1d9722cdc07bbd9ac082ed23482c879f1713f20a54"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "close-0",
+        "label": "Close",
+        "name": "Close",
+        "url": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/master.txt?s=AY2_PMWA8dwJ8XH1jQIgJC0QiaA2PkSU20gH6EUAOHdjBAszd3OdNdnF",
+        "type": "hls",
+        "quality": null,
+        "referer": "https://hdfilmcehennemi.mobi/",
+        "subtitles": [
+          {
+            "id": "hdfc-0",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-en-os12656569-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "English",
+            "lang": "en",
+            "default": false
+          },
+          {
+            "id": "hdfc-1",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-tur-disclosureday-2026-bluray-trdual-tt15047880_subtitles01.tur.vtt",
+            "label": "Forced",
+            "lang": "und",
+            "default": false
+          },
+          {
+            "id": "hdfc-2",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-fr-os12676164-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "French",
+            "lang": "fr",
+            "default": false
+          },
+          {
+            "id": "hdfc-3",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/10/MoDEXaHfsVY-ger-disclosureday-2026-webdl-tt15047880_subtitles02.ger-k133876.vtt",
+            "label": "German",
+            "lang": "de",
+            "default": false
+          },
+          {
+            "id": "hdfc-4",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-pt-os12676717-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "Portuguese",
+            "lang": "pt",
+            "default": false
+          },
+          {
+            "id": "hdfc-5",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-es-os12675899-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "Spanish",
+            "lang": "es",
+            "default": false
+          },
+          {
+            "id": "hdfc-6",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-tur-disclosureday-2026-bluray-trdual-tt15047880_subtitles02.tur.vtt",
+            "label": "Turkish",
+            "lang": "tr",
+            "default": true
+          }
+        ],
+        "status": "ready",
+        "playlist": true,
+        "transport": "native"
+      },
+      {
+        "id": "rapidrame-1",
+        "label": "Rapidrame",
+        "name": "Rapidrame",
+        "url": "https://srv10.cdnimages102.cyou/hls/disclosureday-2026-bluray-trdual-tt15047880mp4-MoDEXaHfsVY.mp4/txt/master.txt?s=AUhHR6EQi89UQEptYOyQ2ECoFEp2Ph3VQWCfh3JV4YuebqA9PxiQDztd",
+        "type": "hls",
+        "quality": null,
+        "referer": "https://www.hdfilmcehennemi.nl/",
+        "subtitles": [
+          {
+            "id": "hdfc-0",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-en-os12656569-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "English",
+            "lang": "en",
+            "default": false
+          },
+          {
+            "id": "hdfc-1",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-tur-disclosureday-2026-bluray-trdual-tt15047880_subtitles01.tur.vtt",
+            "label": "Forced",
+            "lang": "und",
+            "default": false
+          },
+          {
+            "id": "hdfc-2",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-fr-os12676164-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "French",
+            "lang": "fr",
+            "default": false
+          },
+          {
+            "id": "hdfc-3",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/10/MoDEXaHfsVY-ger-disclosureday-2026-webdl-tt15047880_subtitles02.ger-k133876.vtt",
+            "label": "German",
+            "lang": "de",
+            "default": false
+          },
+          {
+            "id": "hdfc-4",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-pt-os12676717-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "Portuguese",
+            "lang": "pt",
+            "default": false
+          },
+          {
+            "id": "hdfc-5",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-es-os12675899-disclosureday2026bluraytrdualtt15047880m.vtt",
+            "label": "Spanish",
+            "lang": "es",
+            "default": false
+          },
+          {
+            "id": "hdfc-6",
+            "url": "https://hdfilmcehennemi.mobi/vtt/2026/08/MoDEXaHfsVY-tur-disclosureday-2026-bluray-trdual-tt15047880_subtitles02.tur.vtt",
+            "label": "Turkish",
+            "lang": "tr",
+            "default": true
+          }
+        ],
+        "status": "unverified"
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "close-0",
+        "label": "Close",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      },
+      {
+        "sourceId": "rapidrame-1",
+        "label": "Rapidrame",
+        "status": "candidate",
+        "detail": "Yayın listesi doğrulanamadı; oynatılırken sınanır."
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "hell-spider",
+    "site": "filmizlehell",
+    "page": "https://filmizlehell.net/film/3730-orumcek-adam-yepyeni-bir-gun-jg6-izle",
+    "label": "Playturka",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:04.230Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://filmizlehell.net/film/3730-orumcek-adam-yepyeni-bir-gun-jg6-izle",
+        "finalUrl": "https://filmizlehell.net/film/3730-orumcek-adam-yepyeni-bir-gun-jg6-izle",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "f9f9ac5a3e9864f588de8bd9309b823a7490cc34a63e09b0aabee86dc3596acf.txt",
+        "sha256": "f9f9ac5a3e9864f588de8bd9309b823a7490cc34a63e09b0aabee86dc3596acf"
+      },
+      {
+        "method": "GET",
+        "url": "https://p.playturka.space/api/video-url?id=ehrQP75",
+        "finalUrl": "https://p.playturka.space/api/video-url?id=ehrQP75",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "file": "376d3a1025d9956770853552c6f61dafc49d384bf00094d396bb2122ce0447e1.txt",
+        "sha256": "376d3a1025d9956770853552c6f61dafc49d384bf00094d396bb2122ce0447e1"
+      },
+      {
+        "method": "GET",
+        "url": "https://p.playturka.space/videos/ehrQP75/master.m3u8?token=mywFaZyJBC77ODC1_7tRrg&exp=1793701924&v=1791228560",
+        "finalUrl": "https://p.playturka.space/videos/ehrQP75/master.m3u8?token=mywFaZyJBC77ODC1_7tRrg&exp=1793701924&v=1791228560",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "f90d639fe29d13526511c52e30b1479b7f8fddf8598f5b5c38d3e8d98e1c6cef.txt",
+        "sha256": "f90d639fe29d13526511c52e30b1479b7f8fddf8598f5b5c38d3e8d98e1c6cef"
+      },
+      {
+        "method": "GET",
+        "url": "https://p.playturka.space/videos/ehrQP75/playlist_min.m3u8",
+        "finalUrl": "https://p.playturka.space/videos/ehrQP75/playlist_min.m3u8",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "a104cf49e91672af299c106a9f1d90b79990f5bce61ffc3b036ead5484b3e38e.txt",
+        "sha256": "a104cf49e91672af299c106a9f1d90b79990f5bce61ffc3b036ead5484b3e38e"
+      },
+      {
+        "method": "GET",
+        "url": "https://n.sharemedia.space/p2p/videos/ehrQP75/min-ehrQP75/media_0000.png",
+        "finalUrl": "https://n.sharemedia.space/p2p/videos/ehrQP75/min-ehrQP75/media_0000.png",
+        "code": 200,
+        "headers": {
+          "Content-Type": "video/mp4"
+        },
+        "file": "3609ee40e4bd994bb54e801eb13846761d9897a529af210b6dab70ad08dcd616.txt",
+        "sha256": "3609ee40e4bd994bb54e801eb13846761d9897a529af210b6dab70ad08dcd616"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "filmizlehell-ehrQP75",
+        "label": "PlayTurka",
+        "url": "https://p.playturka.space/videos/ehrQP75/master.m3u8?token=mywFaZyJBC77ODC1_7tRrg&exp=1793701924&v=1791228560",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://p.playturka.space/#ehrQP75",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "filmizlehell-ehrQP75",
+        "label": "PlayTurka",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "love-gorunmez",
+    "site": "lovefilmizle",
+    "page": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/4/",
+    "label": "Görünmez Çocuk /4/",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T07:16:03.156Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/4/",
+        "finalUrl": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/4/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "404fd4fef33b80f39f0d0e432d8d351e77cbee61a1d0aa1221cf8d9d60887ca8.txt",
+        "sha256": "404fd4fef33b80f39f0d0e432d8d351e77cbee61a1d0aa1221cf8d9d60887ca8"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-f36g507oya1f.html&filmadi=GorunmezCocuk:IkinciNesil",
+        "finalUrl": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-f36g507oya1f.html&filmadi=GorunmezCocuk:IkinciNesil",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "ac7effc952db03836d0f7caed4d97c718811f4a9fb01a93bbcef35d8ab19e027.txt",
+        "sha256": "ac7effc952db03836d0f7caed4d97c718811f4a9fb01a93bbcef35d8ab19e027"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.net/embed-f36g507oya1f.html",
+        "finalUrl": "https://vidmoly.biz/embed-f36g507oya1f.html",
+        "code": 404,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "cd86475babf2f0bfc4ee191b9e50067eab2f276b18d6d0323ed790074315db66.txt",
+        "sha256": "cd86475babf2f0bfc4ee191b9e50067eab2f276b18d6d0323ed790074315db66"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/",
+        "finalUrl": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "7e1244b18f6d9acf7e129211338e8676287e9d02a8fce5a5fa812c0ffd84cfac.txt",
+        "sha256": "7e1244b18f6d9acf7e129211338e8676287e9d02a8fce5a5fa812c0ffd84cfac"
+      },
+      {
+        "method": "GET",
+        "url": "https://odnoklassniki.ru/videoembed/7711281711697",
+        "finalUrl": "https://ok.ru/videoembed/7711281711697",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "30408d0c680b8c4aeb237ff883d67df58eb89dd90aaf3b6f8fbac0606127d2ad.txt",
+        "sha256": "30408d0c680b8c4aeb237ff883d67df58eb89dd90aaf3b6f8fbac0606127d2ad"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd196.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776564836&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=95.163.35.41&type=2&sig=nYa_Y80PHiw&ct=8&urls=176.112.172.39&clientType=0&id=8198166743792",
+        "finalUrl": "https://vd196.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776564836&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=95.163.35.41&type=2&sig=nYa_Y80PHiw&ct=8&urls=176.112.172.39&clientType=0&id=8198166743792",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "06e63aff65025e6d4341c7217215f90a4c125a17733d69a272d942c29a46cae4.txt",
+        "sha256": "06e63aff65025e6d4341c7217215f90a4c125a17733d69a272d942c29a46cae4"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/2/",
+        "finalUrl": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/2/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5c05e04786624cd33ffcf10d765729d654f2d8d97bd34e2178391379ed5ed26f.txt",
+        "sha256": "5c05e04786624cd33ffcf10d765729d654f2d8d97bd34e2178391379ed5ed26f"
+      },
+      {
+        "method": "GET",
+        "url": "https://my.mail.ru/video/embed/9197363450076987466",
+        "finalUrl": "https://my.mail.ru/video/embed/9197363450076987466",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "39d7ca294eb85e2c5df7323604394a94768b11d08ab6350f99c0f231a224a889.txt",
+        "sha256": "39d7ca294eb85e2c5df7323604394a94768b11d08ab6350f99c0f231a224a889"
+      },
+      {
+        "method": "GET",
+        "url": "https://my.mail.ru/+/video/meta/9197363450076987466",
+        "finalUrl": "https://my.mail.ru/+/video/meta/9197363450076987466",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "file": "d074b38cbd4b4cce2c98be6aa919755f7c8563bc189c71ff5ecc607e1b12a582.txt",
+        "sha256": "d074b38cbd4b4cce2c98be6aa919755f7c8563bc189c71ff5ecc607e1b12a582"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/3/",
+        "finalUrl": "https://lovefilmizle.net/gorunmez-cocuk-ikinci-nesil-izle/3/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5b33ea9ff4aed0d4e7fda359836ebc1601f0aec70f60de3db0d68fc8dff37fde.txt",
+        "sha256": "5b33ea9ff4aed0d4e7fda359836ebc1601f0aec70f60de3db0d68fc8dff37fde"
+      },
+      {
+        "method": "GET",
+        "url": "https://ok.ru/videoembed/1349762222726",
+        "finalUrl": "https://ok.ru/videoembed/1349762222726",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "00de42282cc6357f7727658bd4784e4d2a7f15fa67e6523e71e2b3e9ba57546a.txt",
+        "sha256": "00de42282cc6357f7727658bd4784e4d2a7f15fa67e6523e71e2b3e9ba57546a"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776567640&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=VEqmsaaycOM&ct=8&urls=95.163.35.41&clientType=0&id=623860517510",
+        "finalUrl": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776567640&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=VEqmsaaycOM&ct=8&urls=95.163.35.41&clientType=0&id=623860517510",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "b54786471567b4dc7c3f564c363da59b79fe7875b6f8e953fa6439657d4de53f.txt",
+        "sha256": "b54786471567b4dc7c3f564c363da59b79fe7875b6f8e953fa6439657d4de53f"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd196.okcdn.ru/expires/1793776564836/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/95.163.35.41/type/2/sig/nYa_Y80PHiw/ct/8/urls/176.112.172.39/clientType/0/id/8198166743792/video/",
+        "finalUrl": "https://vd196.okcdn.ru/expires/1793776564836/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/95.163.35.41/type/2/sig/nYa_Y80PHiw/ct/8/urls/176.112.172.39/clientType/0/id/8198166743792/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "5223e11e93f1f30b08134c889b75f3985cc1257efce78347fe4d3c1cd80444f6.txt",
+        "sha256": "5223e11e93f1f30b08134c889b75f3985cc1257efce78347fe4d3c1cd80444f6"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd423.okcdn.ru/expires/1793776567640/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/178.237.23.39/type/2/sig/VEqmsaaycOM/ct/8/urls/95.163.35.41/clientType/0/id/623860517510/video/",
+        "finalUrl": "https://vd423.okcdn.ru/expires/1793776567640/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/178.237.23.39/type/2/sig/VEqmsaaycOM/ct/8/urls/95.163.35.41/clientType/0/id/623860517510/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "7962baf4d2e764980e4d4f06f334081f9a4d5fedecd62bac4231764ebda6ddcd.txt",
+        "sha256": "7962baf4d2e764980e4d4f06f334081f9a4d5fedecd62bac4231764ebda6ddcd"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "lovefilmizle-page-1",
+        "label": "FilmOk",
+        "url": "https://vd196.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776564836&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=95.163.35.41&type=2&sig=nYa_Y80PHiw&ct=8&urls=176.112.172.39&clientType=0&id=8198166743792",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://odnoklassniki.ru/videoembed/7711281711697",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-2",
+        "label": "FilmRu",
+        "url": "https://cdn59.my.mail.ru/v/68860745.mp4?slave[]=s%3Ahttp%3A%2F%2F10.146.243.4%3A9090%2Fvideo4%2F68860745-v&p=f&video_key=b72c133c28b5b401eb55c4cacdfaf5adefb6a819&expire_at=1793703600&touch=1574405983&reg=76&sign=1ee1cca5077ba896541f8f99ec0c439ba446ce80",
+        "type": "mp4",
+        "status": "candidate",
+        "referer": "https://my.mail.ru/video/embed/9197363450076987466",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-3",
+        "label": "FilmOk2",
+        "url": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776567640&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=VEqmsaaycOM&ct=8&urls=95.163.35.41&clientType=0&id=623860517510",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://ok.ru/videoembed/1349762222726",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "lovefilmizle-page-4",
+        "label": "FilmMl",
+        "status": "error",
+        "detail": "HTTP 404",
+        "stage": "embed"
+      },
+      {
+        "sourceId": "lovefilmizle-page-1",
+        "label": "FilmOk",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-2",
+        "label": "FilmRu",
+        "status": "candidate",
+        "detail": "MP4 medya motorunda sınanacak",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-3",
+        "label": "FilmOk2",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "love-goster",
+    "site": "lovefilmizle",
+    "page": "https://lovefilmizle.net/goster-gununu-2-izle/8/",
+    "label": "Göster Gününü 2 /8/",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T07:16:11.373Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/8/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/8/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "a9be40e4f2125e30d6106a76ca3350ae94a13893262565ab22b8cb273dd0cf29.txt",
+        "sha256": "a9be40e4f2125e30d6106a76ca3350ae94a13893262565ab22b8cb273dd0cf29"
+      },
+      {
+        "method": "GET",
+        "url": "https://videoseyred.in/embed/281524",
+        "finalUrl": "https://videoseyred.in/embed/281524",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5d53952d8e856ce1dba7bec971d8a9b99c55ad0f2596aa7723f2e933e9380d41.txt",
+        "sha256": "5d53952d8e856ce1dba7bec971d8a9b99c55ad0f2596aa7723f2e933e9380d41"
+      },
+      {
+        "method": "GET",
+        "url": "https://videoseyred.in/playlist/281524.json",
+        "finalUrl": "https://videoseyred.in/playlist/281524.json",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/json; charset=utf-8"
+        },
+        "file": "640360e88681ea9155834b07f75b0d467f01212d5788ae57cabda9f4c03bd8cc.txt",
+        "sha256": "640360e88681ea9155834b07f75b0d467f01212d5788ae57cabda9f4c03bd8cc"
+      },
+      {
+        "method": "GET",
+        "url": "https://sithmanifest.com/enCoder/filmler/kick-ass-2/master/manifest.m3u8",
+        "finalUrl": "https://sithmanifest.com/enCoder/filmler/kick-ass-2/master/manifest.m3u8",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "11c209b1a71867dd276540d371f0816a0847b89b5941c51d3116288d5dd0ceb0.txt",
+        "sha256": "11c209b1a71867dd276540d371f0816a0847b89b5941c51d3116288d5dd0ceb0"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "dcf2f350019190d2585b2ca5ee99b6a3c1faff343af546eb9c2d3cd458ce9a84.txt",
+        "sha256": "dcf2f350019190d2585b2ca5ee99b6a3c1faff343af546eb9c2d3cd458ce9a84"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-szjpmoedem3y.html&filmadi=GosterGununu2",
+        "finalUrl": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-szjpmoedem3y.html&filmadi=GosterGununu2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "f756c5be1de454bcf7c3efc9c4ad72571c7907287e4cf6c7b61421389bce9ec6.txt",
+        "sha256": "f756c5be1de454bcf7c3efc9c4ad72571c7907287e4cf6c7b61421389bce9ec6"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.net/embed-szjpmoedem3y.html",
+        "finalUrl": "https://vidmoly.biz/embed-szjpmoedem3y.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "03020b16cbd82b63fbb50461e504b3c4e29888414f37ac91867494a7f89bba6e.txt",
+        "sha256": "03020b16cbd82b63fbb50461e504b3c4e29888414f37ac91867494a7f89bba6e"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_,n,l,.urlset/master.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_,n,l,.urlset/master.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "29eaa631b39ea9b9b4ef598e51c0f405de3136b18159f0fcafa7a6c3b84378e3.txt",
+        "sha256": "29eaa631b39ea9b9b4ef598e51c0f405de3136b18159f0fcafa7a6c3b84378e3"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/2/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/2/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "96cb67859961a18883f11026f093b0c4a6023b9cdfc6f870e38ebd6366c69cfa.txt",
+        "sha256": "96cb67859961a18883f11026f093b0c4a6023b9cdfc6f870e38ebd6366c69cfa"
+      },
+      {
+        "method": "GET",
+        "url": "https://odnoklassniki.ru/videoembed/84561889979",
+        "finalUrl": "https://ok.ru/videoembed/84561889979",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "9ab00b1ed233c6419085bdc20cfbb2c5c7dff5dcd81bc802ee7c9b09c00a4b0f.txt",
+        "sha256": "9ab00b1ed233c6419085bdc20cfbb2c5c7dff5dcd81bc802ee7c9b09c00a4b0f"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776574776&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=2LcBe25j7s0&ct=8&urls=95.163.35.41&clientType=0&id=8203713776371",
+        "finalUrl": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776574776&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=2LcBe25j7s0&ct=8&urls=95.163.35.41&clientType=0&id=8203713776371",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "f9cf80ab0e665e4029d74e32778a27cd8bd3098fa699316b45a2274d724f0b7e.txt",
+        "sha256": "f9cf80ab0e665e4029d74e32778a27cd8bd3098fa699316b45a2274d724f0b7e"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/3/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/3/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "abe47f07d61dc23d9947c132c4dde8e37f293340bd84c6f035c6d008b6b61e3e.txt",
+        "sha256": "abe47f07d61dc23d9947c132c4dde8e37f293340bd84c6f035c6d008b6b61e3e"
+      },
+      {
+        "method": "GET",
+        "url": "https://ok.ru/videoembed/514381908544",
+        "finalUrl": "https://ok.ru/videoembed/514381908544",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "baf391f9652b3c807edf5f7dbe2711ab48162642e366e8cf92111fc64dcedb20.txt",
+        "sha256": "baf391f9652b3c807edf5f7dbe2711ab48162642e366e8cf92111fc64dcedb20"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776575461&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=X10NuBIU0H0&ct=8&urls=176.112.172.39&clientType=0&id=365742262848",
+        "finalUrl": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776575461&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=X10NuBIU0H0&ct=8&urls=176.112.172.39&clientType=0&id=365742262848",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "86049032b1b4570946d66ce31cc28485f5200be05d05b63a36fe16f95516c7d6.txt",
+        "sha256": "86049032b1b4570946d66ce31cc28485f5200be05d05b63a36fe16f95516c7d6"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/4/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/4/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "5575fdee2bb091fa2c9fb01a9ea12d756acafce9c3020ba680ccdc5f94cb0f50.txt",
+        "sha256": "5575fdee2bb091fa2c9fb01a9ea12d756acafce9c3020ba680ccdc5f94cb0f50"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-umxgbxk82xkn.html&filmadi=GosterGununu2",
+        "finalUrl": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-umxgbxk82xkn.html&filmadi=GosterGununu2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "9ba9f37c61e839ab4c1dfcfcdcd0b4ec2d613eaa35649ab45c4d0b48a12d9dfe.txt",
+        "sha256": "9ba9f37c61e839ab4c1dfcfcdcd0b4ec2d613eaa35649ab45c4d0b48a12d9dfe"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.net/embed-umxgbxk82xkn.html",
+        "finalUrl": "https://vidmoly.biz/embed-umxgbxk82xkn.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "2e83e9ada652539f1a222265fd76d2472139ed91560c459b5f18bfd79077e06c.txt",
+        "sha256": "2e83e9ada652539f1a222265fd76d2472139ed91560c459b5f18bfd79077e06c"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/5/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/5/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "46efec1e644470a340fe847aee966ef314b9d7262bcb34e47bed9a3e76b8f81c.txt",
+        "sha256": "46efec1e644470a340fe847aee966ef314b9d7262bcb34e47bed9a3e76b8f81c"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-0n3jg8qfiqew.html&filmadi=GosterGununu2",
+        "finalUrl": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-0n3jg8qfiqew.html&filmadi=GosterGununu2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "2e61194e513a02cf26c8ff8f9567ac21af4f86c12f0b47fda2a7c5e290f8a7c6.txt",
+        "sha256": "2e61194e513a02cf26c8ff8f9567ac21af4f86c12f0b47fda2a7c5e290f8a7c6"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.net/embed-0n3jg8qfiqew.html",
+        "finalUrl": "https://vidmoly.biz/embed-0n3jg8qfiqew.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "5641d6584285e4c4b389aea52d56e0bc8b270b7ba561ee97b5e44891c8142a03.txt",
+        "sha256": "5641d6584285e4c4b389aea52d56e0bc8b270b7ba561ee97b5e44891c8142a03"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1560-ant-t.vmpx.online/hls2/02/00449/0n3jg8qfiqew_n/master.m3u8?t=CvH0VffKsxot5Mm1YPDAuy_hX3FJ_WwXQu60gE5Ek9A=&s=1793690177&e=43200&v=&srv=box-c-o-l-10&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1560-ant-t.vmpx.online/hls2/02/00449/0n3jg8qfiqew_n/master.m3u8?t=CvH0VffKsxot5Mm1YPDAuy_hX3FJ_WwXQu60gE5Ek9A=&s=1793690177&e=43200&v=&srv=box-c-o-l-10&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "40d98237505e041c68b2c7de1a3dd7e43874c1728813e93ba8b31073fdebc24c.txt",
+        "sha256": "40d98237505e041c68b2c7de1a3dd7e43874c1728813e93ba8b31073fdebc24c"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/6/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/6/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "a703930744588de740caeee05b0a153d3dc613938f7c9f1185e32776bb958f06.txt",
+        "sha256": "a703930744588de740caeee05b0a153d3dc613938f7c9f1185e32776bb958f06"
+      },
+      {
+        "method": "GET",
+        "url": "https://odnoklassniki.ru/videoembed/84549241531",
+        "finalUrl": "https://ok.ru/videoembed/84549241531",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "f5b66351337271de696372e8c5980f8f52239ca7fee5ea778dd58e5bc31ab5ef.txt",
+        "sha256": "f5b66351337271de696372e8c5980f8f52239ca7fee5ea778dd58e5bc31ab5ef"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd1.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776577895&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=176.112.172.39&type=2&sig=TEyq-tJasPk&ct=8&urls=185.180.203.46&clientType=0&id=8203712137971",
+        "finalUrl": "https://vd1.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776577895&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=176.112.172.39&type=2&sig=TEyq-tJasPk&ct=8&urls=185.180.203.46&clientType=0&id=8203712137971",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "fd1fd520091c23a63444303865c2291b556f552e55360788bd1509af6d16940c.txt",
+        "sha256": "fd1fd520091c23a63444303865c2291b556f552e55360788bd1509af6d16940c"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/7/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/7/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "67ffa7c8612457683f1a3be0dff234b6ecc568225f5aa127114476be8ed196a2.txt",
+        "sha256": "67ffa7c8612457683f1a3be0dff234b6ecc568225f5aa127114476be8ed196a2"
+      },
+      {
+        "method": "GET",
+        "url": "https://ok.ru/videoembed/514381777472",
+        "finalUrl": "https://ok.ru/videoembed/514381777472",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html;charset=UTF-8"
+        },
+        "file": "8f26d0c3043f86c8fbf58a8bcffc631990892f18ad6f267b51c29f27911a70ba.txt",
+        "sha256": "8f26d0c3043f86c8fbf58a8bcffc631990892f18ad6f267b51c29f27911a70ba"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd196.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776578610&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=95.163.35.41&type=2&sig=Im-h8jFzgCI&ct=8&urls=185.180.203.46&clientType=0&id=365740362304",
+        "finalUrl": "https://vd196.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776578610&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=95.163.35.41&type=2&sig=Im-h8jFzgCI&ct=8&urls=185.180.203.46&clientType=0&id=365740362304",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "0c657db1f526beb4ad40ac2a5f11504cf1ecb452ad760cde7234be604b7fd2c9.txt",
+        "sha256": "0c657db1f526beb4ad40ac2a5f11504cf1ecb452ad760cde7234be604b7fd2c9"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/goster-gununu-2-izle/9/",
+        "finalUrl": "https://lovefilmizle.net/goster-gununu-2-izle/9/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "a2eabb391324ffc1135d25898334c73ee9f6ba18fa83efb00133c0ab0d7b88c3.txt",
+        "sha256": "a2eabb391324ffc1135d25898334c73ee9f6ba18fa83efb00133c0ab0d7b88c3"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-aziv1hgzgtn7.html&filmadi=GosterGununu2",
+        "finalUrl": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-aziv1hgzgtn7.html&filmadi=GosterGununu2",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "2e8ae8c5469085e5405cddb734be99247d0ad4302d351655f3e841768af465cd.txt",
+        "sha256": "2e8ae8c5469085e5405cddb734be99247d0ad4302d351655f3e841768af465cd"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.net/embed-aziv1hgzgtn7.html",
+        "finalUrl": "https://vidmoly.biz/embed-aziv1hgzgtn7.html",
+        "code": 404,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "cd86475babf2f0bfc4ee191b9e50067eab2f276b18d6d0323ed790074315db66.txt",
+        "sha256": "cd86475babf2f0bfc4ee191b9e50067eab2f276b18d6d0323ed790074315db66"
+      },
+      {
+        "method": "GET",
+        "url": "https://sithmanifest.com/server/filmler/kick-ass-2/master/NW1nMk1iZEdjczJ1aWUyV1Y0aEhaWklCblBpbUsxT0xSZEdUSTJOU3JzWlJSendTQVNaTjIydjZGR044dGJRVg/720.m3u8?__=1793689984",
+        "finalUrl": "https://sithmanifest.com/server/filmler/kick-ass-2/master/NW1nMk1iZEdjczJ1aWUyV1Y0aEhaWklCblBpbUsxT0xSZEdUSTJOU3JzWlJSendTQVNaTjIydjZGR044dGJRVg/720.m3u8?__=1793689984",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "f1905b4f0b126691cb5e0ee5e3edb1d7eb17ccb3cbd4b24aa42d243325e284c9.txt",
+        "sha256": "f1905b4f0b126691cb5e0ee5e3edb1d7eb17ccb3cbd4b24aa42d243325e284c9"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_n/index-v1-a1.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_n/index-v1-a1.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "d111f1fafb74d8c791669616488d57dd4bf623dc3311f7b0168a8592e2d718d7.txt",
+        "sha256": "d111f1fafb74d8c791669616488d57dd4bf623dc3311f7b0168a8592e2d718d7"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd423.okcdn.ru/expires/1793776574776/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/178.237.23.39/type/2/sig/2LcBe25j7s0/ct/8/urls/95.163.35.41/clientType/0/id/8203713776371/video/",
+        "finalUrl": "https://vd423.okcdn.ru/expires/1793776574776/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/178.237.23.39/type/2/sig/2LcBe25j7s0/ct/8/urls/95.163.35.41/clientType/0/id/8203713776371/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "02c129cd905de3d234431e1261eefd322921d0f67c27805ff4b6ba2e181641d1.txt",
+        "sha256": "02c129cd905de3d234431e1261eefd322921d0f67c27805ff4b6ba2e181641d1"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd423.okcdn.ru/expires/1793776575461/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/178.237.23.39/type/2/sig/X10NuBIU0H0/ct/8/urls/176.112.172.39/clientType/0/id/365742262848/video/",
+        "finalUrl": "https://vd423.okcdn.ru/expires/1793776575461/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/178.237.23.39/type/2/sig/X10NuBIU0H0/ct/8/urls/176.112.172.39/clientType/0/id/365742262848/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "81eee3d9c8ed5ea0fbd6099add036f72741e66fc0a58cbc6520bbbc9c13d50e7.txt",
+        "sha256": "81eee3d9c8ed5ea0fbd6099add036f72741e66fc0a58cbc6520bbbc9c13d50e7"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1560-ant-t.vmpx.online/hls2/02/00449/0n3jg8qfiqew_n/index-v1-a1.m3u8?t=CvH0VffKsxot5Mm1YPDAuy_hX3FJ_WwXQu60gE5Ek9A=&s=1793690177&e=43200&v=&srv=box-c-o-l-10&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1560-ant-t.vmpx.online/hls2/02/00449/0n3jg8qfiqew_n/index-v1-a1.m3u8?t=CvH0VffKsxot5Mm1YPDAuy_hX3FJ_WwXQu60gE5Ek9A=&s=1793690177&e=43200&v=&srv=box-c-o-l-10&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "b4b039f8b060d4077cb0c5903c3e233d7e7013847b0bfd69b642dc93d97b3af7.txt",
+        "sha256": "b4b039f8b060d4077cb0c5903c3e233d7e7013847b0bfd69b642dc93d97b3af7"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd1.okcdn.ru/expires/1793776577895/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/176.112.172.39/type/2/sig/TEyq-tJasPk/ct/8/urls/185.180.203.46/clientType/0/id/8203712137971/video/",
+        "finalUrl": "https://vd1.okcdn.ru/expires/1793776577895/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/176.112.172.39/type/2/sig/TEyq-tJasPk/ct/8/urls/185.180.203.46/clientType/0/id/8203712137971/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "02c129cd905de3d234431e1261eefd322921d0f67c27805ff4b6ba2e181641d1.txt",
+        "sha256": "02c129cd905de3d234431e1261eefd322921d0f67c27805ff4b6ba2e181641d1"
+      },
+      {
+        "method": "GET",
+        "url": "https://vd196.okcdn.ru/expires/1793776578610/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/95.163.35.41/type/2/sig/Im-h8jFzgCI/ct/8/urls/185.180.203.46/clientType/0/id/365740362304/video/",
+        "finalUrl": "https://vd196.okcdn.ru/expires/1793776578610/srcIp/78.174.104.152/pr/10/srcAg/UNKNOWN/ch/-536166974/ms/95.163.35.41/type/2/sig/Im-h8jFzgCI/ct/8/urls/185.180.203.46/clientType/0/id/365740362304/video/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "81eee3d9c8ed5ea0fbd6099add036f72741e66fc0a58cbc6520bbbc9c13d50e7.txt",
+        "sha256": "81eee3d9c8ed5ea0fbd6099add036f72741e66fc0a58cbc6520bbbc9c13d50e7"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "lovefilmizle-page-8",
+        "label": "FilmVS",
+        "url": "https://sithmanifest.com/enCoder/filmler/kick-ass-2/master/manifest.m3u8",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://videoseyred.in/embed/281524",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-1",
+        "label": "FilmViP",
+        "url": "https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_,n,l,.urlset/master.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidmoly.net/embed-szjpmoedem3y.html",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-2",
+        "label": "FilmOk",
+        "url": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776574776&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=2LcBe25j7s0&ct=8&urls=95.163.35.41&clientType=0&id=8203713776371",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://odnoklassniki.ru/videoembed/84561889979",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-3",
+        "label": "FilmOk2",
+        "url": "https://vd423.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776575461&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=178.237.23.39&type=2&sig=X10NuBIU0H0&ct=8&urls=176.112.172.39&clientType=0&id=365742262848",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://ok.ru/videoembed/514381908544",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-5",
+        "label": "FilmViP",
+        "url": "https://prx-1560-ant-t.vmpx.online/hls2/02/00449/0n3jg8qfiqew_n/master.m3u8?t=CvH0VffKsxot5Mm1YPDAuy_hX3FJ_WwXQu60gE5Ek9A=&s=1793690177&e=43200&v=&srv=box-c-o-l-10&i=0.4&sp=0&asn=47331",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidmoly.net/embed-0n3jg8qfiqew.html",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-6",
+        "label": "FilmOk",
+        "url": "https://vd1.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776577895&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=176.112.172.39&type=2&sig=TEyq-tJasPk&ct=8&urls=185.180.203.46&clientType=0&id=8203712137971",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://odnoklassniki.ru/videoembed/84549241531",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      },
+      {
+        "id": "lovefilmizle-page-7",
+        "label": "FilmOk2",
+        "url": "https://vd196.okcdn.ru/video.m3u8?cmd=videoPlayerCdn&expires=1793776578610&srcIp=78.174.104.152&pr=10&srcAg=UNKNOWN&ch=-536166974&ms=95.163.35.41&type=2&sig=Im-h8jFzgCI&ct=8&urls=185.180.203.46&clientType=0&id=365740362304",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://ok.ru/videoembed/514381777472",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "lovefilmizle-page-8",
+        "label": "FilmVS",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-1",
+        "label": "FilmViP",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-2",
+        "label": "FilmOk",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-3",
+        "label": "FilmOk2",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-4",
+        "label": "FilmMl",
+        "status": "error",
+        "detail": "Aktif JW medya ayarı bulunamadı.",
+        "stage": "decode"
+      },
+      {
+        "sourceId": "lovefilmizle-page-5",
+        "label": "FilmViP",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-6",
+        "label": "FilmOk",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-7",
+        "label": "FilmOk2",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      },
+      {
+        "sourceId": "lovefilmizle-page-9",
+        "label": "FilmMl",
+        "status": "error",
+        "detail": "HTTP 404",
+        "stage": "embed"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "love-guvenli",
+    "site": "lovefilmizle",
+    "page": "https://lovefilmizle.net/guvenli-yer-yok-izle/",
+    "label": "Vidmoly / OK / Mail / Videoseyred",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T07:16:00.544Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/guvenli-yer-yok-izle/",
+        "finalUrl": "https://lovefilmizle.net/guvenli-yer-yok-izle/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "68268d5b38e1f6d77de394bf7fabceca603d33a3ad96d4ee4f5259846da4ebe0.txt",
+        "sha256": "68268d5b38e1f6d77de394bf7fabceca603d33a3ad96d4ee4f5259846da4ebe0"
+      },
+      {
+        "method": "GET",
+        "url": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-4iy3jgh4yerb.html&filmadi=tt3034594",
+        "finalUrl": "https://lovefilmizle.net/bemoly/bemoly.php?url=https://vidmoly.net/embed-4iy3jgh4yerb.html&filmadi=tt3034594",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "95ec6054aa1ba43672f92566ad1d907d2cb64c561be7d8333164b9833bbe44d7.txt",
+        "sha256": "95ec6054aa1ba43672f92566ad1d907d2cb64c561be7d8333164b9833bbe44d7"
+      },
+      {
+        "method": "GET",
+        "url": "https://vidmoly.net/embed-4iy3jgh4yerb.html",
+        "finalUrl": "https://vidmoly.biz/embed-4iy3jgh4yerb.html",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "1ddd53a892e695d0c60230b21a57727adb2e5ee578f4b9329fb05d4df395d513.txt",
+        "sha256": "1ddd53a892e695d0c60230b21a57727adb2e5ee578f4b9329fb05d4df395d513"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/master.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/master.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "1b3d81a0ed8bd5a385a27e84c6d7e3ab62c7b35f26646e9df76837e951f96a3a.txt",
+        "sha256": "1b3d81a0ed8bd5a385a27e84c6d7e3ab62c7b35f26646e9df76837e951f96a3a"
+      },
+      {
+        "method": "GET",
+        "url": "https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/index-v1-a1.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331",
+        "finalUrl": "https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/index-v1-a1.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/vnd.apple.mpegurl"
+        },
+        "file": "82172c2f4d548922369dbb2d223f3ab0b64490490ac9be5c49990caa2d457c8e.txt",
+        "sha256": "82172c2f4d548922369dbb2d223f3ab0b64490490ac9be5c49990caa2d457c8e"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "lovefilmizle-page-1",
+        "label": "Kaynak 1",
+        "url": "https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/master.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331",
+        "type": "hls",
+        "status": "ready",
+        "referer": "https://vidmoly.net/embed-4iy3jgh4yerb.html",
+        "transport": "native",
+        "destination": "downloads",
+        "userAgent": "",
+        "seekMode": "media-event",
+        "subtitles": [],
+        "thumbnails": null,
+        "preferredEngine": null
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "lovefilmizle-page-1",
+        "label": "Kaynak 1",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "sinemacc-send-help",
+    "site": "sinemacc",
+    "page": "https://sinemacc.com/film/yardim-cagrisi-send-help-2026/",
+    "label": "Player.filmizle.in",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:31.594Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://sinemacc.com/film/yardim-cagrisi-send-help-2026/",
+        "finalUrl": "https://sinemacc.com/film/yardim-cagrisi-send-help-2026/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf8"
+        },
+        "file": "62d397cc9cbf9f3688727553a0c4e8da1f431e8313effd9cc4ce2b7e1491f17f.txt",
+        "sha256": "62d397cc9cbf9f3688727553a0c4e8da1f431e8313effd9cc4ce2b7e1491f17f"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/video/033cc385728c51d97360020ed57776f0?lng=tur",
+        "finalUrl": "https://player.filmizle.in/video/033cc385728c51d97360020ed57776f0?lng=tur",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "09e9f6330430a8ce8ce4a79b225e394e13319d2c1fcecece0132a1c3943b709b.txt",
+        "sha256": "09e9f6330430a8ce8ce4a79b225e394e13319d2c1fcecece0132a1c3943b709b"
+      },
+      {
+        "method": "POST",
+        "url": "https://player.filmizle.in/player/index.php?data=033cc385728c51d97360020ed57776f0&do=getVideo",
+        "finalUrl": "https://player.filmizle.in/player/index.php?data=033cc385728c51d97360020ed57776f0&do=getVideo",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "e6ac706a41284aeafc2941851bf544c7cf960cca22f619efcdca97532dec689b.txt",
+        "sha256": "e6ac706a41284aeafc2941851bf544c7cf960cca22f619efcdca97532dec689b"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/cdn/hls/e7bf3a3e7da1340cd9509c366b8ce24a/master.m3u8?md5=fSsNK3pvqCaEfhFRJimgHg&expires=1793694752",
+        "finalUrl": "https://player.filmizle.in/cdn/hls/e7bf3a3e7da1340cd9509c366b8ce24a/master.m3u8?md5=fSsNK3pvqCaEfhFRJimgHg&expires=1793694752",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "db2c1abf60644ee8041dbd140c98dcdfb9fbf15c4d8b2fffc267fb155b8ceacd.txt",
+        "sha256": "db2c1abf60644ee8041dbd140c98dcdfb9fbf15c4d8b2fffc267fb155b8ceacd"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/hls/VHF4M2c1YXJyWU1memg2ZURsOHdHbkZaK3g3d0FTRldrOGNJMnRuV1FpaU9nR2IxRlNGdXZiSzVlVEd0OTJNdVo3Vm15d2ZGeTlQZ0k4TVREeEZmT0phdGkzekNFekRTZjBxdUV5akhMQWp3UW8xTUZWNXlrZUs3TGVESjQxMm9JU1VsdW9ScHBVVUFJeVZvclUzSGtROU5VaTZrbGRXaEovWDl0b0ZiNDEyUDAwZDV6V1RReEFVSFNsWFdoNGpUc2NDNFBnSEd4a09vdy9Ma0tQS0w0eC91akVTZEc0YnhnZjBrUllPWlB5VXVBRS9zcER5OFU1cW03WmhlbkpDVmtXVkpOenVrb3R0QnFiWVVLZEhwZUF4M3MrUDVQNHpzajBDNk5vUS9NZE09",
+        "finalUrl": "https://player.filmizle.in/hls/VHF4M2c1YXJyWU1memg2ZURsOHdHbkZaK3g3d0FTRldrOGNJMnRuV1FpaU9nR2IxRlNGdXZiSzVlVEd0OTJNdVo3Vm15d2ZGeTlQZ0k4TVREeEZmT0phdGkzekNFekRTZjBxdUV5akhMQWp3UW8xTUZWNXlrZUs3TGVESjQxMm9JU1VsdW9ScHBVVUFJeVZvclUzSGtROU5VaTZrbGRXaEovWDl0b0ZiNDEyUDAwZDV6V1RReEFVSFNsWFdoNGpUc2NDNFBnSEd4a09vdy9Ma0tQS0w0eC91akVTZEc0YnhnZjBrUllPWlB5VXVBRS9zcER5OFU1cW03WmhlbkpDVmtXVkpOenVrb3R0QnFiWVVLZEhwZUF4M3MrUDVQNHpzajBDNk5vUS9NZE09",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "00321c17e8634b6831c48460f301f66682078531245ac95e6a21a4dd8f24482d.txt",
+        "sha256": "00321c17e8634b6831c48460f301f66682078531245ac95e6a21a4dd8f24482d"
+      },
+      {
+        "method": "GET",
+        "url": "https://newmoviescenas1.shop/y/1NAyadXo-2ZinSKJPGco4VX8w8OQchCkaPyWVR5ad_J8Ppg508w7FO9pBQlZHML5Mj1znww011F5i86TZRY1fyvNJrxHb9lUicfZhRK6nXs.js",
+        "finalUrl": "https://newmoviescenas1.shop/y/1NAyadXo-2ZinSKJPGco4VX8w8OQchCkaPyWVR5ad_J8Ppg508w7FO9pBQlZHML5Mj1znww011F5i86TZRY1fyvNJrxHb9lUicfZhRK6nXs.js",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/javascript"
+        },
+        "file": "4c3de137093860a68a48fafbc4343be192fced027b26d38a52b5ec162011c9eb.txt",
+        "sha256": "4c3de137093860a68a48fafbc4343be192fced027b26d38a52b5ec162011c9eb"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "sinemacc-033cc385728c51d97360020ed57776f0",
+        "label": "Dublaj & Altyazı",
+        "url": "https://player.filmizle.in/cdn/hls/e7bf3a3e7da1340cd9509c366b8ce24a/master.m3u8?md5=fSsNK3pvqCaEfhFRJimgHg&expires=1793694752",
+        "referer": "https://player.filmizle.in/video/033cc385728c51d97360020ed57776f0?lng=tur",
+        "type": "hls",
+        "status": "ready",
+        "destination": "downloads",
+        "userAgent": "Mozilla/5.0",
+        "transport": "xhr",
+        "validation": {
+          "playlistTransport": "native"
+        },
+        "seekMode": "media-event",
+        "subtitles": [
+          {
+            "url": "https://newmoviescenas5.shop/y/1NAyadXo-2ZinSKJPGco4VX8w8OQchCkaPyWVR5ad_Ka9GiiXkQ-rP92H3ryTDELxVoZu0u4Sg0kzn5gUd7sRlWQqlGroRT81k0sjNSbKQY.jpg",
+            "label": "Turkish",
+            "language": "tur",
+            "type": "vtt"
+          }
+        ]
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "sinemacc-033cc385728c51d97360020ed57776f0",
+        "label": "Dublaj & Altyazı",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı · aynı yayının dilleri Ses ve Altyazı menülerinde",
+        "stage": ""
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "turkcefilmler-dual",
+    "site": "turkcefilmler",
+    "page": "https://turkcefilmler.to/drop-kabul-et-veya-reddet/",
+    "label": "DUAL / Drop",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:48.598Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://turkcefilmler.to/drop-kabul-et-veya-reddet/",
+        "finalUrl": "https://turkcefilmler.to/drop-kabul-et-veya-reddet/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf8"
+        },
+        "file": "de2acad59542c7b89e9e6fbe7169e04c66af7d7cf45f1bb5b41f1dbf5f3dec4f.txt",
+        "sha256": "de2acad59542c7b89e9e6fbe7169e04c66af7d7cf45f1bb5b41f1dbf5f3dec4f"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/video/89b9c689a57b82e59074c6ba09aa394d",
+        "finalUrl": "https://player.filmizle.in/video/89b9c689a57b82e59074c6ba09aa394d",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "8a7131156e5633b7a60501c9ef6d2ba6e4e3890b1e16f962261fc9898bb1fdd7.txt",
+        "sha256": "8a7131156e5633b7a60501c9ef6d2ba6e4e3890b1e16f962261fc9898bb1fdd7"
+      },
+      {
+        "method": "POST",
+        "url": "https://player.filmizle.in/player/index.php?data=89b9c689a57b82e59074c6ba09aa394d&do=getVideo",
+        "finalUrl": "https://player.filmizle.in/player/index.php?data=89b9c689a57b82e59074c6ba09aa394d&do=getVideo",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "5f9e462ed44d15d34d54a82e801bcf992901e5f3386c7c7de3216308536565e7.txt",
+        "sha256": "5f9e462ed44d15d34d54a82e801bcf992901e5f3386c7c7de3216308536565e7"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/cdn/hls/0bccd8c40274aefa42a3e4dcef1143c2/master.txt",
+        "finalUrl": "https://player.filmizle.in/cdn/hls/0bccd8c40274aefa42a3e4dcef1143c2/master.txt",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "1181c1b9118cce9595d14af93e72ad0b461fb9e1fe1a227eb73b770d817f0696.txt",
+        "sha256": "1181c1b9118cce9595d14af93e72ad0b461fb9e1fe1a227eb73b770d817f0696"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/m3/Q01CemJ1L1ZBSzdWZXY3bXl3dDBpRkJ5TVJWM3dpZjRGUVE2dFNkcElselVObkRMdjBVNElHZnpuMVJhUW1PZ1F3bmFSMDlEamFwZ3BMYzlOQU4wUXpndUI3S3dYZk80eVl3R3d6NlUwVlRLb2ZaemRnaStaU05DSkszWURMTmlvaVRFYmNqN05WVnRnV000YnlEY3ZvbjZzQmpDbnJnQVFmSVlHWlZjMzRZNkIxUU5JYkpIRzhjMjV3cmhYUW0vTGJlUTlvQTQ3UkRsanRNMXVScnJxSHJKN3NYOWhRb1FyQlA1R0gxajVzMlFjL0QybndxaGdDd2NCam1xM0tZWi80dFRsdWg5eDI2Qm9CV09XZysvTzlwQVI2d2I2MkdJM1UxVkZmeFd4dk09",
+        "finalUrl": "https://player.filmizle.in/m3/Q01CemJ1L1ZBSzdWZXY3bXl3dDBpRkJ5TVJWM3dpZjRGUVE2dFNkcElselVObkRMdjBVNElHZnpuMVJhUW1PZ1F3bmFSMDlEamFwZ3BMYzlOQU4wUXpndUI3S3dYZk80eVl3R3d6NlUwVlRLb2ZaemRnaStaU05DSkszWURMTmlvaVRFYmNqN05WVnRnV000YnlEY3ZvbjZzQmpDbnJnQVFmSVlHWlZjMzRZNkIxUU5JYkpIRzhjMjV3cmhYUW0vTGJlUTlvQTQ3UkRsanRNMXVScnJxSHJKN3NYOWhRb1FyQlA1R0gxajVzMlFjL0QybndxaGdDd2NCam1xM0tZWi80dFRsdWg5eDI2Qm9CV09XZysvTzlwQVI2d2I2MkdJM1UxVkZmeFd4dk09",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "24e86275f4440d37f0c94b352cb835d6b4bd813fa82cb1a99262657ac880be38.txt",
+        "sha256": "24e86275f4440d37f0c94b352cb835d6b4bd813fa82cb1a99262657ac880be38"
+      },
+      {
+        "method": "GET",
+        "url": "https://newmoviescenas1.shop/y/CzKjD0IFRyZrF-3bc_0K2pEwyx36SKfAEXrMuvdx-lyYxL5VStQekZL17VsKrP6D7QoclGkLdfzF2l-yHBZIMP_ZkCrEWFGHR8M5WtFJBjo.js",
+        "finalUrl": "https://newmoviescenas1.shop/y/CzKjD0IFRyZrF-3bc_0K2pEwyx36SKfAEXrMuvdx-lyYxL5VStQekZL17VsKrP6D7QoclGkLdfzF2l-yHBZIMP_ZkCrEWFGHR8M5WtFJBjo.js",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/javascript"
+        },
+        "file": "be257f7fdb2547133c72400e81298e59f9d1d4f6510946fb84c6c053c7aa00ce.txt",
+        "sha256": "be257f7fdb2547133c72400e81298e59f9d1d4f6510946fb84c6c053c7aa00ce"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "turkcefilmler-0",
+        "label": "DUAL",
+        "url": "https://player.filmizle.in/cdn/hls/0bccd8c40274aefa42a3e4dcef1143c2/master.txt",
+        "referer": "https://player.filmizle.in/video/89b9c689a57b82e59074c6ba09aa394d",
+        "userAgent": "Mozilla/5.0",
+        "destination": "downloads",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": [
+          {
+            "url": "https://newmoviescenas2.shop/y/CzKjD0IFRyZrF-3bc_0K2pEwyx36SKfAEXrMuvdx-lzljqro095zyETQaeNgAoHjVLop7xPlNwO0GSON_HLLTwEd3aw95e3etB18TtYHCfg.jpg",
+            "label": "Turkish",
+            "language": "tur",
+            "type": "vtt"
+          }
+        ]
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "turkcefilmler-0",
+        "label": "DUAL",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "turkcefilmler-jwplayer",
+    "site": "turkcefilmler",
+    "page": "https://turkcefilmler.to/companion/",
+    "label": "JWPlayer / Companion",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:53.983Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://turkcefilmler.to/companion/",
+        "finalUrl": "https://turkcefilmler.to/companion/",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf8"
+        },
+        "file": "156bd580d9983ca56a03dc788397c5cd62ad0fcb84c24f7a799f51d7c37cb8ea.txt",
+        "sha256": "156bd580d9983ca56a03dc788397c5cd62ad0fcb84c24f7a799f51d7c37cb8ea"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/video/c6e81542b125c36346d9167691b8bd09",
+        "finalUrl": "https://player.filmizle.in/video/c6e81542b125c36346d9167691b8bd09",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "c92a6a972230b40336b26e1cd695c0de3a085bff7bb8a31752f31a6ea42ae14e.txt",
+        "sha256": "c92a6a972230b40336b26e1cd695c0de3a085bff7bb8a31752f31a6ea42ae14e"
+      },
+      {
+        "method": "POST",
+        "url": "https://player.filmizle.in/player/index.php?data=c6e81542b125c36346d9167691b8bd09&do=getVideo",
+        "finalUrl": "https://player.filmizle.in/player/index.php?data=c6e81542b125c36346d9167691b8bd09&do=getVideo",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "02a8746288a4f9c93db6cd6cda12731ef8bee78797bfead36ca685e8e0e9bbe6.txt",
+        "sha256": "02a8746288a4f9c93db6cd6cda12731ef8bee78797bfead36ca685e8e0e9bbe6"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/cdn/hls/fa726b255034b5c1296bc55d7e85bc7e/master.txt",
+        "finalUrl": "https://player.filmizle.in/cdn/hls/fa726b255034b5c1296bc55d7e85bc7e/master.txt",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "93f4e48e5c67e2c98a23fda7e02bf042e23ef661a362f3e4a75a87451f0e6882.txt",
+        "sha256": "93f4e48e5c67e2c98a23fda7e02bf042e23ef661a362f3e4a75a87451f0e6882"
+      },
+      {
+        "method": "GET",
+        "url": "https://player.filmizle.in/m3/WGhGeG9aRHZsTGlGcWVLTXV6K2k5UFllMWJtRCtNK2xFVmFQUmhad0ZleUhVMXg2SE9pOEtRVFp0T3FVdkdPek5qRFF0L21jeHV5Q1ArNFp3SXBUV3dYam00T0lOTHJPQXowRGxDd01Rd3EwakhNalAxOVFyak81eC9Kb2huZXpDVjh2M3NrdmN1VDJCaUUxcm1QUEtSQ0hCM29sb25rbldWM2oyRm4vMk5ZTE9yYVhWMlhzOGpiOEdOMWExUHl3RHRTSVloeElmOW54SUpub0dvT2lndXE0S2tDcUVJdnU1Y1l2bjBIV0pGank1dEw4cVoxT0luck1oQXNBbmR4TFNNNFhUQ2c0OVowYXFzWVRoZ1N4SGdqSTUzbm9FRFo3KzB1TGl2TWcrYTA9",
+        "finalUrl": "https://player.filmizle.in/m3/WGhGeG9aRHZsTGlGcWVLTXV6K2k5UFllMWJtRCtNK2xFVmFQUmhad0ZleUhVMXg2SE9pOEtRVFp0T3FVdkdPek5qRFF0L21jeHV5Q1ArNFp3SXBUV3dYam00T0lOTHJPQXowRGxDd01Rd3EwakhNalAxOVFyak81eC9Kb2huZXpDVjh2M3NrdmN1VDJCaUUxcm1QUEtSQ0hCM29sb25rbldWM2oyRm4vMk5ZTE9yYVhWMlhzOGpiOEdOMWExUHl3RHRTSVloeElmOW54SUpub0dvT2lndXE0S2tDcUVJdnU1Y1l2bjBIV0pGank1dEw4cVoxT0luck1oQXNBbmR4TFNNNFhUQ2c0OVowYXFzWVRoZ1N4SGdqSTUzbm9FRFo3KzB1TGl2TWcrYTA9",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/plain;charset=UTF-8"
+        },
+        "file": "ab2946ebe89c48ac9ad3aee59eaffd8417c87372d7c8b07ca3bc296ed3023e7d.txt",
+        "sha256": "ab2946ebe89c48ac9ad3aee59eaffd8417c87372d7c8b07ca3bc296ed3023e7d"
+      },
+      {
+        "method": "GET",
+        "url": "https://newmoviescenas1.shop/y/uNgfg0IOAraJavv0rG96Db_hrpKnRlN3YC6AoOK3ESuLXHovRzb1GwyCZ0WDj8OukganyXZxPEAEU09Sc7hzabZWq4_EHer-VnK1CsB7EyY.js",
+        "finalUrl": "https://newmoviescenas1.shop/y/uNgfg0IOAraJavv0rG96Db_hrpKnRlN3YC6AoOK3ESuLXHovRzb1GwyCZ0WDj8OukganyXZxPEAEU09Sc7hzabZWq4_EHer-VnK1CsB7EyY.js",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/javascript"
+        },
+        "file": "0b8e15ebfa8d72d82a4e874d08ffbc16fd40214da2328fc07eb990c56bb250a5.txt",
+        "sha256": "0b8e15ebfa8d72d82a4e874d08ffbc16fd40214da2328fc07eb990c56bb250a5"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "turkcefilmler-0",
+        "label": "DUAL",
+        "url": "https://player.filmizle.in/cdn/hls/fa726b255034b5c1296bc55d7e85bc7e/master.txt",
+        "referer": "https://player.filmizle.in/video/c6e81542b125c36346d9167691b8bd09",
+        "userAgent": "Mozilla/5.0",
+        "destination": "downloads",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      }
+    ],
+    "referenceOptions": [
+      {
+        "sourceId": "turkcefilmler-0",
+        "label": "DUAL",
+        "status": "ready",
+        "detail": "HLS erişimi doğrulandı"
+      }
+    ],
+    "referenceError": null
+  },
+  {
+    "id": "vix-obsession",
+    "site": "hdfilmdelisi",
+    "page": "https://hdfilmdelisi.one/film/saplanti-obsession",
+    "label": "ha.vixolity / pl.vixolity",
+    "scope": "HOST_PREFLIGHT_ONLY",
+    "at": "2026-11-03T06:32:40.812Z",
+    "responses": [
+      {
+        "method": "GET",
+        "url": "https://hdfilmdelisi.one/film/saplanti-obsession",
+        "finalUrl": "https://hdfilmdelisi.one/film/saplanti-obsession",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=utf-8"
+        },
+        "file": "29e404349ba2c4d6dcd631a7acb8ee319a8ec71b7c46a09554c40d5509351a9f.txt",
+        "sha256": "29e404349ba2c4d6dcd631a7acb8ee319a8ec71b7c46a09554c40d5509351a9f"
+      },
+      {
+        "method": "GET",
+        "url": "https://pl.vixolity.com/WkVoUmVrNTZTVFJPZWsxNlRsRTlQUT09",
+        "finalUrl": "https://pl.vixolity.com/WkVoUmVrNTZTVFJPZWsxNlRsRTlQUT09",
+        "code": 200,
+        "headers": {
+          "Content-Type": "text/html; charset=UTF-8"
+        },
+        "file": "dd4e0a9e2a4d489ff8caa9ed06e8aa39e4ace4c7da85a9ead8d69a4e3f367002.txt",
+        "sha256": "dd4e0a9e2a4d489ff8caa9ed06e8aa39e4ace4c7da85a9ead8d69a4e3f367002"
+      },
+      {
+        "method": "GET",
+        "url": "https://ha.vixolity.com/vs/tt37287335",
+        "finalUrl": "https://ha.vixolity.com/vs/tt37287335",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "d4c8b526d47350f328f1fab12265581b0e6dda57f1754bd28c5512731e1e8c56.txt",
+        "sha256": "d4c8b526d47350f328f1fab12265581b0e6dda57f1754bd28c5512731e1e8c56"
+      },
+      {
+        "method": "GET",
+        "url": "https://ha.vixolity.com/mm/tt37287335/main_1080p/index-v1-a1.gif",
+        "finalUrl": "https://ha.vixolity.com/mm/tt37287335/main_1080p/index-v1-a1.gif",
+        "code": 200,
+        "headers": {
+          "Content-Type": "application/x-mpegURL"
+        },
+        "file": "271384b40a66b4631deb9bcc2dcbff44316887525d874482ec4b7a308bfb2c43.txt",
+        "sha256": "271384b40a66b4631deb9bcc2dcbff44316887525d874482ec4b7a308bfb2c43"
+      }
+    ],
+    "fixtureIssue": null,
+    "referenceSources": [
+      {
+        "id": "hdfilmdelisi-vixolity",
+        "label": "Vixolity",
+        "url": "https://ha.vixolity.com/vs/tt37287335",
+        "referer": "https://pl.vixolity.com/WkVoUmVrNTZTVFJPZWsxNlRsRTlQUT09",
+        "userAgent": "Mozilla/5.0",
+        "destination": "downloads",
+        "type": "hls",
+        "status": "ready",
+        "transport": "native",
+        "seekMode": "media-event",
+        "subtitles": []
+      }
+    ],
+    "referenceOptions": [],
+    "referenceError": null
+  }
+]

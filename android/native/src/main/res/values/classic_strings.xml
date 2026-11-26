@@ -1,0 +1,65 @@
+<resources>
+    <string name="classic_name">Film Merkezi Klasik</string>
+    <string name="classic_modern">Film Merkezi Modern — yakında</string>
+    <string name="classic_setup_title">Arayüzünüzü seçin</string>
+    <string name="classic_setup_description">Film Merkezi Klasik: tanıdık görünüm, sade gezinme. Modern arayüz daha sonra eklenecek.</string>
+    <string name="classic_setup_start">Film Merkezi Klasik ile başla</string>
+    <string name="classic_tagline">SİNEMA EVİNİZDE</string>
+    <string name="classic_search_hint">Film veya dizi adı yazın…</string>
+    <string name="classic_options">Seçenekler</string>
+    <string name="classic_site_name">Siteler · %1$s</string>
+    <string name="classic_site_responses">Site yanıtları</string>
+    <string name="classic_discover">Keşfet</string>
+    <string name="classic_footer">↑ ↓ ← → Gezin · OK Seç · Geri Dön</string>
+    <string name="classic_enjoy">İyi seyirler.</string>
+    <string name="classic_showcase">BUGÜNÜN VİTRİNİ</string>
+    <string name="classic_recommend">Ne izlesem?</string>
+    <string name="classic_new_movies">Sitelerden yeni filmler</string>
+    <string name="classic_new_series">Sitelerden yeni diziler</string>
+    <string name="classic_sort">Sırala: %1$s</string>
+    <string name="classic_sort_title">Sırala</string>
+    <string name="classic_sites_done">Site yanıtları tamamlandı · %1$d site</string>
+    <string name="classic_sites_loading">Site yanıtları · %1$d/%2$d site</string>
+    <string name="classic_default_order">Varsayılan sıra</string>
+    <string name="classic_newest_order">Yıl: yeniden eskiye</string>
+    <string name="classic_rating_order">IMDb puanı</string>
+    <string name="classic_title_order">Ad: A–Z</string>
+    <string name="classic_filters">☷ Filtreler</string>
+    <string name="classic_filter_scope">Filtreler yüklenen sonuçlara uygulanır. Diğer sonuçlar için sonraki sayfayı yükleyebilirsiniz.</string>
+    <string name="classic_filter_year">Yıl: %1$s</string>
+    <string name="classic_filter_rating">En düşük IMDb: %1$s</string>
+    <string name="classic_filter_language">Dil: %1$s</string>
+    <string name="classic_any">Tümü</string>
+    <string name="classic_dubbed">Türkçe dublaj</string>
+    <string name="classic_subtitled">Türkçe altyazı</string>
+    <string name="classic_filter_apply">Uygula</string>
+    <string name="classic_filter_clear">Filtreleri temizle</string>
+    <string name="classic_recommend_scope">Yüklenen filmlerden, geçmişinizde izlenmemiş öneriler</string>
+    <string name="classic_no_recommendation">Yüklenen filmlerde uygun öneri bulunamadı. Filtreleri değiştirebilir veya daha fazla film yükleyebilirsiniz.</string>
+    <string name="classic_back">‹ Geri</string>
+    <string name="classic_watch">▶ İzle</string>
+    <string name="classic_movie">FİLM</string>
+    <string name="classic_movie_meta">Film</string>
+    <string name="classic_series_meta">Dizi</string>
+    <string name="classic_series">DİZİ</string>
+    <string name="classic_sites_count">Siteler (%1$d)</string>
+    <string name="classic_read_more">Devamını oku</string>
+    <string name="classic_cast">Tüm oyuncular</string>
+    <string name="classic_no_cast">Oyuncu bilgisi bulunmuyor.</string>
+    <string name="classic_operations">Diğer işlemler</string>
+    <string name="classic_reload_episodes">Bölümleri yenile</string>
+    <string name="classic_episodes">Bölümler</string>
+    <string name="classic_episode_title">%1$d. Sezon %2$d. Bölüm</string>
+    <string name="classic_episode_options">⋯ Bölüm seçenekleri</string>
+    <string name="classic_episode_progress">%1$d/%2$d bölüm izlendi</string>
+    <string name="classic_episode_restart">Baştan izle</string>
+    <string name="classic_interface">Arayüz · Film Merkezi Klasik</string>
+    <item type="id" name="tv_nav_discover" />
+    <item type="id" name="tv_nav_history" />
+    <item type="id" name="classic_search_clear" />
+    <item type="id" name="classic_search_recent" />
+    <item type="id" name="classic_recommend" />
+    <item type="id" name="classic_filter" />
+    <item type="id" name="classic_sort" />
+    <item type="id" name="classic_setup_start" />
+</resources>

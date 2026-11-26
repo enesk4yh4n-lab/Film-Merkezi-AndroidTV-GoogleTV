@@ -1,0 +1,70 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link href="https://hotstream.club/themes/bepeak/player/css/jw.css" rel="stylesheet"> 
+<script src="https://db187550c7dkf.cloudfront.net/jwplayer-unlimited-8.25.6/jwplayer.js" id="vsplayerjw-js"></script>
+<script src="https://hotstream.club/themes/bepeak/player/js/humane.min.js"></script>
+<script src="https://hotstream.club/themes/bepeak/player/js/promise-polyfill.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
+<script type="text/javascript">jwplayer.key="W7zSm81+mmIsg7F+fyHRKhF3ggLkTqtGMhvI92kbqf/ysE99";</script>
+<script src="https://cdn.jsdelivr.net/npm/navigator.sendbeacon"></script>    
+<script type="text/javascript" src="/beload.php"></script>
+
+<link rel="shortcut icon" href="https://hotstream.club/themes/bepeak/img/icon.png">
+
+<title>The Gorge 2025 Filmi izle | beHLS</title>
+</head>
+<body>
+
+
+  <div id="video_container"></div>
+  <div class="info">
+    <div class="total"></div>
+    <div class="server"></div>
+    <div class="p2p"></div>
+    <div class="connected-peers"></div>
+    <div class="ip-peers"></div>
+  </div>
+  <div class="video-player embed-video-player " style="overflow: hidden;">
+    
+    <div class="loader" style="z-index: 0;">
+      <div class="page-loader__spinner"></div>
+    </div>
+    <div id="my-video_jw" controls style="width:100%; height:100%"  >
+                         </div>
+                                                      </div>
+              </body>
+              </html>
+                              <script type="text/javascript">  
+  $(document).ready(function() {
+    bePlayer('ck5zcElzREl5YWxRNUQ2QVRzaWVwZz09', '{"ct":"sImRKUWXa3ah6ZNIcsmUx5LdZIiwRXxCSsEqmvIZRHLZWDSkY1i3MR+g+Il0etNJG4Ncry82\/4Z4w\/L85rSvyPfMgORc+dtW1Z67naDFe34Gi0eetcCZUvfoyYemziMU\/L1EtmR4GHU6iYSLJ3hy\/FVtRn\/sfPT0gevI4LTSYYJyu01pxEDForSg6o6KmIRVp90FrCO1qShyoTDufBoh7Cj\/yoxsTuUdRofHN83S\/I5lFCVfDEAYovpDVDopQpLgrA1Pn8Wowl2EsJGXa38aNzq1eRUQOqb15mR6mm\/kie9hdcaPbOznislP3B184Atze\/ScX+jafYaU804+f8yGBjBrfbBfW6ZVEp+Ma9riqLecAB9fjM5Nm+5BfBxIkZHieGJYWggFZYBQeRD7thZrIjVvUpNty+WNXqbStzAqKZ6a8yOBMS2yLCLvioDww2lkkKQ2FfKMueHWpYmwtwmgfiymEG4\/OVBNMHl8RRbNNTT9Feuht+0Dn4ntxQN7Q1K7mdMB+VEz01AtFNz\/McJEtcliB\/klf5vTDfuHP0fgUnZ72j0X2YPxrSdnh+CvBeoAFcxeeaLh+sSbn6XPouyu3mRx7Yjl35RvHItYkLCRhwOwgFGzSAgnDzfhv8m0vsCCAGrEgPxBqNWPAsK9qCwrEqwQ4EdH71iTqkGbeYy4d7sLahdMM5SmEc87O+TOR7yRa0JJsyv20Kkir8VPabHJFMWU+waS\/5+2Y5gDRnLOAdae2znM9w1YvzN83BMd6DEto8r\/qfL0OYiW8TA\/+47uxP9onvXfRySw9KFNSGUFSd8x+pVeUefu2jJYdYIcrhKL5QCaaBLQZIZTykeIXb5mADxm5Tnr3NhwiSzyDNIm0KpVbveHEas5aNH5rfBBWYkIlJDJFSxfDF1P2CFs16HjNqgRWygRRcqAMYhjQBrysGVb4QrAfCJAhmikkUsXy8kk2PvEoB39aYVSVaYIP+DBtdulWxdPGQ+G6JozGajvCgrrFCC9ULfsjvfXcd37Z3F+zEhWqCFh9b5dfukA3pyNRIt58RnVKOABjwjH\/YtbmHdbEs9U8HZx\/zsB1PLuqlFYYDEt3Weitzf7zh0ITu7pCdFJCyZwJqF6IzLlM9oCWEtrP71vHAt\/v1EuplGRudvEa3SCCSgn0zBsbYlrQ14I0Emof9lc\/0VwqPpbqHnmsvOkCZK6Pg5F9eqx6VECRpRNPZX5G2DoM78aCtoDly\/E4jmdtJI\/33mDR99qTzIpL3tbPxtuxt\/ANLuSYaTxdLwfPRL43plXyHsb0YrJXOErNQ==","iv":"9d6436491a9a46bc8faffe01f2489793","s":"d04fd352a1029351"}');
+  });
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', '');
+</script>
+<script>
+  var heartbeat5 = setInterval(function(){
+    gtag('event', 'HeartBeat', {minutes: '4'});
+  }, 240000);
+</script>
+<script>
+  $('body').on('click', '.btn-download', function(e){
+    e.preventDefault();
+    if(confirm('Dosyayı indirmeye yönlendirileceksiniz. Devam etmek istiyor musunuz?')){
+      window.location = $(this).attr('data-href');
+    } else {
+      return false;
+    }
+  });
+</script>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+    <application android:label="@string/native_app_name" android:theme="@android:style/Theme.Material.NoActionBar"
+        android:icon="@mipmap/fm_launcher" android:roundIcon="@mipmap/fm_launcher" android:banner="@mipmap/fm_tv_banner"
+        android:allowBackup="false" android:usesCleartextTraffic="false" android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/native_network_security_config" android:enableOnBackInvokedCallback="false">
+        <activity android:name=".NativeMainActivity" android:screenOrientation="landscape" android:exported="false"/>
+        <activity android:name=".tv.TvActivity" android:label="@string/native_app_name"
+            android:icon="@mipmap/fm_launcher" android:banner="@mipmap/fm_tv_banner" android:theme="@style/FilmTvTheme" android:screenOrientation="landscape" android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

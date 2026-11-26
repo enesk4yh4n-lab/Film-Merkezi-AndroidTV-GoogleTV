@@ -1,0 +1,68 @@
+<resources>
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_general">Genel ve görünüm</string><string name="settings_catalog">Katalog ve siteler</string>
+    <string name="settings_playback">Oynatma ve kaynaklar</string><string name="settings_video">Görüntü</string>
+    <string name="settings_audio">Ses ve altyazı</string><string name="settings_remote">Kumanda</string>
+    <string name="settings_storage">Performans ve depolama</string><string name="settings_about">Hakkında ve tanılama</string>
+    <string name="settings_on">Açık</string><string name="settings_off">Kapalı</string><string name="settings_unlimited">Sınırsız</string>
+    <string name="settings_normal">Normal</string><string name="settings_large">Büyük</string><string name="settings_start">Açılış ekranı</string>
+    <string name="settings_font">Menü yazısı</string><string name="settings_exit">Uygulamadan çıkış onayı</string>
+    <string name="settings_rows">Ana sayfa satırları</string><string name="settings_row_actions">Satır işlemleri</string>
+    <string name="settings_visibility">Göster / gizle</string><string name="settings_up">Önceliği yükselt</string><string name="settings_down">Önceliği düşür</string>
+    <string name="settings_merge">Aynı içerikleri birleştir</string>
+    <string name="settings_merge_help">Kapalıyken site kartları ayrılır. Ortak bölüm listesi ve izleme kayıtları korunur.</string>
+    <string name="settings_adult">Yetişkin içerikleri gizle</string>
+    <string name="settings_adult_help">Bilinen erotik/yetişkin kategorileri gizlenir. Etiketi olmayanlar görünür kalır; çocuklara uygunluk garantisi değildir.</string>
+    <string name="settings_site_catalog">Katalogda göster</string><string name="settings_site_sources">Kaynaklarını kullan</string>
+    <string name="settings_site_state">Katalog: %1$s · Kaynak: %2$s</string>
+    <string name="settings_disabled_sites">Bu görünüm için açık site yok. Ayarlardan katalog sitelerini açabilirsin.</string>
+    <string name="settings_filtered">Bu içerik yetişkin filtresiyle gizleniyor.</string>
+    <string name="settings_saved_error">Ayar kaydedilemedi. Önceki değer korundu.</string>
+    <string name="settings_retry">Yeniden dene</string><string name="settings_help">↑ ↓ Gezin · → Seçenekler · ← Kategoriler · OK Değiştir · Geri Dön</string>
+    <string name="settings_device">Cihaz ve codec bilgileri</string><string name="settings_connection">Site bağlantı kontrolü</string>
+    <string name="settings_connecting">Bağlantılar kontrol ediliyor…</string><string name="settings_licenses">Lisanslar</string>
+    <string name="settings_ask">Sor</string><string name="settings_resume">Otomatik devam</string><string name="settings_restart">Baştan</string>
+    <string name="settings_entry">Oynatmaya başlama</string><string name="settings_rewind_resume">Devam ederken geri al</string>
+    <string name="settings_default_quality">Başlangıç kalite tercihi</string><string name="settings_max_height">Otomatik kalite üst sınırı</string>
+    <string name="settings_max_fps">Otomatik FPS üst sınırı</string>
+    <string name="settings_auto_limit_help">Yalnız otomatik seçime uygulanır. Elle kalite seçimi bu sınırı aşabilir.</string>
+    <string name="settings_sizing">Görüntü biçimi</string><string name="settings_fit">Sığdır</string><string name="settings_zoom">Yakınlaştır</string><string name="settings_stretch">Esnet</string>
+    <string name="settings_audio_first">Birinci ses dili</string><string name="settings_audio_second">İkinci ses dili</string>
+    <string name="settings_source_audio">Kaynağın varsayılan sesini kullan</string><string name="settings_text_language">Altyazı dili</string>
+    <string name="settings_subtitle_policy">Altyazı davranışı</string><string name="settings_subtitle_auto">Ses diline göre otomatik</string>
+    <string name="settings_subtitle_look">Altyazı görünümü</string><string name="settings_source_style">Kaynağın stili</string><string name="settings_custom_style">Özelleştir</string>
+    <string name="settings_subtitle_size">Altyazı boyutu</string><string name="settings_small">Küçük</string><string name="settings_very_large">Çok büyük</string>
+    <string name="settings_subtitle_color">Altyazı rengi</string><string name="settings_white">Beyaz</string><string name="settings_yellow">Sarı</string>
+    <string name="settings_outline">Siyah kenarlık</string><string name="settings_subtitle_background">Altyazı zemini</string>
+    <string name="settings_transparent">Saydam</string><string name="settings_half_black">Yarı saydam siyah</string><string name="settings_black">Siyah</string>
+    <string name="settings_subtitle_bottom">Alttan konum</string><string name="settings_subtitle_preview">Film Merkezi · Altyazı önizlemesi</string>
+    <string name="settings_seek">İlk sarma adımı</string><string name="settings_accelerate">Basılı tutunca hızlandır</string>
+    <string name="settings_controls">Kontrollerin kapanması</string><string name="settings_manual_hide">Elle</string>
+    <string name="settings_seconds">%1$d sn</string><string name="settings_minutes">%1$d dakika</string>
+    <string name="settings_sleep">Uyku zamanlayıcısı</string><string name="settings_sleep_help">Bu oturumda oynatmayı kaydederek bitirir; TV’yi kapatmaz.</string>
+    <string name="settings_sleep_finished">Uyku zamanlayıcısı doldu.</string>
+    <string name="settings_buffer">Tampon profili</string><string name="settings_buffer_low">Düşük bellek</string><string name="settings_buffer_long">Uzun tampon</string>
+    <string name="settings_next_playback">Bir sonraki oynatmada uygulanır. Çalışan motor değişmez.</string>
+    <string name="settings_cache">Görsel önbelleği</string><string name="settings_clear_cache">Görsel önbelleğini temizle</string>
+    <string name="settings_clear_search">Arama geçmişini temizle</string><string name="settings_clear_history">İzleme geçmişi ve devam kayıtlarını temizle</string>
+    <string name="settings_clear_history_help">Listem, takip edilen diziler ve elle bölüm işaretleri korunur.</string>
+    <string name="settings_clear_overrides">İçeriğe özel tercihleri sıfırla</string><string name="settings_reset">Ayarları varsayılana döndür</string>
+    <string name="settings_confirm_clear">Bu işlemi uygulamak istiyor musun? Listem ve elle bölüm işaretleri silinmez.</string>
+    <string name="settings_stop_first">Bu işlem için önce oynatıcıdan çık.</string><string name="settings_done">İşlem tamamlandı.</string>
+    <string name="settings_content_preferences">Bu içerik için hatırlanır</string><string name="settings_reset_this">Bu içeriğin tercihlerini sıfırla</string>
+    <string name="settings_global_preferences">Genel varsayılanlar</string>
+    <string name="settings_apply">Uygula</string>
+    <string name="settings_caption_help">Özelleştirme metin altyazılarına uygulanır. Görüntü tabanlı altyazıların stili korunur.</string>
+    <string name="settings_local_log">Yerel oynatma günlüğünü göster</string>
+    <string name="settings_log_disabled">Oynatma günlüğü kapalı. Açıldığında bu oturumun son 64 olayı ve tamponlama ölçümleri burada gösterilir. Ağ adresleri ve Cookie gösterilmez.</string>
+    <string name="settings_log_summary">Yeniden tamponlama: %1$d · süre: %2$d ms · ortalama indirme: %3$d kbit/sn</string>
+    <string name="settings_working">İşlem sürüyor…</string>
+    <string name="settings_operation_error">İşlem tamamlanamadı. Yeniden deneyebilirsin.</string>
+    <string name="settings_connection_failed">Bağlantı kurulamadı / süre doldu</string>
+    <string name="settings_connection_help">Yalnız açık katalog/kaynak sitelerine istek gönderir. HTTP yanıtı, video oynatma doğrulaması değildir.</string>
+    <string name="settings_cache_size">Disk: %1$.1f MiB / 24 MiB</string>
+    <string name="settings_clear_cache_help">Yalnız indirilen afiş önbelleği ve görsel belleği temizlenir. İzleme kayıtları korunur.</string>
+    <string name="settings_clear_search_help">Kaydedilmiş arama sorguları silinir. Diğer kayıtlar korunur.</string>
+    <string name="settings_clear_overrides_help">Hatırlanan ses, altyazı ve kalite tercihleri kaldırılır. İzleme konumu ve Listem korunur.</string>
+    <string name="settings_reset_help">Genel ayarlar varsayılana döner. İçeriğe özel tercihler, Listem, takipler ve izleme kayıtları korunur.</string>
+</resources>

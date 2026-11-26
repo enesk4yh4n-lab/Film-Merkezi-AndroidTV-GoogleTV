@@ -1,0 +1,62 @@
+[
+  {
+    "name": "home",
+    "url": "https://diziboxum.com/",
+    "finalUrl": "https://diziboxum.com/",
+    "status": 200,
+    "bytes": 148078,
+    "sha256": "17e624196de8c95ce10874c2edc8223760673fc1734179733e15a35c30a5f1c7",
+    "fixture": "home.html",
+    "capturedDate": "2026-11-06"
+  },
+  {
+    "name": "episode",
+    "url": "https://diziboxum.com/tulsa-king-1-sezon-2-bolum-9b0sw-16021/",
+    "finalUrl": "https://diziboxum.com/tulsa-king-1-sezon-2-bolum-9b0sw-16021/",
+    "status": 200,
+    "bytes": 94750,
+    "sha256": "e72a1fc0def1dbff2545586376362b8ac4e2527d7ba74d7e8da30d4c9aa0ad7e",
+    "fixture": "episode.html",
+    "capturedDate": "2026-11-06"
+  },
+  {
+    "name": "series",
+    "url": "https://diziboxum.com/dizi/tulsa-king-val2h-1046/",
+    "finalUrl": "https://diziboxum.com/dizi/tulsa-king-val2h-1046/",
+    "status": 200,
+    "bytes": 91373,
+    "sha256": "351263930eaef673e43814fbb125477e70fac5f87355cdd53804ed64358e711a",
+    "fixture": "series.html",
+    "capturedDate": "2026-11-06"
+  },
+  {
+    "name": "search",
+    "url": "https://diziboxum.com/?s=tulsa+king",
+    "finalUrl": "https://diziboxum.com/?s=tulsa+king",
+    "status": 200,
+    "bytes": 68554,
+    "sha256": "e45746f8478754901d31b002e88323e4c4bc09c0fb83e297ef1e25190dcb64c6",
+    "fixture": "search.html",
+    "capturedDate": "2026-11-06"
+  },
+  {
+    "name": "archive",
+    "url": "https://diziboxum.com/diziler/",
+    "finalUrl": "https://diziboxum.com/diziler/",
+    "status": 200,
+    "bytes": 68226,
+    "sha256": "90b2b1ee976466e68fcfcf31837bed2866a58de813ee9e08131b17ca36141728",
+    "fixture": "archive.html",
+    "capturedDate": "2026-11-06"
+  },
+  {
+    "name": "katre",
+    "url": "https://ksdpictures.site/dzembed.php?id=731b18d9-6a7a-4df4-bb33-8d0d858acde0",
+    "finalUrl": "https://ksdpictures.site/dzembed.php?id=731b18d9-6a7a-4df4-bb33-8d0d858acde0",
+    "status": 200,
+    "bytes": 9861,
+    "sha256": "da01547d10707f7c331f4af0fcad73905af850af222b5e1cc50130c995e99d3f",
+    "fixture": "katre.html",
+    "capturedDate": "2026-11-06"
+  }
+]

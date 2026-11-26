@@ -1,0 +1,11 @@
+QuickJS-KT 1.0.15 local Android JNI correction
+
+Upstream: https://github.com/dokar3/quickjs-kt/tree/v1.0.15
+Original Apache-2.0 license remains in QuickJS-KT.txt; QuickJS and c-vector retain their licenses.
+Modified file: quickjs/native/jni/binding_bridge.c
+The getter, setter, synchronous and asynchronous binding entry points now use
+PushLocalFrame / PopLocalFrame. This bounds temporary JNI references and fixes
+the observed local-reference-table overflow on Android 7. Original Kotlin classes
+and the pinned QuickJS/c-vector revisions are unchanged.
+tools/quickjs-native-lock.json records source archives and SHA-256 values.
+tools/build-patched-quickjs.mjs applies the correction and rebuilds the three Android ABIs.

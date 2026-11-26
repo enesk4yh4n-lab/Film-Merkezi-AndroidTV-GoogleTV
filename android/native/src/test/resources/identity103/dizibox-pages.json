@@ -1,0 +1,3395 @@
+{
+  "query": "vision",
+  "source": "Native ProviderNetwork live capture; primary HTML excerpts",
+  "pages": [
+    {
+      "seed": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/wandavision-hd-3/",
+          "kind": "series"
+        },
+        "title": "WandaVision",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/wandavision-200x290.jpg",
+        "year": null,
+        "imdb": 7.9,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "WandaVision"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:455d3716-b7cf-4800-b69f-d59dc1c324fe",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Komedi",
+          "Macera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/wandavision-hd-3/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "WandaVision",
+          "aliases": [
+            "WandaVision"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "html": "<html><head><link href=\"https://www.dizibox.live/diziler/wandavision-hd-3/\" rel=\"canonical\"/><script type=\"application/ld+json\">\n{\n\t\"@context\": \"http://schema.org/\",\n\t\"@type\": \"TVEpisode\",\n\t\"name\": \"WandaVision - DiziBOX\",\n\t\"author\": \"@dizibox\",\n\t\"url\" : \"https://www.dizibox.live/diziler/wandavision-hd-3/\",\n\t\"image\": \"https://www.dizibox.live/wp-content/uploads/afisler/wandavision-200x290.jpg\",\n\t\"description\": \"WandaVision 1080p Full HD izle, WandaVision Full izle, WandaVision Türkçe Altyazılı izle\",\n    \"aggregateRating\": {\n      \"@type\": \"AggregateRating\",\n      \"ratingCount\": \"6843\",\n      \"ratingValue\": \"7.9\",\n      \"bestRating\": \"10.0\",\n      \"worstRating\": \"1.0\"\n\t}\n}\n</script></head><body><section id=\"single-diziler\"><div class=\"tv-overview bg-dark\">\n<figure class=\"figure big-cover pull-left m-r-1\" id=\"main-cover\">\n <a href=\"https://www.dizibox.live/diziler/wandavision-hd-3/\">\n<img alt=\"WandaVision\" class=\"main-cover\" src=\"https://www.dizibox.live/wp-content/uploads/afisler/wandavision-200x290.jpg\"/> </a>\n</figure>\n\n<div class=\"title-terms\">\n<h1 class=\"pull-left m-b-0\">\n<a class=\"link-unstyled\" href=\"https://www.dizibox.live/diziler/wandavision-hd-3/\">WandaVision</a>\n</h1>\n<span class=\"label label-imdb pull-left\">imdb: <b>7.9</b></span>\n<div class=\"text-right pull-right span-three\"></div> <div class=\"terms text-muted-dark text-overflow\">\n<span><i class=\"icon icon-globe\"></i><a href=\"https://www.dizibox.live/ulke/amerika/\" rel=\"tag\">ABD</a></span>              |   <span><i class=\"icon icon-calendar\"></i><a href=\"https://www.dizibox.live/yil/2021/\" rel=\"tag\">2021</a></span>              |   <span><i class=\"icon icon-hash\"></i><a href=\"https://www.dizibox.live/tur/aksiyon/\" rel=\"tag\">Aksiyon</a>, <a href=\"https://www.dizibox.live/tur/komedi/\" rel=\"tag\">Komedi</a>, <a href=\"https://www.dizibox.live/tur/macera/\" rel=\"tag\">Macera</a></span>              |   <i class=\"icon icon-cinema\"></i> <a href=\"https://www.dizibox.live/oyuncu/elizabeth-olsen/\" rel=\"tag\">Elizabeth Olsen</a>, <a href=\"https://www.dizibox.live/oyuncu/kat-dennings/\" rel=\"tag\">Kat Dennings</a>, <a href=\"https://www.dizibox.live/oyuncu/kathryn-hahn/\" rel=\"tag\">Kathryn Hahn</a>, <a href=\"https://www.dizibox.live/oyuncu/paul-bettany/\" rel=\"tag\">Paul Bettany</a>, <a href=\"https://www.dizibox.live/oyuncu/randall-park/\" rel=\"tag\">Randall Park</a>, <a href=\"https://www.dizibox.live/oyuncu/teyonah-parris/\" rel=\"tag\">Teyonah Parris</a> </div>\n</div>\n<div class=\"tv-story-wrapper m-t-2\">\n<div class=\"tv-story\">\n<p>1950'li yıllarda geçecek olan WandaVision, beyaz perdede Elizabeth Olsen ve Paul Bettany’nin hayat verdiği Marvel karakterleri Scarlet Witch ve Vision'a odaklanıyor.</p>\n</div>\n\n</div>\n</div><div id=\"seasons-list\"></div></section></body></html>",
+      "expectedYear": 2021,
+      "rawSha256": "e18659a0bc3c285c500ed7ed76f9892f9e76304645db46c0d8f34a643c11d137",
+      "rawFile": "58c1e290d8bb39e96a1a302e.json"
+    },
+    {
+      "seed": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/visionquest/",
+          "kind": "series"
+        },
+        "title": "VisionQuest",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/visionquest-200x290.jpg",
+        "year": null,
+        "imdb": 8,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "VisionQuest"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:8416797b-67b0-4eee-827b-f1f1fde109b8",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Bilimkurgu",
+          "Drama",
+          "Gerilim",
+          "Mcera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/visionquest/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "VisionQuest",
+          "aliases": [
+            "VisionQuest"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "html": "<html><head><link href=\"https://www.dizibox.live/diziler/visionquest/\" rel=\"canonical\"/><script type=\"application/ld+json\">\n{\n\t\"@context\": \"http://schema.org/\",\n\t\"@type\": \"TVEpisode\",\n\t\"name\": \"VisionQuest - DiziBOX\",\n\t\"author\": \"@dizibox\",\n\t\"url\" : \"https://www.dizibox.live/diziler/visionquest/\",\n\t\"image\": \"https://www.dizibox.live/wp-content/uploads/afisler/visionquest-200x290.jpg\",\n\t\"description\": \"VisionQuest 1080p Full HD izle, VisionQuest Full izle, VisionQuest Türkçe Altyazılı izle\",\n    \"aggregateRating\": {\n      \"@type\": \"AggregateRating\",\n      \"ratingCount\": \"5358\",\n      \"ratingValue\": \"8.0\",\n      \"bestRating\": \"10.0\",\n      \"worstRating\": \"1.0\"\n\t}\n}\n</script></head><body><section id=\"single-diziler\"><div class=\"tv-overview bg-dark\">\n<figure class=\"figure big-cover pull-left m-r-1\" id=\"main-cover\">\n <a href=\"https://www.dizibox.live/diziler/visionquest/\">\n<img alt=\"VisionQuest\" class=\"main-cover\" src=\"https://www.dizibox.live/wp-content/uploads/afisler/visionquest-200x290.jpg\"/> </a>\n</figure>\n\n<div class=\"title-terms\">\n<h1 class=\"pull-left m-b-0\">\n<a class=\"link-unstyled\" href=\"https://www.dizibox.live/diziler/visionquest/\">VisionQuest</a>\n</h1>\n<span class=\"label label-imdb pull-left\">imdb: <b>8.0</b></span>\n<div class=\"text-right pull-right span-three\"></div> <div class=\"terms text-muted-dark text-overflow\">\n<span><i class=\"icon icon-globe\"></i><a href=\"https://www.dizibox.live/ulke/amerika/\" rel=\"tag\">ABD</a>, <a href=\"https://www.dizibox.live/ulke/ingiltere/\" rel=\"tag\">İngiltere</a></span>              |   <span><i class=\"icon icon-calendar\"></i><a href=\"https://www.dizibox.live/yil/2026/\" rel=\"tag\">2026</a></span>              |   <span><i class=\"icon icon-hash\"></i><a href=\"https://www.dizibox.live/tur/aksiyon/\" rel=\"tag\">Aksiyon</a>, <a href=\"https://www.dizibox.live/tur/bilimkurgu/\" rel=\"tag\">Bilimkurgu</a>, <a href=\"https://www.dizibox.live/tur/drama/\" rel=\"tag\">Drama</a>, <a href=\"https://www.dizibox.live/tur/gerilim/\" rel=\"tag\">Gerilim</a>, <a href=\"https://www.dizibox.live/tur/mcera/\" rel=\"tag\">Mcera</a></span>              |   <i class=\"icon icon-cinema\"></i> <a href=\"https://www.dizibox.live/oyuncu/diane-morgan/\" rel=\"tag\">Diane Morgan</a>, <a href=\"https://www.dizibox.live/oyuncu/emily-hampshire/\" rel=\"tag\">Emily Hampshire</a>, <a href=\"https://www.dizibox.live/oyuncu/james-darcy/\" rel=\"tag\">James D'Arcy</a>, <a href=\"https://www.dizibox.live/oyuncu/james-spader/\" rel=\"tag\">James Spader</a>, <a href=\"https://www.dizibox.live/oyuncu/lauren-morais/\" rel=\"tag\">Lauren Morais</a>, <a href=\"https://www.dizibox.live/oyuncu/orla-brady/\" rel=\"tag\">Orla Brady</a>, <a href=\"https://www.dizibox.live/oyuncu/paul-bettany/\" rel=\"tag\">Paul Bettany</a>, <a href=\"https://www.dizibox.live/oyuncu/ruaridh-mollica/\" rel=\"tag\">Ruaridh Mollica</a>, <a href=\"https://www.dizibox.live/oyuncu/tnia-miller/\" rel=\"tag\">T'Nia Miller</a> </div>\n</div>\n<div class=\"tv-story-wrapper m-t-2\">\n<div class=\"tv-story\">\n<p>Yeniden canlandırılan Vision, kendisini bir silah olarak kullanmak isteyenlerden saklanır. Ortadan kaybolduğu bu dönemde, gerçek amacını bulmak için programlamasına gömülü yapay zeka kişiliklerine, aralarında kötü şöhretli Ultron’un da bulunduğu kişilere danışır. Bu içe dönük, sakin yaşam, başına konulan ödül nedeniyle Vision’ın oğlu olabilecek gizemli çocuk Thomas Shepard ile birlikte kaçak hayatına atılmasıyla sona erer.</p>\n</div>\n\n</div>\n</div><div id=\"seasons-list\"></div></section></body></html>",
+      "expectedYear": 2026,
+      "rawSha256": "af8e07a23f473f32255c1acdcb6f04c913f7070acac61fa5b32a149f18fb3ea5",
+      "rawFile": "8fc7cd0177ba6c39619db2fc.json"
+    },
+    {
+      "seed": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-izle-3/",
+          "kind": "series"
+        },
+        "title": "Star Wars: Visions",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-200x290.jpg",
+        "year": null,
+        "imdb": 8.6,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Star Wars: Visions"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:780fdc9e-6431-46c0-ab48-70da8458260d",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Animasyon",
+          "Bilimkurgu",
+          "Fantastik",
+          "Macera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-izle-3/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "Star Wars: Visions",
+          "aliases": [
+            "Star Wars: Visions"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "html": "<html><head><link href=\"https://www.dizibox.live/diziler/star-wars-visions-izle-3/\" rel=\"canonical\"/><script type=\"application/ld+json\">\n{\n\t\"@context\": \"http://schema.org/\",\n\t\"@type\": \"TVEpisode\",\n\t\"name\": \"Star Wars: Visions - DiziBOX\",\n\t\"author\": \"@dizibox\",\n\t\"url\" : \"https://www.dizibox.live/diziler/star-wars-visions-izle-3/\",\n\t\"image\": \"https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-200x290.jpg\",\n\t\"description\": \"Star Wars: Visions 1080p Full HD izle, Star Wars: Visions Full izle, Star Wars: Visions Türkçe Altyazılı izle\",\n    \"aggregateRating\": {\n      \"@type\": \"AggregateRating\",\n      \"ratingCount\": \"26\",\n      \"ratingValue\": \"8.6\",\n      \"bestRating\": \"10.0\",\n      \"worstRating\": \"1.0\"\n\t}\n}\n</script></head><body><section id=\"single-diziler\"><div class=\"tv-overview bg-dark\">\n<figure class=\"figure big-cover pull-left m-r-1\" id=\"main-cover\">\n <a href=\"https://www.dizibox.live/diziler/star-wars-visions-izle-3/\">\n<img alt=\"Star Wars: Visions\" class=\"main-cover\" src=\"https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-200x290.jpg\"/> </a>\n</figure>\n\n<div class=\"title-terms\">\n<h1 class=\"pull-left m-b-0\">\n<a class=\"link-unstyled\" href=\"https://www.dizibox.live/diziler/star-wars-visions-izle-3/\">Star Wars: Visions</a>\n</h1>\n<span class=\"label label-imdb pull-left\">imdb: <b>8.6</b></span>\n<div class=\"text-right pull-right span-three\"></div> <div class=\"terms text-muted-dark text-overflow\">\n<span><i class=\"icon icon-globe\"></i><a href=\"https://www.dizibox.live/ulke/amerika/\" rel=\"tag\">ABD</a>, <a href=\"https://www.dizibox.live/ulke/japonya/\" rel=\"tag\">Japonya</a></span>              |   <span><i class=\"icon icon-calendar\"></i><a href=\"https://www.dizibox.live/yil/2021/\" rel=\"tag\">2021</a></span>              |   <span><i class=\"icon icon-hash\"></i><a href=\"https://www.dizibox.live/tur/aksiyon/\" rel=\"tag\">Aksiyon</a>, <a href=\"https://www.dizibox.live/tur/animasyon/\" rel=\"tag\">Animasyon</a>, <a href=\"https://www.dizibox.live/tur/bilimkurgu/\" rel=\"tag\">Bilimkurgu</a>, <a href=\"https://www.dizibox.live/tur/fantastik/\" rel=\"tag\">Fantastik</a>, <a href=\"https://www.dizibox.live/tur/macera/\" rel=\"tag\">Macera</a></span>              |   <i class=\"icon icon-cinema\"></i> <a href=\"https://www.dizibox.live/oyuncu/andrew-kishino/\" rel=\"tag\">Andrew Kishino</a>, <a href=\"https://www.dizibox.live/oyuncu/greg-chun/\" rel=\"tag\">Greg Chun</a>, <a href=\"https://www.dizibox.live/oyuncu/hiromi-dames/\" rel=\"tag\">Hiromi Dames</a>, <a href=\"https://www.dizibox.live/oyuncu/karen-fukuhara/\" rel=\"tag\">Karen Fukuhara</a> </div>\n</div>\n<div class=\"tv-story-wrapper m-t-2\">\n<div class=\"tv-story\">\n<p>Yedi farklı anime stüdyosunun dokuz farklı Star Wars hikâyesine imza attığı antolojik anime dizisi Star Wars: Visions, yeni kahraman, kötü ,silahları ve Star Wars hikâyeleriyle karşınızda.</p>\n</div>\n\n</div>\n</div><div id=\"seasons-list\"></div></section></body></html>",
+      "expectedYear": 2021,
+      "rawSha256": "07dfc18706e7bfe631a999371e34fb8a4aab7c4629a0caf8bc28e314a35c35dd",
+      "rawFile": "a1812fc888d0933c50ea3e33.json"
+    },
+    {
+      "seed": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/",
+          "kind": "series"
+        },
+        "title": "Star Wars: Visions Presents – The Ninth Jedi",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-presents-the-ninth-jedi-200x290.jpg",
+        "year": null,
+        "imdb": null,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Star Wars: Visions Presents",
+          "The Ninth Jedi"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:609fefdf-bb0e-44ce-b331-4703119001ca",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Animasyon",
+          "Bilimkurgu",
+          "Macera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "Star Wars: Visions Presents – The Ninth Jedi",
+          "aliases": [
+            "Star Wars: Visions Presents",
+            "The Ninth Jedi"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "html": "<html><head><link href=\"https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/\" rel=\"canonical\"/><script type=\"application/ld+json\">\n{\n\t\"@context\": \"http://schema.org/\",\n\t\"@type\": \"TVEpisode\",\n\t\"name\": \"Star Wars: Visions Presents &#8211; The Ninth Jedi - DiziBOX\",\n\t\"author\": \"@dizibox\",\n\t\"url\" : \"https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/\",\n\t\"image\": \"https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-presents-the-ninth-jedi-200x290.jpg\",\n\t\"description\": \"Star Wars: Visions Presents &#8211; The Ninth Jedi 1080p Full HD izle, Star Wars: Visions Presents &#8211; The Ninth Jedi Full izle, Star Wars: Visions Presents &#8211; The Ninth Jedi Türkçe Altyazılı izle\",\n    \"aggregateRating\": {\n      \"@type\": \"AggregateRating\",\n      \"ratingCount\": \"\",\n      \"ratingValue\": \"\",\n      \"bestRating\": \"10.0\",\n      \"worstRating\": \"1.0\"\n\t}\n}\n</script></head><body><section id=\"single-diziler\"><div class=\"tv-overview bg-dark\">\n<figure class=\"figure big-cover pull-left m-r-1\" id=\"main-cover\">\n <a href=\"https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/\">\n<img alt=\"Star Wars: Visions Presents – The Ninth Jedi\" class=\"main-cover\" src=\"https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-presents-the-ninth-jedi-200x290.jpg\"/> </a>\n</figure>\n\n<div class=\"title-terms\">\n<h1 class=\"pull-left m-b-0\">\n<a class=\"link-unstyled\" href=\"https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/\">Star Wars: Visions Presents – The Ninth Jedi</a>\n</h1>\n<div class=\"text-right pull-right span-three\"></div> <div class=\"terms text-muted-dark text-overflow\">\n<span><i class=\"icon icon-globe\"></i><a href=\"https://www.dizibox.live/ulke/amerika/\" rel=\"tag\">ABD</a>, <a href=\"https://www.dizibox.live/ulke/japonya/\" rel=\"tag\">Japonya</a></span>              |   <span><i class=\"icon icon-calendar\"></i><a href=\"https://www.dizibox.live/yil/2026/\" rel=\"tag\">2026</a></span>              |   <span><i class=\"icon icon-hash\"></i><a href=\"https://www.dizibox.live/tur/aksiyon/\" rel=\"tag\">Aksiyon</a>, <a href=\"https://www.dizibox.live/tur/animasyon/\" rel=\"tag\">Animasyon</a>, <a href=\"https://www.dizibox.live/tur/bilimkurgu/\" rel=\"tag\">Bilimkurgu</a>, <a href=\"https://www.dizibox.live/tur/macera/\" rel=\"tag\">Macera</a></span>              |   <i class=\"icon icon-cinema\"></i> <a href=\"https://www.dizibox.live/oyuncu/andrew-kishino/\" rel=\"tag\">Andrew Kishino</a>, <a href=\"https://www.dizibox.live/oyuncu/feodor-chin/\" rel=\"tag\">Feodor Chin</a>, <a href=\"https://www.dizibox.live/oyuncu/jp-karliak/\" rel=\"tag\">JP Karliak</a>, <a href=\"https://www.dizibox.live/oyuncu/keone-young/\" rel=\"tag\">Keone Young</a>, <a href=\"https://www.dizibox.live/oyuncu/kimiko-glenn/\" rel=\"tag\">Kimiko Glenn</a>, <a href=\"https://www.dizibox.live/oyuncu/neil-kaplan/\" rel=\"tag\">Neil Kaplan</a>, <a href=\"https://www.dizibox.live/oyuncu/patrick-seitz/\" rel=\"tag\">Patrick Seitz</a>, <a href=\"https://www.dizibox.live/oyuncu/young-mazino/\" rel=\"tag\">Young Mazino</a> </div>\n</div>\n<div class=\"tv-story-wrapper m-t-2\">\n<div class=\"tv-story\">\n<p>Kara ve Jedi dostları giderek güçlenen bir savaş lorduna karşı savaşacak nitelikli Jedilar bulmak için yola çıkar.</p>\n</div>\n\n</div>\n</div><div id=\"seasons-list\"></div></section></body></html>",
+      "expectedYear": 2026,
+      "rawSha256": "398b55d1f187a746b6e2b9f70130a355690d3e3f6302eea52cb1a75a25ab8598",
+      "rawFile": "c5d350466b2b84bccbf1e70c.json"
+    },
+    {
+      "seed": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/division-palermo/",
+          "kind": "series"
+        },
+        "title": "División Palermo",
+        "poster": "",
+        "year": null,
+        "imdb": null,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:2a07284a-93c4-4fc4-9a43-8fd74a393e76",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "html": "<html><head><link href=\"https://www.dizibox.live/diziler/division-palermo/\" rel=\"canonical\"/><script type=\"application/ld+json\">\n{\n\t\"@context\": \"http://schema.org/\",\n\t\"@type\": \"TVEpisode\",\n\t\"name\": \"División Palermo - DiziBOX\",\n\t\"author\": \"@dizibox\",\n\t\"url\" : \"https://www.dizibox.live/diziler/division-palermo/\",\n\t\"image\": \"https://www.dizibox.live/wp-content/uploads/afisler/division-palermo-200x290.jpg\",\n\t\"description\": \"División Palermo 1080p Full HD izle, División Palermo Full izle, División Palermo Türkçe Altyazılı izle\",\n    \"aggregateRating\": {\n      \"@type\": \"AggregateRating\",\n      \"ratingCount\": \"1965\",\n      \"ratingValue\": \"6.5\",\n      \"bestRating\": \"10.0\",\n      \"worstRating\": \"1.0\"\n\t}\n}\n</script></head><body><section id=\"single-diziler\"><div class=\"tv-overview bg-dark\">\n<figure class=\"figure big-cover pull-left m-r-1\" id=\"main-cover\">\n <a href=\"https://www.dizibox.live/diziler/division-palermo/\">\n<img alt=\"División Palermo\" class=\"main-cover\" src=\"https://www.dizibox.live/wp-content/uploads/afisler/division-palermo-200x290.jpg\"/> </a>\n</figure>\n\n<div class=\"title-terms\">\n<h1 class=\"pull-left m-b-0\">\n<a class=\"link-unstyled\" href=\"https://www.dizibox.live/diziler/division-palermo/\">División Palermo</a>\n</h1>\n<span class=\"label label-imdb pull-left\">imdb: <b>6.5</b></span>\n<div class=\"text-right pull-right span-three\"></div> <div class=\"terms text-muted-dark text-overflow\">\n<span><i class=\"icon icon-globe\"></i><a href=\"https://www.dizibox.live/ulke/arjantin/\" rel=\"tag\">Arjantin</a></span>              |   <span><i class=\"icon icon-calendar\"></i><a href=\"https://www.dizibox.live/yil/2023/\" rel=\"tag\">2023</a></span>              |   <span><i class=\"icon icon-hash\"></i><a href=\"https://www.dizibox.live/tur/komedi/\" rel=\"tag\">Komedi</a>, <a href=\"https://www.dizibox.live/tur/suc/\" rel=\"tag\">Suç</a></span>              |   <i class=\"icon icon-cinema\"></i> <a href=\"https://www.dizibox.live/oyuncu/daniel-hendler/\" rel=\"tag\">Daniel Hendler</a>, <a href=\"https://www.dizibox.live/oyuncu/martin-garabal/\" rel=\"tag\">Martín Garabal</a>, <a href=\"https://www.dizibox.live/oyuncu/pilar-gamboa/\" rel=\"tag\">Pilar Gamboa</a>, <a href=\"https://www.dizibox.live/oyuncu/santiago-korovsky/\" rel=\"tag\">Santiago Korovsky</a> </div>\n</div>\n<div class=\"tv-story-wrapper m-t-2\">\n<div class=\"tv-story\">\n<p>Polis teşkilatının imajını düzeltmek için kurulan ve sivillerden oluşan devriye ekibi, birtakım tuhaf suçlularla karşılaştıklarında farkında olmadan kendi hayatlarını riske atar.</p>\n</div>\n\n</div>\n</div><div id=\"seasons-list\"></div></section></body></html>",
+      "expectedYear": 2023,
+      "rawSha256": "a56262adbd659d8405b79c680958cf94bd85e0e552c19b9cb5733ea76906b313",
+      "rawFile": "e3a38855561a516f2ba92292.json"
+    }
+  ],
+  "groupsBefore": [
+    {
+      "identity": "work:db359436-d467-4d2d-8369-efa8038d2c8c",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizipal",
+          "pageUrl": "https://dizipalorjinal19.com/diziler/visionquest",
+          "kind": "series"
+        },
+        "title": "VisionQuest",
+        "poster": "https://dizipalorjinal19.com/storage/posters/300x450/03694a00-c7b4-4806-8edb-345f5675fbec.webp",
+        "year": 2026,
+        "imdb": 9,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "VisionQuest",
+        "imdbId": "",
+        "aliases": [
+          "VisionQuest"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:db359436-d467-4d2d-8369-efa8038d2c8c",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Dram",
+          "Bilim Kurgu & Fantazi"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://dizipalorjinal19.com/diziler/visionquest",
+          "kind": "SERIES",
+          "year": 2026,
+          "imdbId": "",
+          "originalTitle": "VisionQuest",
+          "title": "VisionQuest",
+          "aliases": [
+            "VisionQuest"
+          ],
+          "typeVerified": true,
+          "yearVerified": true,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "primary-release-year",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "dizipal",
+            "pageUrl": "https://dizipalorjinal19.com/diziler/visionquest",
+            "kind": "series"
+          },
+          "title": "VisionQuest",
+          "poster": "https://dizipalorjinal19.com/storage/posters/300x450/03694a00-c7b4-4806-8edb-345f5675fbec.webp",
+          "year": 2026,
+          "imdb": 9,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "VisionQuest",
+          "imdbId": "",
+          "aliases": [
+            "VisionQuest"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:db359436-d467-4d2d-8369-efa8038d2c8c",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Dram",
+            "Bilim Kurgu & Fantazi"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://dizipalorjinal19.com/diziler/visionquest",
+            "kind": "SERIES",
+            "year": 2026,
+            "imdbId": "",
+            "originalTitle": "VisionQuest",
+            "title": "VisionQuest",
+            "aliases": [
+              "VisionQuest"
+            ],
+            "typeVerified": true,
+            "yearVerified": true,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "primary-release-year",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/dizi/visionquest-2026-fm9mb8/",
+            "kind": "series"
+          },
+          "title": "VisionQuest",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/visionquest-2026.jpg-thumb-liste.webp",
+          "year": 2026,
+          "imdb": 7.8,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:db359436-d467-4d2d-8369-efa8038d2c8c",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/dizi/visionquest-2026-6/",
+            "kind": "series"
+          },
+          "title": "VisionQuest",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/visionquest.webp",
+          "year": 2026,
+          "imdb": 7.8,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "VisionQuest"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:db359436-d467-4d2d-8369-efa8038d2c8c",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:0697d4e2-5090-4265-8cb9-11ee263fb088",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmifullizle",
+          "pageUrl": "https://www.filmifullizle.news/film/vision-izle-4.html",
+          "kind": "movie"
+        },
+        "title": "Vision",
+        "poster": "https://www.filmifullizle.news/wp-content/uploads/2022/06/vision-180x270.jpg",
+        "year": 2018,
+        "imdb": null,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:0697d4e2-5090-4265-8cb9-11ee263fb088",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmifullizle",
+            "pageUrl": "https://www.filmifullizle.news/film/vision-izle-4.html",
+            "kind": "movie"
+          },
+          "title": "Vision",
+          "poster": "https://www.filmifullizle.news/wp-content/uploads/2022/06/vision-180x270.jpg",
+          "year": 2018,
+          "imdb": null,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:0697d4e2-5090-4265-8cb9-11ee263fb088",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/vision-5/",
+            "kind": "movie"
+          },
+          "title": "Vision",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/vision.webp",
+          "year": 2018,
+          "imdb": 5.2,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Vision"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:0697d4e2-5090-4265-8cb9-11ee263fb088",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:569a77dd-a109-4fa3-b6d9-0a07d1ed343f",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmcibaba",
+          "pageUrl": "https://filmizle.ink/a-marvel-television-special-presentation-the-punisher-one-last-kill/",
+          "kind": "movie"
+        },
+        "title": "A Marvel Television Special Presentation – The Punisher: One Last Kill 2026",
+        "poster": "https://filmizle.ink/wp-content/uploads/2026/05/14101151-30227612-203x300.jpg",
+        "year": null,
+        "imdb": null,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "A Marvel Television Special Presentation",
+          "The Punisher: One Last Kill 2026"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:569a77dd-a109-4fa3-b6d9-0a07d1ed343f",
+        "yearHint": 2026,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon Filmleri",
+          "Dram Filmleri",
+          "Gerilim Filmleri",
+          "Macera Filmleri",
+          "Polisiye Suç Filmleri"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://filmizle.ink/a-marvel-television-special-presentation-the-punisher-one-last-kill/",
+          "kind": "MOVIE",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "A Marvel Television Special Presentation – The Punisher: One Last Kill 2026",
+          "aliases": [
+            "A Marvel Television Special Presentation",
+            "The Punisher: One Last Kill 2026"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmcibaba",
+            "pageUrl": "https://filmizle.ink/a-marvel-television-special-presentation-the-punisher-one-last-kill/",
+            "kind": "movie"
+          },
+          "title": "A Marvel Television Special Presentation – The Punisher: One Last Kill 2026",
+          "poster": "https://filmizle.ink/wp-content/uploads/2026/05/14101151-30227612-203x300.jpg",
+          "year": null,
+          "imdb": null,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "A Marvel Television Special Presentation",
+            "The Punisher: One Last Kill 2026"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:569a77dd-a109-4fa3-b6d9-0a07d1ed343f",
+          "yearHint": 2026,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon Filmleri",
+            "Dram Filmleri",
+            "Gerilim Filmleri",
+            "Macera Filmleri",
+            "Polisiye Suç Filmleri"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://filmizle.ink/a-marvel-television-special-presentation-the-punisher-one-last-kill/",
+            "kind": "MOVIE",
+            "year": null,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "A Marvel Television Special Presentation – The Punisher: One Last Kill 2026",
+            "aliases": [
+              "A Marvel Television Special Presentation",
+              "The Punisher: One Last Kill 2026"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:2a07284a-93c4-4fc4-9a43-8fd74a393e76",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/division-palermo/",
+          "kind": "series"
+        },
+        "title": "División Palermo",
+        "poster": "",
+        "year": null,
+        "imdb": null,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:2a07284a-93c4-4fc4-9a43-8fd74a393e76",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "dizibox",
+            "pageUrl": "https://www.dizibox.live/diziler/division-palermo/",
+            "kind": "series"
+          },
+          "title": "División Palermo",
+          "poster": "",
+          "year": null,
+          "imdb": null,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:2a07284a-93c4-4fc4-9a43-8fd74a393e76",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:a040e43f-e78c-4f66-b11d-e977edc76312",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "fixfullfilmizle",
+          "pageUrl": "https://www.fixfullfilmizle.net/yenilmezler-4-turkce-full-hd-film-izle/",
+          "kind": "movie"
+        },
+        "title": "Yenilmezler 4",
+        "poster": "https://www.fixfullfilmizle.net/wp-content/uploads/Yenilmezler-4.jpg",
+        "year": null,
+        "imdb": 8.4,
+        "language": "Türkçe Dublaj",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:a040e43f-e78c-4f66-b11d-e977edc76312",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "fixfullfilmizle",
+            "pageUrl": "https://www.fixfullfilmizle.net/yenilmezler-4-turkce-full-hd-film-izle/",
+            "kind": "movie"
+          },
+          "title": "Yenilmezler 4 Türkçe",
+          "poster": "https://www.fixfullfilmizle.net/wp-content/uploads/Yenilmezler-4.jpg",
+          "year": null,
+          "imdb": 8.4,
+          "language": "Türkçe Dublaj",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:a040e43f-e78c-4f66-b11d-e977edc76312",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:97f6665c-e24a-4bef-8dff-b44b9cb0df66",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmifullizle",
+          "pageUrl": "https://www.filmifullizle.news/film/eurovision-sarki-yarismasi-fira-saganin-hikayesi-izle-4.html",
+          "kind": "movie"
+        },
+        "title": "Eurovision Şarkı Yarışması: Fira Saga’nın Hikâyesi",
+        "poster": "https://www.filmifullizle.news/wp-content/uploads/2022/04/eurovision-sarki-yarismasi-fira-saganin-hikayesi-180x270.jpg",
+        "year": 2020,
+        "imdb": null,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:97f6665c-e24a-4bef-8dff-b44b9cb0df66",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmifullizle",
+            "pageUrl": "https://www.filmifullizle.news/film/eurovision-sarki-yarismasi-fira-saganin-hikayesi-izle-4.html",
+            "kind": "movie"
+          },
+          "title": "Eurovision Şarkı Yarışması: Fira Saga’nın Hikâyesi",
+          "poster": "https://www.filmifullizle.news/wp-content/uploads/2022/04/eurovision-sarki-yarismasi-fira-saganin-hikayesi-180x270.jpg",
+          "year": 2020,
+          "imdb": null,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:97f6665c-e24a-4bef-8dff-b44b9cb0df66",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "sinemacc",
+            "pageUrl": "https://sinemacc.com/film/eurovision-sarki-yarismasi-fira-saga-nin-hikayesi-2020/",
+            "kind": "movie"
+          },
+          "title": "Eurovision Şarkı Yarışması: Fira Saga’nın Hikâyesi",
+          "poster": "https://sinemacc.com/uploads/filmler/2022-12/eurovision-sarki-yarismasi-fira-saga-nin-hikayesi-2020_f.webp",
+          "year": 2020,
+          "imdb": 6.5,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:97f6665c-e24a-4bef-8dff-b44b9cb0df66",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:b12fb13e-6b5e-4e89-ac95-bd737094cfe1",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/the-division/",
+          "kind": "movie"
+        },
+        "title": "The Division - A Divisão",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/the-division.webp",
+        "year": 2020,
+        "imdb": 6.2,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "The Division",
+          "A Divisão"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:b12fb13e-6b5e-4e89-ac95-bd737094cfe1",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/the-division/",
+            "kind": "movie"
+          },
+          "title": "The Division - A Divisão",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/the-division.webp",
+          "year": 2020,
+          "imdb": 6.2,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "The Division",
+            "A Divisão"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:b12fb13e-6b5e-4e89-ac95-bd737094cfe1",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmifullizle",
+            "pageUrl": "https://www.filmifullizle.news/film/the-division.html",
+            "kind": "movie"
+          },
+          "title": "The Division",
+          "poster": "https://www.filmifullizle.news/wp-content/uploads/2023/12/a-divisao-180x270.jpg",
+          "year": 2020,
+          "imdb": null,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:b12fb13e-6b5e-4e89-ac95-bd737094cfe1",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/the-division-izle-2020/",
+            "kind": "movie"
+          },
+          "title": "The Division",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/a-diviso-2020.jpg-thumb-liste.webp",
+          "year": 2020,
+          "imdb": 6.2,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:b12fb13e-6b5e-4e89-ac95-bd737094cfe1",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/the-division-izle/",
+            "kind": "movie"
+          },
+          "title": "The Division",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2023/12/The-Division-izle.jpg",
+          "year": 2020,
+          "imdb": 6.2,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:b12fb13e-6b5e-4e89-ac95-bd737094cfe1",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:10ea5ab6-da50-472c-a78e-1a17d1ec4a0a",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/a-marvel-television-special-presentation-the-punisher-one-last-kill-13/",
+          "kind": "movie"
+        },
+        "title": "A Marvel Television Special Presentation - The Punisher: One Last Kill",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/a-marvel-television-special-presentation-the-punisher-one-last-kill.webp",
+        "year": 2026,
+        "imdb": 7,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "A Marvel Television Special Presentation",
+          "The Punisher: One Last Kill"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:10ea5ab6-da50-472c-a78e-1a17d1ec4a0a",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/a-marvel-television-special-presentation-the-punisher-one-last-kill-13/",
+            "kind": "movie"
+          },
+          "title": "A Marvel Television Special Presentation - The Punisher: One Last Kill",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/a-marvel-television-special-presentation-the-punisher-one-last-kill.webp",
+          "year": 2026,
+          "imdb": 7,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "A Marvel Television Special Presentation",
+            "The Punisher: One Last Kill"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:10ea5ab6-da50-472c-a78e-1a17d1ec4a0a",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmizlehell",
+            "pageUrl": "https://filmizlehell.net/film/2944-the-punisher-one-last-kill-6a2-izle",
+            "kind": "movie"
+          },
+          "title": "The Punisher: One Last Kill",
+          "poster": "https://filmizlehell.net/storage/posters/17020/conversions/the-punisher-one-last-kill-poster-poster-md.webp",
+          "year": 2026,
+          "imdb": 8.6,
+          "language": "Türkçe Dublaj",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:10ea5ab6-da50-472c-a78e-1a17d1ec4a0a",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/the-punisher-one-last-kill-2026-fmn6ym/",
+            "kind": "movie"
+          },
+          "title": "The Punisher: One Last Kill",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/a-marvel-television-special-presentation-the-punisher-one-last-kill-2026.jpg-thumb-liste.webp",
+          "year": 2026,
+          "imdb": 7,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:10ea5ab6-da50-472c-a78e-1a17d1ec4a0a",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:3ef40953-78b2-45a2-b979-9ba7158604a5",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmcibaba",
+          "pageUrl": "https://filmizle.ink/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle/",
+          "kind": "movie"
+        },
+        "title": "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi",
+        "poster": "https://filmizle.ink/wp-content/uploads/2020/06/Eurovision-Song-Contest-The-Story-of-Fire-Saga.jpg",
+        "year": 2020,
+        "imdb": 6.7,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:3ef40953-78b2-45a2-b979-9ba7158604a5",
+        "yearHint": 2020,
+        "sourceSeason": null,
+        "genres": [
+          "2020 filmleri",
+          "Komedi Filmleri",
+          "Netflix Filmleri izle"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://filmizle.ink/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle/",
+          "kind": "MOVIE",
+          "year": 2020,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle",
+          "aliases": [
+            "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle"
+          ],
+          "typeVerified": true,
+          "yearVerified": true,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "primary-release-year",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmcibaba",
+            "pageUrl": "https://filmizle.ink/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle/",
+            "kind": "movie"
+          },
+          "title": "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle",
+          "poster": "https://filmizle.ink/wp-content/uploads/2020/06/Eurovision-Song-Contest-The-Story-of-Fire-Saga.jpg",
+          "year": 2020,
+          "imdb": 6.7,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:3ef40953-78b2-45a2-b979-9ba7158604a5",
+          "yearHint": 2020,
+          "sourceSeason": null,
+          "genres": [
+            "2020 filmleri",
+            "Komedi Filmleri",
+            "Netflix Filmleri izle"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://filmizle.ink/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle/",
+            "kind": "MOVIE",
+            "year": 2020,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle",
+            "aliases": [
+              "Eurovision Şarkı Yarışması: Fire Saga’nın Hikâyesi izle"
+            ],
+            "typeVerified": true,
+            "yearVerified": true,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "primary-release-year",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle-fm3/",
+            "kind": "movie"
+          },
+          "title": "Eurovision Şarkı Yarışması: Fire Saga'nın Hikayesi",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/eurovision-song-contest-the-story-of-fire-saga-2020.jpg-thumb-liste.webp",
+          "year": 2020,
+          "imdb": 6.5,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:3ef40953-78b2-45a2-b979-9ba7158604a5",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle-hdf-4/",
+            "kind": "movie"
+          },
+          "title": "Eurovision Şarkı Yarışması Fire Saga'nın Hikayesi - Eurovision Song Contest: The Story of Fire Saga",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle.webp",
+          "year": 2020,
+          "imdb": 6.5,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Eurovision Şarkı Yarışması Fire Saga'nın Hikayesi",
+            "Eurovision Song Contest: The Story of Fire Saga"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:3ef40953-78b2-45a2-b979-9ba7158604a5",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/eurovision-sarki-yarismasi-fire-saganin-hikayesi-izle/",
+            "kind": "movie"
+          },
+          "title": "Eurovision Şarkı Yarışması: Fire Saga’nın Hikayesi",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2026/03/Eurovision-Sarki-Yarismasi-Fire-Saga8217nin-Hikayesi-izle.jpg",
+          "year": 2020,
+          "imdb": 6.5,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:3ef40953-78b2-45a2-b979-9ba7158604a5",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:92079fa2-5f27-4684-b81c-f39726e08e20",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/vizyon-izle-2018-fm1/",
+          "kind": "movie"
+        },
+        "title": "Vizyon",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/vision-2018.jpg-thumb-liste.webp",
+        "year": 2018,
+        "imdb": 5.2,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:92079fa2-5f27-4684-b81c-f39726e08e20",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/vizyon-izle-2018-fm1/",
+            "kind": "movie"
+          },
+          "title": "Vizyon",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/vision-2018.jpg-thumb-liste.webp",
+          "year": 2018,
+          "imdb": 5.2,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:92079fa2-5f27-4684-b81c-f39726e08e20",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "fullhdfilmizlesene",
+            "pageUrl": "https://www.fullhdfilmizlesene.now/film/vizyon/",
+            "kind": "movie"
+          },
+          "title": "Vizyon",
+          "poster": "https://img.fullhdfilmizlesene.now/poster/film/vizyon-vision-90911.jpg",
+          "year": 2018,
+          "imdb": 5.2,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:92079fa2-5f27-4684-b81c-f39726e08e20",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:5d520d89-1320-4ddc-91cb-4e2dc9aa60fc",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmcibaba",
+          "pageUrl": "https://filmizle.ink/kelebek-gorusu-butterfly-vision-2022-izle/",
+          "kind": "movie"
+        },
+        "title": "Kelebek Görüşü – Butterfly Vision 2022",
+        "poster": "https://filmizle.ink/wp-content/uploads/2023/08/Kelebek-Gorusu.jpg",
+        "year": null,
+        "imdb": 6.6,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Kelebek Görüşü",
+          "Butterfly Vision 2022 izle"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:5d520d89-1320-4ddc-91cb-4e2dc9aa60fc",
+        "yearHint": 2022,
+        "sourceSeason": null,
+        "genres": [
+          "Çıkması Beklenen Film ve Diziler"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://filmizle.ink/kelebek-gorusu-butterfly-vision-2022-izle/",
+          "kind": "MOVIE",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "Kelebek Görüşü – Butterfly Vision 2022 izle",
+          "aliases": [
+            "Kelebek Görüşü",
+            "Butterfly Vision 2022 izle"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmcibaba",
+            "pageUrl": "https://filmizle.ink/kelebek-gorusu-butterfly-vision-2022-izle/",
+            "kind": "movie"
+          },
+          "title": "Kelebek Görüşü – Butterfly Vision 2022 izle",
+          "poster": "https://filmizle.ink/wp-content/uploads/2023/08/Kelebek-Gorusu.jpg",
+          "year": null,
+          "imdb": 6.6,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Kelebek Görüşü",
+            "Butterfly Vision 2022 izle"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:5d520d89-1320-4ddc-91cb-4e2dc9aa60fc",
+          "yearHint": 2022,
+          "sourceSeason": null,
+          "genres": [
+            "Çıkması Beklenen Film ve Diziler"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://filmizle.ink/kelebek-gorusu-butterfly-vision-2022-izle/",
+            "kind": "MOVIE",
+            "year": null,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "Kelebek Görüşü – Butterfly Vision 2022 izle",
+            "aliases": [
+              "Kelebek Görüşü",
+              "Butterfly Vision 2022 izle"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:780fdc9e-6431-46c0-ab48-70da8458260d",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-izle-3/",
+          "kind": "series"
+        },
+        "title": "Star Wars: Visions",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-200x290.jpg",
+        "year": null,
+        "imdb": 8.6,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Star Wars: Visions"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:780fdc9e-6431-46c0-ab48-70da8458260d",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Animasyon",
+          "Bilimkurgu",
+          "Fantastik",
+          "Macera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-izle-3/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "Star Wars: Visions",
+          "aliases": [
+            "Star Wars: Visions"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "dizibox",
+            "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-izle-3/",
+            "kind": "series"
+          },
+          "title": "Star Wars: Visions",
+          "poster": "https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-200x290.jpg",
+          "year": null,
+          "imdb": 8.6,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Star Wars: Visions"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:780fdc9e-6431-46c0-ab48-70da8458260d",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon",
+            "Animasyon",
+            "Bilimkurgu",
+            "Fantastik",
+            "Macera"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-izle-3/",
+            "kind": "SERIES",
+            "year": null,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "Star Wars: Visions",
+            "aliases": [
+              "Star Wars: Visions"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:0fbe3916-b3bd-4bf8-a72e-45320ab43f11",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmifullizle",
+          "pageUrl": "https://www.filmifullizle.news/film/kelebek-gorusu.html",
+          "kind": "movie"
+        },
+        "title": "Kelebek Görüşü",
+        "poster": "https://www.filmifullizle.news/wp-content/uploads/2023/09/d0b1d0b0d187d0b5d0bdd0bdd18f-d0bcd0b5d182d0b5d0bbd0b8d0bad0b0-180x270.jpg",
+        "year": 2022,
+        "imdb": null,
+        "language": "Türkçe Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:0fbe3916-b3bd-4bf8-a72e-45320ab43f11",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmifullizle",
+            "pageUrl": "https://www.filmifullizle.news/film/kelebek-gorusu.html",
+            "kind": "movie"
+          },
+          "title": "Kelebek Görüşü",
+          "poster": "https://www.filmifullizle.news/wp-content/uploads/2023/09/d0b1d0b0d187d0b5d0bdd0bdd18f-d0bcd0b5d182d0b5d0bbd0b8d0bad0b0-180x270.jpg",
+          "year": 2022,
+          "imdb": null,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:0fbe3916-b3bd-4bf8-a72e-45320ab43f11",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "fullhdfilmizlesene",
+            "pageUrl": "https://www.fullhdfilmizlesene.now/film/kelebek-gorusu-butterfly-vision-bachennya-metelyka/",
+            "kind": "movie"
+          },
+          "title": "Kelebek Görüşü",
+          "poster": "https://img.fullhdfilmizlesene.now/poster/film/film-tt14867294.jpg",
+          "year": 2022,
+          "imdb": 6.6,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:0fbe3916-b3bd-4bf8-a72e-45320ab43f11",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/kelebek-gorusu-izle/",
+            "kind": "movie"
+          },
+          "title": "Kelebek Görüşü",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2023/08/Kelebek-Gorusu-izle.jpg",
+          "year": 2022,
+          "imdb": 6.5,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:0fbe3916-b3bd-4bf8-a72e-45320ab43f11",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:cd3e0538-510f-4f51-babd-f44f3f0c0903",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/dizi/wandavision-izle-2021-fmumxn/",
+          "kind": "series"
+        },
+        "title": "WandaVision",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/wandavision-2021.jpg-thumb-liste.webp",
+        "year": 2021,
+        "imdb": 7.9,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:cd3e0538-510f-4f51-babd-f44f3f0c0903",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/dizi/wandavision-izle-2021-fmumxn/",
+            "kind": "series"
+          },
+          "title": "WandaVision",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/wandavision-2021.jpg-thumb-liste.webp",
+          "year": 2021,
+          "imdb": 7.9,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:cd3e0538-510f-4f51-babd-f44f3f0c0903",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/dizi/wandavision-dizi-izle-hdf11-60333162/",
+            "kind": "series"
+          },
+          "title": "WandaVision",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/wandavision-izle.webp",
+          "year": 2021,
+          "imdb": 7.9,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "WandaVision"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:cd3e0538-510f-4f51-babd-f44f3f0c0903",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/wandavision-1-sezon-izle-10/",
+            "kind": "series"
+          },
+          "title": "WandaVision 1. Sezon",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2025/07/WandaVision-1.-Sezon-izle.jpg",
+          "year": 2021,
+          "imdb": 7.9,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:cd3e0538-510f-4f51-babd-f44f3f0c0903",
+          "yearHint": null,
+          "sourceSeason": 1,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:6c1b8151-c3e6-47d0-88c4-ac9e4e67ddca",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/visions-izle-2023/",
+          "kind": "movie"
+        },
+        "title": "Visions",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/visions-2023.jpg-thumb-liste.webp",
+        "year": 2023,
+        "imdb": 5.3,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:6c1b8151-c3e6-47d0-88c4-ac9e4e67ddca",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/visions-izle-2023/",
+            "kind": "movie"
+          },
+          "title": "Visions",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/visions-2023.jpg-thumb-liste.webp",
+          "year": 2023,
+          "imdb": 5.3,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6c1b8151-c3e6-47d0-88c4-ac9e4e67ddca",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/visions-19/",
+            "kind": "movie"
+          },
+          "title": "Visions",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/visions.webp",
+          "year": 2023,
+          "imdb": 5.3,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Visions"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6c1b8151-c3e6-47d0-88c4-ac9e4e67ddca",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:fdf02b95-c984-4e95-98b2-2a2e42c78229",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-sunar-the-ninth-jedi-2026-fm4n4h/",
+          "kind": "series"
+        },
+        "title": "Star Wars Visions Sunar - The Ninth Jedi",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/star-wars-visions-presents-the-ninth-jedi-2026.jpg-thumb-detay.webp",
+        "year": 2026,
+        "imdb": 7.5,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "tt43337681",
+        "aliases": [
+          "Star Wars: Visions Presents - The Ninth Jedi",
+          "Star Wars Visions Sunar",
+          "The Ninth Jedi"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:fdf02b95-c984-4e95-98b2-2a2e42c78229",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Aile",
+          "Animasyon",
+          "Belgesel",
+          "Biyografi",
+          "Bilim Kurgu",
+          "Dram",
+          "Fantastik",
+          "Gerilim",
+          "Gizem",
+          "Komedi",
+          "Korku",
+          "Macera",
+          "Müzik",
+          "Polisiye",
+          "Romantik",
+          "Savaş",
+          "Spor",
+          "Tarih",
+          "Western"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-sunar-the-ninth-jedi-2026-fm4n4h/",
+          "kind": "SERIES",
+          "year": 2026,
+          "imdbId": "tt43337681",
+          "originalTitle": "Star Wars: Visions Presents - The Ninth Jedi",
+          "title": "Star Wars Visions Sunar - The Ninth Jedi",
+          "aliases": [
+            "Star Wars: Visions Presents - The Ninth Jedi",
+            "Star Wars Visions Sunar",
+            "The Ninth Jedi"
+          ],
+          "typeVerified": true,
+          "yearVerified": true,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "primary-release-year",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-sunar-the-ninth-jedi-2026-fm4n4h/",
+            "kind": "series"
+          },
+          "title": "Star Wars Visions Sunar - The Ninth Jedi",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/star-wars-visions-presents-the-ninth-jedi-2026.jpg-thumb-detay.webp",
+          "year": 2026,
+          "imdb": 7.5,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "tt43337681",
+          "aliases": [
+            "Star Wars: Visions Presents - The Ninth Jedi",
+            "Star Wars Visions Sunar",
+            "The Ninth Jedi"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:fdf02b95-c984-4e95-98b2-2a2e42c78229",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon",
+            "Aile",
+            "Animasyon",
+            "Belgesel",
+            "Biyografi",
+            "Bilim Kurgu",
+            "Dram",
+            "Fantastik",
+            "Gerilim",
+            "Gizem",
+            "Komedi",
+            "Korku",
+            "Macera",
+            "Müzik",
+            "Polisiye",
+            "Romantik",
+            "Savaş",
+            "Spor",
+            "Tarih",
+            "Western"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-sunar-the-ninth-jedi-2026-fm4n4h/",
+            "kind": "SERIES",
+            "year": 2026,
+            "imdbId": "tt43337681",
+            "originalTitle": "Star Wars: Visions Presents - The Ninth Jedi",
+            "title": "Star Wars Visions Sunar - The Ninth Jedi",
+            "aliases": [
+              "Star Wars: Visions Presents - The Ninth Jedi",
+              "Star Wars Visions Sunar",
+              "The Ninth Jedi"
+            ],
+            "typeVerified": true,
+            "yearVerified": true,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "primary-release-year",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/dizi/star-wars-visions-presents-the-ninth-jedi-14/",
+            "kind": "series"
+          },
+          "title": "Star Wars: Visions Presents – The Ninth Jedi",
+          "poster": "https://www.hdfilmcehennemi.nl/images/list/poster/star-wars-visions-presents-the-ninth-jedi.webp",
+          "year": 2026,
+          "imdb": 6.8,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "tt43337681",
+          "aliases": [
+            "Star Wars: Visions Presents – The Ninth Jedi",
+            "Star Wars: Visions Presents",
+            "The Ninth Jedi"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:fdf02b95-c984-4e95-98b2-2a2e42c78229",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Animasyon",
+            "Sci-Fi & Fantasy",
+            "Action & Adventure"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://www.hdfilmcehennemi.nl/dizi/star-wars-visions-presents-the-ninth-jedi-14/",
+            "kind": "SERIES",
+            "year": 2026,
+            "imdbId": "tt43337681",
+            "originalTitle": "",
+            "title": "Star Wars: Visions Presents – The Ninth Jedi",
+            "aliases": [
+              "Star Wars: Visions Presents – The Ninth Jedi",
+              "Star Wars: Visions Presents",
+              "The Ninth Jedi"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:609fefdf-bb0e-44ce-b331-4703119001ca",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/",
+          "kind": "series"
+        },
+        "title": "Star Wars: Visions Presents – The Ninth Jedi",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-presents-the-ninth-jedi-200x290.jpg",
+        "year": null,
+        "imdb": null,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Star Wars: Visions Presents",
+          "The Ninth Jedi"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:609fefdf-bb0e-44ce-b331-4703119001ca",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Animasyon",
+          "Bilimkurgu",
+          "Macera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "Star Wars: Visions Presents – The Ninth Jedi",
+          "aliases": [
+            "Star Wars: Visions Presents",
+            "The Ninth Jedi"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "dizibox",
+            "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/",
+            "kind": "series"
+          },
+          "title": "Star Wars: Visions Presents – The Ninth Jedi",
+          "poster": "https://www.dizibox.live/wp-content/uploads/afisler/star-wars-visions-presents-the-ninth-jedi-200x290.jpg",
+          "year": null,
+          "imdb": null,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Star Wars: Visions Presents",
+            "The Ninth Jedi"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:609fefdf-bb0e-44ce-b331-4703119001ca",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon",
+            "Animasyon",
+            "Bilimkurgu",
+            "Macera"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://www.dizibox.live/diziler/star-wars-visions-presents-the-ninth-jedi/",
+            "kind": "SERIES",
+            "year": null,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "Star Wars: Visions Presents – The Ninth Jedi",
+            "aliases": [
+              "Star Wars: Visions Presents",
+              "The Ninth Jedi"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:0a3ee46c-530b-485d-9c1d-b0665891b42b",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "fullhdfilmizlesene",
+          "pageUrl": "https://www.fullhdfilmizlesene.now/film/kehanet-vision-aus-dem-leben-der-hildegard-von-bingen/",
+          "kind": "movie"
+        },
+        "title": "Kehanet",
+        "poster": "https://img.fullhdfilmizlesene.now/poster/film/film-tt0995850.jpg",
+        "year": 2009,
+        "imdb": 6.5,
+        "language": "Türkçe Dublaj",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:0a3ee46c-530b-485d-9c1d-b0665891b42b",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "fullhdfilmizlesene",
+            "pageUrl": "https://www.fullhdfilmizlesene.now/film/kehanet-vision-aus-dem-leben-der-hildegard-von-bingen/",
+            "kind": "movie"
+          },
+          "title": "Kehanet",
+          "poster": "https://img.fullhdfilmizlesene.now/poster/film/film-tt0995850.jpg",
+          "year": 2009,
+          "imdb": 6.5,
+          "language": "Türkçe Dublaj",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:0a3ee46c-530b-485d-9c1d-b0665891b42b",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:bf7396e6-345c-4499-be65-d7a0de230ba3",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmcibaba",
+          "pageUrl": "https://filmizle.ink/haber/marvel-sinematik-evreni-kronolojik-izleme-sirasi/",
+          "kind": "collection"
+        },
+        "title": "Marvel Sinematik Evreni Kronolojik İzleme Sırası",
+        "poster": "",
+        "year": null,
+        "imdb": null,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:bf7396e6-345c-4499-be65-d7a0de230ba3",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmcibaba",
+            "pageUrl": "https://filmizle.ink/haber/marvel-sinematik-evreni-kronolojik-izleme-sirasi/",
+            "kind": "collection"
+          },
+          "title": "Marvel Sinematik Evreni Kronolojik İzleme Sırası",
+          "poster": "",
+          "year": null,
+          "imdb": null,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:bf7396e6-345c-4499-be65-d7a0de230ba3",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:8416797b-67b0-4eee-827b-f1f1fde109b8",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/visionquest/",
+          "kind": "series"
+        },
+        "title": "VisionQuest",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/visionquest-200x290.jpg",
+        "year": null,
+        "imdb": 8,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "VisionQuest"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:8416797b-67b0-4eee-827b-f1f1fde109b8",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Bilimkurgu",
+          "Drama",
+          "Gerilim",
+          "Mcera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/visionquest/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "VisionQuest",
+          "aliases": [
+            "VisionQuest"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "dizibox",
+            "pageUrl": "https://www.dizibox.live/diziler/visionquest/",
+            "kind": "series"
+          },
+          "title": "VisionQuest",
+          "poster": "https://www.dizibox.live/wp-content/uploads/afisler/visionquest-200x290.jpg",
+          "year": null,
+          "imdb": 8,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "VisionQuest"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:8416797b-67b0-4eee-827b-f1f1fde109b8",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon",
+            "Bilimkurgu",
+            "Drama",
+            "Gerilim",
+            "Mcera"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://www.dizibox.live/diziler/visionquest/",
+            "kind": "SERIES",
+            "year": null,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "VisionQuest",
+            "aliases": [
+              "VisionQuest"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:cd4adf51-e41f-4615-a890-f03ad523eaf4",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "lovefilmizle",
+          "pageUrl": "https://lovefilmizle.net/prenses-kaguya-masali-izle/",
+          "kind": "movie"
+        },
+        "title": "Prenses Kaguya Masalı",
+        "poster": "https://lovefilmizle.net/wp-content/uploads/2026/10/wmFzjCp0tDFexGOzraOSRnHHaB3.jpg",
+        "year": 2013,
+        "imdb": 8,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:cd4adf51-e41f-4615-a890-f03ad523eaf4",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/prenses-kaguya-masali-izle/",
+            "kind": "movie"
+          },
+          "title": "Prenses Kaguya Masalı",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2026/10/wmFzjCp0tDFexGOzraOSRnHHaB3.jpg",
+          "year": 2013,
+          "imdb": 8,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:cd4adf51-e41f-4615-a890-f03ad523eaf4",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:6c7ff5a3-a11d-43a8-a549-dfdfc5d38255",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-izle-2021/",
+          "kind": "series"
+        },
+        "title": "Star Wars: Visions",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/star-wars-visions-2021.jpg-thumb-detay.webp",
+        "year": 2021,
+        "imdb": 7,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "tt13622982",
+        "aliases": [
+          "Star Wars: Visions"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:6c7ff5a3-a11d-43a8-a549-dfdfc5d38255",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Aile",
+          "Animasyon",
+          "Belgesel",
+          "Biyografi",
+          "Bilim Kurgu",
+          "Dram",
+          "Fantastik",
+          "Gerilim",
+          "Gizem",
+          "Komedi",
+          "Korku",
+          "Macera",
+          "Müzik",
+          "Polisiye",
+          "Romantik",
+          "Savaş",
+          "Spor",
+          "Tarih",
+          "Western"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-izle-2021/",
+          "kind": "SERIES",
+          "year": 2021,
+          "imdbId": "tt13622982",
+          "originalTitle": "",
+          "title": "Star Wars: Visions",
+          "aliases": [
+            "Star Wars: Visions"
+          ],
+          "typeVerified": true,
+          "yearVerified": true,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "primary-release-year",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-izle-2021/",
+            "kind": "series"
+          },
+          "title": "Star Wars: Visions",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/star-wars-visions-2021.jpg-thumb-detay.webp",
+          "year": 2021,
+          "imdb": 7,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "tt13622982",
+          "aliases": [
+            "Star Wars: Visions"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6c7ff5a3-a11d-43a8-a549-dfdfc5d38255",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon",
+            "Aile",
+            "Animasyon",
+            "Belgesel",
+            "Biyografi",
+            "Bilim Kurgu",
+            "Dram",
+            "Fantastik",
+            "Gerilim",
+            "Gizem",
+            "Komedi",
+            "Korku",
+            "Macera",
+            "Müzik",
+            "Polisiye",
+            "Romantik",
+            "Savaş",
+            "Spor",
+            "Tarih",
+            "Western"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://filmmakinesi.to/dizi/star-wars-visions-izle-2021/",
+            "kind": "SERIES",
+            "year": 2021,
+            "imdbId": "tt13622982",
+            "originalTitle": "",
+            "title": "Star Wars: Visions",
+            "aliases": [
+              "Star Wars: Visions"
+            ],
+            "typeVerified": true,
+            "yearVerified": true,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "primary-release-year",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/dizi/star-wars-visions-hdf5-811157/",
+            "kind": "series"
+          },
+          "title": "Star Wars: Visions",
+          "poster": "https://www.hdfilmcehennemi.nl/images/list/poster/star-wars-visions.webp",
+          "year": 2021,
+          "imdb": 7,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "tt13622982",
+          "aliases": [
+            "Star Wars: Visions"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6c7ff5a3-a11d-43a8-a549-dfdfc5d38255",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Animasyon",
+            "Aksiyon",
+            "Macera"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://www.hdfilmcehennemi.nl/dizi/star-wars-visions-hdf5-811157/",
+            "kind": "SERIES",
+            "year": 2021,
+            "imdbId": "tt13622982",
+            "originalTitle": "",
+            "title": "Star Wars: Visions",
+            "aliases": [
+              "Star Wars: Visions"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:427e8cd1-bed9-40af-9a02-802561b50191",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/noble-vision-izle-2024/",
+          "kind": "movie"
+        },
+        "title": "Noble Vision",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/noble-vision-2024.jpg-thumb-liste.webp",
+        "year": 2024,
+        "imdb": 6.8,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:427e8cd1-bed9-40af-9a02-802561b50191",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/noble-vision-izle-2024/",
+            "kind": "movie"
+          },
+          "title": "Noble Vision",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/noble-vision-2024.jpg-thumb-liste.webp",
+          "year": 2024,
+          "imdb": 6.8,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:427e8cd1-bed9-40af-9a02-802561b50191",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/noble-vision/",
+            "kind": "movie"
+          },
+          "title": "Noble Vision",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/noble-vision.webp",
+          "year": 2024,
+          "imdb": 6.8,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Noble Vision"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:427e8cd1-bed9-40af-9a02-802561b50191",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:455d3716-b7cf-4800-b69f-d59dc1c324fe",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "dizibox",
+          "pageUrl": "https://www.dizibox.live/diziler/wandavision-hd-3/",
+          "kind": "series"
+        },
+        "title": "WandaVision",
+        "poster": "https://www.dizibox.live/wp-content/uploads/afisler/wandavision-200x290.jpg",
+        "year": null,
+        "imdb": 7.9,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "WandaVision"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:455d3716-b7cf-4800-b69f-d59dc1c324fe",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": [
+          "Aksiyon",
+          "Komedi",
+          "Macera"
+        ],
+        "identityEvidence": {
+          "pageUrl": "https://www.dizibox.live/diziler/wandavision-hd-3/",
+          "kind": "SERIES",
+          "year": null,
+          "imdbId": "",
+          "originalTitle": "",
+          "title": "WandaVision",
+          "aliases": [
+            "WandaVision"
+          ],
+          "typeVerified": true,
+          "yearVerified": false,
+          "detailChecked": true,
+          "imdbConflict": false,
+          "reason": "",
+          "referencePage": "",
+          "season": null,
+          "revision": 3
+        }
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "dizibox",
+            "pageUrl": "https://www.dizibox.live/diziler/wandavision-hd-3/",
+            "kind": "series"
+          },
+          "title": "WandaVision",
+          "poster": "https://www.dizibox.live/wp-content/uploads/afisler/wandavision-200x290.jpg",
+          "year": null,
+          "imdb": 7.9,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "WandaVision"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:455d3716-b7cf-4800-b69f-d59dc1c324fe",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": [
+            "Aksiyon",
+            "Komedi",
+            "Macera"
+          ],
+          "identityEvidence": {
+            "pageUrl": "https://www.dizibox.live/diziler/wandavision-hd-3/",
+            "kind": "SERIES",
+            "year": null,
+            "imdbId": "",
+            "originalTitle": "",
+            "title": "WandaVision",
+            "aliases": [
+              "WandaVision"
+            ],
+            "typeVerified": true,
+            "yearVerified": false,
+            "detailChecked": true,
+            "imdbConflict": false,
+            "reason": "",
+            "referencePage": "",
+            "season": null,
+            "revision": 3
+          }
+        }
+      ]
+    },
+    {
+      "identity": "work:97a12d47-e0c0-4bd2-b2e7-13fab18a344f",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "lovefilmizle",
+          "pageUrl": "https://lovefilmizle.net/marco-polo-one-hundred-eyes-izle/",
+          "kind": "movie"
+        },
+        "title": "Marco Polo: One Hundred Eyes",
+        "poster": "https://lovefilmizle.net/wp-content/uploads/2026/10/d0rxzDimOAX5QL9jSBz1CsSZpWL.jpg",
+        "year": 2015,
+        "imdb": 7.7,
+        "language": "Türkçe Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:97a12d47-e0c0-4bd2-b2e7-13fab18a344f",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/marco-polo-one-hundred-eyes-izle/",
+            "kind": "movie"
+          },
+          "title": "Marco Polo: One Hundred Eyes",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2026/10/d0rxzDimOAX5QL9jSBz1CsSZpWL.jpg",
+          "year": 2015,
+          "imdb": 7.7,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:97a12d47-e0c0-4bd2-b2e7-13fab18a344f",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:32a17c23-1c97-428f-b448-472b36b73483",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "lovefilmizle",
+          "pageUrl": "https://lovefilmizle.net/astronot-willy-macera-gezegeni-izle/",
+          "kind": "movie"
+        },
+        "title": "Astronot Willy: Macera Gezegeni",
+        "poster": "https://lovefilmizle.net/wp-content/uploads/2025/09/Astronot-Willy-Macera-Gezegeni-izle.jpg",
+        "year": 2019,
+        "imdb": 6.6,
+        "language": "Türkçe Dublaj",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:32a17c23-1c97-428f-b448-472b36b73483",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/astronot-willy-macera-gezegeni-izle/",
+            "kind": "movie"
+          },
+          "title": "Astronot Willy: Macera Gezegeni",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2025/09/Astronot-Willy-Macera-Gezegeni-izle.jpg",
+          "year": 2019,
+          "imdb": 6.6,
+          "language": "Türkçe Dublaj",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:32a17c23-1c97-428f-b448-472b36b73483",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:5b91ba12-c0f0-4ffa-b206-c69b029a60d5",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/great-yarmouth-provisional-figures/",
+          "kind": "movie"
+        },
+        "title": "Great Yarmouth - Provisional Figures",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/great-yarmouth-provisional-figures.webp",
+        "year": 2022,
+        "imdb": 6.8,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Great Yarmouth",
+          "Provisional Figures"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:5b91ba12-c0f0-4ffa-b206-c69b029a60d5",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/great-yarmouth-provisional-figures/",
+            "kind": "movie"
+          },
+          "title": "Great Yarmouth - Provisional Figures",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/great-yarmouth-provisional-figures.webp",
+          "year": 2022,
+          "imdb": 6.8,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Great Yarmouth",
+            "Provisional Figures"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:5b91ba12-c0f0-4ffa-b206-c69b029a60d5",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/great-yarmouth-provisional-figures-izle-2022/",
+            "kind": "movie"
+          },
+          "title": "Great Yarmouth: Provisional Figures",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/great-yarmouth-provisional-figures-2022.jpg-thumb-liste.webp",
+          "year": 2022,
+          "imdb": 6.8,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:5b91ba12-c0f0-4ffa-b206-c69b029a60d5",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:6e899245-c97c-46bd-832a-c42851db3f4a",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/gecmisin-laneti-izle-fm4/",
+          "kind": "movie"
+        },
+        "title": "Geçmişin Laneti",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/visions-2015.jpg-thumb-liste.webp",
+        "year": 2015,
+        "imdb": 5.3,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:6e899245-c97c-46bd-832a-c42851db3f4a",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/gecmisin-laneti-izle-fm4/",
+            "kind": "movie"
+          },
+          "title": "Geçmişin Laneti",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/visions-2015.jpg-thumb-liste.webp",
+          "year": 2015,
+          "imdb": 5.3,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6e899245-c97c-46bd-832a-c42851db3f4a",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/gecmisin-laneti-izle/",
+            "kind": "movie"
+          },
+          "title": "Geçmişin Laneti",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2025/02/Gecmisin-Laneti-izle.jpg",
+          "year": 2015,
+          "imdb": 5.3,
+          "language": "Türkçe Dublaj",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6e899245-c97c-46bd-832a-c42851db3f4a",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:f2a20bf7-e84c-4579-b9ac-87ab3fa58886",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/onsezi-kitabi-izle-2020-fm1/",
+          "kind": "movie"
+        },
+        "title": "Önsezi Kitabı",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/the-book-of-vision-2021.jpg-thumb-liste.webp",
+        "year": 2020,
+        "imdb": 7.1,
+        "language": "Türkçe Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:f2a20bf7-e84c-4579-b9ac-87ab3fa58886",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/onsezi-kitabi-izle-2020-fm1/",
+            "kind": "movie"
+          },
+          "title": "Önsezi Kitabı",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/the-book-of-vision-2021.jpg-thumb-liste.webp",
+          "year": 2020,
+          "imdb": 7.1,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:f2a20bf7-e84c-4579-b9ac-87ab3fa58886",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "lovefilmizle",
+            "pageUrl": "https://lovefilmizle.net/onsezi-kitabi-izle/",
+            "kind": "movie"
+          },
+          "title": "Önsezi Kitabı",
+          "poster": "https://lovefilmizle.net/wp-content/uploads/2023/08/Onsezi-Kitabi-izle.jpg",
+          "year": 2020,
+          "imdb": 7.5,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:f2a20bf7-e84c-4579-b9ac-87ab3fa58886",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:275768e6-9c03-41b8-8523-88036f3fc082",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/shirley-visions-of-reality-izle-2013-fm2/",
+          "kind": "movie"
+        },
+        "title": "Shirley Visions of Reality",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/shirley-visions-of-reality-2013.jpg-thumb-liste.webp",
+        "year": 2013,
+        "imdb": 6.3,
+        "language": "Türkçe Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:275768e6-9c03-41b8-8523-88036f3fc082",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/shirley-visions-of-reality-izle-2013-fm2/",
+            "kind": "movie"
+          },
+          "title": "Shirley Visions of Reality",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/shirley-visions-of-reality-2013.jpg-thumb-liste.webp",
+          "year": 2013,
+          "imdb": 6.3,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:275768e6-9c03-41b8-8523-88036f3fc082",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/shirley-visionsof-reality-2013/",
+            "kind": "movie"
+          },
+          "title": "Shirley Visionsof Reality - Shirley: Visions of Reality",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/shirley-visions-of-reality.webp",
+          "year": 2013,
+          "imdb": 6.3,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Shirley Visionsof Reality",
+            "Shirley: Visions of Reality"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:275768e6-9c03-41b8-8523-88036f3fc082",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:6324faaa-4586-4348-adb1-1baa78c752e2",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/hd-tom-clancys-the-division-agent-origins-izle-4/",
+          "kind": "movie"
+        },
+        "title": "Tom Clancys the Division Agent Origins - The Division: Agent Origins",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/hd-tom-clancys-the-division-agent-origins-izle.webp",
+        "year": 2016,
+        "imdb": 6,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Tom Clancys the Division Agent Origins",
+          "The Division: Agent Origins"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:6324faaa-4586-4348-adb1-1baa78c752e2",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/hd-tom-clancys-the-division-agent-origins-izle-4/",
+            "kind": "movie"
+          },
+          "title": "Tom Clancys the Division Agent Origins - The Division: Agent Origins",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/hd-tom-clancys-the-division-agent-origins-izle.webp",
+          "year": 2016,
+          "imdb": 6,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Tom Clancys the Division Agent Origins",
+            "The Division: Agent Origins"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6324faaa-4586-4348-adb1-1baa78c752e2",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        },
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/tom-clancys-the-division-agent-origins-izle-fm3/",
+            "kind": "movie"
+          },
+          "title": "Tom Clancys the Division: Agent Origins",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/the-division-agent-origins-2016.jpg-thumb-liste.webp",
+          "year": 2016,
+          "imdb": 6,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:6324faaa-4586-4348-adb1-1baa78c752e2",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:780dcacb-a841-46cd-b3fe-9a0728a1f0a1",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/night-vision-2011/",
+          "kind": "movie"
+        },
+        "title": "Night Vision",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/night-vision-2011.jpg-thumb-liste.webp",
+        "year": 2011,
+        "imdb": 3.3,
+        "language": "Türkçe Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:780dcacb-a841-46cd-b3fe-9a0728a1f0a1",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/night-vision-2011/",
+            "kind": "movie"
+          },
+          "title": "Night Vision",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/night-vision-2011.jpg-thumb-liste.webp",
+          "year": 2011,
+          "imdb": 3.3,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:780dcacb-a841-46cd-b3fe-9a0728a1f0a1",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:ad5e3f66-ecb2-4d36-8660-84f0e998ac2f",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/chilling-visions-5-senses-of-fear-2013/",
+          "kind": "movie"
+        },
+        "title": "Chilling Visions: 5 Senses of Fear",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/chilling-visions-5-senses-of-fear.webp",
+        "year": 2013,
+        "imdb": 4.9,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Chilling Visions: 5 Senses of Fear"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:ad5e3f66-ecb2-4d36-8660-84f0e998ac2f",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/chilling-visions-5-senses-of-fear-2013/",
+            "kind": "movie"
+          },
+          "title": "Chilling Visions: 5 Senses of Fear",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/chilling-visions-5-senses-of-fear.webp",
+          "year": 2013,
+          "imdb": 4.9,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Chilling Visions: 5 Senses of Fear"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:ad5e3f66-ecb2-4d36-8660-84f0e998ac2f",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:bbdb356c-32d2-41c2-8383-c17d67607a4e",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/goz-double-vision-izle-hdf-hdf-4/",
+          "kind": "movie"
+        },
+        "title": "Göz Double Vision - Double Vision",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/goz-double-vision-izle.webp",
+        "year": 2002,
+        "imdb": 6.4,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Göz Double Vision",
+          "Double Vision"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:bbdb356c-32d2-41c2-8383-c17d67607a4e",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/goz-double-vision-izle-hdf-hdf-4/",
+            "kind": "movie"
+          },
+          "title": "Göz Double Vision - Double Vision",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/goz-double-vision-izle.webp",
+          "year": 2002,
+          "imdb": 6.4,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Göz Double Vision",
+            "Double Vision"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:bbdb356c-32d2-41c2-8383-c17d67607a4e",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:ff9d9702-a9ae-467c-b78c-fa134c39130a",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "hdfilmcehennemi",
+          "pageUrl": "https://www.hdfilmcehennemi.nl/terror-vision-1986/",
+          "kind": "movie"
+        },
+        "title": "Terror Vision - TerrorVision",
+        "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/terrorvision.webp",
+        "year": 1986,
+        "imdb": 5.6,
+        "language": "",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [
+          "Terror Vision",
+          "TerrorVision"
+        ],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:ff9d9702-a9ae-467c-b78c-fa134c39130a",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "hdfilmcehennemi",
+            "pageUrl": "https://www.hdfilmcehennemi.nl/terror-vision-1986/",
+            "kind": "movie"
+          },
+          "title": "Terror Vision - TerrorVision",
+          "poster": "https://www.hdfilmcehennemi.nl/images/thumb/poster/terrorvision.webp",
+          "year": 1986,
+          "imdb": 5.6,
+          "language": "",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [
+            "Terror Vision",
+            "TerrorVision"
+          ],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:ff9d9702-a9ae-467c-b78c-fa134c39130a",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:9393a5c0-6d00-4052-adeb-8c2c608fca38",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/ikinci-goz-2002/",
+          "kind": "movie"
+        },
+        "title": "İkinci Göz",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/ikinci-goz-2002.jpg-thumb-liste.webp",
+        "year": 2002,
+        "imdb": 6.4,
+        "language": "Türkçe Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:9393a5c0-6d00-4052-adeb-8c2c608fca38",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/ikinci-goz-2002/",
+            "kind": "movie"
+          },
+          "title": "İkinci Göz",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/ikinci-goz-2002.jpg-thumb-liste.webp",
+          "year": 2002,
+          "imdb": 6.4,
+          "language": "Türkçe Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:9393a5c0-6d00-4052-adeb-8c2c608fca38",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:3ba7dbcf-b085-43b0-8a9a-2b644ed96ed5",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/korku-uydusu-1986/",
+          "kind": "movie"
+        },
+        "title": "Korku Uydusu",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/korku-uydusu-1986.jpg-thumb-liste.webp",
+        "year": 1986,
+        "imdb": 5.6,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:3ba7dbcf-b085-43b0-8a9a-2b644ed96ed5",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/korku-uydusu-1986/",
+            "kind": "movie"
+          },
+          "title": "Korku Uydusu",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/korku-uydusu-1986.jpg-thumb-liste.webp",
+          "year": 1986,
+          "imdb": 5.6,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:3ba7dbcf-b085-43b0-8a9a-2b644ed96ed5",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    },
+    {
+      "identity": "work:d169d660-6dd6-4e82-8c55-11dfccc8cca4",
+      "card": {
+        "schemaVersion": 2,
+        "ref": {
+          "siteId": "filmmakinesi",
+          "pageUrl": "https://filmmakinesi.to/film/korkunun-5-duyusu-2013/",
+          "kind": "movie"
+        },
+        "title": "Korkunun 5 Duyusu",
+        "poster": "https://filmmakinesi.to/uploads/postlar/afis/chilling-visions-5-senses-of-fear-2015.jpg-thumb-liste.webp",
+        "year": 2013,
+        "imdb": 4.9,
+        "language": "Dublaj & Altyazılı",
+        "originalTitle": "",
+        "imdbId": "",
+        "aliases": [],
+        "seriesIdentity": "",
+        "episode": null,
+        "workId": "work:d169d660-6dd6-4e82-8c55-11dfccc8cca4",
+        "yearHint": null,
+        "sourceSeason": null,
+        "genres": []
+      },
+      "alternatives": [
+        {
+          "schemaVersion": 2,
+          "ref": {
+            "siteId": "filmmakinesi",
+            "pageUrl": "https://filmmakinesi.to/film/korkunun-5-duyusu-2013/",
+            "kind": "movie"
+          },
+          "title": "Korkunun 5 Duyusu",
+          "poster": "https://filmmakinesi.to/uploads/postlar/afis/chilling-visions-5-senses-of-fear-2015.jpg-thumb-liste.webp",
+          "year": 2013,
+          "imdb": 4.9,
+          "language": "Dublaj & Altyazılı",
+          "originalTitle": "",
+          "imdbId": "",
+          "aliases": [],
+          "seriesIdentity": "",
+          "episode": null,
+          "workId": "work:d169d660-6dd6-4e82-8c55-11dfccc8cca4",
+          "yearHint": null,
+          "sourceSeason": null,
+          "genres": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+<resources>
+    <string name="series_incomplete_sites">Bazı sitelere ulaşılamadı (%1$d); bölüm listesi kısmi olabilir.</string>
+    <string name="series_unverified_parts">Bölüm numarası doğrulanamayan %1$d site sayfası listeye eklenmedi.</string>
+    <string name="series_no_episode_links">Bu sezon için site bölüm bağlantısı bildirmiyor. Diğer sitelerde de bul seçeneğini deneyebilirsiniz.</string>
+</resources>

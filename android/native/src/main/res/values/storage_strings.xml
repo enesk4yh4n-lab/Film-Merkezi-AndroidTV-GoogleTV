@@ -1,0 +1,4 @@
+<resources>
+    <string name="tv_storage_damaged">Bazı kayıtlar okunamadı; özgün veriler korundu.</string>
+    <string name="tv_storage_save_failed">Kayıt kaydedilemedi. Önceki veriler korundu.</string>
+</resources>

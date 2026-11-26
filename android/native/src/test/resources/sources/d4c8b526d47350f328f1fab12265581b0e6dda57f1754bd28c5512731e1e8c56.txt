@@ -1,0 +1,13 @@
+#EXTM3U
+# Info: HLS8
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio0",NAME="Türkçe",LANGUAGE="tr",AUTOSELECT=NO,DEFAULT=NO,CHANNELS="2",URI="https://ha.vixolity.com/mm/tt37287335/main_1080p/index-a1.gif"
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio0",NAME="English",LANGUAGE="en",AUTOSELECT=NO,DEFAULT=NO,CHANNELS="2",URI="https://ha.vixolity.com/mm/tt37287335/main_1080p/index-a2.gif"
+#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID="subs0",NAME="English",LANGUAGE="en",AUTOSELECT=NO,DEFAULT=NO,URI="https://ha.vixolity.com/vtt/tt37287335/sub_en.gif"
+#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID="subs0",NAME="Sesotho",LANGUAGE="st",AUTOSELECT=YES,DEFAULT=YES,URI="https://ha.vixolity.com/vtt/tt37287335/sub_st.gif"
+#EXT-X-MEDIA:TYPE=SUBTITLES,GROUP-ID="subs0",NAME="Türkçe",LANGUAGE="tr",AUTOSELECT=NO,DEFAULT=NO,URI="https://ha.vixolity.com/vtt/tt37287335/sub_tr.gif"
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2409615,RESOLUTION=1920x1080,FRAME-RATE=23.974,CODECS="avc1.4d4028,mp4a.40.2",AUDIO="audio0",SUBTITLES="subs0"
+https://ha.vixolity.com/mm/tt37287335/main_1080p/index-v1-a1.gif
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=702600,RESOLUTION=854x480,FRAME-RATE=23.974,CODECS="avc1.4d401e,mp4a.40.2",AUDIO="audio0",SUBTITLES="subs0"
+https://ha.vixolity.com/mm/tt37287335/main_480p/index-v1-a1.gif
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=169630,RESOLUTION=1920x1080,CODECS="avc1.4d4028",URI="https://ha.vixolity.com/mm/tt37287335/main_1080p/iframes-v1-a1.gif"
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=60424,RESOLUTION=854x480,CODECS="avc1.4d401e",URI="https://ha.vixolity.com/mm/tt37287335/main_480p/iframes-v1-a1.gif"

@@ -1,0 +1,8 @@
+#EXTM3U
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2107095,RESOLUTION=1600x900,FRAME-RATE=23.974,CODECS="avc1.640028,mp4a.40.2"
+https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_n/index-v1-a1.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=851686,RESOLUTION=852x480,FRAME-RATE=23.974,CODECS="avc1.4d401f,mp4a.40.2"
+https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_l/index-v1-a1.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331
+
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=206158,RESOLUTION=1600x900,CODECS="avc1.640028",URI="https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_n/iframes-v1-a1.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331"
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=101575,RESOLUTION=852x480,CODECS="avc1.4d401f",URI="https://prx-1566-ant-r.vmpx.online/hls2/03/00449/szjpmoedem3y_l/iframes-v1-a1.m3u8?t=weNyBsRsOQr6V_IcGDFFrLpmDSjro5NucA09bGmK-sI=&s=1793690173&e=43200&v=&srv=box-c-o-l-2&i=0.4&sp=0&asn=47331"

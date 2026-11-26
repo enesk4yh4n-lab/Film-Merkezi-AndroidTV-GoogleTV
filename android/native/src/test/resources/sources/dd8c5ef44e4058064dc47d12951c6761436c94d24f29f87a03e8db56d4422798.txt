@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DisclosureDay-2026-BLURAY-TRDUAL-tt15047880.mp4</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="utf-8">
+
+			<link rel="preconnect" href="https://ssl.p.jwpcdn.com">
+	<link rel="preconnect" href="https://www.gstatic.com">
+	<link rel="dns-prefetch" href="https://ssl.p.jwpcdn.com">
+	<link rel="dns-prefetch" href="https://www.gstatic.com">
+
+	<meta name="description" content="DisclosureDay-2026-BLURAY-TRDUAL-tt15047880.mp4" />
+	<meta name="keywords" content="DisclosureDay-2026-BLURAY-TRDUAL-tt15047880.mp4" />
+	
+	<script>
+			</script>
+	
+	<script src="/Tema/v1/js/tasarim/devtools-console-detectv2.js?v=1.04e"></script>	
+		
+	
+		<script src="/Tema/v1/js/jquery-2.1.1.min.js"></script>
+		<script src="/Tema/v1/js/jquery-migrate.js"></script>
+		
+	<!--link rel="stylesheet" href="/Tema/v1/css/bootstrap.min.css"-->
+	
+		
+		
+	<style>
+		html, body { margin:0; padding:0; background:#000; width:100%; height:100%; }
+		/*.player { width:100%; height:100%; }*/
+		
+		.adsbox { position:absolute; top:-100px; }
+		
+		.btn-backward { background:url("/Tema/v1/images/backward.png") no-repeat !important; }
+		.btn-forward { background:url("/Tema/v1/images/forward.png") no-repeat !important; }
+		.btn-backward, .btn-forward { background-size:20px 20px !important; background-position-y:5px !important; background-position-x:center !important; cursor:pointer; }
+		.btn-backward:hover, .btn-forward:hover { box-shadow: 0em 0em 1em #696969; }
+	</style>
+	
+	
+		
+		<meta name="robots" content="noindex,follow" />
+	</head>
+
+<body><a href="https://hdfilmcehennemi.mobi/cdn-cgi/content?id=SdJwj54YxNK1kRJZELKI9.3JGKRq7f_OKMmkVeNA.70-1793687563.664653-1.2.1.1-DUf9QDvOCh2HogSz0Q5upVRUyOd8eLBny9ppefJ60do2XAAPZct_Ln8f_4Oa7WCZ" aria-hidden="true" rel="nofollow noopener" style="display: none !important; visibility: hidden !important"></a>
+						<!--div class="embed-responsive embed-responsive-16by9"-->
+				
+			<script type="application/ld+json">
+			{
+				"@context": "http://schema.org",
+				"@type": "VideoObject",
+				"name": "DisclosureDay-2026-BLURAY-TRDUAL-tt15047880.mp4",
+				"description": "DisclosureDay-2026-BLURAY-TRDUAL-tt15047880.mp4",
+				"thumbnailUrl": [
+					"https://hdfilmcehennemi.mobi/img/_autocdn-default.jpg"
+				],
+				"uploadDate": "2026-08-15T22:30:32+03:00",
+				"duration": "PT2H25M34S",
+				"embedUrl": "https://hdfilmcehennemi.mobi/video/embed/MoDEXaHfsVY/",
+				"contentUrl": "https://hls8.playmix.uno/hls/filmakinesimp4-f9gx1M12BwC.mp4/master.txt"
+			}
+			</script>
+		
+			<style>
+				.player { width:100%; height:100%; position:relative; }
+				#videoplayer { width:100% !important; height:100% !important; }
+				
+				.brand { height:auto; position:absolute; z-index:1112; top:15px; right:20px; padding:10px; border-radius:4px; }
+				.brand img { width:100%; display:block; }
+				.brand .download { width:90px; padding:0; background:rgba(123,123,123,0.35); color:#fff; text-decoration:none; font-size:18px; display:inline-block; padding:10px 0; margin:0 5px; border-radius:5px; text-align:center; }
+				.brand .download:hover { background:#a7a5a559; }
+				.brand .download img { display:inline-block; width:16px; }
+				.brand .yardim { width:90px; padding:0; background:rgba(123,123,123,0.35); color:#fff; text-decoration:none; font-size:18px; display:inline-block; padding:10px 0; border-radius:5px; margin:0 5px; text-align:center; }
+				.brand .yardim:hover { background:#a7a5a559; }
+				
+				.video-title { width:100%; position:absolute; top:0; cursor:default; padding:15px; z-index:99; color:#fff; background:linear-gradient(0deg,transparent,rgba(0,0,0,.6)); font-size:20px !important; }
+				@media (max-width: 480px) { .video-title { font-size:14px !important; } }
+				.jw-flag-user-inactive .video-title { display:none; }
+				.jw-state-paused .video-title { display:block; }
+				.jw-flag-user-inactive .brand { display:none; }
+				
+				.dual-buttons { position:absolute; bottom:110%; left:0; z-index:1; text-align:left; padding-left:20px; padding-bottom:10px; }
+				.dual-buttons a { display:inline-block; padding:8px 15px; margin-right:10px; border:1px solid #fff; background:#00000096; color:#fff; text-decoration:none; transition:all 0.2s ease-in-out; font-size:14px; }
+				@media (max-width: 768px) { .dual-buttons a { padding:5px 10px; font-size:12px; } }
+				.dual-buttons a:hover { background:#62626296; }
+				.jw-flag-user-inactive .dual-buttons { display:none; }
+				.jw-state-paused .dual-buttons { display:block; }
+				
+				/*dual ses control bar butonu*/
+				.jw-controlbar .jw-button-container .dilsec-btn { margin:0 !important; padding:0 !important; }
+				
+				.jwplayer .jw-rightclick.jw-open { display:none !important; }
+				
+				/*subtitle config - videojs ile aynı görünüm*/
+				.jw-captions { bottom:0 !important; font-size:25.55px; max-height:calc(100% - 60px) !important; }
+				.jw-text-track-display { top:unset !important; bottom:0 !important; left:0 !important; right:0 !important; width:auto !important; text-align:center !important; }
+				.jw-text-track-cue {
+					font-family:sans-serif;
+					font-weight:bold !important;
+					line-height:1.2 !important;
+					white-space:pre-line !important;
+					background:transparent;
+					text-shadow: rgb(0,0,0) 3px 0px 0px, rgb(0,0,0) 2.83487px 0.981584px 0px, rgb(0,0,0) 2.35766px 1.85511px 0px, rgb(0,0,0) 1.62091px 2.52441px 0px, rgb(0,0,0) 0.705713px 2.91581px 0px, rgb(0,0,0) -0.287171px 2.98622px 0px, rgb(0,0,0) -1.24844px 2.72789px 0px, rgb(0,0,0) -2.07227px 2.16926px 0px, rgb(0,0,0) -2.66798px 1.37182px 0px, rgb(0,0,0) -2.96998px 0.42336px 0px, rgb(0,0,0) -2.94502px -0.571704px 0px, rgb(0,0,0) -2.59586px -1.50383px 0px, rgb(0,0,0) -1.96093px -2.27041px 0px, rgb(0,0,0) -1.11013px -2.78704px 0px, rgb(0,0,0) -0.137119px -2.99686px 0px, rgb(0,0,0) 0.850987px -2.87677px 0px, rgb(0,0,0) 1.74541px -2.43999px 0px, rgb(0,0,0) 2.44769px -1.73459px 0px, rgb(0,0,0) 2.88051px -0.838247px 0px;
+				}
+
+				/*fullscreen responsive - font büyütme + konum*/
+				.jw-flag-fullscreen .jw-captions { font-size:20px; }
+				@media (min-width: 992px) {
+					.jw-flag-fullscreen .jw-captions { font-size:26.62px; }
+				}
+				
+				/*ios native CC track gizle*/
+				.jw-settings-content-item[aria-label="CC"] { display:none !important; }
+
+				/*jw settings menü düzenlemeleri*/
+				.jw-settings-submenu-audioTracks .jw-reset.jw-settings-submenu-items:before { content:"Seslendirme"; color:#fff; font-weight:bold; padding:10px; display:block; }
+				.jw-settings-submenu-captions .jw-reset.jw-settings-submenu-items:before { content:"Altyazı"; color:#fff; font-weight:bold; padding:10px; display:block; }
+				.jw-settings-submenu-playbackRates .jw-reset.jw-settings-submenu-items:before { content:"Oynatma Hızı"; color:#fff; font-weight:bold; padding:10px; display:block; }
+				.jw-settings-submenu-quality .jw-reset.jw-settings-submenu-items:before { content:"Kalite"; color:#fff; font-weight:bold; padding:10px; display:block; }
+				
+				/*info tooltip*/
+				.tooltip-info { width:185px; background-color:#363636; cursor:pointer; color:#fff; border-radius:5px; padding:10px; position:absolute; z-index:9999; bottom:40px; right:165px; font-size:14px !important; }
+				.tooltip-info::after { content:""; position:absolute; top:100%; left:50%; margin-left:42px; border-width:5px; border-style:solid; border-color:#fff transparent transparent transparent; }
+				.tooltip-info .fl { width:90%; float:left; }
+				.tooltip-info i { margin-left:5px; float:right; font-weight:bold; font-style:normal; }
+				.tooltip-info.sub-info { right:120px; display:none; }
+				.jw-texttrack-upload { background:#4e4e4e !important; cursor:pointer; }
+				
+				/*closeload jw renk teması (#0e223d)*/
+				.jwplayer .jw-controlbar { background:#0e223dd1 !important; }
+				.jwplayer .jw-slider-time .jw-rail { background:rgba(255,255,255,0.2) !important; }
+				.jwplayer .jw-slider-time .jw-buffer { background:rgba(255,255,255,0.3) !important; }
+				.jwplayer .jw-slider-time .jw-progress { background:#3b82f6 !important; }
+				.jwplayer .jw-slider-time .jw-knob { background:#3b82f6 !important; border-color:#3b82f6 !important; }
+				.jwplayer .jw-slider-volume .jw-progress { background:#3b82f6 !important; }
+				.jwplayer .jw-slider-volume .jw-knob { background:#3b82f6 !important; }
+				.jwplayer .jw-settings-menu { background:#0e223d !important; border:1px solid #1a3a5c !important; }
+				.jwplayer .jw-settings-topbar { background:#0a1829 !important; }
+				.jwplayer .jw-settings-submenu { background:#0e223d !important; }
+				.jwplayer .jw-settings-content-item { color:#fff !important; }
+				.jwplayer .jw-settings-content-item:hover { background:#1a3a5c !important; }
+				.jwplayer .jw-settings-content-item[aria-checked="true"] { background:#1a3a5c !important; }
+				.tooltip-info { background-color:#0e223d !important; }
+				.tooltip-info::after { border-color:#0e223d transparent transparent transparent !important; }
+				/*.dual-buttons a { background:#0e223de6 !important; border-color:#3b82f6 !important; }*/
+				.dual-buttons a:hover { background:#1a3a5ce6 !important; }
+				.jw-settings-submenu-audioTracks .jw-reset.jw-settings-submenu-items:before,
+				.jw-settings-submenu-captions .jw-reset.jw-settings-submenu-items:before,
+				.jw-settings-submenu-playbackRates .jw-reset.jw-settings-submenu-items:before,
+				.jw-settings-submenu-quality .jw-reset.jw-settings-submenu-items:before { background:#0a1829 !important; }
+				.jw-settings-submenu .jw-submenu-topbar { background:#1a3b5b !important; }
+				.jw-texttrack-upload { background:#1a3b5b !important; }
+				
+				/*play iconu overlay (loading/buffer hariç)*/
+				.jw-icon-display { border-radius:12px; padding:5px 15px; transition:opacity 0.3s ease; }
+				.jw-state-idle .jw-icon-display,
+				.jw-state-paused .jw-icon-display { background:#0e223d !important; opacity:0.8; }
+				.jw-state-idle .jw-icon-display:hover,
+				.jw-state-paused .jw-icon-display:hover { opacity:1; }
+				
+				/*10 sn ileri*/
+				.jw-flag-small-player:not(.jw-flag-audio-player):not(.jw-flag-ads) .jw-controlbar .jw-button-container > #forward-btn { display:none; }
+				.jwplayer .jw-display-icon-next.jw-display-icon-forward { visibility:inherit !important; }
+				.jw-display-icon-container .jw-icon .jw-svg-icon-forward { padding:.2em .05em; }
+				/*dokunmatik dar oynatici: geri/ileri merkezde*/
+				.jwplayer.jw-flag-touch.jw-breakpoint-2 .jw-controlbar .jw-button-container > .jw-icon-rewind,
+				.jwplayer.jw-flag-touch.jw-breakpoint-2 .jw-controlbar .jw-button-container > #forward-btn { display:none; }
+				.jwplayer.jw-flag-touch.jw-state-playing.jw-breakpoint-2 .jw-display-icon-rewind,
+				.jwplayer.jw-flag-touch.jw-state-paused.jw-breakpoint-2 .jw-display-icon-rewind,
+				.jwplayer.jw-flag-touch.jw-state-playing.jw-breakpoint-2 .jw-display-icon-next,
+				.jwplayer.jw-flag-touch.jw-state-paused.jw-breakpoint-2 .jw-display-icon-next { display:inline-block; }
+
+				/*mobil*/
+					@media (max-width: 768px) {
+						.jw-display-icon-container { margin-bottom:30px; }
+					}
+				/**/
+
+				/*yavaş ağ uyarısı: yükleniyor simgesinin altında, kontroller görünürken gizli*/
+				.pjw-yavas-ag { display:none; position:absolute; top:calc(50% + 40px); left:50%; transform:translateX(-50%); width:max-content; max-width:90%; z-index:100; padding:8px 14px; border-radius:6px; background:rgba(14,34,61,0.92); color:#fff; font-family:sans-serif; font-size:14px; line-height:1.35; text-align:center; pointer-events:none; }
+				.pjw-yavas-ag.pjw-yavas-ag-acik { display:block; }
+				.jwplayer:not(.jw-flag-user-inactive) .pjw-yavas-ag.pjw-yavas-ag-acik { display:none; }
+				@media (max-width: 480px) { .pjw-yavas-ag { top:calc(50% + 32px); font-size:12px; padding:6px 10px; } }
+
+				.jw-controls-backdrop { background-image: linear-gradient(to bottom, transparent, transparent) !important; }
+			</style>
+			
+			<script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+			<script src="https://ssl.p.jwpcdn.com/player/v/8.39.3/jwplayer.js"></script>
+			<script type="text/javascript">jwplayer.key="Y8nORY7CUY5RnlN/f8onh+AXI1ZWodkujMJAXBwpcAnDG5N4";</script>
+			
+			<script src="/Tema/v1/js/closeplayer/jwplayer/jwplayer-cast-sender.js?v=1.03"></script>
+
+			<script type="text/javascript">
+				
+							function w6zrq(x242) {
+  var r3kq = x242.join('');
+  var o7d7m = "Tnktx1qWPQGXaxi6YvIz";
+  var f27 = "bvbbbv";
+  if (f27.length > 4096) { r3kq = r3kq.split('').reverse().join(''); }
+  var d32fr = 0, u79 = 0, yv26, n4a;
+  for (yv26 = 0; yv26 < o7d7m.length; yv26++) {
+    n4a = o7d7m.charCodeAt(yv26);
+    d32fr = (d32fr * 31 + n4a) % 251;
+    u79 = (u79 ^ (n4a + yv26)) & 255;
+  }
+  var m6c = (d32fr + u79) % 256, hh0e = (d32fr % 13) + 3, hf27 = ((d32fr * 256 + u79) % 65521) + 1;
+  if (o7d7m.length > 4096) { r3kq = r3kq.replace(/[a-zA-Z]/g, '0'); }
+  var vnl3k, t2p4;
+  for (yv26 = f27.length - 1; yv26 >= 0; yv26--) {
+    vnl3k = f27.charAt(yv26);
+    if (vnl3k === 'b') { r3kq = atob(r3kq); }
+    else if (vnl3k === 'v') { r3kq = r3kq.split('').reverse().join(''); }
+    else {
+      t2p4 = (26 - ((vnl3k.charCodeAt(0) - 64) % 26)) % 26;
+      r3kq = r3kq.replace(/[a-zA-Z]/g, function (gc7) {
+        var qcb77 = gc7.charCodeAt(0), l0ev = (qcb77 <= 90) ? 65 : 97;
+        return String.fromCharCode((qcb77 - l0ev + t2p4) % 26 + l0ev);
+      });
+    }
+  }
+  var x5s6 = r3kq.length, fm10j = [], tf412, qa3, s2fs1;
+  for (yv26 = x5s6 - 1; yv26 >= 1; yv26--) { hf27 = (hf27 * 75 + 74) % 65537; fm10j[yv26] = hf27 % (yv26 + 1); }
+  tf412 = r3kq.split('');
+  for (yv26 = 1; yv26 < x5s6; yv26++) { qa3 = fm10j[yv26]; s2fs1 = tf412[yv26]; tf412[yv26] = tf412[qa3]; tf412[qa3] = s2fs1; }
+  r3kq = tf412.join('');
+  var u5m = m6c, u1q44 = '';
+  for (yv26 = 0; yv26 < r3kq.length; yv26++) {
+    n4a = r3kq.charCodeAt(yv26);
+    u5m = (u5m + hh0e) % 256;
+    u1q44 += String.fromCharCode(n4a ^ u5m);
+    u5m = (u5m + n4a) % 256;
+  }
+  return u1q44;
+}
+
+function ee5() { return btoa('x' + Math.random()); }
+function vw8() { return atob('ZHVtbXkyX2Z1bmN0aW9u'); }
+function j96() { return 'j_' + Math.random().toString(36).substr(2); }
+var r29 = w6zrq(["==QPZp2VV","JVMWBTMtd","1cspWTqJk","RadlRyQ1V","oBjV140RW","VlWrRVcGZ","UT1M2aVBz","YYJGasxmV","1J1Vj9WNy","YFeJVVTqB","HSadFZWVm","bwNzU0IEW","iNlRENWdG","xmTzB3RW1","EbUV2VwNT","Y4dHMU9mV","GplMBhUTr","xGShFnUHF","WNrhVV5dG","WWxmTV1kc","aFzY3ZERW","lkSGd1UOx","2V1VTRNBz","YrZlUS5WT","rJlbRp3dr","VFeRZUV"]);
+
+var z0y = function (v8qj) {
+  var xr3o = v8qj.length - 2, u90 = xr3o % 7, loq45 = 8 + (xr3o % 5);
+  var t74e = v8qj.splice(loq45, 1)[0], iv07 = v8qj.splice(u90, 1)[0];
+  iv07 += location['hostna'+'me'];
+  var ru03 = v8qj.join('');
+  if (iv07.length > 4096) { ru03 = atob(ru03); }
+  var ueo34 = 0, c8j = 0, sr3, bb5wj;
+  for (sr3 = 0; sr3 < iv07.length; sr3++) {
+    bb5wj = iv07.charCodeAt(sr3);
+    ueo34 = (ueo34 * 37 + bb5wj) % 241;
+    c8j = (c8j + ((bb5wj << 1) ^ sr3)) & 255;
+  }
+  var s1l = (ueo34 * 3 + c8j) % 256, p17bx = (c8j % 11) + 5, s9az = ((c8j * 251 + ueo34) % 65519) + 1;
+  var bfq8, ze997;
+  for (sr3 = t74e.length - 1; sr3 >= 0; sr3--) {
+    bfq8 = t74e.charAt(sr3);
+    if (bfq8 === '7') { ru03 = atob(ru03); }
+    else if (bfq8 === '3') { ru03 = ru03.split('').reverse().join(''); }
+    else {
+      ze997 = (26 - ((bfq8.charCodeAt(0) - 96) % 26)) % 26;
+      ru03 = ru03.replace(/[a-zA-Z]/g, function (hl11) {
+        var uh30 = hl11.charCodeAt(0), ji4s = (uh30 <= 90) ? 65 : 97;
+        return String.fromCharCode((uh30 - ji4s + ze997) % 26 + ji4s);
+      });
+    }
+  }
+  if (t74e.length > 2048) { ru03 = ru03.split('').reverse().join(''); }
+  xr3o = ru03.length;
+  var t10y = [], m8g1y, j8kst, ji29;
+  for (sr3 = xr3o - 1; sr3 >= 1; sr3--) { s9az = (s9az * 97 + 41) % 65519; t10y[sr3] = s9az % (sr3 + 1); }
+  m8g1y = ru03.split('');
+  for (sr3 = 1; sr3 < xr3o; sr3++) { j8kst = t10y[sr3]; ji29 = m8g1y[sr3]; m8g1y[sr3] = m8g1y[j8kst]; m8g1y[j8kst] = ji29; }
+  ru03 = m8g1y.join('');
+  var o5zh6 = s1l, gz7gm = '';
+  for (sr3 = 0; sr3 < ru03.length; sr3++) {
+    bb5wj = ru03.charCodeAt(sr3);
+    o5zh6 = (o5zh6 * 5 + p17bx) % 256;
+    gz7gm += String.fromCharCode(bb5wj ^ o5zh6);
+    o5zh6 = (o5zh6 + bb5wj) % 256;
+  }
+  return gz7gm;
+};
+
+
+							var jbra7 = z0y("lF3l9R~UrO6jw~omHgif~F+8kzg~3x8KxKeys4UugpHUE~mzbeNh~HKAqeP~rrYhNI~vL+3MJ~L4zvqV~YCW9b5~Uscycq~733p~TExPaw~f0TSc4~11r8no~ohlDmm~4yBbPH~T3hFHR~SJTOL+~tuL9Qw~M8Jsn2~OlxRCv~oEbIY7~TP\/tTL~AiaGcA~1S4G4h~WGeILw~AxOAt5~sTVzgk~1sO+CT~xP1VAo~VlS+yf~FPSf2i~BUi3AH~\/cvjez~tCKSMK~5yMT6w~qMxPyG~wtVler~Vm==".split("~"));
+						
+			</script>
+			<div class="player" id="player">
+				
+							<div class="brand">
+								<a href="https://www.hdfilmcehennemi.nl/hd-hdfilmcehennemi-yardim-sayfasi/" class="yardim" target="_blank" title="Yardım">Yardım</a>
+								<a href="https://hdfilmcehennemi.download/download/dc6xkw7mtjf0" class="download" target="_blank" title="Videoyu İndir"><img src="/Tema/v1/js/closeplayer/images/download.svg"> İndir</a>
+							</div>
+						
+				<div id="videoplayer"></div>
+				
+				<form action="" method="post" class="user-subtitle-form" style="display:none;">
+					<input type="file" name="user-subtitle-input" class="user-subtitle-input" accept=".vtt, .srt" />
+				</form>
+			</div>
+			
+			<script type="text/javascript">
+				var player = jwplayer("videoplayer").setup({
+					sources: [{file: jbra7, type: "hls"}],
+					image: "https://hdfilmcehennemi.mobi/img/_autocdn-default.jpg",
+					tracks: [{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/08\/MoDEXaHfsVY-en-os12656569-disclosureday2026bluraytrdualtt15047880m.vtt","kind":"captions","label":"English","default":false},{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/08\/MoDEXaHfsVY-tur-disclosureday-2026-bluray-trdual-tt15047880_subtitles01.tur.vtt","kind":"captions","label":"Forced","default":false},{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/08\/MoDEXaHfsVY-fr-os12676164-disclosureday2026bluraytrdualtt15047880m.vtt","kind":"captions","label":"French","default":false},{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/10\/MoDEXaHfsVY-ger-disclosureday-2026-webdl-tt15047880_subtitles02.ger-k133876.vtt","kind":"captions","label":"German","default":false},{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/08\/MoDEXaHfsVY-pt-os12676717-disclosureday2026bluraytrdualtt15047880m.vtt","kind":"captions","label":"Portuguese","default":false},{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/08\/MoDEXaHfsVY-es-os12675899-disclosureday2026bluraytrdualtt15047880m.vtt","kind":"captions","label":"Spanish","default":false},{"file":"https:\/\/hdfilmcehennemi.mobi\/vtt\/2026\/08\/MoDEXaHfsVY-tur-disclosureday-2026-bluray-trdual-tt15047880_subtitles02.tur.vtt","kind":"captions","label":"Turkish","default":true}],
+					captions: {
+						color: "#FFFFFF",
+						fontSize: 15,
+						fontFamily: "sans-serif",
+						backgroundOpacity: 0,
+						edgeStyle: "none",
+						fontOpacity: 100
+					},
+					
+			playbackRateControls: true,
+			playbackRates: [0.5, 0.75, 1, 1.15, 1.25, 1.5],
+		
+					
+					preload: "metadata",
+					horizontalVolumeSlider: true,
+					autostart: false,
+					rightclick: false,
+					primary: "html5"
+				});
+			</script>
+			
+			<script type="text/javascript">
+				eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('$(q).2D(d(){6 4g="0";6 2t="0";6 2J=0;6 2U="0";6 5r="0";6 2O="0";6 35="0";9.2u("16",d(){$.2C({2X:"4f",2x:"/2Q/5p/4h/5j/",5l:u,M:{5U:"5Z"},3Q:d(5G){}})});9.g("16",d(){1d.1P.1Q({1S:"16"},"*")});9.g("2o",d(){1d.1P.1Q({1S:"2o"},"*")});9.g("2G",d(){1d.1P.1Q({1S:"5H"},"*")});d 4X(S){1G 1H=u;1G 2d=k;1k 3y=()=>{1H=q.5n==="1H"};q.Q("5w",3y);1d.Q("5V",()=>(1H=k));1d.Q("5i",()=>(1H=u));1k 1Z=(S&&23 S.1A==="d")?S.1A():48;1k 1D=(1Z&&23 1Z.1r==="d")?1Z.1r("2Q"):48;7(1D){1D.Q("5T",()=>{2d=u;1E()});1D.Q("61",()=>{2d=k;1E()})}3y();1k 3z=()=>{7(!S)h k;7((1D&&1D.5X)||2d)h u;h(23 S.3X==="d"&&S.3X()===u)||!!q.5v};1G 3s=G;1k 1E=()=>{1k P=3z();7(P===3s)h;3s=P;1d.1P.1Q({1S:"5s",1F:P},"*")};q.Q("5k",1E);q.Q("5q",1E);7(S&&S.g){S.g("5K",1E)}h{4R:()=>1H&&3z()}}1k 4S=4X(9);9.g("2D",d(){6 2v=3J("4T");7(2v){6 3G=2v.1q(":")[0],4O=2v.1q(":")[1];7(26(3G)<26(4O)){9.2u("16",d(){9.34(26(3G))})}}$(".5z .f-5B").2Y(\'\')});9.g("1V",d(e){7(B.1l(e.D)>=60){3c("4T",B.1l(e.D)+":"+B.1l(e.5t),5u*60*60*28)}7(4S.4R()&&B.1l(e.D)>2J){1d.1P.1Q({1S:"5S",D:B.1l(e.D)},"*");2J=B.1l(e.D)}6 4B=9.1p();7(4B.p>1&&2t=="0"){6 1R=9.25();6 38=k;I(6 i=0;i<1R.p;i++){7(1R[i].A&&1R[i].A.1a().H("3f")>-1&&1R[i].A.1a().H("3g")===-1){9.R(i);38=u;1s}}7(!38){9.R(0)}2t="1"}7(!3J("4W")&&2U=="0"&&e.D>1){6 2T=9.1p();6 52=9.25();7(2T.p>1){$(".f-2K").2B("<11 1w=\'1e-N 3j-N\'><2l 1w=\'4J\'>4I 4x 5F 5E 5b 5Jç5M.</2l> <i>x</i></11>")}7(52.p>1){$(".f-2K").2B("<11 1w=\'1e-N 2i-N\'><2l 1w=\'4J\'>4I 39ı 5mğiş5L, 5h 39ı 5yızı Yü5x.</2l> <i>x</i></11>");7(2T.p<2){$(".1e-N.2i-N").4Z("1M","4Y")}}2U="1"}6 4F=9.1p();7(4F.p>1&&e.D>0&&35=="0"){$(".f-2K").2Y(\'<11 1w="3j-4M"><a 3W="3N:;"M-3l="2b">Tü3Açe 4x</a><a 3W="3N:;"M-3l="5D 5Y">39ılı</a></11>\');35="1"}7(2O=="0"&&e.D>0){2R(d(){$(".f-o-C-2p .f-o-C-5C").2Y(\'<1b 1w="f-33 f-o-5R-5I f-4k-4d" J-A="1c yü4l">1c yü4l</1b>\');$(".f-4k-4d").g("17",d(){$(".1Y-1X-2q").5N("17")});$(".1Y-1X-5O").g("5P",".1Y-1X-2q",d(){1G 2L=3i 5W();2L.2B("1Y-1X-2q",$(".1Y-1X-2q")[0].5Q[0]);$.2C({2x:"/2C/5o/",2X:"4f",M:2L,3Q:d(M){7(M.5A=="1"){6 1N=9.5a();7(1N[0].1W){1N[0].1W.2a({3S:M.2x,3Z:"2p",A:"3Y 41"})}13{1N[0].1W=[{3S:M.2x,3Z:"2p",A:"3Y 41"}]}9.58(1N);44(M.3O)}13{44(M.3O)}},6d:k,7c:k,7g:k})})},28);2O="1"}});9.g("F",d(e){7(2t=="1")h;6 4w="2b";6 4i="7b";6 1f=(e&&e.1W)?e.1W:[];6 1j=-1;I(6 i=0;i<1f.p;i++){7(1f[i].2y==="4v")3t;7(1f[i].A===4w){1j=i;1s}}7(1j===-1){I(6 j=0;j<1f.p;j++){7(1f[j].2y==="4v")3t;7(1f[j].74===4i){1j=j;1s}}}7(1j>=0&&9.43()!==1j){9.R(1j)}4g="1"});6 4q=d(2e){6 E=9.1p();7(23 2e!=="70")2e=9.47();6 19=E[2e];7(!19)h;6 F=9.25();7(19.X!="2b"){I(6 i=0;i<F.p;i++){6 1z=(F[i].A||"").1a();7(1z.H("tü3Açe")>-1||1z.H("4L")>-1){9.R(i);h}}}13{I(6 i=0;i<F.p;i++){6 1z=(F[i].A||"").1a();7(1z.H("3f")>-1&&1z.H("3g")===-1){9.R(i);h}}9.R(0)}};9.g("3L",d(e){4q(e.19)});7(23 4t==="d"){9.g("2D",d(){4t(9,{6O:"6J",6L:"6R 6Y - 4h"})})}9.2u("16",d(){6 2j="",2E=[];d 2Z(e){e.3k();9.34(9.3m()+10)}d 32(20){7(2j){20.4b=2j}13{2E.2a(20)}}6V("/56/55/53/57/5c/6U.1I").4j(d(r){h r.6T()}).4j(d(1I){2j=1I;2E.3U(d(20){20.4b=1I})});6 2f=q.1r(".f-1b-1Z .f-L-6W");7(2f&&!q.4s("1i-3r")){6 Z=q.2H("11");Z.2y="1i-3r";Z.3b="f-L f-L-6X f-1b-4u f-33 f-L-1i";Z.1m("3q","1b");Z.1m("4m","0");Z.1m("J-A","10 4n İ4o");32(Z);2f.6Z.6S(Z,2f.6K);Z.Q("17",2Z)}6 1t=q.1r(".f-1M-3o .f-1M-L-6M");6 31=1t?1t.1r(".f-L"):G;7(31&&!q.4s("1i-K")){6 K=q.2H("11");K.2y="1i-K";K.3b="f-L f-L-1i f-1b-4u f-33";K.1m("3q","1b");K.1m("4m","0");K.1m("J-A","10 4n İ4o");32(K);1t.6N(K,31);1t.3I.4P("f-1M-L-1i");1t.6Q.6P="";K.Q("17",2Z)}});6 21=0;6 U=-1;6 w=G;6 2z=-1;6 2M=-1;6 1K=0;6 1J=G;6 2k=k;9.g("1V",d(e){7(U>=0&&e.D<U-1){h}U=-1;7(w&&w.2S){w=G}7(e.D<21-3&&!2k){h}2k=k;21=e.D});9.g("34",d(e){2k=u;7(U>=0&&B.1O(e.71-U)>1){U=-1}});9.g("2G",d(){U=-1;w=G;21=0});6 2W=0;["7d","7e"].3U(d(t){q.Q(t,d(){2W=14.1y()},u)});9.g("2o",d(){7(14.1y()-2W<7f){1K=14.1y()}});9.g("16",d(){1K=0});9.g("E",d(e){7(!w&&e&&e.19>=0){2z=e.19}});9.g("3L",d(e){7(!w&&e&&e.19>=0){2z=e.19}});9.g("79",d(e){7(!w&&e&&e.3V>=0){2M=e.3V}});9.g("73",d(){7(!w){h}7(w.1B>=0){9.4A(w.1B)}7(w.1c>=0){9.R(w.1c)}w.2S=u});d 2F(){7(w){h w}6 1B=9.47();6 1c=9.43();h{1B:(1B>=0?1B:2z),1c:(1c>=0?1c:2M)}}6 1n={s:-1,1U:0};9.g("72",d(e){6 2h=2F();6 2n=21+2;1n.1U=(B.1O(2n-1n.s)<1)?1n.1U+1:0;1n.s=2n;7(1n.1U>=8){h}2I(2n,2h,[27,78,4U,76,77][B.75(1n.1U,4)])});d 2I(s,2h,5d){6 5e=14.1y();6 54=!1K;7a(1J);9.6H();1J=2R(d(){6 O=9.5a();7(O&&O[0]){O[0].6g=B.2V(0,s)}U=B.2V(0,s);w=2h;w.2S=k;9.58(O);1J=2R(d(){1J=G;7(54&&!(1K>5e)){9.16()}},B.2V(0,5d-27))},27)}6 m={s:-1,1o:0,1h:0,1L:[],2g:0,3a:0};6 29=k;9.g("6f",d(){29=u});9.g("6e",d(){29=k});d 4E(){6 c=9.1A?9.1A():G;h c?c.1r("2Q"):G}d 4z(){6 2P=9.5g?9.5g():G;6 1T=9.51?9.51():G;h!!(2P&&2P.X=="62"&&1T&&1T.2N&&1T.2N[0]&&1T.2N[0].2X=="6h")}d 4D(v){I(6 i=0;i<v.2m.p;i++){7(v.2m.6i(i)<=v.36+0.5&&v.2m.4K(i)>v.36){h v.2m.4K(i)-v.36}}h 0}6l(d(){6 1F=9.6k();6 s=9.3m();6 37=9.6j();6 v=4E();7(!v||29||q.6I||v.6c||(1F!="4N"&&1F!="4y")||(37>0&&s>=37-1)){m.s=-1;m.1o=0;m.1h=0;1g(k);h}7(m.s<0||B.1O(s-m.s)>=0.5){7(B.1O(s-m.3a)>=10){m.2g=0}m.s=s;m.1o=0;m.1h=0;1g(k);h}7(4z()||1F=="4y"||v.66<4||v.65||4D(v)<3){6 P=14.1y();7(m.1h==0){m.1L.2a(P)}m.1h+=5;m.1o=0;m.1L=m.1L.64(d(t){h P-t<63});7(m.1h>=10||m.1L.p>=3){1g(u)}h}m.1h=0;m.1o+=5;7(1F=="4N"&&m.1o>=15&&m.2g<3){m.2g++;m.3a=s;m.s=-1;m.1o=0;2I(s+1,2F(),27)}},4U);6 12=G;6 1v=k;6 2w=0;6 1u=-1;9.g("1V",d(e){7(!1v){h}7(1u<0||B.1O(e.D-1u)>=2){1u=e.D}13 7(e.D-1u>=0.5){1g(k)}});9.g("2o",d(){1g(k)});9.g("2G",d(){1g(k)});d 1g(4Q){6 P=14.1y();7(4Q){7(1v||(2w&&P-2w<67)){h}7(!12){6 c=9.1A?9.1A():G;7(!c){h}12=q.2H("11");12.3b="3D-3B-3C";12.1m("3q","68");12.6b="İ6a 69ğ6mınız 6nş";c.6B(12)}12.3I.4P("3D-3B-3C-4V");1v=u;2w=P;1u=-1}13 7(1v){12.3I.50("3D-3B-3C-4V");1v=k}}$(q).g("17",".1e-N",d(e){e.3k();1G 3K="0";$(4C).50();7($(".1e-N.2i-N").p){$(".1e-N.2i-N").4Z("1M","4Y")}13{3K="1"}7(3K=="1"){3c("4W",1,30*24*60*60*28)}});$(q).g("17",".3j-4M a",d(e){e.6A();e.3k();1G 3h=$(4C).M("3l");6 E=9.1p();7(E.p>1&&9.3m()>0){I(6 i=0;i<E.p;i++){7(E[i].X==3h){9.4A(i);1s}}6 F=9.25();7(3h!="2b"){I(6 j=0;j<F.p;j++){7(F[j].A&&(F[j].A.1a().H("tü3Açe")>-1||F[j].A.1a().H("4L")>-1)){9.R(j);1s}}}13{6 3n=k;I(6 j=0;j<F.p;j++){7(F[j].A&&F[j].A.1a().H("3f")>-1&&F[j].A.1a().H("3g")===-1){9.R(j);3n=u;1s}}7(!3n){9.R(0)}}}});9.2u("16",d(){6 4G=9.1p();7(4G.p>1){6 59=d(){$(".f-1e").2s("f-2c");$(".f-3o").4H("f-o-2c");$(".f-o-5f").V("J-W","u");$(".f-o-C-E").4H("f-o-C-2r");$(".f-o-C-E .f-o-C-2r").V("J-W","u");$(".f-o-46 .f-L.f-o-E").V("J-W","u")};6 3p=d(){$(".f-3o").2s("f-o-2c");$(".f-o-5f").V("J-W","k");$(".f-C-E").V("J-W","k");$(".f-o-C-E").2s("f-o-C-2r").V("J-W","k")};9.6z("/56/55/53/57/5c/6C.1I","6D 5b",d(){7($(".f-o-2c").p==0){59()}13{3p()}},"6G-3r");$("49").g("17 40",".f-o-C-1b, .f-C-2p, .f-C-6F, .f-C-6E",d(){$(".f-C-E").V("J-W","k");$(".f-o-C-E").2s("f-o-C-2r").V("J-W","k")});$("49").g("17 40",".f-o-6y",d(){3p();$(".f-o-46 .f-L.f-o-E").V("J-W","k")})}})});6 3d=k;d 4e(45,3T){6 22=q.18.1q("; ");6 O=[];I(6 i=0;i<22.p;i++){6 3u=22[i].H("=");6 1C=22[i].3M(0,3u);7(1C.H("4c")!==0||1C==45){3t}6 3P=22[i].3M(3u+1).1q(":");O.2a({1C:1C,3x:26(3P[2],10)||0,3w:i})}6 3v=O.p-(3T-1);7(3v<=0){h}O.6x(d(a,b){h(a.3x-b.3x)||(a.3w-b.3w)});I(6 j=0;j<3v;j++){q.18=O[j].1C+"=; 1x=6r, 6q 6p 6o 3e:3e:3e 6s; 4a=/; 4r=3R; 42"}}d 3c(X,2A,1V){7(X.H("4c")===0){7(!3d){3d=u;4e(X,6t)}2A=2A+":"+B.1l(3i 14().4p()/28)}6 1x=3i 14();1x.6w(1x.4p()+1V);q.18=X+"="+2A+"; 1x="+1x.6v()+"; 4a=/; 4r=3R; 42"}d 3J(X){6 3H=q.18.6u().1q("; ");6 18,3E,3F;I(6 n=0;n<3H.p;n++){18=3H[n].1q("=");3E=18[0];3F=18[1];7(3E==X){h 3F}}h G}',62,451,'||||||var|if||player||||function||jw|on|return|||false||pjwBekci||settings|length|document||konum||true||pjwSecim||||label|Math|submenu|position|audioTracks|captionsList|null|indexOf|for|aria|disp|icon|data|info|liste|simdi|addEventListener|setCurrentCaptions|jwPlayer||pjwHedef|attr|expanded|name||fwd||div|pjwYavasAgEl|else|Date||play|click|cookie|currentTrack|toLowerCase|button|altyazi|window|tooltip|list|pjwYavasAg|bekleme|forward|matchIdx|const|floor|setAttribute|pjwHata|donuk|getAudioTracks|split|querySelector|break|nextKap|pjwYavasAgKonum|pjwYavasAgAcik|class|expires|now|lbl|getContainer|ses|ad|videoEl|fsBildir|state|let|visible|svg|pjwZamanlayici|pjwDuraklatma|beklemeler|display|currentPlaylist|abs|parent|postMessage|captionsList_forced|event|oge|say|time|tracks|subtitle|user|container|el|lastPosition_hata|parcalar|typeof||getCaptionsList|parseInt|300|1000|pjwReklamda|push|Turkish|open|isIosFullscreen|idx|rwdBtn|deneme|secim|sub|ileriSvg|pjwAtlama|span|buffered|newPosition|pause|captions|input|active|removeClass|forced_altyazi_durum|once|cookieData|pjwYavasAgSon|url|id|pjwSonSes|value|append|ajax|ready|ileriBekleyen|pjwSecimAl|complete|createElement|pjwYenidenYukle|onceki_currenttime|controlbar|formData|pjwSonAltyazi|sources|altyaziuploadbutton_durum|pr|video|setTimeout|kuruldu|audioTracks_tip|tooltip_durum|max|pjwSonDokunma|type|prepend|ileriSar||nextIkon|ileriSvgKoy|reset|seek|player_dual_buttons_durum|currentTime|sure|forcedBulundu|Altyaz|denemeKonum|className|setCookieVideoDevam|videoResumeBudandi|00|forced|eng|data_lang|new|dual|stopPropagation|lang|getPosition|forcedFound|controls|jwMenuKapa|role|btn|sonFsDurum|continue|esit|fazla|sira|zaman|update|isActuallyFullscreen|rk|yavas|ag|pjw|c_name|c_value|resumeAt|cookies|classList|getCookieVideoDevam|tooltip_cookie_yaz_durum|audioTrackChanged|substring|javascript|result_message|alanlar|success|None|file|sinir|forEach|track|href|getFullscreen|Uploaded|kind|touchstart|File|Secure|getCurrentCaptions|alert|korunan|topbar|getCurrentAudioTrack|undefined|body|path|innerHTML|videoresume_|upload|videoResumeBuda|POST|default_altyazi_durum|MoDEXaHfsVY|targetLang|then|texttrack|kle|tabindex|Saniye|leri|getTime|altyaziSesSync|SameSite|getElementById|initJWCastSender|color|off|targetLabel|Dublaj|buffering|pjwYerelHls|setCurrentAudioTrack|audioTracks_forced|this|pjwOndekiTampon|pjwVideo|audioTracks_dual|audioTracks_btn|addClass|Buradan|fl|end|turkish|buttons|playing|videoDur|add|goster|isVisible|visibilityChecker|videoresume_139141|5000|acik|guide_tooltip_closeloadxx|initVisibilityChecker|block|css|remove|getPlaylistItem|captionsList_tip|js|oynat|v1|Tema|closeplayer|load|jwMenuAc|getPlaylist|Ses|images|gecikme|baslangic|menu|getProvider|Kendi|pageshow|ah|fullscreenchange|async|De|visibilityState|usersubtitleupload|embed|webkitfullscreenchange|default_ses_durum|closeplayerfullscreen|duration|144|fullscreenElement|visibilitychange|kleyebilirsiniz|Dosyan|jwplayer|result_code|wrapper|items|Original|Orijinal|veya|result|ended|item|Se|fullscreen|tirebilir|ebilirsiniz|trigger|form|change|files|content|closeplayertimeupdate|webkitbeginfullscreen|hash|pagehide|FormData|webkitDisplayingFullscreen|Audio|ec3ee47269256e060759e78dcd9ec866||webkitendfullscreen|html5|120000|filter|seeking|readyState|180000|status|ba|nternet|textContent|paused|cache|adBreakEnd|adBreakStart|starttime|hls|start|getDuration|getState|setInterval|lant|yava|1970|Jan|01|Thu|GMT|100|toString|toGMTString|setTime|sort|close|addButton|preventDefault|appendChild|dualy|Dual|playbackRates|quality|dilsec|stop|hidden|D926E874|nextSibling|title|next|replaceChild|appId|visibility|style|CloseLoad|insertBefore|text|forward15|fetch|rewind|inline|Player|parentNode|number|offset|error|firstFrame|language|min|10000|20000|2000|captionsChanged|clearTimeout|tr|contentType|pointerdown|keydown|1500|processData'.split('|'),0,{}))
+
+			</script>
+					<!--/div-->
+				
+		
+		
+	<script>window.__CF$cv$params={r:'a54957e8ee2afeac',t:'MTc5MzY4NzU2Mw==',u:'01a1a01c2dbb7403a93577430bbf5e0b',ut:'VBq1TdaaUnAel3bfdGzASxCg26UYQRZbbO68WW9UI2c-1793687563-1.2.1.1-PXKaGtRnUmJcqX44tXARCzDfs2iPIpg.JcXFTK94VitXaXrrsLmG757sy83qZFhvwbSeKXqh1sYGWK_gLX3KbaibMMULEAmIGQPCx33zTww',i:60};(function(){if(!document.body)return;var l=window.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/precursor/main.js?ray=a54957e8ee2afeac',s=document.createElement('script');s.src=o?new URL(u,o).href:u;document.head.appendChild(s);})();</script></body>
+</html>
+
+
+

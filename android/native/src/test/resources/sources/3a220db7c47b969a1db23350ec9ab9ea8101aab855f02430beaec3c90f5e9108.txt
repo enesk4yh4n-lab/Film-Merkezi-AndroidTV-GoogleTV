@@ -1,0 +1,19 @@
+    <!DOCTYPE html>
+   <html lang="en">
+   <head>
+   <meta charset="utf-8">
+   <meta name="robots" content="noindex">
+   <meta name="author" content="SMPlayer">
+   <title>SMPlayer</title>
+   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/devtools-detector@2.0.14/lib/devtools-detector.min.js"></script>
+   <style type="text/css">html,body{margin:0px;padding:0px;height:100%!important;overflow:hidden}#video{position:relative;width:100%!important;height:100%!important;}a{cursor:pointer;}#player {position:absolute;width:100% !important;height: 100% !important;}#butonkapat {position:absolute;padding:10px;background:white;top:0;right:0;font-weight:600;font-family: 'Open Sans', sans-serif}html,body{margin:0px;padding:0px;height: 100% !important;}#type{opacity:0;position:fixed;top:5px;left:10px;/* overflow:hidden; */z-index:999999999;/* display:none; */-webkit-transition: opacity 1s ease-in-out;-moz-transition: opactiy 1s ease-in-out;-ms-transition: opacity 1s ease-in-out;-o-transition: opacity 1s ease-in-out;transition: opacity 1s ease-in-out;}.mesaj{margin:0 auto;position: relative;width: 500px;color:#fff;font-size:30px;text-align:center;display: table-cell;vertical-align: middle;}.alan{position:relative;display: table;width:100%;height:100%;}body:hover>#type{opacity:1;-webkit-transition: opacity 0.05s ease-in-out;-moz-transition: opactiy 0.05s ease-in-out;-ms-transition: opacity 0.05s ease-in-out;-o-transition: opacity 0.05s ease-in-out;transition: opacity 0.05s ease-in-out;}#down{position:absolute;z-index:2;}#down:hover>.down-list{display:block;}.down-list{display:none;position: absolute;list-style: none;float: left;left: 3px;z-index: 9999999999999999;background: #222;margin: 0;border-radius: 3px;width: 144px;padding: 0;padding-top: 6px}#type a,#type div{float:left;}.down-list li{float: left;width: 134px;padding: 5px;}.down-list li:hover{background:#333;}.down-list li:hover>a{color:#337ab7}.down-list li a{text-align: center;color: #999;text-decoration: none;width: 100%;}.down-list li:last-child{border-radius:0 0 3px 3px;}</style>
+	</head>
+	<body>
+<style>
+				body {margin:0px;padding:0px;}
+				a {cursor:pointer}
+				#player {height:100%;width:100%;padding:0;margin:0;}
+				</style><iframe id="player" src="https://film.popcornvakti.net/embed/1183-6ac4a6b15a1a0755f15ccd1b" scrolling="no" width="100%" height="100%" frameborder="0" allowfullscreen=""></iframe><script> devtoolsDetector.addListener(function (isOpen, detail) { if (isOpen) { if(detail.checkerName) { window.stop(); location.reload(); } } }); devtoolsDetector.launch(); </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a549d969ac8fa462',t:'MTc5MzY5Mjg2OA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a549d969ac8fa462',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

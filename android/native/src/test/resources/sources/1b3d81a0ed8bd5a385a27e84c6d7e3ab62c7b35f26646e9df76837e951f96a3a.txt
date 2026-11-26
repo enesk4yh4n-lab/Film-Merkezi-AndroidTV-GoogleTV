@@ -1,0 +1,9 @@
+#EXTM3U
+
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio0",NAME="Türkçe",LANGUAGE="tr",AUTOSELECT=YES,DEFAULT=YES,CHANNELS="2",URI="https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/index-a1.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331"
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio0",NAME="English",LANGUAGE="en",AUTOSELECT=NO,DEFAULT=NO,CHANNELS="2",URI="https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/index-a2.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331"
+
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2583938,RESOLUTION=1600x900,FRAME-RATE=23.974,CODECS="avc1.640028,mp4a.40.2",AUDIO="audio0"
+https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/index-v1-a1.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331
+
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=222934,RESOLUTION=1600x900,CODECS="avc1.640028",URI="https://prx-1590-for.vmnow.online/hls2/07/02463/4iy3jgh4yerb_n/iframes-v1-a1.m3u8?t=O56X0i63XnKgDgm69XHTtcNF3SEfZlJ9yJHWwZ2jfzM=&s=1793690161&e=43200&v=&srv=rck12&i=0.4&sp=0&asn=47331"

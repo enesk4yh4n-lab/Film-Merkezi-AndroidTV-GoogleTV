@@ -1,0 +1,10 @@
+Package: app.filmmerkezi.tv
+Version: 0.0.1-spike (1)
+minSdk: 23
+targetSdk: 36
+compileSdk: 37
+ABI (validated ZIP entries): arm64-v8a, armeabi-v7a, x86_64
+Bytes: 4018241
+SHA-256: 87fc618b8b6bce27d174903545c2722fc01bcf47b3b79234a2e5d202b287406c
+Signature: APK v1 + v2, Android Debug (neutral SDK certificate)
+Manifest values read from Android SDK aapt; ABI list read from the final APK ZIP directory.

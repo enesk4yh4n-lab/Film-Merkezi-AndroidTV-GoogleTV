@@ -1,0 +1,8 @@
+#EXTM3U
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=2375557,RESOLUTION=1920x1080,FRAME-RATE=24.390,CODECS="avc1.640028,mp4a.40.2"
+https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_n/index-v1-a1.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331
+#EXT-X-STREAM-INF:PROGRAM-ID=1,BANDWIDTH=537482,RESOLUTION=852x480,FRAME-RATE=23.974,CODECS="avc1.4d401f,mp4a.40.2"
+https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_l/index-v1-a1.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331
+
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=309976,RESOLUTION=1920x1080,CODECS="avc1.640028",URI="https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_n/iframes-v1-a1.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331"
+#EXT-X-I-FRAME-STREAM-INF:BANDWIDTH=49440,RESOLUTION=852x480,CODECS="avc1.4d401f",URI="https://prx-1560-ant-t.vmpx.online/hls2/01/02977/btcftsaclhfj_l/iframes-v1-a1.m3u8?t=pWyynRnPIjylTZJdLSjYcPmDpVJCButF0dBm29WyoME=&s=1793692867&e=43200&v=&srv=s-box-h-11&i=0.4&sp=0&asn=47331"

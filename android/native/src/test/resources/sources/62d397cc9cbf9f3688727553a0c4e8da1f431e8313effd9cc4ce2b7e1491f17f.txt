@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html data-theme="dark" lang='tr'>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Yardım Çağrısı izle (2026)</title>
+<meta name="description" content="Yardım Çağrısı - Send Help (2026) filmini Dublaj &amp; Altyazı izleme seçenekleri ile izle"/>
+<meta name="language" content="tr" />
+<meta name="dc.language" content="TR" />
+<meta name="location" content="turkey" />
+<meta name="google" content="notranslate" />
+<link rel="canonical" href="https://sinemacc.com/film/yardim-cagrisi-send-help-2026/" />
+<link rel="prev" href="https://sinemacc.com/film/hoplayanlar-hoppers-2026/">
+<link rel="next" href="https://sinemacc.com/film/el-incidente-the-incident-2014/">
+<link rel="shortcut icon" href="https://sinemacc.com/tema/sinemavip/front/favicon.ico?v=3" type="image/x-icon"/>
+<meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large"/>
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:type" content="video.movie" />
+<meta property="og:site_name" content="Film izle" />
+<meta property="og:title" content="Yardım Çağrısı izle (2026)" />
+<meta property="og:description" content="Yardım Çağrısı - Send Help (2026) filmini Dublaj &amp; Altyazı izleme seçenekleri ile izle" />
+<meta property="og:url" content="https://sinemacc.com/film/yardim-cagrisi-send-help-2026/" />
+<meta property="og:image" content="https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi_f.webp" />
+<meta property="og:image:secure_url" content="https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi_f.webp" />
+<meta property="og:image:width" content="233" />
+<meta property="og:image:height" content="334" />
+<meta property="og:image:alt" content="Yardım Çağrısı izle (2026)" />
+<meta property="og:image:type" content="image/webp" />
+<meta property="ya:ovs:upload_date" content="2026-11-01" />
+<meta property="ya:ovs:allow_embed" content="true" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Yardım Çağrısı izle (2026)" />
+<meta name="twitter:image" content="https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi_f.webp" />
+<meta name="twitter:description" content="Yardım Çağrısı - Send Help (2026) filmini Dublaj &amp; Altyazı izleme seçenekleri ile izle" />
+<meta name="twitter:site" content="@CCSinema" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://sinemacc.com/feed">
+<meta name="generator" content="Aydizayn İnternet Hizmetleri" />
+<meta name="google-site-verification" content="xkyJyqR4vd-rj2q5JspHnfwEEm8Yhaguz3HwTT7zosU" />
+<script>function initGTMOnEvent(t){initGTM(),t.currentTarget.removeEventListener(t.type,initGTMOnEvent)}function initGTM(){if(window.gtmDidInit)return!1;window.gtmDidInit=!0;let t=document.createElement("script");t.type="text/javascript",t.onload=()=>{function t(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],t("js",new Date),t("config","G-69MFL25G09")},t.src="https://www.googletagmanager.com/gtag/js?id=G-69MFL25G09",t.defer=!0,document.getElementsByTagName("body")[0].appendChild(t)}document.addEventListener("scroll",initGTMOnEvent),document.addEventListener("mousemove",initGTMOnEvent),document.addEventListener("touchstart",initGTMOnEvent),document.addEventListener("DOMContentLoaded",()=>{setTimeout(initGTM,6e3)});</script>
+<script>
+(function () {
+  try {
+const theme = localStorage.getItem("theme");
+if (theme === "light" || theme === "dark") {
+  document.documentElement.setAttribute("data-theme", theme);
+}
+  } catch (e) {}
+})();
+</script>
+<style>
+html{background:var(--renk_uc);font-size:100%;text-size-adjust:100%;min-height:1000px}html,body,div,span,h1,h2,h3,h4,h5,h6,p,a,acronym,address,em,font,img,strong,b,u,i,ol,ul,li,fieldset,form,label,select,option,input,textarea,button,iframe{margin:0;padding:0;border:0 none;outline:0;font-family:var(--font)}ol,ul,li{list-style:none}h1,h2,h3,h4,h5{font-weight:normal}a{background-color:transparent;color:var(--yazi_renk_beyaz);text-decoration:none;cursor:pointer}a:hover{color:var(--renk_bir)}a:hover,a:focus{outline:0;text-decoration:none}*,*:before,*:after{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}*:not(input){outline:0;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;-webkit-user-drag:none;-moz-user-drag:none;user-drag:none;-webkit-overflow-scrolling:touch}:root{--font:-apple-system,BlinkMacSystemFont,"Segoe UI",SFUIText,Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";--width:19%;--margin:1.25%}[data-theme=dark]{--renk_bir:#f0cc7f;--renk_bir_rgb:240 204 127;--renk_iki:#000;--renk_uc:#323441;--renk_dort:#fbfbff;--renk_bes:#14161d;--renk_alti:#272a35;--renk_yedi:#3a3d4b;--renk_sekiz:#5a5b67;--yazi_renk_beyaz:#FFF;--yazi_renk_siyah:#000}[data-theme=light]{--renk_bir:#D9A441;--renk_bir_rgb:240 204 127;--renk_iki:#2A2438;--renk_uc:#e9e9e4;--renk_dort:#EDEBE4;--renk_bes:#FFF;--renk_alti:#453f53;--renk_yedi:#c4c7cc;--renk_sekiz:#f5f5f5;--yazi_renk_beyaz:#000;--yazi_renk_siyah:#FFF}[data-theme=light] ::-webkit-scrollbar-track,[data-theme=light] .kategori_alani .sol_ok,[data-theme=light] .kategori_alani .sag_ok,[data-theme=light] .arama_modu>div,[data-theme=light] .breadcrumb,[data-theme=light] .arsiv_kutu .select,[data-theme=light] .k_linkler ul li .robot,[data-theme=light] .k_linkler ul li .istek,[data-theme=light] .k_arama .arama_link,[data-theme=light] .sirala .select,[data-theme=light] .video_info .baslik{background:var(--renk_alti)}[data-theme=light] .alan_bg{box-shadow:0 8px 24px rgba(27,46,94,.12)}[data-theme=light] header,[data-theme=light] .kategori_ust{background:var(--renk_iki);box-shadow:0 8px 24px rgba(27,46,94,.12);border-color:#453f53}[data-theme=light] header .arama_link,[data-theme=light] .arama_s:hover{background:var(--renk_yedi)}[data-theme=light] header .header_ust nav li a,[data-theme=light] .baslik,[data-theme=light] .oykat_h2{color:#726C82}[data-theme=light] .ust_alan{background:url(/tema/sinemavip/front/images/bg_dark.webp) repeat var(--renk_iki);border-bottom:1px solid var(--renk_bes)}[data-theme=light] .ust_alan.no_bg,[data-theme=light] .film_kutusu>a:hover .title,[data-theme=light] .film_kutusu>div:hover .title,[data-theme=light] .kategori_k .once_kes::after,[data-theme=light] .kategori_k .sonra_kes::after,[data-theme=light] .kategori_k .once_kes::before,[data-theme=light] .kategori_k .sonra_kes::before,[data-theme=light] .arama_kutusu,[data-theme=light] .pagination button:hover,[data-theme=light] .arama_kategori{background:var(--renk_iki)}[data-theme=light] .kategori_alani .sag_ok:before,[data-theme=light] .film_kutusu>a:hover .imdb:after,[data-theme=light] .film_kutusu>div:hover .imdb:after{border-left-color:var(--renk_iki)}[data-theme=light] .vizyon_k .title,[data-theme=light] .kategori_k .title,[data-theme=light] .slayt_kutu .detay{color:var(--yazi_renk_siyah)}[data-theme=light] .vizyon_k .resim .available{color:var(--yazi_renk_beyaz)}[data-theme=light] .kategori_alani .sol_ok:before{border-left-color:var(--renk_alti)}[data-theme=light] .film_kutusu .title .years,[data-theme=light] .film_kutusu .title .text,[data-theme=light] .film_kutusu .imdb .svgcon,[data-theme=light] .film_kutusu .imdb,[data-theme=light] .kenar_blok>.baslik,[data-theme=light] .kanal_kutusu .title,[data-theme=light] .k_linkler ul li .robot,[data-theme=light] .k_linkler ul li .istek,[data-theme=light] .film_kutusu>a:hover .title .years,[data-theme=light] .film_kutusu>a:hover .title .text,[data-theme=light] .film_kutusu>a:hover .imdb .svgcon,[data-theme=light] .film_kutusu>a:hover .imdb,[data-theme=light] .k_kategori ul li a:hover,[data-theme=light] .kategori_aciklama>div,[data-theme=light] .kategori_ust .baslik,[data-theme=light] .film_kutusu>div:hover .title .years,[data-theme=light] .film_kutusu>div:hover .title .text,[data-theme=light] .film_kutusu>div:hover .imdb .svgcon,[data-theme=light] .film_kutusu>div:hover .imdb,[data-theme=light] .pagination button,[data-theme=light] .pagination button .svgcon,[data-theme=light] .k_arama .arama_link,[data-theme=light] .k_izlenen li a:hover,[data-theme=light] .k_izlenen li a:hover .number small,[data-theme=light] .k_izlenen li a:hover .detail .views,[data-theme=light] .arama_kutusu input,[data-theme=light] .arama_kutusu .svgcon,[data-theme=light] .breadcrumb li a,[data-theme=light] .breadcrumb li .svgcon,[data-theme=light] .arsiv_kutu .select,[data-theme=light] .arsiv_kutu .select option,[data-theme=light] .sirala .select,[data-theme=light] .sirala .select option,[data-theme=light] .arama_kategori .ara,[data-theme=light] .arama_kategori input,[data-theme=light] .video_info .baslik,[data-theme=light] .video_ust_alan .detay li,[data-theme=light] .video_ust_alan .detay li a{color:var(--renk_dort)}[data-theme=light] .arama_kutusu input::placeholder,[data-theme=light] .arama_kategori input::placeholder{color:var(--renk_dort)}[data-theme=light] .arama_kutusu input:-ms-input-placeholder,[data-theme=light] .arama_kategori input:-ms-input-placeholder{color:var(--renk_dort)}[data-theme=light] .arama_kutusu input::-ms-input-placeholder,[data-theme=light] .arama_kategori input::-ms-input-placeholder{color:var(--renk_dort)}[data-theme=light] .video_info>div{background:linear-gradient(160deg,#E7E0F2,#F9F8FB)}[data-theme=light] .izle_onerilen .title{background:var(--renk_alti)}[data-theme=light] .izle_onerilen .imdb:after{border-left-color:var(--renk_alti)}::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:var(--renk_bes)}::-webkit-scrollbar-thumb{background:rgb(var(--renk_bir_rgb) / .6);border-radius:10px}::-webkit-scrollbar-thumb:hover{background:rgb(var(--renk_bir_rgb) / .6)}body{color:rgba(251,251,255,.8);line-height:1.7;font-size:15px;transition:background .2s linear}.ic_alan{width:100%;max-width:1250px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;line-height:1;position:relative}.alan_bg{background:var(--renk_bes);padding:1rem;border-radius:.25rem}.iceri_cek{margin:0 -.5rem}main{width:75%;display:flex;flex-direction:column;align-self:flex-start}aside{width:25%;position:relative;padding-left:1rem;display:flex;flex-direction:column;align-self:flex-start}.icerik{width:100%;position:relative}.bglcp{width:400px;height:300px;position:absolute;left:50%;top:0;transform:translateX(-50%);z-index:-1;opacity:.000000000000000000001}.katfixed{position:fixed;width:288.5px!important;top:20px}.katfixed_over{max-height:633px;overflow:hidden}.container{background:var(--renk_uc)}.uye_aciklama_gizle{height:0;overflow:hidden}.pageskin header{margin-bottom:0;border-radius:.25rem .25rem 0 0;border:2px solid var(--renk_bes);border-bottom:0}.pageskin header:before{height:50px}.pageskin header .header_sag{height:90px}.pageskin header .header_ust{height:50px;padding:10px 0}.pageskin header,.pageskin .ust_alan,.pageskin .kategori_ust,.pageskin .video_ust_alan{width:100%;max-width:1250px;margin-left:auto;margin-right:auto;overflow:hidden}.pageskin header .ic_alan{padding:0 1rem}.pageskin .ust_alan{padding:1rem;margin-top:0;margin-bottom:0}.pageskin .alan_bg{border-radius:0}.pageskin .kategori_ust{padding:1rem;margin-top:0;margin-bottom:0}.pageskin .kanal_listesi{margin-bottom:0}.pageskin .video_ust_alan{padding:1.5rem 1rem;margin-top:0;margin-bottom:0}.pageskin footer{margin-top:0}.pageskin footer .ic_alan{border-radius:0}.reklam_slot{width:100%;min-height:90px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;overflow:hidden;text-align:center}.reklam_slot>*{display:flex;width:100%;max-width:100%}.reklam_slot>*>*,.reklam_slot>*>*>*{display:flex;width:100%!important;max-width:100%}header{background:var(--renk_iki);width:100%;position:relative;color:rgba(251,251,255,.8);border-bottom:1px solid rgba(251,251,255,.075);margin-bottom:1rem;box-shadow:0 1px 2px 0 rgba(0,0,0,.1)}header:before{background-color:var(--renk_uc);height:40px;position:absolute;left:0;right:0;top:0;content:""}header .logo{display:flex;align-items:center;position:relative;margin:12.5px 25px 12.5px 0;float:left;min-width:170px;padding:10px}header .logo:before{background-color:var(--renk_iki);height:100%;position:absolute;left:0;right:0;top:0;border-radius:.5rem .5rem 0 0;content:""}header .logo:after{background-color:var(--renk_uc);height:100%;position:absolute;left:0;right:0;top:-47px;border-radius:100%;content:""}header .logo img{width:auto;height:35px;float:left;position:relative;z-index:1}header .logo span{padding-left:7px;color:var(--renk_dort);font-size:27px;font-weight:900;letter-spacing:-1.5px;z-index:1}header .header_sag{height:80px;display:flex;flex-direction:column;flex:1;position:relative}header .header_ust{height:40px;display:flex;align-items:center;position:relative;padding:5px 0}header .header_ust nav{width:100%}header .header_ust nav ul{width:100%;display:flex}header .header_ust nav ul li{float:left}header .header_ust nav li a{color:var(--renk_dort);line-height:30px;position:relative;padding-right:15px;font-size:14px;font-weight:500;display:flex;align-items:center}header .header_ust nav li a:hover{color:#bebfff}header .header_ust nav li a>img{width:16px;height:16px;float:left;margin-right:5px}header .header_ust nav li a>svg{width:16px;height:16px;float:left;margin-right:5px}header .arama_link{background:var(--renk_sekiz);width:85px;height:30px;line-height:30px;padding:0 .75rem;margin:0;border:0;position:relative;display:flex;align-items:center;color:var(--yazi_renk_beyaz);font-size:.875rem;cursor:pointer;border-radius:2rem}header .arama_link span{font-size:.9rem;opacity:.8}header .arama_link .svgcon{width:14px;height:15px;color:var(--yazi_renk_beyaz);margin-right:.75rem}.arama_modu{background-color:rgb(0 0 0 / .7);display:flex;justify-content:center;align-items:center;position:fixed;inset:0;z-index:9999999999}.arama_modu>div{background:var(--renk_uc);width:100%;max-width:36rem;display:flex;justify-content:center;flex-direction:column;align-items:center;position:relative;border-radius:.5rem;box-shadow:0 0 #0000,0 0 #0000,0 20px 25px -5px rgb(0 0 0 / .1),0 8px 10px -6px rgb(0 0 0 / .1)}.arama_modu .kapat{background:var(--renk_bir);width:40px;height:40px;float:left;padding:.6rem;position:absolute;right:1rem;z-index:1;top:-30px;cursor:pointer;border-radius:.25rem}.arama_modu .kapat .svgcon{width:100%;height:100%;float:left;color:var(--yazi_renk_siyah)}.arama_modu .kapat:hover .svgcon{opacity:.7;cursor:pointer}header .giris_link{background:var(--renk_bir);width:145px;height:30px;line-height:30px;padding:0 .75rem;margin-left:15px;border:0;position:relative;display:flex;align-items:center;color:var(--yazi_renk_siyah);font-size:.875rem;cursor:pointer;border-radius:2rem}header .giris_link span{font-size:.9rem}header .giris_link img{width:30px;height:30px;color:var(--yazi_renk_siyah);margin-right:.75rem;margin-left:-.75rem;border-radius:2rem;object-fit:cover}header .giris_link .svgcon{width:14px;height:15px;color:var(--yazi_renk_siyah);margin-right:.75rem}.giris_modu{background-color:rgb(0 0 0 / .7);display:flex;justify-content:center;align-items:center;position:fixed;inset:0;z-index:9999999999}.giris_modu>div{background:var(--renk_uc);width:100%;max-width:60rem;position:relative;display:flex;flex-direction:row;align-items:flex-start;padding:2rem 1rem;border-radius:.5rem;box-shadow:0 0 #0000,0 0 #0000,0 20px 25px -5px rgb(0 0 0 / .1),0 8px 10px -6px rgb(0 0 0 / .1)}.giris_modu .kapat{background:var(--renk_bir);width:40px;height:40px;float:left;padding:.6rem;position:absolute;right:1rem;z-index:1;top:-20px;cursor:pointer;border-radius:.25rem}.giris_modu .kapat .svgcon{width:100%;height:100%;float:left;color:var(--yazi_renk_siyah)}.giris_modu .kapat:hover .svgcon{opacity:.7;cursor:pointer}.giris_modu .kenar_blok{flex:unset;margin:0}.giris_modu .k_izlenen{width:33.333%;flex-basis:33.333%!important}.giris_modu .p_sol{padding-left:1rem}.giris_modu .p_sag{padding-right:1rem}.giris_modu .k_avantaj{width:33.333%;flex-basis:33.333%}.k_avantaj .icerik_tablosu{background:var(--renk_alti);flex-direction:column;padding:6px 10px 10px 10px;margin-top:.5rem;border-radius:.25rem}.k_avantaj li{margin-top:4px}.k_avantaj li span{background:var(--renk_bes);width:100%;line-height:1.3;display:flex;flex-direction:row;position:relative;padding:.5rem;font-size:14px;color:var(--yazi_renk_beyaz);transition:background-color .2s ease-out;border-radius:.25rem}.k_avantaj li span:hover{background:rgb(0,0,0,.7)}.giris_blok{width:33.333%;flex-basis:33.333%;min-height:365px;display:flex;flex-direction:column;align-items:center;position:relative;padding:55px 40px 15px}.giris_blok:before{background:#959595;background-image:linear-gradient(-45deg,#42485c 0,#FFF 150%);position:absolute;top:-3rem;bottom:-3rem;left:0;right:0;box-shadow:0 13px 49px -14px rgba(19,26,46,.56);border-radius:12px;content:""}.giris_blok .logos{display:flex;align-items:center;position:absolute;left:50%;top:-3rem;transform:translateX(-50%);padding:10px;z-index:1}.giris_blok .logos:before{background-color:var(--renk_iki);height:100%;position:absolute;left:0;right:0;top:0;border-radius:0 0 .5rem .5rem;content:""}.giris_blok .logos img{width:auto;height:35px;float:left;position:relative;z-index:1}.giris_blok .logos span{padding-left:7px;color:var(--renk_dort);font-size:27px;font-weight:900;letter-spacing:-1.5px;z-index:1}.giris_blok .logos span b{color:var(--renk_bir)}.giris_blok form{width:100%;position:relative;z-index:1}.giris_blok form>div{width:100%;display:flex;flex-direction:column;align-items:center;position:relative;margin-bottom:25px}.giris_blok .ikonlu .form-control{padding-left:50px}.giris_blok .ikonlu .svgcon{width:50px;height:100%;position:absolute;left:0;top:0;color:var(--renk_bir);padding:13px;z-index:2}.giris_blok .form-control,.giris_blok .btn{width:100%;height:40px;line-height:40px;border-radius:17px;position:relative;justify-content:center;z-index:1}.giris_blok .form-control{background:var(--yazi_renk_beyaz);font-weight:700}.giris_blok input:-webkit-autofill,.giris_blok input:-webkit-autofill:hover,.giris_blok input:-webkit-autofill:focus,.giris_blok input:-webkit-autofill:active{-webkit-box-shadow:0 0 0 30px var(--yazi_renk_beyaz) inset!important}.giris_blok .form-control::placeholder{color:#42485c;opacity:1;font-size:14px}.giris_blok .form-control:-ms-input-placeholder{color:#42485c;font-size:14px}.giris_blok .form-control::-ms-input-placeholder{color:#42485c;font-size:14px}.giris_blok .checkbox_hatirla{width:100%;display:flex;position:relative;padding-left:35px;color:var(--yazi_renk_beyaz);font-size:13px;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.giris_blok .checkbox_hatirla input{position:absolute;opacity:0;cursor:pointer;height:0;width:0}.giris_blok .checkbox_hatirla .checkmark{background-color:var(--yazi_renk_beyaz);width:19px;height:19px;border:2px solid #fff;position:absolute;top:50%;left:0;transform:translateY(-50%);border-radius:4px}.giris_blok .checkbox_hatirla:hover input~.checkmark{border-color:#ffcc74}.giris_blok .checkbox_hatirla input:checked~.checkmark{background-color:var(--yazi_renk_beyaz);border-color:#ffcc74}.giris_blok .checkbox_hatirla .checkmark:after{content:"";position:absolute;display:none}.giris_blok .checkbox_hatirla input:checked~.checkmark:after{display:block}.giris_blok .checkbox_hatirla .checkmark:after{left:5px;top:0;width:6px;height:12px;border:solid #00b22e;border-width:0 2px 2px 0;-webkit-transform:rotate(45deg);-ms-transform:rotate(45deg);transform:rotate(45deg)}.giris_blok>div>span{width:100%;display:flex;position:relative;color:var(--yazi_renk_beyaz);margin-bottom:1.5rem;font-size:1rem;font-weight:400;line-height:1.5}.giris_blok .loading{background:var(--renk_bir);width:100%;height:40px;line-height:40px;border-radius:17px;position:absolute;left:0;top:0;right:0;bottom:0;z-index:2;display:none}.giris_blok .loading img{width:40px;height:40px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1}.giris_blok .butonlar{width:100%;display:flex;flex-direction:row;gap:1rem;margin:15px 0}.giris_blok .unuttum{background:var(--renk_bes);color:var(--yazi_renk_beyaz)}.giris_blok .uyari{width:100%;display:flex;flex-direction:column;position:relative;z-index:1}.giris_blok .uyari>div{width:100%;line-height:1.3;padding:.75rem 1rem;border-radius:1rem;color:var(--yazi_renk_beyaz);font-size:14px;text-align:center}.giris_blok .uyari .basarili{background:#7ff0bf;color:#000}.giris_blok .uyari .hata{background:#f07f7f}.uye_popup{width:33.333%;display:flex;flex-direction:column;align-items:center;position:relative}.uye_popup:before{background:#959595;background-image:linear-gradient(-45deg,#42485c 0,#FFF 150%);position:absolute;top:-3rem;bottom:-3rem;left:0;right:0;box-shadow:0 13px 49px -14px rgba(19,26,46,.56);border-radius:12px;content:""}.uye_popup .ust_gorsel{background:var(--renk_bes);width:100%;display:flex;flex-direction:column;position:relative;margin-top:-3rem;padding-bottom:.5rem;border-bottom:2px dashed var(--renk_bir);border-radius:12px 12px 0 0;z-index:1}.uye_popup .ust_gorsel .resim{width:100%;height:100px;display:flex;position:relative;object-fit:cover;border-radius:12px 12px 0 0}.uye_popup .ust_gorsel .resim:after{background-image:linear-gradient(180deg,transparent,#000);height:30%;position:absolute;left:0;right:0;bottom:0;transition:height .1s ease;content:""}.uye_popup .ust_gorsel .resim img{width:100%;height:100%;display:flex;object-fit:cover;border-radius:12px 12px 0 0}.uye_popup .ust_gorsel .avatar{width:100%;display:flex;position:relative;padding:0 1rem}.uye_popup .ust_gorsel .avatar img{width:70px;height:70px;display:flex;margin-top:-30px;border:5px solid var(--renk_bir);object-fit:cover;border-radius:50%;box-shadow:0 0 #0000,0 0 #0000,0 20px 25px -5px rgb(0 0 0 / .1),0 8px 10px -6px rgb(0 0 0 / .1)}.uye_popup .ust_gorsel .avatar span{display:flex;padding:.75rem 0 0 1rem;line-height:1.5;font-weight:700;color:var(--yazi_renk_beyaz)}.uye_popup .linkler{width:100%;position:relative;display:flex;flex-direction:column;padding:1rem;border-radius:.25rem;z-index:1}.uye_popup .linkler ul{background:var(--renk_alti);display:flex;flex-direction:column;padding:6px 10px 10px 10px;border-radius:.25rem}.uye_popup .linkler ul li{display:flex;margin-top:4px}.uye_popup .linkler ul li a{background:var(--renk_bes);width:100%;display:flex;flex-direction:row;position:relative;padding:.7rem .5rem;font-size:14px;font-weight:500;color:var(--yazi_renk_beyaz);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background-color .2s ease-out;border-radius:.25rem}.uye_popup .linkler ul li a:hover{background:rgb(0,0,0,.7)}.uye_popup .linkler ul li .svgcon{width:13px;height:13px;margin-right:.5rem;color:var(--renk_bir);fill:var(--renk_bir)}.uye_popup .ayarlar{padding:0 1rem;z-index:1}.uye_popup .ayarlar .icerik_tablosu{flex-direction:column}.uye_popup .ayarlar .select{margin-top:4px}.arama_kutusu{background:var(--renk_bes);width:100%;position:relative;flex:1;padding:1rem .75rem 1rem;border-radius:.5rem .5rem 0 0}.arama_kutusu>form{display:flex;width:100%;position:relative}.arama_kutusu input{background-color:var(--renk_alti);width:100%;line-height:40px;height:40px;padding:.75rem 5rem .75rem 3rem;border:0;color:var(--yazi_renk_beyaz);font-size:16px;font-family:var(--font);font-weight:400;text-align:left;border-radius:20px;outline:2px solid transparent;outline-offset:2px;-webkit-tap-highlight-color:transparent}.arama_kutusu input:focus{border-color:none;outline:0;-webkit-tap-highlight-color:transparent}.arama_kutusu input::placeholder{color:var(--yazi_renk_beyaz);font-size:16px;opacity:1}.arama_kutusu input:-ms-input-placeholder{color:var(--yazi_renk_beyaz);font-size:16px;opacity:1}.arama_kutusu input::-ms-input-placeholder{color:var(--yazi_renk_beyaz);font-size:16px;opacity:1}.arama_kutusu .svgcon{width:16px;height:16px;color:var(--yazi_renk_beyaz);position:absolute;left:1rem;top:50%;transform:translate(0,-50%) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)}.arama_kutusu .esc{background:var(--renk_uc);color:var(--renk_dort);font-size:.75rem;line-height:1rem;padding:.125rem .5rem;position:absolute;right:1rem;top:50%;cursor:pointer;border-radius:.25rem;transform:translate(0,-50%) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)}.arama_sonuc_tablosu{min-height:324px;position:relative}.arama_sonuc_tablosu{width:100%;display:flex;flex-direction:column}.arama_sonuc_tablosu .baslik{display:flex;color:#9ca3af;font-weight:500;font-size:.875rem;line-height:1.25rem;margin:.75rem 0 .25rem 0;padding:0 1rem}.arama_sonuc_tablosu .baslik>span{margin-right:5px}.arama_sonuc_tablosu .baslik .svgcon{6color:var(--renk_bir)}.arama_sonuc_tablosu .icerikler{width:98%;max-height:340px;display:flex;flex-direction:column;overflow-y:auto;padding-right:1rem;margin-bottom:1rem}.arama_sonuc_tablosu .arama_s{margin-top:.3rem}.arama_sonuc_tablosu .arama_s:first-child{margin-top:0}.arama_sonuc_tablosu .duyuru_kutusu{margin:0}.arama_sonuc_tablosu .tum_gor{background:rgb(var(--renk_bir_rgb) / .5);position:absolute;right:1rem;top:0;margin:0;border-radius:0 0 .25rem .25rem}.arama_sonuc_tablosu .sonuc_yok{position:absolute;left:0;top:0;right:0;border-radius:0 0 .5rem .5rem}.sonuc_yok{background:var(--renk_uc);width:100%;height:100%;display:flex;justify-content:center;flex-direction:column;align-items:center;padding:2rem;border-radius:.25rem}.sonuc_yok .svgcon{width:125px;height:125px;flex:0 0 125px;color:var(--renk_bir)}.sonuc_yok span{display:flex;color:var(--yazi_renk_beyaz);text-align:center;margin:1rem 0}.sonuc_yok .a{font-weight:900;font-size:25px}.sonuc_yok .b{font-weight:400;font-size:12px;opacity:.4;line-height:15px}.arama_s{width:100%;display:flex;flex-direction:row;align-items:center;padding:.5rem 1rem .5rem 1.25rem;font-size:14px;color:var(--yazi_renk_beyaz);border-radius:0 .5rem .5rem 0}.arama_s:hover{background:var(--renk_bes)}.arama_s:hover .detail .title{color:var(--yazi_renk_beyaz)}.arama_s:hover .tikla{display:flex}.arama_s:hover .hashtag{color:var(--yazi_renk_beyaz)}.arama_s .hashtag{width:20px;height:20px;color:var(--renk_dort)}.arama_s .tikla{width:20px;height:20px;display:none}.arama_s .images{display:flex;height:3rem;margin-left:10px;position:relative}.arama_s .images img{width:48px;height:100%;border-radius:0 .25rem .25rem 0;object-fit:cover}.arama_s .images .year{background:var(--renk_bir);width:16px;height:100%;line-height:11px;display:flex;flex-direction:column;justify-content:space-around;color:var(--yazi_renk_siyah);padding:3px 5px;text-align:center;font-size:10px;font-weight:700;border-radius:.25rem 0 0 .25rem;word-wrap:break-word}.arama_s .detail{flex:1 1 0;padding-left:.75rem;min-width:0}.arama_s .detail .title{width:100%;margin:0 0 .25rem 0;padding:0;line-height:1.25rem;font-size:.875rem;color:var(--renk_dort);font-weight:500;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.arama_s .detail b{font-weight:400}.arama_s .detail .imdb,.arama_s .detail .type,.arama_s .detail .lang{background:var(--yazi_renk_beyaz);float:left;display:flex;align-items:center;line-height:1rem;padding:.125rem .5rem;margin-right:.5rem;position:relative;overflow:hidden;font-size:.75rem;color:var(--yazi_renk_siyah);border-radius:.25rem}.arama_s .detail .svgcon{width:15px;height:12px;color:var(--yazi_renk_siyah);fill:var(--yazi_renk_siyah)}.arama_s .detail .imdb .svgcon{color:#facc15;margin-right:4px}.arama_s .detail .lang{padding-left:.225rem;padding-right:.225rem}.arama_s .detail .lang .svgcon{margin:0 .175rem;height:16px}header .header_alt{height:40px;display:flex;align-items:center;justify-content:flex-end;position:relative;padding:5px 70px 5px 0;position:relative}header .header_alt nav{width:auto}header .header_alt nav ul{width:100%;display:flex}header .header_alt nav ul li{float:left}header .header_alt nav li a{color:var(--renk_dort);line-height:30px;position:relative;padding-right:15px;font-size:14px;font-weight:500;display:flex;align-items:center;transition:color .2s linear}header .header_alt nav li a:hover{color:#bebfff}header .header_alt nav li a>img{width:16px;height:16px;float:left;margin-right:5px}header .header_alt nav li a>svg{width:16px;height:16px;float:left;margin-right:5px}.mod_degistir{background:linear-gradient(90deg,var(--renk_sekiz),var(--renk_alti));width:55px;height:30px;border-radius:50px;position:absolute;right:0;top:5px;padding:5px;cursor:pointer;display:flex;justify-content:space-between;align-items:center}.mod_degistir .svgcon{width:18px;height:18px;position:relative;z-index:1}.mod_degistir .gunes{margin-right:auto;left:1px}.mod_degistir .ay{margin-left:auto;right:1px}.mod_degistir:after{background-color:var(--yazi_renk_beyaz);width:26px;height:26px;position:absolute;right:2px;top:2px;border-radius:50%;transition:transform .2s linear;content:""}[data-theme=light] .mod_degistir:after{transform:translateX(-24px)}html:not([data-theme]) *{transition:none!important}.kaydir{width:100%;display:flex;padding:0 1rem;position:relative}.kaydir:before,.kaydir:after{width:2rem;position:absolute;top:0;bottom:0;z-index:1;content:""}.kaydir:before{background-image:linear-gradient(90deg,var(--renk_iki) 50%,rgba(0,0,0,0) 100%);left:0}.kaydir:after{background-image:linear-gradient(270deg,var(--renk_iki) 50%,rgba(0,0,0,0) 100%);right:0}.marquee-wrapper{width:100%;height:18px;overflow:hidden;position:relative;white-space:nowrap;color:var(--yazi_renk_beyaz)}.marquee-track{display:flex;position:absolute;top:0;left:0;will-change:transform}.marquee-item{padding:0 15px;white-space:nowrap}.marquee-wrapper a{background:var(--renk_bir);color:var(--yazi_renk_siyah);font-size:10px;padding:2px 5px;font-weight:600;white-space:nowrap;line-height:1;border-radius:.25rem;z-index:2}.marquee-wrapper:hover{cursor:pointer}.duyuru_kutusu{width:100%;margin-bottom:1rem}.duyuru_kutusu>div{background:linear-gradient(90.53deg,var(--renk_uc) 5%,#392b3c 50%,var(--renk_uc) 102.99%);padding:1rem;line-height:20px;font-size:14px;display:flex;color:var(--yazi_renk_beyaz);position:relative;overflow:hidden;border-radius:.25rem}.duyuru_kutusu>div:before{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;content:""}.duyuru_kutusu>div:after{width:0;height:0;border-left:15px solid transparent;border-right:0 solid transparent;border-bottom:15px solid var(--renk_bir);position:absolute;right:0;bottom:0;content:""}.duyuru_kutusu .svgcon{width:20px;height:20px;flex:0 0 20px;color:var(--yazi_renk_beyaz);fill:#FFF;margin-right:5px}.ust_alan{background:url(/tema/sinemavip/front/images/bg_dark.webp) repeat var(--renk_bes);width:100%;display:flex;padding:1rem 0;margin-top:-1rem;margin-bottom:1.5rem;border-bottom:1px solid var(--renk_bes)}.ust_alan.no_bg{background:var(--renk_bes)}.film_kutusu{width:25%;float:left;padding:0 .5rem 1.3rem .5rem;position:relative}.film_kutusu>a,.film_kutusu>div{width:100%;height:100%;float:left;position:relative;overflow:hidden}.film_kutusu>a:hover .title .text,.film_kutusu>div:hover .title .text{opacity:.8}.film_kutusu>a:hover .image:after,.film_kutusu>div:hover .image:after{height:40%}.film_kutusu>a:hover .title,.film_kutusu>div:hover .title{background:var(--renk_yedi)}.film_kutusu>a:hover .imdb:after,.film_kutusu>div:hover .imdb:after{border-left-color:var(--renk_yedi)}.film_kutusu .image{width:100%;float:left;position:relative;overflow:hidden;border-radius:.25rem .25rem 0 0}.film_kutusu .image:after{background-image:linear-gradient(180deg,transparent,#000);height:15%;position:absolute;left:0;right:0;bottom:0;transition:height .1s ease;content:""}.film_kutusu .image img{width:100%;height:auto;aspect-ratio:170/254;float:left;object-fit:cover;border-radius:.25rem .25rem 0 0;transition:all .3s ease}.film_kutusu .type{position:absolute;right:10px;bottom:10px;top:unset;z-index:1}.film_kutusu .type .svgcon{width:23px;height:17px;margin-left:5px;color:var(--yazi_renk_beyaz)}.film_kutusu .type .flg2{color:var(--renk_bir)}.film_kutusu .imdb{display:flex;flex-direction:column;position:absolute;left:0;bottom:0;font-weight:600;padding:0 10px;font-size:11px;color:var(--yazi_renk_beyaz);z-index:1}.film_kutusu .imdb .svgcon{width:12px;height:12px;margin-bottom:5px;color:var(--yazi_renk_beyaz)}.film_kutusu .imdb:after{width:0;height:0;border-top:55px solid transparent;border-bottom:0 solid transparent;border-left:55px solid var(--renk_alti);position:absolute;left:0;bottom:0;z-index:-1;transition:background .1s ease;content:""}.film_kutusu .imdb_up .svgcon{color:#fff900!important}.film_kutusu .title{background:var(--renk_alti);width:100%;padding:10px;display:flex;flex-direction:column;align-items:flex-start;color:var(--yazi_renk_beyaz);border-radius:0 0 .25rem .25rem;transition:background .1s ease}.film_kutusu .title .text{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:600 15px/18px var(--font);color:var(--yazi_renk_beyaz);margin:0}.film_kutusu .title .orj{width:100%;line-height:15px;font-size:12px;margin-top:5px;color:var(--yazi_renk_beyaz);opacity:.6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.film_kutusu .title .years{width:100%;line-height:15px;font-size:11px;margin-top:5px;color:var(--yazi_renk_beyaz);opacity:.6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.film_kutusu .silbuton{width:35px;height:35px;position:absolute;right:1rem;top:1rem;padding:6px;z-index:2}.film_kutusu .silbuton .svgcon{width:100%;height:100%;color:red}.film_kutusu>div .uyar{background:rgb(0,0,0,.7);position:absolute;left:0;top:0;bottom:0;right:0;visibility:hidden;border-radius:.25rem;z-index:2}.film_kutusu>div .uyar>span{background:rgb(188,71,71,.7);color:var(--yazi_renk_beyaz);height:18px;line-height:18px;padding:0 .25rem;margin-top:-10px;font-size:12px;text-align:center;position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);z-index:2}.film_kutusu>div .uyar>span:before{height:22px;border-top:1px dashed #bc4747;border-bottom:1px dashed #bc4747;position:absolute;left:0;right:0;top:-2px;content:""}.film_kutusu>div:hover .uyar{visibility:visible}.liste_kutusu{width:33.333%;float:left;padding:0 10px 20px 10px;position:relative}.liste_kutusu>a{width:100%;height:100%;float:left;position:relative;overflow:hidden}.liste_kutusu>a:hover .image:after{height:40%}.liste_kutusu>a:hover .title{background:var(--renk_yedi)}.liste_kutusu>a:hover .title .text{opacity:.8}.liste_kutusu>a:hover .sayi:after{border-left-color:var(--renk_yedi)}.liste_kutusu .image{width:100%;float:left;position:relative;overflow:hidden;border-radius:.25rem .25rem 0 0}.liste_kutusu .image:after{background-image:linear-gradient(180deg,transparent,#000);height:30%;position:absolute;left:0;right:0;bottom:0;transition:height .1s ease;content:""}.liste_kutusu .image img{width:100%;height:auto;aspect-ratio:325/183;float:left;border-radius:.25rem .25rem 0 0;transition:all .3s ease}.liste_kutusu .sayi{display:flex;flex-direction:column;position:absolute;left:0;bottom:0;font-weight:600;padding:0 10px;font-size:11px;color:var(--yazi_renk_beyaz);z-index:1}.liste_kutusu .sayi .svgcon{width:12px;height:12px;margin-bottom:5px;color:var(--yazi_renk_beyaz)}.liste_kutusu .sayi:after{width:0;height:0;border-top:55px solid transparent;border-bottom:0 solid transparent;border-left:55px solid var(--renk_alti);position:absolute;left:0;bottom:0;z-index:-1;transition:background .1s ease;content:""}.liste_kutusu .title{background:var(--renk_alti);width:100%;padding:1rem 10px;display:flex;flex-direction:column;align-items:flex-start;color:var(--yazi_renk_beyaz);border-radius:0 0 .25rem .25rem;transition:background .1s ease}.liste_kutusu .title .text{width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font:600 15px/18px var(--font);color:var(--yazi_renk_beyaz);margin:0}.film_liste_kutu{width:100%;float:left;padding:0 .5rem 1.3rem .5rem}.film_liste_kutu>div{width:100%;display:flex;flex-direction:row;position:relative;overflow:hidden;border-radius:.25rem}.film_liste_kutu .sol{background:var(--renk_alti);width:249px;flex:0 0 249px;position:relative;overflow:hidden;border-radius:.25rem .25rem 0 0}.film_liste_kutu .image{width:100%;height:139px;float:left;object-fit:cover;border-radius:.25rem .25rem 0 0}.film_liste_kutu .years{position:absolute;left:0;top:0;z-index:2;font-size:18px;padding:.4rem;color:var(--yazi_renk_siyah);letter-spacing:-1.5px;font-weight:900;text-align:center;text-shadow:-3px 4px 1px rgba(0,0,0,.3)}.film_liste_kutu .years:after{width:0;height:0;border-top:0 solid transparent;border-bottom:70px solid transparent;border-left:70px solid var(--renk_bir);position:absolute;left:0;top:0;z-index:-1;content:""}.film_liste_kutu .imdb{width:70px;height:70px;display:flex;justify-content:flex-end;position:absolute;right:0;top:69px;color:var(--renk_dort);border-radius:0 .25rem .25rem 0}.film_liste_kutu .imdb:after{width:0;height:0;border-left:70px solid transparent;border-right:0 solid transparent;border-bottom:70px solid var(--renk_bir);position:absolute;right:0;bottom:0;content:""}.film_liste_kutu .imdb span{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;padding:0 7px 7px 0;position:relative;font-size:16px;font-weight:900;color:var(--yazi_renk_siyah);z-index:1}.film_liste_kutu .imdb .svgcon{width:15px;height:15px;margin-bottom:5px;color:var(--yazi_renk_siyah)}.film_liste_kutu .serit{position:absolute;left:1rem;top:110px}.film_liste_kutu .box{background:rgb(0,0,0,.7);float:left;display:flex;align-items:center;line-height:19px;padding:0 .5rem;margin-right:.5rem;position:relative;overflow:hidden;font-size:.75rem;color:var(--yazi_renk_beyaz);z-index:1;border-radius:.25rem}.film_liste_kutu .uyar{background:rgb(188,71,71,.8);color:var(--yazi_renk_beyaz)}.film_liste_kutu .detay{background:var(--renk_alti);width:100%;display:flex;flex-direction:column;position:relative;overflow:hidden;border-radius:0 0 .25rem .25rem}.film_liste_kutu .ust{background:rgb(0,0,0,.2);min-height:52px;position:relative;padding:.5rem 1rem;display:flex;flex-direction:column;justify-content:center}.film_liste_kutu .liste_baslik{position:relative;font-size:15px;font-weight:600;margin-bottom:.5rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;z-index:1}.film_liste_kutu .orj{position:relative;margin-top:-.3rem;font-size:13px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;opacity:.6;z-index:1}.film_liste_kutu .desc{width:100%;max-height:55px;overflow:hidden;padding:0 1rem;margin:.5rem 0;line-height:1.3;font-size:14px;color:var(--yazi_renk_beyaz)}.film_liste_kutu .devam_btn{position:relative;text-align:center;margin-top:-.7rem;z-index:1;cursor:pointer}.film_liste_kutu .devam_btn:after{background:var(--renk_alti);background:linear-gradient(0deg,var(--renk_alti) 0,rgba(39,42,53,0) 100%);width:100%;height:30px;position:absolute;left:0;right:0;top:-25px;z-index:1;content:""}.film_liste_kutu .devam_btn .svgcon{width:25px;height:25px;color:var(--yazi_renk_beyaz)}.film_uzun_kutu{width:100%;float:left;margin-bottom:1rem}.film_uzun_kutu>a,.film_uzun_kutu>.seri_linksiz{width:100%;display:flex;flex-direction:row;position:relative;overflow:hidden;border-radius:.25rem}.film_uzun_kutu>a:before,.film_uzun_kutu>.seri_linksiz:before{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;z-index:1;content:""}.film_uzun_kutu>a:hover{opacity:1}.film_uzun_kutu>a:hover .sol:after,.film_uzun_kutu>.seri_linksiz:hover .sol:after{border-bottom-color:var(--renk_bir)}.film_uzun_kutu>a:hover .years,.film_uzun_kutu>.seri_linksiz:hover .years{color:var(--yazi_renk_siyah)}.film_uzun_kutu>a:hover .years small,.film_uzun_kutu>.seri_linksiz:hover .years small{color:rgba(0,0,0,.5)}.film_uzun_kutu>.a_linksiz{width:100%;display:flex;flex-direction:row;position:relative;overflow:hidden;padding-right:70px;border-radius:.25rem}.film_uzun_kutu .sol{background:var(--renk_alti);width:90px;flex:0 0 90px;position:relative;overflow:hidden;border-radius:.25rem}.film_uzun_kutu .sol:before{width:0;height:0;border-left:15px solid transparent;border-right:0 solid transparent;border-bottom:15px solid var(--renk_bir);position:absolute;right:0;bottom:0;z-index:2;content:""}.film_uzun_kutu .sol:after{width:0;height:0;border-left:70px solid transparent;border-right:0 solid transparent;border-bottom:70px solid var(--renk_alti);position:absolute;right:0;bottom:0;content:""}.film_uzun_kutu .image{width:100%;height:110px;float:left;object-fit:cover;border-radius:.25rem 0 0 .25rem}.film_uzun_kutu .years{position:absolute;right:.5rem;bottom:7px;z-index:2;font-size:18px;color:var(--yazi_renk_beyaz);letter-spacing:-1.5px;font-weight:900;text-align:center;text-shadow:-3px 4px 1px rgba(0,0,0,.5)}.film_uzun_kutu .counter{position:absolute;right:.5rem;bottom:7px;z-index:2;font-size:22px;color:var(--yazi_renk_beyaz);letter-spacing:-1.5px;font-weight:900;text-align:center;text-shadow:-3px 4px 1px rgba(0,0,0,.5)}.film_uzun_kutu .detay{background:var(--renk_alti);display:flex;flex-direction:column;justify-content:center;flex:1;min-width:0;position:relative;overflow:hidden;margin-left:1rem;padding:0 1rem;padding-right:70px;border-radius:.25rem 0 0 .25rem}.film_uzun_kutu .detay:before{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;content:""}.film_uzun_kutu .baslik{position:relative;margin-bottom:1rem;font-size:14px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;z-index:1}.film_uzun_kutu .orj{position:relative;margin-top:-.6rem;margin-bottom:1rem;font-size:13px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;opacity:.6;z-index:1}.film_uzun_kutu .box{background:rgb(255,255,255,.1);float:left;display:flex;align-items:center;line-height:19px;padding:0 .5rem;margin-right:.5rem;position:relative;overflow:hidden;font-size:.75rem;color:var(--yazi_renk_beyaz);z-index:1;border-radius:.25rem}.film_uzun_kutu .imdb{background:var(--renk_alti);width:70px;height:100%;display:flex;justify-content:flex-end;position:absolute;right:0;top:0;color:var(--renk_dort);border-radius:0 .25rem .25rem 0}.film_uzun_kutu .imdb:after{width:0;height:0;border-left:70px solid transparent;border-right:0 solid transparent;border-bottom:70px solid var(--renk_bir);position:absolute;right:0;bottom:0;content:""}.film_uzun_kutu .imdb span{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;padding:0 7px 7px 0;position:relative;font-size:16px;font-weight:900;color:var(--yazi_renk_siyah);z-index:1}.film_uzun_kutu .imdb .svgcon{width:15px;height:15px;margin-bottom:5px;color:var(--yazi_renk_siyah)}.film_uzun_kutu>.seri_linksiz{opacity:.4}.film_uzun_kutu>.seri_linksiz:hover{opacity:1}.film_uzun_kutu>div .uyar{background:rgb(0,0,0,.7);position:absolute;left:0;top:0;bottom:0;right:0;visibility:hidden;border-radius:.25rem;z-index:2}.film_uzun_kutu>div .uyar>span{background:rgb(188,71,71,.7);color:var(--yazi_renk_beyaz);height:18px;line-height:18px;padding:0 .25rem;font-size:12px;text-align:center;position:absolute;left:-5px;right:-5px;top:50%;transform:translateY(-50%) rotate(-7deg);z-index:2}.film_uzun_kutu>div .uyar>span:before{height:22px;border-top:1px dashed #bc4747;border-bottom:1px dashed #bc4747;position:absolute;left:0;right:0;top:-2px;content:""}.film_uzun_kutu>div:hover .uyar{visibility:visible}.oyuncu_ust{background:linear-gradient(90deg,var(--renk_iki) 0,var(--renk_bes) 50%,var(--renk_iki) 100%);display:flex;position:relative;margin-bottom:1rem;padding:1rem;border-radius:.25rem}.oyuncu_ust:before{border:2px solid var(--renk_bir);position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;border-radius:.25rem;opacity:.15;content:""}.oyuncu_ust .avatar{width:150px;height:fit-content;display:flex;position:relative}.oyuncu_ust .avatar:before{border:2px solid var(--renk_bir);position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;border-radius:50%;opacity:.5;content:""}.oyuncu_ust .avatar img{width:150px;height:150px;padding:.5rem;object-fit:cover;border-radius:50%}.oyuncu_ust .sag{display:flex;flex-direction:column;justify-content:center;position:relative;padding-left:1rem;z-index:1}.oyuncu_ust .sag h2{font-size:25px;color:#fff;margin-bottom:.25rem}.oyuncu_ust .oy_meslek{color:#d5ad63;font-size:16px;display:block;margin-bottom:25px}.oyuncu_ust .oy_detay{display:flex;gap:.75rem}.oyuncu_ust .oy_detay li{background:rgba(255,255,255,.05);display:flex;flex-direction:column;justify-content:center;padding:.5rem 1rem;border:1px solid rgba(212,174,95,.25);border-radius:.5rem}.oyuncu_ust .oy_detay li:hover{background:rgba(255,255,255,.12)}.oyuncu_ust .oy_detay li small{display:block;color:#8c919d;font-size:11px;margin-bottom:.5rem}.oyuncu_ust .oy_detay li strong{color:#fff;font-size:13px}.oyuncu_ust .oy_detay .link{background:var(--renk_bir);display:flex;align-items:center;height:25px;line-height:25px;padding:0 .5rem;font-size:13px;font-weight:700;color:var(--yazi_renk_siyah);border-radius:.25rem}.oyuncu_ust .oy_detay .link .svgcon{width:25px;height:25px;color:var(--yazi_renk_siyah)}.oyuncu_ust .oy_detay .imdb{background:#F5C518;color:var(--yazi_renk_siyah)}.oyuncu_ust .oy_detay .tmdb{background:#002e52;color:var(--yazi_renk_beyaz)}.oyuncu_ust .oy_detay .tmdb .svgcon{width:75px;color:var(--yazi_renk_beyaz)}.oyuncular .film_uzun_kutu{width:50%;padding:0 10px 20px 10px;margin:0}.oyuncular .film_uzun_kutu .counter,.oyuncular .film_uzun_kutu .sol:after{display:none}.oykat_h2{color:var(--renk_dort);font-weight:700;font-size:16px}.film_seri_kutu{width:12.5%;float:left;padding:0 .5rem;margin-bottom:10px}.film_seri_kutu>a{background:var(--renk_alti);width:100%;display:flex;flex-direction:row;position:relative;overflow:hidden;border-radius:.25rem}.film_seri_kutu>a:before{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;z-index:1;content:""}.film_seri_kutu>a:after{width:0;height:0;border-left:70px solid transparent;border-right:0 solid transparent;border-bottom:70px solid var(--renk_alti);position:absolute;right:0;bottom:0;content:""}.film_seri_kutu .image{width:100%;height:auto;float:left;aspect-ratio:170/254;object-fit:cover;border-radius:.25rem 0 0 .25rem}.film_seri_kutu .years{position:absolute;right:0;bottom:0;padding:0 .5rem 7px 0;z-index:2;font-size:18px;color:var(--yazi_renk_beyaz);letter-spacing:-1.5px;font-weight:900;text-align:center;text-shadow:-3px 4px 1px rgba(0,0,0,.5)}.film_seri_kutu .years:before{width:0;height:0;border-left:15px solid transparent;border-right:0 solid transparent;border-bottom:15px solid var(--renk_bir);position:absolute;right:0;bottom:0;z-index:2;content:""}.kenar_blok{width:100%;margin-bottom:1rem;flex:0 0 100%;display:flex;flex-direction:column;clear:both}.kenar_blok>.baslik{background:var(--renk_alti);height:40px;line-height:20px;padding:10px 15px;color:var(--yazi_renk_beyaz);margin:0;overflow:hidden;border-radius:.25rem}.kenar_blok>.baslik:before{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;content:""}.kenar_blok>.baslik:after{width:0;height:0;border-left:15px solid transparent;border-right:0 solid transparent;border-bottom:15px solid var(--renk_bir);position:absolute;right:0;bottom:0;content:""}.kenar_blok>.baslik .svgcon{color:var(--renk_bir);fill:var(--renk_bir)}.kenar_blok .icerik_tablosu{width:100%;flex:0 0 100%;display:flex}.kenar_blok .rounded-0{border-radius:0}.kenar_blok iframe{max-width:100%!important}.k_kanallar{width:100%;display:flex;flex-direction:column;position:relative;margin:0}.k_kanallar .icerik_tablosu{display:flex;flex-wrap:wrap;margin:0 -3px}.k_arama .arama_link{background:linear-gradient(90deg,var(--renk_sekiz),var(--renk_alti));width:100%;height:40px;line-height:40px;padding:0 .75rem;margin:0;border:0;position:relative;display:flex;align-items:center;color:var(--yazi_renk_beyaz);font-size:.875rem;cursor:pointer;border-radius:.25rem}.k_arama .arama_link span{font-size:.9rem;opacity:.8}.k_arama .arama_link .svgcon{width:14px;height:15px;color:var(--yazi_renk_beyaz);margin-right:.75rem}.kanal_listesi{margin-bottom:1rem;padding:1rem .5rem}.kanal_listesi .scroll{display:flex;flex-direction:row;flex-wrap:nowrap;width:100%;overflow-x:scroll;padding:0 0 .5rem 0}.kanal_listesi .scroll::-webkit-scrollbar{height:10px}.kanal_listesi .scroll::-webkit-scrollbar{height:8px}.kanal_listesi .scroll::-webkit-scrollbar-track{background:var(--renk_alti);border-radius:8px}.kanal_listesi .scroll::-webkit-scrollbar-thumb{background:var(--renk_bir);border-radius:8px}.kanal_listesi .scroll::-webkit-scrollbar-thumb:hover{background:var(--renk_bir)}.kanal_listesi .kanal_kutusu{width:16.667%;flex:0 0 16.667%;padding:0 .5rem}.kanal_kutusu{width:33.333%;float:left;padding:0 3px 1rem;position:relative;text-align:center}.kanal_kutusu>a{display:flex;flex-direction:column;position:relative}.kanal_kutusu .resim{width:100%;height:auto;aspect-ratio:225/100;float:left;position:relative;border-radius:.25rem .25rem 0 0}.kanal_kutusu .resim img{width:100%;height:auto;aspect-ratio:225/100;float:left;object-fit:cover;border-radius:.25rem .25rem 0 0;transition:all .5s ease}.kanal_kutusu .title{background:var(--renk_alti);width:100%;padding:8px 5px;display:flex;justify-content:center;font-size:12px;font-weight:700;color:var(--yazi_renk_beyaz);border-radius:0 0 .25rem .25rem}.kanal_kutusu.aktif .title{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.k_kategori .icerik_tablosu{background:var(--renk_alti);padding:10px;margin-top:.5rem;border-radius:.25rem}.k_kategori .b_title{border-radius:5px}.k_kategori ul{background:var(--renk_bes);display:flex;flex-direction:row;flex-wrap:wrap;flex:1;border-radius:.25rem}.k_kategori ul li{width:50%;display:flex}.k_kategori ul li a{width:100%;position:relative;padding:12px 5px 12px 27px;font-size:14px;font-weight:500;color:var(--yazi_renk_beyaz);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background-color .2s ease-out}.k_kategori ul li a:hover{background:rgb(0,0,0,.7)}.k_kategori ul li a .svgcon{width:13px;height:13px;color:var(--yazi_renk_beyaz);fill:var(--yazi_renk_beyaz);position:absolute;left:8px;top:50%;transform:translateY(-50%)}.k_kategori .secili_kat{background:var(--renk_bir)}.k_kategori .secili_kat a{color:black!important}.k_kategori .secili_kat a .svgcon{color:black!important}.k_linkler .icerik_tablosu{flex-direction:column}.k_linkler ul{margin:0 -2px}.k_linkler ul li{width:50%;display:flex;float:left;padding:0 2px}.k_linkler ul li a{position:relative;display:flex;gap:.1rem;height:4rem;width:100%;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:.5rem 0;font-size:.875rem;line-height:1.25rem;font-weight:500;color:var(--yazi_renk_beyaz);border-radius:.75rem;transition-property:all;transition-timing-function:cubic-bezier(0.4,0,.2,1);transition-duration:150ms}.k_linkler ul li .svgcon{width:1.5rem;height:1.5rem;color:var(--yazi_renk_beyaz);opacity:.7}.k_linkler ul li .robot{background:linear-gradient(90deg,var(--renk_alti),var(--renk_sekiz));border-radius:.25rem 0 0 .25rem}.k_linkler ul li .robot:hover{opacity:.8}.k_linkler ul li .robot:after{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;content:""}.k_linkler ul li .istek{background:linear-gradient(90deg,var(--renk_sekiz),var(--renk_alti));border-radius:0 .25rem .25rem 0}.k_linkler ul li .istek:hover{opacity:.8}.k_linkler ul li .istek:after{width:0;height:0;border-left:15px solid transparent;border-right:0 solid transparent;border-bottom:15px solid var(--renk_bir);position:absolute;right:0;bottom:0;content:""}.k_izlenen{border-radius:05px}.k_izlenen .b_title{border-radius:5px}.k_izlenen .icerik_tablosu{background:var(--renk_alti);flex-direction:column;padding:6px 10px 10px 10px;margin-top:.5rem;border-radius:.25rem}.k_izlenen li{margin-top:4px}.k_izlenen li a{background:var(--renk_bes);width:100%;display:flex;flex-direction:row;position:relative;padding:.5rem;font-size:14px;font-weight:500;color:var(--yazi_renk_beyaz);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background-color .2s ease-out;border-radius:.25rem}.k_izlenen li a:hover{background:var(--renk_iki)}.k_izlenen li .number{display:flex;flex:0 0 25px;align-items:center;justify-content:flex-end;margin-right:.5rem;font-size:1.75rem;font-weight:700}.k_izlenen li .number small{font-size:1rem;color:var(--yazi_renk_beyaz);opacity:.7}.k_izlenen li .detail{flex:1;overflow:hidden}.k_izlenen li .detail .title{margin:0;padding:0;font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:21px}.k_izlenen li .detail .views{display:flex;align-items:center;color:var(--yazi_renk_beyaz);opacity:.7;font-size:.875em;line-height:19px}.k_izlenen li .detail .svgcon{width:21px;flex:0 0 21px;height:14px;color:var(--renk_bir);margin-right:5px}.k_izlenen .trend_poster{aspect-ratio:170 / 254;object-fit:cover}.k_serifilm,.k_popoyuncu{border-radius:5px}.k_serifilm .b_title,.k_popoyuncu .b_title{border-radius:5px}.k_serifilm .icerik_tablosu,.k_popoyuncu .icerik_tablosu{background:var(--renk_alti);flex-direction:column;padding:6px 10px 10px 10px;margin-top:.5rem;border-radius:.25rem}.k_serifilm .icerik_tablosu{padding-top:0}.k_serifilm .k_film>a .detail .orj{margin-left:-20px;position:relative;z-index:1}.k_popoyuncu li{margin-top:4px}.k_popoyuncu li a{background:var(--renk_bes);width:100%;display:flex;flex-direction:row;position:relative;padding:.5rem;font-size:14px;font-weight:500;color:var(--yazi_renk_beyaz);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;transition:background-color .2s ease-out;border-radius:.25rem}.k_popoyuncu li a:hover{background:rgb(0,0,0,.7)}.k_popoyuncu li .number{display:flex;flex:0 0 25px;align-items:center;justify-content:flex-end;margin-right:.5rem;font-size:1.75rem;font-weight:700}.k_popoyuncu li .number small{font-size:1rem;color:var(--yazi_renk_beyaz);opacity:.7}.k_popoyuncu li .detail{flex:1;overflow:hidden}.k_popoyuncu li .detail .title{margin:0;padding:0;font-size:14px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:21px}.k_popoyuncu li .detail .views{display:flex;align-items:center;color:var(--yazi_renk_beyaz);opacity:.7;font-size:.875em;line-height:19px}.k_popoyuncu li .detail .svgcon{width:21px;flex:0 0 21px;height:14px;color:var(--renk_bir);margin-right:5px}.k_html img,.k_html iframe{width:100%;height:auto;display:table}.k_filmlist .icerik_tablosu{flex-direction:row;flex-wrap:wrap;margin:0 -5px;width:auto}.k_filmlist .liste_kutusu{width:50%;padding:10px 5px 0 5px}.k_filmlist .liste_kutusu .sayi{padding:0 5px}.k_filmlist .liste_kutusu .sayi .svgcon{width:9px;height:9px}.k_filmlist .liste_kutusu .sayi:after{border-top-width:45px;border-left-width:45px}.k_filmlist .liste_kutusu .title{padding:10px 5px 5px 5px}.k_filmlist .liste_kutusu .title .text{height:40px;line-height:20px;font-size:14px;white-space:unset;text-overflow:unset}.k_mesajlar .icerik_tablosu{background:var(--renk_alti);flex-direction:column;padding:6px 10px 10px 10px;margin-top:.5rem;border-radius:.25rem}.k_mesaj{width:100%;float:left;margin-top:4px;position:relative;overflow:hidden;border-radius:.25rem}.k_mesaj>a{display:flex;flex-direction:column;color:var(--yazi_renk_beyaz);text-decoration:none}.k_mesaj>a .top{display:flex;flex-direction:row;margin-bottom:-30px;margin-left:-5px;z-index:1}.k_mesaj>a img{background:var(--renk_alti);width:55px;height:55px;flex:0 0 55px;padding:5px;object-fit:cover;border-radius:10px 10px 55px 10px}.k_mesaj>a .title{margin:0;padding:5px 0 0 5px;font-size:14px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1}.k_mesaj>a .cmnt{background:var(--renk_bes);color:var(--yazi_renk_beyaz);padding:10px;line-height:18px;font-size:13px;font-weight:400;border-radius:.25rem}.k_mesaj>a .cmnt>b{color:var(--yazi_renk_beyaz);padding-left:45px;opacity:.7}.k_robot .icerik_tablosu{background:var(--renk_alti);flex-direction:column;padding:10px;margin-top:.5rem;border-radius:.25rem}.k_robot .icerik_tablosu>form{width:100%}.k_robot .yazi{background:var(--renk_bes);color:var(--yazi_renk_beyaz);padding:.25rem .5rem;line-height:18px;font-size:12px;font-weight:400;border-radius:.25rem}.k_robot .parca{margin-top:15px;position:relative}.k_robot .parca label{z-index:-1;position:absolute}.k_robot .parca>.svgcon{width:13px;height:13px;color:var(--yazi_renk_beyaz);position:absolute;left:.75rem;top:50%;transform:translate(0,-50%);opacity:.7;z-index:1}.k_robot .parca>.arrow{width:11px;height:11px;right:.50rem;left:unset}.k_robot .parca:after{background:var(--renk_bes);position:absolute;top:0;bottom:0;right:0;width:1.5rem;border-radius:0 .5rem .5rem 0;content:""}.k_robot .select{background:var(--renk_bes);text-indent:2rem;padding:0}.k_robot .buttons{display:flex;flex-direction:row;justify-content:space-between}.k_robot .buttons .btn{background:var(--renk_bes);width:49%;color:var(--yazi_renk_beyaz);padding:0;border-radius:.25rem}.k_filmler .icerik_tablosu{background:var(--renk_alti);flex-direction:column;padding:0 10px 10px 10px;margin-top:.5rem;border-radius:.25rem}.k_filmler .icerik_tablosu.bgsiz{background:transparent;padding:0 .25rem;margin-top:.5rem}.k_filmler .film_kutusu{width:33.333%;padding:0 .25rem 10px .25rem}.k_filmler .film_kutusu .imdb{padding:0 5px}.k_filmler .film_kutusu .imdb .svgcon{width:10px;height:10px}.k_filmler .film_kutusu .imdb:after{border-top-width:45px;border-left-width:45px}.k_filmler .film_kutusu .title{padding:5px}.k_filmler .film_kutusu .title .text{font-size:13px;line-height:14px}.k_filmler .film_kutusu .title .years{font-size:10px;margin-top:2px}.k_film{width:100%;float:left;padding-top:10px}.k_film>a{background:var(--renk_bes);width:100%;display:flex;flex-direction:row;align-items:center;align-items:stretch;font-size:14px;color:var(--yazi_renk_beyaz);position:relative;overflow:hidden;border-radius:.25rem}.k_film>a img{width:75px;height:55px;flex:0 0 75px;object-fit:cover;border-radius:.25rem 0 0 .25rem}.k_film>a .detail{flex:1 1 0;padding:7px 10px 7px 0;position:relative}.k_film>a .detail:after{width:0;height:0;border-left:55px solid transparent;border-right:0 solid transparent;border-bottom:55px solid var(--renk_bes);position:absolute;left:-54px;bottom:0;content:""}.k_film>a .detail .title{position:relative;margin-bottom:6px;font-size:14px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1;z-index:1}.k_film>a .detail .orj{color:rgb(255,255,255,.5);font-size:.875em;display:block;line-height:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.k_film>a .detail .box{background:rgb(255,255,255,.1);float:left;display:flex;align-items:center;line-height:19px;padding:0 .5rem;margin-right:.5rem;position:relative;overflow:hidden;font-size:.75rem;color:var(--yazi_renk_beyaz);border-radius:.25rem;z-index:1}.k_film>a .detail .svgcon{width:12px;height:12px;margin-right:7px;fill:#ffc728}.k_film>a .detail b{font-weight:400}.k_film>a .detail .lang{margin-left:-20px}.k_film>a .detail .imdb{margin-right:auto}.k_film>a .sayi{width:55px;display:flex;flex-direction:column;align-items:flex-end;position:absolute;right:0;bottom:0;font-weight:600;padding:5px;font-size:11px;color:var(--yazi_renk_beyaz);z-index:1}.k_film>a .sayi .svgcon{width:9px;height:9px;margin-bottom:5px;color:var(--yazi_renk_beyaz)}.k_film>a .sayi:after{width:0;height:0;border-top:55px solid transparent;border-bottom:0 solid transparent;border-right:55px solid rgb(0,0,0,.5);position:absolute;left:0;bottom:0;z-index:-1;transition:background .1s ease;content:""}.k_film_seri{width:100%;display:flex;flex-direction:column;position:relative;margin-bottom:15px;border-radius:5px}.k_film_seri .icerik_tablosu{flex-direction:column;margin-top:1rem;position:relative}.k_film_seri .seriyi_gor{background:linear-gradient(90deg,transparent,var(--renk_bir));width:65%;display:flex;justify-content:flex-end;align-items:center;position:absolute;right:0;top:0;bottom:0;z-index:2;border-radius:0 .25rem .25rem 0}.k_film_seri .seriyi_gor>span{background:var(--renk_bir);max-width:300px;display:flex;color:var(--yazi_renk_siyah);line-height:23px;padding:.5rem 1rem;text-transform:none;font-weight:900;font-size:18px;text-align:center;border-radius:.25rem 0 0 .25rem}.izle_benzer{width:16.666%!important}.baslik.seri_baslik{background:var(--renk_yedi);width:100%;padding:.5rem .5rem .5rem 1rem;border-spacing:0;border-radius:.25rem;position:relative;overflow:hidden;color:var(--yazi_renk_beyaz)}.baslik.seri_baslik:after{position:absolute;left:0;right:0;top:0;bottom:0;border:1px solid var(--yazi_renk_beyaz);opacity:.1;border-radius:.25rem;content:""}.baslik.seri_baslik:before{width:0;height:0;border-top:8px solid transparent;border-bottom:8px solid transparent;border-left:8px solid var(--renk_bes);position:absolute;left:-1px;top:50%;transform:translateY(-50%);z-index:3;content:""}.k_benzer .baslik{margin-bottom:1rem}.k_onerilen{padding:0!important;margin:0}.k_onerilen .baslik{border-radius:0!important}.k_onerilen .icerik_tablosu{margin-top:1rem;padding:0 1rem;position:relative}.k_onerilen .izle_onerilen{width:12.5%}.k_onerilen .izle_onerilen:nth-child(n+9){display:none}.izle_onerilen .title{background:var(--renk_bes);padding:10px 5px 5px 5px}.izle_onerilen .title .text{font-size:13px;line-height:14px}.izle_onerilen .imdb{padding:0 5px}.izle_onerilen .imdb:after{border-top-width:45px;border-left-width:45px;border-left-color:var(--renk_bes)}.yatay_scroll{display:flex;flex-direction:row;flex-wrap:nowrap;overflow-x:auto}.yatay_scroll::-webkit-scrollbar{width:3px}.yatay_scroll::-webkit-scrollbar-track{background:#272a35;border-radius:8px}.sansurle .resim img,.sansurle .image img{filter:blur(10px);transform:scale(1.05)}.sansurle .resim::before,.sansurle .image::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,.55)}.sansurle .resim::after,.sansurle .image::after{background:#c40000;width:41.2%;height:auto;content:"+18";position:absolute;top:50%;left:50%;right:unset;bottom:unset;transform:translate(-50%,-50%);aspect-ratio:90 / 90;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;font-weight:800;letter-spacing:1px;box-shadow:0 8px 20px rgba(0,0,0,.4);transition:background-color .25s ease,color .25s ease}.sansurle:hover .resim::after,.sansurle:hover .image::after{background:#ffd400;color:#000}.sansurle>a:hover .resim::after,.sansurle>a:hover .image::after{height:auto!important}.sansurle .title,.sansurle .years{filter:blur(3px)}.sansurle .alt{display:none}.s_sansurle>*{filter:blur(4px)}.s_sansurle::after{content:"YETİŞKİN İÇERİK";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.65);color:#fff;font-weight:700;font-size:14px;line-height:1.4;letter-spacing:.5px;z-index:5;pointer-events:none}.sansurboyut.sansurle .image::after{width:55%;font-size:16px}.sansurboyut.sansurle>a:hover .image::after{height:auto!important}.form_alani{width:100%;display:flex;flex-direction:column;position:relative}.form_alani>div{margin-bottom:15px}.form_alani>div .form-control,.form_alani>div .textarea{box-shadow:rgb(10 10 10 / 29%) 0 0 2px 0}.form_alani .iceri_cek{margin-bottom:0}.form_alani .text{display:flex;flex-direction:row}.form_alani .text>div{width:33.333%;padding:0 7.5px;margin-bottom:15px}.form_uyarisi{background-color:rgb(0 0 0 / .7);display:none;justify-content:center;align-items:center;position:fixed;inset:0;z-index:9999999999}.form_uyarisi>div{background:var(--renk_uc);width:100%;max-width:36rem;display:flex;justify-content:center;flex-direction:column;align-items:center;position:relative;border-radius:.5rem;box-shadow:0 0 #0000,0 0 #0000,0 20px 25px -5px rgb(0 0 0 / .1),0 8px 10px -6px rgb(0 0 0 / .1)}.form_uyarisi .kapat{background:var(--renk_bir);width:40px;height:40px;float:left;padding:.6rem;position:absolute;right:1rem;z-index:1;top:-30px;cursor:pointer;border-radius:.25rem}.form_uyarisi .kapat .svgcon{width:100%;height:100%;float:left;color:var(--yazi_renk_siyah)}.form_uyarisi .kapat:hover .svgcon{opacity:.7;cursor:pointer}.form_uyarisi .uyari_kutu{padding:2rem;color:var(--yazi_renk_beyaz);font-size:16px;border-radius:10px;clear:both}.form_uyarisi .uyari_kutu .icon{display:flex;justify-content:center}.form_uyarisi .uyari_kutu .icon .svgcon{width:50px;height:50px}.form_uyarisi .uyari_kutu .text{margin-top:30px;line-height:20px;text-align:center;font-weight:600}.form_uyarisi.cc_error .icon .svgcon{color:#ef5959!important}.form_uyarisi.cc_ok .icon .svgcon{color:#50f79c!important}.kategori_ust{background:linear-gradient(90deg,var(--renk_bes) 0,var(--renk_iki) 50%,var(--renk_bes) 100%);width:100%;display:flex;padding:1.5rem 0;margin-top:-1rem;margin-bottom:1rem}.kategori_ust .baslik.orj{width:100%;display:flex;justify-content:center;margin-bottom:5px;font-size:20px;font-weight:700;letter-spacing:-1px;opacity:.7}.kategori_ust .baslik{width:100%;display:flex;justify-content:center;margin-bottom:1.5rem;font-size:27px;font-weight:900;letter-spacing:-1px}.kategori_ust .kategori_aciklama{margin:0}.kategori_ust .kategori_aciklama>div{font-size:15px;background:transparent;padding:0;text-align:center}.kategori_ust .breadcrumb{margin-top:1rem}.kategori_ust .kategori_aciklama ol,.kategori_ust .kategori_aciklama ul{display:flex;justify-content:center;flex-direction:column;align-items:center}.kategori_ust .kategori_aciklama ol,.kategori_ust .kategori_aciklama ul{display:flex;justify-content:center;flex-direction:column;align-items:center}.kategori_ust.seri_ust h1{margin-bottom:10px!important}.breadcrumb{background:var(--renk_uc);list-style:none;display:flex;flex-wrap:wrap;position:relative;margin:0 auto;overflow:hidden;border-radius:.25rem}.breadcrumb li{position:relative}.breadcrumb li .svgcon{width:20px;height:20px;color:var(--yazi_renk_beyaz);padding:0;position:absolute;right:0;top:50%;transform:translateY(-50%)}.breadcrumb li a{max-width:100%;height:30px;line-height:30px;padding:0 30px 0 10px;float:left;position:relative;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-decoration:none;color:var(--yazi_renk_beyaz);font-weight:600}.breadcrumb li a:hover{background:rgba(255,255,255,.6);color:var(--yazi_renk_beyaz)}.breadcrumb li:last-child a{padding-right:10px}.kategori_aciklama{width:100%;display:flex;flex-direction:column;margin-bottom:1rem;clear:both}.kategori_aciklama>div{background:var(--renk_alti);width:100%;padding:1rem 1rem .25rem;color:var(--yazi_renk_beyaz);font-size:13px;line-height:1.2;border-radius:.25rem}.kategori_aciklama h1,.kategori_aciklama h2,.kategori_aciklama h3,.kategori_aciklama h4,.kategori_aciklama h5,.kategori_aciklama h6{font-weight:700;font-size:19px;margin-bottom:1rem;font-family:var(--font)}.kategori_aciklama img{max-width:100%}.kategori_aciklama .img{width:100%;height:350px;display:flex;margin:10px 0;object-fit:cover;border-radius:.25rem}.kategori_aciklama p{margin-bottom:1rem;font-size:15px;line-height:1.3}.kategori_aciklama hr{border:0 none;border-top:2px dashed var(--renk_bir)}.kategori_aciklama ol,.kategori_aciklama ul,.kategori_aciklama li{list-style:inherit}.kategori_aciklama ol{list-style-type:decimal;padding:0 0 0 40px;margin:.8em 0 .9em 0}.kategori_aciklama ul{list-style:disc;padding:0 0 0 40px;margin:.8em 0 .9em 0}.kategori_aciklama .marker{background:var(--renk_alti);padding:1rem;border-radius:.25rem}.kategori_aciklama blockquote{background-color:#fff5e6;border-left:5px solid #ffcb80;color:rgba(0,0,0,.5);font-style:italic;padding:1rem;margin:1rem 0}.kategori_aciklama blockquote p{margin:0}.kategori_aciklama iframe,.kategori_aciklama object,.kategori_aciklama embed{width:100%;border:0 none}.kategori_aciklama table{width:100%;border-bottom:1px solid var(--renk_alti);border-spacing:0;border-radius:.25rem;overflow:hidden}.kategori_aciklama th{text-align:left}.kategori_aciklama table>thead>tr>th{background:var(--renk_alti);border-bottom:1px solid var(--renk_bes);color:var(--yazi_renk_beyaz)}.kategori_aciklama table td,.kategori_aciklama table th{border:1px solid var(--renk_alti);padding:.5rem 1rem}.kategori_aciklama table>tbody>tr:nth-child(2n+2)>td,.kategori_aciklama table>tbody>tr:nth-child(2n+2)>th{background-color:var(--renk_alti)}.kategori_aciklama .scroll{max-height:400px;overflow-y:scroll;margin-bottom:.75rem}.kategori_aciklama .scroll>p:last-child{margin-bottom:0}.kategori_aciklama .avatar{width:150px;float:left;margin:0 1rem 1rem 0}.baslik_h2{font-size:18px}.baslik_mb20{margin-bottom:20px!important}.kategori_aciklama_text{max-height:185px;overflow-y:scroll;padding-right:10px!important}.kategori_aciklama_text::-webkit-scrollbar{background:#13141b;width:5px}.kategori_aciklama_text::-webkit-scrollbar{width:3px}.kategori_aciklama_text::-webkit-scrollbar-track{background:#0d0e12;border-radius:8px}.kategori_aciklama_text::-webkit-scrollbar-thumb{background:var(--renk_bir);border-radius:8px}.kategori_aciklama_text::-webkit-scrollbar-thumb:hover{background:var(--renk_bir)}.arama_kategori{background:var(--renk_bes);width:100%;position:relative;flex:1;padding:1rem .75rem 1rem;margin-bottom:1rem;border-radius:.5rem}.arama_kategori>form{display:flex;width:100%;position:relative}.arama_kategori input{background-color:var(--renk_alti);width:100%;line-height:40px;height:40px;padding:.75rem 5rem .75rem 3rem;border:0;color:var(--yazi_renk_beyaz);font-size:16px;font-family:var(--font);font-weight:400;text-align:left;border-radius:20px;outline:2px solid transparent;outline-offset:2px;-webkit-tap-highlight-color:transparent}.arama_kategori input:focus{border-color:none;outline:0;-webkit-tap-highlight-color:transparent}.arama_kategori input::placeholder{color:var(--yazi_renk_beyaz);font-size:16px;opacity:1}.arama_kategori input:-ms-input-placeholder{color:var(--yazi_renk_beyaz);font-size:16px;opacity:1}.arama_kategori input::-ms-input-placeholder{color:var(--yazi_renk_beyaz);font-size:16px;opacity:1}.arama_kategori .ara{width:16px;height:16px;color:var(--yazi_renk_beyaz);position:absolute;left:1rem;top:50%;transform:translate(0,-50%) rotate(0) skewX(0) skewY(0) scaleX(1) scaleY(1)}.arama_kategori .inp_alan{display:flex;position:absolute;right:0;top:50%;padding-right:7px;transform:translate(0,-50%)}.arama_kategori .esc{background:var(--renk_uc);width:40px;height:32px;color:var(--yazi_renk_beyaz);border:2px solid var(--yazi_renk_beyaz);font-size:.75rem;line-height:1rem;padding:.5rem;margin-right:7px;opacity:.6;cursor:pointer;border-radius:20px}.arama_kategori .ara_btn{width:75px;height:32px;line-height:16px;border-radius:20px}.video_ust_alan{background:linear-gradient(90deg,rgb(20 22 29) 0,rgb(0 0 0) 50%,rgb(20 22 29) 100%);width:100%;display:flex;padding:1.5rem 0;margin-top:-1rem;margin-bottom:1rem}.video_ust_alan>div>div{width:100%;display:flex;flex-direction:row;position:relative;color:var(--yazi_renk_beyaz)}.video_ust_alan .image{width:100%;height:max-content;display:flex;flex:0 0 125px;float:left;position:relative;border-radius:.25rem}.video_ust_alan .image>img{width:100%;height:auto;aspect-ratio:125/187.5;float:left;border-radius:.25rem}.video_ust_alan .yayinci{width:70%;display:flex;position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);border-radius:.25rem .25rem 0 0}.video_ust_alan .yayinci img{width:100%;height:auto;aspect-ratio:225/75;object-fit:cover;border-radius:5px;border:2px solid var(--yazi_renk_beyaz);border-radius:9px}.video_ust_alan .center{width:100%;padding:0 1rem;display:flex;flex-direction:column;justify-content:space-between}.video_ust_alan .center .baslik{width:100%;display:flex;justify-content:center;margin-bottom:.5rem;font-size:27px;font-weight:900;letter-spacing:-1px}.video_ust_alan .center .baslik.orj{width:100%;display:flex;justify-content:center;margin-bottom:1rem;font-size:20px;font-weight:700;letter-spacing:-1px;opacity:.7}.video_ust_alan .kategori_aciklama{margin:0;max-height:100px;min-height:65px;overflow-y:scroll}.video_ust_alan .kategori_aciklama>div{font-size:15px;background:transparent;padding:0;text-align:center}.video_ust_alan .kategori_aciklama ol,.video_ust_alan .kategori_aciklama ul{display:flex;justify-content:center;flex-direction:column;align-items:center}.video_ust_alan .breadcrumb{margin-top:1rem}.video_ust_alan .right{width:100%;height:max-content;display:flex;flex:0 0 145px;float:left;position:relative;border-radius:.25rem}.video_ust_alan .detay{width:100%;display:flex;flex-direction:column;flex-wrap:wrap}.video_ust_alan .detay li{background:var(--renk_alti);display:flex;flex-direction:row;align-items:center;flex:1;position:relative;line-height:34px;padding:0 .5rem;margin-top:.25rem;color:var(--yazi_renk_beyaz);font-size:13px;font-weight:700;border-radius:.25rem}.video_ust_alan .detay li .svgcon{width:16px;height:16px;margin-right:7px;color:var(--yazi_renk_beyaz)}.video_ust_alan .detay li:first-child{margin-top:0}.video_ust_alan .detay li span{text-align:center}.video_ust_alan .detay li span:first-child{background:linear-gradient(to top,var(--bg-color4) 0,var(--bg-color8) 100%);margin:-5px auto 0;padding:0 10px;border-radius:0 0 .25rem .25rem}.kategori_aciklama::-webkit-scrollbar-track{background:#0b0c10;border-radius:8px}.kategori_aciklama::-webkit-scrollbar{width:6px}.video_alt_alan{background:var(--renk_alti);width:100%;display:flex;padding:1rem;margin-bottom:1rem;border-radius:.25rem}.video_alt_alan>div>div{width:100%;display:flex;flex-direction:row;position:relative;color:var(--yazi_renk_beyaz)}.video_alt_alan .image{width:100%;height:max-content;display:flex;flex:0 0 125px;float:left;position:relative;border-radius:.25rem}.video_alt_alan .image>img{width:100%;height:auto;aspect-ratio:125/187.5;float:left;border-radius:.25rem}.video_alt_alan .yayinci{width:70%;display:flex;position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);border-radius:.25rem .25rem 0 0}.video_alt_alan .yayinci img{width:100%;height:auto;aspect-ratio:225/75;object-fit:cover;border-radius:.25rem .25rem 0 0}.video_alt_alan .center{width:100%;padding:0 1rem;display:flex;flex-direction:column;justify-content:flex-start}.video_alt_alan .center .baslik{width:100%;display:flex;justify-content:center;margin-bottom:.5rem;font-size:27px;font-weight:900;letter-spacing:-1px}.video_alt_alan .center .baslik.orj{width:100%;display:flex;justify-content:center;margin-bottom:1.5rem;font-size:20px;font-weight:700;letter-spacing:-1px;opacity:.7}.video_alt_alan .kategori_aciklama{margin:0}.video_alt_alan .kategori_aciklama>div{font-size:15px;background:transparent;padding:0;text-align:center}.video_alt_alan .kategori_aciklama ol,.video_alt_alan .kategori_aciklama ul{display:flex;justify-content:center;flex-direction:column;align-items:center}.video_alt_alan .right{width:100%;height:max-content;display:flex;flex:0 0 145px;float:left;position:relative;border-radius:.25rem}.video_alt_alan .detay{width:100%;display:flex;flex-direction:column;flex-wrap:wrap}.video_alt_alan .detay li{background:var(--renk_bes);display:flex;flex-direction:row;align-items:center;flex:1;position:relative;line-height:34px;padding:0 .5rem;margin-top:.25rem;color:var(--yazi_renk_beyaz);font-size:13px;font-weight:700;border-radius:.25rem}.video_alt_alan .detay li .svgcon{width:16px;height:16px;margin-right:7px;color:var(--yazi_renk_beyaz)}.video_alt_alan .detay li:first-child{margin-top:0}.video_alt_alan .detay li span{text-align:center}.video_alt_alan .detay li span:first-child{background:linear-gradient(to top,var(--bg-color4) 0,var(--bg-color8) 100%);margin:-5px auto 0;padding:0 10px;border-radius:0 0 .25rem .25rem}.video_info{width:100%;display:flex;flex-direction:column;position:relative;margin-bottom:1rem;border-radius:.25rem}.video_info .baslik{background:var(--renk_yedi);display:flex;flex-direction:row;flex-wrap:nowrap;align-items:flex-start;padding:.5rem 1rem;margin-bottom:0;border-radius:.25rem .25rem 0 0}.video_info .baslik p{display:flex;flex-direction:column;flex:1;line-height:15px;font-weight:600;font-size:17px;color:var(--yazi_renk_beyaz)}.video_info .baslik .orj{width:100%;font-size:13px;color:var(--yazi_renk_beyaz);margin-top:4px;font-style:italic;opacity:.7}.video_info>div{background:var(--renk_alti);width:100%;padding:1rem;display:flex;flex-direction:column;position:relative;overflow:hidden;color:var(--yazi_renk_beyaz)}.video_info>div:last-child{border-radius:0 0 .25rem .25rem}.video_info .info{display:flex;justify-content:space-between;overflow:hidden;position:absolute;left:10px;right:10px;bottom:20px;z-index:2}.video_info .description{width:100%;display:flex}.video_info .desc{display:block;font-size:14px;line-height:18px;max-height:188px;overflow-y:scroll;color:var(--yazi_renk_beyaz)}.video_info .desc>p{margin-top:1rem}.video_info .desc>p:first-child{margin-top:0}.video_info .desc h4{position:relative;padding-left:.75rem}.video_info .desc h4:before{background:var(--renk_bir);width:3px;height:100%;position:absolute;left:0;top:50%;margin-top:1px;transform:translate(0,-50%);border-radius:.25rem;opacity:.5;content:""}.video_info .detail{width:100%;display:flex;flex-direction:column;padding-top:0}.video_info .detail>li{background:var(--renk_alti);width:100%;display:flex;flex-direction:row;flex:1;line-height:20px;padding:5px 15px;margin-top:15px;color:var(--yazi_renk_beyaz);font-size:13px;font-weight:700;border-radius:.25rem}.video_info .detail>li small{min-width:60px;position:relative;margin-right:10px;font-size:13px}.video_info .detail>li small:after{padding-left:5px;content:":"}.video_info .detail>li span{display:block;color:var(--yazi_renk_beyaz);word-wrap:break-word;font-size:13px}.video_info .detail>li a{margin:4px 8px 4px 0;color:var(--yazi_renk_beyaz);word-wrap:break-word;font-size:13px}.video_info .tags{background:var(--renk_yedi);padding:10px 15px;border-radius:0 0 .25rem .25rem}.video_info .tags small,.video_info .tags a{background:var(--renk_alti);height:25px;line-height:25px;float:left;position:relative;display:flex;justify-content:space-between;align-items:center;padding:0 10px;margin:5px 5px 5px 0;font-size:12px;font-weight:700;color:var(--yazi_renk_beyaz);word-wrap:break-word;border-radius:16px}.video_info .tags div{display:flex;flex-direction:row;flex-wrap:wrap;color:var(--yazi_renk_beyaz)}.video_info #boxset table{background:var(--renk_yedi);width:100%;padding:.5rem;border-spacing:0;margin-top:.75rem;border-radius:.25rem;position:relative;overflow:hidden}.video_info #boxset table:after{position:absolute;left:0;right:0;top:0;bottom:0;border:1px solid var(--yazi_renk_beyaz);opacity:.1;border-radius:.25rem;content:""}.video_info #boxset th{text-align:left}.video_info #boxset table>thead>tr>th{background:var(--renk_alti);border-bottom:1px solid var(--renk_bes);color:var(--yazi_renk_beyaz)}.video_info #boxset table td,.video_info #boxset table th{border:1px solid var(--yazi_renk_siyah);padding:.5rem 1rem;height:60px}.video_info #boxset table>tbody>tr:nth-child(2n+2)>td,.video_info #boxset table>tbody>tr:nth-child(2n+2)>th{background-color:var(--renk_alti)}.video_content{width:100%;display:flex;flex-direction:column}.video_part{min-height:40px;display:flex;flex-direction:column;margin-bottom:1rem;position:relative}.video_part .tab_title{background:var(--renk_alti);display:flex;flex-direction:row;margin:0 auto 1rem 0;border-radius:.25rem}.video_part .tab_title li a{height:38px;line-height:38px;padding:0 .75rem;position:relative;display:flex;flex-direction:row;align-items:center;overflow:hidden;font-size:14px;font-weight:600;color:var(--yazi_renk_beyaz);border-radius:.25rem}.video_part .tab_title li a.active,.video_part .tab_title li a.active:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.video_part .tab_title li a:hover{color:var(--yazi_renk_beyaz)}.video_part .tab_title li a .svgcon{background:#FFF;width:27px;height:22px;padding:3px;margin-right:10px;color:var(--yazi_renk_siyah);border-radius:.25rem}.video_part .tab_content{background:var(--renk_alti);padding:3.5px 10px;display:flex;flex-direction:row;flex-wrap:wrap;border-radius:.25rem}.video_part .tab_content li{margin:3.5px 15px 3.5px 0}.video_part .tab_content li a{background:var(--renk_bes);height:30px;line-height:30px;padding:0 15px;display:flex;flex-direction:row;align-items:center;position:relative;overflow:hidden;font-size:14px;color:var(--yazi_renk_beyaz);border-radius:.25rem}.video_part .tab_content li a.active,.video_part .tab_content li a:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.video_content .videos{background:var(--renk_alti);width:100%;height:0;display:block;padding-top:56.25%;position:relative;overflow:hidden;border-radius:.25rem}.video_content .videos iframe,.video_content .videos object,.video_content .videos embed,.video_content .videos .video-js{width:100%;height:100%;border:0 none;position:absolute;left:0;top:0;border-radius:.25rem}.video_content .play_ust_txt{background:#f5c518;line-height:18px;padding:5px 1rem;font-size:1rem;font-weight:700;color:var(--yazi_renk_siyah);display:flex;align-items:center;justify-content:center;text-align:center}#f_player{position:relative;background:#000}#playerloading{background:#000;position:absolute;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .3s}.spinner{width:50px;height:50px;border:4px solid rgba(255,75,43,.2);border-top:4px solid #FF4B2B;border-radius:50%;animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}.player_part{width:100%;height:38px;display:flex;flex-direction:row;justify-content:center;align-items:center;position:relative;margin:0 auto;border-radius:.25rem}.player_part:after{background:var(--renk_bir);width:100%;height:5px;position:absolute;left:0;right:0;top:50%;transform:translateY(-50%);border-radius:.25rem;content:""}.player_part .part_button{background:var(--renk_alti);height:38px;line-height:38px;padding:0 .75rem;position:relative;display:flex;flex-direction:row;align-items:center;overflow:hidden;font-size:14px;font-weight:600;color:var(--yazi_renk_beyaz);cursor:pointer;z-index:1}.player_part .part_button.active,.player_part .part_button.active>a,.player_part .part_button.active:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.player_part .part_button .svgcon{background:#FFF;width:27px;height:22px;padding:3px;margin-right:10px;color:var(--yazi_renk_siyah);border-radius:.25rem}.player_part .part_button:first-child{border-top-left-radius:.25rem;border-bottom-left-radius:.25rem}.player_part .part_button:last-child{border-top-right-radius:.25rem;border-bottom-right-radius:.25rem}.player_part_alt{display:flex;flex-direction:row;justify-content:center;align-items:center;margin:.75rem 0;border-radius:.25rem}.player_part_alt li button{cursor:pointer;background:var(--renk_alti);height:38px;line-height:38px;padding:0 .75rem;display:flex;flex-direction:row;align-items:center;position:relative;overflow:hidden;font-size:14px;font-weight:600;color:var(--yazi_renk_beyaz)}.player_part_alt li.active button,.player_part_alt li button:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.player_part_alt li button .svgcon{background:#FFF;width:27px;height:22px;padding:3px;margin-right:10px;color:var(--yazi_renk_siyah);border-radius:.25rem}.player_part_alt .part_button:first-child button{border-top-left-radius:.25rem;border-bottom-left-radius:.25rem}.player_part_alt .part_button:last-child button{border-top-right-radius:.25rem;border-bottom-right-radius:.25rem}.fragmanacik #fragman_player{position:fixed;top:0;width:100%;height:100%;z-index:1000;left:0}.fragmanacik #fragman_player .fragman_backdrop{position:fixed;top:0;left:0;z-index:1;width:100vw;height:100vh;background:var(--renk_uc);opacity:.85}.fragman_box{width:100%;max-width:1140px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9999999999}.fragman_box>div{width:100%;display:flex;flex-direction:column;transition:transform .3s ease-out;transform:translate(0,-50px)}.fragman_box .f_header{display:flex;flex-shrink:0;align-items:center;justify-content:space-between;padding:1rem 0}.fragman_box .left{display:flex;flex:1;align-items:center}.fragman_box .back{width:30px;height:30px}.fragman_box .back>svg{width:100%;height:100%;color:var(--yazi_renk_beyaz)}.fragman_box .name{padding-left:15px;color:var(--yazi_renk_beyaz);font-size:25px}.fragman_box .btn{width:35px;display:flex;padding:8px}.fragman_box .btn>svg{width:100%;height:100%;color:var(--yazi_renk_siyah)}.fragman_box .f_body{background:var(--renk_bes);width:100%;height:0;padding-top:56.20%;position:relative}.fragman_box .f_body iframe{width:100%;height:100%;position:absolute;left:0;top:0}.video_point{background:var(--renk_alti);width:100%;margin:1rem 0;padding:1rem;display:flex;flex-direction:row;justify-content:space-between;align-items:center;border-radius:.25rem}.video_point .left{display:flex}.video_point .left>a{background:var(--renk_bir);display:flex;align-items:center;height:35px;line-height:35px;padding:0 1rem 0 0;margin-right:1rem;font-size:13px;font-weight:700;color:var(--yazi_renk_siyah);border-radius:.25rem}.video_point .left>a span{background:rgb(0,0,0,.1);height:35px;line-height:35px;padding:0 10px;border-radius:.25rem 0 0 .25rem}.video_point .left>a .svgcon{width:35px;height:35px;margin-left:.5rem;color:var(--yazi_renk_siyah)}.video_point .left .imdb_link{background:#F5C518;color:var(--yazi_renk_siyah)}.video_point .left .tmdb_link{background:#041420;color:var(--yazi_renk_beyaz)}.video_point .left .tmdb_link span{background:#90CEA1;background:linear-gradient(90deg,rgba(144,206,161,1) 0,rgba(1,180,228,1) 100%);color:var(--yazi_renk_siyah)}.video_point .left .tmdb_link .svgcon{width:75px;color:var(--yazi_renk_beyaz)}.video_point .left .rottentomatoes_link{background:#fa320a;color:var(--yazi_renk_beyaz)}.video_point .left .rottentomatoes_link span{background:rgb(0,0,0,.2)}.video_point .left .rottentomatoes_link .svgcon{width:75px;color:var(--yazi_renk_beyaz)}.video_point .right{flex:1}.video_point .rating{display:flex;flex-direction:row;align-items:center}.video_point .star{background:var(--renk_bes);height:35px;line-height:35px;padding:0 .5rem;display:flex;border-radius:0 .25rem .25rem 0}.video_point .star .points{margin:0 2px;cursor:pointer;display:flex;align-items:center}.video_point .star .svgcon{width:15px;height:15px;color:var(--yazi_renk_beyaz)}.video_point .star .points.active .svgcon,.video_point .star .points:hover .svgcon{color:var(--renk_bir)}.video_point .star .points.active:hover .svgcon{color:#f07f7f}.video_point .text{background:var(--renk_bir);height:35px;line-height:35px;padding:0 1rem;font-size:15px;color:var(--yazi_renk_siyah);font-weight:600;border-radius:.25rem 0 0 .25rem}.video_point .vd_btn{display:flex;justify-content:flex-end}.video_point .vd_btn button{position:relative;display:flex;flex-direction:row;align-items:center;padding-left:0;margin-left:1rem}.video_point .vd_btn button:first-child{margin-left:0}.video_point .vd_btn button:hover{opacity:.9;color:var(--yazi_renk_siyah)}.video_point .vd_btn button .svgcon{width:35px;height:100%;padding:.5rem;border-right:1px solid rgba(0,0,0,.3);margin-right:.5rem}.video_point .vd_btn button.favaktif{background:#f07f7f}.filmi_indir{width:100%;display:flex}.filmi_indir>a{background:linear-gradient(90.53deg,var(--renk_uc) 5%,#392b3c 50%,var(--renk_uc) 102.99%);width:100%;display:flex;flex-direction:row;align-items:center;padding:.5rem 1rem .5rem .5rem;position:relative;overflow:hidden;color:var(--yazi_renk_beyaz);border-radius:.25rem}.filmi_indir>a:before{width:0;height:0;border-left:0 solid transparent;border-right:15px solid transparent;border-top:15px solid var(--renk_bir);position:absolute;left:0;top:0;content:""}.filmi_indir>a:after{width:0;height:0;border-left:15px solid transparent;border-right:0 solid transparent;border-bottom:15px solid var(--renk_bir);position:absolute;right:0;bottom:0;content:""}.filmi_indir>a .ikon{width:35px;height:45px;padding-right:.5rem}.filmi_indir>a .ikon .svgcon{width:100%;height:100%;color:var(--yazi_renk_beyaz)}.filmi_indir>a .orta{display:flex;align-items:center;flex:1}.filmi_indir>a .resim{width:45px;height:45px;object-fit:cover;border-radius:5px}.filmi_indir>a .detay{flex:1;padding:0 10px;min-width:0}.filmi_indir>a .detay .title{margin:0;padding:0;font-size:14px;font-weight:600;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.1}.filmi_indir>a .detay .kategori{display:flex;justify-content:space-between;font-size:11px;padding-top:5px}.filmi_indir>a .detay .kategori span{background:var(--bg-color6);padding:0 6px;line-height:20px;position:relative;padding-left:26px;font-weight:600;color:var(--yazi_renk_beyaz);border-radius:10px}.filmi_indir>a .btn{display:flex;align-items:center;border-radius:5px}.filmi_indir>a .btn .svgcon{width:20px;height:20px;margin-right:10px;color:var(--yazi_renk_beyaz)}.k_oyuncu{width:100%;display:flex;flex-direction:column;position:relative;margin-bottom:15px;border-radius:5px}.k_oyuncu .icerik_tablosu{background:var(--renk_alti);flex-direction:row;flex-wrap:wrap;padding:10px;margin-top:.5rem;position:relative;border-radius:.25rem}.oyuncu_listesiscroll{max-height:340px;over-flow:hidden;overflow-y:scroll}.oyuncu_listesiscroll::-webkit-scrollbar{width:3px}.oyuncu_listesiscroll::-webkit-scrollbar-track{background:#272a35;border-radius:8px}.oyuncu_kutusu{width:33.333%;float:left;padding:0 .25rem 10px;position:relative;text-align:center;border-radius:.25rem}.oyuncu_kutusu>a{background:var(--renk_bes);width:100%;float:left;padding:.5rem;position:relative;text-align:center;border-radius:.25rem}.oyuncu_kutusu>.sdiv{background:var(--renk_bes);width:100%;float:left;padding:.5rem;position:relative;text-align:center;border-radius:.25rem}.oyuncu_kutusu .resim{width:100%;height:auto;aspect-ratio:94.5/94.5;float:left;position:relative}.oyuncu_kutusu .resim img{width:100%;height:100%;float:left;object-fit:cover;border-radius:.25rem}.oyuncu_kutusu .resim div{text-align:center;background:rgb(0,0,0,.5);width:100%;line-height:12px;max-height:28px;overflow:hidden;position:absolute;left:0;bottom:0;right:0;font-size:10px;padding:.25rem .15rem;display:flex;align-items:center;justify-content:center}.oyuncu_kutusu small{width:100%;float:left;line-height:16px;padding-top:6px;color:var(--yazi_renk_beyaz);font-weight:600;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.oyuncu_kutusu.genis{width:100%}.oyuncu_kutusu.genis>a{width:100%;display:flex;flex-direction:row;padding:0;text-align:left}.oyuncu_kutusu.genis>.sdiv{width:100%;display:flex;flex-direction:row;padding:0;text-align:left}.oyuncu_kutusu>.sdiv small{color:var(--yazi_renk_beyaz)}.oyuncu_kutusu.genis .resim{width:75px;height:55px;flex:0 0 75px}.oyuncu_kutusu.genis .resim img{border-radius:.25rem 0 0 .25rem}.oyuncu_kutusu.genis small{padding-top:0}.oyuncu_kutusu.genis .detail{flex:1 1 0;flex-direction:column;padding:7px 10px;position:relative}.oyuncu_kutusu.genis .detail b{width:100%;float:left;line-height:15px;padding-top:3px;color:var(--renk_bir);font-weight:600;font-size:13px}.commenting_box{background:var(--renk_alti);width:100%;display:flex;flex-direction:column;padding:1rem;margin:1rem 0;position:relative;color:var(--yazi_renk_beyaz);border-radius:.25rem}.commenting_box .writing_box{display:flex;flex-direction:column;width:auto;clear:both}.commenting_box .writing_box>div{display:flex;flex-direction:column}.commenting_box .writing_box>div.bottom{flex-direction:row;justify-content:space-between}.commenting_box .writing_box .text{display:flex;flex-direction:row}.commenting_box .writing_box .text>div{flex:1;padding:0 7.5px}.commenting_box .writing_box .text .form-control{background:var(--renk_bes);margin-bottom:1rem}.commenting_box .textarea{background:var(--renk_bes);min-height:auto;margin-bottom:1rem}.commenting_box .btn{font-weight:600}.commenting_box .btn:hover{color:var(--yazi_renk_siyah)}.commenting_box .checkbox{background:var(--renk_bir);width:auto;height:35px;line-height:35px;padding:0 10px;font-size:14px;font-weight:500;border-radius:.25rem}.comments_box{width:100%;display:flex;flex-direction:column;margin-bottom:1rem;position:relative;color:var(--yazi_renk_beyaz)}.comments_box .commentlist{padding:0 0 1rem 0;display:flex;flex-direction:column;width:auto;clear:both}.comments_box .commentlist .comment:first-child{margin-top:0}.comments_box .pending{background:var(--renk_bir);margin-bottom:1rem;padding:.7rem 1rem;font:600 15px var(--font);text-align:center;color:var(--yazi_renk_siyah);border-radius:.25rem}.comment{background:var(--renk_alti);display:flex;flex-direction:column;flex:0 0 100%;margin-top:1rem;position:relative;border-radius:.5rem}.comment .message{display:flex;flex-direction:column;position:relative;flex:1;color:#f8f8f8;padding:1rem 1rem .5rem 1rem}.comment .message>div{line-height:20px;font-size:14px;font-family:segoe ui,tahoma,Arial,sans-serif}.comment .message .spoiler{filter:blur(2px)}.comment .message .spo_alert{background:rgb(39,42,53,.99);line-height:20px;position:absolute;left:0;right:0;top:0;bottom:0;padding:0 10px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--yazi_renk_beyaz);border-radius:.5rem}.comment .message .spo_alert span{background:var(--renk_bes);padding:7px;border-radius:.5rem;box-shadow:rgb(10 10 10 / 29%) 0 0 2px 0}.comment .message .spo_alert b{text-shadow:rgba(0,0,0,1) 0 0 0;color:var(--renk_bir)}.comment .message .spoiler_ac{cursor:pointer}.comment .info{background:var(--renk_yedi);display:flex;justify-content:space-between;align-items:center;padding:.8rem 1rem;font-weight:600;color:var(--yazi_renk_beyaz);font-size:12px;position:relative;z-index:1;border-radius:.25rem .25rem 0 0}.comment .info>div{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.comment .info .left{display:flex;flex-direction:column;align-items:flex-start;overflow:unset}.comment .info .left>div{font-size:14px;margin-bottom:.1rem}.comment .info>div:nth-child(2){flex:1}.comment .info>img{background:var(--gradient);width:30px;height:30px;margin-right:.7rem;margin-bottom:-18px;object-fit:cover;border-radius:.25rem;z-index:1}.comment .link{display:flex;margin-left:auto;margin-top:.25rem}.comment .link button{background:var(--renk_bir);display:flex;line-height:20px;padding:0 10px;margin-left:4px;font-size:11px;color:var(--yazi_renk_siyah);border-radius:.25rem;cursor:pointer}.comment .link button .svgcon{width:15px;height:20px;margin-right:5px;color:var(--yazi_renk_siyah)}.comment .link button.icon_like,.comment .link button.icon_dislike{background:var(--renk_sekiz);color:var(--yazi_renk_beyaz)}.comment .link button.icon_like .svgcon,.comment .link button.icon_dislike .svgcon{margin:0;color:var(--yazi_renk_beyaz)}.comment .link .like-sayisi{min-width:35px;justify-content:center;font-weight:bold}.comment.cevaplar .cizgi{width:1rem;height:55px;border-left:3px dashed var(--renk_sekiz);border-bottom:3px dashed var(--renk_sekiz);position:absolute;top:-1rem;left:-1rem;border-radius:0 0 0 .5rem;z-index:2}.comment.cevap1{margin-left:2rem}.comment.cevap2{margin-left:4rem}.comment.cevap3{margin-left:6rem}.comment.cevap4{margin-left:8rem}.comment.cevap5{margin-left:10rem}.comment.populer{border:3px solid var(--renk_bir)}.comment.populer .info{background:var(--renk_bir)}.comment.populer .info .left>a{color:var(--yazi_renk_siyah)}.comment.populer .rank{margin-left:-2px}.spinner_yor{width:14px;height:14px;animation:rotate 1s linear infinite;vertical-align:middle;border:4px solid rgb(0 0 0 / 60%);border-top:4px solid #000;margin-top:3px}.spinner_yor .path{stroke:#999;stroke-linecap:round;animation:dash 1.5s ease-in-out infinite;fill:none;stroke-width:3}@keyframes rotate{100%{transform:rotate(360deg)}}@keyframes dash{0%{stroke-dasharray:1,150;stroke-dashoffset:0}50%{stroke-dasharray:90,150;stroke-dashoffset:-35}100%{stroke-dasharray:90,150;stroke-dashoffset:-124}}.yorum_cevapeditor #commenting_box{border-top:2px solid #3a3d4b;border-radius:0;margin-top:7px}.yorum_cevapeditor #commenting_box .baslik{display:none}.yorum_cevapeditor #commenting_box .link{display:none}.comment .rank{background:#f75050;display:flex;padding:0 6px 0 57px;position:absolute;left:0;bottom:-10px;line-height:20px;font-weight:600;font-size:11px;color:var(--yazi_renk_beyaz);border-radius:0 .25rem .25rem 0}.comment .rankimg{display:flex;padding:0;margin-right:10px}.comment .rankimg>img{height:20px}.comment .rankc1{background:#e4232b}.comment .rankc2{background:#00bf00}.comment .rankc3{background:#ee5140}.comment .rankc4{background:#55acee}.comment .rankc5{background:#0a1625}.comment .rankc6{background:#ffcdcd}.checkbox{width:100%;float:left;position:relative;z-index:1;-webkit-transition:all .25s linear}.checkbox label{display:block;padding:0 0 0 25px;cursor:pointer;color:var(--yazi_renk_siyah);position:relative}.checkbox label:before{width:15px;height:15px;display:block;border:2px solid transparent;box-shadow:0 0 0 2px var(--renk_bes);color:var(--yazi_renk_beyaz);position:absolute;top:50%;left:0;transform:translateY(-50%);z-index:5;transition:border .25s linear;-webkit-transition:border .25s linear;border-radius:.25rem;content:""}.checkbox:hover label:before{box-shadow:0 0 0 2px var(--yazi_renk_siyah)}.checkbox input[type=checkbox]{position:absolute;visibility:hidden}.checkbox input[type=checkbox]:checked~label:before{background:rgb(0 0 0 / .7);box-shadow:0 0 0 2px var(--yazi_renk_siyah)}.checkbox input[type=checkbox]:checked~label:after{width:5px;height:9px;border:2px solid var(--yazi_renk_beyaz);border-top:0;border-left:0;position:absolute;left:5px;top:50%;transform:translateY(-50%) rotate(43deg);z-index:6;content:""}.page_list{width:100%;display:flex;justify-content:center;clear:both;margin-bottom:15px}.pagination{display:flex;position:relative;margin-top:10px;flex-wrap:wrap}.pagination a{background:var(--renk_alti);width:40px;height:40px;line-height:40px;margin:0 5px;display:flex;align-items:center;justify-content:center;padding:0 12px;color:var(--yazi_renk_beyaz);font-size:14px;text-align:center;font-weight:500;transition:all .2s ease-in;border-radius:.25rem}.pagination a.navs{background:var(--renk_alti);padding:0 5px}.pagination a .svgcon{width:25px;height:25px;color:var(--yazi_renk_beyaz)}.pagination li.active a,.pagination a.active,.pagination li.active a:hover,.pagination a.active:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.pagination a:hover{background:rgba(255,255,255,.2)}.pagination .pages{background:#161a1f;height:20px;line-height:20px;color:#9a9a9a;font-size:10px;padding:0 15px;position:absolute;left:50%;bottom:-15px;transform:translateX(-50%)}.pagination button{cursor:pointer;background:var(--renk_alti);width:40px;height:40px;line-height:40px;margin:0 5px;display:flex;align-items:center;justify-content:center;padding:0 12px;color:var(--yazi_renk_beyaz);font-size:14px;text-align:center;font-weight:500;transition:all .2s ease-in;border-radius:.25rem}.pagination button.navs{background:var(--renk_alti);padding:0 5px}.pagination button .svgcon{width:25px;height:25px;color:var(--yazi_renk_beyaz)}.pagination li.active button,.pagination button.active,.pagination li.active button:hover,.pagination button.active:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.pagination button:hover{background:rgba(255,255,255,.2)}.pagination .pages{background:#161a1f;height:20px;line-height:20px;color:#9a9a9a;font-size:10px;padding:0 15px;position:absolute;left:50%;bottom:-15px;transform:translateX(-50%)}.sol_sayfa_list{position:fixed;left:auto;bottom:40px;margin-left:-4rem;display:flex;flex-direction:column;flex-wrap:nowrap;z-index:1}.sol_sayfa_list .yukari_cik{background:var(--renk_bes);width:40px;height:40px;line-height:40px;margin:5px 0;display:flex;align-items:center;justify-content:center;padding:7px;color:var(--renk_bir);font-size:14px;text-align:center;font-weight:500;transition:all .2s ease-in;border-radius:.25rem;animation:float 1s linear infinite}.sol_sayfa_list .yukari_cik:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.sol_sayfa_list .pagination{flex-direction:column}.sol_sayfa_list .pagination a{background:var(--renk_bes);margin:5px 0}.sol_sayfa_list .pagination a.active,.sol_sayfa_list .pagination a.active:hover,.sol_sayfa_list .pagination a:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.sol_sayfa_list .pagination a.first,.sol_sayfa_list .pagination a.prev,.sol_sayfa_list .pagination a.last,.sol_sayfa_list .pagination a.next{transform:rotate(90deg)}.sol_sayfa_list .pagination button{cursor:pointer;background:var(--renk_bes);margin:5px 0}.sol_sayfa_list .pagination button.active,.sol_sayfa_list .pagination button.active:hover,.sol_sayfa_list .pagination button:hover{background:var(--renk_bir);color:var(--yazi_renk_siyah)}.sol_sayfa_list .pagination button.first,.sol_sayfa_list .pagination button.prev,.sol_sayfa_list .pagination button.last,.sol_sayfa_list .pagination button.next{transform:rotate(90deg)}.infinity_loading{width:100%;height:30px;display:flex;position:relative;margin:1rem 0;z-index:2}.infinity_loading img{width:120px;height:30px;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:1}@-webkit-keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}.iletisim_baslik{color:var(--renk_dort);font-weight:700;font-size:16px}.sirala{display:flex;margin-left:auto;color:var(--yazi_renk_beyaz)}.sirala .item{width:100%;position:relative}.sirala .item>.svgcon{width:13px;height:13px;color:#9ca3af;position:absolute;left:.75rem;top:50%;transform:translate(0,-50%);z-index:1}.sirala .item>.arrow{width:11px;height:11px;right:.50rem;left:unset;color:var(--yazi_renk_siyah)}.sirala .item:after{background:var(--renk_bir);position:absolute;top:0;bottom:0;right:0;width:1.5rem;border-radius:0 .25rem .25rem 0;content:""}.sirala .select{background:linear-gradient(90deg,#272a35,#6e7077);text-indent:1.3rem;border-radius:.25rem}.sirala .select option{background:var(--renk_alti);color:var(--yazi_renk_beyaz);padding:5px}.page_404{background:var(--renk_alti);width:100%;overflow:hidden;display:flex;flex-direction:column;text-align:center;border-radius:.25rem}.page_404 .top{display:flex;flex-direction:column;width:100%;color:var(--yazi_renk_beyaz)}.page_404 .top b{font-size:5em;font-weight:600;padding:60px 0;color:var(--yazi_renk_beyaz)}.page_404 .top b.image{padding:0 35px}.page_404 .top b>img{width:100%;height:auto}.page_404 .top p{margin:0 0 40px 0;font-size:1.429em;font-weight:600}.page_404 .bottom{background:var(--renk_alti);width:100%;float:left;padding:35px 10px 25px 10px;position:relative;border-top:10px solid var(--renk_bir);border-radius:0 0 10px 10px}.page_404 .svgcon.link{background:var(--renk_bir);width:60px;height:60px;float:left;padding:15px;color:var(--yazi_renk_siyah);position:absolute;top:-50%;left:50%;transform:translate(-50%,0);border-radius:50%}.page_404 .bottom span{width:100%;display:table;text-align:center;color:var(--yazi_renk_beyaz)}.kaydirma_cubugu::-webkit-scrollbar{width:6px}.kaydirma_cubugu::-webkit-scrollbar-track{background:#272a35;border-radius:8px}.kaydirma_cubugu::-webkit-scrollbar-thumb{background:var(--renk_bir);border-radius:8px}.kaydirma_cubugu::-webkit-scrollbar-thumb:hover{background:var(--renk_bir)}.hidden{display:none}.tum_gor{background:var(--renk_bir);height:22px;line-height:22px;padding:0 7px;margin-top:2px;float:right;font-size:11px;color:var(--yazi_renk_siyah);border-radius:.25rem}.tum_gor:hover{background:rgb(var(--renk_bir_rgb) / .7);color:var(--yazi_renk_siyah)}.btn{background:var(--renk_bir);cursor:pointer;display:inline-block;height:35px;line-height:35px;outline:0;border:0;vertical-align:baseline;color:var(--yazi_renk_siyah);padding:0 1rem;text-transform:none;font-weight:600;font-size:14px;text-align:center;text-decoration:none;white-space:nowrap;border-radius:.25rem;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-transition:opacity .1s ease,background-color .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;transition:opacity .1s ease,background-color .1s ease,color .1s ease,background .1s ease,-webkit-box-shadow .1s ease;transition:opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;transition:opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease,-webkit-box-shadow .1s ease;will-change:"";-webkit-tap-highlight-color:transparent}.form-control{background-color:var(--renk_alti);width:100%;height:35px;display:block;padding:.375rem .75rem;font-size:14px;font-weight:400;line-height:1.5;color:var(--yazi_renk_beyaz);background-clip:padding-box;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out}.textarea{background:var(--renk_alti);width:100%;min-height:100px;color:var(--yazi_renk_beyaz);margin:0;padding:.375rem .75rem;font-size:14px;font-weight:400;line-height:1.5;border-radius:.25rem}.select{background:var(--renk_alti);width:100%;height:35px;color:var(--yazi_renk_beyaz);padding-left:10px;font-size:14px;border-radius:.25rem;cursor:pointer}#yorum_loading,#arsiv_loading{background-color:#000;width:100%;height:100%;position:absolute;z-index:10;left:0;top:0;opacity:.9;text-align:center;display:none;border-radius:.25rem}#arsiv_loading svg{width:100%;height:30px;position:absolute;top:50%;left:0;transform:translateY(-50%)}#yorum_loading svg{width:100%;height:30px}#devam_loading{background:#202020;width:100%;height:40px;z-index:10;opacity:.9;text-align:center;display:none;clear:both}#devam_loading svg{width:100%;height:40px;margin-top:-5px}.baslik{width:100%;line-height:20px;margin-bottom:10px;color:var(--renk_dort);position:relative;display:flex;align-items:center;font-weight:700;font-size:16px}.baslik>span{width:15px;height:15px;float:left;margin-right:5px}.baslik .svgcon{width:15px;height:15px;color:var(--renk_bir);fill:var(--renk_bir)}.baslik .tum_gor{margin-left:auto}.baslik .cancel_reply{position:absolute;right:0;top:50%;transform:translateY(-50%)}footer{width:100%;display:flex;flex-direction:column;margin-top:1.5rem}footer .ic_alan{background:var(--renk_bes);background-image:url(/tema/sinemavip/front/images/bg_dark.webp);padding:1rem;border-radius:.25rem .25rem 0 0}footer .ust{width:100%}footer .yazi{width:100%;line-height:1.2;margin:15px 0;color:var(--yazi_renk_beyaz);font-size:13px;position:relative;overflow:hidden}footer .yazi h1,footer .yazi h2,footer .yazi h3,footer .yazi h4{font-weight:700;font-size:15px;margin-bottom:5px}footer .yazi p{margin-bottom:15px}footer .alt{background:var(--renk_uc);width:100%;display:flex;flex-direction:row;padding:.5rem 1rem;border-radius:.25rem}footer .logo{display:flex;align-items:center;position:relative;float:left;min-width:70px}footer .logo img{height:25px;float:left;position:relative;z-index:1}footer .logo span{padding-left:7px;color:var(--renk_dort);font-size:20px;font-weight:900;letter-spacing:-1.5px;z-index:1}footer .copyright{height:25px;line-height:25px;margin-left:auto;font-size:13px;font-weight:700;color:var(--yazi_renk_beyaz)}footer .footerscroll{height:163px;overflow-y:scroll}.footer_fad{position:fixed;left:50%;bottom:0;transform:translate(-50%,0);z-index:1001}.footer_fad .btn-close{background:#f4c200;height:25px;line-height:25px;display:flex;flex-direction:row;align-items:center;padding:0 10px;position:absolute;right:0;top:-25px;border:0;font-size:12px;font-weight:600;color:#000;border-radius:5px 5px 0 0;cursor:pointer}.footer_fad .btn-close>span{background:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/1em auto no-repeat transparent;width:10px;height:10px;margin-left:10px;color:#000;box-sizing:content-box}.footer_fad .f_content{float:left}@media (max-width:1360.98px){.sol_sayfa_list{display:none!important}}</style>
+<script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "name": "Yardım Çağrısı",
+    "alternateName": "Send Help",
+    "image": "https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi.webp",
+"dateCreated": "2026-11-01",
+    "description": "İki meslektaş, bir uçak kazasından sağ kurtulan tek kişiler olarak ıssız bir adada mahsur kalır. Adada, geçmişteki sıkıntıların üstesinden gelip hayatta kalmak için birlikte çalışmak zorunda kalırlar. Ancak nihayetinde hayatta kalmak için irade ve zekâ mücadelesi vermek zorundalar.",
+"duration": "PT113M",    "potentialAction": {
+        "@type": "WatchAction",
+        "target": [
+            {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://sinemacc.com/film/yardim-cagrisi-send-help-2026/",
+                "inLanguage": "tr",
+                "actionPlatform": [
+                    "https://schema.org/DesktopWebPlatform",
+                    "https://schema.org/MobileWebPlatform",
+                    "https://schema.org/IOSPlatform"
+                ]
+            }
+        ]
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "6.7",
+        "bestRating": "10.0",
+        "worstRating": "1.0",
+        "ratingCount": "1"
+    },
+    "director": {
+        "@type": "Person",
+        "name": "Sam Raimi"
+    },
+    "actor": [
+        {
+            "@type": "Person",
+            "name": "Rachel McAdams"
+        }
+,        {
+            "@type": "Person",
+            "name": "Dylan O&#039;Brien"
+        }
+,        {
+            "@type": "Person",
+            "name": "Edyll Ismail"
+        }
+,        {
+            "@type": "Person",
+            "name": "Xavier Samuel"
+        }
+,        {
+            "@type": "Person",
+            "name": "Dennis Haysbert"
+        }
+,        {
+            "@type": "Person",
+            "name": "Thaneth Warakulnukroh"
+        }
+,        {
+            "@type": "Person",
+            "name": "Chris Pang"
+        }
+,        {
+            "@type": "Person",
+            "name": "Emma Raimi"
+        }
+,        {
+            "@type": "Person",
+            "name": "Kristy Best"
+        }
+,        {
+            "@type": "Person",
+            "name": "Francesca Waters"
+        }
+    ]
+}
+</script>
+</head>
+<body  >
+<img alt="Lg Load Resmi" class="bglcp no-lazy" fetchpriority="high" src="/tema/sinemavip/front/images/lgloading.svg">
+<header>
+<div class="ic_alan">
+<a accesskey="mainlogo" class="logo" href="https://sinemacc.com/" title="Film izle">
+<img width="35" height="35" alt="https://sinemacc.com/ Logo" src="https://sinemacc.com/uploads/filmizle-2_3.webp" />
+<span>SINEMA</span>
+<span style="color: var(--renk_bir);">CC</span>
+</a>
+<div class="header_sag">
+<div class="header_ust">
+<nav>
+<ul itemscope itemtype="https://schema.org/SiteNavigationElement" role="menu">
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/" title="Film izle"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_home"></use></svg> FİLM İZLE</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/film-arsivi/" title="Film Arşivi"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_arama"></use></svg> KEŞFET</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/seri-filmler/" title="Serİ Filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_spiral"></use></svg> SERİLER</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/film-listesi/" title="Film listeleri - Seçili Özel Filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_list"></use></svg> LİSTELER</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/imdb-top-250/" title="İmdb 250, En çok beğenilen 250 imdb filmi"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_stars"></use></svg> TOP-250</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/oyuncular/" title="Oyuncular ve Yönetmenler Listesi"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_user"></use></svg> OYUNCULAR</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/iletisim/" title="İletişim / Destek"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_contact"></use></svg> İLETİŞİM</a></li>
+</ul>
+</nav>
+<div onclick="arama_ekraniac()" id="arama_link" class="arama_link">
+<svg class="svgcon"><use href="/tema/_temaicons.svg#icon_arama"></use></svg>
+<span>Ara</span>
+</div>
+<div onclick="uyelik_ekraniac()" id="giris_link" class="giris_link">
+<svg class="svgcon"><use href="/tema/_temaicons.svg#icon_login"></use></svg>
+<span>Giriş Yap</span>
+</div>
+<div style="display:none" id="giris_modu" class="giris_modu">
+<img src="/tema/sinemavip/front/images/lgloading.svg" alt="Login Loading">
+</div>
+</div>
+<div class="header_alt">
+<nav>
+<ul itemscope itemtype="https://schema.org/SiteNavigationElement" role="menu">
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/kanal/netflix/" title="Netflix filmleri"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Netflix</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/dil/turkce-altyazi/" title="Türkçe Altyazılı Filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Altyazı</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/dil/turkce-dublaj/" title="Türkçe Dublaj Filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Dublaj</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/film-listesi/mutlaka-izlemeniz-gereken-30-basyapit-film/" title="Ölmeden Önce İzlenilmesi Gerekenler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Mutlaka İzle</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/ulke/hindistan/" title="Bollywood Hindistan Filmleri"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Bollywood </a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/konu/uzay-filmleri/" title="Uzay Evren Konulu Filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Uzay</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/kanal/marvel/" title="Marvel Filmleri"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Marvel</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/konu/mafya-filmleri/" title="Mafyatik Filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Mafya</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/konu/intikam-filmleri/" title="intikam konulu filmler"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>İntikam </a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/konu/zombi-filmleri/" title="Zombir Filmleri"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>Zombi</a></li>
+<li itemprop="name" role="menuitem"><a href="https://sinemacc.com/yil/2026/" title="2026 Filmleri"><svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hashtag"></use></svg>2026</a></li>
+</ul>
+</nav>
+<button class="mod_degistir" id="theme-toggle"  type="button" data-theme-toggle aria-label="Mod Değişimi">
+<span class="ball"></span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<div id="arama_modu" style="display:none" class="arama_modu hidden">
+<img src="/tema/sinemavip/front/images/lgloading.svg" alt="Arama Loading">
+</div>
+<script> var cover_imgpar="https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi-cover.webp";</script>
+<div class="video_ust_alan">
+<div class="ic_alan">
+<div>
+<div class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi.webp" alt="Yardım Çağrısı Film Posteri">
+<span class="yayinci">
+<a title="En iyi 20th Century Filmleri" href="https://sinemacc.com/kanal/20th-century/"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/kanal/20th.webp" alt="20th Century Logo" ></a>
+</span>
+</div>
+<div class="center">
+<h1 class="baslik">
+Yardım Çağrısı İzle</h1>
+<h2 class="baslik orj">Send Help</h2>
+<div class="kategori_aciklama">
+<div><p>İki meslektaş, bir uçak kazasından sağ kurtulan tek kişiler olarak ıssız bir adada mahsur kalır. Adada, geçmişteki sıkıntıların üstesinden gelip hayatta kalmak için birlikte çalışmak zorunda kalırlar. Ancak nihayetinde hayatta kalmak için irade ve zekâ mücadelesi vermek zorundalar.</p></div>
+</div>
+<ol class="breadcrumb" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+<a itemprop="item" href="https://sinemacc.com/"><span itemprop="name">Film izle</span></a>
+<meta itemprop="position" content="1">
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_angel_right"></use></svg>
+</li>
+<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+<a itemprop="item" href="https://sinemacc.com/tur/gerilim-filmleri/"><span itemprop="name">Gerilim</span></a>
+<meta itemprop="position" content="2">
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_angel_right"></use></svg>
+</li>
+<li itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+<a itemprop="item" href="https://sinemacc.com/film/yardim-cagrisi-send-help-2026/"><span itemprop="name">Yardım Çağrısı - Send Help İzle</span></a>
+<meta itemprop="position" content="3">
+</li>
+</ol>
+</div>
+<div class="right">
+<ul class="detay">
+<li>
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_clock"></use></svg>
+113 Dakika</li>
+<li>
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_hd"></use></svg>
+1080p</li>
+<li>
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_subtitle"></use></svg>
+<a title="Tüm Türkçe Altyazı Filmler" href="https://sinemacc.com/dil/turkce-altyazi/"> Altyazı</a>, <a title="Tüm Türkçe Dublaj Filmler" href="https://sinemacc.com/dil/turkce-dublaj/"> Dublaj</a></li>
+<li>
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_world"></use></svg>
+<a title="ABD Yapımı Tüm Filmler" href="https://sinemacc.com/ulke/abd/">ABD</a>
+</li>
+<li>
+<svg class="svgcon"><use xlink:href="/tema/_temaicons.svg#icon_calendar"></use></svg>
+<a title="2026 Yılında Vizyona Girmiş Filmler" href="https://sinemacc.com/yil/2026/">2026</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="ic_alan alan_bg">
+<div class="video_content">
+<div class="player_part plpchn" style="margin-bottom:10px" id="player_part">
+<button rel="aHR0cHM6Ly9wbGF5ZXIuZmlsbWl6bGUuaW4vdmlkZW8vMDMzY2MzODU3MjhjNTFkOTczNjAwMjBlZDU3Nzc2ZjA/bG5nPXR1cg==" class='part_button grup_button active' >
+<svg class="svgcon"><use href='/tema/_temaicons.svg#icon_flag_tr'></use></svg>
+Türkçe Dublaj
+</button>
+<button rel="aHR0cHM6Ly9wbGF5ZXIuZmlsbWl6bGUuaW4vdmlkZW8vMDMzY2MzODU3MjhjNTFkOTczNjAwMjBlZDU3Nzc2ZjA/bG5nPXRyc3Vi" class='part_button grup_button ' >
+<svg class="svgcon"><use href='/tema/_temaicons.svg#icon_subtitle'></use></svg>
+Türkçe Altyazı
+</button>
+<button rel="aHR0cHM6Ly9wbGF5ZXIuZmlsbWl6bGUuaW4vdmlkZW8vMDMzY2MzODU3MjhjNTFkOTczNjAwMjBlZDU3Nzc2ZjA/bG5nPW9yaWc=" class='part_button grup_button ' >
+<svg class="svgcon"><use href='/tema/_temaicons.svg#icon_star'></use></svg>
+Orjinal Dil
+</button>
+<button rel="aHR0cHM6Ly93d3cueW91dHViZS5jb20vZW1iZWQvY09tbm1Gel9VenM/YXV0b3BsYXk9MQ==" class='part_button grup_button ' >
+<svg class="svgcon"><use href='/tema/_temaicons.svg#icon_youtube'></use></svg>
+Fragman
+</button>
+</div>
+<div id="f_player" class="videos">
+<div style="display:none" id="playerloading"><div class="spinner"></div></div>
+<iframe style="z-index: 999;" src="https://sinemacc.com/?vr_set=1&vidon=2" id="video_adiframe"  width="100%" title="Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<iframe data-vsrc="aHR0cHM6Ly9wbGF5ZXIuZmlsbWl6bGUuaW4vdmlkZW8vMDMzY2MzODU3MjhjNTFkOTczNjAwMjBlZDU3Nzc2ZjA/bG5nPXR1cg==" id="video_playeriframe" width="100%" title="Video Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+</div>
+</div>
+<div class="video_point">
+<div class="left">
+<a class="imdb_link" title="Yardım Çağrısı IMDb Sayfası" target="_blank" rel="nofollow" href="https://www.imdb.com/title/tt8036976/">
+<span>6.7</span>
+<svg class="svgcon"><use href="/tema/_temaicons.svg#icon_imdb"></use></svg>
+</a>
+<a class="tmdb_link" title="Yardım Çağrısı TMDB Sayfası" target="_blank" rel="nofollow" href="https://www.themoviedb.org/movie/1198994-send-help">
+<span>7</span>
+<svg class="svgcon"><use href="/tema/_temaicons.svg#icon_tmdb"></use></svg>
+</a>
+<a class="rottentomatoes_link" title="Yardım Çağrısı Rottentomatoes Sayfası" target="_blank" rel="nofollow" href="https://www.rottentomatoes.com/m/send_help">
+<span>92%</span>
+<svg class="svgcon"><use href="/tema/_temaicons.svg#icon_rottentomatoes"></use></svg>
+</a>
+</div>
+<div class="right vd_btn">
+<style>
+.s_acttiv_ayd{cursor: auto !important;}
+.s_acttiv_ayd>.svgcon:hover {fill: #43454a !important;}
+.s_acttiv_ayd>.svgcon {fill: #43454a !important;}
+.active>.svgcon{fill: #fbc107 !important;}
+.active>.svgcon:hover{fill: #fbc107 !important;}
+</style>
+<div class="rate"></div>
+<div class="rating">
+<div class="text"> <span id="sitepuan">7.4</span>/ <span  >10</span></div>
+<div class="star">
+<span data-puan="1" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="2" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="3" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="4" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="5" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="6" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="7" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="8" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="9" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+<span data-puan="10" class="points p_acttiv_ayd"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg></span>
+</div>
+</div>
+<button aria-label="Favori Ekle" class="btn" id="favori_ekle_login" data-fid="3562" title="Favori Ekle"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_hearth"></use></svg> <span id="favori_metin">Favoriye Ekle</span></button>
+</div>
+</div>
+<main class="sol_blok">
+<div id="video_infos" class="video_info">
+<div class="baslik">
+<span><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_logo"></use></svg></span>
+<style>.filmografi{font-size: 17px;font-weight: 700;}
+.fhakkinda h4{
+margin-bottom: 0px;
+margin-top: 9px;
+margin-bottom: 9px;
+font-size: 17px;
+font-weight: 600;
+color: var(--renk_bir);
+}
+.video_info .desc {
+font-size: 15px;
+}
+</style>
+<h3 class="filmografi">Yardım Çağrısı  - Send Help Künyesi ve Yapım Bilgileri</h3>
+</div>
+<div class="fhakkinda">
+<style>
+.aciklama_benzer{width:97px;float:left;}
+.description ul {    margin: 10px 0;    padding-left: 25px;}
+.description ul li {display: list-item;list-style-type: disc;margin: 5px 0;padding: 0;line-height: 1.5;}
+.description ul li em {font-style: italic;}
+.benzer_isim{height: 16px;overflow: hidden;display: inline-block;}
+</style>
+<div class="description">
+<div style="max-height: 350px; " class="desc kaydirma_cubugu">
+<div id="awards">
+<h4>Ödüller ve Sinematik Başarılar</h4>
+<p>Yardım Çağrısı, 2026 ödül sezonunda toplam <strong>8 adaylık</strong> aldı. Korku türündeki performansları ve genel film kategorileriyle farklı organizasyonlarda öne çıktı.</p>
+<p>Adaylıkların dağılımı şöyle:</p>
+<ul>
+<li><em>Critics Choice Super Awards</em> kapsamında <strong>Rachel McAdams</strong>, En İyi Korku Filmi Kadın Oyuncusu dalında CCA Super Award’a aday oldu.</li>
+<li><em>Critics Choice Super Awards</em>, Yardım Çağrısı’nı En İyi Korku Filmi dalında CCA Super Award’a aday gösterdi.</li>
+<li><em>Fangoria Chainsaw Awards</em> kapsamında <strong>Rachel McAdams</strong>, En İyi Başrol Performansı dalında Chainsaw Award’a aday oldu.</li>
+<li><em>Fangoria Chainsaw Awards</em>, Yardım Çağrısı’nı En İyi Geniş Gösterim Filmi dalında Chainsaw Award’a aday gösterdi.</li>
+<li><em>Astra Midseason Movie Awards</em>, Yardım Çağrısı’nı En İyi Korku Filmi dalında Astra Midseason Award’a aday gösterdi.</li>
+<li><em>Astra Midseason Movie Awards</em> kapsamında <strong>Dylan O'Brien</strong>, En İyi Yardımcı Erkek Oyuncu dalında Astra Midseason Award’a aday oldu.</li>
+<li><em>Astra Midseason Movie Awards</em> kapsamında <strong>Rachel McAdams</strong>, En İyi Kadın Oyuncu dalında Astra Midseason Award’a aday oldu.</li>
+<li><em>Astra Midseason Movie Awards</em>, Yardım Çağrısı’nı En İyi Film dalında Astra Midseason Award’a aday gösterdi.</li>
+</ul>
+</div>
+<div id="ageverif">
+<h4>Yaş Sınırı ve İzleyici Sınıflandırması</h4>
+<strong>Yardım Çağrısı</strong> filmi, Türkiye'de <strong>16+</strong>, Amerika'da <strong>R</strong>, İngiltere'de <strong>15</strong>, Almanya'da <strong>16</strong>, Fransa'da <strong>12</strong>, İspanya'da <strong>16</strong>, İtalya'da <strong>VM14</strong>, Norveç'te <strong>15</strong>, Yeni Zelanda'da <strong>R16</strong>, Singapur'da <strong>NC16</strong>, İsveç'te <strong>15</strong>, Kanada'da <strong>13+</strong>, Portekiz'de <strong>M/16</strong>, Güney Kore'de <strong>15</strong>, Finlandiya'da <strong>K-16</strong> verileri ile derecelendirilmiştir. Film yaş derecelendirmesine göre <strong>15 yaş ve üzeri</strong> izleyiciler için önerilmektedir.</div>
+<div id="aka">
+<h4>Diğer Vizyon İsimleri (AKA)</h4>
+<p>Yapımın çeşitli ülkelerde kullanılan resmi vizyon isimleri;</p>
+<ul>
+<li>Türkiye'de <em lang="TR">“Yardım Çağrısı | Strateji ve planlama departmanından Linda Little ile tanışın... Artık patron o.”</em></li>
+<li>İngiltere'de <em lang="EN">“Send Help | Meet Linda Liddle... She's from strategy and planning. She's the boss now.”</em></li>
+<li>İspanya'da <em lang="ES">“SEND HELP (Enviad ayuda) | Esta es Linda Liddle... Trabaja en estrategia y planificación... Ahora es la jefa.”</em></li>
+<li>Hırvatistan'da <em lang="en">“Poziv u pomoć | Sada je ona šef.”</em></li>
+<li>Meksika'da <em lang="en">“¡Ayuda! | Les presento a Linda Liddle... Viene del área de estrategia y planificación. Ahora ella es la jefa.”</em></li>
+<li>Letonya'da <em lang="en">“Sūtiet palīgā”</em></li>
+<li>Kanada'da <em lang="en">“Envoyez de l'aide | Voici Linda Liddle... Elle travaille au département de stratégie et planification”</em></li>
+<li>Portekiz'de <em lang="en">“Socorro! | Agora, é ela a chefe”</em></li>
+</ul>
+</div>
+<div id="boxoffice">
+<h4>Gişe ve Bütçe (Box Office)</h4>
+<p>Yardım Çağrısı, gişe performansında dikkat çeken sonuçlar elde etti. Açılış hafta sonundan dünya geneline uzanan gelirleri şöyle:</p>
+<ul>
+<li>Yurt içi hasılat: <strong>64.734.795 dolar</strong></li>
+<li>Dünya geneli hasılat: <strong>94.041.481 dolar</strong></li>
+<li>Açılış hafta sonu hasılatı: <strong>19.102.299 dolar</strong></li>
+<li>Yapım bütçesi: <strong>40.000.000 dolar</strong></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="kenar_blok k_onerilen">
+<div class="baslik">
+<span><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_logo"></use></svg></span>
+Önerilen Alternatif Yapımlar
+</div>
+<div class="icerik_tablosu">
+<div class="iceri_cek">
+<div class="film_kutusu izle_onerilen">
+<a title="Av Filmi" href="https://sinemacc.com/film/av-the-hunt-2020/">
+<span class="image">
+<img alt="Av Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/514847.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.7</span>
+</span>
+<span class="title">
+<span class="text">Av</span>
+<span class="years">2020</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_onerilen">
+<a title="Gözlerini Kırp Filmi" href="https://sinemacc.com/film/gozlerini-kirp-blink-twice-2024/">
+<span class="image">
+<img alt="Gözlerini Kırp Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/840705.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.7</span>
+</span>
+<span class="title">
+<span class="text">Gözlerini Kırp</span>
+<span class="years">2024</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_onerilen">
+<div>
+<div class="uyar"><span>Eklenecek</span></div>
+<span class="image">
+<img alt="Derin Kabus Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/1127384.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>7.4</span>
+</span>
+<span class="title">
+<span class="text">Derin Kabus</span>
+<span class="years">2026</span>
+</span>
+</div>
+</div>
+<div class="film_kutusu izle_onerilen">
+<a title="Dead Sea Filmi" href="https://sinemacc.com/film/dead-sea-2024/">
+<span class="image">
+<img alt="Dead Sea Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/1308757.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.4</span>
+</span>
+<span class="title">
+<span class="text">Dead Sea</span>
+<span class="years">2024</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_onerilen">
+<a title="Seni Öldürecekler Filmi" href="https://sinemacc.com/film/seni-oldurecekler-they-will-kill-you-2026/">
+<span class="image">
+<img alt="Seni Öldürecekler Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/1292695.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.9</span>
+</span>
+<span class="title">
+<span class="text">Seni Öldürecekler</span>
+<span class="years">2026</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_onerilen">
+<div>
+<div class="uyar"><span>Eklenecek</span></div>
+<span class="image">
+<img alt="The Long Walk Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/604079.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.8</span>
+</span>
+<span class="title">
+<span class="text">The Long Walk</span>
+<span class="years">2025</span>
+</span>
+</div>
+</div>
+<div class="film_kutusu izle_onerilen">
+<a title="Bugonia Filmi" href="https://sinemacc.com/film/bugonia-2025/">
+<span class="image">
+<img alt="Bugonia Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/701387.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>7.3</span>
+</span>
+<span class="title">
+<span class="text">Bugonia</span>
+<span class="years">2025</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_onerilen">
+<div>
+<div class="uyar"><span>Eklenecek</span></div>
+<span class="image">
+<img alt="Katil Oyunu Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/507241.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.4</span>
+</span>
+<span class="title">
+<span class="text">Katil Oyunu</span>
+<span class="years">2024</span>
+</span>
+</div>
+</div>
+<div class="film_kutusu izle_onerilen">
+<div>
+<div class="uyar"><span>Eklenecek</span></div>
+<span class="image">
+<img alt="İyi Geceler Anne Film Posteri" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/benzerfilm/814800.webp"/>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"></use></svg>6.3</span>
+</span>
+<span class="title">
+<span class="text">İyi Geceler Anne</span>
+<span class="years">2022</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="tags">
+<div>
+<a title="Tüm Gerilim Filmleri" href="https://sinemacc.com/tur/gerilim-filmleri/">Gerilim</a><a title="Tüm Komedi Filmleri" href="https://sinemacc.com/tur/komedi-filmleri/">Komedi</a><a title="Tüm Korku Filmleri" href="https://sinemacc.com/tur/korku-filmleri/">Korku</a>
+</div>
+</div>
+</div>
+<div class="kenar_blok k_film_seri">
+<div class="baslik">
+<span><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_logo"></use></svg></span>
+Diğer Gerilim Filmleri
+</div>
+<div class="icerik_tablosu benzerfilm">
+<div class="iceri_cek">
+<div class="film_kutusu izle_benzer ">
+<a href="https://sinemacc.com/film/les-chambres-rouges-red-rooms-2023/" title="Les Chambres rouges İzle">
+<span class="image">
+<img class="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2023-12/les-chambres-rouges-red-rooms-2023.webp" srcset="https://sinemacc.com/uploads/filmler/2023-12/les-chambres-rouges-red-rooms-2023_f.webp 2x" alt="Les Chambres rouges Film Posteri">
+<span class="box type"><svg class="flg2 svgcon"><use href="/tema/_temaicons.svg#icon_subtitle"></use></svg></span>
+<span class="imdb imdb_up" title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>7.1</span>
+</span>
+<span class="title">
+<span class="text">Les Chambres rouges</span>
+<span class="years">2023 | Gerilim</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_benzer ">
+<a href="https://sinemacc.com/film/hucre-211-cell-211-2009/" title="Hücre 211 İzle">
+<span class="image">
+<img class="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2022-10/hucre-211-cell-211-2009.webp" srcset="https://sinemacc.com/uploads/filmler/2022-10/hucre-211-cell-211-2009_f.webp 2x" alt="Hücre 211 Film Posteri">
+<span class="box type"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_flag_tr"></use></svg><svg class="flg2 svgcon"><use href="/tema/_temaicons.svg#icon_subtitle"></use></svg></span>
+<span class="imdb imdb_up" title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>7.6</span>
+</span>
+<span class="title">
+<span class="text">Hücre 211</span>
+<span class="years">2009 | Aksiyon</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_benzer ">
+<a href="https://sinemacc.com/film/gorunmez-adam-the-invisible-man-2020/" title="Görünmez Adam İzle">
+<span class="image">
+<img class="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2022-12/gorunmez-adam-the-invisible-man-2020.webp" srcset="https://sinemacc.com/uploads/filmler/2022-12/gorunmez-adam-the-invisible-man-2020_f.webp 2x" alt="Görünmez Adam Film Posteri">
+<span class="box type"><svg class="flg2 svgcon"><use href="/tema/_temaicons.svg#icon_subtitle"></use></svg></span>
+<span class="imdb imdb_up" title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>7.1</span>
+</span>
+<span class="title">
+<span class="text">Görünmez Adam</span>
+<span class="years">2020 | Gerilim</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_benzer ">
+<a href="https://sinemacc.com/film/sessiz-bir-yer-birinci-gun-2024/" title="Sessiz Bir Yer: Birinci Gün İzle">
+<span class="image">
+<img class="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2024-07/sessiz-bir-yer-birinci-gun-2024.webp" srcset="https://sinemacc.com/uploads/filmler/2024-07/sessiz-bir-yer-birinci-gun-2024_f.webp 2x" alt="Sessiz Bir Yer: Birinci Gün Film Posteri">
+<span class="box type"><svg class="flg2 svgcon"><use href="/tema/_temaicons.svg#icon_subtitle"></use></svg></span>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>6.2</span>
+</span>
+<span class="title">
+<span class="text">Sessiz Bir Yer: Birinci Gün</span>
+<span class="years">2024 | Gerilim</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_benzer ">
+<a href="https://sinemacc.com/film/the-mother-2023/" title="The Mother İzle">
+<span class="image">
+<img class="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2023-06/the-mother-2023.webp" srcset="https://sinemacc.com/uploads/filmler/2023-06/the-mother-2023_f.webp 2x" alt="The Mother Film Posteri">
+<span class="box type"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_flag_tr"></use></svg></span>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>5.7</span>
+</span>
+<span class="title">
+<span class="text">The Mother</span>
+<span class="years">2023 | Aksiyon</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu izle_benzer ">
+<a href="https://sinemacc.com/film/imkansiz-canavarlar-impossible-monsters-2019/" title="İmkansız Canavarlar İzle">
+<span class="image">
+<img class="image" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2023-02/imkansiz-canavarlar-impossible-monsters-2019.webp" srcset="https://sinemacc.com/uploads/filmler/2023-02/imkansiz-canavarlar-impossible-monsters-2019_f.webp 2x" alt="İmkansız Canavarlar Film Posteri">
+<span class="box type"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_flag_tr"></use></svg></span>
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>4.1</span>
+</span>
+<span class="title">
+<span class="text">İmkansız Canavarlar</span>
+<span class="years">2019 | Gerilim</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+<div id="commenting_box" class="commenting_box">
+<div class="baslik">
+<span><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_comment_new"></use></svg></span>
+<b id="yorumcvpmetin">Yardım Çağrısı Filmine Yorum Yaz</b>
+</div>
+<form id="yorumformu" action="" method="post">
+<input  id="yorum_cevap_id" name="yorum_cevap_id" type="hidden" value="0">
+<div class="writing_box">
+<div  class="text iceri_cek">
+<div>
+<input class="form-control" name="ziyaretciadi" required="" type="text" placeholder="Rumuz" value="">
+</div>
+<div>
+<input class="form-control" name="ziyaretcimail" required="" type="email" placeholder="E-Mail" value="">
+</div>
+</div>
+<textarea class="textarea" required="" placeholder="Yorumunuz..." id="yorum_mesaj" name="yorum_mesaj"></textarea>
+<div class="bottom">
+<div class="checkbox">
+<input name="spoiler_comment" value="1" type="checkbox" id="spicerir">
+<label for="spicerir">
+Spoiler İçeriyor
+</label>
+</div>
+<div>
+<button class="btn cancel_reply" type="button" style="display:none" aria-label="İptal" id="cevapiptal">Cevabı İptal Et</button>
+<input class="btn" type="submit" name="submit" value="Gönder">
+</div>
+</div>
+</div>
+</form>
+</div>
+<div id="yorum_durumcevap" class="form_uyarisi cc_ok">
+<div>
+<div class="uyari_kutu">
+<div class="icon">
+<svg class="svgcon"><use href="/tema/_temaicons.svg#icon_info"></use></svg>
+</div>
+<div class="text"></div>
+</div>
+<button id="yorum_cevap_kapat" type="button" class="kapat"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_cross"></use></svg></button>
+</div>
+</div>
+</main>
+<aside class="side">
+<div class="kenar_blok k_oyuncu">
+<div class="baslik">
+<span><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_logo"></use></svg></span>
+Yardım Çağrısı Oyuncuları
+</div>
+<div class="icerik_tablosu">
+<div class="iceri_cek oyuncu_listesiscroll">
+<div class="oyuncu_kutusu genis">
+<a href="https://sinemacc.com/oyuncu/sam-raimi/" title="Sam Raimi Rol Aldığı Tüm Filmler">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/sam-raimi.webp" alt="Sam Raimi Fotoğrafı">
+</span>
+<span class="detail">
+<small>Sam Raimi</small>
+<b>Yönetmen</b>
+</span>
+</a>
+</div>
+<div class="oyuncu_kutusu">
+<a href="https://sinemacc.com/oyuncu/rachel-mcadams/" title="Rachel McAdams Rol Aldığı Tüm Filmler">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/rachel-mcadams.webp" alt="Rachel McAdams Fotoğrafı">
+<div>Linda Liddle</div>
+</span>
+<small>Rachel McAdams</small>
+</a>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/dylan-obrien.webp" alt="Dylan O'Brien Fotoğrafı">
+<div>Bradley Preston</div>
+</span>
+<small>Dylan O'Brien</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/edyll-ismail.webp" alt="Edyll Ismail Fotoğrafı">
+<div>Zuri</div>
+</span>
+<small>Edyll Ismail</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/xavier-samuel.webp" alt="Xavier Samuel Fotoğrafı">
+<div>Donovan</div>
+</span>
+<small>Xavier Samuel</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/dennis-haysbert.webp" alt="Dennis Haysbert Fotoğrafı">
+<div>Franklin</div>
+</span>
+<small>Dennis Haysbert</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/thaneth-warakulnukroh.webp" alt="Thaneth Warakulnukroh Fotoğrafı">
+<div>Boat Captain</div>
+</span>
+<small>Thaneth Warakulnukroh</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/chris-pang.webp" alt="Chris Pang Fotoğrafı">
+<div>Chase</div>
+</span>
+<small>Chris Pang</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/emma-raimi.webp" alt="Emma Raimi Fotoğrafı">
+<div>River</div>
+</span>
+<small>Emma Raimi</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/kristy-best.webp" alt="Kristy Best Fotoğrafı">
+<div>Polly Perera</div>
+</span>
+<small>Kristy Best</small>
+</div>
+</div>
+<div class="oyuncu_kutusu">
+<div class="sdiv">
+<span class="resim">
+<img src="https://sinemacc.com/uploads/oyuncular/francesca-waters.webp" alt="Francesca Waters Fotoğrafı">
+<div>Barbara</div>
+</span>
+<small>Francesca Waters</small>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="kenar_blok k_filmler ">
+<div class="baslik">
+<span><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_repeate"></use></svg></span>
+Son Eklenen Filmler
+</div>
+<div class="icerik_tablosu bgsiz">
+<div class="iceri_cek">
+<div class="film_kutusu sansurboyut ">
+<a href="https://sinemacc.com/film/a-company-man-2012/" title="A Company Man İzle">
+<span class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/a-company-man.webp" alt="A Company Man Film Posteri" >
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>6.6</span>
+</span>
+<span class="title">
+<span class="text">A Company Man</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu sansurboyut ">
+<a href="https://sinemacc.com/film/el-incidente-the-incident-2014/" title="El Incidente İzle">
+<span class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/el-incidente.webp" alt="El Incidente Film Posteri" >
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>6.3</span>
+</span>
+<span class="title">
+<span class="text">El Incidente</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu sansurboyut ">
+<a href="https://sinemacc.com/film/yardim-cagrisi-send-help-2026/" title="Yardım Çağrısı İzle">
+<span class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/yardim-cagrisi.webp" alt="Yardım Çağrısı Film Posteri" >
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>6.7</span>
+</span>
+<span class="title">
+<span class="text">Yardım Çağrısı</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu sansurboyut ">
+<a href="https://sinemacc.com/film/hoplayanlar-hoppers-2026/" title="Hoplayanlar İzle">
+<span class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/hoplayanlar.webp" alt="Hoplayanlar Film Posteri" >
+<span class="imdb imdb_up" title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>7.2</span>
+</span>
+<span class="title">
+<span class="text">Hoplayanlar</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu sansurboyut ">
+<a href="https://sinemacc.com/film/black-box-2026/" title="Black Box İzle">
+<span class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/black-box.webp" alt="Black Box Film Posteri" >
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>5.1</span>
+</span>
+<span class="title">
+<span class="text">Black Box</span>
+</span>
+</a>
+</div>
+<div class="film_kutusu sansurboyut ">
+<a href="https://sinemacc.com/film/dogum-gunu-hediyesi-the-birthday-gift-2026/" title="Doğum Günü Hediyesi İzle">
+<span class="image">
+<img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3C/svg%3E" data-src="https://sinemacc.com/uploads/filmler/2026-11/dogum-gunu-hediyesi.webp" alt="Doğum Günü Hediyesi Film Posteri" >
+<span class="imdb " title="IMDb"><svg class="svgcon"><use href="/tema/_temaicons.svg#icon_star"/></svg>5.1</span>
+</span>
+<span class="title">
+<span class="text">Doğum Günü Hediyesi</span>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+<script>
+let film_permalink = 'https://sinemacc.com/film/yardim-cagrisi-send-help-2026/';
+let yorum_eklendi = '';
+let oturum_durum = '0';
+</script>
+</div>
+<footer id="footer_cont" >
+<div class="ic_alan">
+<div class="ust">
+<div class="yazi footerscroll">
+<strong>Film İzleme Sitesi</strong> <br> <br>
+2018'den bu yana yerli ve yabancı filmlere yer veren <strong>Sinema CC</strong>; film detayları, oyuncu bilgileri, yönetmen, yapım yılı ve IMDb puanı gibi temel bilgileri bir arada sunar. <br> <br> <strong>Film Türleri ve İçerikler</strong> <br> <br>
+Aksiyon, dram, komedi, korku, bilim kurgu, gerilim ve animasyon başta olmak üzere birçok türden film hakkında içerikler bulunur. Türkçe dublaj ve altyazılı yapımların yanı sıra HD ve 4K görüntü kalitesindeki filmler de sitede yer almaktadır. Film listeleri, oyuncu sayfaları, farklı yıllardan yapımlar ve daha fazlasıyla sinemaya dair bilgilere ve aradığınız filmlere kolayca ulaşabilirsiniz.
+</div>
+</div>
+<div class="alt">
+<div id="alt_logo" class="logo">
+<img width="100%" height="100%" alt="https://sinemacc.com/ Logo" src="https://sinemacc.com/uploads/filmizle-2_3.webp" />
+<span>SINEMA&nbsp;CC</span>
+</div>
+<div class="copyright">© 2026 Film izle</div>
+</div>
+</div>
+</footer>
+<script>
+let site_adresi = 'https://sinemacc.com/';
+let arama_adresi = 'https://sinemacc.com/arama/';
+let reklam_etkilesim_suresi = 0*1000;
+let psresimler = 'https://sinemacc.com/_rek/1.webp,https://sinemacc.com/_rek/2.webp,https://sinemacc.com/_rek/3.webp';
+let pslinkler  = '#url1,#url2,#url3';
+let ps_m_resimler = 'https://sinemacc.com/_rek/m1.webp,https://sinemacc.com/_rek/m2.webp,https://sinemacc.com/_rek/m3.webp';
+let ps_m_linkler = '#m_url1,#m_url2,#m_url3';
+</script>
+<script src="https://sinemacc.com/sistem.js?st=film_izle&islogn=&lzy=1&scrl=1&sldr=1&sldrlstl=1&rsetk=1&rtketk=1&rmsetk=1&psdurum=2&ps_m_durum=2&fk_drm=&hms=1&inf_pg=&cus_inf=&vr=1" defer></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "url": "https://filmizle.ink/haber/imdb-top-50-filmi-sinema-dunyasinin-zirvesine-yolculuk/",
+  "capturedDate": "2026-11-05",
+  "sha256": "dce3c45b1b0a2b1611fb0d44c24b7cd82ef2a9fa9049bb54ff9114f3598c2e3f",
+  "bytes": 87968,
+  "liveCapture": true,
+  "indexPages": [
+    {
+      "file": "home.html",
+      "url": "https://filmizle.ink/",
+      "sha256": "2ab8ed1eff9415cf38e7f33444d630e3caba4bb0945bf4812f28d397ec4249b5"
+    },
+    {
+      "file": "search.html",
+      "url": "https://filmizle.ink/?s=matrix",
+      "sha256": "50301103b710b0d73e12fc482b7926ee6902671fc0bcc4759f9fc2c1d1149254"
+    }
+  ]
+}

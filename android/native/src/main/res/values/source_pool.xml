@@ -1,0 +1,10 @@
+<resources>
+    <string name="pool_find_sites">Diğer sitelerde de bul</string>
+    <string name="pool_settings">Kaynak ayarları</string>
+    <string name="pool_automatic">Kaynak seçimi: Otomatik</string>
+    <string name="pool_cross_site">Diğer sitelerin kaynakları</string>
+    <string name="pool_searching">Kaynaklar aranıyor…</string>
+    <string name="pool_next">Sonraki kaynaklar ›</string>
+    <string name="pool_previous">‹ Önceki kaynaklar</string>
+    <string name="pool_retry">Yeniden dene</string>
+</resources>

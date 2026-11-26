@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <title>Tulsa King - S1E2 - 1. Sezon 2. Bölüm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex">
+    <meta name="referrer" content="unsafe-url">
+    <link rel="stylesheet" href="player-assets/np.css?v=7cadeb7660d027a4">
+    <link rel="stylesheet" href="player-assets/embed.css?v=c37aac13193c981c">
+    <link rel="stylesheet" href="player-assets/start-button.css?v=a3ee1dd37505e6a0">
+    <script src="https://yabancidizim.com/serv1/devdetect.js"></script>
+    <script>
+        if (window.top === window.self) {
+            window.location.href = 'about:blank';
+        }
+    </script>
+</head>
+<body>
+<script>
+(function () {
+    'use strict';
+
+    // DiziKat Birlikte �zle bridge v4
+    var parentOrigin = '';
+    var boundVideo = null;
+    var suppressUntil = 0;
+    var heartbeatTimer = null;
+    var pendingCommand = null;
+
+    function isAllowedParentOrigin(origin) {
+        try {
+            var url = new URL(origin);
+            var host = (url.hostname || '').toLowerCase();
+            return url.protocol === 'https:' &&
+                (host === 'dizikat.com' || host.endsWith('.dizikat.com'));
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function getVideo() {
+        return document.querySelector('#player video') || document.querySelector('video');
+    }
+
+    function postToParent(payload) {
+        if (!parentOrigin || window.parent === window) return false;
+        try {
+            window.parent.postMessage(payload, parentOrigin);
+            return true;
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function makeState(action, extra) {
+        var video = getVideo();
+        var payload = {
+            type: 'DIZIKAT_PLAYER_EVENT',
+            bridgeVersion: 4,
+            action: action,
+            ready: !!video,
+            time: video ? (Number(video.currentTime) || 0) : 0,
+            duration: video ? (Number(video.duration) || 0) : 0,
+            paused: video ? !!video.paused : true,
+            ended: video ? !!video.ended : false,
+            rate: video ? (Number(video.playbackRate) || 1) : 1,
+            remote: Date.now() < suppressUntil,
+            sentAt: Date.now()
+        };
+
+        if (extra && typeof extra === 'object') {
+            Object.keys(extra).forEach(function (key) {
+                payload[key] = extra[key];
+            });
+        }
+
+        return payload;
+    }
+
+    function sendState(action, extra) {
+        postToParent(makeState(action, extra));
+    }
+
+    function playVideo(video) {
+        // Enter through NP's start flow so remote play cannot bypass preroll ads.
+        if (window.player && typeof window.player.api === 'function') {
+            window.player.api('play');
+            return null;
+        }
+        return video.play();
+    }
+
+    function syncTime(video, time) {
+        if (typeof time !== 'number' || !Number.isFinite(time) || time < 0) return;
+        if (window.npPlayer && typeof window.npPlayer.prepareSeek === 'function') window.npPlayer.prepareSeek(time);
+        try {
+            if (Math.abs((Number(video.currentTime) || 0) - time) > 0.30) {
+                video.currentTime = time;
+            }
+        } catch (e) {}
+    }
+
+    function applyCommand(data) {
+        if (!data || data.type !== 'DIZIKAT_PLAYER_COMMAND') return;
+
+        if (data.action === 'ping') {
+            postToParent({
+                type: 'DIZIKAT_BRIDGE_PONG',
+                bridgeVersion: 4,
+                ready: !!getVideo(),
+                requestId: data.requestId || null,
+                sentAt: Date.now()
+            });
+            return;
+        }
+
+        var video = getVideo();
+
+        if (window.NP_EMBED && window.NP_EMBED.isAdActive() && data.action !== 'get_state') {
+            pendingCommand = data;
+            return;
+        }
+
+        if (!video) {
+            pendingCommand = data;
+
+            if (data.action === 'get_state') {
+                sendState('state', {
+                    requestId: data.requestId || null
+                });
+            }
+            return;
+        }
+
+        bindVideo(video);
+        suppressUntil = Date.now() + 1500;
+
+        if (typeof data.rate === 'number' && Number.isFinite(data.rate) && data.rate > 0) {
+            try {
+                video.playbackRate = Math.max(0.25, Math.min(4, data.rate));
+            } catch (e) {}
+        }
+
+        if (data.action === 'play') {
+            syncTime(video, data.time);
+            var p = playVideo(video);
+            if (p && typeof p.catch === 'function') {
+                p.catch(function (error) {
+                    sendState('autoplay_blocked', {
+                        message: error && error.message ? error.message : 'Autoplay blocked'
+                    });
+                });
+            }
+            return;
+        }
+
+        if (data.action === 'pause') {
+            syncTime(video, data.time);
+            video.pause();
+            return;
+        }
+
+        if (data.action === 'seek') {
+            syncTime(video, data.time);
+            return;
+        }
+
+        if (data.action === 'sync') {
+            syncTime(video, data.time);
+
+            if (data.paused === true) {
+                video.pause();
+            } else if (data.paused === false) {
+                var sp = playVideo(video);
+                if (sp && typeof sp.catch === 'function') {
+                    sp.catch(function (error) {
+                        sendState('autoplay_blocked', {
+                            message: error && error.message ? error.message : 'Autoplay blocked'
+                        });
+                    });
+                }
+            }
+            return;
+        }
+
+        if (data.action === 'get_state') {
+            sendState('state', {
+                requestId: data.requestId || null
+            });
+        }
+    }
+
+    function bindVideo(video) {
+        if (!video || boundVideo === video) return;
+        boundVideo = video;
+
+        video.addEventListener('play', function () {
+            sendState('play');
+        });
+
+        video.addEventListener('pause', function () {
+            sendState('pause');
+        });
+
+        video.addEventListener('seeked', function () {
+            sendState('seek');
+        });
+
+        video.addEventListener('ended', function () {
+            sendState('ended');
+        });
+
+        video.addEventListener('ratechange', function () {
+            sendState('ratechange');
+        });
+
+        video.addEventListener('loadedmetadata', function () {
+            sendState('state');
+        });
+
+        clearInterval(heartbeatTimer);
+        heartbeatTimer = setInterval(function () {
+            var current = getVideo();
+            if (!current || current.paused || current.ended) return;
+            sendState('heartbeat');
+        }, 4000);
+
+        sendState('ready');
+        sendState('state');
+
+        if (pendingCommand) {
+            var command = pendingCommand;
+            pendingCommand = null;
+            setTimeout(function () {
+                applyCommand(command);
+            }, 0);
+        }
+    }
+
+    window.addEventListener('message', function (event) {
+        if (event.source !== window.parent) return;
+        if (!isAllowedParentOrigin(event.origin)) return;
+
+        parentOrigin = event.origin;
+        applyCommand(event.data);
+    });
+
+    document.addEventListener('np-embed-ad-finished', function () {
+        if (pendingCommand) {
+            var command = pendingCommand;
+            pendingCommand = null;
+            applyCommand(command);
+        }
+    });
+
+    function lookForVideo() {
+        var video = getVideo();
+        if (video) bindVideo(video);
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', lookForVideo);
+    } else {
+        lookForVideo();
+    }
+
+    var observer = new MutationObserver(lookForVideo);
+    observer.observe(document.documentElement, {
+        childList: true,
+        subtree: true
+    });
+
+    var attempts = 0;
+    var finder = setInterval(function () {
+        attempts++;
+        lookForVideo();
+        if (boundVideo || attempts >= 60) clearInterval(finder);
+    }, 250);
+})();
+</script>
+    <div id="player-wrapper"><div id="player"><div id="np" class="np-root np-t-ynp np-l-classic np-lang-pill"></div></div></div>
+    <script>window.NP_CONFIG = {"id":"embed-731b18d9-6a7a-4df4-bb33-8d0d858acde0","title":"Tulsa King","subtitle":"1. Sezon 2. Bölüm","theme":{"name":"ynp","layout":"classic","lang":"pill","color":"#ff0000","colorFg":"#ffffff","menu":"rgba(16,16,18,.88)","menuHover":"rgba(255,255,255,.08)","skip":15,"subSize":30,"subSizeFs":46,"dual":true},"poster":"https://image.tmdb.org/t/p/w1280/mNHRGO1gFpR2CYZdANe72kcKq7G.jpg","sources":[{"title":"Orijinal","kind":"orig","master":"https://ksdpictures.site/dserv/uploads/20b1b89e-a698-423c-bd9d-961184925f08/731b18d9-6a7a-4df4-bb33-8d0d858acde0/master.m3u8","hosts":[]}],"subtitles":[{"label":"İngilizce","lang":"en","forced":false,"url":"https://ksdpictures.site/dserv/uploads/20b1b89e-a698-423c-bd9d-961184925f08/731b18d9-6a7a-4df4-bb33-8d0d858acde0/sub_en_35c85.vtt"},{"label":"Türkçe","lang":"tr","forced":false,"url":"https://ksdpictures.site/dserv/uploads/20b1b89e-a698-423c-bd9d-961184925f08/731b18d9-6a7a-4df4-bb33-8d0d858acde0/sub_tr_9e03a.vtt"}],"vast":"","advertising":[],"download":"","track":"","autoplay":false,"remoteControl":false,"stats":{"ws":null}};</script>
+    <script src="player-assets/hls.min.js?v=72b87a6e58db623f"></script>
+    <script src="player-assets/np-embed.js?v=f178fbb52b23a8eb"></script>
+    <script src="player-assets/np.js?v=np-cachefix-20261028"></script>
+    <script>window.NP_EMBED.attach();</script>
+</body>
+</html>

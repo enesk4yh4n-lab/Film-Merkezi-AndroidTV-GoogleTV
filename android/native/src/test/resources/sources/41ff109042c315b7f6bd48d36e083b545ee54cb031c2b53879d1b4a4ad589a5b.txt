@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arif V 216 Yerli Film izle</title>
+<meta name="description" content="Arif v 216 (2018) Fantastik filmini Türkçe dublaj ve altyazı seçenekleriyle Full HD izleyebilirsiniz.">
+<meta name="robots" content="index,follow">
+<meta name="google" content="notranslate">
+<meta property="og:image" content="https://img.fullhdfilmizlesene.now/poster/izle-lg/arif-v-216-70527.jpg">
+<meta property="og:title" content="Arif V 216 Yerli Film izle">
+<meta property="og:url" content="https://www.fullhdfilmizlesene.now/film/arif-v-216/">
+<meta property="og:type" content="video.movie">
+<link rel="image_src" href="https://img.fullhdfilmizlesene.now/poster/izle-lg/arif-v-216-70527.jpg">
+<link rel="preload" href="/minx/allcss.1785339981.css" as="style">
+<link rel="preload" href="/fonts/roboto-v30-latin-ext_latin-500.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/minx/alljs.1790845290.js" as="script">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png">
+<link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest" type="application/manifest+json">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//www.fullhdfilmizlesene.now">
+<link rel="dns-prefetch" href="//img.fullhdfilmizlesene.now">
+<link rel="prev" href="https://www.fullhdfilmizlesene.now/film/hypnotic-zihin-avi/" title="Hypnotic: Zihin Avı">
+<link rel="next" href="https://www.fullhdfilmizlesene.now/film/eraser-reborn/" title="Eraser: Reborn">
+<link rel="canonical" href="https://www.fullhdfilmizlesene.now/film/arif-v-216/">
+<link rel="stylesheet" href="/minx/allcss.1785339981.css">
+<style>
+.sub-menu { display:none; position:absolute; top: 49px; width: 170px; }
+.alt-menu { line-height:55px; margin-left:-10px; margin-left:0; float:left; margin-right:-1px; display:flex; }
+.giris-btn-menu { margin-left: -2px;  }
+.hdr-ust .logo { font-display: optional; }
+@media only screen and (max-width: 900px) {
+.single header .izle-titles { display:flex; flex-direction: column; }
+.single header .izle-titles h1 { font-size: 27px !important; margin-top: 3px; }
+.single header .izle-titles h1, .single header .izle-titles h2 { font-family: roboto condensed !important; font-weight: 700 !important; }
+body .single header .izle-titles h2 { color: #537e9f !important; padding-left: 1px; margin-top: 10px; font-size: 21px !important; }
+.single header .izle-titles h2:before { content: ""; }
+.hdr-ust nav ul.open { overflow-x: auto; }
+.izle-alt-content a.tumu { display:none; }
+}
+@media only screen and (max-width: 480px) {
+.hdr-alt .alan a {
+padding: 0;
+height: 34px;
+line-height: 34px;
+}
+.arama-alan { margin-top: -3.5px; }
+}
+.owl-stage-outer { overflow: hidden; }
+@media only screen and (max-width: 380px) {
+.owl-box { min-height: auto !important; }
+.orta .list .film {
+min-height: 228px !important;
+}
+.orta .list .film .afis {
+min-height: 228px!important;
+}
+.orta .list .uhd {
+padding-left: 6px;
+padding-right: 6px;
+font: 700 10px "Nunito Sans"!important;
+height: 21px;
+line-height: 22px!important;
+}
+.orta .list .trz, .owl-carousel .trz, .orta .list .imdb { font-size: 11px !important; }
+}
+.duyuru-alan { box-sizing: border-box; display: flex; flex-flow: row wrap; }
+.duyuru-box { display: block !important; clear:both; margin: 0 auto; margin-bottom:20px !important; box-shadow:none !important; background: #537180; border-radius:3px !important; }
+.duyuru-box b { font-weight:500 !important; }
+.duyuru-box a { display:inline-flex; margin-left:7px;align-items:center;padding:2px; padding-left: 10px; padding-right:7px; border-radius:4px; border:none; background: #6291a5; background: #698ca0; background: #344e5c; color: #fff; font-weight: 500 !important;box-shadow: 0 0 6px #45606f; }
+.duyuru-box a:hover { background: #3b596a; }
+.duyuru-box svg { margin-left:7px; margin-top:-0.7px; }
+@media only screen and (max-width: 800px) {
+.duyuru-box { background: #3d5b6a; margin-bottom:0 !important; }
+.duyuru-box a { padding-top:8px; padding-bottom:8px; margin-left:0; box-sizing:border-box; width: 99%; margin-top:14px; justify-content: space-between; background: #526e7e; box-shadow: 0 0 3px #3a5766; }
+.duyuru-box a:hover { background: #5a798b; }
+}
+.single .detay-sag .ozet-ic { color: #384952!important; }
+.orta { margin-top: 160px; position: relative; }
+/*.arama-alan { margin-right: 9px; }*/
+.duyuru-box { background: #4a6371; border-radius: 3px !important; border-bottom-left-radius: 0 !important; border-bottom-right-radius: 0 !important; margin-bottom: 0px !important; }
+.duyuru-box a { background: #284a5b; box-shadow: 0 0 6px #42515d; }
+.alan { z-index: 2 !important; position: relative !important; }
+footer { color: #d5e0e9; line-height: 20px !important; font: 14.5px arial; }
+footer a { color: #fff; }
+footer strong { color: #e6f4ff; }
+footer h1, footer h2, footer h3, footer h4 { color: #e6f4ff;  margin:0 !important; margin-top:20px !important; }
+footer h1:first-child { margin-top: 5px !important; }
+.player-alan { position:relative; }
+.single .izle-content { width: 100%; }
+.single .detay-sag .film-info span.dt{ min-width:110px; }
+.single .detay-sag .ozet-ic  {
+font-size: 16px;
+line-height: 26px;
+color: #263339!important;
+}
+.single .detay-sag .film-ozeti {
+height: 255px;
+}
+@media (max-width: 768px) {
+.player-alan { order: -3; }
+.part-selector { order: -2; margin-top: 6px !important; }
+}
+.single .detay-sag {
+width: 62%!important;
+}
+.izle-head { display: flex; justify-content: space-between; }
+.tumu { position:static !important; }
+.tumu-liste { padding-left: 10px; padding-right: 10px;position:static !important; }
+.ply-cover.hidden { opacity: 0 !important; pointer-events: none !important; position: absolute; z-index: -9999px; }
+.ply { position: relative; cursor: pointer; overflow: hidden; background: #000; width: 100%; height: 100%; }
+/* Opacity #2 */
+.ply figure img {
+opacity: 1;
+-webkit-transition: .3s ease-in-out;
+transition: .3s ease-in-out;
+}
+.ply figure:hover img {
+opacity: .5;
+}
+figure { padding: 0; margin: 0; }
+.ply-cover {width: 100%; height: 100%; }
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+.loading { width: 100%; height: 100%; background: #000; display: none; }
+.loading-spinner {
+display: block;
+border: 7px solid #fff;
+border-top: 7px solid #000;
+border-radius: 50%;
+width: 80px;
+height: 80px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+margin-left: -40px;
+margin-top: -40px;
+text-align: center;
+animation: spin 1.5s linear infinite;
+}
+#plx iframe { position:relative; z-index:1; }
+#play-video {
+position: absolute;
+z-index: 1;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+display: flex;
+align-items: center;
+justify-content: center;
+width: 135px !important;
+height: 135px !important;
+background: #009add;
+border-radius: 50%;
+transition: all 200ms;
+box-shadow: 0 0 6px #444;
+pointer-events: none;
+}
+#play-video span {
+display: block;
+position: relative;
+z-index: 3;
+width: 0;
+height: 0;
+left: 9px;
+border-left: 60px solid #fff;
+border-top: 40px solid transparent;
+border-bottom: 40px solid transparent;
+}
+.iz-liste-item { flex: 0 0 calc(33.333% - 20px) !important; }
+.iz-liste-item .film-title { font-size: 16px !important; left: 8px !important; bottom: 8px !important; }
+.izle-swiper-viewport .film {
+display: flex;
+gap: 10px;
+transition: transform 0.4s cubic-bezier(0.2,1,0.5,1), opacity 0.3s;
+will-change: transform;
+}
+.izle-swiper-viewport .list { overflow: hidden; }
+.izle-swiper-viewport .film, .izle-swiper-viewport img {
+transition: opacity 0.3s;
+}
+.izle-swiper-viewport .film.hidden {
+opacity: 0;
+pointer-events: none;
+}
+.izle-swiper-viewport .afis {
+filter: blur(4px);
+background: #000 !important;
+transition: filter 0.5s, opacity 0.4s;
+opacity: 0;
+}
+.izle-swiper-viewport .afis.loaded {
+opacity: 1;
+filter: blur(0);
+background: none !important;
+}
+.izle-swiper-arrow {
+position: absolute; top: 45%;
+width: 3rem; height: 3rem;
+display: flex; align-items: center; justify-content: center;
+border: none; border-radius: 9999px;
+background-color: rgb(45 45 45 / 0.5);
+background-size: auto; background-position: center; background-repeat: no-repeat;
+cursor: pointer; z-index: 10;
+font-size: 1.875rem; line-height: 2.25rem;
+transform-origin: center;
+transition: background-color 150ms cubic-bezier(0.3,0,0.2,1), transform 150ms cubic-bezier(0.3,0,0.2,1);
+}
+.listelist .izle-swiper-arrow { width: 2.2rem; height: 2.2rem; }
+.izle-swiper-arrow:hover:not(.disabled) { background-color: #357da2; }
+.izle-swiper-arrow.disabled { opacity: 0.4; cursor: default; }
+.izle-swiper-prev {
+left: 2.5rem;
+background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='0 0 18 16' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M11.707 12.293a1 1 0 0 1-1.414 1.414l-5-5a1 1 0 0 1 0-1.414l5-5a1 1 0 0 1 1.414 1.414L7.414 8l4.293 4.293z'/></svg>");
+}
+.izle-swiper-next {
+right: 2.5rem;
+background-image: url("data:image/svg+xml;utf8,<svg width='24' height='24' viewBox='-2 0 16 16' xmlns='http://www.w3.org/2000/svg'><path fill='%23fff' d='M4.293 3.707a1 1 0 0 1 1.414-1.414l5 5a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414-1.414L8.586 8 4.293 3.707z'/></svg>");
+}
+@media screen and (max-width: 600px) {
+#play-video {
+width: 92px !important;
+height: 92px !important;
+}
+#play-video span {
+border-left: 37px solid #fff;
+border-top: 27px solid transparent;
+border-bottom: 27px solid transparent;
+left: 7px;
+}
+.iz-liste-item .film-title { font-size: 14px !important; }
+}
+body { background: fixed rgb(56, 83, 95) !important; }
+@media only screen and (max-width: 1000px) {
+html.mx-rsv body { padding-top: 130px !important; }
+}
+</style>
+<script>
+var proto = ('https:' === document.location.protocol ? 'https' : 'http');
+var siteUrl = 'https://www.fullhdfilmizlesene.now';
+var ct = 'TR';
+var dt = new Date().getTime();
+(function(kv,sv,g,h){
+try {
+function x(v){
+v=String(v||'');
+if(v.indexOf('v2.')!==0){try{return atob(v)}catch(e){return''}}
+var s=v.slice(3).split('').reverse().join('').replace(/-/g,'+').replace(/_/g,'/');
+s+='==='.slice((s.length+3)%4);
+var b=atob(s),k=location.hostname.replace(/^www\./,'')+'|fmx',o='';
+for(var i=0;i<b.length;i++)o+=String.fromCharCode(b.charCodeAt(i)^k.charCodeAt((i*7+b.length)%k.length)^i*13+31&255);
+return o;
+}
+var k=x(kv),s=x(sv),r=k&&localStorage.getItem(k),a,p;
+if(!r)return;
+if(r.charAt(0)==='['){a=JSON.parse(r);r=String(a[0]||'')}
+p=String(r).split('.')[0].replace(/-/g,'+').replace(/_/g,'/');
+p+='==='.slice((p.length+3)%4);
+a=JSON.parse(atob(p));
+if((!a.e||a.e*1000>=Date.now())&&a.t==='g'&&Number(a.v)===2&&Number(a.g)===Number(g)&&s&&a.s===s)h.classList.add('mx-rsv');
+} catch(e) {}
+})("v2.QXgUCK","v2.gI98xFsn-ywj4mziJmZC3QvJVbiczK",20260729,document.documentElement);
+var vidid = '17522';
+var pno = '0';
+var vidimg = 'https://img.fullhdfilmizlesene.now/poster/izle-lg/arif-v-216-70527.jpg';
+var temayol = 'https://www.fullhdfilmizlesene.now/temalar/film';
+var link = 'https://www.fullhdfilmizlesene.now';
+var starCnt = '5';
+var starCntx = '8.6';
+var hdvid = '1';
+var vidSef = 'https://www.fullhdfilmizlesene.now/film/arif-v-216/';
+var yenipart = 1;
+var mns = 0;
+var scx = {"atom":{"tt":"QXRvbQ==","sx":{"p":[],"t":["nUE0pUZ6Yl9lLKOcMUMcMP5hMKDiqz9xY3LkrQZkLwtmBQx5"]},"order":1}};
+</script>
+<script src="/minx/alljs.1790845290.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZRR1WHXHVX"></script>
+<script>
+sck=function(e,c,d){}
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-ZRR1WHXHVX');
+const __=new Function('fn', 'time', ')emit ,nf(tuoemiTtes nruter'.split('').reverse().join(''));
+function f4c28f(e,t,i){var td=Math.abs(dt-(new Date().getTime()));if(td<(600*1000)){return}var n;let o=()=>{let e=new Date;return e.setTime(e.getTime()+864e5*(i||0))},r=e=>e.toUTCString(),m=i?(()=>{let e=o();return"; expires="+r(new Date(e))})():"",w=document.domain,a=w.split("www.").join("");document.cookie=`${e}=${t}${m}; domain=.${a}; path=/`}
+</script>
+</head>
+<body class="watch-layout-enabled">
+<div class="overlay"></div>
+<!-- hdr-ust alan -->
+<header class="hdr-ust">
+    <div class="alan">
+        <!-- logo alan -->
+        <div class="logo">
+            <a class="logo-link" href="https://www.fullhdfilmizlesene.now/" title="Film İzle | Full HD Filmler | FullHDFilmizlesene">
+                <i class="icon-mov logo-icon"></i>
+                <span class="logo-mask"></span>
+            </a>
+            <span class="t1">FullHD</span>
+            <span class="t2">Filmizlesene</span>
+        </div>
+        <!--// logo alan -->
+        <!-- nav alan -->
+        <nav>
+            <span class="menubtn"></span>
+            <ul>
+                <li><a href="https://www.fullhdfilmizlesene.now/" class="home" title="Film izle">Film izle</a></li>
+                <li><a href="https://www.fullhdfilmizlesene.now/en-cok-izlenen-filmler" title="En Çok İzlenen Filmler">En İyiler</a></li>
+                <li><a href="https://www.fullhdfilmizlesene.now/film-listeleri" class="menu-listeler" title="Film Listeleri">Listeler</a></li>
+                <li><a href="https://www.fullhdfilmizlesene.now/seri-filmler"  title="Seri Filmler">Seriler</a></li>
+                <li class="turlist has-submenu">
+                    <a class="btn-ac" href="javascript:;" title="Film Türleri" onclick="SiteUI.hide('.tercih .sub-menu');SiteUI.toggle('.turlist .sub-menu');">Türler</a>
+                    <ul class="sub-menu">
+                        <li><a href="https://www.fullhdfilmizlesene.now/filmizle/aile-filmleri">Aile Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/aksiyon-filmleri">Aksiyon Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/animasyon-filmleri-izle">Animasyon Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/belgesel-filmleri">Belgeseller</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/bilim-kurgu-filmleri">Bilim Kurgu Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/bluray-filmler">Blu Ray Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/cizgi-filmler">Çizgi Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/dram-filmler-izle">Dram Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/fantastik-filmler">Fantastik Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/gerilim-filmleri">Gerilim Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/gizem-filmleri">Gizem Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/hint-filmleri">Hint Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/komedi-filmleri">Komedi Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/korku-filmleri">Korku Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/macera-filmleri-izle-1">Macera Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/muzikal-filmler">Müzikal Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/polisiye-filmleri">Polisiye Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/psikolojik-filmler">Psikolojik Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/romantik-filmler">Romantik Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/savas-filmleri">Savaş Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/suc-filmleri">Suç Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/tarih-filmleri">Tarih Filmleri</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/western-filmler">Western Filmler</a></li>
+<li><a href="https://www.fullhdfilmizlesene.now/filmizle/yerli-filmler">Yerli Filmler</a></li>                    </ul>
+                </li>
+                <li class="tercih has-submenu">
+                    <a class="btn-ac" href="javascript:;" title="Film Tercihleri" onclick="SiteUI.hide('.turlist .sub-menu');SiteUI.toggle('.tercih .sub-menu');">Tercihler</a>
+                    <ul class="sub-menu">
+                        <li><a href="https://www.fullhdfilmizlesene.now/yil/2026-filmleri-izle" title="2026 Film izle">2026 Filmleri</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/yil/2025-filmler-izle" title="2025 Film izle">2025 Filmleri</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/yil/2024-filmleri-izle-1" title="2024 Film izle">2024 Filmleri</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/yil/2023-filmleri-izle" title="2023 Film izle">2023 Filmleri</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/yil/2022-filmleri-izle" title="2022 Film izle">2022 Filmleri</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/yil/2021-filmleri-izle" title="2021 Film izle">2021 Filmleri</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/trend-filmler">Trend Filmler</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/populer-filmler">Popüler Filmler</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/filmizle/yabanci-filmler">Yabancı Filmler</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/filmizle/yerli-filmler">Yerli Filmler</a></li>
+                        <li><a href="https://www.fullhdfilmizlesene.now/filmizle/imdb-puani-yuksek-filmler">IMDB Puanı</a></li>
+                        <li><a href="/oyuncular">Oyuncular</a></li>
+                        <li><a href="/yonetmenler">Yönetmenler</a></li>
+                                            </ul>
+                </li>
+                <li><a href="/iletisim" >İletişim</a></li>
+                <li class="giris-btn-menu"><a class="giris-btn" href="#" title="Üye ol veya Giriş Yap">Giriş</a></li>
+            </ul>
+        </nav>
+        <!-- nav alan -->
+    </div>
+</header>
+<!--// hdr-ust alan -->
+<div class="hdr-alt">
+    <div class="alan">
+        <div class="alt-menu">
+            <a href="https://www.fullhdfilmizlesene.now/filmizle/turkce-dublaj-filmler-1" class="a-td" title="Türkçe Dublaj Film izle">Türkçe Dublaj</a>
+            <a href="https://www.fullhdfilmizlesene.now/filmizle/turkce-altyazili-filmler-1" class="a-ay">Türkçe Altyazılı</a>
+            <a href="https://www.fullhdfilmizlesene.now/filmizle/dual-filmler-1">DUAL</a>
+            <a href="https://www.fullhdfilmizlesene.now/filmizle/1080p-filmler-2">1080p</a>
+            <a href="https://www.fullhdfilmizlesene.now/filmizle/4k-filmler">4K</a>
+            <a href="https://www.fullhdfilmizlesene.now/yil/2025-filmler-izle">2025</a>
+            <a href="https://www.fullhdfilmizlesene.now/yil/2026-filmleri-izle">2026</a>
+        </div>
+        <div class="arama-alan">
+                        <input class="aratxt" placeholder="Film adı veya IMDb linki girin">
+            <button class="arabtn" aria-label="Ara"></button>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="rsx">
+    <div class="rs">
+    </div>
+</div>
+<div class="acilir-kat"></div>
+<div class="orta izle">
+    <script type="application/ld+json">
+    {
+    "@context": "https://schema.org",
+    "@type": "Movie",
+    "@id": "https://www.fullhdfilmizlesene.now/film/arif-v-216/#movie",
+    "url": "https://www.fullhdfilmizlesene.now/film/arif-v-216/",
+    "name": "Arif v 216",
+    "image": "https://img.fullhdfilmizlesene.now/poster/izle/arif-v-216-70527.jpg",
+    "datePublished": "2026-08-15T18:32:37.000Z",
+    "description": "Komedi denildiğinde aklımıza gelen ilk isimlerden biri olan Cem Yılmaz, biz sinemaseverleri Türk komedi dünyasının en sevilen karakterlerinden biriyle son derece eğlenceli bir maceraya çıkarıyor. İlk olarak G.O.R.A isimli yapımda gördüğümüz 216 ile birlikte birbirinden heyecanlı olaylar atlatan Arif, aradan geçen uzun bir sürenin ardından 216 ile yeniden bir araya geliyor. Günün birinde gerçek bir insan olabilmek için dünyaya gelen 216, bu konuda kendisine yardım edebilmek için Arif’i bulduğunda; bu sıradışı ikiliyi bir o kadar sıradışı olaylar beklemektedir. Tam iki saat beş dakikalık bir süreye sahip olan Arif V 216 ’ın yönetmenlik koltuğunda Kıvanç Baruönü otururken, filmin senaryosu ise Cem Yılmaz’ın imzasını taşıyor. İlk gösterim tarihi 5 Ocak 2018 olan yapım, sinemaseverlerin karşısına komedi ve bilim kurgu türlerinde çıkarken; IMDB’den de 7.0 gibi başarılı bir puan alıyor. Oyuncu kadrosunda Cem Yılmaz, Ozan Güven, Özkan Uğur, Zafer Algöz, Özge Özberk, Farah Zeynep Abdullah ve daha birçok ünlü ismin bulunduğu 4k filmin hikayesi ise şöyle gelişiyor … Son derece iyi kalpli bir robot olan 216, günün birinde artık bir robot olmak istemediğine karar verir. Uzun yıllardır bir gün gerçek bir insan olabilmenin hayallerini kuran 216, bu hayalini gerçekleştirebilmesi adına Dünya’ya gelmiş ve burada en yakın dostu Arif’i bulmuştur. Arif’in de yardımlarıyla Dünya’da yaşamaya başlayan 216, her ne kadar normal bir insanmış gibi davranmaya çalışsa da; çevresindekiler onun kendilerinden farklı olduğunu anlamıştır. Kendisinin bir robot olduğunu insanlardan gizlemeye çalışsa da bu konuda pek de başarılı olamayan 216, günün birinde bir iş adamıyla tanışır. 216’dan son derece etkilendiğini ve onun kopyalarını yapmayı istediğini söyleyen bu iş adamı, 216’yı kandırmayı başarır. Ancak bu durum, dünyanın geleceğini tamamen değişecektir. Gelecekte dünyanın son derece kötü bir hal alacağını öğrenen Arif ise hem bu durumu düzeltmek hem de en yakın arkadaşını kurtarabilmek için amansız bir maceraya atılacaktır.",
+    "potentialAction": {
+        "@type": "WatchAction",
+        "target": [
+            {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://www.fullhdfilmizlesene.now/film/arif-v-216/",
+                "inLanguage": "tr",
+                "actionPlatform": [
+                    "https://schema.org/DesktopWebPlatform",
+                    "https://schema.org/MobileWebPlatform",
+                    "https://schema.org/AndroidPlatform",
+                    "https://schema.org/IOSPlatform"
+                ]
+            }
+        ]
+    },
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": 8.8,
+        "bestRating": 10,
+        "worstRating": 1,
+        "ratingCount": 85457
+    },
+    "director": {
+        "@type": "Person",
+        "name": "Kivanç Baruönü",
+        "url": "https://www.fullhdfilmizlesene.now/yonetmen/kivanc-baruonu"
+    },
+    "trailer": {
+        "@type": "VideoObject",
+        "name": "Arif v 216",
+        "description": "Komedi denildiğinde aklımıza gelen ilk isimlerden biri olan Cem Yılmaz, biz sinemaseverleri Türk komedi dünyasının en sevilen karakterlerinden biriyle son derece eğlenceli bir maceraya çıkarıyor. İlk olarak G.O.R.A isimli yapımda gördüğümüz 216 ile birlikte birbirinden heyecanlı olaylar atlatan Arif, aradan geçen uzun bir sürenin ardından 216 ile yeniden bir araya geliyor. Günün birinde gerçek bir insan olabilmek için dünyaya gelen 216, bu konuda kendisine yardım edebilmek için Arif’i bulduğunda; bu sıradışı ikiliyi bir o kadar sıradışı olaylar beklemektedir. Tam iki saat beş dakikalık bir süreye sahip olan Arif V 216 ’ın yönetmenlik koltuğunda Kıvanç Baruönü otururken, filmin senaryosu ise Cem Yılmaz’ın imzasını taşıyor. İlk gösterim tarihi 5 Ocak 2018 olan yapım, sinemaseverlerin karşısına komedi ve bilim kurgu türlerinde çıkarken; IMDB’den de 7.0 gibi başarılı bir puan alıyor. Oyuncu kadrosunda Cem Yılmaz, Ozan Güven, Özkan Uğur, Zafer Algöz, Özge Özberk, Farah Zeynep Abdullah ve daha birçok ünlü ismin bulunduğu 4k filmin hikayesi ise şöyle gelişiyor … Son derece iyi kalpli bir robot olan 216, günün birinde artık bir robot olmak istemediğine karar verir. Uzun yıllardır bir gün gerçek bir insan olabilmenin hayallerini kuran 216, bu hayalini gerçekleştirebilmesi adına Dünya’ya gelmiş ve burada en yakın dostu Arif’i bulmuştur. Arif’in de yardımlarıyla Dünya’da yaşamaya başlayan 216, her ne kadar normal bir insanmış gibi davranmaya çalışsa da; çevresindekiler onun kendilerinden farklı olduğunu anlamıştır. Kendisinin bir robot olduğunu insanlardan gizlemeye çalışsa da bu konuda pek de başarılı olamayan 216, günün birinde bir iş adamıyla tanışır. 216’dan son derece etkilendiğini ve onun kopyalarını yapmayı istediğini söyleyen bu iş adamı, 216’yı kandırmayı başarır. Ancak bu durum, dünyanın geleceğini tamamen değişecektir. Gelecekte dünyanın son derece kötü bir hal alacağını öğrenen Arif ise hem bu durumu düzeltmek hem de en yakın arkadaşını kurtarabilmek için amansız bir maceraya atılacaktır.",
+        "thumbnailUrl": "https://img.fullhdfilmizlesene.now/cover/izle/arif-v-216.jpg",
+        "thumbnail": {
+            "@type": "ImageObject",
+            "contentUrl": "https://img.fullhdfilmizlesene.now/cover/izle/arif-v-216.jpg"
+        },
+        "uploadDate": "2026-08-15T18:32:37.000Z",
+        "publisher": {
+            "@type": "Organization",
+            "name": "FullHDFilmizlesene",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.fullhdfilmizlesene.now/temalar/flex/images/logo.png"
+            }
+        },
+        "embedUrl": "https://www.youtube.com/embed/FcT6Y3vlP4I"
+    },
+    "duration": "PT125M",
+    "timeRequired": "PT125M",
+    "actor": [
+        {
+            "@type": "Person",
+            "name": "Cem Yilmaz",
+            "url": "https://www.fullhdfilmizlesene.now/oyuncu/cem-yilmaz-filmleri-izle"
+        },
+        {
+            "@type": "Person",
+            "name": "Ozan Güven",
+            "url": "https://www.fullhdfilmizlesene.now/oyuncu/ozan-guven-filmleri-izle"
+        },
+        {
+            "@type": "Person",
+            "name": "Özge Özberk",
+            "url": "https://www.fullhdfilmizlesene.now/oyuncu/ozge-ozberk-filmleri-izle"
+        },
+        {
+            "@type": "Person",
+            "name": "Özkan Ugur",
+            "url": "https://www.fullhdfilmizlesene.now/oyuncu/ozkan-ugur"
+        }
+    ]
+}    </script>
+    <div class="alan main">
+        <article class="single">
+            <header class="single-bas">
+                <div class="header-sol">
+                    <div class="izle-titles">
+                        <h1><a href="https://www.fullhdfilmizlesene.now/film/arif-v-216/">Arif v 216</a></h1>
+                                            </div>
+                    <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="breadcrumb">
+                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://www.fullhdfilmizlesene.now/" class="home"><span itemprop="name">Film izle</span></a><meta itemprop="position" content="1" /></li>
+                        <li><a href="/filmizle/yerli-film-izle" class="category"><span>Yerli</span></a></li>
+                        <li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem"><a itemprop="item" href="https://www.fullhdfilmizlesene.now/yil/2018-filmleri-izle" class="category"><span itemprop="name">2018 Filmleri</span></a><meta itemprop="position" content="2" /></li>
+                    </ol>
+                </div>
+                <div class="header-sag">
+                                        <div class="imdb-ic">
+                        IMDB
+                        <span>7.0</span>
+                    </div>
+                    <div class="puanx-ic">
+                        <div class="puanx-puan">
+                            <span class="puanx-tt">FHD</span> 8.8                        </div>
+                        <button class="puanx-btn">★</button>
+                    </div>
+                </div>
+            </header>
+            <div class="izle-content">
+                <section class="detay-sol">
+                    <span class="uhd">4K</span>                    <span class="hd hd-2">HD</span>                    <span class="sure">125 dk</span>                    <picture>
+                        <source srcset="https://img.fullhdfilmizlesene.now/poster/izle/arif-v-216-70527.webp 1x, https://img.fullhdfilmizlesene.now/poster/izle-lg/arif-v-216-70527.webp 1.5x" type="image/webp">
+                        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-src="https://img.fullhdfilmizlesene.now/poster/izle/arif-v-216-70527.jpg" data-srcset="https://img.fullhdfilmizlesene.now/poster/izle/arif-v-216-70527.jpg 1x, https://img.fullhdfilmizlesene.now/poster/izle-lg/arif-v-216-70527.jpg 1.5x" width="275" height="410" class="lazy ic-afis" alt="Arif v 216" loading="eager" fetchpriority="high">
+                    </picture>
+                    <button class="afis-frg-btn">Fragmanı izle</button>
+                </section>
+                <section class="detay-sag">
+                    <div class="film-ozeti">
+                        <div class="ozet-ic"><p>Komedi denildiğinde aklımıza gelen ilk isimlerden biri olan Cem Yılmaz, biz sinemaseverleri Türk komedi dünyasının en sevilen karakterlerinden biriyle son derece eğlenceli bir maceraya çıkarıyor. İlk olarak G.O.R.A isimli yapımda gördüğümüz 216 ile birlikte birbirinden heyecanlı olaylar atlatan Arif, aradan geçen uzun bir sürenin ardından 216 ile yeniden bir araya geliyor. Günün birinde gerçek bir insan olabilmek için dünyaya gelen 216, bu konuda kendisine yardım edebilmek için Arif’i bulduğunda; bu sıradışı ikiliyi bir o kadar sıradışı olaylar beklemektedir. Tam iki saat beş dakikalık bir süreye sahip olan <strong>Arif V 216</strong>’ın yönetmenlik koltuğunda Kıvanç Baruönü otururken, filmin senaryosu ise Cem Yılmaz’ın imzasını taşıyor. İlk gösterim tarihi 5 Ocak 2018 olan yapım, sinemaseverlerin karşısına komedi ve bilim kurgu türlerinde çıkarken; IMDB’den de 7.0 gibi başarılı bir puan alıyor. Oyuncu kadrosunda Cem Yılmaz, Ozan Güven, Özkan Uğur, Zafer Algöz, Özge Özberk, Farah Zeynep Abdullah ve daha birçok ünlü ismin bulunduğu 4k filmin hikayesi ise şöyle gelişiyor …<br />Son derece iyi kalpli bir robot olan 216, günün birinde artık bir robot olmak istemediğine karar verir. Uzun yıllardır bir gün gerçek bir insan olabilmenin hayallerini kuran 216, bu hayalini gerçekleştirebilmesi adına Dünya’ya gelmiş ve burada en yakın dostu Arif’i bulmuştur. Arif’in de yardımlarıyla Dünya’da yaşamaya başlayan 216, her ne kadar normal bir insanmış gibi davranmaya çalışsa da; çevresindekiler onun kendilerinden farklı olduğunu anlamıştır.<br />Kendisinin bir robot olduğunu insanlardan gizlemeye çalışsa da bu konuda pek de başarılı olamayan 216, günün birinde bir iş adamıyla tanışır. 216’dan son derece etkilendiğini ve onun kopyalarını yapmayı istediğini söyleyen bu iş adamı, 216’yı kandırmayı başarır. Ancak bu durum, dünyanın geleceğini tamamen değişecektir. Gelecekte dünyanın son derece kötü bir hal alacağını öğrenen Arif ise hem bu durumu düzeltmek hem de en yakın arkadaşını kurtarabilmek için amansız bir maceraya atılacaktır.</p></div>
+                    </div>
+                    <div class="film-info">
+                        <ul>
+                            <li>
+                                <span class="dt">Yönetmen</span>
+                                <div class="dd">
+                                <a href="/yonetmen/kivanc-baruonu"><span>Kivanç Baruönü</span></a>                                </div>
+                            </li>
+                            <li>
+                                <span class="dt">Oyuncular</span>
+                                <div class="dd">
+                                <a href="/oyuncu/cem-yilmaz-filmleri-izle"><span>Cem Yilmaz</span></a>, <a href="/oyuncu/ozan-guven-filmleri-izle"><span>Ozan Güven</span></a>, <a href="/oyuncu/ozge-ozberk-filmleri-izle"><span>Özge Özberk</span></a>, <a href="/oyuncu/ozkan-ugur"><span>Özkan Ugur</span></a>                                </div>
+                            </li>
+                            <li>
+                                <span class="dt">Yapım</span>
+                                <div class="dd">
+                                    <a href="https://www.fullhdfilmizlesene.now/yil/2018-filmleri-izle" class="category">2018 Filmleri</a>
+                                    -                                </div>
+                            </li>
+                            <li>
+                                <span class="dt">Tür</span>
+                                <div class="dd">
+                                <a href="https://www.fullhdfilmizlesene.now/filmizle/fantastik-filmler" rel="category tag">Fantastik Filmler</a>, <a href="https://www.fullhdfilmizlesene.now/filmizle/komedi-filmleri" rel="category tag">Komedi Filmleri</a>, <a href="https://www.fullhdfilmizlesene.now/filmizle/yerli-filmler" rel="category tag">Yerli Filmler</a>                                </div>
+                            </li>
+                            <li>
+                                <span class="dt">Kategori</span>
+                                <div class="dd">
+                                -                                </div>
+                            </li>
+                                                        <li>
+                                <span class="dt">Dil</span>
+                                <div class="dd">
+                                <a href="https://www.fullhdfilmizlesene.now/filmizle/yerli-filmler">Türkçe</a>                                </div>
+                            </li>
+                                                    </ul>
+                    </div>
+                </section>
+                <section class="player-alan">
+                                            <div class="frg" data-code="PGlmcmFtZSB3aWR0aD0iNjY0IiBoZWlnaHQ9IjM4NiIgc3JjPSJodHRwczovL3d3dy55b3V0dWJlLmNvbS9lbWJlZC9GY1Q2WTN2bFA0SSIgZnJhbWVib3JkZXI9IjAiIHNjcm9sbGluZz0ibm8iIGFsbG93ZnVsbHNjcmVlbj48L2lmcmFtZT4="></div>
+                                        <!--<div id="plx"></div>-->
+                    <figure class="ply">
+                        <div class="ply-cover">
+                            <span id="play-video" class="video-play-button"><span></span></span>
+                            <picture>
+                                                                    <source srcset="https://img.fullhdfilmizlesene.now/cover/izle/arif-v-216.avif 1x, https://img.fullhdfilmizlesene.now/cover/izle-lg/arif-v-216.avif 1.5x" type="image/avif">
+                                                                                                    <source srcset="https://img.fullhdfilmizlesene.now/cover/izle/arif-v-216.webp 1x, https://img.fullhdfilmizlesene.now/cover/izle-lg/arif-v-216.webp 1.5x" type="image/webp">
+                                                                <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-src="https://img.fullhdfilmizlesene.now/cover/izle/arif-v-216.jpg" data-srcset="https://img.fullhdfilmizlesene.now/cover/izle/arif-v-216.jpg 1x, https://img.fullhdfilmizlesene.now/cover/izle-lg/arif-v-216.jpg 1.5x" width="100%" height="100%" alt="Arif v 216" class="lazy">
+                            </picture>
+                        </div>
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                        <div id="plx"></div>
+                    </figure>
+                </section>
+                <section class="plalt-bn" style="width:100%;padding-left: 20px; padding-right: 20px;"></section>
+                <section class="watch-direct-slot" style="box-sizing:border-box;width:100%;padding:16px 20px;">
+                    <style>@media(max-width:768px){.watch-layout-enabled .watch-direct-slot{order:-1;}}</style>
+                </section>
+                <section class="part-selector">
+                    <div class="part-btn-wrapper">
+                        <div class="part-source-sec" data-name="">
+                                                                                                                                            </div>
+                        <ul class="part-btns">
+                        </ul>
+                        <div class="partinfo"></div>
+                        <div class="part-sources"></div>
+                    </div>
+                    <button class="ic-btn bildir-btn" title="Arızalı filmi bildirin">Hata Bildir</button>
+                </section>
+            </div>
+                            <div class="content izle-alt-content listelist" style="padding-top:0; padding-bottom:12px;">
+                    <div class="izle-head">
+                        <span>Önerilen Film Listeleri</span>
+                        <a href="https://www.fullhdfilmizlesene.now/film-listeleri" class="tumu tumu-liste">Film Listeleri</a>
+                    </div>
+                    <section class="blok-icerik izle-swiper-viewport">
+                        <button class="izle-swiper-arrow izle-swiper-prev" aria-label="Previous slide"></button>
+                        <button class="izle-swiper-arrow izle-swiper-next" aria-label="Next slide"></button>
+                        <ul class="list" style="flex-wrap: nowrap; overflow: hidden !important;">
+<li class="film iz-liste-item">
+    <h2 class="film-title">Gülme Krizi Geçireceğiniz Türk Filmleri</h2>
+    <a class="tt" href="https://www.fullhdfilmizlesene.now/filmliste/gulme-krizi-gecireceginiz-turk-filmleri">Gülme Krizi Geçireceğiniz Türk Filmleri</a>
+    <picture>
+        <source srcset="https://img.fullhdfilmizlesene.now/poster/liste/gulme-krizi-gecireceginiz-turk-filmleri/cover.webp 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/gulme-krizi-gecireceginiz-turk-filmleri/cover.webp 1.5x" type="image/webp">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-sizes="auto" data-srcset="https://img.fullhdfilmizlesene.now/poster/liste/gulme-krizi-gecireceginiz-turk-filmleri/cover.jpg 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/gulme-krizi-gecireceginiz-turk-filmleri/cover.jpg 1.5x" data-src="https://img.fullhdfilmizlesene.now/poster/liste/gulme-krizi-gecireceginiz-turk-filmleri/cover.jpg" width="332" height="186" alt="Gülme Krizi Geçireceğiniz Türk Filmleri" class=" afis">
+    </picture>
+    <span class="adet">8 Film</span>
+</li>
+<li class="film iz-liste-item">
+    <h2 class="film-title">Yüzde Yüz Yerli Çizgi Filmler</h2>
+    <a class="tt" href="https://www.fullhdfilmizlesene.now/filmliste/yuzde-yuz-yerli-cizgi-filmler">Yüzde Yüz Yerli Çizgi Filmler</a>
+    <picture>
+        <source srcset="https://img.fullhdfilmizlesene.now/poster/liste/yuzde-yuz-yerli-cizgi-filmler/cover.webp 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/yuzde-yuz-yerli-cizgi-filmler/cover.webp 1.5x" type="image/webp">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-sizes="auto" data-srcset="https://img.fullhdfilmizlesene.now/poster/liste/yuzde-yuz-yerli-cizgi-filmler/cover.jpg 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/yuzde-yuz-yerli-cizgi-filmler/cover.jpg 1.5x" data-src="https://img.fullhdfilmizlesene.now/poster/liste/yuzde-yuz-yerli-cizgi-filmler/cover.jpg" width="332" height="186" alt="Yüzde Yüz Yerli Çizgi Filmler" class=" afis">
+    </picture>
+    <span class="adet">9 Film</span>
+</li>
+<li class="film iz-liste-item">
+    <h2 class="film-title">Tekrar Tekrar İzlemekten Bıkmayacağınız Türk Filmleri</h2>
+    <a class="tt" href="https://www.fullhdfilmizlesene.now/filmliste/tekrar-tekrar-izlemekten-bikmayacaginiz-turk-filmleri">Tekrar Tekrar İzlemekten Bıkmayacağınız Türk Filmleri</a>
+    <picture>
+        <source srcset="https://img.fullhdfilmizlesene.now/poster/liste/tekrar-tekrar-izlemekten-bikmayacaginiz-turk-filmleri/cover.webp 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/tekrar-tekrar-izlemekten-bikmayacaginiz-turk-filmleri/cover.webp 1.5x" type="image/webp">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-sizes="auto" data-srcset="https://img.fullhdfilmizlesene.now/poster/liste/tekrar-tekrar-izlemekten-bikmayacaginiz-turk-filmleri/cover.jpg 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/tekrar-tekrar-izlemekten-bikmayacaginiz-turk-filmleri/cover.jpg 1.5x" data-src="https://img.fullhdfilmizlesene.now/poster/liste/tekrar-tekrar-izlemekten-bikmayacaginiz-turk-filmleri/cover.jpg" width="332" height="186" alt="Tekrar Tekrar İzlemekten Bıkmayacağınız Türk Filmleri" class=" afis">
+    </picture>
+    <span class="adet">10 Film</span>
+</li>
+<li class="film iz-liste-item">
+    <h2 class="film-title">En Çok İzlenen Türk Komedi Filmleri</h2>
+    <a class="tt" href="https://www.fullhdfilmizlesene.now/filmliste/en-cok-izlenen-turk-komedi-filmleri-fh">En Çok İzlenen Türk Komedi Filmleri</a>
+    <picture>
+        <source srcset="https://img.fullhdfilmizlesene.now/poster/liste/en-cok-izlenen-turk-komedi-filmleri/cover.webp 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/en-cok-izlenen-turk-komedi-filmleri/cover.webp 1.5x" type="image/webp">
+        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%200%200'%3E%3C/svg%3E" data-sizes="auto" data-srcset="https://img.fullhdfilmizlesene.now/poster/liste/en-cok-izlenen-turk-komedi-filmleri/cover.jpg 1x, https://img.fullhdfilmizlesene.now/poster/liste-lg/en-cok-izlenen-turk-komedi-filmleri/cover.jpg 1.5x" data-src="https://img.fullhdfilmizlesene.now/poster/liste/en-cok-izlenen-turk-komedi-filmleri/cover.jpg" width="332" height="186" alt="En Çok İzlenen Türk Komedi Filmleri" class=" afis">
+    </picture>
+    <span class="adet">9 Film</span>
+</li>
+                        </ul>
+                    </section>
+                </div>
+            <section class="yorum-alan">
+                <div class="izle-head"><span>Filme Yorum Yaz</span></div>
+                <div class="izle-box yorumyaz-box">
+                    <div id="yorumsonuc" class="iz-alert alert-info"></div>
+                    <form class="yorum-form" method="post" onsubmit="return false;">
+                        <div class="yorumyaz-ust">
+                            <div class="yorumyaz-sol">
+                                <input class="txt usr" id="usr" name="ad" type="text" placeholder="Rumuz">
+                                <input class="txt mail" id="mail" name="mail" type="text" placeholder="E-Mail">
+                                <div class="sp-uyar">
+                                </div>
+                            </div>
+                            <div class="yorumyaz-sag">
+                                <textarea class="txt yrm" id="yrm" name="yorum" placeholder="Yorumunuz"></textarea>
+                            </div>
+                        </div>
+                        <div class="yorumyaz-alt">
+                            <div style="margin-right:10px; font: normal 13px arial; color: #516677; float:left; position:relative; left: -15px;display: flex; align-items: center;">
+                                <input id="spp" type="checkbox">
+                                <label for="spp" style="padding-left: 7px;">Yorum spoiler içeriyorsa işaretleyin</label>
+                            </div>
+                            <button class="gonder btn-outline yrmsubmit" onclick="gonder('https://www.fullhdfilmizlesene.now',17522,'v');">Gönder</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="izle-head">
+                    <span>Film Yorumları</span>
+                    <div class="yorum-sirala" style="float:right; margin-top:4px; position: relative;">
+                        <!--<div style="float: right; font: 500 14px roboto; margin-left:7px; margin-top:2.5px;">
+                            SIRALAMA ÖLÇÜTÜ:
+                        </div>-->
+                        <div class="yorum-sirala-btn">
+                            <svg viewBox="0 0 24 24" preserveAspectRatio="xMidYMid meet" focusable="false" class="style-scope yt-icon" style="pointer-events: none; display: block; width: 100%; height: 100%;">
+                                <g class="style-scope yt-icon">
+                                    <path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z" class="style-scope yt-icon"></path>
+                                    <path d="M0 0h24v24H0z" fill="none" class="style-scope yt-icon"></path>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="yorum-sirala-list">
+                            <ul>
+                                <li data-sort="liked">Beğenilen Yorumlar</li>
+                                <li data-sort="last">Son Yorumlar</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                                    <div id="yorumyok"><span class="hl">Arif v 216</span> filmi icin henüz yorum yok</div>
+                            </section>
+        </article>
+    </div>
+    <div class="alan">
+        <footer>
+            <div class="ft-txt ft-info">
+                <div class="ft-ic">
+                    <div class="ft-alt">
+                        <div class="ft-a2">
+                            <a href="https://www.fullhdfilmizlesene.now/"><strong>FullDFilmizlesene</strong></a> - <a href="https://www.fullhdfilmizlesene.now/iletisim">İletişim</a>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="copyright-text">
+                                            </div>
+                    <div style="clear:both; height:10px;"></div>
+                    <div class="ft-a1">© 2005-2026 FullHDFilmizlesene.now</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<script data-q="v2.wTZ02Y0I0QvibkErY8gXYlQuSdcpnbjtEDtEw4hXv0eP5sDmqxkEyQC8mb7pFVtWKrLr49x--1VPTLxEhQ1ZmbBYg5_Gv1d_L5XWowxBXXMZwL4AwVBE_8cv819aLyEftc4t0XQ9jZThwszuq2KXf7orJz8cTaNg1e5V3FPFLt3mp3-n_7POtJno1CaNAZBp1ApO6kWbc_-XNmNziNDshGypHABYh8ty8x_Or9f3dKyNSHQMmI74FFlLe4V74rlSbkG-2KuURAgs3C" src="/minx/ftjs.1793382707.js"></script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a549c691b91b2f36',t:'MTc5MzY5MjA5Ng=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a549c691b91b2f36',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

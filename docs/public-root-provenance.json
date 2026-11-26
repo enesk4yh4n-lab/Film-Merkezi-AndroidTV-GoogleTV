@@ -1,0 +1,20 @@
+[
+  {
+    "name": "isrg_root_x1",
+    "url": "https://letsencrypt.org/certs/isrgrootx1.der",
+    "bytes": 1391,
+    "subject": "C=US\nO=Internet Security Research Group\nCN=ISRG Root X1",
+    "issuer": "C=US\nO=Internet Security Research Group\nCN=ISRG Root X1",
+    "notAfter": "Jun  4 11:04:38 2035 GMT",
+    "sha256": "96bcec06264976f37460779acf28c5a7cfe8a3c0aae11a8ffcee05c0bddf08c6"
+  },
+  {
+    "name": "isrg_root_x2",
+    "url": "https://letsencrypt.org/certs/isrg-root-x2.der",
+    "bytes": 543,
+    "subject": "C=US\nO=Internet Security Research Group\nCN=ISRG Root X2",
+    "issuer": "C=US\nO=Internet Security Research Group\nCN=ISRG Root X2",
+    "notAfter": "Sep 17 16:00:00 2040 GMT",
+    "sha256": "69729b8e15a86efc177a57afb7171dfc64add28c2fca8cf1507e34453ccb1470"
+  }
+]

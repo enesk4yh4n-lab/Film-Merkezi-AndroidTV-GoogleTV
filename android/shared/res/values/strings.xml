@@ -1,0 +1,25 @@
+<resources>
+    <string name="player_refreshing">%1$s bağlantısı yenileniyor…</string>
+    <string name="app_name">Film Merkezi — Deneme</string>
+    <string name="search">Ara</string>
+    <string name="fixture_notice">0. aşama • Yerel fixture deneyi</string>
+    <string name="query_hint">Film adı</string>
+    <string name="play">Oynat</string>
+    <string name="back">Geri</string>
+    <string name="choose_source">Kaynak seç</string>
+    <string name="cancel">İptal</string>
+    <string name="loading">Hazırlanıyor…</string>
+    <string name="stop">Durdur</string>
+    <string name="live_mode">Canlı siteyi dene</string>
+    <string name="fixture_mode">Yerel fixture moduna dön</string>
+    <string name="live_notice">0. aşama • Canlı Filmci Baba deneyi</string>
+    <string name="player_preparing">%1$s hazırlanıyor…</string>
+    <string name="player_source">Kaynak: %1$s</string>
+    <string name="player_retrying">Bağlantı yeniden kuruluyor: %1$s</string>
+    <string name="player_switching">Diğer kaynağa geçiliyor: %1$s</string>
+    <string name="player_source_failed">Kaynak açılamadı. Geri dönüp yeniden deneyebilirsiniz.</string>
+    <string name="player_no_picture">Görüntü başlatılamadı. Başka bir kaynak deneyin.</string>
+    <string name="player_stalled">Yayın ilerlemiyor. Başka bir kaynak deneyin.</string>
+    <string name="player_audio_unsupported">Bu kaynağın ses biçimi cihazda desteklenmiyor. Başka bir kaynak deneyin.</string>
+    <string name="player_video_unsupported">Bu kaynağın video biçimi veya kalitesi bu cihaz profiline uygun değil. Başka bir kaynak deneyin.</string>
+</resources>

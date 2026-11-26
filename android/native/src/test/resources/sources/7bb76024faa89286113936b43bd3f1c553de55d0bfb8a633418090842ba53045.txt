@@ -1,0 +1,7 @@
+#EXTM3U
+#EXT-X-VERSION:3
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="group_closedual",NAME="Turkish",DEFAULT=YES,URI="sublist_aud1.txt"
+#EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="group_closedual",NAME="Original Audio",DEFAULT=NO,URI="sublist_aud2.txt"
+#EXT-X-STREAM-INF:BANDWIDTH=2530620,RESOLUTION=1920x1080,CODECS="avc1.640028,mp4a.40.2",AUDIO="group_closedual"
+sublist_2.txt
+

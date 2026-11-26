@@ -1,0 +1,49 @@
+
+<html lang="tr-TR"><head>
+<title>No Title</title>
+<meta name="description" content="No Desc">
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, follow">
+<style>
+body{
+	margin:0;
+	overflow:hidden;
+	width:100vw;
+	height:100vh;
+	background:#000;
+}
+iframe{
+	border:0;
+	overflow: hidden;
+	width:100vw;
+	height:100vh
+}
+a{text-decoration:none;}
+a:visited, a:link, a:active{color:#888888;}
+.div{
+	width:100vw;
+	height:100vh;
+	float:left;
+	background:#000;
+	box-sizing:border-box;
+	display:block;
+}
+.div span{
+	display: table-cell;
+	text-align:center;
+	vertical-align: middle;
+	font-family:Tahoma;
+	font-size:12px;
+	line-height:20px;
+	height:100vh;
+	width:100vw;
+}
+.div img{
+	display:block;
+	margin:40px auto;
+}
+</style>
+</head>
+<body>
+<a class="div" href="https://www.youtube.com/watch?v=5SAwvBpQuIw" target="_blank" rel="nofollow"><span><img src="play-icon.png">Diziyi izlemek için tıklayın</span></a>
+</body></html>
