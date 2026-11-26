@@ -12,6 +12,6 @@ Kararlar: public kaynak, kalıcı APK anahtarı; otomatik kontrol ve kullanıcı
 - [x] Native SDK/yardımcı süreç, pilot ve 16 site geçişi.
 - [x] Eski imzadan kalıcı imzaya veri aktarımı.
 - [x] Hedefli testler ve imzalı APK; 32 paket yayımlandı.
-- [ ] Son APK/kararlı feed yayını ve uzak indirme doğrulaması.
+- [x] Son APK/kararlı feed yayını ve uzak indirme doğrulaması; açılış kontrolü 0.12.1/37 düzeltmesiyle tamamlandı.
 
 Kaynak veya test kapsamı tamamlanmadan kararlı güncelleme bildirimi yayımlanmaz. Test edilmemiş sonuç başarılı olarak kaydedilmez. Gerçek ARM TV kabulü ayrıca gerekir.

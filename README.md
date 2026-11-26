@@ -2,6 +2,8 @@
 
 Native Kotlin / Leanback TV UI and a single Media3/ExoPlayer. Film Merkezi Klasik keeps the original logo, Turkish interface, DPAD controls, shared content identity, series tracking, library and playback preferences.
 
+Current release: **0.12.1 / 37**, including the immediate startup update check. [APK and targeted validation](docs/modular-0121-report.md).
+
 ## Modular distribution
 
 - APK: native UI, settings, storage, identity, network and Media3.

@@ -1303,7 +1303,9 @@ class TvActivity:FragmentActivity() {
         super.onWindowFocusChanged(hasFocus)
         if(hasFocus)window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
     }
-    override fun onResume(){super.onResume();foreground=true;if(android.os.Build.VERSION.SDK_INT<=23)playback.resumePlayback()}
+    override fun onResume(){super.onResume();foreground=true;if(android.os.Build.VERSION.SDK_INT<=23)playback.resumePlayback()
+        if(dataFactoryForTests==null)app.filmmerkezi.tv.updates.DistributionManager.get(this).foreground(playback.active)
+    }
     override fun onPause(){if(android.os.Build.VERSION.SDK_INT<=23){foreground=false;saveProgress();playback.suspendPlayback()};super.onPause()}
     override fun onStop(){foreground=false;if(!finishBusy&&(pendingCheckpoint!=null||entryBusy))cancelEntry(false);cancelSources();nextEpisodeJob?.cancel();playerControls?.close();cancelWork();saveProgress();if(android.os.Build.VERSION.SDK_INT>=24)playback.suspendPlayback();super.onStop()}
     override fun onTrimMemory(level:Int){

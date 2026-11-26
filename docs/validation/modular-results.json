@@ -112,5 +112,34 @@
     "Before": "4855",
     "After": "4970",
     "Restarted": true
-  }
+  },
+  "patchRelease": {
+    "schemaVersion": 1,
+    "packageName": "app.filmmerkezi.tv",
+    "versionCode": 37,
+    "versionName": "0.12.1",
+    "minSdk": 23,
+    "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.12.1/Film-Merkezi-Android-TV-0.12.1.apk",
+    "size": 5302593,
+    "sha256": "6f138d923906fed16d82257938b4960fa73007e506108eb8b2ce40725d79da0b",
+    "certificateSha256": "73753d46c206a8f651067541b12f5e038a5d207cca4bee21f8f984a27ed197ed",
+    "notes": "Film Merkezi 0.12.1 / 37 — açılış güncelleme kontrolü düzeltmesi.\n\nUygulama öne geldiğinde güncelleme kontrolü hemen başlar; ilk açılıştaki bir dakikalık bekleme kaldırıldı. Otuz dakikalık kontrol aralığı ve oynatma sırasında bekleme korunur. İndirme ve uygulama kullanıcı seçimiyle yapılır.\n\n0.12.0 ile aynı kalıcı APK anahtarı kullanılır; kayıtlar ve eklentiler üzerine kurulumda korunur. 16 site / 32 imzalı eklenti paketiyle uyumludur.\n\nEski deneme imzasından ilk geçiş için 0.11.5 aktarım APK'sı ve uygulama dışında doğrulanmış yedek gerekir. Önceki sürümler yayımlandığı içerikle korunur."
+  },
+  "patchValidation": {
+    "startupCheck": "PASS",
+    "packagesRetained": "PASS",
+    "dataRetention": {
+      "libraryExact": true,
+      "seriesExact": true,
+      "overridesExact": true,
+      "identityRowsPreserved": true,
+      "catalogueObservationTimestampMayRefresh": true
+    },
+    "build": "PASS",
+    "lint": "PASS",
+    "playerRetested": false
+  },
+  "nativeRemoteFeedVerified": true,
+  "realLegacyUpdateBadge": true,
+  "uncooperativeNativeDeadlineTest": "PASS"
 }
