@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "packageName": "app.filmmerkezi.tv",
+  "versionCode": 36,
+  "versionName": "0.12.0",
+  "minSdk": 23,
+  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.12.0/Film-Merkezi-Android-TV-0.12.0.apk",
+  "size": 5302593,
+  "sha256": "bf1cb1f93e9178828ee2e3c4bbf1bca39b8d3946e0abb807a8507cf288922af8",
+  "certificateSha256": "73753d46c206a8f651067541b12f5e038a5d207cca4bee21f8f984a27ed197ed",
+  "notes": "Film Merkezi 0.12.0: native çekirdek ve ayrı imzalı site/çözümleyici paketleri.\n\nGüncelleme Merkezi, GitHub depo keşfi, kullanıcı tarafından yayıncı güveni, bağımlılık denetimi, paket geri dönüşü ve kayıt aktarımı eklendi. 16 site için 32 paket ayrı eklenti deposundadır. Hiçbir depo önceden seçilmez.\n\nKontroller otomatik; indirme ve uygulama kullanıcı seçimiyledir. Klasik arayüz, logo, kayıtlar ve tek Media3 korunur. Yalnız site/çözümleyici güncellemeleri APK değiştirmeden yapılabilir; native özellikler APK güncellemesi gerektirir.\n\nEski deneme imzalı kurulumlarda önce 0.11.5 aktarım APK'sını kurup yedeği uygulama dışına kaydedin. Yedeği doğrulamadan eski uygulamayı kaldırmayın. Kalıcı imzaya ilk geçiş farklı sertifika nedeniyle normal üzerine kurulum değildir. Ayrıntılar: docs/android-signing-migration.md.\n\nEmülatör doğrulamaları yapılmıştır; gerçek ARM TV kabulü henüz yapılmadı. Eklenti yayıncıları güvenilir olmalıdır; yardımcı süreç kötü niyetli kod için güvenlik sandbox'ı değildir."
+}
