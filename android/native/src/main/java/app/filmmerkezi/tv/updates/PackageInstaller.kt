@@ -61,7 +61,7 @@ class PackageInstaller(private val manager:DistributionManager) {
             staged.put(c.identity,JSONObject().put("repo",c.repo.getString("key")).put("manifest",c.raw.toString(Charsets.UTF_8)).put("signature",c.signature).put("artifact",m.hash).put("enabled",true))
         }
         PackageSets.validate(state,staged,manager.installedCode,Build.VERSION.SDK_INT)
-        manager.store.commit{current->require(current.getJSONObject("packages").toString()==state.getJSONObject("packages").toString()){ "Kurulum sirasinda paket seti degisti; tekrar deneyin" };current.put("pending",staged)}
+        manager.store.commit{current->require(current.getJSONObject("packages").toString()==state.getJSONObject("packages").toString()){ "Kurulum sirasinda paket seti degisti; tekrar deneyin" };require(current.optJSONObject("pending")?.toString()==state.optJSONObject("pending")?.toString()){ "Hazir paket seti degisti; tekrar deneyin" };PackageSets.validate(current,staged,manager.installedCode,Build.VERSION.SDK_INT);current.put("pending",staged)}
     }
     fun validateJar(file:File){
         ZipFile(file).use{zip->val entries=zip.entries().asSequence().toList();require(entries.size in 1..64&&entries.any{it.name=="classes.dex"}){"Geçerli Kotlin/DEX paketi değil"}

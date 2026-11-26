@@ -23,7 +23,7 @@ class PublicationPlaybackTest {
         val keys=KeyStore.getInstance(KeyStore.getDefaultType()).apply{load(null);setCertificateEntry("fixture",cert)}
         val tm=TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm()).apply{init(keys)}.trustManagers.filterIsInstance<X509TrustManager>().single()
         val ssl=SSLContext.getInstance("TLS").apply{init(null,arrayOf(tm),null)}
-        val requests=java.util.Collections.synchronizedList(mutableListOf<JSONObject>())
+        val requests=java.util.concurrent.CopyOnWriteArrayList<JSONObject>()
         val http=OkHttpClient.Builder().sslSocketFactory(ssl.socketFactory,tm).hostnameVerifier{host,_->host=="10.0.2.2"}.addNetworkInterceptor{chain->val r=chain.request();requests.add(JSONObject().put("url",r.url.toString()).put("cookie",r.header("Cookie")).put("referer",r.header("Referer")).put("ua",r.header("User-Agent")));chain.proceed(r)}.build()
         val activity=ins.startActivitySync(Intent(context,NativeMainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))as NativeMainActivity
         val source=Contracts.source(ResolvedSource("publication-local","Local HTTPS fixture","https://10.0.2.2:8767/master.m3u8",StreamType.HLS,referer="https://fixture.example.test/",userAgent="FM-Publication",sessionCookies=listOf(SessionCookie("fm","fixture","10.0.2.2","/",System.currentTimeMillis()+600000,true,true,true))))

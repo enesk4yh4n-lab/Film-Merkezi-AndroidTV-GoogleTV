@@ -181,6 +181,10 @@ class TvActivity:FragmentActivity() {
         return scope.launch{try{block(token);if(active(token)&&data.storageWarning)status.setText(R.string.tv_storage_damaged)}
             catch(e:CancellationException){throw e}catch(e:Exception){if(active(token)){if((e as? DataFailure)?.stage=="adult-filter"){
                 status.setText(R.string.settings_filtered);grid?.show(listOf(statusTile(R.string.settings_filtered,"settings")))
+            }else if((e as? DataFailure)?.stage=="plugin"){
+                status.text=e.message
+                if(grid!=null)grid?.show(listOf(TvTile("status:updates",e.message.orEmpty(),action="updates")))
+                else{body.addView(text(e.message.orEmpty()));body.addView(button(getString(R.string.updates_title)){DistributionPanel(this@TvActivity,scope,{playback.active}).open()})}
             }else showError()}}}.also{work.add(it)}
     }
     internal suspend fun quiesceForDistribution(){
@@ -1053,6 +1057,7 @@ class TvActivity:FragmentActivity() {
         tile.item?.let{focuses[current.screen]=(focuses[current.screen]?.first?:0L) to tile.key;open(it);return}
         when{
             tile.action=="settings"->showSettings()
+            tile.action=="updates"->DistributionPanel(this,scope,{playback.active}).open()
             tile.action=="movies"->navigate(TvNav(TvScreen.MOVIES))
             tile.action=="series"->navigate(TvNav(TvScreen.SERIES))
             tile.action=="library"->navigate(TvNav(TvScreen.LIBRARY))

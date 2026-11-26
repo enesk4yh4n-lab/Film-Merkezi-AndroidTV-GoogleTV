@@ -11,7 +11,7 @@ android {
         versionName = if(providers.gradleProperty("migrationBuild").orNull=="true") "0.11.5" else "0.12.0"
         buildConfigField("boolean","MIGRATION",(providers.gradleProperty("migrationBuild").orNull=="true").toString())
         ndk { abiFilters += listOf("armeabi-v7a","arm64-v8a","x86_64") }
-        testInstrumentationRunner = if(providers.gradleProperty("frameworkProbe").orNull=="true") "app.filmmerkezi.tv.probe.PreservationProbe" else "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = if(providers.gradleProperty("distributionProbe").orNull=="true") "app.filmmerkezi.tv.updates.DistributionProbeRunner" else if(providers.gradleProperty("frameworkProbe").orNull=="true") "app.filmmerkezi.tv.probe.PreservationProbe" else "androidx.test.runner.AndroidJUnitRunner"
     }
     sourceSets.getByName("main").java.srcDir("../shared/src")
     buildFeatures { buildConfig=true }

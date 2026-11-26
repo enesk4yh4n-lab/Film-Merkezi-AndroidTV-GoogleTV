@@ -95,7 +95,7 @@ class CatalogRepository(private val network:WebTransport,private val works:WorkS
         return provider(site.id).collections()
 
     }
-    fun provider(id:String)=providers[id]?:throw DataFailure(FailureKind.PARSE,"Bilinmeyen site")
+    fun provider(id:String)=providers[id]?:throw DataFailure(FailureKind.UNSUPPORTED,"Site eklentisi kurulu değil: $id","plugin")
     suspend fun detail(card:Card):Detail {
         val d=provider(card.ref.siteId).detail(card);val group=works?.item(d.card)
         val normalized=group?.alternatives?.firstOrNull{it.ref.pageUrl==d.card.ref.pageUrl}?:d.card

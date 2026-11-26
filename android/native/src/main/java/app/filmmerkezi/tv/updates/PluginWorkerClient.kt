@@ -25,7 +25,7 @@ class PluginWorkerClient(private val context:Context,private val manager:Distrib
         withContext(Dispatchers.Main){check(context.bindService(Intent(context,PluginWorkerService::class.java),conn,Context.BIND_AUTO_CREATE)){"Eklenti süreci başlatılamadı"}}
         val b=withTimeout(10000){ready.await()};withContext(Dispatchers.IO){val data=Parcel.obtain();val reply=Parcel.obtain();try{data.writeInterfaceToken(PluginWorkerService.TOKEN);b.transact(PluginWorkerService.PID,data,reply,0);reply.readException();pid=reply.readInt()}finally{data.recycle();reply.recycle()}};b
     }
-    suspend fun call(siteId:String,type:String,operation:String,payload:JSONObject):JSONObject {
+    suspend fun verifyBoot(){
         health.withLock{
             if(manager.store.snapshot().optBoolean("bootPending")){
                 try{val all=manager.store.snapshot().getJSONObject("packages");for(key in all.keys()){
@@ -35,6 +35,9 @@ class PluginWorkerClient(private val context:Context,private val manager:Distrib
                 catch(e:Exception){PackageInstaller(manager).recover();stop();ModuleRuntime.register(manager.store.snapshot());throw DataFailure(FailureKind.PARSE,"Eklenti seti başlatılamadı; önceki sete dönüldü. Uygulamayı yeniden açın.","plugin",cause=e)}
             }
         }
+    }
+    suspend fun call(siteId:String,type:String,operation:String,payload:JSONObject):JSONObject {
+        verifyBoot()
         val all=manager.store.snapshot().getJSONObject("packages");val sites=all.keys().asSequence().filter{key->val m=UpdateProtocol.module(all.getJSONObject(key).getString("manifest").toByteArray());m.type=="site"&&m.site!!.getString("id")==siteId}.toList()
         val owner=sites.singleOrNull()?:throw DataFailure(FailureKind.UNSUPPORTED,"Bu site için eklenti kurun: $siteId","plugin")
         val identity=if(type=="site")owner else{
@@ -93,6 +96,7 @@ object ModuleRuntime {
             runBlocking(Dispatchers.IO){manager.store.commit{it.put("runtimeError",e.message?:"Eklenti seti doğrulanamadı")}}
         }
         client=PluginWorkerClient(context.applicationContext,manager);PluginGateway.remote={site,type,operation,payload->client!!.call(site,type,operation,payload)};prepared=true
+        CoroutineScope(SupervisorJob()+Dispatchers.IO).launch{runCatching{client!!.verifyBoot()}}
     }
     fun register(state:JSONObject){
         val modules=PackageSets.validate(state,state.getJSONObject("packages"),app.filmmerkezi.tv.BuildConfig.VERSION_CODE,Build.VERSION.SDK_INT)

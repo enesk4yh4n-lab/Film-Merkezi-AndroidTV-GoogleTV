@@ -16,12 +16,12 @@ object PluginGateway {
             val job=currentCoroutineContext()[Job]
             val host=object:PluginHost {
                 override fun cancelled()=job?.isActive==false
-                override fun request(payload:String):String=runBlocking{
+                override fun request(payload:String):String=runBlocking(job?:kotlin.coroutines.EmptyCoroutineContext){
                     val o=JSONObject(payload);fun map(k:String)=o.optJSONObject(k)?.let{x->x.keys().asSequence().associateWith{x.getString(it)}}?:emptyMap()
                     val r=network.request(WebRequest(o.getString("url"),o.optString("referer"),o.optString("method","GET"),map("fields"),if(o.isNull("body"))null else o.optString("body"),map("headers"),o.optLong("timeoutMs",12000),o.optInt("byteLimit",2097152)))
                     JSONObject().put("url",r.url).put("body",r.body).put("code",r.code).put("headers",JSONObject(r.headers)).toString()
                 }
-                override fun resolver(dependencyId:String,operation:String,payload:String):String=runBlocking{
+                override fun resolver(dependencyId:String,operation:String,payload:String):String=runBlocking(job?:kotlin.coroutines.EmptyCoroutineContext){
                     require(dependencyId=="youtube"&&youtube!=null);val o=JSONObject(payload);Contracts.source(youtube.resolve(PluginWire.option(o.getJSONObject("option")),o.getString("url"))).toString()
                 }
                 override fun storage(operation:String,key:String,value:String)=error("Fixture storage is not available")
