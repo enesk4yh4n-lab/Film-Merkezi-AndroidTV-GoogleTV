@@ -27,6 +27,8 @@ Son 0.12.1 APK da Release'ten indirilip yerel imzalı dosyayla hash karşılaşt
 
 Oynatıcı ve tüm site matrisi tekrar çalıştırılmadı. 0.12.0'ın [303 geçen / 1 fixture atlanan CI sonucu](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/actions/runs/45863735307), DEX/aktarım/oynatım ölçümleri ana rapordadır. Gerçek ARM TV kontrolü cihaz bulunduğunda yapılmalıdır. 10,7 saniyelik önceki soğuk ilk görüntü ölçümü hızlı açılış hedefi karşılandı şeklinde sunulmaz.
 
+**Son 0.12.1 CI da başarılı:** [45864964913](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/actions/runs/45864964913). Lint, JVM sözleşme/fixture kontrolleri ve imzasız APK üretimi tamamlandı. CI'nın otomatik testleri dışında yerel tüm site/uzun oynatma matrisi yeniden çalıştırılmadı.
+
 ## Kullanıcının yapacakları
 
 Eski deneme anahtarlı kurulumda önce 0.11.5 ile yedeği uygulama dışına kaydedin ve doğrulayın. Kalıcı imzaya geçişi talimata göre tamamlayın; yedeksiz kaldırmayın. 0.12.0 zaten kuruluysa 0.12.1 aynı sertifikayla doğrudan üzerine kurulabilir. Yeni kurulumda eklenti deposu kullanıcı tarafından eklenir.

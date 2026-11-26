@@ -141,7 +141,14 @@
     "nativeApkDownloadSameSigner": "PASS",
     "legacySignerGuard": "PASS",
     "githubReleaseDownloadedAndHashMatched": true,
-    "signedFeedPublished": true
+    "signedFeedPublished": true,
+    "ci": {
+      "run": 45864964913,
+      "conclusion": "success",
+      "lint": true,
+      "jvm": true,
+      "unsignedApk": true
+    }
   },
   "nativeRemoteFeedVerified": true,
   "realLegacyUpdateBadge": true,
