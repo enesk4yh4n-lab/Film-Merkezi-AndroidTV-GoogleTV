@@ -32,6 +32,7 @@ class PluginWorkerClient(private val context:Context,private val manager:Distrib
                     val m=UpdateProtocol.module(all.getJSONObject(key).getString("manifest").toByteArray());val spec=m.site?:Sites.known.firstOrNull()?.let(PluginWire::site)?:JSONObject().put("id","probe").put("name","Probe").put("base","https://example.com")
                     request(key,"describe",JSONObject().put("site",spec),10000)
                 };PackageInstaller(manager).accept()}
+                catch(e:CancellationException){throw e}
                 catch(e:Exception){PackageInstaller(manager).recover();stop();ModuleRuntime.register(manager.store.snapshot());throw DataFailure(FailureKind.PARSE,"Eklenti seti başlatılamadı; önceki sete dönüldü. Uygulamayı yeniden açın.","plugin",cause=e)}
             }
         }

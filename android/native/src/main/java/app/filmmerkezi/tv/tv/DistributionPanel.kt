@@ -115,7 +115,7 @@ internal class DistributionPanel(private val activity:Activity,private val scope
         if(page>1)add(ClassicAction("previous","‹"){launchWork{results(query,user,page-1)}})
         if(rows.size==10&&page<10)add(ClassicAction("next","›"){launchWork{results(query,user,page+1)}})
     }){key->launchWork{trust(manager.probe(manager.address(rows.single{it.fullName==key})))}}}
-    internal fun restart(){scope.launch{
+    internal fun restart(){launchWork{
         (activity as? TvActivity)?.quiesceForDistribution()
         ModuleRuntime.stop()
         activity.startActivity(Intent(activity,RestartActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))

@@ -2,6 +2,8 @@ package app.filmmerkezi.tv.core
 
 import app.filmmerkezi.tv.pluginapi.*
 import kotlinx.coroutines.*
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.json.*
 
 /** Production uses a process boundary. JVM fixtures can load the source runtime on their classpath. */
@@ -34,7 +36,11 @@ object PluginGateway {
 class NativeSiteProvider(private val template:SiteSpec,private val network:WebTransport,private val parsing:CoroutineDispatcher):SiteProvider {
     override val site get()=Sites.current(template)
     private var standalone:Plugin?=null
-    private suspend fun invoke(op:String,o:JSONObject=JSONObject())=PluginGateway.call(site,"site",op,o,network,local={standalone?:PluginGateway.standalone().also{standalone=it}})
+    private val standaloneLock=Mutex()
+    private suspend fun invoke(op:String,o:JSONObject=JSONObject()):JSONObject {
+        suspend fun call()=PluginGateway.call(site,"site",op,o,network,local={standalone?:PluginGateway.standalone().also{standalone=it}})
+        return if(PluginGateway.remote!=null)call()else standaloneLock.withLock{call()}
+    }
     override suspend fun search(query:String,next:PageCursor?)=PluginWire.page(invoke("search",JSONObject().put("query",query).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL)))
     override suspend fun browse(kind:ContentKind,next:PageCursor?)=PluginWire.page(invoke("browse",JSONObject().put("kind",kind.name).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL)))
     override suspend fun detail(card:Card)=PluginWire.detail(invoke("detail",JSONObject().put("card",Contracts.card(card))))
@@ -62,6 +68,5 @@ class NativeSiteProvider(private val template:SiteSpec,private val network:WebTr
 }
 
 class SourceResolver(private val network:WebTransport,private val youtube:YoutubeResolver=NewPipeYoutube(network)) {
-    private val standalone by lazy{PluginGateway.standalone()}
-    suspend fun resolve(option:SourceOption)=PluginWire.source(PluginGateway.call(Sites.get(option.content.siteId),"resolver","resolve",JSONObject().put("option",Contracts.option(option)),network,youtube){standalone})
+    suspend fun resolve(option:SourceOption)=PluginWire.source(PluginGateway.call(Sites.get(option.content.siteId),"resolver","resolve",JSONObject().put("option",Contracts.option(option)),network,youtube){PluginGateway.standalone()})
 }
