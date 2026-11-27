@@ -27,8 +27,14 @@ class PluginWorkerService:Service() {
     private val cookies=ConcurrentHashMap<String,MutableList<okhttp3.Cookie>>()
     private val httpSlots=kotlinx.coroutines.sync.Semaphore(2)
     companion object {const val TOKEN="app.filmmerkezi.tv.plugins.v1";const val CALL=1;const val CANCEL=2;const val PID=3;const val TRIM=4}
-    override fun onCreate(){super.onCreate();store=DistributionStore(this);network=ProviderNetwork(this);installSites(store.snapshot())}
-    private fun installSites(state:JSONObject){val packages=state.getJSONObject("packages");Sites.installed(packages.keys().asSequence().map{packages.getJSONObject(it)}.filter{it.optBoolean("enabled",true)}.map{UpdateProtocol.module(it.getString("manifest").toByteArray())}.filter{it.type=="site"}.map{PluginWire.site(it.site!!)}.toList())}
+    override fun onCreate(){
+        super.onCreate()
+        // AndroidX Startup providers run in the main process. The worker also needs
+        // its own application context before OkHttp parses Domain= cookies/PSL data.
+        okhttp3.OkHttp.initialize(applicationContext)
+        store=DistributionStore(this);network=ProviderNetwork(this);installSites(store.snapshot())
+    }
+    private fun installSites(state:JSONObject){val packages=state.getJSONObject("packages");Sites.installed(PackageSets.orderedSites(packages.keys().asSequence().map{packages.getJSONObject(it)}.filter{it.optBoolean("enabled",true)}.map{UpdateProtocol.module(it.getString("manifest").toByteArray())}.toList()))}
     private val binder=object:Binder(){
         override fun onTransact(code:Int,data:Parcel,reply:Parcel?,flags:Int):Boolean {
             data.enforceInterface(TOKEN)

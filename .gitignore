@@ -33,3 +33,4 @@ android/youtubeProbe/
 *.ndjson
 *.iml
 distribution/private/
+android/native/src/androidTest/assets/pilot-test/

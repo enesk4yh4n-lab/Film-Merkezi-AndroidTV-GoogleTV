@@ -21,6 +21,8 @@ class DistributionProbeRunner:Instrumentation() {
                 "download"->DistributionSmokeTest().githubRepositoryDownloadsAndStagesSignedDependencySet()
                 "ui"->DistributionSmokeTest().emptyHomeOpensClassicNativeUpdatePanelAndBackReturnsFocus()
                 "playback"->PublicationPlaybackTest().signedModulesAndMedia3PreserveCookieHeadersAndProgress()
+                "pilot"->PilotWorkerTest().signaturesDependenciesAndFourCatalogsLoadInRealWorker()
+                "pilot-playback"->PilotWorkerTest().fourLiveSourcesRenderAndAdvanceTwentySeconds()
                 "stage"->kotlinx.coroutines.runBlocking{
                     val manager=DistributionManager.get(targetContext);val probe=manager.probe("https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler");manager.trust(probe)
                     val installer=PackageInstaller(manager);val plan=installer.plan(probe.fingerprint+"/"+probe.index.id,"site-filmcibaba");installer.install(plan)

@@ -5,6 +5,10 @@ import org.json.JSONObject
 
 /** Validates the whole next set before switching any active package. */
 object PackageSets {
+    /** Provider codes define default order, independently of dependency/install order. */
+    fun orderedSites(modules:Collection<UpdateProtocol.Module>) = modules.filter{it.type=="site"}
+        .sortedWith(compareBy<UpdateProtocol.Module>{Regex("^p(\\d{3})$").matchEntire(it.id)?.groupValues?.get(1)?.toIntOrNull()?:Int.MAX_VALUE}.thenBy{it.id})
+        .map{app.filmmerkezi.tv.core.PluginWire.site(it.site!!)}
     fun validate(state:JSONObject, set:JSONObject, appCode:Int, api:Int):Map<String,UpdateProtocol.Module> {
         require(set.length()<=64){"64 kurulu paket sınırı"}
         val modules=set.keys().asSequence().associateWith { key ->

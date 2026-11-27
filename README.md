@@ -2,13 +2,13 @@
 
 Native Kotlin / Leanback TV UI and a single Media3/ExoPlayer. Film Merkezi Klasik keeps the original logo, Turkish interface, DPAD controls, shared content identity, series tracking, library and playback preferences.
 
-Current release: **0.12.1 / 37**, including the immediate startup update check. [APK and targeted validation](docs/modular-0121-report.md).
+Current release: **0.12.2 / 38**, including the plugin-process HTTP initialization fix and P002–P005 default order. [APK, pilot packages and targeted validation](docs/pilot-p002-p005-report.md).
 
 ## Modular distribution
 
 - APK: native UI, settings, storage, identity, network and Media3.
 - Separate signed Kotlin/DEX packages: site catalogues and source resolvers.
-- [Android extension repository](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler): all published addons were withdrawn on 27 November 2026 pending review. The signed index currently offers 0 packages; development sources are retained.
+- [Android extension repository](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler): controlled P002/R002 PuhuTV, P003/R003 NOW, P004/R004 Filmci Baba and P005/R005 Star TV pilot. Other withdrawn addons remain unpublished. These eight packages require app versionCode 38.
 - [SDK, signatures, dependencies and publisher guide](docs/android-plugin-sdk.md).
 - [Signing migration and data transfer](docs/android-signing-migration.md).
 - [Delivery and actual validation](docs/modular-0120-report.md).

@@ -104,7 +104,7 @@ object ModuleRuntime {
     }
     fun register(state:JSONObject){
         val modules=PackageSets.validate(state,state.getJSONObject("packages"),app.filmmerkezi.tv.BuildConfig.VERSION_CODE,Build.VERSION.SDK_INT)
-        Sites.installed(modules.values.filter{it.type=="site"}.map{PluginWire.site(it.site!!)});
+        Sites.installed(PackageSets.orderedSites(modules.values));
         state.optJSONArray("knownSites")?.let{a->Sites.remember((0 until a.length()).map{PluginWire.site(a.getJSONObject(it))})}
     }
     fun stop(){client?.stop()}

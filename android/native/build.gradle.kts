@@ -7,8 +7,8 @@ android {
         applicationId = "app.filmmerkezi.tv"
         minSdk = 23
         targetSdk = 36
-        versionCode = if(providers.gradleProperty("migrationBuild").orNull=="true")35 else 37
-        versionName = if(providers.gradleProperty("migrationBuild").orNull=="true") "0.11.5" else "0.12.1"
+        versionCode = if(providers.gradleProperty("migrationBuild").orNull=="true")35 else 38
+        versionName = if(providers.gradleProperty("migrationBuild").orNull=="true") "0.11.5" else "0.12.2"
         buildConfigField("boolean","MIGRATION",(providers.gradleProperty("migrationBuild").orNull=="true").toString())
         ndk { abiFilters += listOf("armeabi-v7a","arm64-v8a","x86_64") }
         testInstrumentationRunner = if(providers.gradleProperty("distributionProbe").orNull=="true") "app.filmmerkezi.tv.updates.DistributionProbeRunner" else if(providers.gradleProperty("frameworkProbe").orNull=="true") "app.filmmerkezi.tv.probe.PreservationProbe" else "androidx.test.runner.AndroidJUnitRunner"
