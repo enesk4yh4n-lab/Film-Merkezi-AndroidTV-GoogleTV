@@ -27,7 +27,7 @@ jobs:
       - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
         with:
           repository: enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler
-          ref: builtin-v1.0.0
+          ref: 11772a4bc64baaa6ccefc2032822f78661f77c49 # source-only checkout; published addons withdrawn
           persist-credentials: false
           path: addons
       - uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0

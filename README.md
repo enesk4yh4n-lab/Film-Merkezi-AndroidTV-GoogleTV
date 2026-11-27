@@ -8,7 +8,7 @@ Current release: **0.12.1 / 37**, including the immediate startup update check. 
 
 - APK: native UI, settings, storage, identity, network and Media3.
 - Separate signed Kotlin/DEX packages: site catalogues and source resolvers.
-- [Android extension repository](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler): 16 site adapters / 32 site and resolver packages.
+- [Android extension repository](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler): all published addons were withdrawn on 27 November 2026 pending review. The signed index currently offers 0 packages; development sources are retained.
 - [SDK, signatures, dependencies and publisher guide](docs/android-plugin-sdk.md).
 - [Signing migration and data transfer](docs/android-signing-migration.md).
 - [Delivery and actual validation](docs/modular-0120-report.md).
