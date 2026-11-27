@@ -69,3 +69,9 @@ Yerel `reports/` dizininde paketleme, derleme, birim test ve Android ham çıkt�
 - D8, kullanılan Kotlin 2.4 metadata sürümünü yeniden yazarken desteklediği metadata sınırı hakkında uyarı verdi. DEX üretimi sıfır çıkış koduyla tamamlandı ve gerçek Android işçi testleri geçti; bu uyarı diğer Android/ARM cihazları için doğrulama yerine geçmez.
 - Eski `site-filmcibaba` paketi hâlâ cihazda kuruluysa P004 ile aynı site kimliğini taşır. Güncelleme Merkezi'nde eski site paketini kaldırıp P004'ü kurmak gerekir; aynı siteyi iki paketle etkinleştirme koruması kaldırılmadı. Bu işlem uygulamayı veya Listem/Geçmiş veritabanını silmeyi gerektirmez.
 - Güncelleme Merkezi'nin daha kapsamlı menü düzenlemeleri bu teslimin kapsamına eklenmedi.
+
+## Yayın doğrulaması
+
+- [0.12.2 imzalı APK](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.12.2/Film-Merkezi-Android-TV-0.12.2.apk) yayımlandı; uygulamanın imzalı güncelleme bildirimi versionCode 38'i sunar. Android'de gerçek uzaktan bildirim kontrolü `PASS: check-feed` verdi.
+- Eklenti deposunun imzalı indeksi revision 35'tir ve yalnız P002/R002–P005/R005 içerir. İnternetten sekiz manifest, imza, DEX ve APK yeniden indirilerek hash/imzaları doğrulandı: `node tools/verify-pilot-publication.cjs` → `verified: true`.
+- [GitHub Actions son doğrulaması](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/actions/runs/45960777696) **başarılı**: SDK/paketleme kontrolleri, lint, JVM fixture'ları ve imzasız debug APK. İlk CI çalışmasında bulunan farklı eklenti checkout yolu hatası, aracın `FM_ADDONS_DIR` değişkenini kullanmasıyla düzeltildi. Yerelde tüm eski test matrisi tekrar çalıştırılmadı; son CI mevcut standart kontrol akışını çalıştırdı.
