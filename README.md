@@ -14,7 +14,7 @@ Mevcut eklenti denemesi **P002/R002, P003/R003, P004/R004 ve P005/R005** kodlar?
 
 Katalog ve kaynaklar kurulu eklentiler taraf?ndan sa?lan?r. Site ad?, adresi ve varsay?lan s?ras? eklenti metadatas?ndan al?n?r. Yaln?z kurulu ve etkin sa?lay?c?lar site se?iminde yer almal?d?r. Kald?r?lm?? sa?lay?c?lara ait ge?mi?/Listem kay?tlar? silinmez.
 
-Yay?mlanm?? 0.12.2 s?r?m?nde eski site bilgilerinin ayarlarda g?r?nmesiyle ilgili d?zeltme yerelde haz?rlan?yor. Bu README de?i?ikli?i yeni bir APK yay?mland??? anlam?na gelmez.
+Yay?mlanm?? 0.12.2 s?r?m?nde eski site bilgilerinin ayarlarda g?r?nmesiyle ilgili d?zeltme yerelde haz?rland?; yeni APK hen?z yay?mlanmad?. Bu README de?i?ikli?i yeni bir APK yay?mland??? anlam?na gelmez.
 
 ## GitHub ve yay?n kurallar?
 
