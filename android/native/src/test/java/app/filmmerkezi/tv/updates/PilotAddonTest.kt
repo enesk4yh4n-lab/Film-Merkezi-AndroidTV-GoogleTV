@@ -6,6 +6,8 @@ import app.filmmerkezi.tv.pluginapi.PluginHost
 import org.json.*
 import org.junit.Assert.*
 import org.junit.Test
+import org.junit.Before
+import org.junit.After
 import org.junit.Assume.assumeTrue
 import java.io.File
 import okhttp3.*
@@ -15,6 +17,10 @@ import java.util.concurrent.TimeUnit
 
 /** Only P002–P005. Live capture is explicit and never part of ordinary test/CI runs. */
 class PilotAddonTest {
+    private var previousSites=emptyList<SiteSpec>()
+    private var previousKnown=emptyList<SiteSpec>()
+    @Before fun preserveSiteRegistry(){previousSites=Sites.all.toList();previousKnown=Sites.known.toList()}
+    @After fun restoreSiteRegistry(){Sites.installed(previousSites);Sites.remember(previousKnown)}
     private fun spec(id: String)=when(id) {
         "p002"->SiteSpec(id,"P002 · PuhuTV","https://puhutv.com","/","/","a","h2")
         "p003"->SiteSpec(id,"P003 · NOW","https://www.nowtv.com.tr","/arama","/dizi-arsivi","a","h2")
