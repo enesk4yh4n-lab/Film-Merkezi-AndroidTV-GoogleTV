@@ -5,7 +5,7 @@ const {pack,INDEX,hash}=require('./android-distribution.cjs');
 const root=path.resolve(__dirname,'..'),args={};
 for(let i=2;i<process.argv.length;i+=2){if(!process.argv[i].startsWith('--')||!process.argv[i+1])throw Error('Expected --name value');args[process.argv[i].slice(2)]=process.argv[i+1];}
 if(!args.key||!args.out||args.scope!=='p002,p003,p004,p005')throw Error('Required: --key <external key> --out <new pilot directory> --scope p002,p003,p004,p005');
-const addons=path.resolve(args.addons||path.join(root,'../Android-Eklentiler')),out=path.resolve(args.out);
+const addons=path.resolve(args.addons||process.env.FM_ADDONS_DIR||path.join(root,'../Android-Eklentiler')),out=path.resolve(args.out);
 if(out.toLowerCase()===addons.toLowerCase())throw Error('Build into a separate reviewable pilot directory, never the live repository');
 if(fs.existsSync(path.join(out,INDEX)))throw Error('Use a fresh output directory; signed package versions are immutable');
 const sdk=process.env.ANDROID_HOME||process.env.ANDROID_SDK_ROOT;if(!sdk)throw Error('ANDROID_HOME required');
@@ -13,7 +13,7 @@ const privateKey=crypto.createPrivateKey(fs.readFileSync(args.key)),publicKey=cr
 const build=path.join(root,'android/native/build/pilot-addons');fs.mkdirSync(build,{recursive:true});
 const classes=path.join(build,'classes.jar');
 cp.execFileSync('python',['-c','import zipfile,sys;open(sys.argv[2],"wb").write(zipfile.ZipFile(sys.argv[1]).read("classes.jar"))',path.join(addons,'runtime/build/outputs/aar/addonRuntime-debug.aar'),classes]);
-const java=process.env.JAVA_HOME?path.join(process.env.JAVA_HOME,'bin/java.exe'):'java';
+const java=process.env.JAVA_HOME?path.join(process.env.JAVA_HOME,'bin',process.platform==='win32'?'java.exe':'java'):'java';
 const platform=['android-37.0','android-37'].map(p=>path.join(sdk,'platforms',p,'android.jar')).find(fs.existsSync);if(!platform)throw Error('Android 37 platform required');
 const jar=path.join(build,'plugin.jar');
 cp.execFileSync(java,['-cp',path.join(sdk,'build-tools/36.1.0/lib/d8.jar'),'com.android.tools.r8.D8','--release','--min-api','23','--lib',platform,'--classpath',path.join(root,'android/native/build/intermediates/compile_app_classes_jar/debug/bundleDebugClassesToCompileJar/classes.jar'),'--classpath',path.join(root,'android/pluginApi/build/libs/pluginApi.jar'),'--output',jar,classes],{stdio:'inherit'});
