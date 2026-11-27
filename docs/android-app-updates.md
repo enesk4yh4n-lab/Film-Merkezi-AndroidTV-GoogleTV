@@ -2,6 +2,8 @@
 
 Site veya çözümleyici değişikliği [eklenti SDK akışından](android-plugin-sdk.md) yayımlanır. Native menü/ayar/oynatıcı/izin değişiklikleri APK gerektirir.
 
+**Yayın ön koşulu:** İlgili APK/eklenti yayını için açık kullanıcı onayı gerekir. Hazırlama veya test isteği push, yükleme, Release ya da yeni sürüm onayı değildir. Onaydan önce gelecek sürüm numarası belirlenmez; yerel çalışmalarda konu adı ve gerekirse QA etiketi kullanılır. README veya mevcut Release açıklaması için verilen düzenleme izni, yeni APK/eklenti yayımlama izni değildir.
+
 1. `android/native/build.gradle.kts` içindeki versionCode'u artırın ve versionName'i değiştirin. Kalıcı APK sertifikasını koruyun.
 2. Değişen bölümün testleri ve lint sonrası küçültülmüş release APK'yı derleyin, yerel JKS ile [sign-release.ps1](../tools/sign-release.ps1) üzerinden imzalayın. APK'yı üzerine kurarak kayıtların korunduğunu doğrulayın.
 3. Kaynak commit/tag'ini GitHub'a gönderin. `v<versionName>` GitHub Release oluşturun; doğrulanmış APK'yı sabit dosya adıyla yükleyin. İmzalama JKS'sini/şifresini yüklemeyin.
