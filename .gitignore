@@ -21,6 +21,8 @@ source.local.json
 logs/
 .playwright-cli/
 reports/
+/EKLENTI_TAKIP.xlsx
+/KAYNAK_TAKIP.xlsx
 releases/
 spike/
 android/app/
@@ -34,3 +36,5 @@ android/youtubeProbe/
 *.iml
 distribution/private/
 android/native/src/androidTest/assets/pilot-test/
+android/native/src/androidTest/assets/tracked-test/
+android/native/src/androidTest/assets/release-test/

@@ -22,7 +22,12 @@ interface SiteProvider {
 /** Failure in one provider cannot cancel successful providers. Unified mode is always on. */
 class CatalogRepository(private val network:WebTransport,private val works:WorkStore?=null,private val requestOptions:()->CatalogRequestOptions={CatalogRequestOptions()},private val metadataSites:()->Set<String> = {requestOptions().sites.toSet()}) {
     private val parsing=Dispatchers.Default.limitedParallelism(1)
-    val providers:Map<String,NativeSiteProvider> = Sites.all.associate { it.id to NativeSiteProvider(it,network,parsing) }
+    private var providerRevision=-1L
+    private var providerSnapshot:Map<String,NativeSiteProvider> = emptyMap()
+    val providers:Map<String,NativeSiteProvider> get()=synchronized(this){
+        if(providerRevision!=Sites.revision){providerSnapshot=Sites.all.associate{it.id to NativeSiteProvider(it,network,parsing)};providerRevision=Sites.revision}
+        providerSnapshot
+    }
     private val cache=object:LinkedHashMap<String,Pair<Long,UnifiedPage>>(8,0.75f,true) {
         override fun removeEldestEntry(eldest:MutableMap.MutableEntry<String,Pair<Long,UnifiedPage>>?)=size>6
     }
@@ -90,10 +95,11 @@ class CatalogRepository(private val network:WebTransport,private val works:WorkS
         send(result)
     }
     suspend fun collections():List<Card> {
-        if("filmcibaba" !in providers)return emptyList()
-        val site=Sites.get("filmcibaba")
-        return provider(site.id).collections()
-
+        val result=mutableListOf<Card>()
+        for(id in requestOptions().sites){val p=providers[id]?:continue
+            try{result.addAll(p.collections())}catch(e:CancellationException){throw e}catch(_:Exception){}
+        }
+        return result.distinctBy{it.ref.id}
     }
     fun provider(id:String)=providers[id]?:throw DataFailure(FailureKind.UNSUPPORTED,"Site eklentisi kurulu değil: $id","plugin")
     suspend fun detail(card:Card):Detail {

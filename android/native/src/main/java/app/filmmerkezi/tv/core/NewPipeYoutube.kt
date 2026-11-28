@@ -56,9 +56,7 @@ class NewPipeYoutube(private val network:WebTransport):YoutubeResolver {
                     val subtitles=runCatching{extractor.getSubtitles(MediaFormat.VTT)}.getOrDefault(emptyList()).filter{it.isUrl&&publicUrl(it.content)?.startsWith("https://")==true}
                         .map{Subtitle(it.content,it.displayLanguageName,it.languageTag,"vtt")}
                     owner.ensureActive()
-                    if(variants.isEmpty()&&info.hlsUrl?.startsWith("https://")==true)ResolvedSource(option.id,option.label,info.hlsUrl,StreamType.HLS,
-                        "https://www.youtube.com/",YoutubeStreams.USER_AGENT,subtitles=subtitles.take(8),playbackRequirements=setOf("youtube"))
-                    else YoutubeStreams.assemble(option,variants,subtitles)
+                    YoutubeStreams.assemble(option,variants,subtitles,info.hlsUrl)
                 }
             }catch(e:CancellationException){throw e}
             catch(e:DataFailure){throw e}

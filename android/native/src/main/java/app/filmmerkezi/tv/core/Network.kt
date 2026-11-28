@@ -21,6 +21,14 @@ data class WebRequest(val url: String, val referer: String = "", val method: Str
 data class WebResponse(val url: String, val body: String, val code: Int = 200, val headers: Map<String, String> = emptyMap())
 interface WebTransport { suspend fun request(request: WebRequest): WebResponse }
 
+internal fun providerHttpFailure(code:Int, mitigation:String?):DataFailure? {
+    if(mitigation.equals("challenge",ignoreCase=true))
+        return DataFailure(FailureKind.ACCESS,"Site tarayıcı doğrulaması istiyor","browser-challenge",code.takeUnless{it in 200..299})
+    if(code in 200..299)return null
+    val kind=if(code in listOf(401,403,429))FailureKind.ACCESS else FailureKind.HTTP
+    return DataFailure(kind,"HTTP $code","http",code)
+}
+
 /** Application-owned metadata transport. Cancellation affects only the caller's Call. */
 class ProviderNetwork(context: Context,private val originPolicy:((HttpUrl)->Unit)?=null,sharedPool:ConnectionPool?=null,private val cookies:MutableList<Cookie> = mutableListOf()) : WebTransport {
     private val slots = Semaphore(2)
@@ -60,7 +68,7 @@ class ProviderNetwork(context: Context,private val originPolicy:((HttpUrl)->Unit
                 }
                 override fun onResponse(call:Call,response:Response) {
                     try { response.use { r ->
-                        if(!r.isSuccessful) throw DataFailure(if(r.code in listOf(401,403,429)) FailureKind.ACCESS else FailureKind.HTTP,"HTTP ${r.code}","http",r.code)
+                        providerHttpFailure(r.code,r.header("cf-mitigated"))?.let{throw it}
                         val output=ByteArrayOutputStream()
                         r.body.byteStream().use { input ->
                             val buffer=ByteArray(8192)

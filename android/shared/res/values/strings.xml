@@ -12,7 +12,7 @@
     <string name="stop">Durdur</string>
     <string name="live_mode">Canlı siteyi dene</string>
     <string name="fixture_mode">Yerel fixture moduna dön</string>
-    <string name="live_notice">0. aşama • Canlı Filmci Baba deneyi</string>
+    <string name="live_notice">Yerel canlı oynatma deneyi</string>
     <string name="player_preparing">%1$s hazırlanıyor…</string>
     <string name="player_source">Kaynak: %1$s</string>
     <string name="player_retrying">Bağlantı yeniden kuruluyor: %1$s</string>

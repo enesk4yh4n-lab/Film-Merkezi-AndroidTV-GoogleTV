@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="plugin_sites_empty">Yüklü ve etkin site eklentisi yok. Güncelleme Merkezi’nden bir site eklentisi kurun.</string>
+</resources>

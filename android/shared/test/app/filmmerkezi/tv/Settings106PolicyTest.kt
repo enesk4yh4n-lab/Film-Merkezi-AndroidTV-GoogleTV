@@ -20,8 +20,18 @@ class Settings106PolicyTest {
         assertFalse(PlaybackPreferencePolicy.subtitleAllowed(SubtitlePolicy.OFF,"en",true))
         assertTrue(PlaybackPreferencePolicy.subtitleAllowed(SubtitlePolicy.ON,"tr",false))
     }
-    @Test fun profilesAreBoundedAndDefaultRetainsTheProvenBuffer(){
-        assertEquals(16*1024*1024,BufferProfile.AUTO.bytes)
-        for(p in BufferProfile.entries){assertTrue(p.maxMs>=p.minMs);assertTrue(p.minMs>=p.restartMs);assertTrue(p.minMs>=p.startMs);assertTrue(p.bytes<=24*1024*1024)}
+    @Test fun profilesStayWithinTheNormalPlaybackBufferBudget(){
+        val mib = 1024 * 1024
+        val smallHeap = 32L * mib
+        val largeHeap = 256L * mib
+        assertEquals(32 * mib, BufferProfile.AUTO.targetBytes(largeHeap))
+        assertEquals(32 * mib, BufferProfile.LONG.targetBytes(largeHeap))
+        assertEquals(8 * mib, BufferProfile.LOW.targetBytes(largeHeap))
+        for(p in BufferProfile.entries){
+            assertTrue(p.maxMs>=p.minMs)
+            assertTrue(p.minMs>=p.restartMs)
+            assertTrue(p.minMs>=p.startMs)
+            assertEquals(8 * mib, p.targetBytes(smallHeap))
+        }
     }
 }

@@ -7,8 +7,10 @@ android {
         applicationId = "app.filmmerkezi.tv"
         minSdk = 23
         targetSdk = 36
-        versionCode = if(providers.gradleProperty("migrationBuild").orNull=="true")35 else 38
-        versionName = if(providers.gradleProperty("migrationBuild").orNull=="true") "0.11.5" else "0.12.2"
+        versionCode = if(providers.gradleProperty("migrationBuild").orNull=="true")35 else 39
+        versionName = if(providers.gradleProperty("migrationBuild").orNull=="true") "0.11.5" else providers.gradleProperty("qaLabel").orNull?.let{
+            require(it.matches(Regex("[a-z][a-z0-9-]{0,39}"))){"Invalid local QA label"};"local-$it"
+        }?:"0.13.0"
         buildConfigField("boolean","MIGRATION",(providers.gradleProperty("migrationBuild").orNull=="true").toString())
         ndk { abiFilters += listOf("armeabi-v7a","arm64-v8a","x86_64") }
         testInstrumentationRunner = if(providers.gradleProperty("distributionProbe").orNull=="true") "app.filmmerkezi.tv.updates.DistributionProbeRunner" else if(providers.gradleProperty("frameworkProbe").orNull=="true") "app.filmmerkezi.tv.probe.PreservationProbe" else "androidx.test.runner.AndroidJUnitRunner"
@@ -18,6 +20,12 @@ android {
     sourceSets.getByName("main").java.srcDir("../sharedCatalog/src")
     sourceSets.getByName("main").res.srcDir("../shared/res")
     sourceSets.getByName("test").java.srcDir("../shared/test")
+    if(providers.gradleProperty("migrationBuild").orNull=="true") {
+        sourceSets.getByName("main").java.srcDir("../legacyFixtures/src")
+    } else {
+        sourceSets.getByName("test").java.srcDir("../legacyFixtures/src")
+        sourceSets.getByName("androidTest").java.srcDir("../legacyFixtures/src")
+    }
     buildTypes {
         getByName("debug") {
             if (providers.gradleProperty("unsignedDebug").orNull == "true") signingConfig = null
@@ -45,6 +53,18 @@ tasks.register<JavaExec>("exportSiteSpecs") {
     args(layout.buildDirectory.file("site-specs.json").get().asFile.absolutePath)
 }
 kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11) } }
+tasks.withType<Test>().configureEach {
+    // Manual live captures must rerun when the selected provider changes.
+    if(name=="testDebugUnitTest")for (variable in listOf("FM_PILOT_LIVE", "FM_PILOT_SITES", "FM_PILOT_OUTPUT", "FM_PILOT_FILMCI_QUERY")) {
+        inputs.property(variable, providers.environmentVariable(variable).orElse(""))
+    }
+}
+configurations.matching { it.name.contains("UnitTest") && it.name.endsWith("Classpath") }.configureEach {
+    resolutionStrategy.dependencySubstitution {
+        substitute(module("com.squareup.okhttp3:okhttp")).using(module("com.squareup.okhttp3:okhttp-jvm:5.5.1"))
+            .because("JVM tests need the JVM public-suffix resource, not Android assets")
+    }
+}
 dependencies {
     implementation(project(":pluginApi"))
     if(findProject(":addonRuntime")!=null){

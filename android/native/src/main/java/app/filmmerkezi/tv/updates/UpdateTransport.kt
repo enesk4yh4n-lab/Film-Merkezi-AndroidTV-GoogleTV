@@ -42,18 +42,19 @@ class UpdateTransport(context:Context) {
             return https(u.toString())
         }
     }
-    suspend fun bytes(url:String,limit:Int=65536):ByteArray = transfer(url,limit,null,null){}
+    suspend fun bytes(url:String,limit:Int=65536,timeoutMs:Long=30000):ByteArray = transfer(url,limit,null,null,timeoutMs){}
     suspend fun download(url:String,target:File,size:Int,hash:String,progress:(Long)->Unit={}) {
-        transfer(url,size,target,hash,progress);if(target.length()!=size.toLong()){target.delete();error("İndirilen dosyanın boyutu eşleşmiyor")}
+        transfer(url,size,target,hash,120000,progress);if(target.length()!=size.toLong()){target.delete();error("İndirilen dosyanın boyutu eşleşmiyor")}
     }
-    private suspend fun transfer(url:String,limit:Int,target:File?,hash:String?,progress:(Long)->Unit):ByteArray=slots.withPermit {
+    private suspend fun transfer(url:String,limit:Int,target:File?,hash:String?,timeoutMs:Long,progress:(Long)->Unit):ByteArray=slots.withPermit {
+        require(timeoutMs in 1..120000)
         suspendCancellableCoroutine { cont ->
             var active:Call?=null;var closed:Response?=null
             cont.invokeOnCancellation{active?.cancel();closed?.close()}
             fun request(address:String,redirects:Int){
                 if(!cont.isActive)return
                 try{
-                    val call=client.newCall(Request.Builder().url(https(address)).header("User-Agent","FilmMerkezi-Android-Distribution/1").header("Cache-Control","no-cache").build());active=call
+                    val call=client.newCall(Request.Builder().url(https(address)).header("User-Agent","FilmMerkezi-Android-Distribution/1").header("Accept",if(address.startsWith("https://api.github.com/"))"application/vnd.github+json"else"*/*").header("Cache-Control","no-cache").build());call.timeout().timeout(timeoutMs,TimeUnit.MILLISECONDS);active=call
                     if(!cont.isActive){call.cancel();return}
                     call.enqueue(object:Callback{
                         override fun onFailure(call:Call,e:IOException){if(cont.isActive)cont.resumeWithException(e)}
@@ -61,7 +62,8 @@ class UpdateTransport(context:Context) {
                             closed=response
                             try{response.use{r->
                                 if(r.code in 300..399){require(redirects<5){"Yönlendirme sınırı"};val next=r.header("Location")?.let{r.request.url.resolve(it)}?:error("Yönlendirme adresi yok");request(https(next.toString()),redirects+1);return}
-                                require(r.isSuccessful){"HTTP ${r.code}"};require(r.body.contentLength()<=limit){"Dosya boyut sınırını aştı"}
+                                if(!r.isSuccessful)throw UpdateHttpFailure.response(r.code,r.request.url.host,r.header("X-RateLimit-Remaining"),r.header("Retry-After"),r.header("X-RateLimit-Reset"))
+                                require(r.body.contentLength()<=limit){"Dosya boyut sınırını aştı"}
                                 val digest=MessageDigest.getInstance("SHA-256");val memory=if(target==null)ByteArrayOutputStream()else null
                                 target?.parentFile?.mkdirs();val output=target?.outputStream()?.also{if(target.extension=="jar")require(target.setReadOnly()){"Paket salt okunur yapılamadı"}}?:memory!!
                                 var count=0L;var reported=0L

@@ -8,6 +8,22 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class YoutubeLegacyTransportTest {
+    @Test fun tinyHeapsUseBoundedProgressiveTransportAndBufferTargets() {
+        val base=OkHttpClient()
+        val tinyHeap=16L*1024*1024
+        val media=source("https://media.example/video.mp4",youtube=false).put("type","mp4")
+        val transport=PlaybackHttpPolicy.mediaTransport(media,base,29,tinyHeap)
+        assertEquals(listOf(Protocol.HTTP_1_1),transport.protocols)
+        assertSame(base.connectionPool,transport.connectionPool)
+        assertEquals(listOf(Protocol.HTTP_1_1),PlaybackHttpPolicy.mediaTransport(media,base,29,tinyHeap*2).protocols)
+        assertSame(base,PlaybackHttpPolicy.mediaTransport(media,base,29,tinyHeap*2+1))
+        assertSame(base,PlaybackHttpPolicy.mediaTransport(media,base,29,tinyHeap*4))
+        assertSame(base,PlaybackHttpPolicy.mediaTransport(media.put("type","hls"),base,29,tinyHeap))
+        assertEquals(4*1024*1024,BufferProfile.AUTO.targetBytes(tinyHeap))
+        assertEquals(8*1024*1024,BufferProfile.AUTO.targetBytes(tinyHeap*2))
+        assertEquals(16*1024*1024,BufferProfile.LONG.targetBytes(tinyHeap*4))
+        assertEquals(32*1024*1024,BufferProfile.LONG.targetBytes(tinyHeap*8))
+    }
     private fun source(url:String="https://rr1.googlevideo.com/videoplayback",youtube:Boolean=true)=JSONObject().put("url",url).put("playbackRequirements",JSONArray(if(youtube)listOf("youtube")else emptyList<String>()))
     @Test fun legacyYoutubeTransportKeepsSessionWhileUsingHttp1(){
         val base=OkHttpClient()

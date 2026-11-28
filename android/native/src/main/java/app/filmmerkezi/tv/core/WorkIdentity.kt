@@ -126,6 +126,11 @@ object ContentIdentity {
             return answer(IdentityState.SAME,"imdb")
         }
         if(a.kind!=b.kind)return answer(if(a.typeVerified&&b.typeVerified)IdentityState.DIFFERENT else IdentityState.UNCERTAIN,"type")
+        val parentA=left.seriesRef;val parentB=right.seriesRef
+        if(a.kind==ContentKind.SERIES&&parentA!=null&&parentB!=null&&parentA.kind==ContentKind.SERIES&&parentB.kind==ContentKind.SERIES&&
+            parentA.siteId==left.ref.siteId&&parentB.siteId==right.ref.siteId&&parentA.siteId==parentB.siteId&&
+            parentA.pageUrl.substringBefore('#').trimEnd('/')==parentB.pageUrl.substringBefore('#').trimEnd('/'))
+            return answer(IdentityState.SAME,"explicit-series-parent")
         val common=a.names.keys.intersect(b.names.keys)
         val sa=left.sourceSeason?:a.evidence?.season;val sb=right.sourceSeason?:b.evidence?.season
         if(a.kind==ContentKind.SERIES&&left.ref.siteId==right.ref.siteId&&sa!=null&&sb!=null&&a.checked&&b.checked&&a.typeVerified&&b.typeVerified&&common.any{a.names[it]==true&&b.names[it]==true}){
@@ -190,7 +195,8 @@ object ContentIdentity {
         val f=facts(c)
         if(f.kind==ContentKind.COLLECTION)return listOf("ref:"+c.ref.id)
         if(f.kind==ContentKind.EPISODE)return listOf("ref:"+c.ref.id)+if(c.seriesIdentity.isNotBlank()&&c.episodeNumber!=null)listOf("episode:${c.seriesIdentity}:${c.episodeNumber}")else emptyList()
-        return f.names.keys.map{"name:$it"}+listOf("ref:"+c.ref.id)+if(f.imdb.isBlank())emptyList()else listOf("imdb:"+f.imdb)
+        val parent=c.seriesRef?.takeIf{f.kind==ContentKind.SERIES&&it.kind==ContentKind.SERIES&&it.siteId==c.ref.siteId}
+        return f.names.keys.map{"name:$it"}+listOf("ref:"+c.ref.id)+(parent?.let{listOf("series-parent:${it.siteId}:"+it.pageUrl.substringBefore('#').trimEnd('/'))}?:emptyList())+(if(f.imdb.isBlank())emptyList()else listOf("imdb:"+f.imdb))
     }
     private fun mergeBatch(cards:List<Card>):List<UnifiedItem> {
         val input=cards.groupBy{it.ref.id}.map{(_,v)->v.maxBy{if(facts(it).checked)1 else 0}}

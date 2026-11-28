@@ -47,7 +47,7 @@ internal class SettingsMaintenance(private val context:Context,private val data:
             Build.SUPPORTED_ABIS.joinToString()+"\nRAM: ${mem.totalMem/(1024*1024)} MiB · Java: ${manager.memoryClass} MiB\n\n"+codecs.joinToString("\n\n")
     }
     suspend fun connections(settings:AppSettings):String=coroutineScope{
-        val sites=settings.siteOrder.filter{it !in settings.disabledCatalog||settings.sourceAllowed(it)}
+        val sites=settings.installedSites().map{it.id}.filter{it !in settings.disabledCatalog||settings.sourceAllowed(it)}
         if(sites.isEmpty())return@coroutineScope context.getString(app.filmmerkezi.tv.R.string.settings_disabled_sites)
         val http=client.newBuilder().callTimeout(10,TimeUnit.SECONDS).build();val permits=Semaphore(2)
         sites.map{id->async{permits.withPermit{

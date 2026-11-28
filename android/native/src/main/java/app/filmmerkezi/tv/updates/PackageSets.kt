@@ -5,10 +5,28 @@ import org.json.JSONObject
 
 /** Validates the whole next set before switching any active package. */
 object PackageSets {
+    /** A publisher can rename its provider package while preserving the stable site id. */
+    fun replacedProviders(set:JSONObject,next:Map<String,UpdateProtocol.Module>):Map<String,List<String>> {
+        val existing=set.keys().asSequence().associateWith{UpdateProtocol.module(set.getJSONObject(it).getString("manifest").toByteArray(Charsets.UTF_8))}
+        return next.filterValues{it.type=="site"}.mapValues{(key,module)->
+            existing.filter{(oldKey,old)->oldKey!=key&&old.type=="site"&&old.site!!.getString("id")==module.site!!.getString("id")}.keys.onEach{oldKey->
+                require(oldKey.substringBefore('/')==key.substringBefore('/')){"Bu site başka bir yayıncının eklentisiyle kurulu. Önce mevcut site eklentisini kaldırın."}
+                require(oldKey !in next){"Aynı site için iki farklı eklenti seçildi."}
+            }.toList()
+        }
+    }
     /** Provider codes define default order, independently of dependency/install order. */
     fun orderedSites(modules:Collection<UpdateProtocol.Module>) = modules.filter{it.type=="site"}
         .sortedWith(compareBy<UpdateProtocol.Module>{Regex("^p(\\d{3})$").matchEntire(it.id)?.groupValues?.get(1)?.toIntOrNull()?:Int.MAX_VALUE}.thenBy{it.id})
         .map{app.filmmerkezi.tv.core.PluginWire.site(it.site!!)}
+    fun activeSites(state:JSONObject,modules:Map<String,UpdateProtocol.Module>):List<app.filmmerkezi.tv.core.SiteSpec> {
+        val packages=state.getJSONObject("packages")
+        val enabled=modules.keys.filter{packages.optJSONObject(it)?.optBoolean("enabled",true)==true}.toMutableSet()
+        do {val unavailable=enabled.filter{key->modules.getValue(key).dependencies.any{it.publisher+"/"+it.id !in enabled}}
+            enabled.removeAll(unavailable.toSet())
+        } while(unavailable.isNotEmpty())
+        return orderedSites(modules.filterKeys{it in enabled}.values)
+    }
     fun validate(state:JSONObject, set:JSONObject, appCode:Int, api:Int):Map<String,UpdateProtocol.Module> {
         require(set.length()<=64){"64 kurulu paket sınırı"}
         val modules=set.keys().asSequence().associateWith { key ->

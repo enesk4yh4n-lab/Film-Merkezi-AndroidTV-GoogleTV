@@ -13,20 +13,20 @@ import org.json.JSONObject
 import java.io.File
 
 /** Isolated metadata and local media; restores the user's settings in finally. */
-internal class Settings110Fixture(private val continuous:Boolean=false) {
+internal class Settings110Fixture(private val continuous:Boolean=false,private val resume:Boolean=false) {
     val ins=InstrumentationRegistry.getInstrumentation();val context=ins.targetContext
     val repo=SettingsRepository.get(context);private val original=repo.value
     private val ui=context.getSharedPreferences("interface-preferences",0);private val oldUi=ui.all.toMap()
     lateinit var activity:TvActivity
     val card=Card(ContentRef("filmcibaba","https://filmizle.ink/settings110-1-sezon-1-bolum/",ContentKind.EPISODE),"Ayarlar yerel oynatma deneyi",workId="work:settings110",episodeNumber=EpisodeNumber(1,1))
-    fun main(block:()->Unit)=ins.runOnMainSync(block)
+    fun main(block:()->Unit){var failure:Throwable?=null;ins.runOnMainSync{try{block()}catch(e:Throwable){failure=e}};failure?.let{throw it}}
     fun snap():JSONObject{var v=JSONObject();main{v=activity.snapshotForUiTest()};return v}
     suspend fun waitFor(timeout:Long=40000,check:()->Boolean){val end=SystemClock.elapsedRealtime()+timeout
         while(SystemClock.elapsedRealtime()<end){var ok=false;main{ok=check()};if(ok)return;delay(100)}
         screenshot("settings110-timeout.png");var focus="";main{focus=activity.currentFocus?.tag.toString()};error("Settings110 timeout, focus=$focus: "+snap())}
     fun tag(value:String)=activity.window.decorView.findViewWithTag<View>(value)
-    suspend fun start(settings:AppSettings=AppSettings(entry="RESTART"),customData:TvData?=null){
-        repo.update{settings};ui.edit().putString("style","classic").putBoolean("configured",true).commit()
+    suspend fun start(settings:AppSettings=AppSettings(entry="RESTART"),customData:TvData?=null,configured:Boolean=true){
+        repo.update{settings};ui.edit().putString("style","classic").putBoolean("configured",configured).commit()
         TvActivity.dataFactoryForTests={customData?:object:TvData{
             private fun option()=SourceOption(card.ref.id,card.ref,"Yerel HLS",card.ref.pageUrl)
             override fun browse(kind:ContentKind,cursors:Map<String,PageCursor>)=flowOf(UnifiedPage(listOf(UnifiedItem(card.workId,card,listOf(card))),emptyMap(),emptyList()))
@@ -36,7 +36,7 @@ internal class Settings110Fixture(private val continuous:Boolean=false) {
             override fun episodeSourcePool(item:UnifiedItem,crossSite:Boolean,gate:suspend()->Unit)=flowOf(SourcePool(listOf(option().scoped()),false))
             override suspend fun resolve(option:SourceOption)=ResolvedSource(option.id,option.label,"http://10.0.2.2:8770/case/settings110-${SystemClock.elapsedRealtime()}/"+(if(continuous)"long.m3u8"else "master.m3u8"),StreamType.HLS,
                 referer="https://fixture.example.test/",userAgent="FM-Settings110",subtitles=listOf(Subtitle("http://10.0.2.2:8770/case/settings110-captions/"+(if(continuous)"captions.vtt"else "tr.vtt"),"Türkçe","tr", "vtt")))
-            override suspend fun records()=emptyList<LibraryRecord>()
+            override suspend fun records()=if(resume)listOf(LibraryRecord(card.workId,card,false,25000,600000,1))else emptyList()
             override suspend fun update(card:Card,listed:Boolean?,position:Long?,duration:Long?){}
             override suspend fun remember(query:String){};override suspend fun searches()=emptyList<String>()
         }}

@@ -76,4 +76,21 @@ class ClassicEpisodeGridFragment:VerticalGridSupportFragment(){
                 if(row!=null)row.getChildAt(0)?.requestFocus()else grid.requestFocus()}}
     }
     fun atTop()=selected==0
+    fun move(key:Int):Boolean {
+        val grid=view?.findViewById<VerticalGridView>(androidx.leanback.R.id.browse_grid)?:return false
+        if(!grid.hasFocus()||cards.size()==0)return false
+        val focus=activity?.currentFocus?:return false
+        val more=focus.tag?.toString()?.endsWith(":options")==true
+        if(key==KeyEvent.KEYCODE_DPAD_LEFT||key==KeyEvent.KEYCODE_DPAD_RIGHT){
+            val row=grid.findViewHolderForAdapterPosition(selected)?.itemView as? ViewGroup
+            row?.getChildAt(if(key==KeyEvent.KEYCODE_DPAD_RIGHT)1 else 0)?.takeIf{it.isShown}?.requestFocus();return true
+        }
+        val next=when(key){KeyEvent.KEYCODE_DPAD_DOWN->minOf(selected+1,cards.size()-1);KeyEvent.KEYCODE_DPAD_UP->if(selected==0)return false else selected-1;else->return false}
+        selected=next;grid.setSelectedPosition(next,object:ViewHolderTask{
+            override fun run(holder:androidx.recyclerview.widget.RecyclerView.ViewHolder){
+                val row=holder.itemView as? ViewGroup?:return
+                row.getChildAt(if(more)1 else 0)?.takeIf{it.isShown}?.requestFocus()
+            }
+        });return true
+    }
 }

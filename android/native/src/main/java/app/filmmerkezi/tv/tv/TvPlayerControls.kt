@@ -24,6 +24,7 @@ internal class TvPlayerControls(private val activity:Activity,private val view:P
     private val directSteps=SeekKeySteps({prefs.repository.value.player.seekSeconds},{prefs.repository.value.player.accelerate})
     private var directTarget:Long?=null
     private var directDirection=0
+    private var timelineReturn=androidx.media3.ui.R.id.exo_play_pause
     private var menu="";private var type=C.TRACK_TYPE_UNKNOWN
     private val handler=android.os.Handler(android.os.Looper.getMainLooper())
     private val refreshTask=object:Runnable{override fun run(){if(overlay?.showing==true){refresh();handler.postDelayed(this,500)}}}
@@ -59,6 +60,7 @@ internal class TvPlayerControls(private val activity:Activity,private val view:P
         // A separate flag used to require Down before already visible buttons could navigate.
         val controlsVisible=view.isControllerFullyVisible
         val key=event.keyCode
+        val timeline=view.findViewById<View>(androidx.media3.ui.R.id.exo_progress)
         if(key==KeyEvent.KEYCODE_DPAD_DOWN&&event.action==KeyEvent.ACTION_DOWN&&!controlsVisible){
             feedback.hide();directSteps.reset();directTarget=null
             view.showController();view.findViewById<View>(androidx.media3.ui.R.id.exo_play_pause).requestFocus();return true
@@ -67,11 +69,25 @@ internal class TvPlayerControls(private val activity:Activity,private val view:P
         // the controller that the matching Down event has just hidden.
         if(key==KeyEvent.KEYCODE_DPAD_UP&&event.action==KeyEvent.ACTION_UP)return true
         if(key==KeyEvent.KEYCODE_DPAD_UP&&event.action==KeyEvent.ACTION_DOWN&&controlsVisible){
+            if(!timeline.hasFocus()){timelineReturn=activity.currentFocus?.id?:androidx.media3.ui.R.id.exo_play_pause;feedback.hide();timeline.requestFocus();return true}
             feedback.hide();view.controllerAutoShow=false;view.hideController();view.requestFocus()
             seekSteps.reset();directSteps.reset();directTarget=null;return true
         }
+        if(key==KeyEvent.KEYCODE_DPAD_DOWN&&event.action==KeyEvent.ACTION_DOWN&&controlsVisible){
+            if(timeline.hasFocus()||activity.currentFocus===view)(view.findViewById<View>(timelineReturn)?.takeIf{it.isEnabled&&it.isShown&&it.isFocusable}
+                ?:view.findViewById(androidx.media3.ui.R.id.exo_play_pause)).requestFocus()
+            return true
+        }
         if(key!=KeyEvent.KEYCODE_DPAD_LEFT&&key!=KeyEvent.KEYCODE_DPAD_RIGHT)return false
-        if(controlsVisible){directSteps.reset();directTarget=null;return false}
+        if(controlsVisible){directSteps.reset();directTarget=null
+            if(timeline.hasFocus())return false
+            val buttons=listOf(R.id.fm_player_previous,R.id.fm_player_rewind,androidx.media3.ui.R.id.exo_play_pause,R.id.fm_player_forward,
+                R.id.fm_player_next,R.id.fm_player_sources,R.id.fm_player_quality,R.id.fm_player_audio,R.id.fm_player_subtitles,R.id.fm_player_settings,R.id.fm_player_exit)
+                .map{view.findViewById<View>(it)}.filter{it.isEnabled&&it.isFocusable&&it.isShown}
+            val index=buttons.indexOfFirst{it.hasFocus()}
+            if(index>=0){if(event.action==KeyEvent.ACTION_DOWN)buttons[(index+if(key==KeyEvent.KEYCODE_DPAD_RIGHT)1 else -1).coerceIn(0,buttons.lastIndex)].requestFocus();return true}
+            return false
+        }
         if(event.action==KeyEvent.ACTION_UP){directSteps.reset();directTarget=null;return true}
         if(event.action!=KeyEvent.ACTION_DOWN)return true
         val direction=if(key==KeyEvent.KEYCODE_DPAD_RIGHT)1 else -1
@@ -107,10 +123,16 @@ internal class TvPlayerControls(private val activity:Activity,private val view:P
             for((site,values)in groups){add(ClassicRow("header:$site",Sites.all.firstOrNull{it.id==site}?.name?:site,header=true))
                 for(id in values){val choice=entries[id];val option=byId[id]
                     val state=when(choice?.state){"resolving"->R.string.ux_resolving;"ready"->R.string.ux_ready;"playing"->R.string.ux_playing;"paused"->R.string.ux_paused;else->R.string.ux_untried}
-                    add(ClassicRow(id,option?.label?:choice?.label.orEmpty(),choice?.reason?.ifBlank{null}?:option?.reason?.ifBlank{null}?:activity.getString(state),choice?.selected==true,option?.state?.let{it==OptionState.AVAILABLE}?:true))
+                    val explanation=choice?.reason?.takeIf(String::isNotBlank)?:when(choice?.state){
+                        "resolving","ready","playing","paused"->activity.getString(state)
+                        else->option?.reason?.takeIf(String::isNotBlank)?:activity.getString(state)
+                    }
+                    add(ClassicRow(id,option?.label?:choice?.label.orEmpty(),explanation,choice?.selected==true,option?.state?.let{it==OptionState.AVAILABLE}?:true))
                 }
             }
-            sourcePool.errors.forEach{add(ClassicRow("error:${it.siteId}",Sites.all.firstOrNull{s->s.id==it.siteId}?.name?:it.siteId,it.message,enabled=false))}
+            sourcePool.errors.forEachIndexed{i,error->
+                add(ClassicRow("error:$i:${error.siteId}",Sites.all.firstOrNull{it.id==error.siteId}?.name?:error.siteId,error.message,enabled=false))
+            }
         }
         window.update(rows,message=if(sourcePool.pending)activity.getString(R.string.pool_searching)else ""){id->if(session.chooseSource(id))window.close()}
     }

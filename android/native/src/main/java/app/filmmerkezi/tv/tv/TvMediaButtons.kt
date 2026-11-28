@@ -17,6 +17,8 @@ internal class TvMediaButtons(context:Context,private val playing:(Boolean)->Uni
     private var session:MediaSession?=null
     private var player:ExoPlayer?=null
     private var title=""
+    private var controlsEnabled=true
+    fun controlsEnabled(value:Boolean){controlsEnabled=value;session?.isActive=value}
     private val listener=object:Player.Listener{
         override fun onEvents(player:Player,events:Player.Events){update()}
     }
@@ -45,7 +47,7 @@ internal class TvMediaButtons(context:Context,private val playing:(Boolean)->Uni
                     return super.onMediaButtonEvent(intent)
                 }
             },Handler(Looper.getMainLooper()))
-            isActive=true
+            isActive=controlsEnabled
         }
         update()
     }

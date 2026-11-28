@@ -72,7 +72,11 @@ private class ClassicRowHeader(private val move:(Long,Int)->Unit):RowHeaderPrese
         return Holder(frame,label,previous,next)
     }
     override fun onBindViewHolder(viewHolder:Presenter.ViewHolder,item:Any?){val h=viewHolder as Holder;val row=item as ListRow
-        h.label.text=row.headerItem?.name.orEmpty();h.previous.setOnClickListener{move(row.headerItem.id,-1)};h.next.setOnClickListener{move(row.headerItem.id,1)};h.view.alpha=1f}
+        h.label.text=row.headerItem?.name.orEmpty();h.previous.tag="home-row:${row.headerItem.id}:previous";h.next.tag="home-row:${row.headerItem.id}:next"
+        h.previous.setOnClickListener{move(row.headerItem.id,-1)};h.next.setOnClickListener{move(row.headerItem.id,1)};h.view.alpha=1f
+        h.previous.setOnKeyListener{_,key,e->if(key==KeyEvent.KEYCODE_DPAD_LEFT||key==KeyEvent.KEYCODE_DPAD_RIGHT){if(e.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_RIGHT)h.next.requestFocus();true}else false}
+        h.next.setOnKeyListener{_,key,e->if(key==KeyEvent.KEYCODE_DPAD_LEFT||key==KeyEvent.KEYCODE_DPAD_RIGHT){if(e.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_LEFT)h.previous.requestFocus();true}else false}
+    }
     override fun onUnbindViewHolder(viewHolder:Presenter.ViewHolder){val h=viewHolder as Holder;h.label.text="";h.previous.setOnClickListener(null);h.next.setOnClickListener(null)}
     override fun onSelectLevelChanged(holder:RowHeaderPresenter.ViewHolder){holder.view.alpha=1f}
 }
@@ -145,6 +149,29 @@ class TvRowsFragment:RowsSupportFragment() {
         setSelectedPosition(index,false,ListRowPresenter.SelectItemViewHolderTask(column))
     }
     fun atTop()=selectedPosition<=0
+    fun move(key:Int):Boolean {
+        val focus=activity?.currentFocus?:return false
+        if(verticalGridView?.hasFocus()!=true)return false
+        val header=focus.tag?.toString()?.startsWith("home-row:")==true
+        if(header&&key==KeyEvent.KEYCODE_DPAD_DOWN){
+            val id=items.keys.elementAtOrNull(selectedPosition)?:return false
+            fun horizontal(node:View?):HorizontalGridView?=when(node){is HorizontalGridView->node;is ViewGroup->(0 until node.childCount).firstNotNullOfOrNull{horizontal(node.getChildAt(it))};else->null}
+            horizontal(verticalGridView?.findViewHolderForAdapterPosition(selectedPosition)?.itemView)?.setSelectedPosition(columns[id]?:0,object:ViewHolderTask{
+                override fun run(holder:androidx.recyclerview.widget.RecyclerView.ViewHolder){holder.itemView.requestFocus()}
+            });return true
+        }
+        var parent:ViewParent?=focus.parent
+        while(parent!=null&&parent !is HorizontalGridView)parent=parent.parent
+        val grid=parent as? HorizontalGridView?:return false
+        if(key==KeyEvent.KEYCODE_DPAD_UP){
+            val id=items.keys.elementAtOrNull(selectedPosition)?:return false
+            view?.findViewWithTag<View>("home-row:$id:previous")?.requestFocus();return true
+        }
+        if(key!=KeyEvent.KEYCODE_DPAD_LEFT&&key!=KeyEvent.KEYCODE_DPAD_RIGHT)return false
+        val at=grid.selectedPosition.coerceAtLeast(0);val last=(grid.adapter?.itemCount?:0)-1
+        if(last<0)return true
+        grid.setSelectedPosition((at+if(key==KeyEvent.KEYCODE_DPAD_LEFT)-1 else 1).coerceIn(0,last));return true
+    }
 }
 
 /** Articles have ordered names/years, not poster URLs: keep every member readable. */

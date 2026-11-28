@@ -20,8 +20,9 @@ object YoutubeLinks {
     fun frameUrl(value:String,page:String):String? {
         val u=publicUrl(value,page)?.toHttpUrlOrNull()?:return null
         if(videoId(u.toString())!=null)return u.toString()
-        // DDizi's public iframe carries the actual YouTube link in its id query.
-        if(u.host==page.toHttpUrlOrNull()?.host&&u.encodedPath=="/player/telif/index.php"&&Sites.get("ddizi").catalogUrl(u.toString())!=null){
+        // A provider-owned wrapper may carry the public YouTube URL as inert data.
+        val owner=page.toHttpUrlOrNull()
+        if(owner!=null&&u.scheme==owner.scheme&&u.host==owner.host&&u.port==owner.port&&u.encodedPath=="/player/telif/index.php"){
             val id=videoId(u.queryParameter("id").orEmpty())?:return null
             return "https://www.youtube.com/watch?v=$id"
         }
@@ -33,13 +34,35 @@ fun interface YoutubeResolver { suspend fun resolve(option:SourceOption,url:Stri
 
 object YoutubeStreams {
     const val USER_AGENT="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
-    fun assemble(option:SourceOption,variants:List<MediaVariant>,subtitles:List<Subtitle>):ResolvedSource {
+    private const val HLS_OPTION = "youtubeFormat"
+
+    internal fun withHlsOptions(options: List<SourceOption>): List<SourceOption> {
+        val alternatives = options.mapNotNull { option ->
+            if (option.extractor != "youtube" || option.state != OptionState.AVAILABLE ||
+                option.fields.containsKey(HLS_OPTION) || YoutubeLinks.videoId(option.url) == null) return@mapNotNull null
+            val hlsId = option.id + "-hls"
+            if (options.any { it.id == hlsId }) return@mapNotNull null
+            option.copy(id = hlsId, label = option.label + " · HLS", fields = option.fields + (HLS_OPTION to "hls"))
+        }
+        return options + alternatives
+    }
+
+    @JvmOverloads
+    fun assemble(option:SourceOption,variants:List<MediaVariant>,subtitles:List<Subtitle>,hlsUrl:String?=null):ResolvedSource {
+        val hlsOnly = option.fields[HLS_OPTION] == "hls"
         val valid=variants.filter{it.height>0&&it.fps>=0&&it.mimeType in setOf("video/mp4","video/webm")
             &&publicUrl(it.url)?.startsWith("https://")==true&&it.audio.all{a->publicUrl(a.url)?.startsWith("https://")==true}}
             .distinctBy{it.id}.sortedWith(compareByDescending<MediaVariant>{it.height}.thenByDescending{it.fps})
         // Retain every resolution/codec family, including combined fallbacks. Device support is checked by the player.
         val choices=valid.distinctBy{listOf(it.height,it.fps,it.codec,it.mimeType,it.audio.isEmpty())}
-        val best=choices.firstOrNull()?:throw DataFailure(FailureKind.UNSUPPORTED,"YouTube: uygun video kaynağı bulunamadı","youtube")
+        val best=choices.firstOrNull()
+        if(hlsOnly || best==null) {
+            val manifest=hlsUrl?.let{publicUrl(it)}?.takeIf{it.startsWith("https://")}
+                ?:throw DataFailure(FailureKind.UNSUPPORTED,
+                    if (hlsOnly) "YouTube bu video için HLS manifesti sunmadı" else "YouTube: uygun video kaynağı bulunamadı", "youtube")
+            return ResolvedSource(option.id,option.label,manifest,StreamType.HLS,"https://www.youtube.com/",USER_AGENT,
+                subtitles=subtitles.take(8),playbackRequirements=setOf("youtube"))
+        }
         val expires=choices.mapNotNull{it.url.toHttpUrlOrNull()?.queryParameter("expire")?.toLongOrNull()?.times(1000)}.minOrNull()
         return ResolvedSource(option.id,option.label,best.url,if(best.mimeType=="video/webm")StreamType.WEBM else StreamType.MP4,"https://www.youtube.com/",USER_AGENT,
             subtitles=subtitles.take(8),playbackRequirements=setOf("youtube"),mediaProfile=MediaProfile(best.codec,null,best.width,best.height),

@@ -34,6 +34,7 @@ class TvActivity:FragmentActivity() {
     private lateinit var data:TvData
     private lateinit var settings:app.filmmerkezi.tv.settings.SettingsRepository
     private var settingsScreen:SettingsScreen?=null
+    private var updateNotices:UpdateNoticeController?=null
     private var transferPanel:DataTransferPanel?=null
     internal fun openDataTransfer(){transferPanel=DataTransferPanel(this,scope,{::playback.isInitialized&&playback.active}).also{it.open()}}
     @Deprecated("Framework file picker bridge")
@@ -81,6 +82,7 @@ class TvActivity:FragmentActivity() {
     private var heroImage:ImageView?=null
     private var detailImage:ImageView?=null
     private var firstContent:View?=null
+    private var contentReturn:View?=null
     private var queryView:EditText?=null
     private var heroButton:Button?=null
     private var homeHero:View?=null
@@ -99,7 +101,7 @@ class TvActivity:FragmentActivity() {
     private var entryRevision=0
     private var sourceEpisode:UnifiedItem?=null
     private var returnEpisodeKey:String?=null
-    private var initialSourceCard:Card?=null
+    private var initialSourceDetail:Detail?=null
     private var initialSourceResume=0L
     private var neighbours=emptyList<Episode>()
     private var neighbourJob:Job?=null
@@ -122,6 +124,8 @@ class TvActivity:FragmentActivity() {
     private val sourceState=MutableStateFlow(SourcePool(emptyList(),false))
     private val sourceOptions=linkedMapOf<String,SourceOption>()
     private val primedSources=mutableMapOf<String,ResolvedSource>()
+    private val sourceResolutionFailures=mutableMapOf<String,String>()
+    private fun sourceFailureReason(error:Throwable)=(error as? DataFailure)?.message?:getString(R.string.tv_no_source)
     private fun candidate(o:SourceOption)=JSONObject().put("id",o.id).put("label",o.label).put("lazyOptionId",o.id)
     private fun cancelSources(){sourceRevision++;sourcePoolJob?.cancel();sourceStartJob?.cancel();sourceDeadlineJob?.cancel();if(::playback.isInitialized&&playback.active)playback.appendCandidates(emptyList(),false)}
     private lateinit var mediaButtons:TvMediaButtons
@@ -158,9 +162,7 @@ class TvActivity:FragmentActivity() {
         if(dataFactoryForTests==null){
             val distribution=app.filmmerkezi.tv.updates.DistributionManager.get(this)
             scope.launch{while(isActive){if(foreground)distribution.foreground(playback.active);delay(60000)}}
-            scope.launch{distribution.status.collect{v->
-                if(v.release!=null||v.moduleUpdates>0)findViewById<Button>(R.id.tv_nav_about)?.apply{text=getString(R.string.updates_new_badge);setTextColor(ClassicUi.gold)}
-            }}
+            startUpdateNotices()
         }
         scope.launch{var previous=settings.value;settings.changes.collect{v->
             if(playback.active){applyPlayerSettings()
@@ -184,7 +186,7 @@ class TvActivity:FragmentActivity() {
             }else if((e as? DataFailure)?.stage=="plugin"){
                 status.text=e.message
                 if(grid!=null)grid?.show(listOf(TvTile("status:updates",e.message.orEmpty(),action="updates")))
-                else{body.addView(text(e.message.orEmpty()));body.addView(button(getString(R.string.updates_title)){DistributionPanel(this@TvActivity,scope,{playback.active}).open()})}
+                else{body.addView(text(e.message.orEmpty()));body.addView(button(getString(R.string.updates_title)){showSettings("updates")})}
             }else showError()}}}.also{work.add(it)}
     }
     internal suspend fun quiesceForDistribution(){
@@ -205,7 +207,7 @@ class TvActivity:FragmentActivity() {
         setupShowing=false;cancelWork();applySeriesCatalog=null;classicOverlay?.close();dialog?.dismiss();dialog=null;feedBusy=false;renderedCatalog=emptyList();searchTabs.clear()
         heroImage?.let{Posters.clear(it)};detailImage?.let{Posters.clear(it)};detailImage=null
         current=if(state.screen==TvScreen.HISTORY)state.copy(history=true)else state
-        rows=null;grid=null;episodeGrid=null;firstContent=null;queryView=null;heroButton=null;heroCard=null;heroImage=null;homeHero=null;homeStatus=null
+        rows=null;grid=null;episodeGrid=null;firstContent=null;contentReturn=null;queryView=null;heroButton=null;heroCard=null;heroImage=null;homeHero=null;homeStatus=null
         supportFragmentManager.findFragmentById(R.id.tv_content)?.let{supportFragmentManager.beginTransaction().remove(it).commitNow()}
         if(::ui.isInitialized)host.removeView(ui)
         ui=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setBackgroundColor(canvasColor)}
@@ -213,11 +215,11 @@ class TvActivity:FragmentActivity() {
         val shell=ClassicUi.shell(this,current.screen,current.query,scopeName(),
             {screen->!(screen==TvScreen.MOVIES&&!supports(ContentKind.MOVIE)||screen==TvScreen.SERIES&&!supports(ContentKind.SERIES))},
             {screen->feeds.remove(screen);pendingFeeds.remove(screen);navigate(TvNav(screen,history=screen==TvScreen.HISTORY))},
-            ::submitSearch,::recentSearches,::chooseSite,::classicOptions){
+            ::submitSearch,::recentSearches,::chooseSite,{showSettings()}){
                 if(queryView?.hasFocus()==true)(navigation[current.screen]?:navigation[TvScreen.HOME])?.requestFocus()else focusAboveContent()
             }
         navigation.clear();navigation.putAll(shell.navigation);queryView=shell.query
-        if(dataFactoryForTests==null){val update=app.filmmerkezi.tv.updates.DistributionManager.get(this).status.value;if(update.release!=null||update.moduleUpdates>0)shell.root.findViewById<Button>(R.id.tv_nav_about)?.apply{text=getString(R.string.updates_new_badge);setTextColor(ClassicUi.gold)}}
+        if(dataFactoryForTests==null){val update=app.filmmerkezi.tv.updates.DistributionManager.get(this).status.value;updateOptionsBadge(updateNotices?.hasUpdates==true||update.release!=null||update.moduleUpdates>0,shell.root)}
         ui.addView(shell.root,LinearLayout.LayoutParams(-1,dp(88)))
         body=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setPadding(dp(37),0,dp(37),0)}
         ui.addView(body,LinearLayout.LayoutParams(-1,0,1f))
@@ -241,8 +243,10 @@ class TvActivity:FragmentActivity() {
         playerView?.apply{useController=false;keepScreenOn=false;isFocusable=false;descendantFocusability=android.view.ViewGroup.FOCUS_BLOCK_DESCENDANTS}
         val needsRepository=dataFactoryForTests==null&&!app.filmmerkezi.tv.BuildConfig.MIGRATION&&Sites.all.isEmpty()&&state.screen in setOf(TvScreen.HOME,TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER,TvScreen.SEARCH)
         if(needsRepository){
+            statusPanel.visibility=View.GONE
             body.addView(label(R.string.updates_no_sites,18f));body.addView(label(R.string.updates_no_sites_help,12f))
-            body.addView(button(getString(R.string.updates_add_repository)){DistributionPanel(this,scope,{playback.active}).open()},LinearLayout.LayoutParams(dp(260),dp(38)))
+            val hasRepository=app.filmmerkezi.tv.updates.DistributionManager.get(this).store.repositoryCount>0
+            body.addView(button(getString(if(hasRepository)R.string.hub_catalog else R.string.updates_add_repository)){openUpdate(app.filmmerkezi.tv.updates.UpdateRoute(app.filmmerkezi.tv.updates.UpdatePage.CATALOG))}.also{firstContent=it;it.tag="catalog:add-repository";ClassicDirections.standalone(it)},LinearLayout.LayoutParams(dp(260),dp(38)))
         }else when(state.screen){
             TvScreen.HOME->home()
             TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER->catalog()
@@ -297,6 +301,7 @@ class TvActivity:FragmentActivity() {
         }
         actions.addView(heroButton,LinearLayout.LayoutParams(dp(64),dp(23)))
         actions.addView(ClassicUi.button(this,getString(R.string.classic_recommend),R.id.classic_recommend,goldFill=true){showRecommendations()},LinearLayout.LayoutParams(dp(88),dp(23)).apply{marginStart=dp(8)})
+        ClassicDirections.horizontal(actions)
         info.addView(actions);hero.addView(info)
         body.addView(hero,LinearLayout.LayoutParams(-1,dp(104)).apply{bottomMargin=dp(8)});firstContent=heroButton
         rowsContainer()
@@ -502,11 +507,12 @@ class TvActivity:FragmentActivity() {
         actions.addView(listButton,LinearLayout.LayoutParams(-2,dp(31)))
         if(collectionPage>0)actions.addView(button(getString(R.string.tv_previous)){collectionPage--;showCollectionDetail(detail)},LinearLayout.LayoutParams(-2,dp(31)))
         if((collectionPage+1)*24<detail.collectionItems.size)actions.addView(button(getString(R.string.tv_more)){collectionPage++;showCollectionDetail(detail)},LinearLayout.LayoutParams(-2,dp(31)))
+        ClassicDirections.horizontal(actions)
         body.addView(actions,LinearLayout.LayoutParams(-1,dp(42)))
         body.addView(ClassicUi.text(this,detail.card.title,20f,bold=true))
         body.addView(ClassicUi.text(this,getString(R.string.fm_collection_scope),11f,muted))
         val fragment=gridContainer(true);val entries=detail.collectionItems.drop(collectionPage*24).take(24)
-        launchScreen{token->val visible=entries.mapIndexedNotNull{i,e->if(data.hiddenCollectionEntry(e))null else TvTile("collection:"+(collectionPage*24+i),getString(R.string.fm_collection_member,e.ordinal,e.title,e.year))};if(active(token))fragment.show(visible)}
+        launchScreen{token->val visible=entries.mapIndexedNotNull{i,e->if(data.hiddenCollectionEntry(e))null else TvTile("collection:"+(collectionPage*24+i),if(e.knownYear==null)getString(R.string.fm_collection_member_without_year,e.ordinal,e.title)else getString(R.string.fm_collection_member,e.ordinal,e.title,e.year))};if(active(token))fragment.show(visible)}
         fragment.click={tile->tile.key.substringAfter("collection:").toIntOrNull()?.let{openCollectionMember(detail,it)}}
         fragment.focusContent()
     }
@@ -514,14 +520,16 @@ class TvActivity:FragmentActivity() {
         val entry=collection.collectionItems.getOrNull(index)?:return
         launchScreen{token->status.setText(R.string.tv_loading);val matches=data.collectionMatches(entry,true)
             fun openMatch(item:UnifiedItem){collectionContext=collection to index;if(current.item?.card?.ref?.kind==ContentKind.COLLECTION)open(item)else render(TvNav(TvScreen.DETAIL,item))}
-            if(active(token))when(matches.size){0->status.setText(R.string.tv_no_results);1->openMatch(matches.single());else->dialog=ClassicDialog.Builder(this@TvActivity).setTitle(entry.title).setItems(matches.map{it.card.title+" · "+it.card.year}.toTypedArray()){_,i->openMatch(matches[i])}.setNegativeButton(R.string.tv_cancel,null).create().also{it.show()}}
+            if(active(token))when {matches.isEmpty()->status.setText(R.string.tv_no_results);matches.size==1&&entry.knownYear!=null->openMatch(matches.single());else->dialog=ClassicDialog.Builder(this@TvActivity).setTitle(entry.title).setItems(matches.map{it.card.title+(it.card.year?.let{year->" · $year"}?:"")}.toTypedArray()){_,i->openMatch(matches[i])}.setNegativeButton(R.string.tv_cancel,null).create().also{it.show()}}
         }
     }
     private fun recentSearches(){launchScreen{token->val values=data.searches();if(active(token))dialog=ClassicDialog.Builder(this@TvActivity).setTitle(R.string.tv_search_history)
         .setItems(values.toTypedArray()){_,i->submitSearch(values[i])}.setNegativeButton(R.string.tv_cancel,null).create().also{it.show()}}}
-    private fun classicOptions(){dialog=ClassicDialog.Builder(this).setTitle(R.string.classic_options).setItems(arrayOf(getString(R.string.settings_title),getString(R.string.pool_settings),getString(R.string.updates_title),getString(R.string.tv_about),getString(R.string.tv_exit))){_,i->
-        when(i){0->showSettings();1->sourceSettings();2->DistributionPanel(this,scope,{playback.active}).open();3->navigate(TvNav(TvScreen.ABOUT));4->askAppExit()}
-    }.setNegativeButton(R.string.tv_cancel,null).create().also{it.show()}}
+    private fun updateOptionsBadge(available:Boolean,root:View=window.decorView){root.findViewById<Button>(R.id.tv_nav_about)?.apply{
+        text=getString(if(available)R.string.updates_options_badge else R.string.classic_options)
+        contentDescription=getString(R.string.classic_options)+(if(available)" · "+getString(R.string.updates_new_badge)else "")
+        setTextColor(if(available)ClassicUi.gold else ClassicUi.foreground)
+    }}
     private fun showInterfaceSetup(){
         setupShowing=true;cancelWork();if(::ui.isInitialized)host.removeView(ui)
         supportFragmentManager.findFragmentById(R.id.tv_content)?.let{supportFragmentManager.beginTransaction().remove(it).commitNow()}
@@ -538,11 +546,11 @@ class TvActivity:FragmentActivity() {
         val start=ClassicUi.button(this,getString(R.string.classic_setup_start),R.id.classic_setup_start,goldFill=true){UiPreferences(this).classic();render(TvNav())}
         ui.addView(start,LinearLayout.LayoutParams(dp(260),dp(36)).apply{topMargin=dp(16)});start.requestFocus()
     }
-    private fun showSettings(){
-        if(settingsScreen!=null)return
+    private fun showSettings(category:String="general"){
+        settingsScreen?.let{it.openCategory(category);return}
         dialog?.dismiss();classicOverlay?.close();cancelWork()
         val before=settings.value;val savedFocus=focuses[current.screen];val wasPlaying=playback.player?.playWhenReady==true
-        if(playback.active)playback.setPlaying(false)
+        if(playback.active){playback.setPlaying(false);mediaButtons.controlsEnabled(false)}
         ui.visibility=View.GONE
         lateinit var screen:SettingsScreen
         screen=SettingsScreen(this,scope,settings,{
@@ -550,13 +558,21 @@ class TvActivity:FragmentActivity() {
             if(before.catalog()!=settings.value.catalog()||before.siteAddresses!=settings.value.siteAddresses){
                 feeds.clear();pendingFeeds.clear();movies=UnifiedPage(emptyList(),emptyMap(),emptyList());series=movies;services.trim()
             }
-            if(playback.active){ui.visibility=View.GONE;applyPlayerSettings();if(adultBlocked)blockAdultPlayback()else{playback.setPlaying(wasPlaying);playerControls?.show()}}
+            if(playback.active){ui.visibility=View.GONE;mediaButtons.controlsEnabled(true);applyPlayerSettings();if(adultBlocked)blockAdultPlayback()else{playback.setPlaying(wasPlaying);playerControls?.show()}}
             else{render(current);savedFocus?.let{(row,key)->body.post{rows?.restore(row,key);grid?.restore(key)}};findViewById<View>(R.id.tv_nav_about)?.requestFocus()}
-        },SettingsMaintenance(this,data,services.network.client,{playback.active||pendingCheckpoint!=null||entryBusy},::localPlaybackLog,siteCheckTransportForTests?:services.network), {sleepMinutes},::setSleep)
+        },SettingsMaintenance(this,data,services.network.client,{playback.active||pendingCheckpoint!=null||entryBusy},::localPlaybackLog,siteCheckTransportForTests?:services.network), {sleepMinutes},::setSleep,category)
         settingsScreen=screen;host.addView(screen,FrameLayout.LayoutParams(-1,-1))
     }
     internal fun settingsForTest(){showSettings()}
+    private fun openUpdate(route:app.filmmerkezi.tv.updates.UpdateRoute){if(!foreground||isFinishing)return;showSettings("updates");settingsScreen?.openUpdate(route)}
+    private fun startUpdateNotices(){
+        updateNotices?.close();updateNotices=UpdateNoticeController(this,scope,app.filmmerkezi.tv.updates.DistributionManager.get(this),
+            {foreground&&hasWindowFocus()&&!setupShowing&&!playback.active&&!entryBusy&&pendingCheckpoint==null&&!finishBusy&&settingsScreen==null&&classicOverlay?.showing!=true&&dialog?.isShowing!=true},::openUpdate,{updateOptionsBadge(it)})
+    }
+    internal fun noticesForTest(enable:Boolean=true){if(enable)startUpdateNotices()else{updateNotices?.close();updateNotices=null}}
+    internal fun noticePopupForTest()=updateNotices?.popupForTest()
     internal fun settingsDialogForTest()=settingsScreen?.dialogForTest()
+    internal fun updateCenterForTest()=settingsScreen?.updateCenterForTest()
     private fun localPlaybackLog():String {
         if(!settings.value.diagnostics)return getString(R.string.settings_log_disabled)
         val s=playback.snapshot();val events=s.optJSONArray("events")?:org.json.JSONArray()
@@ -566,7 +582,7 @@ class TvActivity:FragmentActivity() {
     private fun scopeName()=Sites.all.firstOrNull{it.id==catalogPreferences.siteId}?.name?:getString(R.string.tv_all_sites)
     private fun supports(kind:ContentKind):Boolean {
         val site=Sites.all.firstOrNull{it.id==catalogPreferences.siteId}?:return true
-        return if(kind==ContentKind.SERIES)site.seriesPath!=null else site.id !in setOf("dizibox","ddizi","diziboxum")
+        return site.supports(kind)
     }
     private fun pageStatus(page:UnifiedPage,count:Int)=if(page.requestedSites>0)
         if(page.completedSites>=page.requestedSites)getString(R.string.classic_sites_done,page.requestedSites)else getString(R.string.classic_sites_loading,page.completedSites,page.requestedSites)
@@ -667,7 +683,7 @@ class TvActivity:FragmentActivity() {
         applySeriesCatalog=null;declaredSeasons=detail.seasons
         if(seriesDetail)episodeValues=detail.episodes.map{it.copy(card=it.card.copy(seriesRef=it.series))}
         val back=FrameLayout(this)
-        back.addView(button(getString(R.string.classic_back)){onBackPressed()},FrameLayout.LayoutParams(dp(57),dp(31)).apply{topMargin=dp(14)})
+        back.addView(button(getString(R.string.classic_back)){onBackPressed()}.also(ClassicDirections::standalone),FrameLayout.LayoutParams(dp(57),dp(31)).apply{topMargin=dp(14)})
         back.addView(ClassicUi.text(this,"",10f,ClassicUi.gold).apply{id=R.id.fm_detail_progress;gravity=Gravity.CENTER_VERTICAL},FrameLayout.LayoutParams(dp(680),dp(31),Gravity.RIGHT).apply{topMargin=dp(14)})
         body.addView(back,LinearLayout.LayoutParams(-1,dp(59)))
         val top=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL}
@@ -705,7 +721,8 @@ class TvActivity:FragmentActivity() {
         controls.addView(save,LinearLayout.LayoutParams(-2,dp(31)).apply{marginStart=dp(8)})
         if(seriesDetail)controls.addView(button(getString(R.string.classic_operations)){seriesOperations(detail)},LinearLayout.LayoutParams(-2,dp(31)).apply{marginStart=dp(8)})
         val item=current.item?:UnifiedItem(ContentIdentity.key(detail.card),detail.card,listOf(detail.card))
-        controls.addView(button(getString(R.string.classic_sites_count,item.alternatives.map{it.ref.siteId}.distinct().size),R.id.fm_detail_sites){chooseProvider(current.item?:item)},LinearLayout.LayoutParams(-2,dp(31)).apply{marginStart=dp(8)})
+        controls.addView(button(getString(R.string.classic_sites_count,item.alternatives.filter{Sites.isInstalled(it.ref.siteId)}.map{it.ref.siteId}.distinct().size),R.id.fm_detail_sites){chooseProvider(current.item?:item)},LinearLayout.LayoutParams(-2,dp(31)).apply{marginStart=dp(8)})
+        ClassicDirections.horizontal(controls)
 
         copy.addView(controls,LinearLayout.LayoutParams(-1,dp(31)).apply{topMargin=dp(10)})
         val secondary=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL}
@@ -714,6 +731,7 @@ class TvActivity:FragmentActivity() {
             launchScreen{t->data.follow(detail.card,episodeValues,seriesWatch?.following!=true);seriesWatch=data.tracking(detail.card);if(active(t))showDetail(detail)}
         },LinearLayout.LayoutParams(-2,dp(29)).apply{marginStart=dp(8)})
         copy.addView(secondary,LinearLayout.LayoutParams(-1,dp(29)).apply{topMargin=dp(8)})
+        ClassicDirections.horizontal(secondary)
         if(!seriesDetail){
             collectionContext?.let{(collection,index)->
                 val actions=LinearLayout(this)
@@ -722,8 +740,8 @@ class TvActivity:FragmentActivity() {
                 copy.addView(actions)
             }
             copy.addView(ClassicUi.text(this,detail.description.ifBlank{getString(R.string.tv_no_description)},13.5f,0xFFC4CFDD.toInt()).apply{maxLines=4;ellipsize=android.text.TextUtils.TruncateAt.END;setLineSpacing(dp(4).toFloat(),1f)},LinearLayout.LayoutParams(-1,-2).apply{topMargin=dp(16)})
-            copy.addView(button(getString(R.string.classic_read_more)){showFullText(ContentIdentity.displayTitle(detail.card),detail.description.ifBlank{getString(R.string.tv_no_description)})},LinearLayout.LayoutParams(-2,dp(31)).apply{topMargin=dp(10)})
-        }else copy.addView(button(getString(R.string.classic_cast)){showFullText(getString(R.string.classic_cast),detail.cast.joinToString("\n").ifBlank{getString(R.string.classic_no_cast)})},LinearLayout.LayoutParams(-2,dp(31)).apply{topMargin=dp(6)})
+            copy.addView(button(getString(R.string.classic_read_more)){showFullText(ContentIdentity.displayTitle(detail.card),detail.description.ifBlank{getString(R.string.tv_no_description)})}.also(ClassicDirections::standalone),LinearLayout.LayoutParams(-2,dp(31)).apply{topMargin=dp(10)})
+        }else copy.addView(button(getString(R.string.classic_cast)){showFullText(getString(R.string.classic_cast),detail.cast.joinToString("\n").ifBlank{getString(R.string.classic_no_cast)})}.also(ClassicDirections::standalone),LinearLayout.LayoutParams(-2,dp(31)).apply{topMargin=dp(6)})
         if(seriesDetail)top.addView(ScrollView(this).apply{addView(copy)},LinearLayout.LayoutParams(0,-1,1f))else top.addView(copy,LinearLayout.LayoutParams(0,-2,1f))
         if(seriesDetail)body.addView(top,LinearLayout.LayoutParams(-1,dp(199)))
         else body.addView(ScrollView(this).apply{isFillViewport=false;addView(top)},LinearLayout.LayoutParams(-1,0,1f))
@@ -797,7 +815,7 @@ class TvActivity:FragmentActivity() {
     }
     private var providerOverlay:ClassicOverlay?=null
     private fun updateProviders(){val window=providerOverlay?.takeIf{it.showing}?:return;val item=current.item?:return
-        window.update(item.alternatives.map{c->ClassicRow(c.ref.id,Sites.get(c.ref.siteId).name+" · "+ContentIdentity.displayTitle(c),listOfNotNull(c.sourceSeason?.let{getString(R.string.tv_season,it)},c.language.takeIf{it.isNotBlank()}).joinToString(" · "),c.ref.id==item.card.ref.id)},
+        window.update(item.alternatives.filter{Sites.isInstalled(it.ref.siteId)}.map{c->ClassicRow(c.ref.id,Sites.get(c.ref.siteId).name+" · "+ContentIdentity.displayTitle(c),listOfNotNull(c.sourceSeason?.let{getString(R.string.tv_season,it)},c.language.takeIf{it.isNotBlank()}).joinToString(" · "),c.ref.id==item.card.ref.id)},
             listOf(ClassicAction("find",getString(R.string.pool_find_sites)){findOtherSites()}),findViewById<TextView>(R.id.fm_detail_progress)?.text?.toString().orEmpty()){id->
                 item.alternatives.firstOrNull{it.ref.id==id}?.let{c->window.close();current=current.copy(item=item.copy(card=c));detailValue=null;render(current)}
             }
@@ -806,7 +824,7 @@ class TvActivity:FragmentActivity() {
         val detail=detailValue?:return
         launchScreen{token->data.discoverAlternatives(detail.card,true).collect{found->if(active(token)){
             current=current.copy(item=found.item.copy(card=detail.card))
-            findViewById<Button>(R.id.fm_detail_sites)?.text=getString(R.string.classic_sites_count,found.item.alternatives.map{it.ref.siteId}.distinct().size)
+            findViewById<Button>(R.id.fm_detail_sites)?.text=getString(R.string.classic_sites_count,found.item.alternatives.filter{Sites.isInstalled(it.ref.siteId)}.map{it.ref.siteId}.distinct().size)
             findViewById<TextView>(R.id.fm_detail_progress)?.text=getString(R.string.fm_alternatives_progress,found.completed,found.total,found.item.alternatives.map{it.ref.siteId}.distinct().size,found.failures.size)
             updateProviders()
             if(!found.running&&detail.card.ref.kind==ContentKind.SERIES){val catalog=data.episodeCatalog(detail.card);if(active(token))applySeriesCatalog?.invoke(catalog)}
@@ -823,30 +841,36 @@ class TvActivity:FragmentActivity() {
                 else data.sourcePool(card,initial,playerPreferences.crossSiteSources,::backgroundGate)
             updates.collect{pool->
                 if(revision!=sourceRevision)return@collect
-                sourceState.value=pool;pool.options.forEach{sourceOptions[it.id]=it}
+                sourceState.value=pool.withResolutionFailures(sourceResolutionFailures)
+                pool.options.forEach{sourceOptions[it.id]=it}
                 if(playback.active){playback.appendCandidates(pool.options.filter{it.state==OptionState.AVAILABLE}.map(::candidate),pool.pending);playerControls?.sourcesChanged(pool.pending)}
-                else {status.text=pool.progress.ifBlank{getString(R.string.pool_searching)};playerNotice?.text=status.text;findViewById<TextView>(R.id.fm_detail_progress)?.text=status.text;initialSourceCard?.let{drawInitialSources(it,initialSourceResume)}}
+                else {status.text=pool.progress.ifBlank{getString(R.string.pool_searching)};playerNotice?.text=status.text;findViewById<TextView>(R.id.fm_detail_progress)?.text=status.text;initialSourceDetail?.let{drawInitialSources(it,initialSourceResume)}}
             }
         }catch(e:CancellationException){throw e}catch(e:Exception){if(revision==sourceRevision){sourceState.value=sourceState.value.copy(pending=false,progress=e.message.orEmpty());if(playback.active)playback.appendCandidates(emptyList(),false)}}}
     }
     private fun chooseSource(detail:Detail,resume:Long){
-        cancelSources();sourceOptions.clear();primedSources.clear()
+        cancelSources();sourceOptions.clear();primedSources.clear();sourceResolutionFailures.clear()
         initialSourceResume=resume
         val revision=sourceRevision
         sourceState.value=SourcePool(detail.options.map{it.scoped()},sourceEpisode!=null||playerPreferences.crossSiteSources)
         sourceState.value.options.forEach{sourceOptions[it.id]=it}
         startSourceUpdates(detail.card,detail.options,revision)
-        if(!playerPreferences.automaticSources){showInitialSources(detail.card,resume);return}
+        if(!playerPreferences.automaticSources){showInitialSources(detail,resume);return}
         status.setText(R.string.pool_searching);playerNotice?.setText(R.string.pool_searching)
         sourceStartJob=scope.launch{
             try{
-                val ready=FirstReadySource.await(sourceState){data.resolve(it)}
+                val ready=FirstReadySource.await(sourceState,onFailure={option,error->
+                    if(revision==sourceRevision) {
+                        sourceResolutionFailures[option.id]=sourceFailureReason(error)
+                        sourceState.value=sourceState.value.withResolutionFailures(sourceResolutionFailures)
+                    }
+                }){data.resolve(it)}
                 if(revision!=sourceRevision||!foreground)return@launch
                 primedSources[ready.first.id]=ready.second
                 val options=listOf(ready.first)+sourceState.value.options.filter{it.id!=ready.first.id&&it.state==OptionState.AVAILABLE}
                 play(detail.card,options,resume);playback.appendCandidates(emptyList(),sourceState.value.pending)
-            }catch(e:CancellationException){if(e !is TimeoutCancellationException)throw e;if(revision==sourceRevision){sourceProblem(getString(R.string.fm_start_timeout));showInitialSources(detail.card,resume)}}
-            catch(e:Exception){if(revision==sourceRevision){sourceProblem(e.message?:getString(R.string.tv_no_source));showInitialSources(detail.card,resume)}}
+            }catch(e:CancellationException){if(e !is TimeoutCancellationException)throw e;if(revision==sourceRevision){sourceProblem(getString(R.string.fm_start_timeout));showInitialSources(detail,resume)}}
+            catch(e:Exception){if(revision==sourceRevision){sourceProblem(e.message?:getString(R.string.tv_no_source));showInitialSources(detail,resume)}}
         }
         sourceDeadlineJob=scope.launch{delay(60000);if(revision==sourceRevision&&playback.active&&!playback.snapshot().optBoolean("firstFrame")){
             sourceStartJob?.cancel();playerNotice?.text=getString(R.string.fm_start_timeout);playerControls?.openSources()
@@ -856,10 +880,10 @@ class TvActivity:FragmentActivity() {
         status.text=message;findViewById<TextView>(R.id.fm_detail_progress)?.text=message
         Toast.makeText(this,message.take(160),Toast.LENGTH_LONG).show()
     }
-    private fun showInitialSources(card:Card,resume:Long){
-        initialSourceCard=card;initialSourceResume=resume
+    private fun showInitialSources(detail:Detail,resume:Long){
+        initialSourceDetail=detail;initialSourceResume=resume
         overlay(getString(R.string.ux_sources),true,back=::cancelEntry)
-        drawInitialSources(card,resume)
+        drawInitialSources(detail,resume)
     }
     private fun sourceRows(pool:SourcePool):List<ClassicRow> = buildList {
         pool.options.groupBy{it.content.siteId}.forEach{(site,options)->
@@ -868,14 +892,14 @@ class TvActivity:FragmentActivity() {
         }
         pool.errors.forEachIndexed{i,e->add(ClassicRow("error:$i:${e.siteId}",Sites.all.firstOrNull{it.id==e.siteId}?.name?:e.siteId,e.message,enabled=false))}
     }
-    private fun drawInitialSources(card:Card,resume:Long){
+    private fun drawInitialSources(detail:Detail,resume:Long){
         val pool=sourceState.value
         classicOverlay?.update(sourceRows(pool),
-            actions=if(!pool.pending)listOf(ClassicAction("retry",getString(R.string.tv_retry)){chooseSource(Detail(card),resume)})else emptyList(),
+            actions=if(!pool.pending)listOf(ClassicAction("retry",getString(R.string.tv_retry)){chooseSource(detail,resume)})else emptyList(),
             message=pool.progress){id->
             val option=sourceState.value.options.firstOrNull{it.id==id&&it.state==OptionState.AVAILABLE}?:return@update
-            initialSourceCard=null;classicOverlay?.close();sourceStartJob?.cancel()
-            sourceStartJob=scope.launch{play(card,listOf(option)+sourceState.value.options.filter{it.id!=id&&it.state==OptionState.AVAILABLE},resume)}
+            initialSourceDetail=null;classicOverlay?.close();sourceStartJob?.cancel()
+            sourceStartJob=scope.launch{play(detail.card,listOf(option)+sourceState.value.options.filter{it.id!=id&&it.state==OptionState.AVAILABLE},resume)}
         }
     }
     private fun ensurePlayerView(){
@@ -888,7 +912,7 @@ class TvActivity:FragmentActivity() {
         }
         subtitleAppearance=SubtitleAppearance(playerView!!).also{it.apply(playbackOverrides.apply(settings.value.player));it.bind(playback.player)}
         root.addView(playerView,FrameLayout.LayoutParams(-1,-1))
-        playerControls=TvPlayerControls(this,playerView!!,playback,playerPreferences,::sourceSettingsChanged,::requestExit,::changeEpisode,{sourceState.value},::rememberTrack,{sleepMinutes},::setSleep,{subtitleAppearance?.seeking(it)},::showSettings,::resetContentPreferences)
+        playerControls=TvPlayerControls(this,playerView!!,playback,playerPreferences,::sourceSettingsChanged,::requestExit,::changeEpisode,{sourceState.value},::rememberTrack,{sleepMinutes},::setSleep,{subtitleAppearance?.seeking(it)},{showSettings()},::resetContentPreferences)
         playerNotice=text("",15f).apply{setBackgroundColor(0xA0090B10.toInt());setPadding(dp(12),dp(6),dp(12),dp(6))}
         root.addView(playerNotice,FrameLayout.LayoutParams(-2,-2,Gravity.TOP or Gravity.START))
         host.addView(root,0,FrameLayout.LayoutParams(-1,-1))
@@ -942,7 +966,7 @@ class TvActivity:FragmentActivity() {
     private fun cancelEntry()=cancelEntry(true)
     private fun cancelEntry(restore:Boolean){
         entryRevision++;entryJob?.cancel();entryJob=null;entryBusy=false
-        cancelSources();initialSourceCard=null;sourceEpisode=null;classicOverlay?.close()
+        cancelSources();initialSourceDetail=null;sourceEpisode=null;classicOverlay?.close()
         val cp=pendingCheckpoint;pendingCheckpoint=null
         if(cp!=null)services.storageScope.launch{try{data.abandonPlayback(cp)}catch(e:Exception){android.util.Log.e("FilmStorage","Entry checkpoint",e)}}
         if(!playback.active){Glide.with(this@TvActivity).resumeRequestsRecursive();ui.visibility=View.VISIBLE;if(restore&&foreground)render(current)}
@@ -1032,13 +1056,6 @@ class TvActivity:FragmentActivity() {
         if(!playerPreferences.crossSiteSources){sourcePoolJob?.cancel();if(playback.active)playback.appendCandidates(emptyList(),false)}
         else if(playback.active)playingCard?.let{startSourceUpdates(it,sourceOptions.values.toList(),sourceRevision)}
     }
-    private fun sourceSettings(){
-        dialog=ClassicDialog.Builder(this).setTitle(R.string.pool_settings).setMultiChoiceItems(arrayOf(getString(R.string.pool_automatic),getString(R.string.pool_cross_site)),
-            booleanArrayOf(settings.value.automaticSources,settings.value.crossSiteSources)){_,i,on->scope.launch{
-            try{settings.update{if(i==0)it.copy(automaticSources=on)else it.copy(crossSiteSources=on)};sourceSettingsChanged()}
-            catch(_:Exception){dialog?.dismiss();dialog=ClassicDialog.Builder(this@TvActivity).setMessage(R.string.settings_saved_error).setPositiveButton(R.string.tv_back,null).show()}
-        }}.setPositiveButton(R.string.tv_player_done,null).create().also{it.show()}
-    }
     private fun about(){
         body.addView(label(R.string.tv_about_description,23f).apply{setPadding(dp(15),dp(25),0,dp(12))})
         val version=packageManager.getPackageInfo(packageName,0).versionName.orEmpty()
@@ -1057,7 +1074,7 @@ class TvActivity:FragmentActivity() {
         tile.item?.let{focuses[current.screen]=(focuses[current.screen]?.first?:0L) to tile.key;open(it);return}
         when{
             tile.action=="settings"->showSettings()
-            tile.action=="updates"->DistributionPanel(this,scope,{playback.active}).open()
+            tile.action=="updates"->showSettings("updates")
             tile.action=="movies"->navigate(TvNav(TvScreen.MOVIES))
             tile.action=="series"->navigate(TvNav(TvScreen.SERIES))
             tile.action=="library"->navigate(TvNav(TvScreen.LIBRARY))
@@ -1080,7 +1097,7 @@ class TvActivity:FragmentActivity() {
         if(rows==null&&grid==null)body.addView(button(getString(R.string.tv_retry)){render(current)}.also{firstContent=it})
     }
     private fun focusAboveContent(fromGrid:Boolean=false){
-        if(current.screen==TvScreen.SEARCH){searchTabs[current.searchType]?.requestFocus();return}
+        if(current.screen==TvScreen.SEARCH&&searchTabs[current.searchType]?.isShown==true){searchTabs[current.searchType]?.requestFocus();return}
         if(firstContent?.isShown==true){firstContent?.requestFocus();return}
         if(fromGrid)(navigation[current.screen]?:navigation[TvScreen.HOME])?.requestFocus()else focusContent()
     }
@@ -1094,15 +1111,25 @@ class TvActivity:FragmentActivity() {
         val header=listOfNotNull(query,findViewById<View>(R.id.tv_search_submit),findViewById(R.id.classic_search_clear),findViewById(R.id.classic_search_recent),findViewById(R.id.tv_nav_about))
         val sites=findViewById<View>(R.id.tv_site_picker)
         val responses=body.findViewWithTag<View>("catalog:responses")?.takeIf{it.isShown}
-        val filters=findViewById<View>(R.id.classic_filter)
-        val sort=findViewById<View>(R.id.classic_sort)
+        val filters=findViewById<View>(R.id.classic_filter)?.takeIf{it.isShown}
+        val sort=findViewById<View>(R.id.classic_sort)?.takeIf{it.isShown}
         val added=body.findViewWithTag<View>("catalog:new")
         val collections=findViewById<View>(R.id.fm_collections)
         fun go(target:View?):Boolean{target?.takeIf{it.isShown&&it.isFocusable}?.requestFocus();return true}
-        fun down():Boolean{focusAboveContent();return true}
+        fun down():Boolean{if(focus!==firstContent)contentReturn=focus;focusAboveContent();return true}
         fun cards():Boolean{if(grid!=null)grid?.focusContent()else focusContent();return true}
+        // Home has Sort above Site responses; catalog/search screens have the reverse layout.
+        // Follow their current on-screen positions rather than imposing a shared hard-coded order.
+        val column=listOfNotNull(sites,sort,responses).filter{it.isShown&&it.isFocusable}.sortedBy{node->IntArray(2).also{node.getLocationOnScreen(it)}[1]}
+        val tool=column.indexOf(focus)
+        if(tool>=0&&(key==KeyEvent.KEYCODE_DPAD_UP||key==KeyEvent.KEYCODE_DPAD_DOWN)){
+            return if(key==KeyEvent.KEYCODE_DPAD_UP)go(column.getOrNull(tool-1)?:header.lastOrNull())
+            else if(tool<column.lastIndex)go(column[tool+1])else down()
+        }
         if(focus===query){
             if(key==KeyEvent.KEYCODE_DPAD_DOWN)return go(navigation[current.screen]?:nav.firstOrNull())
+            if(key==KeyEvent.KEYCODE_DPAD_UP)return true
+            if(key==KeyEvent.KEYCODE_DPAD_LEFT&&query.selectionStart==0&&query.selectionEnd==0)return true
             if(key==KeyEvent.KEYCODE_DPAD_RIGHT&&query.selectionStart==query.text.length&&query.selectionEnd==query.text.length)return go(header.getOrNull(1))
             return false
         }
@@ -1110,13 +1137,13 @@ class TvActivity:FragmentActivity() {
         if(h>=0)return when(key){KeyEvent.KEYCODE_DPAD_LEFT->go(header.getOrNull(h-1));KeyEvent.KEYCODE_DPAD_RIGHT->go(header.getOrNull(h+1));KeyEvent.KEYCODE_DPAD_DOWN->go(if(focus.id==R.id.tv_nav_about)sites else navigation[current.screen]?:nav.firstOrNull());KeyEvent.KEYCODE_DPAD_UP->true;else->false}
         val n=nav.indexOf(focus)
         if(n>=0)return when(key){KeyEvent.KEYCODE_DPAD_LEFT->go(nav.getOrNull(n-1));KeyEvent.KEYCODE_DPAD_RIGHT->go(nav.getOrNull(n+1)?:sites);KeyEvent.KEYCODE_DPAD_UP->go(query);KeyEvent.KEYCODE_DPAD_DOWN->down();else->false}
-        if(focus===sites)return when(key){KeyEvent.KEYCODE_DPAD_UP->go(header.lastOrNull());KeyEvent.KEYCODE_DPAD_DOWN->go(responses?:sort?:firstContent);KeyEvent.KEYCODE_DPAD_LEFT->go(nav.lastOrNull());KeyEvent.KEYCODE_DPAD_RIGHT->true;else->false}
-        if(focus===responses)return when(key){KeyEvent.KEYCODE_DPAD_UP->go(sites);KeyEvent.KEYCODE_DPAD_DOWN->if(sort!=null)go(sort)else down();KeyEvent.KEYCODE_DPAD_LEFT->if(filters!=null)go(filters)else down();KeyEvent.KEYCODE_DPAD_RIGHT->true;else->false}
+        if(focus===sites)return when(key){KeyEvent.KEYCODE_DPAD_LEFT->go(nav.lastOrNull());KeyEvent.KEYCODE_DPAD_RIGHT->true;else->false}
+        if(focus===responses)return key==KeyEvent.KEYCODE_DPAD_LEFT||key==KeyEvent.KEYCODE_DPAD_RIGHT
         if(focus===filters||focus===sort)return when(key){
-            KeyEvent.KEYCODE_DPAD_UP->go(if(focus===sort)responses?:sites else navigation[TvScreen.DISCOVER]?:nav.firstOrNull())
+            KeyEvent.KEYCODE_DPAD_UP->go(navigation[TvScreen.DISCOVER]?:nav.firstOrNull())
             KeyEvent.KEYCODE_DPAD_DOWN->down()
-            KeyEvent.KEYCODE_DPAD_LEFT->go(if(focus===sort)filters?:chips.lastOrNull()?:added else chips.lastOrNull()?:added)
-            KeyEvent.KEYCODE_DPAD_RIGHT->go(if(focus===filters)sort else sites)
+            KeyEvent.KEYCODE_DPAD_LEFT->if(focus===sort&&filters!=null)go(filters)else true
+            KeyEvent.KEYCODE_DPAD_RIGHT->if(focus===filters)go(sort)else true
             else->false}
         val chip=chips.indexOf(focus)
         if(chip>=0)return when(key){
@@ -1125,14 +1152,15 @@ class TvActivity:FragmentActivity() {
             KeyEvent.KEYCODE_DPAD_LEFT->go(chips.getOrNull(chip-1))
             KeyEvent.KEYCODE_DPAD_RIGHT->go(chips.getOrNull(chip+1)?:filters?:sort)
             else->false}
-        if(focus===added||focus===collections)return when(key){KeyEvent.KEYCODE_DPAD_UP->go(navigation[current.screen]?:nav.firstOrNull());KeyEvent.KEYCODE_DPAD_DOWN->cards();KeyEvent.KEYCODE_DPAD_LEFT->go(added);KeyEvent.KEYCODE_DPAD_RIGHT->go(if(focus===added)collections?:filters else filters);else->false}
+        if(focus===added||focus===collections)return when(key){KeyEvent.KEYCODE_DPAD_UP->go(contentReturn?.takeIf{it.isShown}?:navigation[current.screen]?:nav.firstOrNull());KeyEvent.KEYCODE_DPAD_DOWN->cards();KeyEvent.KEYCODE_DPAD_LEFT->go(added);KeyEvent.KEYCODE_DPAD_RIGHT->go(if(focus===added)collections?:filters else filters);else->false}
+        if(rows?.move(key)==true)return true
         if(key==KeyEvent.KEYCODE_DPAD_UP){
             val inContent=findViewById<View>(R.id.tv_content)?.hasFocus()==true
             if(inContent&&episodeGrid?.atTop()==true){findViewById<SeasonButtons>(R.id.tv_season)?.requestFocus();return true}
             if(inContent&&(grid?.atTop()==true||episodeGrid?.atTop()==true||rows?.atTop()==true)){focusAboveContent(true);return true}
-            if(focus===firstContent||heroButton?.hasFocus()==true)return go(navigation[current.screen]?:nav.firstOrNull())
+            if(focus===firstContent||heroButton?.hasFocus()==true||focus.id==R.id.classic_recommend)return go(contentReturn?.takeIf{it.isShown}?:navigation[current.screen]?:nav.firstOrNull())
         }
-        return grid?.move(key)==true
+        return episodeGrid?.move(key)==true||grid?.move(key)==true
     }
     private fun focusContent(){
         if(firstContent?.isShown==true){firstContent?.requestFocus();return}
@@ -1142,6 +1170,12 @@ class TvActivity:FragmentActivity() {
     // Core's legacy ComponentActivity marks its implementation library-restricted.
     @android.annotation.SuppressLint("RestrictedApi")
     override fun dispatchKeyEvent(event:KeyEvent):Boolean {
+        // The full-screen settings view owns navigation, even while a paused player exists below it.
+        if(settingsScreen!=null){
+            if(event.keyCode in listOf(KeyEvent.KEYCODE_MEDIA_PLAY,KeyEvent.KEYCODE_MEDIA_PAUSE,KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE,
+                KeyEvent.KEYCODE_MEDIA_STOP,KeyEvent.KEYCODE_MEDIA_REWIND,KeyEvent.KEYCODE_MEDIA_FAST_FORWARD,KeyEvent.KEYCODE_MEDIA_NEXT,KeyEvent.KEYCODE_MEDIA_PREVIOUS))return true
+            return super.dispatchKeyEvent(event)
+        }
         // Open on release: the same Back key's UP must not immediately dismiss the new dialog.
         if(playback.active&&event.keyCode==KeyEvent.KEYCODE_BACK){if(event.action==KeyEvent.ACTION_UP)onBackPressed();return true}
         if(playback.active&&event.keyCode==KeyEvent.KEYCODE_MEDIA_STOP&&event.action==KeyEvent.ACTION_DOWN){onBackPressed();return true}
@@ -1166,7 +1200,7 @@ class TvActivity:FragmentActivity() {
         try{
             checkpoint?.takeIf{it.token!=cp.token}?.let{previous->data.finishPlayback(previous,PlaybackFinish.SAVE,playback.player?.currentPosition?:0,playback.player?.duration?.coerceAtLeast(0)?:0)}
         }catch(e:Exception){sourceProblem(getString(R.string.ux_storage_retry));return}
-        checkpoint=cp;pendingCheckpoint=null;initialSourceCard=null;classicOverlay?.close()
+        checkpoint=cp;pendingCheckpoint=null;initialSourceDetail=null;classicOverlay?.close()
         playerControls?.close();cancelWork();playback.stopPlayback();playingCard=card
         ensurePlayerView()
         ui.visibility=View.GONE
@@ -1229,8 +1263,12 @@ class TvActivity:FragmentActivity() {
                 val card=target.card.copy(seriesRef=target.card.seriesRef?:previous.seriesRef,episodeNumber=target.number,seriesIdentity=previous.seriesIdentity)
                 val item=UnifiedItem(ContentIdentity.key(card),card,(listOf(card)+target.alternatives).distinctBy(SeriesIdentity::sourceKey))
                 val state=MutableStateFlow(SourcePool(emptyList(),true))
-                discovery=launch{data.episodeSourcePool(item,playerPreferences.crossSiteSources,::backgroundGate).collect{state.value=it}}
-                val ready=if(playerPreferences.automaticSources)FirstReadySource.await(state){data.resolve(it)}else{
+                val failures=mutableMapOf<String,String>()
+                discovery=launch{data.episodeSourcePool(item,playerPreferences.crossSiteSources,::backgroundGate).collect{state.value=it.withResolutionFailures(failures)}}
+                val ready=if(playerPreferences.automaticSources)FirstReadySource.await(state,onFailure={option,error->
+                    failures[option.id]=sourceFailureReason(error)
+                    state.value=state.value.withResolutionFailures(failures)
+                }){data.resolve(it)}else{
                     val selected=CompletableDeferred<SourceOption>()
                     val window=overlay(getString(R.string.ux_sources),true,back={selected.cancel()})
                     val painter=launch{state.collect{pool->window.update(sourceRows(pool),message=pool.progress){id->pool.options.firstOrNull{it.id==id&&it.state==OptionState.AVAILABLE}?.let{selected.complete(it)}}}}
@@ -1239,7 +1277,9 @@ class TvActivity:FragmentActivity() {
                 if(!foreground||playingCard?.ref?.id!=previous.ref.id)return@launch
                 pendingCheckpoint=data.beginPlayback(card)
                 sourceEpisode=item
-                cancelSources();sourceOptions.clear();primedSources.clear();sourceState.value=state.value
+                cancelSources();sourceOptions.clear();primedSources.clear()
+                sourceResolutionFailures.clear();sourceResolutionFailures.putAll(failures)
+                sourceState.value=state.value
                 sourceState.value.options.forEach{sourceOptions[it.id]=it};primedSources[ready.first.id]=ready.second
                 finishBusy=true
                 try{withContext(NonCancellable){play(card,listOf(ready.first)+state.value.options.filter{it.state==OptionState.AVAILABLE&&it.id!=ready.first.id},0)}}finally{finishBusy=false}
@@ -1283,6 +1323,7 @@ class TvActivity:FragmentActivity() {
             .setNegativeButton(R.string.tv_cancel,null).create().also{it.setOnDismissListener{navigation[TvScreen.HOME]?.requestFocus()};it.show()}
     }
     override fun onKeyDown(key:Int,event:KeyEvent):Boolean {
+        if(settingsScreen!=null)return super.onKeyDown(key,event)
         if(!playback.active&&(pendingCheckpoint!=null||entryBusy)&&key==KeyEvent.KEYCODE_MEDIA_STOP){cancelEntry();return true}
         if(playback.active&&key==KeyEvent.KEYCODE_MEDIA_STOP){onBackPressed();return true}
         val p=playback.player
@@ -1307,7 +1348,7 @@ class TvActivity:FragmentActivity() {
         if(dataFactoryForTests==null)app.filmmerkezi.tv.updates.DistributionManager.get(this).foreground(playback.active)
     }
     override fun onPause(){if(android.os.Build.VERSION.SDK_INT<=23){foreground=false;saveProgress();playback.suspendPlayback()};super.onPause()}
-    override fun onStop(){foreground=false;if(!finishBusy&&(pendingCheckpoint!=null||entryBusy))cancelEntry(false);cancelSources();nextEpisodeJob?.cancel();playerControls?.close();cancelWork();saveProgress();if(android.os.Build.VERSION.SDK_INT>=24)playback.suspendPlayback();super.onStop()}
+    override fun onStop(){foreground=false;updateNotices?.hide();if(!finishBusy&&(pendingCheckpoint!=null||entryBusy))cancelEntry(false);cancelSources();nextEpisodeJob?.cancel();playerControls?.close();cancelWork();saveProgress();if(android.os.Build.VERSION.SDK_INT>=24)playback.suspendPlayback();super.onStop()}
     override fun onTrimMemory(level:Int){
         super.onTrimMemory(level)
         if(::services.isInitialized){services.trim();Posters.trim(this,level)}
@@ -1348,5 +1389,6 @@ class TvActivity:FragmentActivity() {
     internal fun siteDialogForTest()=dialog
     internal fun classicOverlayForTest()=classicOverlay
     internal fun playerOverlayForTest()=playerControls?.overlayForTest()
+    internal fun transferOverlayForTest()=transferPanel?.overlayForTest()
     internal fun saveForTest()=saveProgress()
 }

@@ -22,14 +22,14 @@ object Contracts {
         e.string("title"),e.optBoolean("typeVerified"),e.optBoolean("yearVerified"),e.optBoolean("detailChecked"),e.optBoolean("imdbConflict"),e.string("reason"),e.string("referencePage"),e.optInt("season").takeIf{it in 1..1000},e.optInt("revision",0))
     fun readCard(o:JSONObject):Card {
         require(o.getInt("schemaVersion") in 1..VERSION)
-        val r=o.getJSONObject("ref");val site=Sites.get(r.getString("siteId"))
+        val r=o.getJSONObject("ref");val site=Sites.forRecord(r.getString("siteId"),r.getString("pageUrl"))
         val url=site.catalogUrl(r.getString("pageUrl"))?:throw DataFailure(FailureKind.STORAGE,"Kayıt adresi bozuk","storage")
         return Card(ContentRef(site.id,url,ContentKind.valueOf(r.getString("kind").uppercase(Locale.ROOT))),o.getString("title"),SiteAddresses.rebase(o.string("poster"),site),
             if(o.isNull("year"))null else o.getInt("year"),if(o.isNull("imdb"))null else o.getDouble("imdb"),o.string("language"),
             o.string("originalTitle"),o.string("imdbId"),o.optJSONArray("aliases")?.values()?.map{it.toString()}?:emptyList(),
             o.string("seriesIdentity"),o.optJSONObject("episode")?.let{EpisodeNumber(it.getInt("season"),it.getInt("number"))},
             o.optJSONObject("seriesRef")?.let{r->
-                val s=Sites.get(r.getString("siteId"));val url=s.catalogUrl(r.getString("pageUrl"))
+                val s=Sites.forRecord(r.getString("siteId"),r.getString("pageUrl"));val url=s.catalogUrl(r.getString("pageUrl"))
                     ?:throw DataFailure(FailureKind.STORAGE,"Dizi adresi bozuk","storage")
                 ContentRef(s.id,url,ContentKind.SERIES)
             },o.string("workId"),o.optJSONObject("identityEvidence")?.let(::readEvidence),o.optJSONArray("genres")?.values()?.map{it.toString()}?:emptyList(),o.optInt("yearHint").takeIf{it in 1888..2100},o.optInt("sourceSeason").takeIf{it in 1..1000},o.optJSONObject("adultEvidence")?.let{AdultEvidence(it.string("page"),it.string("reason"),it.optBoolean("confirmed"))})

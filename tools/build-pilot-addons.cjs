@@ -5,6 +5,8 @@ const {pack,INDEX,hash}=require('./android-distribution.cjs');
 const root=path.resolve(__dirname,'..'),args={};
 for(let i=2;i<process.argv.length;i+=2){if(!process.argv[i].startsWith('--')||!process.argv[i+1])throw Error('Expected --name value');args[process.argv[i].slice(2)]=process.argv[i+1];}
 if(!args.key||!args.out||args.scope!=='p002,p003,p004,p005')throw Error('Required: --key <external key> --out <new pilot directory> --scope p002,p003,p004,p005');
+const qa=args['qa-label'];if(qa&&!/^[a-z][a-z0-9-]{0,39}$/.test(qa))throw Error('Invalid QA label');
+const repositoryId=qa?'qa-'+qa:'film-merkezi-android-eklentiler',repositoryName=qa?'Film Merkezi Android Eklentiler · QA '+qa:'Film Merkezi Android Eklentiler';
 const addons=path.resolve(args.addons||process.env.FM_ADDONS_DIR||path.join(root,'../Android-Eklentiler')),out=path.resolve(args.out);
 if(out.toLowerCase()===addons.toLowerCase())throw Error('Build into a separate reviewable pilot directory, never the live repository');
 if(fs.existsSync(path.join(out,INDEX)))throw Error('Use a fresh output directory; signed package versions are immutable');
@@ -23,11 +25,11 @@ const provenance=[];
 for(const original of definitions){
  const meta=JSON.parse(JSON.stringify(original));meta.dependencies=meta.type==='site'?[{publisher,id:'r'+meta.id.slice(1),minVersion:'1.0.0',maxVersion:'2.0.0'}]:[];
  const file=path.join(build,meta.id+'.json');fs.writeFileSync(file,JSON.stringify(meta,null,2)+'\n');
- pack({key:args.key,out,manifest:file,jar,id:'film-merkezi-android-eklentiler',name:'Film Merkezi Android Eklentiler'});
+ pack({key:args.key,out,manifest:file,jar,id:repositoryId,name:repositoryName});
  if(args.tizen){const dir=path.join(args.tizen,'kaynak',meta.type==='site'?'saglayicilar':'cozumleyiciler',meta.id);const source=JSON.parse(fs.readFileSync(path.join(dir,'addon.json'),'utf8'));provenance.push({id:meta.id,tizenVersion:source.version,files:source.modules.map(name=>({name,sha256:hash(fs.readFileSync(path.join(dir,name)))}))});}
 }
 const indexFile=path.join(out,INDEX),index=JSON.parse(fs.readFileSync(indexFile));
 index.revision=Number(args.revision||index.revision);if(!Number.isSafeInteger(index.revision)||index.revision<1)throw Error('Invalid index revision');
 const raw=Buffer.from(JSON.stringify(index,null,2)+'\n');fs.writeFileSync(indexFile,raw);fs.writeFileSync(indexFile.replace('.json','.sig'),crypto.sign('sha256',raw,privateKey).toString('base64')+'\n');
-fs.writeFileSync(path.join(out,'pilot-build.json'),JSON.stringify({scope:definitions.map(x=>x.id),publisher,jarBytes:fs.statSync(jar).size,jarSha256:hash(fs.readFileSync(jar)),revision:index.revision,provenance},null,2)+'\n');
+fs.writeFileSync(path.join(out,'pilot-build.json'),JSON.stringify({qaOnly:!!qa,requiredLocalHost:qa?'local-'+qa:null,scope:definitions.map(x=>x.id),publisher,jarBytes:fs.statSync(jar).size,jarSha256:hash(fs.readFileSync(jar)),revision:index.revision,provenance},null,2)+'\n');
 console.log(JSON.stringify({packages:index.packages.length,revision:index.revision,jarBytes:fs.statSync(jar).size,publisher}));

@@ -1,6 +1,7 @@
 package app.filmmerkezi.tv.updates
 
 import android.os.Build
+import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.json.*
@@ -10,7 +11,7 @@ import java.util.zip.ZipFile
 /** A downloaded set is staged atomically. Existing/previous sets stay referenced until acceptance. */
 class PackageInstaller(private val manager:DistributionManager) {
     companion object{private val mutex=Mutex()}
-    data class Candidate(val repo:JSONObject,val manifest:UpdateProtocol.Module,val raw:ByteArray,val signature:String){val identity get()=repo.getString("fingerprint")+"/"+manifest.id}
+    data class Candidate(val repo:JSONObject,val manifest:UpdateProtocol.Module,val raw:ByteArray,val signature:String,val replaces:List<String> = emptyList()){val identity get()=repo.getString("fingerprint")+"/"+manifest.id}
     private fun candidates()=manager.repositories().filter{it.optBoolean("enabled",true)}.flatMap{r->manager.index(r).packages.map{r to it}}
     private suspend fun manifest(repo:JSONObject,e:UpdateProtocol.Entry):Candidate {
         val base=repo.getString("url").substringBeforeLast('/')+"/"
@@ -42,26 +43,33 @@ class PackageInstaller(private val manager:DistributionManager) {
             };return null
         }
         val root=read(roots.first());val chosen=solve(listOf(Need(root.repo.getString("fingerprint"),root.manifest.id,"0.0.0","9999.9999.9999",root)),emptyMap(),emptySet())?:error("Uyumlu bağımlılık takımı bulunamadı")
+        val replacements=PackageSets.replacedProviders(existing,chosen.mapValues{it.value.manifest});val removed=replacements.values.flatten().toSet()
         val order=mutableListOf<Candidate>();val visiting=mutableSetOf<String>();val visited=mutableSetOf<String>()
         fun visit(c:Candidate){if(c.identity in visited)return;require(visiting.add(c.identity)){"Bağımlılık döngüsü"};c.manifest.dependencies.forEach{visit(chosen.getValue(it.publisher+"/"+it.id))};visiting.remove(c.identity);visited.add(c.identity);order.add(c)};chosen.values.forEach(::visit)
-        for(key in existing.keys())if(key !in chosen){val m=UpdateProtocol.module(existing.getJSONObject(key).getString("manifest").toByteArray(Charsets.UTF_8));for(d in m.dependencies){val next=chosen[d.publisher+"/"+d.id];require(next==null||d.accepts(next.manifest.version)){"Kurulu ${m.name} başka çözümleyici sürümü gerektiriyor"}}}
+        for(key in existing.keys())if(key !in chosen&&key !in removed){val m=UpdateProtocol.module(existing.getJSONObject(key).getString("manifest").toByteArray(Charsets.UTF_8));for(d in m.dependencies){val next=chosen[d.publisher+"/"+d.id];require(next==null||d.accepts(next.manifest.version)){"Kurulu ${m.name} başka çözümleyici sürümü gerektiriyor"}}}
         for(c in chosen.values){existing.optJSONObject(c.identity)?.let{old->val previous=UpdateProtocol.module(old.getString("manifest").toByteArray());require(UpdateProtocol.compare(c.manifest.version,previous.version)>=0){"Normal guncelleme daha eski surume donemez; onceki paket setini kullanin"}}}
-        require((existing.keys().asSequence().toSet()+chosen.keys).size<=64){"64 kurulu paket sınırı"};return order
+        require((existing.keys().asSequence().toSet()-removed+chosen.keys).size<=64){"64 kurulu paket sınırı"};return order.map{it.copy(replaces=replacements[it.identity].orEmpty())}
     }
-    suspend fun install(plan:List<Candidate>,progress:(String,Long)->Unit={_,_->})=mutex.withLock{
+    suspend fun install(plan:List<Candidate>,progress:(String,Long)->Unit={_,_->},onState:(InstallProgress)->Unit={})=mutex.withLock{
+        require(plan.isNotEmpty());val total=plan.sumOf{it.manifest.size.toLong()};var completed=0L
         collectGarbage()
         val objects=File(manager.store.directory,"objects").apply{mkdirs()};val state=manager.store.snapshot();val staged=JSONObject((state.optJSONObject("pending")?:state.getJSONObject("packages")).toString())
+        val replacements=PackageSets.replacedProviders(staged,plan.associate{it.identity to it.manifest})
+        for(c in plan){require(c.replaces.toSet()==replacements[c.identity].orEmpty().toSet()){"Kurulum planı değişti; yeniden seçin."};c.replaces.forEach{staged.remove(it)}}
         for(c in plan){val m=c.manifest;val target=File(objects,m.hash+".jar")
             if(!target.exists()||target.length()!=m.size.toLong()||UpdateProtocol.sha(target.readBytes())!=m.hash){
                 val used=objects.listFiles().orEmpty().sumOf{it.length()};require(used+m.size<=64L*1024*1024){"Eklenti alanı dolu; önce kullanılmayan paketleri kaldırın"}
                 val temporary=File(objects,"download-${m.hash}.jar")
-                try{manager.transport.download(c.repo.getString("url").substringBeforeLast('/')+"/"+m.artifact,temporary,m.size,m.hash){progress(m.name,it)};validateJar(temporary);require(temporary.renameTo(target)){"Doğrulanan paket yerleştirilemedi"}}finally{temporary.delete()}
+                try{onState(InstallProgress(InstallPhase.DOWNLOADING,m.name,completed,total));manager.transport.download(c.repo.getString("url").substringBeforeLast('/')+"/"+m.artifact,temporary,m.size,m.hash){progress(m.name,it);onState(InstallProgress(InstallPhase.DOWNLOADING,m.name,completed+it,total))};onState(InstallProgress(InstallPhase.VERIFYING,m.name,completed+m.size,total));validateJar(temporary);require(temporary.renameTo(target)){"Doğrulanan paket yerleştirilemedi"}}finally{temporary.delete()}
             }
+            currentCoroutineContext().ensureActive();onState(InstallProgress(InstallPhase.VERIFYING,m.name,completed+m.size,total))
             validateJar(target);require(target.setReadOnly()){"Paket salt okunur yapılamadı"}
             staged.put(c.identity,JSONObject().put("repo",c.repo.getString("key")).put("manifest",c.raw.toString(Charsets.UTF_8)).put("signature",c.signature).put("artifact",m.hash).put("enabled",true))
+            completed+=m.size
         }
         PackageSets.validate(state,staged,manager.installedCode,Build.VERSION.SDK_INT)
-        manager.store.commit{current->require(current.getJSONObject("packages").toString()==state.getJSONObject("packages").toString()){ "Kurulum sirasinda paket seti degisti; tekrar deneyin" };require(current.optJSONObject("pending")?.toString()==state.optJSONObject("pending")?.toString()){ "Hazir paket seti degisti; tekrar deneyin" };PackageSets.validate(current,staged,manager.installedCode,Build.VERSION.SDK_INT);current.put("pending",staged)}
+        currentCoroutineContext().ensureActive()
+        withContext(NonCancellable){manager.store.commit{current->require(current.getJSONObject("packages").toString()==state.getJSONObject("packages").toString()){ "Kurulum sirasinda paket seti degisti; tekrar deneyin" };require(current.optJSONObject("pending")?.toString()==state.optJSONObject("pending")?.toString()){ "Hazir paket seti degisti; tekrar deneyin" };PackageSets.validate(current,staged,manager.installedCode,Build.VERSION.SDK_INT);current.put("pending",staged)};onState(InstallProgress(InstallPhase.READY,"",total,total))}
     }
     fun validateJar(file:File){
         ZipFile(file).use{zip->val entries=zip.entries().asSequence().toList();require(entries.size in 1..64&&entries.any{it.name=="classes.dex"}){"Geçerli Kotlin/DEX paketi değil"}
@@ -70,13 +78,19 @@ class PackageInstaller(private val manager:DistributionManager) {
         }
     }
     suspend fun activate(){manager.store.commit{s->val pending=s.optJSONObject("pending")?:error("Hazir paket yok");PackageSets.validate(s,pending,manager.installedCode,Build.VERSION.SDK_INT);PackageSets.rememberSites(s,s.getJSONObject("packages"),pending);s.put("previous",s.getJSONObject("packages")).put("packages",pending).put("bootPending",false).put("needsBoot",true);s.remove("pending")}}
-    suspend fun remove(identity:String){manager.store.commit{s->val next=JSONObject((s.optJSONObject("pending")?:s.getJSONObject("packages")).toString());require(next.has(identity));next.remove(identity);PackageSets.validate(s,next,manager.installedCode,Build.VERSION.SDK_INT);s.put("pending",next)}}
+    fun removalPlan(identity:String):PluginRemoval {val state=manager.store.snapshot();return PluginRemovals.plan(state.optJSONObject("pending")?:state.getJSONObject("packages"),identity)}
+    suspend fun remove(identity:String)=remove(removalPlan(identity),false)
+    suspend fun remove(plan:PluginRemoval,includeUnused:Boolean)=mutex.withLock{manager.store.commit{s->
+        val next=PluginRemovals.apply(s.optJSONObject("pending")?:s.getJSONObject("packages"),plan,includeUnused)
+        PackageSets.validate(s,next,manager.installedCode,Build.VERSION.SDK_INT);s.put("pending",next)
+    }}
     suspend fun clearPending(){manager.store.commit{it.remove("pending")}}
     fun collectGarbage(){
         val state=manager.store.snapshot();val referenced=mutableSetOf<String>()
         for(name in listOf("packages","pending","previous")){val set=state.optJSONObject(name)?:continue;set.keys().forEach{referenced.add(set.getJSONObject(it).getString("artifact")+".jar")}}
         File(manager.store.directory,"objects").listFiles().orEmpty().filter{it.isFile&&it.name !in referenced&&(it.name.matches(Regex("[a-f0-9]{64}\\.jar"))||it.name.matches(Regex("download-[a-f0-9]{64}\\.jar")))}.forEach{require(it.delete()){"Kullanılmayan paket temizlenemedi"}}
     }
+    suspend fun cleanup():Long=mutex.withLock{val before=File(manager.store.directory,"objects").listFiles().orEmpty().sumOf{it.length()};collectGarbage();before-File(manager.store.directory,"objects").listFiles().orEmpty().sumOf{it.length()}}
     suspend fun accept(){manager.store.commit{it.put("bootPending",false)}}
     suspend fun recover(){manager.store.commit{s->if(s.optBoolean("bootPending")){s.put("packages",s.optJSONObject("previous")?:JSONObject()).put("bootPending",false).put("recovered",true);s.remove("needsBoot")}}}
     suspend fun rollback(){manager.store.commit{s->val previous=s.optJSONObject("previous")?:error("Onceki paket seti yok");PackageSets.validate(s,previous,manager.installedCode,Build.VERSION.SDK_INT);s.put("pending",previous)}}

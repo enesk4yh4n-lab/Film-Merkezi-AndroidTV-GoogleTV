@@ -18,8 +18,9 @@ data class AppSettings(
     val entry:String="ASK",val resumeRewind:Int=5,val diagnostics:Boolean=false,
     val player:PlaybackSettings=PlaybackSettings(),val siteAddresses:Map<String,SiteAddress> = emptyMap()
 ) {
-    fun catalog()=CatalogRequestOptions(merge,hideAdult,siteOrder.filter{it !in disabledCatalog})
-    fun sourceAllowed(id:String)=id !in disabledSources
+    fun installedSites()=Sites.orderedInstalled(siteOrder)
+    fun catalog()=CatalogRequestOptions(merge,hideAdult,installedSites().map{it.id}.filter{it !in disabledCatalog})
+    fun sourceAllowed(id:String)=Sites.isInstalled(id)&&id !in disabledSources
 }
 
 /** Pure, bounded decoding also handles older/wrong-type preferences without rewriting them. */
@@ -44,7 +45,7 @@ object SettingsCodec {
             values.b("largeText",false),values.b("exitConfirmation",true),
             (values["hiddenRows"]as? Set<*>)?.filterIsInstance<String>()?.filter{it in rows}?.toSet().orEmpty(),order("rowOrder",rows),
             values.b("merge",true),values.b("hideAdult",true),ids("disabledCatalog"),ids("disabledSources"),order("siteOrder",sites),
-            values.s("selectedSite",catalog.s("siteId","")).takeIf{it in sites}.orEmpty(),
+            values.s("selectedSite",catalog.s("siteId","")).takeIf{Sites.isInstalled(it)}.orEmpty(),
             b("automaticSources",true),b("crossSiteSources",true),b("autoNext",true),
             values.s("entry","ASK").takeIf{it in listOf("ASK","RESUME","RESTART")}?:"ASK",values.i("resumeRewind",5).takeIf{it in listOf(0,5,10)}?:5,b("diagnostics",false),
             PlaybackSettings(lang(s("audio","tr"),"tr"),lang(values.s("secondAudio","en"),"en"),values.b("sourceAudio",false),lang(s("text","tr"),"tr"),textMode,

@@ -16,26 +16,60 @@ class PilotWorkerTest {
     private val ins=InstrumentationRegistry.getInstrumentation()
     private val context=ins.targetContext
     private val manager=DistributionManager.get(context)
-    private fun asset(name:String)=ins.context.assets.open("pilot-test/$name").use{it.readBytes()}
-    private suspend fun withSet(block:suspend(PluginWorkerClient)->Unit) {
-        ModuleRuntime.stop();val original=manager.store.snapshot();val raw=asset(UpdateProtocol.INDEX);val index=UpdateProtocol.index(raw)
-        val signature=asset(UpdateProtocol.INDEX.replace(".json",".sig")).toString(Charsets.US_ASCII)
+    private fun asset(name:String,root:String="pilot-test")=ins.context.assets.open("$root/$name").use{it.readBytes()}
+    internal suspend fun withSet(root:String="pilot-test",block:suspend(PluginWorkerClient)->Unit) {
+        fun staged(name:String)=asset(name,root)
+        ModuleRuntime.stop();val original=manager.store.snapshot()
+        // GC tests may unlink package objects. Pin existing artifacts without copying user data.
+        val objects=File(manager.store.directory,"objects").apply{mkdirs()}
+        val pins=File(objects,".pilot-pins-"+java.util.UUID.randomUUID()).apply{mkdirs()}
+        val hashes=listOf("packages","pending","previous").flatMap{name->original.optJSONObject(name)?.let{s->s.keys().asSequence().map{s.getJSONObject(it).getString("artifact")}.toList()}.orEmpty()}.distinct()
+        fun pin(source:File,target:File){try{android.system.Os.link(source.path,target.path)}catch(e:android.system.ErrnoException){
+            // Some Android SELinux profiles forbid hard links even within this app's own data.
+            if(e.errno !in listOf(android.system.OsConstants.EACCES,android.system.OsConstants.EPERM))throw e
+            source.inputStream().use{input->target.outputStream().use{out->check(target.setReadOnly());input.copyTo(out)}}
+        }}
+        hashes.forEach{hash->val file=File(objects,"$hash.jar");if(file.exists())pin(file,File(pins,"$hash.jar"))}
+        val raw=staged(UpdateProtocol.INDEX);val index=UpdateProtocol.index(raw)
+        val signature=staged(UpdateProtocol.INDEX.replace(".json",".sig")).toString(Charsets.US_ASCII)
         UpdateProtocol.verify(raw,signature,index.publicKey)
         val fp=UpdateProtocol.fingerprint(index.publicKey);val repoKey="$fp/${index.id}";val packages=JSONObject()
         val repository=JSONObject().put("key",repoKey).put("id",index.id).put("fingerprint",fp).put("publicKey",index.publicKey).put("name",index.name).put("enabled",true).put("url","https://example.com/${UpdateProtocol.INDEX}").put("revision",index.revision).put("indexHash",UpdateProtocol.sha(raw)).put("index",raw.toString(Charsets.UTF_8)).put("signature",signature)
-        for(entry in index.packages.reversed()) {
-            val manifest=asset(entry.manifest);assertEquals(entry.hash,UpdateProtocol.sha(manifest))
+        val currentEntries=index.packages.groupBy{it.id}.values.map{versions->
+            versions.maxWithOrNull{a,b->UpdateProtocol.compare(a.version,b.version)}!!
+        }
+        for(entry in currentEntries.reversed()) {
+            val manifest=staged(entry.manifest);assertEquals(entry.hash,UpdateProtocol.sha(manifest))
             val m=UpdateProtocol.module(manifest);val file=File(manager.store.directory,"objects/${m.hash}.jar");file.parentFile!!.mkdirs()
-            if(!file.exists()) file.outputStream().use { out->assertTrue(file.setReadOnly());out.write(asset(m.artifact)) }
+            if(!file.exists()) file.outputStream().use { out->assertTrue(file.setReadOnly());out.write(staged(m.artifact)) }
             assertEquals(m.hash,UpdateProtocol.sha(file.readBytes()))
-            packages.put("$fp/${m.id}",JSONObject().put("repo",repoKey).put("manifest",manifest.toString(Charsets.UTF_8)).put("signature",asset(entry.manifest.replace(".json",".sig")).toString(Charsets.US_ASCII)).put("artifact",m.hash).put("enabled",true))
+            packages.put("$fp/${m.id}",JSONObject().put("repo",repoKey).put("manifest",manifest.toString(Charsets.UTF_8)).put("signature",staged(entry.manifest.replace(".json",".sig")).toString(Charsets.US_ASCII)).put("artifact",m.hash).put("enabled",true))
         }
         manager.store.commit{it.put("repositories",JSONObject().put(repoKey,repository)).put("packages",packages).put("bootPending",false).remove("pending")}
         val client=PluginWorkerClient(context,manager)
         try {PackageSets.validate(manager.store.snapshot(),packages,manager.installedCode,android.os.Build.VERSION.SDK_INT);ModuleRuntime.register(manager.store.snapshot());block(client)}
-        finally {client.stop();manager.store.commit{next->next.keys().asSequence().toList().forEach(next::remove);original.keys().forEach{next.put(it,original.get(it))}};ModuleRuntime.register(original)}
+        finally {client.stop();pins.listFiles().orEmpty().forEach{saved->val target=File(objects,saved.name);if(!target.exists())pin(saved,target);saved.delete()};pins.delete()
+            manager.store.commit{next->next.keys().asSequence().toList().forEach(next::remove);original.keys().forEach{next.put(it,original.get(it))}};ModuleRuntime.register(original)}
     }
     private fun payload(id:String):JSONObject = JSONObject().put("site",PluginWire.site(Sites.get(id)))
+    fun publishedSetStartsInTheWorker()=runBlocking {withSet("release-test"){client->
+        val set=manager.store.snapshot().getJSONObject("packages")
+        val prepared=Sites.all.map{it.id}.toSet()
+        assertEquals(17,prepared.size)
+        assertEquals(34,set.length())
+        val ownerByCode=linkedMapOf<String,SiteSpec>()
+        for(key in set.keys()){
+            val module=UpdateProtocol.module(set.getJSONObject(key).getString("manifest").toByteArray())
+            assertEquals(39,module.minApp)
+            if(module.type=="site")ownerByCode[module.id.drop(1)]=Sites.get(module.site!!.getString("id"))
+        }
+        assertEquals(prepared,ownerByCode.values.map{it.id}.toSet())
+        for(key in set.keys()){
+            val spec=ownerByCode.getValue(key.substringAfterLast('/').drop(1))
+            assertEquals(1,client.probe(key,payload(spec.id)).getInt("sdk"))
+        }
+    }}
+
     @Test fun signaturesDependenciesAndFourCatalogsLoadInRealWorker()=runBlocking {withSet{ client->
         val set=manager.store.snapshot().getJSONObject("packages");assertEquals(8,set.length())
         assertEquals(listOf("p002","p003","filmcibaba","p005"),Sites.all.map{it.id})

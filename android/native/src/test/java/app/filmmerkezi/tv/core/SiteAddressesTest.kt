@@ -66,7 +66,7 @@ class SiteAddressesTest {
             val calls=mutableListOf<WebRequest>();val network=object:WebTransport{override suspend fun request(request:WebRequest):WebResponse{calls.add(request);return WebResponse(request.url,"",headers=mapOf("Content-Type" to "video/mp4"))}}
             val ref=ContentRef(original.id,original.base+"/test/");val source=SourceResolver(network).resolve(SourceOption("test",ref,"Video",original.base+"/clip.mp4"))
             assertEquals("https://${original.id}.example/clip.mp4",source.url);assertEquals("https://${original.id}.example/test/",source.referer)
-            assertEquals(app.filmmerkezi.tv.SiteHttpPolicy.defaultUserAgent(original.base.toHttpUrl()),source.userAgent)
+            assertEquals(app.filmmerkezi.tv.SiteHttpPolicy.forProvider(original.id),source.userAgent)
             assertEquals(source.url,calls.single().url);assertEquals(source.referer,calls.single().referer)
         }
         Unit

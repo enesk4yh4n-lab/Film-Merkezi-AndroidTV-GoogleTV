@@ -25,7 +25,7 @@ class CollectionParserTest {
             val fixture=if(request.url=="https://filmizle.ink/")"home"else "search"
             return WebResponse(request.url,javaClass.getResource("/collections/$fixture.html")!!.readText())
         }}
-        val found=CatalogRepository(transport).collections()
+        val found=CatalogRepository(transport,requestOptions={CatalogRequestOptions(sites=listOf("filmcibaba"))}).collections()
         assertTrue(found.any{it.ref.pageUrl.contains("imdb-top-50")});assertTrue(found.all{it.ref.kind==ContentKind.COLLECTION})
         assertEquals(3,requests.size);assertTrue(requests.last().contains("s=top"))
     }

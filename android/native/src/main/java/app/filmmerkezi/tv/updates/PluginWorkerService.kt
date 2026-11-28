@@ -34,7 +34,7 @@ class PluginWorkerService:Service() {
         okhttp3.OkHttp.initialize(applicationContext)
         store=DistributionStore(this);network=ProviderNetwork(this);installSites(store.snapshot())
     }
-    private fun installSites(state:JSONObject){val packages=state.getJSONObject("packages");Sites.installed(PackageSets.orderedSites(packages.keys().asSequence().map{packages.getJSONObject(it)}.filter{it.optBoolean("enabled",true)}.map{UpdateProtocol.module(it.getString("manifest").toByteArray())}.toList()))}
+    private fun installSites(state:JSONObject){val packages=state.getJSONObject("packages");val modules=packages.keys().asSequence().associateWith{UpdateProtocol.module(packages.getJSONObject(it).getString("manifest").toByteArray())};Sites.installed(PackageSets.activeSites(state,modules));state.optJSONArray("knownSites")?.let{a->Sites.remember((0 until a.length()).map{PluginWire.site(a.getJSONObject(it))})}}
     private val binder=object:Binder(){
         override fun onTransact(code:Int,data:Parcel,reply:Parcel?,flags:Int):Boolean {
             data.enforceInterface(TOKEN)
@@ -89,7 +89,9 @@ class PluginWorkerService:Service() {
             override fun request(payload:String):String=runBlocking(callJob?:kotlin.coroutines.EmptyCoroutineContext){
                 val o=JSONObject(payload);allowed(o.getString("url"));allowed(o.optString("referer"));fun map(k:String)=o.optJSONObject(k)?.let{x->x.keys().asSequence().associateWith{x.getString(it)}}?:emptyMap()
                 map("headers").forEach{(k,v)->if(k.equals("Origin",true)||k.equals("Referer",true))allowed(v)}
-                val r=httpSlots.withPermit{scopedNetwork.request(WebRequest(o.getString("url"),o.optString("referer"),o.optString("method","GET"),map("fields"),if(o.isNull("body"))null else o.optString("body"),map("headers"),o.optLong("timeoutMs",12000),o.optInt("byteLimit",2097152)))}
+                val supplied=map("headers")
+                val headers=if(supplied.keys.any{it.equals("User-Agent",true)})supplied else supplied+("User-Agent" to app.filmmerkezi.tv.SiteHttpPolicy.forProvider(siteId))
+                val r=httpSlots.withPermit{scopedNetwork.request(WebRequest(o.getString("url"),o.optString("referer"),o.optString("method","GET"),map("fields"),if(o.isNull("body"))null else o.optString("body"),headers,o.optLong("timeoutMs",12000),o.optInt("byteLimit",2097152)))}
                 allowed(r.url);JSONObject().put("url",r.url).put("body",r.body).put("code",r.code).put("headers",JSONObject(r.headers)).toString()
             }
             override fun resolver(dependencyId:String,operation:String,payload:String):String {

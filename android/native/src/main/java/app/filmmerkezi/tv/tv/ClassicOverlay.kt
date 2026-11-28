@@ -8,6 +8,7 @@ import android.view.*
 import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
 import app.filmmerkezi.tv.R
 
 internal data class ClassicRow(val key:String,val title:String,val description:String="",val selected:Boolean=false,val enabled:Boolean=true,val header:Boolean=false)
@@ -20,6 +21,7 @@ internal class ClassicOverlay(private val activity:Activity,title:String,private
     private val dialog=object:Dialog(activity){
         override fun dispatchKeyEvent(event:KeyEvent):Boolean {
             if(event.keyCode==KeyEvent.KEYCODE_BACK){if(event.action==KeyEvent.ACTION_UP&&canDismiss()){back();close()};return true}
+            if(navigate(event))return true
             if(media(event))return true
             return super.dispatchKeyEvent(event)
         }
@@ -30,6 +32,8 @@ internal class ClassicOverlay(private val activity:Activity,title:String,private
     private val footer=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL}
     private var actionSignature=emptyList<Triple<String,String,Boolean>>();private var lastMessage:String?=null
     private var rows=emptyList<ClassicRow>();private var click:(String)->Unit={};private var closed=false
+    private var actions=emptyList<ClassicAction>();private var rendering=0;private var lastRow:String?=null
+    private val backButton=ClassicUi.button(activity,activity.getString(R.string.tv_back)){if(canDismiss()){back();close()}}.apply{tag="classic-panel:back"}
     private val adapter=object:RecyclerView.Adapter<Holder>(){
         init{setHasStableIds(true)}
         override fun getItemCount()=rows.size
@@ -58,10 +62,10 @@ internal class ClassicOverlay(private val activity:Activity,title:String,private
     init {
         val top=LinearLayout(activity).apply{orientation=LinearLayout.HORIZONTAL;gravity=Gravity.CENTER_VERTICAL}
         top.addView(ClassicUi.text(activity,title,20f,bold=true),LinearLayout.LayoutParams(0,-2,1f))
-        top.addView(ClassicUi.button(activity,activity.getString(R.string.tv_back)){if(canDismiss()){back();close()}},LinearLayout.LayoutParams(u(58),u(30)))
+        top.addView(backButton,LinearLayout.LayoutParams(u(58),u(30)))
         root.addView(top);root.addView(status,LinearLayout.LayoutParams(-1,-2).apply{topMargin=u(8);bottomMargin=u(8)})
         list.adapter=adapter;root.addView(list,LinearLayout.LayoutParams(-1,0,1f));root.addView(footer,LinearLayout.LayoutParams(-1,-2))
-        root.addView(ClassicUi.text(activity,activity.getString(R.string.ux_panel_hint),10f,ClassicUi.muted),LinearLayout.LayoutParams(-1,-2).apply{topMargin=u(10)})
+        root.addView(ClassicUi.text(activity,activity.getString(R.string.ux_panel_hint),10f,ClassicUi.muted).apply{tag="classic-panel:hint"},LinearLayout.LayoutParams(-1,-2).apply{topMargin=u(10)})
         dialog.setContentView(root);dialog.setCanceledOnTouchOutside(false)
         dialog.window?.apply{setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT));addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);setDimAmount(0.62f)
             setGravity(if(side)Gravity.RIGHT or Gravity.TOP else Gravity.CENTER);attributes=attributes.apply{windowAnimations=0}}
@@ -72,28 +76,62 @@ internal class ClassicOverlay(private val activity:Activity,title:String,private
         val signature=actions.map{Triple(it.key,it.title,it.enabled)}
         click=choose
         if(rows==values&&signature==actionSignature&&message==lastMessage)return
-        actionSignature=signature;lastMessage=message
-        if(!side)dialog.window?.setLayout(u(650),u(if(values.isEmpty())190 else 350))
-        val focus=dialog.currentFocus?.tag as? String;val old=rows.indexOfFirst{it.key==focus};val saved=list.layoutManager?.onSaveInstanceState()
+        val actionsChanged=signature!=actionSignature;actionSignature=signature;lastMessage=message;this.actions=actions
+        if(!side){root.minimumHeight=if(values.isEmpty())u(190)else 0
+            dialog.window?.setLayout(u(650),if(values.isEmpty())WindowManager.LayoutParams.WRAP_CONTENT else u(350))}
+        val serial=++rendering;val focus=dialog.currentFocus?.tag as? String;val old=rows.indexOfFirst{it.key==focus};val previous=rows;val saved=list.layoutManager?.onSaveInstanceState()
         rows=values;click=choose;status.text=message;status.visibility=if(message.isBlank())View.GONE else View.VISIBLE
-        adapter.notifyDataSetChanged();list.layoutManager?.onRestoreInstanceState(saved)
-        footer.removeAllViews();actions.forEach{a->footer.addView(ClassicUi.button(activity,a.title){if(a.enabled)a.run()}.apply{
+        DiffUtil.calculateDiff(object:DiffUtil.Callback(){override fun getOldListSize()=previous.size;override fun getNewListSize()=values.size
+            override fun areItemsTheSame(a:Int,b:Int)=previous[a].key==values[b].key
+            override fun areContentsTheSame(a:Int,b:Int)=previous[a]==values[b]}).dispatchUpdatesTo(adapter)
+        if(focus==null||values.none{it.key==focus})list.layoutManager?.onRestoreInstanceState(saved)
+        if(actionsChanged){footer.removeAllViews();actions.forEach{a->footer.addView(ClassicUi.button(activity,a.title){this.actions.firstOrNull{it.key==a.key&&it.enabled}?.run?.invoke()}.apply{
             tag=a.key;isEnabled=a.enabled;isFocusable=a.enabled;alpha=if(a.enabled)1f else 0.45f
-        },LinearLayout.LayoutParams(0,u(40),1f).apply{marginEnd=u(7);topMargin=u(10)})}
-        list.post{
-            val key=focus?.takeIf{k->rows.any{it.key==k&&it.enabled}||actions.any{it.key==k&&it.enabled}}
+        },LinearLayout.LayoutParams(0,u(40),1f).apply{marginEnd=u(7);topMargin=u(10)})}}
+        afterLayout{
+            if(serial!=rendering||closed)return@afterLayout
+            val now=dialog.currentFocus?.tag as? String
+            // A new directional key during layout wins over the old refresh snapshot.
+            if(now!=null&&now!=focus&&(rows.any{it.key==now&&it.enabled&&!it.header}||actions.any{it.key==now&&it.enabled}))return@afterLayout
+            val key=focus?.takeIf{k->k=="classic-panel:back"||rows.any{it.key==k&&it.enabled&&!it.header}||actions.any{it.key==k&&it.enabled}}
                 ?:rows.firstOrNull{it.selected&&it.enabled&&!it.header}?.key
                 ?:rows.getOrNull(old.coerceAtLeast(0))?.takeIf{it.enabled&&!it.header}?.key
                 ?:rows.firstOrNull{it.enabled&&!it.header}?.key
-            val node=key?.let{root.findViewWithTag<View>(it)}
-            if(node!=null)node.requestFocus()else if(key!=null){val index=rows.indexOfFirst{it.key==key};if(index>=0){list.scrollToPosition(index);list.post{root.findViewWithTag<View>(key)?.requestFocus()}}}
-            else if(actions.isNotEmpty())footer.getChildAt(actions.indexOfFirst{it.enabled}.coerceAtLeast(0))?.requestFocus()
+            if(key!=null)focusKey(key)else actions.firstOrNull{it.enabled}?.let{focusKey(it.key)}?:backButton.requestFocus()
         }
     }
-    fun focus(key:String){root.post{root.findViewWithTag<View>(key)?.requestFocus()}}
+    private fun afterLayout(run:()->Unit){list.addOnLayoutChangeListener(object:View.OnLayoutChangeListener{
+        override fun onLayoutChange(v:View,l:Int,t:Int,r:Int,b:Int,ol:Int,ot:Int,or:Int,ob:Int){v.removeOnLayoutChangeListener(this);v.post{run()}}
+    });list.requestLayout()}
+    private fun focusKey(key:String){
+        val index=rows.indexOfFirst{it.key==key&&it.enabled&&!it.header}
+        if(index<0){root.findViewWithTag<View>(key)?.takeIf{it.isFocusable&&it.isEnabled}?.requestFocus();return}
+        val item=list.findViewHolderForAdapterPosition(index)?.itemView
+        lastRow=key
+        if(item!=null&&item.top>=0&&item.bottom<=list.height){item.requestFocus();return}
+        list.scrollToPosition(index);val serial=rendering;afterLayout{if(serial==rendering&&!closed)list.findViewHolderForAdapterPosition(index)?.itemView?.requestFocus()}
+    }
+    private fun navigate(event:KeyEvent):Boolean {
+        val code=event.keyCode
+        if(code !in listOf(KeyEvent.KEYCODE_DPAD_LEFT,KeyEvent.KEYCODE_DPAD_RIGHT,KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_DPAD_DOWN))return false
+        val key=dialog.currentFocus?.tag as? String?:return false
+        if(event.action!=KeyEvent.ACTION_DOWN)return true
+        val enabled=rows.filter{it.enabled&&!it.header};val index=enabled.indexOfFirst{it.key==key};val buttons=actions.filter{it.enabled};val button=buttons.indexOfFirst{it.key==key}
+        when {
+            key=="classic-panel:back"->{if(code==KeyEvent.KEYCODE_DPAD_DOWN)(enabled.firstOrNull{it.key==lastRow}?:enabled.firstOrNull())?.let{focusKey(it.key)}?:buttons.firstOrNull()?.let{focusKey(it.key)}}
+            index>=0->{lastRow=key;when(code){KeyEvent.KEYCODE_DPAD_UP->if(index==0)backButton.requestFocus()else focusKey(enabled[index-1].key)
+                KeyEvent.KEYCODE_DPAD_DOWN->if(index==enabled.lastIndex)buttons.firstOrNull()?.let{focusKey(it.key)}else focusKey(enabled[index+1].key)}}
+            button>=0->when(code){KeyEvent.KEYCODE_DPAD_LEFT->focusKey(buttons[(button-1).coerceAtLeast(0)].key)
+                KeyEvent.KEYCODE_DPAD_RIGHT->focusKey(buttons[(button+1).coerceAtMost(buttons.lastIndex)].key)
+                KeyEvent.KEYCODE_DPAD_UP->enabled.lastOrNull()?.let{focusKey(it.key)}?:backButton.requestFocus()}
+            else->return false
+        };return true
+    }
+    fun focus(key:String){root.post{focusKey(key)}}
     internal fun rowKeys()=rows.map{it.key}
     internal fun select(key:String){if(rows.any{it.key==key&&it.enabled&&!it.header})click(key)else root.findViewWithTag<View>(key)?.performClick()}
     internal fun focusedKey()=dialog.currentFocus?.tag as? String
+    internal fun navigationRootForTest()=root
     internal fun titles()=rows.map{it.title}
     override fun close(){dialog.dismiss()}
 }

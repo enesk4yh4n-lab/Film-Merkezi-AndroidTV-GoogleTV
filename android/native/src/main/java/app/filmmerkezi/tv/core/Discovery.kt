@@ -11,7 +11,7 @@ class AlternativeDiscovery(private val repository:CatalogRepository,private val 
     fun discover(card:Card,force:Boolean=false,background:Boolean=false,gate:suspend()->Unit={}):Flow<DiscoverySnapshot> = channelFlow {
         var item=works.item(card)
         val queries=(listOf(ContentIdentity.cleanTitle(item.card.title,item.card.year),item.card.originalTitle)+item.alternatives.flatMap{listOf(it.originalTitle)+it.aliases}).filter{it.isNotBlank()}.distinctBy{TextKey.fold(it)}.take(2)
-        val providers=allowed().mapNotNull(repository.providers::get).filter{p->val kind=ContentIdentity.facts(card).kind;if(kind==ContentKind.SERIES)p.site.seriesPath!=null else p.site.id !in setOf("dizibox","ddizi","diziboxum")}
+        val providers=allowed().mapNotNull(repository.providers::get).filter{p->p.site.supports(ContentIdentity.facts(card).kind)}
         val signature="|sites:"+providers.joinToString(","){it.site.id}
         if(!force&&works.fresh(item.identity,signature)){send(DiscoverySnapshot(item,providers.size,providers.size,running=false,cached=true));return@channelFlow}
         val slots=Semaphore(if(background)1 else 2);val lock=Mutex();var done=0;val errors=mutableListOf<SiteFailure>();var inspected=0

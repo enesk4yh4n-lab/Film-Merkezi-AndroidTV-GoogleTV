@@ -61,8 +61,8 @@ internal class TvServices private constructor(context:Context):TvData {
     val settings=app.filmmerkezi.tv.settings.SettingsRepository.get(context)
     val network=ProviderNetwork(context)
     private val works=WorkStore(context)
-    private val repository=CatalogRepository(network,works,{settings.value.catalog()},{settings.value.siteOrder.filter{it !in settings.value.disabledCatalog||settings.value.sourceAllowed(it)}.toSet()})
-    private val discovery=AlternativeDiscovery(repository,works){settings.value.siteOrder.filter{settings.value.sourceAllowed(it)}}
+    private val repository=CatalogRepository(network,works,{settings.value.catalog()},{settings.value.installedSites().map{it.id}.filter{it !in settings.value.disabledCatalog||settings.value.sourceAllowed(it)}.toSet()})
+    private val discovery=AlternativeDiscovery(repository,works){settings.value.installedSites().map{it.id}.filter{settings.value.sourceAllowed(it)}}
     private val pools=SourcePoolService(repository,works,discovery,{settings.value.sourceAllowed(it)},{settings.value.hideAdult})
     val resolver=SourceResolver(network)
     private val library=LibraryStore(context)
@@ -123,16 +123,16 @@ internal class TvServices private constructor(context:Context):TvData {
             emit(result)
         }
     }
-    override suspend fun collections()=if("filmcibaba" in settings.value.disabledCatalog)emptyList()else repository.collections().filter{!settings.value.hideAdult||!AdultContent.blocked(it)}
+    override suspend fun collections()=repository.collections().filter{!settings.value.hideAdult||!AdultContent.blocked(it)}
     override suspend fun collectionMatches(entry:CollectionEntry,search:Boolean):List<UnifiedItem>{
         val known=works.matches(entry).filter{!settings.value.hideAdult||!AdultContent.blocked(it)};if(known.isNotEmpty()||!search)return known
         val found=mutableListOf<UnifiedItem>();val seen=mutableSetOf<String>();var checked=0
         withTimeoutOrNull(30000){repository.observeSearch(entry.title.take(100)).takeWhile{found.isEmpty()}.collect{page->
             for(item in page.items)for(raw in item.alternatives){
                 if(raw.ref.kind!=ContentKind.MOVIE||!seen.add(raw.ref.id)||checked>=12)continue
-                if(raw.year!=null&&raw.year!=entry.year)continue
+                if(entry.knownYear!=null&&raw.year!=null&&raw.year!=entry.year)continue
                 checked++;val c=try{repository.detail(raw).card}catch(e:CancellationException){throw e}catch(_:Exception){continue}
-                if(entry.matches(c)){val g=works.item(c);if(!settings.value.hideAdult||!AdultContent.blocked(g))found.add(g)}
+                if(entry.candidate(c)){val g=works.item(c);if(!settings.value.hideAdult||!AdultContent.blocked(g))found.add(g)}
             }
         }}
         return found.distinctBy{it.identity}

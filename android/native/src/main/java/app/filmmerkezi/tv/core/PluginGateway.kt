@@ -41,15 +41,21 @@ class NativeSiteProvider(private val template:SiteSpec,private val network:WebTr
         suspend fun call()=PluginGateway.call(site,"site",op,o,network,local={standalone?:PluginGateway.standalone().also{standalone=it}})
         return if(PluginGateway.remote!=null)call()else standaloneLock.withLock{call()}
     }
-    override suspend fun search(query:String,next:PageCursor?)=PluginWire.page(invoke("search",JSONObject().put("query",query).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL)))
-    override suspend fun browse(kind:ContentKind,next:PageCursor?)=PluginWire.page(invoke("browse",JSONObject().put("kind",kind.name).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL)))
-    override suspend fun detail(card:Card)=PluginWire.detail(invoke("detail",JSONObject().put("card",Contracts.card(card))))
+    override suspend fun search(query:String,next:PageCursor?)=CatalogContent.catalog(PluginWire.page(invoke("search",JSONObject().put("query",query).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL))))
+    override suspend fun browse(kind:ContentKind,next:PageCursor?)=CatalogContent.forKind(PluginWire.page(invoke("browse",JSONObject().put("kind",kind.name).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL))),kind)
+    override suspend fun detail(card: Card): Detail {
+        val detail = PluginWire.detail(invoke("detail", JSONObject().put("card", Contracts.card(card))))
+        return when (site.id) {
+            "ddizi", "p012" -> detail.copy(options = YoutubeStreams.withHlsOptions(detail.options))
+            else -> detail
+        }
+    }
     override suspend fun episodes(card:Card):List<Episode>{val a=invoke("episodes",JSONObject().put("card",Contracts.card(card))).getJSONArray("episodes");return (0 until a.length()).map{PluginWire.episode(a.getJSONObject(it))}}
     suspend fun options()=PluginWire.options(invoke("options"))
     suspend fun filtered(q:CatalogQuery,next:PageCursor?,check:()->Boolean,unverifiedCandidates:Boolean=false):CatalogPage {
         // The shared verification budget stays in the host. Reserving it before a module
         // returns would let a provider with no missing metadata consume everyone else's budget.
-        val page=PluginWire.page(invoke("filtered",JSONObject().put("query",PluginWire.query(q)).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL).put("verificationBudget",0).put("unverifiedCandidates",true)))
+        val page=CatalogContent.forKind(PluginWire.page(invoke("filtered",JSONObject().put("query",PluginWire.query(q)).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL).put("verificationBudget",0).put("unverifiedCandidates",true))),q.kind)
         val coverage=page.coverage?:return page
         var checked=0;var omitted=0
         val cards=mutableListOf<Card>()

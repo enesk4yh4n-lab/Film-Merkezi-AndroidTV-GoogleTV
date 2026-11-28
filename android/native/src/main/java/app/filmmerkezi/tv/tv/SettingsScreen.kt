@@ -15,16 +15,24 @@ import kotlinx.coroutines.flow.collect
 /** Own native, recyclable two-column settings. No platform preference dialogs. */
 @androidx.annotation.OptIn(markerClass=[androidx.media3.common.util.UnstableApi::class])
 internal class SettingsScreen(c:android.app.Activity,private val scope:CoroutineScope,private val repository:SettingsRepository,
-    private val close:()->Unit,private val maintenance:SettingsMaintenance,private val sleepState:()->Int={0},private val setSleep:(Int)->Unit={}):LinearLayout(c) {
+    private val close:()->Unit,private val maintenance:SettingsMaintenance,private val sleepState:()->Int={0},private val setSleep:(Int)->Unit={},initialCategory:String="general"):LinearLayout(c) {
     private val activity=c
     private data class Row(val key:String,val title:String,val value:String="",val help:String="",val action:()->Unit)
     private var category="general";private var dialog:ClassicDialog?=null
     private val categoryViews=linkedMapOf<String,Button>()
+    private val optionFocus=mutableMapOf<String,String>()
+    private var focusRequest=0
+    private var pendingOption:Pair<String,Int>?=null
+    private var returnToOptions=false
+    private lateinit var backButton:Button
     private val options=RecyclerView(c).apply{layoutManager=LinearLayoutManager(c);itemAnimator=null;setItemViewCacheSize(3)}
+    private val contentHost=FrameLayout(c)
+    private val regularOptions:LinearLayout
+    private var updates:DistributionPanel?=null
     private val adapter=Rows()
     private var task:Job?=null;private var cacheBytes=0L
     private val preview=androidx.media3.ui.SubtitleView(c).apply{setBackgroundColor(android.graphics.Color.BLACK);isFocusable=false}
-    private var active=true;private val observer:Job
+    private var active=true;private val observer:Job;private val registryObserver:Job
     private fun s(id:Int)=context.getString(id)
     private fun on(v:Boolean)=s(if(v)R.string.settings_on else R.string.settings_off)
     private fun u(v:Float)=ClassicUi.u(context,v)
@@ -34,28 +42,72 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
         top.addView(ImageView(c).apply{setImageResource(R.drawable.classic_logo);contentDescription=s(R.string.native_app_name)},LayoutParams(u(42f),u(42f)))
         val version=c.packageManager.getPackageInfo(c.packageName,0).versionName.orEmpty()
         top.addView(ClassicUi.text(c,s(R.string.native_app_name)+"  v"+version+"  ·  "+s(R.string.settings_title),22f,bold=true),LayoutParams(0,u(48f),1f).apply{marginStart=u(10f)})
-        val back=ClassicUi.button(c,s(R.string.tv_back)){back()};top.addView(back,LayoutParams(u(80f),u(34f)));addView(top)
+        val back=ClassicUi.button(c,s(R.string.tv_back)){back()}.apply{tag="settings:back"};backButton=back;top.addView(back,LayoutParams(u(80f),u(34f)));addView(top)
         val content=LinearLayout(c);val categories=LinearLayout(c).apply{orientation=VERTICAL;setPadding(0,u(10f),u(14f),0)}
-        val names=listOf("general" to R.string.settings_general,"catalog" to R.string.settings_catalog,"playback" to R.string.settings_playback,"video" to R.string.settings_video,"audio" to R.string.settings_audio,"remote" to R.string.settings_remote,"storage" to R.string.settings_storage,"about" to R.string.settings_about)
+        val names=listOf("general" to R.string.settings_general,"catalog" to R.string.settings_catalog,"playback" to R.string.settings_playback,"video" to R.string.settings_video,"audio" to R.string.settings_audio,"updates" to R.string.updates_title,"remote" to R.string.settings_remote,"storage" to R.string.settings_storage,"about" to R.string.settings_about)
         names.forEach{(key,label)->val b=ClassicUi.button(c,s(label)){select(key,true)};b.tag="settings-category:$key";b.maxLines=2;b.gravity=Gravity.START or Gravity.CENTER_VERTICAL
             b.setOnFocusChangeListener{_,has->if(has)select(key,false)}
-            b.setOnKeyListener{_,code,e->if(e.action==KeyEvent.ACTION_DOWN&&code==KeyEvent.KEYCODE_DPAD_RIGHT){focusOptions();true}else false}
+            b.setOnKeyListener{_,code,e->if(e.action!=KeyEvent.ACTION_DOWN)false else if(pendingOption?.first==category&&(code==KeyEvent.KEYCODE_DPAD_UP||code==KeyEvent.KEYCODE_DPAD_DOWN)){
+                if(code==KeyEvent.KEYCODE_DPAD_UP&&pendingOption?.second==0){focusRequest++;pendingOption=null;returnToOptions=true;backButton.requestFocus()}
+                else focusOptions(((pendingOption?.second?:0)+if(code==KeyEvent.KEYCODE_DPAD_UP)-1 else 1).coerceIn(0,(adapter.rows.size-1).coerceAtLeast(0)));true
+            }else {if(code!=KeyEvent.KEYCODE_DPAD_RIGHT){focusRequest++;pendingOption=null;updates?.view?.cancelFocusRequest()};when(code){
+                KeyEvent.KEYCODE_DPAD_RIGHT->{focusOptions();true}
+                KeyEvent.KEYCODE_DPAD_LEFT->true
+                KeyEvent.KEYCODE_DPAD_UP->{val i=names.indexOfFirst{it.first==key};if(i>0)categoryViews[names[i-1].first]?.requestFocus()else{returnToOptions=false;back.requestFocus()};true}
+                KeyEvent.KEYCODE_DPAD_DOWN->{val i=names.indexOfFirst{it.first==key};categoryViews[names.getOrNull(i+1)?.first]?.requestFocus();true}
+                else->false
+            }}}
             categoryViews[key]=b;categories.addView(b,LayoutParams(-1,u(44f)).apply{bottomMargin=u(5f)})}
         content.addView(ScrollView(c).apply{isFillViewport=true;addView(categories)},LayoutParams(u(250f),-1));options.adapter=adapter
-        val right=LinearLayout(c).apply{orientation=VERTICAL;addView(preview,LayoutParams(-1,u(76f)));addView(options,LayoutParams(-1,0,1f))}
-        content.addView(right,LayoutParams(0,-1,1f));addView(content,LayoutParams(-1,0,1f))
+        regularOptions=LinearLayout(c).apply{orientation=VERTICAL;addView(preview,LayoutParams(-1,u(76f)));addView(options,LayoutParams(-1,0,1f))}
+        contentHost.addView(regularOptions,FrameLayout.LayoutParams(-1,-1))
+        content.addView(contentHost,LayoutParams(0,-1,1f));addView(content,LayoutParams(-1,0,1f))
         addView(ClassicUi.text(c,s(R.string.settings_help),10f,ClassicUi.muted),LayoutParams(-1,u(24f)))
-        back.nextFocusDownId=categoryViews.values.first().id;select(category,false)
+        back.setOnKeyListener{_,code,e->if(e.action!=KeyEvent.ACTION_DOWN)false else when(code){
+            KeyEvent.KEYCODE_DPAD_DOWN->{if(returnToOptions)focusOptions()else categoryViews[category]?.requestFocus();true}
+            KeyEvent.KEYCODE_DPAD_LEFT->{categoryViews[category]?.requestFocus();true}
+            KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_DPAD_RIGHT->true
+            else->false
+        }}
+        select(initialCategory.takeIf{it in categoryViews}?:"general",false)
         observer=scope.launch{repository.changes.collect{if(active)draw()}}
-        post{categoryViews[category]?.requestFocus()}
+        registryObserver=scope.launch{Sites.installedChanges.collect{if(active)draw()}}
+        post{if(!hasFocus()||backButton.hasFocus())categoryViews[category]?.requestFocus()}
     }
-    private fun select(key:String,focus:Boolean){val changed=category!=key;category=key;if(changed&&key=="storage")scope.launch{cacheBytes=maintenance.cacheBytes();if(active&&category=="storage")draw()};categoryViews.forEach{(k,b)->b.isSelected=k==key};if(changed||adapter.rows.isEmpty())draw();if(focus)focusOptions()}
-    private fun focusOptions(){options.scrollToPosition(0);options.post{options.findViewHolderForAdapterPosition(0)?.itemView?.requestFocus()?:options.requestFocus()}}
+    private fun select(key:String,focus:Boolean){
+        val changed=category!=key
+        if(changed){focusRequest++;pendingOption=null}
+        if(changed&&updates?.canLeave()==false){updates?.view?.focusFirst();return}
+        if(changed){updates?.let{it.dispose();contentHost.removeView(it.view)};updates=null}
+        category=key;categoryViews.forEach{(k,b)->b.isSelected=k==key}
+        regularOptions.visibility=if(key=="updates")GONE else VISIBLE
+        if(key=="updates"){
+            if(updates==null){val panel=DistributionPanel(activity,scope,maintenance.playing,
+                left={categoryViews["updates"]?.requestFocus()},up={returnToOptions=true;backButton.requestFocus()})
+                updates=panel;contentHost.addView(panel.view,FrameLayout.LayoutParams(-1,-1));panel.open()}
+        }else{
+            if(changed&&key=="storage")scope.launch{cacheBytes=maintenance.cacheBytes();if(active&&category=="storage")draw()}
+            if(changed||adapter.rows.isEmpty())draw()
+        }
+        if(focus)focusOptions()
+    }
+    private fun focusOptions(targetIndex:Int?=null){if(category=="updates"){updates?.view?.focusContent();return}
+        val index=targetIndex?:pendingOption?.takeIf{it.first==category}?.second?:adapter.rows.indexOfFirst{it.key==optionFocus[category]}.coerceAtLeast(0)
+        val serial=++focusRequest;val selectedCategory=category;val key=adapter.rows.getOrNull(index)?.key?:return
+        pendingOption=category to index
+        fun restore(){if(active&&serial==focusRequest&&category==selectedCategory&&options.findViewHolderForAdapterPosition(index)?.itemView?.takeIf{it.tag=="setting:$key"}?.requestFocus()==true)pendingOption=null}
+        val item=options.findViewHolderForAdapterPosition(index)?.itemView
+        if(item!=null&&item.tag=="setting:$key"&&item.top>=0&&item.bottom<=options.height){restore();return}
+        options.scrollToPosition(index);options.viewTreeObserver.addOnPreDrawListener(object:ViewTreeObserver.OnPreDrawListener{
+            override fun onPreDraw():Boolean{if(options.viewTreeObserver.isAlive)options.viewTreeObserver.removeOnPreDrawListener(this);restore();return true}
+        });options.requestLayout();options.invalidate()}
+    fun openCategory(key:String){select(key,false);categoryViews[category]?.requestFocus()}
     private fun update(change:(AppSettings)->AppSettings){scope.launch{
         try{repository.update(change)}catch(e:CancellationException){throw e}catch(_:Exception){if(active){dialog?.dismiss();dialog=ClassicDialog.Builder(activity).setMessage(R.string.settings_saved_error).setPositiveButton(R.string.settings_retry){_,_->update(change)}.setNegativeButton(R.string.tv_cancel,null).show()}}
     }}
     private fun choose(title:Int,labels:List<String>,selected:Int,action:(Int)->Unit){dialog=ClassicDialog.Builder(activity).setTitle(title).setSingleChoiceItems(labels.toTypedArray(),selected){d,i->d.dismiss();action(i)}.setNegativeButton(R.string.tv_cancel,null).show()}
     private fun draw(){
+        if(category=="updates")return
         val v=repository.value;val rows=mutableListOf<Row>()
         fun row(key:String,title:Int,value:String="",help:String="",action:()->Unit){rows.add(Row(key,s(title),value,help,action))}
         when(category){
@@ -71,10 +123,9 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
                 row("merge",R.string.settings_merge,on(v.merge),s(R.string.settings_merge_help)){update{it.copy(merge=!it.merge)}}
                 row("adult",R.string.settings_adult,on(v.hideAdult),s(R.string.settings_adult_help)){update{it.copy(hideAdult=!it.hideAdult)}}
                 row("site-management",R.string.site_manager_title,help=s(R.string.site_manager_help)){manageSites()}
-                v.siteOrder.forEach{id->val site=Sites.get(id);rows.add(Row("site:$id",site.name,context.getString(R.string.settings_site_state,on(id !in v.disabledCatalog),on(v.sourceAllowed(id)))){site(id)})}
+                v.installedSites().forEach{site->val id=site.id;rows.add(Row("site:$id",site.name,context.getString(R.string.settings_site_state,on(id !in v.disabledCatalog),on(v.sourceAllowed(id)))){site(id)})}
             }
             "about"->{
-                row("updates",R.string.updates_title){DistributionPanel(activity,scope,maintenance.playing).open()}
                 row("transfer",R.string.transfer_title,help=s(R.string.transfer_help)){(activity as TvActivity).openDataTransfer()}
                 row("about",R.string.settings_licenses){information(R.string.settings_licenses){maintenance.licenses()}}
                 row("device",R.string.settings_device,android.os.Build.MODEL+" · API "+android.os.Build.VERSION.SDK_INT){information(R.string.settings_device){maintenance.deviceInfo()}}
@@ -162,7 +213,7 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
         if(key in listOf("history","overrides")&&maintenance.playing()){dialog=ClassicDialog.Builder(activity).setMessage(R.string.settings_stop_first).setPositiveButton(R.string.tv_back,null).show();return}
         dialog=ClassicDialog.Builder(activity).setTitle(title).setMessage(help).setPositiveButton(R.string.settings_apply){_,_->
             task=scope.launch{try{
-                if(key=="reset")repository.update{old->AppSettings(siteAddresses=old.siteAddresses.keys.fold(old.siteAddresses){all,id->SiteAddresses.reset(all,id)})}else maintenance.run(key)
+                if(key=="reset")repository.update{old->AppSettings(siteAddresses=old.installedSites().map{it.id}.filter{it in old.siteAddresses}.fold(old.siteAddresses){all,id->SiteAddresses.reset(all,id)})}else maintenance.run(key)
                 cacheBytes=maintenance.cacheBytes();if(active){draw();dialog=ClassicDialog.Builder(activity).setMessage(R.string.settings_done).setPositiveButton(R.string.tv_back,null).show()}
             }catch(e:CancellationException){throw e}catch(_:Exception){if(active)dialog=ClassicDialog.Builder(activity).setMessage(R.string.settings_operation_error).setPositiveButton(R.string.tv_back,null).show()}}
         }.setNegativeButton(R.string.tv_cancel,null).show()
@@ -176,11 +227,19 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
         dialog=ClassicDialog.Builder(activity).setTitle(Sites.get(id).name).setItems(labels.toTypedArray()){_,i->update{old->when(i){
             0->old.copy(disabledCatalog=if(id in old.disabledCatalog)old.disabledCatalog-id else old.disabledCatalog+id)
             1->old.copy(disabledSources=if(id in old.disabledSources)old.disabledSources-id else old.disabledSources+id)
-            else->{val order=old.siteOrder.toMutableList();val at=order.indexOf(id);val target=(at+if(i==2)-1 else 1).coerceIn(0,order.lastIndex);java.util.Collections.swap(order,at,target);old.copy(siteOrder=order)}
+            else->{val visible=old.installedSites().map{it.id};val at=visible.indexOf(id);if(at<0)old else{
+                val target=(at+if(i==2)-1 else 1).coerceIn(0,visible.lastIndex)
+                val order=(old.siteOrder+visible).distinct().toMutableList();java.util.Collections.swap(order,order.indexOf(id),order.indexOf(visible[target]));old.copy(siteOrder=order)
+            }}
         }}}.setNegativeButton(R.string.tv_back,null).show()
     }
     private fun manageSites(){
-        val sites=repository.value.siteOrder.map(Sites::get)
+        val sites=repository.value.installedSites()
+        if(sites.isEmpty()){
+            dialog=ClassicDialog.Builder(activity).setTitle(R.string.site_manager_title).setMessage(R.string.plugin_sites_empty)
+                .setPositiveButton(R.string.updates_title){_,_->openCategory("updates")}.setNegativeButton(R.string.tv_back,null).show()
+            return
+        }
         dialog=ClassicDialog.Builder(activity).setTitle(R.string.site_manager_title)
             .setItems(sites.map{it.name+"\n"+it.base}.toTypedArray()){_,i->editSite(sites[i].id)}.setNegativeButton(R.string.tv_back,null).show()
     }
@@ -239,9 +298,11 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
             dialog=ClassicDialog.Builder(activity).setTitle(names.getValue(id)).setItems(arrayOf(s(R.string.settings_visibility),s(R.string.settings_up),s(R.string.settings_down))){_,action->update{old->if(action==0)old.copy(hiddenRows=if(id in old.hiddenRows)old.hiddenRows-id else old.hiddenRows+id)else{val list=old.rowOrder.toMutableList();val at=list.indexOf(id);java.util.Collections.swap(list,at,(at+if(action==1)-1 else 1).coerceIn(0,list.lastIndex));old.copy(rowOrder=list)}}}.setNegativeButton(R.string.tv_back,null).show()
         }.setNegativeButton(R.string.tv_back,null).show()
     }
-    fun back(){if(dialog?.isShowing==true){dialog?.dismiss();return};dispose();close()}
-    internal fun dialogForTest()=dialog
-    fun dispose(){active=false;observer.cancel();task?.cancel();dialog?.dismiss()}
+    fun back(){if(dialog?.isShowing==true){dialog?.dismiss();return};if(category=="updates"&&updates?.back()==true)return;dispose();close()}
+    internal fun dialogForTest()=updates?.dialogForTest()?.takeIf{it.isShowing}?:dialog
+    fun dispose(){active=false;observer.cancel();registryObserver.cancel();updates?.dispose();task?.cancel();dialog?.dismiss()}
+    internal fun updateCenterForTest()=updates?.view
+    fun openUpdate(route:app.filmmerkezi.tv.updates.UpdateRoute){select("updates",false);updates?.navigate(route);updates?.view?.focusContent()}
     private inner class Holder(val box:LinearLayout,val title:TextView,val value:TextView,val help:TextView):RecyclerView.ViewHolder(box)
     private inner class Rows:RecyclerView.Adapter<Holder>() {
         var rows=emptyList<Row>();private set
@@ -253,7 +314,14 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
             val box=LinearLayout(context).apply{orientation=VERTICAL;isFocusable=true;isFocusableInTouchMode=true;setPadding(u(14f),u(11f),u(14f),u(11f));background=ClassicUi.focus(context);layoutParams=RecyclerView.LayoutParams(-1,-2).apply{bottomMargin=u(6f)}}
             val title=ClassicUi.text(context,"",14f,bold=true);val value=ClassicUi.text(context,"",12f,ClassicUi.gold);val help=ClassicUi.text(context,"",10f,ClassicUi.muted)
             box.addView(title);box.addView(value);box.addView(help)
-            box.setOnKeyListener{_,key,e->if(e.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_LEFT){categoryViews[category]?.requestFocus();true}else false}
+            box.setOnFocusChangeListener{v,focused->if(focused)(v.tag as? String)?.removePrefix("setting:")?.let{optionFocus[category]=it}}
+            box.setOnKeyListener{v,key,e->if(e.action!=KeyEvent.ACTION_DOWN)false else when(key){
+                KeyEvent.KEYCODE_DPAD_LEFT->{categoryViews[category]?.requestFocus();true}
+                KeyEvent.KEYCODE_DPAD_RIGHT->true
+                KeyEvent.KEYCODE_DPAD_UP->if(adapter.rows.firstOrNull()?.let{"setting:"+it.key}==v.tag){returnToOptions=true;backButton.requestFocus();true}else false
+                KeyEvent.KEYCODE_DPAD_DOWN->adapter.rows.lastOrNull()?.let{"setting:"+it.key}==v.tag
+                else->false
+            }}
             return Holder(box,title,value,help)
         }
         override fun onBindViewHolder(h:Holder,position:Int){val r=rows[position];h.box.tag="setting:"+r.key;h.title.text=r.title;h.value.text=r.value;h.value.visibility=if(r.value.isBlank())GONE else VISIBLE;h.help.text=r.help;h.help.visibility=if(r.help.isBlank())GONE else VISIBLE;val scale=if(repository.value.largeText)1.15f else 1f;h.title.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX,u(14f*scale).toFloat());h.value.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX,u(12f*scale).toFloat());h.help.setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX,u(10f*scale).toFloat());h.box.setOnClickListener{rows.firstOrNull{it.key==r.key}?.action?.invoke()}}

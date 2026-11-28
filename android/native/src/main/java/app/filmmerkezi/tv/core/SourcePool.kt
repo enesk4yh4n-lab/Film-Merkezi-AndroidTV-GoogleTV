@@ -7,6 +7,13 @@ import kotlinx.coroutines.selects.select
 
 data class SourcePool(val options:List<SourceOption>,val pending:Boolean,val progress:String="",val errors:List<SiteFailure> = emptyList())
 fun SourceOption.scoped()=if(id.startsWith(content.siteId+"|"))this else copy(id=content.siteId+"|"+TextKey.hash(content.pageUrl)+"|"+id,label=Sites.get(content.siteId).name+" · "+label)
+internal fun SourcePool.withResolutionFailures(failures:Map<String,String>):SourcePool {
+    if(failures.isEmpty())return this
+    return copy(options=options.map{option->
+        val failure=failures[option.id]
+        if(option.state==OptionState.AVAILABLE&&failure!=null)option.copy(reason=failure)else option
+    })
+}
 
 class SourcePoolService(private val repository:CatalogRepository,private val works:WorkStore,private val discovery:AlternativeDiscovery,private val allowed:(String)->Boolean={true},private val hideAdult:()->Boolean={false}){
     fun episode(item:UnifiedItem,crossSite:Boolean,gate:suspend()->Unit={}):Flow<SourcePool> =
@@ -56,18 +63,41 @@ class SourcePoolService(private val repository:CatalogRepository,private val wor
 
 /** Race metadata only; one winning source is handed to the sole decoder/player. */
 object FirstReadySource {
-    suspend fun await(pool:StateFlow<SourcePool>,resolve:suspend(SourceOption)->ResolvedSource):Pair<SourceOption,ResolvedSource> = withTimeout(60000){
+    suspend fun await(pool:StateFlow<SourcePool>,onFailure:(SourceOption,Throwable)->Unit={_,_->},resolve:suspend(SourceOption)->ResolvedSource):Pair<SourceOption,ResolvedSource> = withTimeout(60000){
         supervisorScope{
             val changes=Channel<Unit>(Channel.CONFLATED);val results=Channel<Pair<SourceOption,Result<ResolvedSource>>>(2)
             val observer=launch{pool.collect{changes.trySend(Unit)}};val tried=mutableSetOf<String>();val jobs=mutableListOf<Job>();var running=0;var last:Throwable?=null
             try{
                 while(true){
                     for(option in pool.value.options.filter{it.state==OptionState.AVAILABLE&&it.id !in tried}.take(2-running)){
-                        tried.add(option.id);running++;jobs.add(launch{val r=try{Result.success(resolve(option))}catch(e:CancellationException){throw e}catch(e:Exception){Result.failure(e)};results.send(option to r)})
+                        tried.add(option.id)
+                        running++
+                        jobs.add(launch {
+                            val result = try {
+                                Result.success(resolve(option))
+                            } catch (e: TimeoutCancellationException) {
+                                currentCoroutineContext().ensureActive()
+                                Result.failure(DataFailure(FailureKind.TIMEOUT,"Kaynak çözümleme zaman aşımına uğradı","resolve",cause=e))
+                            } catch (e: CancellationException) {
+                                throw e
+                            } catch (e: Exception) {
+                                Result.failure(e)
+                            }
+                            results.send(option to result)
+                        })
                     }
-                    if(running==0&&!pool.value.pending)throw last?:DataFailure(FailureKind.UNSUPPORTED,"Oynatılabilir kaynak bulunamadı","source-pool")
+                    if(running==0&&!pool.value.pending){
+                        val failure=pool.value.errors.singleOrNull()
+                        throw last?:failure?.let{DataFailure(it.kind,it.message,"source-pool",it.code)}
+                            ?:DataFailure(FailureKind.UNSUPPORTED,"Oynatılabilir kaynak bulunamadı","source-pool")
+                    }
                     val result=select<Pair<SourceOption,Result<ResolvedSource>>?>{results.onReceive{it};changes.onReceive{null}}
-                    if(result!=null){running--;if(result.second.isSuccess)return@supervisorScope result.first to result.second.getOrThrow();last=result.second.exceptionOrNull()}
+                    if(result!=null){
+                        running--
+                        if(result.second.isSuccess)return@supervisorScope result.first to result.second.getOrThrow()
+                        last=result.second.exceptionOrNull()
+                        if(last!=null)onFailure(result.first,last)
+                    }
                 }
                 @Suppress("UNREACHABLE_CODE") error("unreachable")
             }finally{observer.cancel();jobs.forEach{it.cancel()};changes.close();results.close()}

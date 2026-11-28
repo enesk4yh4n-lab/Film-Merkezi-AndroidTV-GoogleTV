@@ -37,12 +37,12 @@ object SiteAddresses {
     fun encode(values:Map<String,SiteAddress>)=JSONObject().apply{values.toSortedMap().forEach{(id,v)->put(id,JSONObject().put("base",v.base).put("name",v.name).put("previousHosts",JSONArray(v.previousHosts.sorted())))}}.toString()
     fun decode(raw:Any?):Map<String,SiteAddress> = runCatching {
         val text=(raw as? String).orEmpty();if(text.length>65536)return@runCatching emptyMap()
-        val json=JSONObject(text.ifBlank{"{}"});Sites.defaults.mapNotNull{site->
-            val value=json.optJSONObject(site.id)?:return@mapNotNull null
+        val json=JSONObject(text.ifBlank{"{}"});json.keys().asSequence().filter{it.matches(Regex("[a-z][a-z0-9-]{0,63}"))}.take(256).mapNotNull{id->
+            val value=json.optJSONObject(id)?:return@mapNotNull null
             val base=runCatching{normalize(value.getString("base"))}.getOrNull()?:return@mapNotNull null
-            val name=value.optString("name").trim().takeIf{it.length in 1..80&&!it.any(Char::isISOControl)}?:site.name
+            val name=value.optString("name").trim().takeIf{it.length in 1..80&&!it.any(Char::isISOControl)}?:Sites.known.firstOrNull{it.id==id}?.name.orEmpty()
             val hosts=value.optJSONArray("previousHosts")?.values()?.filterIsInstance<String>()?.filter(::publicHost)?.take(64)?.toSet().orEmpty()
-            site.id to SiteAddress(base,name,hosts)
+            id to SiteAddress(base,name,hosts)
         }.toMap()
     }.getOrDefault(emptyMap())
     fun rebase(value:String,site:SiteSpec):String=site.catalogUrl(value)?:value
@@ -53,7 +53,7 @@ object SiteAddresses {
             seriesRef=value.seriesRef?.let{it.copy(pageUrl=rebase(it.pageUrl,Sites.get(it.siteId)))})
     }
     fun userAgent(url:HttpUrl):String {
-        val original=Sites.defaults.firstOrNull{site->url.host in hosts(Sites.get(site.id))}
-        return app.filmmerkezi.tv.SiteHttpPolicy.defaultUserAgent(original?.base?.toHttpUrl()?:url)
+        val original=Sites.all.firstOrNull{site->url.host in hosts(site)}
+        return original?.let{app.filmmerkezi.tv.SiteHttpPolicy.forProvider(it.id)}?:app.filmmerkezi.tv.SiteHttpPolicy.defaultUserAgent(url)
     }
 }

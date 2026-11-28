@@ -45,10 +45,17 @@ class SourceFixtureTest(private val id:String,private val row:JSONObject) {
             }
         }catch(e:Exception){errors.put(JSONObject().put("error",e.message))}
         val expected=row.getJSONArray("referenceSources").values().filterIsInstance<JSONObject>()
+        val deliberatelyUnsupported = if (id == "filmifull-spider") setOf("filmifullizle-source0", "filmifullizle-source2") else emptySet()
+        for (id in deliberatelyUnsupported) {
+            val source = options.single { it.id == id }
+            assertEquals(OptionState.UNSUPPORTED, source.state)
+            assertTrue(source.reason.isNotBlank())
+            assertTrue(good.none { it.id == id })
+        }
         // The native player now retains all real quality variants. The historical
         // Tizen default can be one of those variants rather than the highest URL.
         fun includes(source:ResolvedSource,url:String)=source.url==url||source.variants.any{it.url==url}
-        val missing=expected.filter{e->good.none{includes(it,e.string("url"))}}
+        val missing=expected.filter{e->e.string("id") !in deliberatelyUnsupported && good.none{includes(it,e.string("url"))}}
         // Some original resolvers expose a HLS endpoint whose response redirects to another
         // playlist. This is valid only if that URL was actually traversed in the same capture.
         val unresolved=missing.filter{e->good.none{s->replies.any{it.string("url")==e.string("url")&&includes(s,it.string("finalUrl"))}}}

@@ -142,13 +142,21 @@ class PilotAddonTest {
                     PluginWire.detail(call(entry,id,"detail",host,JSONObject().put("card",Contracts.card(ep))))
                 } else d
                 check(playable.options.isNotEmpty()){ "No playable options" }
-                var resolved:JSONObject?=null;val sourceErrors=JSONArray()
-                for(option in playable.options.filter{it.state==OptionState.AVAILABLE}) {
-                    try { resolved=call(entry,id,"resolve",host,JSONObject().put("option",Contracts.option(option)));File(dir,"option.json").writeText(Contracts.option(option).toString());break }
-                    catch(e:Exception){sourceErrors.put(JSONObject().put("label",option.label).put("error",e.toString()))}
+                var resolved:JSONObject?=null;val sourceErrors=JSONArray();val sourceAudit=JSONArray()
+                for((sourceIndex,option) in playable.options.withIndex()) {
+                    val audit=JSONObject().put("index",sourceIndex).put("id",option.id).put("label",option.label).put("state",option.state.name)
+                    File(dir,"option-$sourceIndex.json").writeText(Contracts.option(option).toString())
+                    if(option.state!=OptionState.AVAILABLE){sourceAudit.put(audit.put("resolved",false).put("reason",option.reason));continue}
+                    try { val source=call(entry,id,"resolve",host,JSONObject().put("option",Contracts.option(option)))
+                        File(dir,"source-$sourceIndex.json").writeText(source.toString());audit.put("resolved",true).put("type",source.getString("type"))
+                        if(resolved==null){resolved=source;File(dir,"option.json").writeText(Contracts.option(option).toString())}
+                    }catch(e:Exception){sourceErrors.put(JSONObject().put("label",option.label).put("error",e.toString()));audit.put("resolved",false).put("error",e.toString())}
+                    sourceAudit.put(audit)
                 }
+                File(dir,"sources-audit.json").writeText(sourceAudit.toString(2))
                 row.put("sourceFailures",sourceErrors)
                 val source=resolved?:error("All sources failed: $sourceErrors");File(dir,"source.json").writeText(source.toString())
+                check(sourceErrors.length()==0){"Some discovered sources failed: $sourceErrors"}
                 row.put("passed",true).put("browse",browse.getJSONArray("cards").length()).put("search",cards.size).put("episodes",d.episodes.size).put("seasons",JSONArray(d.seasons)).put("options",playable.options.size)
             } catch(e:Exception) {failures++;row.put("passed",false).put("error",e.toString())}
             finally {File(dir,"requests.json").writeText(requests.toString(2))}

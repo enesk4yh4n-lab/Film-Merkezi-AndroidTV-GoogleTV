@@ -5,11 +5,8 @@ import org.junit.Assert.*
 import org.junit.Test
 
 class CatalogUserAgentTest {
-    @Test fun observed403OriginsUseBrowserAgentWithoutLeakingItToUnrelatedPlayers(){
-        for(host in listOf("www.hdfilmcehennemi.nl","www.fullhdfilmizlesene.now","filmmakinesi.to",
-            "closeload.filmmakinesi.to","rapid.filmmakinesi.to","rapidvid.org"))
-            assertEquals(SiteHttpPolicy.BROWSER_USER_AGENT,SiteHttpPolicy.defaultUserAgent(("https://"+host+"/").toHttpUrl()))
-        for(host in listOf("hotstream.club","ok.ru","matrudas.com","srv1.cdnimages1.cyou"))
+    @Test fun hostDefaultsDoNotDependOnAnEmbeddedWebsiteList(){
+        for(host in listOf("provider.example","player.example","media.example","new-plugin.example"))
             assertEquals("Mozilla/5.0",SiteHttpPolicy.defaultUserAgent(("https://"+host+"/").toHttpUrl()))
     }
 }

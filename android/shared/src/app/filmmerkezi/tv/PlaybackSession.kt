@@ -81,6 +81,7 @@ internal class PlaybackSession(
     private var qualityHeight=0
     private var configuredSettings=PlaybackSettings()
     private var sessionBuffer=BufferProfile.AUTO
+    private val bufferTargetBytes get() = sessionBuffer.targetBytes(Runtime.getRuntime().maxMemory())
     var candidateAllowed:(JSONObject)->Boolean={true}
     private val manual=mutableMapOf<Int,Pair<TrackGroup,Int>>()
     private var sourceChanged=false
@@ -330,7 +331,7 @@ internal class PlaybackSession(
         val renderer = DefaultRenderersFactory(context).setEnableDecoderFallback(true)
         val buffer=sessionBuffer
         val load = DefaultLoadControl.Builder().setBufferDurationsMs(buffer.minMs,buffer.maxMs,buffer.startMs,buffer.restartMs)
-            .setTargetBufferBytes(buffer.bytes).setBackBuffer(0, false)
+            .setTargetBufferBytes(bufferTargetBytes).setBackBuffer(0, false)
             .setPrioritizeTimeOverSizeThresholds(false).build()
         val bandwidth = DefaultBandwidthMeter.Builder(context).setInitialBitrateEstimate(1_000_000).build()
         player = ExoPlayer.Builder(context, renderer).setTrackSelector(selector).setLoadControl(load)
@@ -610,6 +611,7 @@ internal class PlaybackSession(
             "sourceIndex" to recovery.index, "sourceId" to sources.getOrNull(recovery.index)?.optString("id"),"sourceCount" to originals.size,
             "sourceSwitches" to switches, "sourceRestarts" to restarts, "enginesCreated" to enginesCreated,
             "sourceRefreshes" to refreshes,"bufferProfile" to sessionBuffer.name,"automaticQuality" to automaticQuality,"subtitlePolicy" to configuredSettings.subtitles.name,
+            "bufferTargetBytes" to bufferTargetBytes,
             "diagnosticsEnabled" to diagnosticsEnabled,
             "engineInstancesUsed" to engineInstancesUsed, "engineIdentity" to p?.let(System::identityHashCode), "suspended" to suspended, "resolving" to resolving,
             "droppedFrames" to droppedFrames, "audioUnderruns" to audioUnderruns, "downloadBytes" to transferBytes,

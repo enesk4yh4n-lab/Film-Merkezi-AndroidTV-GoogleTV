@@ -10,41 +10,43 @@ import kotlinx.coroutines.sync.withLock
 import org.json.*
 import java.io.File
 
-data class DistributionStatus(val release:UpdateProtocol.Release?=null,val busy:Boolean=false,val message:String="",val bytes:Long=0,val apk:File?=null,val checkedAt:Long=0,val moduleUpdates:Int=0)
+data class DistributionStatus(val release:UpdateProtocol.Release?=null,val busy:Boolean=false,val message:String="",val bytes:Long=0,val apk:File?=null,val checkedAt:Long=0,val moduleUpdates:Int=0,
+    val appCheck:CheckState=CheckState.UNCHECKED,val appError:String="",val repositoryChecks:Map<String,RepositoryCheck> = emptyMap(),val pluginError:String="")
 data class RepositoryProbe(val url:String,val raw:ByteArray,val signature:String,val index:UpdateProtocol.Index){val fingerprint get()=UpdateProtocol.fingerprint(index.publicKey)}
-data class RepositorySearchResult(val fullName:String,val branch:String,val description:String)
-
 class DistributionManager private constructor(private val context:Context) {
     val store=DistributionStore(context)
     val transport=UpdateTransport(context)
+    val notices=UpdateNoticeStore(context)
+    private val discovery=RepositoryDiscovery({url,limit->transport.bytes(url,limit,10000)})
     private val scope=CoroutineScope(SupervisorJob()+Dispatchers.IO)
     private val operation=Mutex()
+    private var foregroundJob:Job?=null
+    @Volatile private var inventoryCache:Pair<Long,PluginInventory>?=null
+    @Volatile private var catalogCache:Pair<Long,PluginCatalog>?=null
     val installedCode=context.packageManager.getPackageInfo(context.packageName,0).versionCode
     private val state=MutableStateFlow(DistributionStatus(message=store.failure?:store.snapshot().optString("runtimeError")))
+    @Volatile var lastIssue:String="";private set
+    fun recordIssue(error:Throwable){lastIssue=(error.message?:error.javaClass.simpleName).take(2000)}
     val status:StateFlow<DistributionStatus> = state.asStateFlow()
+    fun readyApk():File?=state.value.release?.let{release->state.value.apk?.takeIf{it.name=="application-${release.code}.apk"&&it.exists()}}
     private val key=context.assets.open("update-public-key.txt").bufferedReader().use{it.readText().trim()}
     companion object {
         const val APP_ROOT="https://raw.githubusercontent.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/main/"
         private var singleton:DistributionManager?=null
         fun get(context:Context)=synchronized(this){singleton?:DistributionManager(context.applicationContext).also{singleton=it}}
     }
-    fun foreground(playing:Boolean){if(!playing&&!state.value.busy&&System.currentTimeMillis()-state.value.checkedAt>=1800000)scope.launch{check()}}
+    @Synchronized fun foreground(playing:Boolean){if(!playing&&!state.value.busy&&foregroundJob?.isActive!=true&&System.currentTimeMillis()-state.value.checkedAt>=1800000)foregroundJob=scope.launch{
+        try{check()}catch(e:CancellationException){throw e}catch(e:Exception){recordIssue(e);state.update{it.copy(busy=false,pluginError=e.message.orEmpty())}}
+    }}
     suspend fun check()=operation.withLock{
-        state.value=state.value.copy(busy=true,message="Güncellemeler kontrol ediliyor")
-        try{
+        DistributionChecks.run(state.value,installedCode,repositories().filter{it.optBoolean("enabled",true)}.map{RepositoryCheck(it.getString("key"),it.getString("name"))},application={
             val bytes=transport.bytes(APP_ROOT+"update.json");val sig=transport.bytes(APP_ROOT+"update.sig",2048).toString(Charsets.US_ASCII);UpdateProtocol.verify(bytes,sig,key)
             val release=UpdateProtocol.release(bytes);val hash=UpdateProtocol.sha(bytes);val previous=store.snapshot()
             require(release.code>=previous.optInt("appHighestCode",0)){"Eski uygulama bildirimi reddedildi"}
             require(release.code!=previous.optInt("appHighestCode",0)||previous.optString("appFeedHash")==hash){"Aynı sürümde farklı bildirim reddedildi"}
             store.commit{it.put("appHighestCode",release.code).put("appFeedHash",hash)}
-            state.value=state.value.copy(release=release.takeIf{it.code>installedCode},message=if(release.code>installedCode)"Yeni uygulama: ${release.name}"else"Uygulama güncel")
-        }catch(e:CancellationException){state.value=state.value.copy(busy=false);throw e}catch(e:Exception){state.value=state.value.copy(message=if(e.message=="HTTP 404")"Henüz kararlı uygulama bildirimi yayımlanmadı"else e.message?:"Güncelleme kontrolü başarısız")}
-        finally{state.value=state.value.copy(checkedAt=System.currentTimeMillis())}
-        try{
-            val failures=mutableListOf<String>()
-            for(repo in repositories().filter{it.optBoolean("enabled",true)})try{refresh(repo.getString("key"))}catch(e:CancellationException){throw e}catch(e:Exception){failures.add(repo.getString("name")+": "+e.message)}
-            state.value=state.value.copy(moduleUpdates=availableUpdates(),message=state.value.message+(if(failures.isEmpty())""else"\n"+failures.joinToString("\n")))
-        }finally{state.value=state.value.copy(busy=false)}
+            release
+        },refresh={refresh(it)},count={availableUpdates()},emit={state.value=it})
     }
     suspend fun downloadApk()=operation.withLock{
         val release=checkNotNull(state.value.release);require(Build.VERSION.SDK_INT>=release.minSdk){"Bu Android sürümü yeni APK'yı desteklemiyor"}
@@ -61,6 +63,14 @@ class DistributionManager private constructor(private val context:Context) {
         finally{state.value=state.value.copy(busy=false)}
     }
     fun repositories():List<JSONObject>{val o=store.snapshot().getJSONObject("repositories");return o.keys().asSequence().map{o.getJSONObject(it)}.toList()}
+    fun inventory():PluginInventory {val revision=store.revision.value;inventoryCache?.takeIf{it.first==revision}?.let{return it.second}
+        return PluginInventory(store.snapshot(),repositories().associate{it.getString("key") to index(it)},installedCode).also{inventoryCache=revision to it}}
+    fun catalog():PluginCatalog {
+        val revision=store.revision.value;catalogCache?.takeIf{it.first==revision}?.let{return it.second}
+        val snapshot=store.snapshot();val all=snapshot.getJSONObject("repositories");val repos=all.keys().asSequence().map{all.getJSONObject(it)}.toList()
+        val errors=linkedMapOf<String,String>();val indices=repos.mapNotNull{repo->val id=repo.getString("key");try{id to index(repo)}catch(e:Exception){errors[id]=e.message?:"Depo okunamadı";null}}.toMap()
+        return PluginCatalog(snapshot,repos,indices,installedCode,errors).also{catalogCache=revision to it}
+    }
     fun availableUpdates():Int {
         val installed=store.snapshot().getJSONObject("packages")
         return repositories().filter{it.optBoolean("enabled",true)}.sumOf{repo->index(repo).packages.groupBy{it.id}.count{(id,rows)->
@@ -78,7 +88,7 @@ class DistributionManager private constructor(private val context:Context) {
         s.getJSONObject("repositories").remove(key)
     }}
     suspend fun probe(value:String):RepositoryProbe {
-        val url=UpdateTransport.repository(value);val raw=transport.bytes(url,UpdateProtocol.INDEX_LIMIT);val index=UpdateProtocol.index(raw)
+        val url=discovery.repository(value);val raw=transport.bytes(url,UpdateProtocol.INDEX_LIMIT);val index=UpdateProtocol.index(raw)
         val signature=transport.bytes(url.removeSuffix(".json")+".sig",2048).toString(Charsets.US_ASCII);UpdateProtocol.verify(raw,signature,index.publicKey)
         return RepositoryProbe(url,raw,signature,index)
     }
@@ -96,22 +106,14 @@ class DistributionManager private constructor(private val context:Context) {
             repos.put(repoKey,JSONObject().put("key",repoKey).put("id",id).put("name",probe.index.name).put("fingerprint",fp).put("publicKey",probe.index.publicKey).put("url",probe.url).put("enabled",old?.optBoolean("enabled",true)?:true).put("revision",probe.index.revision).put("indexHash",UpdateProtocol.sha(probe.raw)).put("index",probe.raw.toString(Charsets.UTF_8)).put("signature",probe.signature).put("versionHashes",versions))
         }
     }
-    suspend fun refresh(repoKey:String){val old=repositories().single{it.getString("key")==repoKey};val p=probe(old.getString("url"));require(p.fingerprint==old.getString("fingerprint")){"Yayıncı anahtarı değişti; yeni anahtara otomatik güvenilmedi"};trust(p)}
+    suspend fun refresh(repoKey:String){val old=repositories().single{it.getString("key")==repoKey};val checking=RepositoryCheck(repoKey,old.getString("name"),CheckState.CHECKING)
+        state.update{it.copy(repositoryChecks=it.repositoryChecks+(repoKey to checking))}
+        try{val p=probe(old.getString("url"));require(p.fingerprint==old.getString("fingerprint")){"Yayıncı anahtarı değişti; yeni anahtara otomatik güvenilmedi"};trust(p)
+            state.update{it.copy(repositoryChecks=it.repositoryChecks+(repoKey to checking.copy(state=CheckState.CURRENT)))}}
+        catch(e:CancellationException){state.update{it.copy(repositoryChecks=it.repositoryChecks+(repoKey to checking.copy(state=CheckState.CANCELLED)))};throw e}
+        catch(e:Exception){state.update{it.copy(repositoryChecks=it.repositoryChecks+(repoKey to checking.copy(state=CheckState.FAILED,error=e.message.orEmpty())))};throw e}
+    }
     fun index(repo:JSONObject):UpdateProtocol.Index {val raw=repo.getString("index").toByteArray(Charsets.UTF_8);UpdateProtocol.verify(raw,repo.getString("signature"),repo.getString("publicKey"));return UpdateProtocol.index(raw)}
-    suspend fun search(text:String,user:Boolean=false,page:Int=1):List<RepositorySearchResult> {
-        require(text.length in 1..80&&!text.any{it<' '||it=='"'||it=='\\'});require(!user||text.matches(Regex("[A-Za-z0-9-]{1,39}")));require(page in 1..10)
-        val query=(if(user)"user:$text"else text.replace(Regex("[:<>]")," "))+" \"${UpdateProtocol.INDEX}\" in:readme"
-        val url="https://api.github.com/search/repositories?q="+java.net.URLEncoder.encode(query,"UTF-8")+"&per_page=10&page=$page"
-        val o=JSONObject(transport.bytes(url,262144).toString(Charsets.UTF_8));val a=o.getJSONArray("items")
-        return (0 until minOf(a.length(),10)).mapNotNull{i->val r=a.getJSONObject(i);if(r.optBoolean("private"))null else RepositorySearchResult(r.getString("full_name"),r.getString("default_branch"),r.optString("description").take(200))}
-    }
-    suspend fun address(result:RepositorySearchResult):String {
-        require(result.fullName.matches(Regex("[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+")));require(result.branch.matches(Regex("[A-Za-z0-9_./-]{1,100}"))&&!result.branch.contains(".."))
-        val u="https://api.github.com/repos/${result.fullName}/readme?ref="+java.net.URLEncoder.encode(result.branch,"UTF-8")
-        val o=JSONObject(transport.bytes(u,262144).toString(Charsets.UTF_8));require(o.getString("encoding")=="base64")
-        val readme=java.util.Base64.getMimeDecoder().decode(o.getString("content")).toString(Charsets.UTF_8)
-        val path=Regex("<!--\\s*film-merkezi-android-repository:\\s*([A-Za-z0-9_./-]+)\\s*-->").find(readme)?.groupValues?.get(1)?:UpdateProtocol.INDEX
-        UpdateProtocol.path(path);require(path.substringAfterLast('/')==UpdateProtocol.INDEX)
-        return UpdateTransport.repository("https://raw.githubusercontent.com/${result.fullName}/${result.branch}/$path")
-    }
+    suspend fun search(text:String="",user:Boolean=false,page:Int=1,refresh:Boolean=false)=discovery.search(text,user,page,refresh)
+    suspend fun address(result:RepositorySearchResult)=discovery.address(result)
 }

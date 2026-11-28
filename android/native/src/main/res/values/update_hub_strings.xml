@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hub_catalog">Eklenti yükle</string>
+    <string name="hub_installed">Yüklü eklentiler</string>
+    <string name="hub_installed_help">Kurulu siteleri görüntüle, güncelle veya kaldır.</string>
+    <string name="hub_updates">Güncellemeler</string>
+    <string name="hub_management">Yönetim</string>
+    <string name="hub_advanced">Gelişmiş</string>
+    <string name="hub_catalog_count">%1$d eklenti mevcut · %2$d yeni</string>
+    <string name="hub_summary">%1$d depo · %2$d eklenti mevcut · %3$d yüklü</string>
+    <string name="hub_update_count">%1$d eklenti güncellemesi</string>
+    <string name="hub_repository_errors">%1$d depo okunamadı. Kayıtlı sonuçlar gösteriliyor; Yenile ile tekrar deneyebilirsiniz.</string>
+    <string name="hub_can_install">Kurulabilir</string>
+    <string name="hub_already_installed">Yüklü</string>
+    <string name="hub_install_selected">Yükle (%1$d)</string>
+    <string name="hub_select_all">Hepsini seç</string>
+    <string name="hub_deselect">Seçimi kaldır</string>
+    <string name="hub_refresh">Yenile</string>
+    <string name="hub_selection_changed">Seçilen eklentiler zaten yüklü veya artık kurulabilir değil. Listeyi yeniden inceleyin.</string>
+    <string name="hub_update_all">Eklentileri güncelle</string>
+    <string name="hub_finish_install">Kurulumu tamamla</string>
+    <string name="hub_install_title">Eklentileri kur</string>
+    <string name="hub_install_help">Gerekli çözümleyiciler otomatik kurulur. İşlem tamamlanınca uygulama yeniden açılır.</string>
+    <string name="hub_confirm_install">Yükle</string>
+    <string name="hub_restart_help">Eklentiler doğrulandı. Yeni eklentileri kullanmak için kurulumu tamamlayıp uygulamayı yeniden açın.</string>
+    <string name="hub_update_application">Güncelle</string>
+    <string name="hub_finish_application">Yüklemeye devam et</string>
+    <string name="hub_notifications">Bildirimler</string>
+    <string name="hub_app_notices">Uygulama güncelleme bildirimleri</string>
+    <string name="hub_new_notices">Yeni eklenti bildirimleri</string>
+    <string name="hub_plugin_notices">Eklenti güncelleme bildirimleri</string>
+    <string name="hub_reset_notices">Bildirim tercihlerini sıfırla</string>
+    <string name="hub_notice_rules">Bir daha sorma yalnız bildirilen eklentileri veya güncelleme sürümünü kapatır. Buradan tercihleri sıfırlayabilirsiniz.</string>
+    <string name="hub_notice_app_title">Uygulama güncellemesi var</string>
+    <string name="hub_notice_new_title">Yeni eklentiler bulundu</string>
+    <string name="hub_notice_updates_title">Eklenti güncellemeleri var</string>
+    <string name="hub_notice_new_count">%1$d yeni eklenti bulundu.</string>
+    <string name="hub_notice_updates_count">%1$d eklenti güncellenebilir.</string>
+    <string name="hub_notice_app_version">Film Merkezi %1$s indirilmeye hazır.</string>
+    <string name="hub_notice_more">ve %1$d eklenti daha</string>
+    <string name="hub_notice_ignore">Bir daha sorma</string>
+    <string name="hub_notice_inspect">İncele</string>
+    <string name="hub_notice_later">Daha sonra</string>
+    <string name="hub_notice_later_help">Daha sonra: aynı bildirim 24 saat ertelenir.</string>
+    <string name="hub_notice_save_error">Bildirim tercihi kaydedilemedi. Tekrar deneyin; Geri ile bu oturum için kapatabilirsiniz.</string>
+</resources>

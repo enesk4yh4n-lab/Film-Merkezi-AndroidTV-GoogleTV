@@ -34,6 +34,7 @@ class PlayerDpad112Test {
             f.waitFor{f.activity.currentFocus?.id==R.id.fm_player_quality}
             key(KeyEvent.KEYCODE_DPAD_RIGHT);f.waitFor{f.activity.currentFocus?.id==R.id.fm_player_audio};unchanged(baseline)
             result.put("panelReturnNavigation",true)
+            key(KeyEvent.KEYCODE_DPAD_UP);f.waitFor{f.activity.currentFocus?.id==androidx.media3.ui.R.id.exo_progress}
             key(KeyEvent.KEYCODE_DPAD_UP);f.waitFor(5000){!f.activity.snapshotForUiTest().optBoolean("controllerVisible")}
             result.put("afterHide",f.snap())
             key(KeyEvent.KEYCODE_DPAD_RIGHT);result.put("afterHiddenRight",f.snap());f.waitFor(5000){f.activity.snapshotForUiTest().optLong("positionMs")>=baseline+9900}
