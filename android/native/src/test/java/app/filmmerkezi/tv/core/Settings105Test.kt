@@ -48,10 +48,11 @@ class Settings105Test {
     }
     @Test fun disabledSitesMakeNoRequestAndSettingsArePartOfCacheKey()=runBlocking {
         var calls=0;var options=CatalogRequestOptions(sites=emptyList())
-        val transport=object:WebTransport{override suspend fun request(request:WebRequest):WebResponse{calls++;return WebResponse(request.url,"<html></html>")}}
+        val catalog=recordedCatalog("filmmakinesi")
+        val transport=object:WebTransport{override suspend fun request(request:WebRequest):WebResponse{calls++;return WebResponse(request.url,catalog)}}
         val repo=CatalogRepository(transport,requestOptions={options})
         assertEquals(0,repo.observeBrowse().last().requestedSites);assertEquals(0,calls)
-        options=options.copy(sites=listOf("filmmakinesi"));repo.observeBrowse().last();assertEquals(1,calls)
+        options=options.copy(sites=listOf("filmmakinesi"));assertTrue(repo.observeBrowse().last().items.isNotEmpty());assertEquals(1,calls)
         repo.observeBrowse().last();assertEquals(1,calls)
         options=options.copy(merge=false);repo.observeBrowse().last();assertEquals(2,calls)
     }

@@ -9,14 +9,22 @@ import org.junit.Test
 import java.util.concurrent.atomic.AtomicInteger
 import okhttp3.HttpUrl.Companion.toHttpUrl
 
+private val catalogFixtures by lazy {
+    JSONArray(checkNotNull(RepositoryFlowTest::class.java.getResource("/catalog/index.json")).readText()).values().filterIsInstance<JSONObject>()
+}
+
+internal fun recordedCatalog(siteId:String):String {
+    val row=catalogFixtures.firstOrNull{it.string("site")==siteId&&it.string("method")!="detail"&&!it.getJSONObject("reference").has("error")}
+        ?:return ""
+    return checkNotNull(RepositoryFlowTest::class.java.getResource("/catalog/"+row.string("file"))).readText()
+}
+
 class RepositoryFlowTest {
     private class Network:WebTransport {
         val active=AtomicInteger();val peak=AtomicInteger();var cancelled=0
-        private val index=JSONArray(checkNotNull(javaClass.getResource("/catalog/index.json")).readText()).values().filterIsInstance<JSONObject>()
         private val bodies=Sites.all.associate{site->
             if(site.id=="dizipal")return@associate site.id to """<main><a class="group block" href="/filmler/fixture"><h3>Fixture</h3></a></main>"""
-            val row=index.firstOrNull{it.string("site")==site.id&&it.string("method")!="detail"&&!it.getJSONObject("reference").has("error")}
-            site.id to row?.let{checkNotNull(javaClass.getResource("/catalog/"+it.string("file"))).readText()}.orEmpty()
+            site.id to recordedCatalog(site.id)
         }
         override suspend fun request(request:WebRequest):WebResponse {
             val running=active.incrementAndGet();peak.updateAndGet{maxOf(it,running)}

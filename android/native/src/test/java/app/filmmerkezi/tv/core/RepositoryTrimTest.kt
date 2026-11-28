@@ -8,15 +8,16 @@ import java.util.concurrent.atomic.AtomicInteger
 class RepositoryTrimTest {
     @Test fun inFlightUnifiedRequestCannotRefillTrimmedCache()=runBlocking {
         val entered=CompletableDeferred<Unit>();val release=CompletableDeferred<Unit>();val calls=AtomicInteger()
+        val catalog=recordedCatalog("hdfilmdelisi")
         val network=object:WebTransport {
             override suspend fun request(request:WebRequest):WebResponse {
                 calls.incrementAndGet();entered.complete(Unit);release.await()
-                return WebResponse(request.url,"<html><body>Empty fixture catalog</body></html>")
+                return WebResponse(request.url,catalog)
             }
         }
-        val repository=CatalogRepository(network)
+        val repository=CatalogRepository(network,requestOptions={CatalogRequestOptions(sites=listOf("hdfilmdelisi"))})
         val pending=async{repository.browse()};entered.await();repository.trim();release.complete(Unit);pending.await()
-        val before=calls.get();repository.browse();assertTrue(calls.get()>before)
+        val before=calls.get();assertTrue(repository.browse().items.isNotEmpty());assertTrue(calls.get()>before)
         val cached=calls.get();repository.browse();assertEquals(cached,calls.get())
         repository.trim();repository.browse();assertTrue(calls.get()>cached)
         Unit

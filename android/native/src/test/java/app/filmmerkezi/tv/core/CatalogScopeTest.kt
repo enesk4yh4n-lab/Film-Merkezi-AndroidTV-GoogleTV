@@ -27,12 +27,18 @@ class CatalogScopeTest {
     }
     @Test fun selectedSiteDoesNotRequestOtherSitesAndUsesItsOwnCache()=runBlocking {
         val requests=CopyOnWriteArrayList<WebRequest>()
+        val catalogs=mapOf("https://hdfilmdelisi.one/" to recordedCatalog("hdfilmdelisi"),
+            "https://sinemacc.com/" to recordedCatalog("sinemacc"))
         val repository=CatalogRepository(object:WebTransport{
-            override suspend fun request(request:WebRequest):WebResponse {requests.add(request);return WebResponse(request.url,"<html><body>Empty catalog</body></html>")}
+            override suspend fun request(request:WebRequest):WebResponse {
+                requests.add(request)
+                return WebResponse(request.url,catalogs.entries.single{request.url.startsWith(it.key)}.value)
+            }
         })
         val result=repository.observeBrowse(siteId="hdfilmdelisi").last()
         assertEquals(1,requests.size);assertTrue(requests.all{it.url.startsWith("https://hdfilmdelisi.one/")})
         assertEquals(1,result.requestedSites);assertEquals(1,result.completedSites)
+        assertTrue(result.failures.isEmpty());assertTrue(result.items.isNotEmpty())
         repository.observeBrowse(siteId="hdfilmdelisi").last();assertEquals(1,requests.size)
         repository.observeBrowse(siteId="sinemacc").last();assertEquals(2,requests.size)
         repository.observeSearch("Deneme",siteId="sinemacc").last();assertEquals(3,requests.size)
