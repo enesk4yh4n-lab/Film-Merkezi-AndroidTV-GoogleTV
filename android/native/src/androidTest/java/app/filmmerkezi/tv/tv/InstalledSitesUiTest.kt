@@ -18,7 +18,7 @@ class InstalledSitesUiTest {
         val manager=DistributionManager.get(f.context)
         manager.store.commit{state->state.put("knownSites",(state.optJSONArray("knownSites")?:JSONArray()).put(PluginWire.site(ghost)))}
         ModuleRuntime.register(manager.store.snapshot())
-        val expected=Sites.all.map{it.name};val expectedIds=Sites.all.map{it.id};assertEquals(4,expected.size)
+        val expected=listOf("P002","P003","P004","P005");val expectedIds=Sites.all.map{it.id};assertEquals(4,expectedIds.size)
         val fake=object:TvData {
             override fun browse(kind:ContentKind,cursors:Map<String,PageCursor>)=flowOf(UnifiedPage(emptyList(),emptyMap(),emptyList()))
             override fun search(query:String,cursors:Map<String,PageCursor>)=browse(ContentKind.MOVIE,cursors)

@@ -17,7 +17,7 @@ import org.json.JSONObject
 /** Single update flow embedded in Options. Dialogs are limited to input and confirmation. */
 internal class DistributionPanel(private val activity:Activity,parentScope:CoroutineScope,private val playing:()->Boolean,left:()->Unit={},up:()->Unit=left,
     private val setupExit:(()->Unit)?=null,private val setupInstalled:(()->Unit)?=null,private val setupTrusted:(()->Unit)?=null,
-    private val setupApplied:(()->Unit)?=null) {
+    private val setupApplied:(()->Unit)?=null,private val setupSkip:(()->Unit)?=null) {
     private val lifetime=SupervisorJob(parentScope.coroutineContext[Job])
     private val scope=CoroutineScope(parentScope.coroutineContext+lifetime)
     private val manager=DistributionManager.get(activity)
@@ -27,8 +27,10 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     private var generation=0
     private var observer:Job?=null
     private var work:Job?=null
+    private var searchWork:Job?=null
     private var dialog:ClassicDialog?=null
     private val selected=linkedSetOf<String>()
+    private var setupSelectionInitialized=false
     private var noticePopup:UpdateNoticePopup?=null
     private fun s(id:Int)=activity.getString(id)
     private fun display(builder:ClassicDialog.Builder){dialog?.dismiss();dialog=builder.show()}
@@ -50,21 +52,21 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     private fun inventoryPage(p:UpdateCenterView,render:(PluginInventory)->Unit){val token=generation;p.loading(true);p.update(emptyList());work=scope.launch{
         try{val value=withContext(Dispatchers.IO){manager.inventory()};if(token==generation){p.loading(false);render(value)}}catch(e:CancellationException){throw e}catch(e:Exception){if(token==generation){p.loading(false);error(e)}}}}
     private fun idle():Boolean {if(!playing())return true;notice(s(R.string.updates_busy_playing));return false}
-    private fun show(title:String,parent:(()->Unit)?=null,key:String=""):UpdateCenterView {
-        observer?.cancel();generation++;returnPage=parent?.let{{it();view.requestKey(key)}}
-        view.page(title,parent!=null);view.onBack={back()};return view
+    private fun show(title:String,parent:(()->Unit)?=null,key:String="",actionsOnTop:Boolean=false):UpdateCenterView {
+        observer?.cancel();searchWork?.cancel();generation++;returnPage=parent?.let{{it();view.requestKey(key)}}
+        view.page(title,parent!=null,actionsOnTop);view.onBack={back()};return view
     }
     fun back():Boolean {
         if(dialog?.isShowing==true){dialog?.dismiss();return true}
-        work?.cancel();work=null
+        work?.cancel();work=null;searchWork?.cancel()
         returnPage?.let{it();return true};return false
     }
     fun dispose(){generation++;noticePopup?.close();dialog?.dismiss();lifetime.cancel()}
     fun openSetupRepositories(){
-        repositoryChoices(show(s(R.string.updates_add_repository),setupExit,"search"))
+        results(RepositoryDiscovery.DEFAULT_QUERY,false,1)
     }
     fun openSetupPackages(){when{
-        manager.store.snapshot().has("pending")->ready()
+        manager.store.snapshot().has("pending")||manager.store.restartRequired->ready()
         manager.pluginInstall.value.busy||manager.pluginInstall.value.failure!=null||manager.store.hasInstallJob->showInstallJob()
         else->addPlugins()
     }}
@@ -114,11 +116,13 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     fun navigate(route:UpdateRoute){if(route.install.isNotEmpty()){addPlugins();installKeys(route.install);return}
         when(route.page){UpdatePage.HOME->open();UpdatePage.CATALOG->addPlugins();UpdatePage.INSTALLED->installed();UpdatePage.UPDATES->updates();UpdatePage.APPLICATION->{application();if(route.downloadApplication&&manager.status.value.release?.code==route.applicationCode)downloadApplication()};UpdatePage.REPOSITORIES->repositories();UpdatePage.ADVANCED->technical()}}
     private fun summary(c:PluginCatalog)=activity.getString(R.string.hub_summary,c.repositoryCount,c.availableCount,c.installedCount)+(if(c.errors.isEmpty())""else"\n"+activity.getString(R.string.hub_repository_errors,c.errors.size))
-    private fun addPlugins(){val p=show(s(R.string.hub_catalog),setupExit?: ::open,"add");p.loading(true)
+    private fun addPlugins(){val p=show(s(R.string.hub_catalog),setupExit?: ::open,"add",actionsOnTop=setupInstalled!=null);p.loading(true)
         observer=scope.launch{combine(manager.store.revision,manager.status){_,v->v}.collectLatest{
             val catalog=withContext(Dispatchers.IO){manager.catalog()};p.loading(false)
             val available=catalog.plugins.filter{it.compatible&&!it.ready&&(it.fresh||it.update)}.map{it.key}.toSet();selected.retainAll(available)
             if(catalog.repositoryCount==0){repositoryChoices(p);return@collectLatest}
+            val initialSelection=setupInstalled!=null&&!setupSelectionInitialized&&available.isNotEmpty()&&!catalog.pending
+            if(initialSelection){selected.addAll(available);setupSelectionInitialized=true}
             val rows=catalog.plugins.map{plugin->val reason=when{!plugin.enabled->s(R.string.updates_plugin_repository_off);plugin.entry.minApp>manager.installedCode->s(R.string.updates_plugin_newer_app);plugin.ready->s(R.string.updates_plugin_prepared);plugin.update->s(R.string.updates_plugin_update);plugin.installed!=null->s(R.string.hub_already_installed);else->s(R.string.hub_can_install)}
                 ClassicRow("catalog:"+plugin.key,pluginCode(plugin.entry.id),plugin.entry.version+" · "+reason+"\n"+plugin.repositoryName,selected=plugin.key in selected,enabled=plugin.key in available)}
             p.update(rows,actions=listOf(
@@ -131,6 +135,7 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
             ),message=summary(catalog)+(if(catalog.plugins.isEmpty())"\n"+s(R.string.updates_empty_repository)else "")){key->
                 val id=key.removePrefix("catalog:");if(id in selected)selected.remove(id)else selected.add(id);addPlugins();view.requestKey(key)
             }
+            if(initialSelection)p.requestKey("install-selected")
         }}
     }
     private fun repositoryChoices(p:UpdateCenterView){
@@ -142,7 +147,7 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     }
     private fun addRepository(){val p=show(s(R.string.updates_add_repository),::addPlugins,if(manager.store.repositoryCount==0)"search"else"add-repo");repositoryChoices(p)}
     private fun refreshCatalog(){launchWork{val errors=mutableListOf<String>();for(repo in manager.repositories().filter{it.optBoolean("enabled",true)})try{manager.refresh(repo.getString("key"))}catch(e:CancellationException){throw e}catch(e:Exception){errors.add(repo.getString("name"))};addPlugins();if(errors.isNotEmpty())notice(activity.getString(R.string.hub_repository_errors,errors.size))}}
-    private fun installKeys(keys:List<String>,parent:()->Unit=::addPlugins)=prepareInstall(parent,"install-selected"){
+    private fun installKeys(keys:List<String>,parent:()->Unit=::addPlugins)=prepareInstall(parent,"install-selected",oneClick=setupInstalled!=null){
         val catalog=manager.catalog();val choices=catalog.plugins.filter{it.key in keys&&it.compatible&&!it.ready&&(it.fresh||it.update)}
             require(choices.isNotEmpty()){s(R.string.hub_selection_changed)}
             val all=linkedMapOf<String,PackageInstaller.Candidate>();for(plugin in choices)for(candidate in installer.plan(plugin.repository,plugin.entry.id)){
@@ -296,10 +301,10 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
         (group.prepared?.let{listOf(ClassicRow("prepared-version",s(R.string.updates_plugin_ready_version),it.module.version,enabled=false))}?:emptyList())+
         group.resolvers.map{ClassicRow("resolver:"+it.key,pluginCode(it.module.id),it.module.version,enabled=false)}+
         group.missingResolvers.map{ClassicRow("missing:"+it,pluginCode(it),s(R.string.updates_plugin_missing_resolver),enabled=false)}
-    private fun prepareInstall(parent:()->Unit,key:String,plan:suspend()->List<PackageInstaller.Candidate>){
+    private fun prepareInstall(parent:()->Unit,key:String,oneClick:Boolean=false,plan:suspend()->List<PackageInstaller.Candidate>){
         if(!idle()||work?.isActive==true)return
         if(manager.pluginInstall.value.busy||manager.store.hasInstallJob){showInstallJob();return}
-        val p=show(s(R.string.setup_install_pending),parent,key)
+        val p=show(s(R.string.setup_install_pending),parent,key,actionsOnTop=oneClick)
         p.loading(true);p.update(emptyList(),message=s(R.string.install_preparing));p.focusFirst()
         val token=generation
         launchWork{
@@ -308,6 +313,7 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
                 return@launchWork
             }
             if(token!=generation)return@launchWork
+            if(oneClick){startInstall(candidates,autoApply=true);return@launchWork}
             p.loading(false)
             p.update(emptyList(),actions=listOf(ClassicAction("continue",s(R.string.hub_confirm_install)){confirmInstall(candidates)}),
                 message=s(R.string.install_confirm_prepared))
@@ -316,9 +322,14 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     }
 
     private fun confirmInstall(plan:List<PackageInstaller.Candidate>){display(ClassicDialog.Builder(activity).setTitle(R.string.hub_install_title).setMessage(plan.filter{it.manifest.type=="site"}.joinToString("\n"){pluginCode(it.manifest.id)+" · "+it.manifest.version+it.replaces.joinToString(""){key->"\n"+activity.getString(R.string.updates_replaces_package,pluginCode(key))}}+"\n\n"+s(R.string.hub_install_help))
-        .setPositiveButton(R.string.hub_confirm_install){_,_->
-            if(idle()){manager.startPluginInstall(plan);showInstallJob()}
-        }.setNegativeButton(R.string.tv_cancel){_,_->returnPage?.invoke()})
+        .setPositiveButton(R.string.hub_confirm_install){_,_->startInstall(plan)}
+        .setNegativeButton(R.string.tv_cancel){_,_->returnPage?.invoke()})
+    }
+
+    private fun startInstall(plan:List<PackageInstaller.Candidate>,autoApply:Boolean=false){
+        if(!idle())return
+        manager.startPluginInstall(plan)
+        showInstallJob(autoApply)
     }
 
     private fun installCount(job:InstallJobSummary,run:PluginInstallRun):String {
@@ -326,14 +337,18 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
         return if(total==0)"" else activity.getString(R.string.install_count,job.completed,total,job.percent)
     }
 
-    private fun showInstallJob(){
-        val p=show(s(R.string.setup_install_pending),setupExit?: ::open,"install-job")
+    private fun showInstallJob(autoApply:Boolean=false){
+        val p=show(s(R.string.setup_install_pending),setupExit?: ::open,"install-job",actionsOnTop=setupInstalled!=null)
+        val token=generation
+        var applying=false
+        fun visible()=token==generation&&activity.hasWindowFocus()&&!activity.isFinishing
         val run=manager.pluginInstall.value
         val count=installCount(InstallJobSummary(emptyList()),run)
         if(count.isNotBlank())p.installProgress(0,count)else p.loading(true)
         val initialActions=if(run.busy)listOf(ClassicAction("background",s(R.string.install_background)){setupInstalled?.invoke()?:open()})else emptyList()
         p.update(emptyList(),actions=initialActions,message=listOf(count,s(R.string.install_preparing)).filter(String::isNotBlank).joinToString("\n"));p.focusContent()
         observer=scope.launch{combine(manager.pluginInstall,manager.store.revision){run,_->run}.collectLatest{run->
+            if(applying)return@collectLatest
             val (job,pending)=withContext(Dispatchers.IO){installer.jobSummary() to manager.store.snapshot().has("pending")}
             val total=if(job.total>0)job.total else run.plannedProviders
             val count=installCount(job,run)
@@ -357,6 +372,26 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
                     else->s(R.string.setup_install_waiting)
                 }
                 ClassicRow(item.key,pluginCode(item.key),state,enabled=false)
+            }
+            if(autoApply&&!pending&&!run.busy&&run.failure==null&&job.complete&&visible()&&work?.isActive!=true){
+                applying=true
+                p.update(rows,message=s(R.string.setup_install_applying))
+                launchWork{
+                    var restarting=false
+                    try{
+                        withContext(Dispatchers.IO){installer.stageReady(requireAll=true)}
+                        if(visible()){
+                            withContext(Dispatchers.IO){installer.activate()}
+                            setupApplied?.invoke()
+                            if(visible()){restarting=true;restart()}
+                        }
+                    }finally{
+                        if(!restarting&&token==generation&&!activity.isFinishing){
+                            if(manager.store.restartRequired)ready()else showInstallJob()
+                        }
+                    }
+                }
+                return@collectLatest
             }
             val actions=buildList{
                 if(run.busy)add(ClassicAction("background",s(R.string.install_background)){setupInstalled?.invoke()?:open()})
@@ -384,7 +419,7 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
             p.update(rows,actions,message=listOf(count,phase).filter{it.isNotBlank()}.joinToString("\n"))
         }}
     }
-    private fun ready(){val p=show(s(R.string.updates_phase_ready),::open,"apply");inventoryPage(p){inventory->val groups=inventory.providers.filter{it.state==PluginState.READY||it.state==PluginState.REMOVAL_READY}
+    private fun ready(){val p=show(s(R.string.updates_phase_ready),setupExit?: ::open,"apply",actionsOnTop=setupInstalled!=null);inventoryPage(p){inventory->val groups=inventory.providers.filter{it.state==PluginState.READY||it.state==PluginState.REMOVAL_READY}
         p.update(groups.map{ClassicRow(it.key,pluginCode(it.current.module.id),pluginState(it),enabled=false)},actions=listOf(
             ClassicAction("apply",s(R.string.install_apply_restart)){if(idle())launchWork{withContext(Dispatchers.IO){if(!manager.store.restartRequired)installer.activate()};setupApplied?.invoke();restart()}},
             ClassicAction("later",s(R.string.updates_later)){setupInstalled?.invoke()?:open()}
@@ -428,13 +463,23 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     private fun editSearch(query:String,user:Boolean){prompt(if(user)R.string.updates_search_user else R.string.updates_search,R.string.updates_search_hint,query){q->results(q,user,1)}}
     private fun results(query:String,user:Boolean,page:Int,refresh:Boolean=false){
         work?.cancel()
-        val p=show(s(if(user)R.string.updates_search_user else R.string.updates_search),::addPlugins,if(user)"search-user"else"search")
+        val p=show(s(if(user)R.string.updates_search_user else R.string.updates_search),setupExit?.takeIf{setupSkip!=null}?: ::addPlugins,
+            if(user)"search-user"else"search")
         val token=generation
         val term=query.trim().ifBlank{if(user)""else RepositoryDiscovery.DEFAULT_QUERY}
+        val addressAction=ClassicAction("address",s(R.string.updates_add_address)){address()}
+        val setupActions=setupSkip?.let{skip->listOf(
+            ClassicAction("search-user",s(R.string.updates_search_user)){editSearch("",true)},
+            ClassicAction("setup-skip",s(if(manager.store.repositoryCount==0)R.string.setup_skip_repository else R.string.setup_keep_repositories),run=skip)
+        )}.orEmpty()
+        fun waitingOnDefaultFocus()=setupSkip!=null&&dialog?.isShowing!=true&&
+            p.findFocus()?.tag.let{it==null||it=="updates:address"}
         p.loading(true)
-        p.update(emptyList(),actions=listOf(ClassicAction("cancel",s(R.string.tv_cancel)){back()},ClassicAction("address",s(R.string.updates_add_address)){back();address()}),message=activity.getString(R.string.updates_searching,term))
-        p.focusFirst()
-        work=scope.launch {
+        val loadingActions=if(setupSkip!=null)listOf(addressAction)+setupActions else listOf(
+            ClassicAction("cancel",s(R.string.tv_cancel)){back()},ClassicAction("address",s(R.string.updates_add_address)){back();address()})
+        p.update(emptyList(),actions=loadingActions,message=activity.getString(R.string.updates_searching,term))
+        if(setupSkip!=null)p.requestKey("address")else p.focusFirst()
+        searchWork=scope.launch {
             try {
                 val result=withContext(Dispatchers.IO){manager.search(term,user,page,refresh)}
                 if(token!=generation)return@launch
@@ -451,21 +496,23 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
                     if(result.incomplete)add(s(R.string.updates_search_incomplete))
                     if(result.verificationFailures>0)add(activity.getString(R.string.updates_search_unverified,result.verificationFailures))
                 }.joinToString("\n")
+                val promote=waitingOnDefaultFocus()
                 p.update(rows,actions=listOf(
                     ClassicAction("edit",s(R.string.updates_search_edit)){editSearch(result.query,user)},
                     ClassicAction("refresh",s(R.string.updates_search_retry)){results(result.query,user,page,true)},
-                    ClassicAction("address",s(R.string.updates_add_address)){address()}
-                ),message=message){key->when(key){
+                    addressAction
+                )+setupActions,message=message){key->when(key){
                     "previous"->results(result.query,user,page-1)
                     "next"->results(result.query,user,page+1)
                     else->launchWork{p.loading(true);try{val candidate=result.items.single{it.fullName==key};trust(withContext(Dispatchers.IO){manager.probe(candidate.address)})}finally{if(token==generation)p.loading(false)}}
                 }}
+                if(promote)result.items.firstOrNull()?.let{p.requestKey(it.fullName)}
             }catch(e:CancellationException){if(token==generation)p.loading(false);throw e}
-            catch(e:Exception){if(token==generation){p.loading(false);p.update(emptyList(),actions=listOf(
+            catch(e:Exception){if(token==generation){val promote=waitingOnDefaultFocus();p.loading(false);p.update(emptyList(),actions=listOf(
                 ClassicAction("retry",s(R.string.updates_search_retry)){results(term,user,page,true)},
                 ClassicAction("edit",s(R.string.updates_search_edit)){editSearch(term,user)},
-                ClassicAction("address",s(R.string.updates_add_address)){address()}
-            ),message=activity.getString(R.string.updates_search_failed,e.message?:e.javaClass.simpleName))}}
+                addressAction
+            )+setupActions,message=activity.getString(R.string.updates_search_failed,e.message?:e.javaClass.simpleName));if(promote)p.requestKey("retry")}}
         }
     }
     private fun restart(){scope.launch{DistributionRestart.run(activity)}}

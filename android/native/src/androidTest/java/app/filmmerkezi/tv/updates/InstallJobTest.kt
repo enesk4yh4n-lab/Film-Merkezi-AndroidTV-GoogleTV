@@ -67,6 +67,13 @@ class InstallJobTest {
             }
             val reopened=PackageInstaller(manager)
             assertEquals(4,reopened.job().size)
+            val beforeAutomaticApply=manager.store.snapshot().toString()
+            try{
+                reopened.stageReady(requireAll=true)
+                fail("Automatic apply staged an incomplete install")
+            }catch(_:IllegalArgumentException){
+                assertEquals(beforeAutomaticApply,manager.store.snapshot().toString())
+            }
             reopened.stageReady()
             val staged=manager.store.snapshot()
             assertEquals(original.getJSONObject("packages").toString(),staged.getJSONObject("packages").toString())

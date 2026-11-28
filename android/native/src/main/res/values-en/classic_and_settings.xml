@@ -18,8 +18,6 @@
     <string name="classic_new_series">New series from the sites</string>
     <string name="classic_sort">Sort: %1$s</string>
     <string name="classic_sort_title">Sort</string>
-    <string name="classic_sites_done">Site responses complete · %1$d sites</string>
-    <string name="classic_sites_loading">Site responses · %1$d/%2$d sites</string>
     <string name="classic_default_order">Default order</string>
     <string name="classic_newest_order">Year: newest first</string>
     <string name="classic_rating_order">IMDb rating</string>
@@ -344,6 +342,16 @@
     <string name="tv_site_count">%1$d sites</string>
     <string name="tv_site_no_results">No titles yet</string>
     <string name="tv_site_loading">Loading</string>
+    <string name="catalog_site_selection">%1$d installed · %2$d enabled in catalog</string>
+    <string name="catalog_response_summary">%1$d installed · %2$d in this catalog · %3$d completed</string>
+    <string name="catalog_site_disabled">Disabled in catalog</string>
+    <string name="catalog_site_outside_selection">Outside the selected scope</string>
+    <string name="catalog_site_unsupported">Does not offer this catalog</string>
+    <string name="catalog_site_paused">Temporarily paused</string>
+    <string name="catalog_site_http">Server response · HTTP %1$d</string>
+    <string name="catalog_site_timeout">Timed out</string>
+    <string name="catalog_site_failed">Could not load titles</string>
+    <string name="catalog_site_partial">Partial results</string>
     <string name="fm_collection_member">%1$d. %2$s (%3$d)</string>
     <string name="fm_filter_scope">Supported filters are sent to sites. Other filters cover a limited set of results and are marked as partial.</string>
     <string name="fm_partial_scope">Partial scan: %1$d sites · Sorting: loaded results</string>

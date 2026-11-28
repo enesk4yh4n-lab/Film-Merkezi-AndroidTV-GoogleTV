@@ -4,7 +4,6 @@
     <string name="setup_usage">Kullanım bilgisi</string>
     <string name="setup_usage_help">Film Merkezi içerik veya erişim hakkı sağlamaz. Siteler, seçip yüklediğiniz eklentiler üzerinden kullanılır. Yalnız güvendiğiniz yayıncıların depolarını ekleyin.</string>
     <string name="setup_next">Devam et</string>
-    <string name="setup_repository_help">Kullanmak istediğiniz depoyu arayın veya HTTPS adresini girin.</string>
     <string name="setup_keep_repositories">Mevcut depolarla devam et</string>
     <string name="setup_skip_repository">Şimdilik atla</string>
     <string name="setup_skip_repository_help">Eklenti kurulana kadar katalog boş kalır. Ana sayfadan veya Güncelleme Merkezi’nden depo ekleyebilirsiniz.</string>
@@ -17,6 +16,7 @@
     <string name="setup_install_discard">Kurulumu iptal et</string>
     <string name="setup_install_discard_confirm">Bekleyen indirme listesi kaldırılacak. Kurulu eklentiler korunacak.</string>
     <string name="install_preparing">Kurulum hazırlanıyor…</string>
+    <string name="setup_install_applying">Eklentiler etkinleştiriliyor. Film Merkezi yeniden açılacak.</string>
     <string name="install_confirm_prepared">Paket imzaları doğrulandı. İndirmeyi başlatmak için kurulumu onayla.</string>
     <string name="install_count">%1$d/%2$d eklenti doğrulandı · %%%3$d</string>
     <string name="install_in_progress">Kurulum sürüyor</string>
@@ -38,14 +38,13 @@
     <string name="pin_mismatch">PIN’ler eşleşmiyor.</string>
     <string name="pin_wrong">PIN yanlış.</string>
     <string name="pin_locked">Çok fazla hatalı deneme. Beş dakika bekleyin.</string>
-    <string name="catalog_animation">ÇizgiFilm/Anime</string>
+    <string name="catalog_animation">Çizgi Film/Anime</string>
     <string name="catalog_drama_short">Drama/Short</string>
     <string name="catalog_section_unavailable">Seçili katalogda bu bölümü destekleyen etkin site yok.</string>
     <string name="catalog_section_failed">Kategori yüklenemedi. Site yanıtlarını kontrol et veya yeniden dene.</string>
     <string name="catalog_section_empty">Bu kategoride gösterilecek içerik bulunamadı.</string>
     <string name="catalog_cached_loading">Son kayıtlı sonuçlar · Güncelleniyor</string>
     <string name="catalog_cached_stale">Güncel sonuç alınamadı · Son kayıtlı sonuçlar</string>
-    <string name="catalog_site_failures">%1$d/%2$d site yanıtı alınamadı</string>
     <string name="catalog_check_followed">Şimdi kontrol et</string>
     <string name="catalog_follow_no_results">Takip ettiğiniz dizi yok.</string>
     <string name="catalog_match">Birleştirme yöntemi</string>

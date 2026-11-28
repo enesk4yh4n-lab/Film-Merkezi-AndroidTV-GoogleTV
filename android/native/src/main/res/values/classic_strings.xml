@@ -18,8 +18,6 @@
     <string name="classic_new_series">Sitelerden yeni diziler</string>
     <string name="classic_sort">Sırala: %1$s</string>
     <string name="classic_sort_title">Sırala</string>
-    <string name="classic_sites_done">Site yanıtları tamamlandı · %1$d site</string>
-    <string name="classic_sites_loading">Site yanıtları · %1$d/%2$d site</string>
     <string name="classic_default_order">Varsayılan sıra</string>
     <string name="classic_newest_order">Yıl: yeniden eskiye</string>
     <string name="classic_rating_order">IMDb puanı</string>

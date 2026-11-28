@@ -34,7 +34,7 @@ data class SiteSpec(
     }
 }
 
-internal data class CatalogPluginMetadata(val revision:String,val sections:Map<CatalogSection,List<SectionRoute>>?)
+internal data class CatalogPluginMetadata(val revision:String,val sections:Map<CatalogSection,List<SectionRoute>>?,val packageId:String?=null)
 
 object Sites {
     /** Optional historical fixture/migration source set. The normal APK has no site inventory. */
@@ -62,6 +62,7 @@ object Sites {
     val revision:Long get()=configuration.revision
     @Synchronized fun configure(addresses:Map<String,SiteAddress>){if(addresses!=configuration.addresses){configuration=configuration.copy(addresses=addresses.toMap(),sites=templates.map{SiteAddresses.apply(it,addresses[it.id])},revision=configuration.revision+1);installedState.value=all}}
     internal fun declaredSections(id:String)=configuration.catalog[id]?.sections
+    internal fun catalogPackageId(id:String)=configuration.catalog[id]?.packageId?:id
     internal fun catalogRevision(id:String)=configuration.catalog[id]?.revision.orEmpty()
     fun current(site:SiteSpec)=SiteAddresses.apply(site,configuration.addresses[site.id])
     fun default(id:String)=templates.singleOrNull{it.id==id}?:throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")

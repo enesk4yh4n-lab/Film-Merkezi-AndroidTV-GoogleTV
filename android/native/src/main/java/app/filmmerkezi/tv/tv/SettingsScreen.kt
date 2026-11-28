@@ -327,7 +327,9 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
         }
         window.setOnDismissListener{check?.cancel();revision++;if(active)post{options.findViewWithTag<View>("setting:site-management")?.requestFocus()}}
     }
-    private fun showRows(){val v=repository.value;val names=mapOf("continue" to R.string.tv_continue,"following" to R.string.fm_following,"movies" to R.string.classic_new_movies,"series" to R.string.classic_new_series,"library" to R.string.tv_my_list)
+    private fun showRows(){val v=repository.value;val names=mapOf("continue" to R.string.tv_continue,"following" to R.string.fm_following,
+        "movies" to R.string.classic_new_movies,"series" to R.string.classic_new_series,"animation" to R.string.catalog_animation,
+        "drama-short" to R.string.catalog_drama_short,"library" to R.string.tv_my_list)
         dialog=ClassicDialog.Builder(activity).setTitle(R.string.settings_rows).setItems(v.rowOrder.map{(if(it in v.hiddenRows)""else "✓ ")+s(names.getValue(it))}.toTypedArray()){_,i->val id=v.rowOrder[i]
             dialog=ClassicDialog.Builder(activity).setTitle(names.getValue(id)).setItems(arrayOf(s(R.string.settings_visibility),s(R.string.settings_up),s(R.string.settings_down))){_,action->update{old->if(action==0)old.copy(hiddenRows=if(id in old.hiddenRows)old.hiddenRows-id else old.hiddenRows+id)else{val list=old.rowOrder.toMutableList();val at=list.indexOf(id);java.util.Collections.swap(list,at,(at+if(action==1)-1 else 1).coerceIn(0,list.lastIndex));old.copy(rowOrder=list)}}}.setNegativeButton(R.string.tv_back,null).show()
         }.setNegativeButton(R.string.tv_back,null).show()

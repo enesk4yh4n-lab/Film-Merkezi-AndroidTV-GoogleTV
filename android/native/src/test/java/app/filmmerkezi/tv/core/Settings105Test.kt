@@ -23,6 +23,12 @@ class Settings105Test {
             player=PlaybackSettings(autoMaxFps=30,autoMaxHeight=720,customSubtitles=true,buffer=BufferProfile.LONG,seekSeconds=15))
         assertEquals(s,SettingsCodec.read(SettingsCodec.fields(s)))
     }
+    @Test fun newHomeRowsAreVisibleAndPreserveTheSavedOrdering(){
+        val old=listOf("library","movies","continue","series","following")
+        val settings=SettingsCodec.read(mapOf("rowOrder" to old.joinToString("|"),"hiddenRows" to setOf("movies")))
+        assertEquals(old+listOf("animation","drama-short"),settings.rowOrder)
+        assertEquals(setOf("movies"),settings.hiddenRows)
+    }
     @Test fun separateCardKeysDoNotChangeWorkOrRemoveOtherSites(){
         val a=Card(ContentRef("filmcibaba","https://filmizle.ink/test/"),"Film",year=2025,workId="work:stable")
         val b=a.copy(ref=ContentRef("filmmakinesi","https://filmmakinesi.to/film/test/"))

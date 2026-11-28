@@ -51,7 +51,7 @@ class CatalogRepository(private val network:WebTransport,private val works:WorkS
         unified("browse:$siteId:$kind:$cursors",cursors,siteId,persist=true,eligible={Sites.get(it).supports(kind)}){p,c->p.browse(kind,c)}
     fun observeFiltered(q:CatalogQuery,cursors:Map<String,PageCursor> = emptyMap(),siteId:String?=null):Flow<UnifiedPage>{
         val budget=java.util.concurrent.atomic.AtomicInteger(12)
-        return unified("filtered:$siteId:${q.signature}:$cursors",cursors,siteId,persist=true){p,c->p.filtered(q,c,check={budget.getAndDecrement()>0})}
+        return unified("filtered:$siteId:${q.signature}:$cursors",cursors,siteId,persist=true,eligible={Sites.get(it).supports(q.kind)}){p,c->p.filtered(q,c,check={budget.getAndDecrement()>0})}
     }
     fun observeSection(section:CatalogSection,cursors:Map<String,PageCursor> = emptyMap(),siteId:String?=null):Flow<UnifiedPage> =
         unified("section:$section:$siteId:$cursors",cursors,siteId,eligible={section.routes(it).isNotEmpty()},verifyDetails=false,persist=true){p,c->p.section(section,c)}

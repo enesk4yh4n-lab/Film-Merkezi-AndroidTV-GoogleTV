@@ -22,7 +22,7 @@ class ClassicUiTest {
     private var catalogOriginal=emptyMap<String,Any?>()
     private fun main(block:()->Unit)=ins.runOnMainSync(block)
     private fun texts(v:View):List<String> = buildList{if(v is TextView)add(v.text.toString());if(v is ViewGroup)for(i in 0 until v.childCount)addAll(texts(v.getChildAt(i)))}
-    private fun waitFor(test:()->Boolean){val until=SystemClock.elapsedRealtime()+10000
+    private fun waitFor(timeoutMs:Long=10000,test:()->Boolean){val until=SystemClock.elapsedRealtime()+timeoutMs
         while(SystemClock.elapsedRealtime()<until){var yes=false;main{yes=test()};if(yes)return;SystemClock.sleep(50)};error("Classic UI timeout")}
     private fun click(id:Int){main{checkNotNull(activity.findViewById<View>(id)).performClick()};ins.waitForIdleSync()}
     private fun tile(key:String){waitFor{activity.window.decorView.findViewWithTag<View>(key)!=null};main{activity.window.decorView.findViewWithTag<View>(key).performClick()};ins.waitForIdleSync()}
@@ -57,11 +57,22 @@ class ClassicUiTest {
         waitFor{activity.hasWindowFocus()&&UiPreferences(ins.targetContext).step==1}
         assertFalse(UiPreferences(ins.targetContext).configured)
         ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER)
-        waitFor{UiPreferences(ins.targetContext).step==2}
-        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_DOWN)
+        waitFor{UiPreferences(ins.targetContext).step==2&&activity.window.decorView.findViewWithTag<View>("updates:address")!=null}
+        main{
+            val visibleTexts=texts(activity.window.decorView)
+            assertTrue(visibleTexts.contains(activity.getString(R.string.updates_search)))
+            assertTrue(visibleTexts.any { "film-merkezi" in it })
+            assertFalse(visibleTexts.contains(activity.getString(R.string.updates_add_repository)))
+        }
+        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_BACK)
+        waitFor{UiPreferences(ins.targetContext).step==1}
         ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER)
-        waitFor{activity.setupConfirmationForTest()?.isShowing==true}
-        main{activity.setupConfirmationForTest()!!.getButton(android.content.DialogInterface.BUTTON_POSITIVE).performClick()}
+        waitFor(30000){activity.window.decorView.findViewWithTag<View>("updates:setup-skip")!=null&&
+            activity.window.decorView.findViewWithTag<View>("updates:loading")?.visibility==View.GONE}
+        main{activity.window.decorView.findViewWithTag<View>("updates:address").requestFocus()}
+        repeat(2){ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_RIGHT)}
+        waitFor{activity.currentFocus?.tag=="updates:setup-skip"}
+        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER)
         waitFor{UiPreferences(ins.targetContext).step==3}
         for(key in listOf(KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_CENTER))ins.sendKeyDownUpSync(key)
         waitFor{activity.findViewById<View>(R.id.classic_setup_start)!=null}

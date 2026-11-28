@@ -19,8 +19,10 @@ APK’yı [güncel sürüm sayfasından](https://github.com/enesk4yh4n-lab/Film-
 
 ### İlk açılış
 
-1. **Seçenekler → Güncelleme Merkezi → Depo ekle** yolunu açın. [Eklenti deposunu](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler) ekleyip yayıncıyı doğrulayın.
-2. Kullanmak istediğiniz eklentileri seçip kurun. Katalogda kurulu ve etkin eklentiler görünür.
+1. Kurulum sihirbazı eklenti depolarını otomatik arar. Listeden [Film Merkezi eklenti deposunu](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler) seçip yayıncıyı doğrulayın.
+2. Katalog tercihlerini geçtikten sonra **Yükle**’yi seçin. Kurulabilir eklentiler hazır seçili gelir. Paketler doğrulandıktan sonra Film Merkezi kendiliğinden yeniden açılır.
+
+Depo eklemeyi atlarsanız daha sonra **Seçenekler → Güncelleme Merkezi** üzerinden ekleyebilirsiniz.
 
 Güncelleme Merkezi yeni APK ve eklentileri gösterir. APK kurulumu Android’in onay ekranından tamamlanır. Eski deneme imzasıyla kurulan uygulamalar için [kayıt aktarımı kılavuzunu](docs/android-signing-migration.md) kullanın.
 

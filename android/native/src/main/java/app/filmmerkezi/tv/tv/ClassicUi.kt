@@ -76,7 +76,7 @@ internal object ClassicUi {
                 setPadding(u(c,8f),0,u(c,8f),0)
                 setOnKeyListener{_,key,event->if(event.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_DOWN){down();true}else false}
             }
-            val width=when(s){TvScreen.HOME->86f;TvScreen.ANIMATION->111f;TvScreen.DRAMA_SHORT->100f;else->64f}
+            val width=when(s){TvScreen.HOME->86f;TvScreen.ANIMATION->132f;TvScreen.DRAMA_SHORT->100f;else->64f}
             put(b,x,54f,width,32f);navigation[s]=b
             if(active)put(View(c).apply{setBackgroundColor(gold)},x,83f,width,1.5f)
             x+=width+11f

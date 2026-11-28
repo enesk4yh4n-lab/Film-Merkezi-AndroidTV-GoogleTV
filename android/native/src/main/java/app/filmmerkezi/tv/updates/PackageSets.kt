@@ -28,7 +28,7 @@ object PackageSets {
     internal fun registerSites(state:JSONObject,modules:Map<String,UpdateProtocol.Module>){
         val active=activeModules(state,modules)
         val metadata=active.mapNotNull{m->m.site?.let{
-            it.getString("id") to CatalogPluginMetadata(m.id+"@"+m.version+":"+m.hash,CatalogSection.fromManifest(it))
+            it.getString("id") to CatalogPluginMetadata(m.id+"@"+m.version+":"+m.hash,CatalogSection.fromManifest(it),m.id)
         }}.toMap()
         Sites.installed(orderedSites(active),metadata)
     }

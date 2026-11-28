@@ -9,4 +9,14 @@
     <string name="tv_site_count">%1$d site</string>
     <string name="tv_site_no_results">Henüz içerik yok</string>
     <string name="tv_site_loading">Yükleniyor</string>
+    <string name="catalog_site_selection">%1$d eklenti kurulu · %2$d katalogda açık</string>
+    <string name="catalog_response_summary">%1$d eklenti kurulu · %2$d bu katalogda · %3$d tamamlandı</string>
+    <string name="catalog_site_disabled">Katalogda kapalı</string>
+    <string name="catalog_site_outside_selection">Seçili kapsamın dışında</string>
+    <string name="catalog_site_unsupported">Bu kataloğu sunmuyor</string>
+    <string name="catalog_site_paused">Geçici olarak bekletiliyor</string>
+    <string name="catalog_site_http">Sunucu hatası · HTTP %1$d</string>
+    <string name="catalog_site_timeout">Zaman aşımı</string>
+    <string name="catalog_site_failed">İçerik alınamadı</string>
+    <string name="catalog_site_partial">Kısmi sonuç</string>
 </resources>

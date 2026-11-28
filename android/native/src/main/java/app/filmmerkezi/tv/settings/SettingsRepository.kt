@@ -11,9 +11,11 @@ import kotlinx.coroutines.sync.withLock
 
 enum class SourceScanProfile { SELECTED, BACKUP, MENU }
 
+internal val homeRowOrder=listOf("continue","following","movies","series","animation","drama-short","library")
+
 data class AppSettings(
     val startScreen:String="HOME",val largeText:Boolean=false,val exitConfirmation:Boolean=true,
-    val hiddenRows:Set<String> = emptySet(),val rowOrder:List<String> = listOf("continue","following","movies","series","library"),
+    val hiddenRows:Set<String> = emptySet(),val rowOrder:List<String> = homeRowOrder,
     val merge:Boolean=true,val hideAdult:Boolean=true,val disabledCatalog:Set<String> = emptySet(),val disabledSources:Set<String> = emptySet(),
     val siteOrder:List<String> = Sites.all.map{it.id},val selectedSite:String="",
     val automaticSources:Boolean=true,val crossSiteSources:Boolean=true,val autoNext:Boolean=true,
@@ -42,7 +44,7 @@ object SettingsCodec {
         fun s(k:String,d:String)=values.s(k,legacy.s(k,d))
         val sites=Sites.known.map{it.id};fun ids(k:String)=(values[k]as? Set<*>)?.filterIsInstance<String>()?.filter{it in sites}?.toSet().orEmpty()
         fun order(k:String,all:List<String>)=(values.s(k,"").split('|').filter{it in all}.distinct()+all).distinct()
-        val rows=listOf("continue","following","movies","series","library")
+        val rows=homeRowOrder
         val textMode=en(values.s("subtitlePolicy",if(legacy.b("textEnabled",true))"AUTO"else "OFF"),SubtitlePolicy.AUTO)
         return AppSettings(
             values.s("startScreen","HOME").takeIf{it in listOf("HOME","MOVIES","SERIES","DISCOVER","LIBRARY","HISTORY")}?:"HOME",

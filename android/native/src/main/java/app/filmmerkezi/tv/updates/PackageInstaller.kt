@@ -178,7 +178,7 @@ class PackageInstaller(private val manager:DistributionManager) {
         }
     }
 
-    suspend fun stageReady()=mutex.withLock {
+    suspend fun stageReady(requireAll:Boolean=false)=mutex.withLock {
         val state=manager.store.snapshot()
         require(!manager.store.restartRequired)
         val entries=state.getJSONObject("installJob")
@@ -213,6 +213,7 @@ class PackageInstaller(private val manager:DistributionManager) {
             used.addAll(needed)
         }
         require(used.isNotEmpty()){ "Bağımlılıklarıyla birlikte hazır eklenti yok" }
+        require(!requireAll||used.size==plan.size){"Seçilen eklentilerin tamamı doğrulanamadı"}
         used.forEach{entries.remove(it)}
         commitStaged(state,staged,entries.takeIf{it.length()>0},true)
     }

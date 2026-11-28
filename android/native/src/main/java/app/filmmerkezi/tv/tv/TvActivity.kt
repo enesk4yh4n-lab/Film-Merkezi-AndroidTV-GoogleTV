@@ -64,8 +64,8 @@ class TvActivity:FragmentActivity() {
     private var generation=0
     private var foreground=false
     private var started=false
-    private var movies=UnifiedPage(emptyList(),emptyMap(),emptyList())
-    private var series=movies
+    private val homePages=mutableMapOf<TvScreen,UnifiedPage>()
+    private val homeScreens=listOf(TvScreen.MOVIES,TvScreen.SERIES,TvScreen.ANIMATION,TvScreen.DRAMA_SHORT)
     private var library=emptyList<LibraryRecord>()
     private val feeds=mutableMapOf<TvScreen,UnifiedPage>()
     private val feedLimits=mutableMapOf<Pair<TvScreen,SearchType>,Int>()
@@ -73,8 +73,9 @@ class TvActivity:FragmentActivity() {
     private val catalogJobs=linkedMapOf<TvScreen,Job>()
     private val catalogVisits=mutableMapOf<TvScreen,CatalogVisit>()
     private val liveFeeds=mutableMapOf<TvScreen,UnifiedPage>()
-    private val homeLoaded=mutableSetOf<ContentKind>()
+    private val homeLoaded=mutableSetOf<TvScreen>()
     private var refreshHomeView:(()->Unit)?=null
+    private var refreshSiteStatus:(()->Unit)?=null
     private var catalogScope:Triple<String,CatalogRequestOptions,List<SiteSpec>>?=null
     private var searchQuery=""
     private val feedBusy get()=current.screen in catalogJobs
@@ -253,7 +254,7 @@ class TvActivity:FragmentActivity() {
     private fun cancelCatalogLoads(){catalogJobs.keys.toList().forEach(::cancelCatalogLoad)}
     private fun clearCatalogScreen(screen:TvScreen){
         cancelCatalogLoad(screen);feeds.remove(screen);feedLimits.keys.removeAll{it.first==screen}
-        if(screen==TvScreen.HOME){homeLoaded.clear();movies=UnifiedPage(emptyList(),emptyMap(),emptyList());series=movies}
+        if(screen==TvScreen.HOME){homeLoaded.clear();homePages.clear()}
     }
     private fun catalogVisible(screen:TvScreen)=current.screen==screen&&!setupShowing&&settingsScreen==null&&!playback.active&&!isFinishing&&!isDestroyed
     private fun launchCatalogLoad(screen:TvScreen,load:suspend()->Unit){
@@ -384,7 +385,7 @@ class TvActivity:FragmentActivity() {
         val meta=ClassicUi.text(this,"",9f,muted);info.addView(meta,LinearLayout.LayoutParams(dp(500),dp(14)))
         val actions=LinearLayout(this).apply{orientation=LinearLayout.HORIZONTAL}
         heroButton=ClassicUi.button(this,"▶ "+getString(R.string.tv_explore),R.id.tv_hero_action,goldFill=true){
-            heroCard?.let{c->open((movies.items+series.items).firstOrNull{it.card.ref.id==c.ref.id}?:UnifiedItem(ContentIdentity.key(c),c,listOf(c)))}
+            heroCard?.let{c->open(homeFeatured().firstOrNull{it.card.ref.id==c.ref.id}?:UnifiedItem(ContentIdentity.key(c),c,listOf(c)))}
         }
         actions.addView(heroButton,LinearLayout.LayoutParams(dp(64),dp(23)))
         actions.addView(ClassicUi.button(this,getString(R.string.classic_recommend),R.id.classic_recommend,goldFill=true){showRecommendations()},LinearLayout.LayoutParams(dp(88),dp(23)).apply{marginStart=dp(8)})
@@ -394,7 +395,7 @@ class TvActivity:FragmentActivity() {
         rowsContainer()
         fun update(){
             showHomeRows()
-            val c=shown(movies.items+series.items).firstOrNull{it.card.ref.kind!=ContentKind.COLLECTION}?.card
+            val c=shown(homeFeatured()).firstOrNull{it.card.ref.kind!=ContentKind.COLLECTION}?.card
             if(c!=null&&heroCard?.ref?.id!=c.ref.id){heroCard=c;title.text=ContentIdentity.displayTitle(c)
                 meta.text=listOfNotNull(c.year?.toString(),c.language.takeIf{it.isNotBlank()},c.imdb?.let{"IMDb "+it}).joinToString(" · ")
                 Posters.load(heroImage!!,c,dp(400),dp(104))}
@@ -407,49 +408,58 @@ class TvActivity:FragmentActivity() {
                 lastHomeFollowScan=now;following=data.refreshFollowing();if(active(t))update()
             }
         }
-        val kinds=listOf(ContentKind.MOVIE,ContentKind.SERIES).filter{supports(it)&&it !in homeLoaded}
+        val pending=homeScreens.filter{it !in homeLoaded&&eligibleSites(it).isNotEmpty()}
         val site=catalogPreferences.siteId
-        if(kinds.isNotEmpty()&&settings.value.catalog().sites.isNotEmpty())launchCatalogLoad(TvScreen.HOME){
-            supervisorScope { kinds.forEach{kind->launch{
+        if(pending.isNotEmpty())launchCatalogLoad(TvScreen.HOME){
+            supervisorScope { pending.forEach{screen->launch{
                 try{
-                    val query=CatalogQuery(kind)
-                    firstPages.observe(browseKey(site,query)){data.browseSite(site,kind)}.distinctUntilChanged().collect{page->
-                        if(kind==ContentKind.MOVIE)movies=page else series=page
+                    val query=CatalogQuery(if(screen==TvScreen.SERIES)ContentKind.SERIES else ContentKind.MOVIE)
+                    firstPages.observe(feedKey(screen,site,query)){catalogFlow(TvNav(screen),site,query=query)}.distinctUntilChanged().collect{page->
+                        homePages[screen]=page
                         if(catalogVisible(TvScreen.HOME))refreshHomeView?.invoke()
                     }
-                    homeLoaded.add(kind)
+                    homeLoaded.add(screen)
                 }catch(e:CancellationException){throw e}catch(_:Exception){
-                    val failure=UnifiedPage(emptyList(),emptyMap(),listOf(SiteFailure(site,FailureKind.NETWORK,getString(R.string.tv_network_error))))
-                    if(kind==ContentKind.MOVIE)movies=failure else series=failure
-                    homeLoaded.add(kind)
+                    val failed=eligibleSites(screen).map{SiteFailure(it,FailureKind.NETWORK,"")}
+                    homePages[screen]=homePages[screen]?.copy(failures=failed)?:UnifiedPage(emptyList(),emptyMap(),failed)
+                    homeLoaded.add(screen)
                 }
+                if(catalogVisible(TvScreen.HOME))refreshHomeView?.invoke()
             }} }
         }
     }
+
+    private fun homeFeatured()=homePages[TvScreen.MOVIES]?.items.orEmpty()+homePages[TvScreen.SERIES]?.items.orEmpty()
 
     private fun showHomeRows(){
         if(settings.value.catalog().sites.isEmpty()){
             rows?.show(listOf(TvSection(0,getString(R.string.settings_catalog),listOf(statusTile(R.string.settings_disabled_sites,"settings")))))
             status.setText(R.string.settings_disabled_sites);return
         }
-        fun shelf(values:List<TvTile>,more:String,kind:ContentKind?=null):List<TvTile>{
+        fun shelf(values:List<TvTile>,more:String,screen:TvScreen?=null):List<TvTile>{
             if(values.isNotEmpty())return values.take(TvPolicy.ROW_CARDS)+TvTile("more:$more",getString(R.string.tv_more),action=more)
-            if(kind !in homeLoaded)return listOf(statusTile(R.string.tv_loading,"feed:wait"))
-            val page=if(kind==ContentKind.MOVIE)movies else series
-            return listOf(if(page.failures.isEmpty())statusTile(R.string.tv_no_results,more)else statusTile(R.string.tv_retry))
+            if(screen!=null&&eligibleSites(screen).isEmpty())return listOf(statusTile(R.string.catalog_section_unavailable,more))
+            if(screen !in homeLoaded)return listOf(statusTile(R.string.tv_loading,"feed:wait"))
+            val page=homePages[screen]
+            return listOf(if(page?.failures.isNullOrEmpty()&&page?.coverage.orEmpty().none{it.partial})
+                statusTile(R.string.tv_no_results,more)else statusTile(R.string.catalog_section_failed,more))
         }
+        fun items(screen:TvScreen)=shown(homePages[screen]?.items.orEmpty())
         val sections=buildList{
-            if(supports(ContentKind.MOVIE))add(TvSection(2,getString(R.string.classic_new_movies),shelf(tiles(ClassicCatalogPolicy.apply(shown(movies.items),classicFilter,classicSort)),"movies",ContentKind.MOVIE)))
+            if(supports(ContentKind.MOVIE))add(TvSection(2,getString(R.string.classic_new_movies),shelf(tiles(ClassicCatalogPolicy.apply(items(TvScreen.MOVIES),classicFilter,classicSort)),"movies",TvScreen.MOVIES)))
             val continuing=TvPolicy.continuing(library).take(TvPolicy.ROW_CARDS).map(::libraryTile)
             if(continuing.isNotEmpty())add(TvSection(1,getString(R.string.tv_continue),shelf(continuing,"library")))
-            if(supports(ContentKind.SERIES))add(TvSection(4,getString(R.string.classic_new_series),shelf(tiles(shown(series.items)),"series",ContentKind.SERIES)))
+            if(supports(ContentKind.SERIES))add(TvSection(4,getString(R.string.classic_new_series),shelf(tiles(items(TvScreen.SERIES)),"series",TvScreen.SERIES)))
+            add(TvSection(7,getString(R.string.catalog_animation),shelf(tiles(items(TvScreen.ANIMATION)),"animation",TvScreen.ANIMATION)))
+            add(TvSection(8,getString(R.string.catalog_drama_short),shelf(tiles(items(TvScreen.DRAMA_SHORT)),"drama-short",TvScreen.DRAMA_SHORT)))
             if(following.isNotEmpty())add(TvSection(6,getString(R.string.fm_following),following.take(TvPolicy.ROW_CARDS).map{r->val item=UnifiedItem(ContentIdentity.key(r.card),r.card,listOf(r.card));TvTile(item.identity,ContentIdentity.displayTitle(r.card)+if(r.pending.isNotEmpty())" · "+getString(R.string.fm_new_episodes,r.pending.size)else "",item)}))
             val saved=library.filter{it.listed}.take(TvPolicy.ROW_CARDS).map(::libraryTile)
             if(saved.isNotEmpty())add(TvSection(5,getString(R.string.tv_my_list),shelf(saved,"library")))
         }
-        val keys=mapOf(1L to "continue",2L to "movies",4L to "series",5L to "library",6L to "following")
+        val keys=mapOf(1L to "continue",2L to "movies",4L to "series",5L to "library",6L to "following",7L to "animation",8L to "drama-short")
         rows?.show(sections.filter{keys[it.id] !in settings.value.hiddenRows}.sortedBy{settings.value.rowOrder.indexOf(keys[it.id])})
-        status.text=pageStatus(if(supports(ContentKind.MOVIE))movies else series,movies.items.size+series.items.size)
+        status.text=responseSummary(catalogResponses(TvScreen.HOME))
+        refreshSiteStatus?.invoke()
     }
 
     private fun catalog() {
@@ -457,7 +467,7 @@ class TvActivity:FragmentActivity() {
         gridContainer()
         addFeedAction()
         val screen=current.screen
-        (liveFeeds[screen]?:feeds[screen])?.let(::showFeed)?:status.setText(R.string.tv_loading)
+        (liveFeeds[screen]?:feeds[screen])?.let(::showFeed)?:run{status.text=responseSummary(catalogResponses(screen))}
         if(feeds[screen]==null)loadFeed(false)
     }
     private fun loadFeed(more:Boolean) {
@@ -490,10 +500,15 @@ class TvActivity:FragmentActivity() {
             flow.distinctUntilChanged().collect{page->
                 val combined=if(!more)page else withContext(Dispatchers.Default){
                     val options=settings.value.catalog()
+                    val base=checkNotNull(previous)
                     val cards=old+page.items
+                    val seen=page.siteCounts.keys+page.failures.map{it.siteId}
                     page.copy(items=if(options.merge)CatalogPresentation.project(ContentIdentity.merge(cards.flatMap{it.alternatives}),options)
                         else cards.distinctBy{it.displayKey.ifBlank{it.card.ref.id}},
-                        next=cursors.filterKeys{it !in page.siteCounts} + page.next.filter{(id,next)->next!=cursors[id]})
+                        next=cursors.filterKeys{it !in page.siteCounts} + page.next.filter{(id,next)->next!=cursors[id]},
+                        siteCounts=base.siteCounts+page.siteCounts.mapValues{(id,count)->count+(base.siteCounts[id]?:0)},
+                        failures=base.failures.filter{it.siteId !in seen}+page.failures,
+                        coverage=base.coverage.filter{it.siteId !in seen}+page.coverage)
                 }
                 val previousItems=liveFeeds[state.screen]?.items?:previous?.items.orEmpty()
                 val result=combined.copy(items=stableContentOrder(previousItems,combined.items))
@@ -508,7 +523,7 @@ class TvActivity:FragmentActivity() {
     private fun screenQuery(screen:TvScreen)=catalogQuery(if(screen==TvScreen.SERIES)ContentKind.SERIES else ContentKind.MOVIE)
     private fun browseKey(site:String,query:CatalogQuery)="$site:${query.signature}"
     private fun feedKey(screen:TvScreen,site:String,query:CatalogQuery)=screen.section?.let{"$site:$it"}?:browseKey(site,query)
-    private fun homeKeys()=listOf(ContentKind.MOVIE,ContentKind.SERIES).map{browseKey(catalogPreferences.siteId,CatalogQuery(it))}.toSet()
+    private fun homeKeys()=homeScreens.map{feedKey(it,catalogPreferences.siteId,CatalogQuery(if(it==TvScreen.SERIES)ContentKind.SERIES else ContentKind.MOVIE))}.toSet()
     private fun visibleCatalogKeys()=when(current.screen){
         TvScreen.HOME->homeKeys()
         TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER,TvScreen.ANIMATION,TvScreen.DRAMA_SHORT->setOf(feedKey(current.screen,catalogPreferences.siteId,screenQuery(current.screen)))
@@ -545,7 +560,11 @@ class TvActivity:FragmentActivity() {
             !feedBusy&&values.isEmpty()&&page.failures.isEmpty()->getString(if(section)R.string.catalog_section_empty else R.string.tv_no_results)
             else->pageStatus(page,values.size)
         }
-        status.text=message+if(page.coverage.any{it.partial})" · "+getString(R.string.fm_partial_scope,page.coverage.count{it.partial})else ""
+        val summary=responseSummary(catalogResponses(current.screen))
+        status.text=if(values.isEmpty()&&!feedBusy&&section)message else
+            listOf(summary,message).filter(String::isNotBlank).joinToString(" · ")+
+                if(page.coverage.any{it.partial})" · "+getString(R.string.fm_partial_scope,page.coverage.count{it.partial})else ""
+        refreshSiteStatus?.invoke()
         when{
             localMore||!feedBusy&&more->setFeedAction(R.string.tv_more){loadFeed(true)}
             feedBusy&&feedAction?.hasFocus()==true->setFeedAction(R.string.tv_more){}
@@ -748,7 +767,6 @@ class TvActivity:FragmentActivity() {
         settingsScreen=screen;host.addView(screen,FrameLayout.LayoutParams(-1,-1))
     }
     internal fun settingsForTest(){showSettings()}
-    internal fun setupConfirmationForTest()=setupView?.confirmationForTest()
     internal fun playerPanelForTest()=playerControls?.overlayForTest()
     internal fun subtitleOffsetForTest()=subtitleAppearance?.offsetMs?:0
     internal fun speedForTest()=playback.player?.playbackParameters?.speed
@@ -768,23 +786,28 @@ class TvActivity:FragmentActivity() {
         return getString(R.string.settings_log_summary,s.optInt("rebufferCount"),s.optLong("rebufferMs"),s.optLong("averageDownloadBps")/1000)+"\n\n"+
             (0 until events.length()).map{events.getJSONObject(it)}.joinToString("\n"){"${it.optLong("atMs")} ms · ${it.optString("kind")}"}
     }
-    private fun scopeName()=Sites.all.firstOrNull{it.id==catalogPreferences.siteId}?.name?:getString(R.string.tv_all_sites)
+    private fun scopeName()=catalogPreferences.siteId.takeIf(Sites::isInstalled)?.let(::catalogPluginCode)?:getString(R.string.tv_all_sites)
     private fun supports(kind:ContentKind):Boolean {
         val site=Sites.all.firstOrNull{it.id==catalogPreferences.siteId}?:return true
         return site.supports(kind)
     }
     private fun pageStatus(page:UnifiedPage,count:Int)=when{
         page.cached->getString(if(page.completedSites<page.requestedSites)R.string.catalog_cached_loading else R.string.catalog_cached_stale)
-        page.requestedSites>0&&page.completedSites<page.requestedSites->getString(R.string.classic_sites_loading,page.completedSites,page.requestedSites)
-        page.requestedSites>0&&page.failures.isNotEmpty()->getString(R.string.catalog_site_failures,page.failures.size,page.requestedSites)
-        page.requestedSites>0->getString(R.string.classic_sites_done,page.requestedSites)
+        page.requestedSites>0&&page.completedSites<page.requestedSites->""
         page.failures.isEmpty()->getString(R.string.tv_result_count,count)
         else->getString(R.string.tv_partial,count)
     }
     private fun chooseSite(){
-        val enabled=settings.value.catalog().sites.map(Sites::get);val ids=listOf("")+enabled.map{it.id};val names=listOf(getString(R.string.tv_all_sites))+enabled.map{it.name}
+        val enabled=settings.value.catalog().sites
+        val installed=settings.value.installedSites().map{it.id}
         val window=overlay(getString(R.string.tv_sites),origin=findViewById(R.id.tv_site_picker))
-        window.update(ids.mapIndexed{i,id->ClassicRow("site:$id",names[i],selected=id==catalogPreferences.siteId)}){key->window.close();selectSite(key.removePrefix("site:"))}
+        val rows=listOf(ClassicRow("site:",getString(R.string.tv_all_sites),selected=catalogPreferences.siteId.isEmpty()))+installed.map{id->
+            ClassicRow("site:$id",catalogPluginCode(id),if(id in enabled)""else getString(R.string.catalog_site_disabled),
+                selected=id==catalogPreferences.siteId,enabled=id in enabled)
+        }
+        window.update(rows,message=getString(R.string.catalog_site_selection,installed.size,enabled.size)){key->
+            window.close();selectSite(key.removePrefix("site:"))
+        }
     }
     private fun selectSite(id:String){
         if(catalogPreferences.siteId==id)return
@@ -792,27 +815,68 @@ class TvActivity:FragmentActivity() {
             detailValue=null;episodeValues=emptyList();navigate(TvNav())
         }catch(_:Exception){Toast.makeText(this@TvActivity,R.string.settings_saved_error,Toast.LENGTH_LONG).show()}}
     }
+    private fun eligibleSites(screen:TvScreen)=settings.value.catalog().sites.filter{id->
+        (catalogPreferences.siteId.isBlank()||catalogPreferences.siteId==id)&&when(screen){
+            TvScreen.MOVIES,TvScreen.DISCOVER->Sites.get(id).supports(ContentKind.MOVIE)
+            TvScreen.SERIES->Sites.get(id).supports(ContentKind.SERIES)
+            TvScreen.SEARCH->current.query.isNotBlank()
+            else->screen.section?.routes(id)?.isNotEmpty()==true
+        }
+    }
+    private fun catalogResponses(screen:TvScreen):CatalogResponses {
+        val screens=if(screen==TvScreen.HOME)homeScreens else listOf(screen)
+        val installed=settings.value.installedSites().map{it.id}
+        val eligible=linkedMapOf<String,MutableList<TvScreen>>()
+        screens.forEach{tab->eligibleSites(tab).forEach{id->eligible.getOrPut(id){mutableListOf()}.add(tab)}}
+        val pages=if(screen==TvScreen.HOME)homePages else (liveFeeds[screen]?:feeds[screen])?.let{mapOf(screen to it)}.orEmpty()
+        return CatalogResponses(installed,eligible,pages)
+    }
+    private fun responseSummary(responses:CatalogResponses)=getString(R.string.catalog_response_summary,
+        responses.installed.size,responses.eligible.size,responses.completed)
+
     private fun showSiteStatus(){
-        if(current.screen in setOf(TvScreen.FOLLOWING,TvScreen.LIBRARY,TvScreen.HISTORY,TvScreen.ABOUT))return
         val screen=current.screen
-        val pages=if(screen==TvScreen.HOME)listOf(movies,series)else listOfNotNull(liveFeeds[screen]?:feeds[screen])
-        val sites=settings.value.catalog().sites.map(Sites::get).filter{
-            (catalogPreferences.siteId.isEmpty()||it.id==catalogPreferences.siteId)&&(screen.section?.routes(it.id)?.isNotEmpty()!=false)
-        }
-        val labels=sites.map{s->
-            val failure=pages.flatMap{it.failures}.firstOrNull{it.siteId==s.id}
-            val count=pages.sumOf{it.siteCounts[s.id]?:0}
-            val message=if(count>0)"$count"+(failure?.let{" · "+it.message}?:"")else failure?.let{it.message}?:getString(if(pages.any{it.siteCounts.containsKey(s.id)})R.string.tv_site_no_results else R.string.tv_site_loading)
-            s.name+" · "+message
-        }
+        if(screen !in homeScreens&&screen !in setOf(TvScreen.HOME,TvScreen.DISCOVER,TvScreen.SEARCH))return
         val window=overlay(getString(R.string.tv_sites_status))
-        window.update(sites.mapIndexed{i,s->ClassicRow(s.id,labels[i])},
-            actions=listOf(ClassicAction("refresh",getString(R.string.hub_refresh),!feedBusy&&(screen!=TvScreen.SEARCH||current.query.isNotBlank())){
+        fun update(){
+            if(!window.showing||current.screen!=screen)return
+            val responses=catalogResponses(screen)
+            val enabled=settings.value.catalog().sites.toSet()
+            val rows=responses.installed.map{id->
+                val answer=responses.answer(id)
+                val description=when{
+                    id !in enabled->getString(R.string.catalog_site_disabled)
+                    catalogPreferences.siteId.isNotBlank()&&catalogPreferences.siteId!=id->getString(R.string.catalog_site_outside_selection)
+                    screen==TvScreen.SEARCH&&current.query.isBlank()->getString(R.string.tv_search_prompt)
+                    id !in responses.eligible->getString(R.string.catalog_site_unsupported)
+                    else->buildList{
+                        answer.counts?.let{count->if(count>0)add(getString(R.string.tv_result_count,count))
+                            else if(answer.complete&&answer.failure==null)add(getString(R.string.tv_site_no_results))}
+                        if(data.pausedFor(id)>0)add(getString(R.string.catalog_site_paused))
+                        else answer.failure?.let{failure->add(when{
+                            failure.code!=null->getString(R.string.catalog_site_http,failure.code)
+                            failure.kind==FailureKind.TIMEOUT->getString(R.string.catalog_site_timeout)
+                            else->getString(R.string.catalog_site_failed)
+                        })}
+                        if(answer.partial)add(getString(R.string.catalog_site_partial))
+                        if(!answer.complete)add(getString(R.string.tv_site_loading))
+                    }.joinToString(" · ")
+                }
+                ClassicRow(id,catalogPluginCode(id),description)
+            }
+            window.update(rows,actions=listOf(ClassicAction("refresh",getString(R.string.hub_refresh),!feedBusy&&responses.eligible.isNotEmpty()){
                 window.close();refreshCatalogScreen()
-            }),message=if(screen.section!=null&&sites.isEmpty())getString(R.string.catalog_section_unavailable)else ""){id->
-            window.close()
-            if(data.pausedFor(id)>0)retryCatalogSite(id)else selectSite(id)
+            }),message=responseSummary(responses)){id->
+                if(id in enabled){
+                    window.close()
+                    if(data.pausedFor(id)>0&&id in responses.eligible)retryCatalogSite(id)else selectSite(id)
+                }
+            }
         }
+        refreshSiteStatus=::update
+        val onClosed=window.onClosed
+        window.onClosed={if(classicOverlay===window)refreshSiteStatus=null;onClosed?.invoke()}
+        update()
     }
     private fun search() {
         classicHeading(if(current.query.isBlank())getString(R.string.tv_search)else getString(R.string.ux_search_title,current.query));gridContainer();addFeedAction()
@@ -840,25 +904,26 @@ class TvActivity:FragmentActivity() {
         status.setText(R.string.tv_loading)
         fun update(old:UnifiedPage?,page:UnifiedPage):UnifiedPage {
             if(old==null)return page
-            val remaining=old.items.flatMap{it.alternatives}.filter{it.ref.siteId!=id}
+            val refreshed=id in page.siteCounts
+            val remaining=old.items.flatMap{it.alternatives}.filter{!refreshed||it.ref.siteId!=id}
             val cards=remaining+page.items.flatMap{it.alternatives}
             return old.copy(items=shown(ContentIdentity.merge(cards)),failures=old.failures.filter{it.siteId!=id}+page.failures,
-                next=old.next-id+page.next,siteCounts=old.siteCounts-id+page.siteCounts)
+                next=(if(refreshed)old.next-id else old.next)+page.next,siteCounts=old.siteCounts+page.siteCounts,
+                coverage=old.coverage.filter{it.siteId!=id}+page.coverage)
         }
         launchScreen{token->
             if(state.screen==TvScreen.HOME){
-                if(Sites.get(id).supports(ContentKind.MOVIE)){
-                    val page=data.browseSite(id,ContentKind.MOVIE).last()
-                    if(active(token))movies=update(movies,page)
-                }
-                if(Sites.get(id).supports(ContentKind.SERIES)){
-                    val page=data.browseSite(id,ContentKind.SERIES).last()
-                    if(active(token))series=update(series,page)
+                for(screen in homeScreens.filter{id in eligibleSites(it)}){
+                    val query=CatalogQuery(if(screen==TvScreen.SERIES)ContentKind.SERIES else ContentKind.MOVIE)
+                    val page=catalogFlow(TvNav(screen),id,query=query).last()
+                    if(active(token))homePages[screen]=update(homePages[screen],page)
                 }
                 if(active(token))showHomeRows()
             }else{
                 val result=catalogFlow(state,id).last()
-                if(active(token))update(feeds[state.screen],result).let{feeds[state.screen]=it;showFeed(it)}
+                if(active(token))update(liveFeeds[state.screen]?:feeds[state.screen],result).let{
+                    feeds[state.screen]=it;liveFeeds[state.screen]=it;showFeed(it)
+                }
             }
         }
     }
@@ -1025,7 +1090,7 @@ class TvActivity:FragmentActivity() {
             launchScreen{t->data.follow(detail.card,episodeValues,seriesWatch?.following!=true);seriesWatch=data.tracking(detail.card);if(active(t))showDetail(detail)}
         },LinearLayout.LayoutParams(-2,dp(29)).apply{marginStart=dp(8)})
         if(settings.value.merge&&settings.value.matchingMode==MatchingMode.FLEXIBLE){
-            val candidates=CatalogPresentation.possible(detail.card,feeds.values.flatMap{it.items}+movies.items+series.items)
+            val candidates=CatalogPresentation.possible(detail.card,feeds.values.flatMap{it.items}+homePages.values.flatMap{it.items})
             if(candidates.isNotEmpty())secondary.addView(button(getString(R.string.catalog_possible_matches)){
                 val panel=overlay(getString(R.string.catalog_possible_matches))
                 panel.update(candidates.mapIndexed{i,c->ClassicRow(i.toString(),ContentIdentity.displayTitle(c.card),Sites.get(c.card.ref.siteId).name)}){
@@ -1429,6 +1494,8 @@ class TvActivity:FragmentActivity() {
             tile.action=="updates"->showSettings("updates")
             tile.action=="movies"->navigate(TvNav(TvScreen.MOVIES))
             tile.action=="series"->navigate(TvNav(TvScreen.SERIES))
+            tile.action=="animation"->navigate(TvNav(TvScreen.ANIMATION))
+            tile.action=="drama-short"->navigate(TvNav(TvScreen.DRAMA_SHORT))
             tile.action=="library"->navigate(TvNav(TvScreen.LIBRARY))
             tile.action=="feed:more"->loadFeed(true)
             tile.action=="feed:wait"->Unit

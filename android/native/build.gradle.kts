@@ -7,10 +7,10 @@ android {
         applicationId = if(providers.gradleProperty("qaIsolated").orNull=="true") "app.filmmerkezi.tv.qa" else "app.filmmerkezi.tv"
         minSdk = 23
         targetSdk = 36
-        versionCode = if(providers.gradleProperty("migrationBuild").orNull=="true")35 else 41
+        versionCode = if(providers.gradleProperty("migrationBuild").orNull=="true")35 else 42
         versionName = if(providers.gradleProperty("migrationBuild").orNull=="true") "0.11.5" else providers.gradleProperty("qaLabel").orNull?.let{
             require(it.matches(Regex("[a-z][a-z0-9-]{0,39}"))){"Invalid local QA label"};"local-$it"
-        }?:"0.13.2"
+        }?:"0.13.3"
         buildConfigField("boolean","MIGRATION",(providers.gradleProperty("migrationBuild").orNull=="true").toString())
         ndk { abiFilters += listOf("armeabi-v7a","arm64-v8a","x86_64") }
         testInstrumentationRunner = if(providers.gradleProperty("distributionProbe").orNull=="true") "app.filmmerkezi.tv.updates.DistributionProbeRunner" else if(providers.gradleProperty("frameworkProbe").orNull=="true") "app.filmmerkezi.tv.probe.PreservationProbe" else "androidx.test.runner.AndroidJUnitRunner"

@@ -13,7 +13,8 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
     private val progress=ProgressBar(activity,null,android.R.attr.progressBarStyleHorizontal).apply{isIndeterminate=true;visibility=GONE;tag="updates:loading"}
     private val back=ClassicUi.button(activity,activity.getString(R.string.tv_back)){onBack?.invoke()}.apply{tag="updates:back"}
     private val list=RecyclerView(activity).apply{layoutManager=LinearLayoutManager(activity);itemAnimator=null;setItemViewCacheSize(3);overScrollMode=View.OVER_SCROLL_NEVER}
-    private val footer=LinearLayout(activity)
+    private val actionBar=LinearLayout(activity)
+    private var actionsOnTop=false
     private var rows=emptyList<ClassicRow>()
     private var choose:(String)->Unit={}
     private var actions=emptyList<ClassicAction>()
@@ -48,8 +49,8 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
                 code==KeyEvent.KEYCODE_DPAD_UP||code==KeyEvent.KEYCODE_DPAD_DOWN->{
                     val available=rows.filter{it.enabled&&!it.header};val index=available.indexOfFirst{"updates:"+it.key==v.tag}
                     val next=index+if(code==KeyEvent.KEYCODE_DPAD_UP)-1 else 1
-                    if(next<0){if(back.isShown)back.requestFocus()else up()}
-                    else if(next>=available.size){if(actions.any{it.enabled})focusFooter()}
+                    if(next<0){if(!actionsOnTop||!focusFirstAction())focusBack()}
+                    else if(next>=available.size){if(!actionsOnTop)focusFirstAction()}
                     else focusKey("updates:"+available[next].key);true
                 }
                 else->false
@@ -69,7 +70,7 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
         orientation=VERTICAL;tag="update-center";setPadding(u(5f),u(9f),0,0)
         val heading=LinearLayout(activity).apply{gravity=Gravity.CENTER_VERTICAL;addView(title,LayoutParams(0,-2,1f));addView(back,LayoutParams(u(64f),u(32f)))}
         addView(heading);addView(progress,LayoutParams(-1,u(3f)).apply{topMargin=u(8f)});addView(status,LayoutParams(-1,-2).apply{topMargin=u(10f);bottomMargin=u(12f)})
-        list.adapter=adapter;addView(list,LayoutParams(-1,0,1f));addView(footer,LayoutParams(-1,-2))
+        list.adapter=adapter;addView(list,LayoutParams(-1,0,1f));addView(actionBar,LayoutParams(-1,-2))
         back.setOnKeyListener{_,code,event->if(event.action!=KeyEvent.ACTION_DOWN)false else when(code){
             KeyEvent.KEYCODE_DPAD_LEFT->{left();true}
             KeyEvent.KEYCODE_DPAD_DOWN->{focusFirst();true}
@@ -79,13 +80,18 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
         }}
         back.setOnFocusChangeListener{v,focused->if(focused)resumeFocus=v.tag as? String}
     }
-    fun page(value:String,nested:Boolean){
+    fun page(value:String,nested:Boolean,actionsOnTop:Boolean=false){
         if(pageId.isNotEmpty())positions[pageId]=Position(list.layoutManager?.onSaveInstanceState(),resumeFocus)
         rendering++;pageId=value;val saved=positions[value];restoreScroll=saved?.scroll;restoreFocus=saved?.focus;resumeFocus=saved?.focus
         title.text=value;back.visibility=if(nested)VISIBLE else GONE;preferred=null;loading(false)
         progress.contentDescription=null;progress.progressTintList=null;progress.layoutParams=progress.layoutParams.apply{height=u(3f)}
         val count=rows.size;rows=emptyList();choose={};if(count>0)adapter.notifyItemRangeRemoved(0,count)
-        actions=emptyList();footer.removeAllViews();status.text="";status.visibility=GONE
+        actions=emptyList();actionBar.removeAllViews();status.text="";status.visibility=GONE
+        if(this.actionsOnTop!=actionsOnTop){
+            this.actionsOnTop=actionsOnTop
+            removeView(actionBar)
+            addView(actionBar,if(actionsOnTop)indexOfChild(list)else childCount)
+        }
     }
     fun loading(value:Boolean){progress.isIndeterminate=true;progress.visibility=if(value)VISIBLE else GONE}
     fun message(value:String){status.text=value;status.visibility=if(value.isBlank())GONE else VISIBLE}
@@ -109,19 +115,18 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
         else if(focused==null||values.none{"updates:"+it.key==focused})list.layoutManager?.onRestoreInstanceState(saved)
         if(restoring)restoreScroll=null
         val changed=this.actions.map{Triple(it.key,it.title,it.enabled)}!=actions.map{Triple(it.key,it.title,it.enabled)};this.actions=actions
-        if(changed){footer.removeAllViews();actions.forEach{a->footer.addView(ClassicUi.button(activity,a.title){this.actions.firstOrNull{it.key==a.key&&it.enabled}?.run?.invoke()}.apply{
+        if(changed){actionBar.removeAllViews();actions.forEach{a->actionBar.addView(ClassicUi.button(activity,a.title){this.actions.firstOrNull{it.key==a.key&&it.enabled}?.run?.invoke()}.apply{
             tag="updates:"+a.key;isEnabled=a.enabled;isFocusable=a.enabled
             setOnFocusChangeListener{v,focused->if(focused)resumeFocus=v.tag as? String}
             setOnKeyListener{_,code,event->when{
                 event.action!=KeyEvent.ACTION_DOWN->false
-                code==KeyEvent.KEYCODE_DPAD_LEFT&&footer.indexOfChild(this)==0->{left();true}
+                code==KeyEvent.KEYCODE_DPAD_LEFT&&actionBar.indexOfChild(this)==0->{left();true}
                 code==KeyEvent.KEYCODE_DPAD_LEFT||code==KeyEvent.KEYCODE_DPAD_RIGHT->{val enabled=this@UpdateCenterView.actions.filter{it.enabled};val at=enabled.indexOfFirst{"updates:"+it.key==tag};val target=(at+if(code==KeyEvent.KEYCODE_DPAD_LEFT)-1 else 1).coerceIn(0,(enabled.size-1).coerceAtLeast(0));enabled.getOrNull(target)?.let{focusKey("updates:"+it.key)};true}
-                code==KeyEvent.KEYCODE_DPAD_DOWN->true
-                code==KeyEvent.KEYCODE_DPAD_UP&&rows.any{it.enabled&&!it.header}->{val key=rows.last{it.enabled&&!it.header}.key;focusKey("updates:$key");true}
-                code==KeyEvent.KEYCODE_DPAD_UP->{if(back.isShown)back.requestFocus()else up();true}
+                code==KeyEvent.KEYCODE_DPAD_DOWN->{if(actionsOnTop)focusRow();true}
+                code==KeyEvent.KEYCODE_DPAD_UP->{if(actionsOnTop||!focusRow(last=true))focusBack();true}
                 else->false
             }}
-        },LayoutParams(0,u(38f),1f).apply{marginEnd=u(6f);topMargin=u(9f)})}}
+        },LayoutParams(0,u(38f),1f).apply{marginEnd=u(6f);if(actionsOnTop)bottomMargin=u(9f)else topMargin=u(9f)})}}
         // Background status refreshes must never steal focus from the category rail.
         val target=preferred?:restoreFocus?:focused
         val explicit=preferred!=null||pendingFocus
@@ -142,10 +147,18 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
         if(item!=null&&item.top>=0&&item.bottom<=list.height&&item.requestFocus()){pendingFocus=false;return true}
         val serial=rendering;list.scrollToPosition(index);afterLayout{if(serial==rendering&&list.findViewHolderForAdapterPosition(index)?.itemView?.requestFocus()==true)pendingFocus=false};return true
     }
-    private fun focusFooter(){actions.firstOrNull{it.enabled}?.let{focusKey("updates:"+it.key)}}
+    private fun focusBack(){if(back.isShown)back.requestFocus()else up()}
+    private fun focusFirstAction()=actions.firstOrNull{it.enabled}?.let{focusKey("updates:"+it.key)}==true
+    private fun focusRow(last:Boolean=false):Boolean {
+        val row=if(last)rows.lastOrNull{it.enabled&&!it.header}else rows.firstOrNull{it.enabled&&!it.header}
+        return row?.let{focusKey("updates:"+it.key)}==true
+    }
     fun focusContent(){pendingFocus=true;if(resumeFocus?.let(::focusKey)!=true)focusFirst()}
     fun cancelFocusRequest(){pendingFocus=false}
-    fun focusFirst(){rows.firstOrNull{it.enabled&&!it.header}?.let{focusKey("updates:"+it.key)}?:actions.firstOrNull{it.enabled}?.let{focusKey("updates:"+it.key)}?:back.takeIf{it.visibility==VISIBLE}?.let{focusKey("updates:back")}}
+    fun focusFirst(){
+        val focused=if(actionsOnTop)focusFirstAction()||focusRow()else focusRow()||focusFirstAction()
+        if(!focused&&back.isShown)focusKey("updates:back")
+    }
     internal fun keys()=rows.map{it.key}
     internal fun titles()=rows.map{it.title}
     internal fun row(key:String)=rows.single{it.key==key}

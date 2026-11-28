@@ -52,5 +52,5 @@ internal class Settings110Fixture(private val continuous:Boolean=false,private v
         main{activity.classicOverlayForTest()!!.select("save")};waitFor{activity.snapshotForUiTest().isNull("playingTitle")}}
     fun screenshot(name:String){ins.waitForIdleSync();SystemClock.sleep(400);ins.uiAutomation.takeScreenshot()?.let{bmp->File(context.getExternalFilesDir(null),name).outputStream().use{bmp.compress(android.graphics.Bitmap.CompressFormat.PNG,100,it)};bmp.recycle()}}
     suspend fun close(){if(::activity.isInitialized)main{activity.finish()};TvActivity.dataFactoryForTests=null;repo.update{original}
-        val e=ui.edit().clear();oldUi.forEach{(k,v)->when(v){is String->e.putString(k,v);is Boolean->e.putBoolean(k,v)}};e.commit()}
+        val e=ui.edit().clear();oldUi.forEach{(k,v)->when(v){is String->e.putString(k,v);is Boolean->e.putBoolean(k,v);is Int->e.putInt(k,v)}};e.commit()}
 }
