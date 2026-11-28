@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "packageName": "app.filmmerkezi.tv",
-  "versionCode": 39,
-  "versionName": "0.13.0",
+  "versionCode": 40,
+  "versionName": "0.13.1",
   "minSdk": 23,
-  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.13.0/Film-Merkezi-Android-TV-0.13.0.apk",
-  "size": 5429569,
-  "sha256": "74418c85e851cd4c471c2137c1c225c8c938f2181990d3ddba64fa7a8821a03e",
+  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.13.1/Film-Merkezi-Android-TV-0.13.1.apk",
+  "size": 5572929,
+  "sha256": "d3cd4cf0e14a54fb22e42661254942636e1adf32a13f450085ba34ce5439630c",
   "certificateSha256": "73753d46c206a8f651067541b12f5e038a5d207cca4bee21f8f984a27ed197ed",
-  "notes": "- Güncelleme Merkezi sadeleştirildi. Yeni uygulama ve eklentiler için bildirimler eklendi.\n- Kumandayla gezinme, arama, katalog ve bölüm listeleri iyileştirildi.\n- Kaynak zaman aşımından sonra alternatiflerin denenmesi ve oynatma kararlılığı iyileştirildi.\n- Resmî eklenti kapsamı genişletildi. P008, P016 ve P018’de bazı oynatma seçenekleri sağlayıcı erişimine bağlı."
+  "notes": "- Klasik kurulum sihirbazı, Türkçe ve İngilizce menüler ve yetişkin içerik filtresi için PIN seçeneği eklendi.\n- Çizgi Film/Anime ve Drama/Short katalogları iyileştirildi. Sekmelere dönüldüğünde son başarılı sonuçlar daha hızlı gösteriliyor.\n- Oynatıcıda kaynak hataları kısa açıklamalarla gösteriliyor. Otomatik kaynak geçişinde izleme konumu, ses ve altyazı tercihleri korunuyor.\n- Güncelleme Merkezi eklentileri kodlarıyla gösteriyor. Kurulum ilerlemesi yüzdeyle izlenebiliyor ve kesintiden sonra kalan paketler yeniden denenebiliyor.\n- Oynatıcıya hız, yer imleri, A–B tekrarı ve harici altyazı senkronu eklendi."
 }
