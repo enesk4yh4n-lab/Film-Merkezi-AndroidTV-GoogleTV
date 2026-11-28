@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "packageName": "app.filmmerkezi.tv",
-  "versionCode": 38,
-  "versionName": "0.12.2",
+  "versionCode": 39,
+  "versionName": "0.13.0",
   "minSdk": 23,
-  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.12.2/Film-Merkezi-Android-TV-0.12.2.apk",
-  "size": 5302593,
-  "sha256": "29c2fdc0afc0f5e6262b658bcdbbf319181e8b095d7ea83e99deb4154db2ca68",
+  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.13.0/Film-Merkezi-Android-TV-0.13.0.apk",
+  "size": 5429569,
+  "sha256": "74418c85e851cd4c471c2137c1c225c8c938f2181990d3ddba64fa7a8821a03e",
   "certificateSha256": "73753d46c206a8f651067541b12f5e038a5d207cca4bee21f8f984a27ed197ed",
-  "notes": "Film Merkezi 0.12.2 / 38 ? P002?P005 pilotu.\n\nPuhuTV, NOW, Filmci Baba ve Star TV i?in sekiz imzal? site/??z?mleyici paketi ayr? depodan kurulabilir. Di?er kald?r?lan eklentiler bu yay?na girmez.\n\nEklenti s?recinde OkHttp ba?latmas? d?zeltildi; Star TV ?erez/alan ad? hatas? giderildi. P002?P005 s?ras? korunur. Yeni paketler bu APK?y? gerektirir.\n\nD?rt kaynakla k?sa 20 saniyelik Media3 testi yap?ld?; ger?ek ARM TV kontrol? bekliyor. Kal?c? APK anahtar? de?i?medi; 0.12.1 ?zerine kurulur. Eski site-filmcibaba kuruluysa P004?ten ?nce yaln?z eski site paketini kald?r?n; uygulama verilerini silmeyin."
+  "notes": "- Güncelleme Merkezi sadeleştirildi. Yeni uygulama ve eklentiler için bildirimler eklendi.\n- Kumandayla gezinme, arama, katalog ve bölüm listeleri iyileştirildi.\n- Kaynak zaman aşımından sonra alternatiflerin denenmesi ve oynatma kararlılığı iyileştirildi.\n- Resmî eklenti kapsamı genişletildi. P008, P016 ve P018’de bazı oynatma seçenekleri sağlayıcı erişimine bağlı."
 }
