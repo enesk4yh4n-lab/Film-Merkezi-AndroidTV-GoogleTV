@@ -45,12 +45,26 @@ class ClassicUiTest {
     @Test fun firstRunChoicePersistsClassicAndShowsRealBrandVersion(){
         ins.targetContext.getSharedPreferences("interface-preferences",0).edit().clear().putString("configured","bad type").commit()
         TvActivity.forceSetupForTests=true;start()
-        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_RIGHT);ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_LEFT)
-        main{assertNotNull(activity.findViewById<View>(R.id.classic_setup_start));assertTrue(texts(activity.window.decorView).contains(ins.targetContext.getString(R.string.classic_modern)))}
+        main{
+            assertTrue(texts(activity.window.decorView).contains("Türkçe"))
+            assertTrue(texts(activity.window.decorView).contains("English"))
+            assertNotNull(activity.currentFocus)
+        }
+        for(key in listOf(KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_DPAD_CENTER))ins.sendKeyDownUpSync(key)
+        waitFor{UiPreferences(ins.targetContext).step==1}
         ins.sendKeyDownUpSync(KeyEvent.KEYCODE_HOME)
         ins.targetContext.startActivity(Intent(ins.targetContext,TvActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT))
-        waitFor{activity.hasWindowFocus()&&activity.findViewById<View>(R.id.classic_setup_start)!=null}
+        waitFor{activity.hasWindowFocus()&&UiPreferences(ins.targetContext).step==1}
         assertFalse(UiPreferences(ins.targetContext).configured)
+        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER)
+        waitFor{UiPreferences(ins.targetContext).step==2}
+        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_DOWN)
+        ins.sendKeyDownUpSync(KeyEvent.KEYCODE_DPAD_CENTER)
+        waitFor{activity.setupConfirmationForTest()?.isShowing==true}
+        main{activity.setupConfirmationForTest()!!.getButton(android.content.DialogInterface.BUTTON_POSITIVE).performClick()}
+        waitFor{UiPreferences(ins.targetContext).step==3}
+        for(key in listOf(KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_CENTER))ins.sendKeyDownUpSync(key)
+        waitFor{activity.findViewById<View>(R.id.classic_setup_start)!=null}
         click(R.id.classic_setup_start);waitFor{activity.findViewById<View>(R.id.tv_query)!=null}
         main{val all=texts(activity.window.decorView);assertTrue(all.contains("Film Merkezi"));assertTrue(all.contains("SİNEMA EVİNİZDE"))
             val version=ins.targetContext.packageManager.getPackageInfo(ins.targetContext.packageName,0).versionName

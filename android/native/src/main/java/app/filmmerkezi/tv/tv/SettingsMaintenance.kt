@@ -28,9 +28,9 @@ internal class SettingsMaintenance(private val context:Context,private val data:
         if(count==0)throw IllegalStateException(context.getString(app.filmmerkezi.tv.R.string.site_manager_no_cards))
         return context.getString(app.filmmerkezi.tv.R.string.site_manager_test_ok,count)
     }
-    suspend fun cacheBytes()=Posters.diskBytes(context)
+    suspend fun cacheBytes()=Posters.diskBytes(context)+data.catalogCacheBytes()
     suspend fun run(key:String){when(key){
-        "cache"->Posters.clearCache(context)
+        "cache"->{Posters.clearCache(context);data.clearCatalogCache()}
         "search"->data.clearSearches()
         "history"->{check(!playing());data.clearPlaybackHistory()}
         "overrides"->{check(!playing());data.clearPlaybackPreferences()}

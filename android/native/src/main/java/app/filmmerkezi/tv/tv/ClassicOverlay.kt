@@ -129,6 +129,7 @@ internal class ClassicOverlay(private val activity:Activity,title:String,private
     }
     fun focus(key:String){root.post{focusKey(key)}}
     internal fun rowKeys()=rows.map{it.key}
+    internal fun messageForTest()=lastMessage.orEmpty()
     internal fun select(key:String){if(rows.any{it.key==key&&it.enabled&&!it.header})click(key)else root.findViewWithTag<View>(key)?.performClick()}
     internal fun focusedKey()=dialog.currentFocus?.tag as? String
     internal fun navigationRootForTest()=root

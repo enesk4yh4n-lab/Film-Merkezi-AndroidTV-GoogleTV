@@ -1,5 +1,6 @@
 package app.filmmerkezi.tv.core
 
+import org.json.JSONObject
 import java.net.URI
 import java.security.MessageDigest
 import java.text.Normalizer
@@ -10,7 +11,7 @@ data class ContentRef(val siteId: String, val pageUrl: String, val kind: Content
     val id: String get() = "$siteId:${kind.name.lowercase(Locale.ROOT)}:" + URI(pageUrl).path.trim('/')
 }
 data class EpisodeNumber(val season: Int, val number: Int) {
-    init { require(season in 1..1000 && number in 1..100000) }
+    init { require(season in 0..1000 && number in 1..100000) }
 }
 data class Card(
     val ref: ContentRef, val title: String, val poster: String = "", val year: Int? = null,
@@ -47,7 +48,10 @@ data class ResolvedSource(
     val headers: Map<String, String> = emptyMap(), val subtitles: List<Subtitle> = emptyList(),
     val playbackRequirements: Set<String> = emptySet(), val mediaProfile: MediaProfile? = null,
     val expiresAt: Long? = null, val audioStreams:List<MediaAudio> = emptyList(), val variants:List<MediaVariant> = emptyList(),val sessionCookies:List<SessionCookie> = emptyList()
-)
+){
+    // Keep the published Kotlin constructor and copy signatures intact for installed DEX packages.
+    internal var navigation:JSONObject?=null
+}
 enum class FailureKind { NETWORK, TIMEOUT, HTTP, ACCESS, PARSE, UNSUPPORTED, LIMIT, STORAGE }
 class DataFailure(
     val kind: FailureKind, override val message: String, val stage: String = "",
@@ -56,7 +60,7 @@ class DataFailure(
 data class SiteFailure(val siteId: String, val kind: FailureKind, val message: String, val code: Int? = null)
 data class UnifiedItem(val identity: String, val card: Card, val alternatives: List<Card>,val displayKey:String="")
 data class UnifiedPage(val items: List<UnifiedItem>, val next: Map<String, PageCursor>, val failures: List<SiteFailure>,
-    val siteCounts:Map<String,Int> = emptyMap(),val completedSites:Int=0,val requestedSites:Int=0,val coverage:List<FilterCoverage> = emptyList())
+    val siteCounts:Map<String,Int> = emptyMap(),val completedSites:Int=0,val requestedSites:Int=0,val coverage:List<FilterCoverage> = emptyList(),val cached:Boolean=false)
 
 /** Interleave providers before deduplication, so a fast/full provider cannot own the first shelf. */
 object CatalogMerge {

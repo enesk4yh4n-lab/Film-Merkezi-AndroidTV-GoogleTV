@@ -21,6 +21,10 @@ internal class TvSeekFeedback(private val view:PlayerView,private val visibility
     private val delta=ClassicUi.text(context,"",12f,ClassicUi.gold,bold=true).apply{id=R.id.fm_seek_delta}
     private val time=ClassicUi.text(context,"",25f,bold=true).apply{id=R.id.fm_seek_time}
     private val remaining=ClassicUi.text(context,"",11f,ClassicUi.muted).apply{id=R.id.fm_seek_remaining;gravity=Gravity.END}
+    private val preview=android.widget.ImageView(context).apply{
+        visibility=View.GONE;scaleType=android.widget.ImageView.ScaleType.FIT_CENTER
+        importantForAccessibility=View.IMPORTANT_FOR_ACCESSIBILITY_NO
+    }
     private val progress=ProgressBar(context,null,android.R.attr.progressBarStyleHorizontal).apply{
         id=R.id.fm_seek_progress;isIndeterminate=false;max=10000
         progressTintList=ColorStateList.valueOf(ClassicUi.gold)
@@ -32,6 +36,7 @@ internal class TvSeekFeedback(private val view:PlayerView,private val visibility
         isFocusable=false;isClickable=false;isFocusableInTouchMode=false
         background=ClassicUi.shape(context,0xF2142233.toInt(),5f,0xFF576044.toInt())
         accessibilityLiveRegion=View.ACCESSIBILITY_LIVE_REGION_POLITE
+        addView(preview,LinearLayout.LayoutParams(-1,u(80)))
         addView(delta,LinearLayout.LayoutParams(-1,-2))
         addView(time,LinearLayout.LayoutParams(-1,-2).apply{topMargin=u(4)})
         addView(progress,LinearLayout.LayoutParams(-1,u(5)).apply{topMargin=u(9);bottomMargin=u(7)})
@@ -60,7 +65,12 @@ internal class TvSeekFeedback(private val view:PlayerView,private val visibility
     }
     fun hide(){
         handler.removeCallbacks(hideTask);root.visibility=View.GONE
+        setPreview(null)
         visibility(false)
+    }
+    fun setPreview(bitmap:android.graphics.Bitmap?){
+        preview.setImageBitmap(bitmap)
+        preview.visibility=if(bitmap==null||root.visibility!=View.VISIBLE)View.GONE else View.VISIBLE
     }
     override fun close()=hide()
 }

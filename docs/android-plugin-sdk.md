@@ -36,7 +36,8 @@ Her çağrı `site` metadata nesnesini içerir. Alanların tam dönüşümü [Pl
 
 | İşlem | Girdi | Yanıt |
 |---|---|---|
-| describe | site | `{ "sdk": 1 }` |
+| describe | site | `{ "sdk": 1 }`. İsteğe bağlı `capabilities: ["suggest"]` özel öneri uç noktasını bildirir. |
+| suggest | site, query | İsteğe bağlı. `cards[]` yalnız aynı siteden başlık önerilerini taşır. Yetenek bildirilmemişse çekirdek, kullanıcı öneri kaynağı olarak bu siteyi seçtiğinde aynı sitenin arama sonuçlarından öneri çıkarabilir. |
 | search | site, query, next veya null | cards[], next veya null, coverage isteğe bağlı |
 | browse | site, kind (MOVIE/SERIES), next | aynı katalog sayfası |
 | detail | site, card | card, description, genres[], cast[], duration, episodes[], episodePages[], options[], episodesNext, collectionItems[], seasons[] |
@@ -50,6 +51,10 @@ Her çağrı `site` metadata nesnesini içerir. Alanların tam dönüşümü [Pl
 
 Kart `schemaVersion`, `ref {siteId,pageUrl,kind}`, title ve isteğe bağlı metadata içerir. Kaynak `schemaVersion`, id, label, url, type (hls/mp4/dash/webm), referer, userAgent, cookie, headers, subtitles, playbackRequirements, mediaProfile, expiresAt, audioStreams ve variants taşır. Dizilerde sezon/bölüm numarası korunur. Başarısız yanıt boş başarılı liste diye dönülmez.
 
+Bölüm yanıtındaki isteğe bağlı `verifiedNumber: { season, number }`, sağlayıcının açıkça doğruladığı sezon ve bölüm koordinatlarını taşır. `season: 0` yalnız sağlayıcının özel bölüm olarak bildirdiği bölümde kullanılır. Kartın ham başlığı korunur ve numara uyuşmayan alternatif kaynaklar elenir.
+
+Çözümleyici isteğe bağlı `navigation` nesnesini döndürebilir. `chapters` kayıtları `{startMs, title, endMs?, kind?}` biçimindedir. İlk ve son zamanları bildirilen `kind: "intro"` kaydı giriş atlamayı açar. `previews` kayıtları `{startMs, endMs, url, region?}` biçimindedir. Görsel HTTPS üzerinden medya adresiyle aynı sunucu ve porttan alınır. Sprite kullanılırsa `region: {x, y, width, height}` alanları piksel cinsindendir. Veriyi sunan sağlayıcı kaynağın gerçek zaman bilgilerini taşımalıdır. Eski paketler bu alanları eklemeden çalışır.
+
 Site eklentilerinin içerik alanlarını toplama ve birleştirmeye doğru kanıt sağlama kabul kuralları [İçerik verisi ve birleştirme kuralları](eklenti-veri-ve-birlestirme-kurallari.md) belgesindedir. Sitede bulunan kimlik/özgün ad/yıl/tür ve ana dizi bağlantıları okunmalı; bulunmayan veri uydurulmamalıdır. Belgedeki yeni alan önerileri mevcut JSON SDK'da uygulanmış sayılmaz.
 
 Site manifesti birincil çözümleyicisini ilk bağımlılık olarak bildirir. Birden fazla çözümleyici kullanıyorsa kaynak seçeneğinin `fields._resolverId` ve gerekirse `fields._resolverPublisher` alanları bildirilen bağımlılığı seçer. Bildirilmemiş çözümleyici çağrılamaz. Yerleşik YouTube çıkarıcısı APK yeteneğidir; paket tarafından sessizce değiştirilmez.
@@ -59,6 +64,21 @@ Site manifesti birincil çözümleyicisini ilk bağımlılık olarak bildirir. B
 ### Manifest ve bağımlılıklar
 
 Örnekler [eklenti deposundaki sources](https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV-Eklentiler/tree/main/sources) altındadır. `schemaVersion:1`, `platform:android`, `runtime:kotlin-dex-v1`, `sdkMin:1`, `sdkMax:2` gerekir. SDK üst sınırı hariçtir. `minAppVersionCode:36`, `minSdk:23`, `entryClass:app.filmmerkezi.addon.…`, kapalı `origins` listesi ve artifact bilgileri bulunur. Site paketinde site metadata; çözümleyicide site metadata bulunmaz.
+
+Site eklentisi `site.catalogSections` altında gerçekten sunduğu özel kategorileri bildirebilir. Bir kategori en fazla dört farklı liste yolu içerebilir. Örnek site alanı:
+
+```json
+{
+  "catalogSections": {
+    "ANIMATION": [{ "path": "/animation/" }],
+    "DRAMA_SHORT": [{ "path": "/short-series/", "kinds": ["SERIES"], "pageParameter": "page" }]
+  }
+}
+```
+
+`path`, etkin site adresinden çözülen köke göre liste yoludur. Sorgu, kullanıcı bilgisi, tam URL ve üst dizin yolu kabul edilmez. Çekirdek HTML'yi GET ile alır ve eklentinin `parseList` işlemini çağırır. `kinds` sayfadaki gerçek kart türlerinin izin listesidir. Varsayılan `ANIMATION` için `MOVIE` ve `SERIES`, `DRAMA_SHORT` için `SERIES` değeridir. Sayfalama yalnız aynı kategorinin sıradaki `/page/2/` veya `?sayfa=2` bağlantısını izler. Farklı bir sorgu anahtarı için `pageParameter` kullanılır. Yönlendirmeler aynı site ve kategori sayfasıyla sınırlıdır. Eklenti erişim veya biçim hatasını `PluginException` ile bildirmeli, geçerli boş listede boş `cards` dönmelidir.
+
+`catalogSections` yoksa eski P004/P007 paketleri geçişte mevcut kategori rotalarını kullanır. Açıkça boş nesne bildirmek özel kategori desteğini kapatır. Kurulu, etkin ve imzası doğrulanmış manifestteki bildirim eski yolların önüne geçer. Yeni bir kategori yolu aynı host sürümünde manifest güncellemesiyle değiştirilebilir.
 
 Bağımlılık kimliği `publisherFingerprint/packageId`, sürüm aralığı `[minVersion,maxVersion)` olur. Çözümleme, farklı yayıncıları, elmas bağımlılıkları ve kurulu diğer paketleri birlikte değerlendirir. Döngü, eksik bağımlılık, uyumsuz SDK veya aynı site kimliği reddedilir. Bağımlılığı kullanılan paket tek başına kaldırılamaz.
 

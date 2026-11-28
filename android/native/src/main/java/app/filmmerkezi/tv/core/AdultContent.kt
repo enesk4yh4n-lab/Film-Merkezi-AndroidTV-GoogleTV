@@ -3,6 +3,7 @@ package app.filmmerkezi.tv.core
 import org.json.JSONObject
 import org.json.JSONArray
 import org.jsoup.nodes.Element
+import org.jsoup.nodes.Document
 
 data class AdultEvidence(val page:String,val reason:String,val confirmed:Boolean=true)
 
@@ -13,9 +14,19 @@ object AdultContent {
     fun blocked(c:Card)=c.adultEvidence?.confirmed==true
     fun blocked(g:UnifiedItem)=blocked(g.card)||g.alternatives.any(::blocked)
     fun genres(c:Card,values:List<String>,page:String=c.ref.pageUrl)=values.firstOrNull(::category)?.let{c.copy(adultEvidence=AdultEvidence(page,"genre:"+TextKey.fold(it)))}?:c
-    fun listing(body:String,page:CatalogPage,site:SiteSpec):CatalogPage {
+    private val explicitDescription=Regex("(?:(?:tur|kategori|icerik turu|genre|category|content type) )?(?:bir )?(?:erotik|yetiskin|pornografik|erotic|adult|pornographic) (?:film|filmi|filmdir|filmidir)|bu (?:film|yapim|icerik|eser) (?:bir )?(?:erotik|yetiskin|pornografik) (?:filmdir|filmidir)|this (?:film|movie) is an? (?:erotic|adult|pornographic) film")
+    fun declaredDescription(value:Detail):Detail {
+        if(blocked(value.card)||value.card.ref.kind!=ContentKind.MOVIE)return value
+        val sentences=value.description.take(4097).split(Regex("[.!?;\\r\\n…]+"))
+        val complete=if(value.description.length>4096)sentences.dropLast(1)else sentences
+        return if(complete.any{explicitDescription.matches(TextKey.fold(it))})
+            value.copy(card=value.card.copy(adultEvidence=AdultEvidence(value.card.ref.pageUrl,"description:classification"))) else value
+    }
+    fun listing(body:String,page:CatalogPage,site:SiteSpec)=
+        if(page.cards.isEmpty())page else listing(HtmlData.document(body,site.base+"/"),page,site)
+
+    internal fun listing(d:Document,page:CatalogPage,site:SiteSpec):CatalogPage {
         if(page.cards.isEmpty())return page
-        val d=HtmlData.document(body,site.base+"/")
         val nodes=d.select(site.cards)
         return page.copy(cards=page.cards.map{c->
             val node=nodes.firstOrNull{n->(listOf(n)+n.select("a[href]")).any{site.catalogUrl(it.attr("href"),site.base+"/")?.let(site::canonical)==site.canonical(c.ref.pageUrl)}}
@@ -41,6 +52,6 @@ object AdultContent {
             else->"article [itemprop=genre], main [itemprop=genre]"
         }
         val own=d.select(selector).filter{n->n.parents().none{it.normalName() in setOf("nav","aside","footer","header")}}.map(Element::text)
-        return value.copy(card=genres(c,tags+own))
+        return declaredDescription(value.copy(card=genres(c,tags+own)))
     }
 }

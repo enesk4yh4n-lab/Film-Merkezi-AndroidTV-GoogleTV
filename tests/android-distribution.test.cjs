@@ -8,6 +8,16 @@ test('SDK rejects traversal, invalid ranges and open network declarations',()=>{
  for(const patch of [{id:'../bad'},{version:'1.0.0/../../'},{entryClass:'java.lang.Runtime'},{origins:['https://*']},{dependencies:[{publisher:'0'.repeat(64),id:'resolver',minVersion:'2.0.0',maxVersion:'1.0.0'}]}])assert.throws(()=>validateManifest({...metadata(),...patch}));
  validateManifest(metadata());
 });
+test('site category declarations accept bounded same-origin paths',()=>{
+ const site={id:'example-site',name:'Example site',base:'https://example.com'};
+ const validate=catalogSections=>validateManifest({...metadata(),type:'site',site:{...site,catalogSections}});
+ validate({ANIMATION:[{path:'/animation/'}],DRAMA_SHORT:[{path:'/shows/',kinds:['SERIES'],pageParameter:'page'}]});
+ validate({});
+ for(const route of [{path:'//another.example/'},{path:'/../shows'},{path:'/shows/?page=1'},{path:'/shows/',kinds:['EPISODE']},{path:'/shows/',pageParameter:'a&b'}])
+  assert.throws(()=>validate({ANIMATION:[route]}),/catalog/);
+ assert.throws(()=>validate({ANIMATION:[{path:'/shows/'},{path:'/shows'}]}),/Duplicate/);
+ assert.throws(()=>validate({MOVIES:[{path:'/movies/'}]}),/catalog/);
+});
 test('DEX archive budget and paths are checked before signing',()=>{
  const valid=fs.readFileSync(jar);validateJar(valid);
  assert.throws(()=>validateJar(Buffer.alloc(4194305)));assert.throws(()=>validateJar(Buffer.from('not-a-dex')));

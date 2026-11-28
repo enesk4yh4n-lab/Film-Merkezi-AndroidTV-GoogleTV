@@ -32,6 +32,7 @@ internal fun providerHttpFailure(code:Int, mitigation:String?):DataFailure? {
 /** Application-owned metadata transport. Cancellation affects only the caller's Call. */
 class ProviderNetwork(context: Context,private val originPolicy:((HttpUrl)->Unit)?=null,sharedPool:ConnectionPool?=null,private val cookies:MutableList<Cookie> = mutableListOf()) : WebTransport {
     private val slots = Semaphore(2)
+    private class CatalogTarget(val site:SiteSpec,val route:SectionRoute,val number:Int)
     val client: OkHttpClient = LegacyTls.configure(context.applicationContext, OkHttpClient.Builder()
         .connectionPool(sharedPool?:ConnectionPool(3,1,TimeUnit.MINUTES))
         .addNetworkInterceptor{chain->try{originPolicy?.invoke(chain.request().url)}catch(e:Exception){throw IOException(e.message,e)};chain.proceed(chain.request())}
@@ -48,9 +49,30 @@ class ProviderNetwork(context: Context,private val originPolicy:((HttpUrl)->Unit
             }
             override fun loadForRequest(url:HttpUrl):List<Cookie> = synchronized(cookies) { cookies.filter { it.expiresAt>System.currentTimeMillis() && it.matches(url) } }
         })).build()
-    override suspend fun request(request: WebRequest): WebResponse = slots.withPermit {
+    private val categoryClient by lazy {
+        client.newBuilder().followRedirects(false).followSslRedirects(false).addInterceptor{chain->
+            var request=chain.request()
+            val target=checkNotNull(request.tag(CatalogTarget::class.java))
+            for(hop in 0..4){
+                val response=chain.proceed(request)
+                if(response.code !in setOf(301,302,303,307,308))return@addInterceptor response
+                val redirected=response.use{it.header("Location")?.let{location->target.site.catalogUrl(location,request.url.toString())}}
+                if(hop==4||redirected==null||sectionPageNumber(target.site,target.route,redirected)!=target.number)
+                    throw IOException("Kategori yönlendirmesi istenen sayfaya ait değil")
+                request=request.newBuilder().url(redirected).build()
+            }
+            error("Unreachable redirect limit")
+        }.build()
+    }
+
+    override suspend fun request(request: WebRequest): WebResponse = request(request,null)
+    internal suspend fun requestCategory(request:WebRequest,site:SiteSpec,route:SectionRoute,number:Int):WebResponse =
+        request(request,CatalogTarget(site,route,number))
+
+    private suspend fun request(request:WebRequest,target:CatalogTarget?):WebResponse = slots.withPermit {
         require(request.timeoutMs in 1..60000 && request.byteLimit in 1..4*1024*1024)
-        val url = publicUrl(SiteAddresses.rebaseKnown(request.url)) ?: throw DataFailure(FailureKind.PARSE,"Geçersiz ağ adresi","request")
+        val address=if(target==null)SiteAddresses.rebaseKnown(request.url)else target.site.catalogUrl(request.url).orEmpty()
+        val url = publicUrl(address) ?: throw DataFailure(FailureKind.PARSE,"Geçersiz ağ adresi","request")
         val builder=Request.Builder().url(url).header("Accept","*/*")
         if(request.referer.isNotBlank()) builder.header("Referer", SiteAddresses.rebaseKnown(request.referer))
         request.headers.forEach { (key,value) -> builder.header(key,value) }
@@ -59,7 +81,8 @@ class ProviderNetwork(context: Context,private val originPolicy:((HttpUrl)->Unit
                 else (request.body?:"").toRequestBody(null)
             builder.post(body)
         }
-        val call=client.newCall(builder.build()); call.timeout().timeout(request.timeoutMs,TimeUnit.MILLISECONDS)
+        val http=if(target==null)client else categoryClient.also{builder.tag(CatalogTarget::class.java,target)}
+        val call=http.newCall(builder.build()); call.timeout().timeout(request.timeoutMs,TimeUnit.MILLISECONDS)
         suspendCancellableCoroutine { continuation ->
             continuation.invokeOnCancellation { call.cancel() }
             call.enqueue(object:Callback {

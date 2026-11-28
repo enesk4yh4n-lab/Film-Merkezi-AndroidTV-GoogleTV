@@ -17,8 +17,8 @@ class PilotWorkerTest {
     private val context=ins.targetContext
     private val manager=DistributionManager.get(context)
     private fun asset(name:String,root:String="pilot-test")=ins.context.assets.open("$root/$name").use{it.readBytes()}
-    internal suspend fun withSet(root:String="pilot-test",block:suspend(PluginWorkerClient)->Unit) {
-        fun staged(name:String)=asset(name,root)
+    internal suspend fun withSet(root:String="pilot-test",folder:File?=null,block:suspend(PluginWorkerClient)->Unit) {
+        fun staged(name:String)=folder?.resolve(name)?.readBytes()?:asset(name,root)
         ModuleRuntime.stop();val original=manager.store.snapshot()
         // GC tests may unlink package objects. Pin existing artifacts without copying user data.
         val objects=File(manager.store.directory,"objects").apply{mkdirs()}
@@ -52,6 +52,33 @@ class PilotWorkerTest {
             manager.store.commit{next->next.keys().asSequence().toList().forEach(next::remove);original.keys().forEach{next.put(it,original.get(it))}};ModuleRuntime.register(original)}
     }
     private fun payload(id:String):JSONObject = JSONObject().put("site",PluginWire.site(Sites.get(id)))
+    fun signedCatalogUpdatesReadRecordedPages()=runBlocking {
+        val folder=File(context.getExternalFilesDir(null),"catalog-release-test")
+        withSet(folder=folder){client->
+            val entries=PluginInventory.modules(manager.store.snapshot().getJSONObject("packages")).values.associateBy{it.module.id}
+            val fixtures=mapOf(
+                "p004" to listOf("p004-animation" to "/Kategori/tur/animasyon-filmleri/","p004-anime" to "/Kategori/anime-izle/",
+                    "p004-short" to "/Kategori/k-drama-reels-asya-dizileri/"),
+                "p007" to listOf("p007-drama" to "/asya-dizileri/")
+            )
+            for((id,pages) in fixtures){
+                val entry=entries.getValue(id)
+                val module=entry.module
+                val site=module.site!!
+                val siteId=site.getString("id")
+                assertEquals(manager.installedCode,module.minApp)
+                assertTrue(site.has("catalogSections"))
+                val resolver=entries.getValue("r"+id.drop(1))
+                assertEquals(1,client.probe(resolver.key,payload(siteId)).getInt("sdk"))
+                for((name,path) in pages){
+                    val input=payload(siteId).put("body",File(folder,"$name.html").readText()).put("url",site.getString("base")+path)
+                    val result=PluginWire.page(client.call(siteId,"site","parseList",input))
+                    assertTrue(name,result.cards.isNotEmpty())
+                    assertTrue(name,result.cards.all{it.ref.siteId==siteId})
+                }
+            }
+        }
+    }
     fun publishedSetStartsInTheWorker()=runBlocking {withSet("release-test"){client->
         val set=manager.store.snapshot().getJSONObject("packages")
         val prepared=Sites.all.map{it.id}.toSet()

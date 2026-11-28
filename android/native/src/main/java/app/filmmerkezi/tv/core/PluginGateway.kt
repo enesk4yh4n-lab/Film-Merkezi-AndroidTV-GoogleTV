@@ -42,9 +42,16 @@ class NativeSiteProvider(private val template:SiteSpec,private val network:WebTr
         return if(PluginGateway.remote!=null)call()else standaloneLock.withLock{call()}
     }
     override suspend fun search(query:String,next:PageCursor?)=CatalogContent.catalog(PluginWire.page(invoke("search",JSONObject().put("query",query).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL))))
+    suspend fun suggest(query:String):List<Card> {
+        val description=invoke("describe")
+        val capabilities=description.optJSONArray("capabilities")
+        val providerSuggestions=capabilities!=null&&(0 until capabilities.length()).any{capabilities.optString(it)=="suggest"}
+        if(!providerSuggestions)return search(query).cards.filter{ContentIdentity.relevant(it,query)}.take(8)
+        return CatalogContent.catalog(PluginWire.page(invoke("suggest",JSONObject().put("query",query)))).cards.take(8)
+    }
     override suspend fun browse(kind:ContentKind,next:PageCursor?)=CatalogContent.forKind(PluginWire.page(invoke("browse",JSONObject().put("kind",kind.name).put("next",next?.let(Contracts::cursor)?:JSONObject.NULL))),kind)
     override suspend fun detail(card: Card): Detail {
-        val detail = PluginWire.detail(invoke("detail", JSONObject().put("card", Contracts.card(card))))
+        val detail = AdultContent.declaredDescription(PluginWire.detail(invoke("detail", JSONObject().put("card", Contracts.card(card)))))
         return when (site.id) {
             "ddizi", "p012" -> detail.copy(options = YoutubeStreams.withHlsOptions(detail.options))
             else -> detail
@@ -69,6 +76,40 @@ class NativeSiteProvider(private val template:SiteSpec,private val network:WebTr
         return page.copy(cards=sorted,coverage=coverage.copy(checked=checked,omitted=omitted))
     }
     suspend fun parseList(body:String,url:String)=PluginWire.page(invoke("parseList",JSONObject().put("body",body).put("url",url)))
+    internal suspend fun section(section:CatalogSection,cursor:PageCursor?):CatalogPage {
+        val current=site
+        val routes=section.routes(current.id)
+        val cards=mutableListOf<Card>()
+        val more=linkedMapOf<String,String>()
+        var failure:Exception?=null
+        var success=false
+        for(route in routes){
+            val root=route.path
+            val raw=if(cursor==null)root else cursor.fields[root]?:continue
+            val number=sectionPageNumber(current,route,raw)?:continue
+            val url=current.catalogUrl(raw)?:continue
+            try{
+                val request=WebRequest(url,current.base+"/")
+                val response=if(network is ProviderNetwork)network.requestCategory(request,current,route,number)else network.request(request)
+                providerHttpFailure(response.code,response.headers.entries.firstOrNull{it.key.equals("cf-mitigated",true)}?.value)?.let{throw it}
+                if(sectionPageNumber(current,route,response.url)!=number)
+                    throw DataFailure(FailureKind.PARSE,"Yanıt istenen kategori sayfasına ait değil","catalog-section")
+                val parsed=parseList(response.body,response.url)
+                val (matched,next)=withContext(parsing){
+                    fun nextPage(candidate:String)=current.catalogUrl(candidate,response.url)?.takeIf{sectionPageNumber(current,route,it)==number+1}
+                    val document=HtmlData.document(response.body,response.url)
+                    val link=parsed.next?.url?.let(::nextPage)?:document.select("a[href]").firstNotNullOfOrNull{nextPage(it.attr("href"))}
+                    val page=CatalogContent.catalog(AdultContent.listing(document,parsed,current))
+                    page.cards.filter{it.ref.kind in route.kinds} to link
+                }
+                success=true;cards.addAll(matched)
+                if(next!=null)more[root]=next
+            }catch(e:CancellationException){throw e}catch(e:Exception){failure=e}
+        }
+        if(!success)failure?.let{throw it}
+        val next=more.values.firstOrNull()?.let{PageCursor(current.id,it,(cursor?.page?:1)+1,more)}
+        return CatalogPage(cards.distinctBy{it.ref.id},next,if(failure==null)null else FilterCoverage(current.id,emptySet(),setOf("section")))
+    }
     suspend fun collections():List<Card>{val a=invoke("collections").getJSONArray("cards");return (0 until a.length()).map{Contracts.readCard(a.getJSONObject(it))}}
     fun trim(){standalone=null}
 }

@@ -21,7 +21,7 @@ class SeasonButtons(context:Context):HorizontalScrollView(context) {
         val values=numbers.filter{it in 1..1000}.distinct().sorted();val focused=buttons.entries.firstOrNull{it.value.hasFocus()}?.key
         buttons.keys.filter{it !in values}.toList().forEach{n->row.removeView(buttons.remove(n))}
         values.forEachIndexed{i,n->
-            val b=buttons.getOrPut(n){ClassicUi.button(context,context.getString(R.string.season_tab,n)){
+            val b=buttons.getOrPut(n){ClassicUi.button(context,if(n==0)context.getString(R.string.catalog_specials)else context.getString(R.string.season_tab,n)){
                 bind(values,n);select?.invoke(n)
             }.apply{tag="season:$n";setOnKeyListener{_,key,event->
                 if(event.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_DOWN){down?.invoke();true}

@@ -9,6 +9,16 @@ import androidx.media3.ui.CaptionStyleCompat
 import androidx.media3.ui.PlayerView
 import androidx.media3.ui.SubtitleView
 import app.filmmerkezi.tv.PlaybackSettings
+import app.filmmerkezi.tv.PlaybackSession
+import androidx.media3.common.Format
+import androidx.media3.datasource.DataSourceInputStream
+import androidx.media3.datasource.DataSpec
+import androidx.media3.extractor.text.CuesWithTiming
+import androidx.media3.extractor.text.DefaultSubtitleParserFactory
+import androidx.media3.extractor.text.SubtitleParser
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.ensureActive
 
 /** Canvas captions, one owner for style and controller/seek insets. Never touches the media source. */
 @androidx.annotation.OptIn(markerClass=[androidx.media3.common.util.UnstableApi::class])
@@ -17,17 +27,86 @@ internal class SubtitleAppearance(private val view:PlayerView):AutoCloseable {
     private var player:Player?=null
     private var cues=emptyList<Cue>()
     private var controls=false;private var seeking=false
+    private val handler=android.os.Handler(android.os.Looper.getMainLooper())
+    private var shifted:List<CuesWithTiming> = emptyList()
+    private var prefixEnd=LongArray(0)
+    private var activeFile:(()->PlaybackSession.SubtitleFile?)?=null
+    private var fileId=""
+    private var result=emptyList<Cue>()
+    var offsetMs=0
+        private set
+    private val tick=object:Runnable {
+        override fun run(){
+            if(offsetMs==0)return
+            if(activeFile?.invoke()?.id!=fileId){clearOffset();return}
+            val time=(player?.currentPosition?:0L)*1000-offsetMs*1000L
+            val current=selectCues(time)
+            if(result!=current){result=current;render()}
+            handler.postDelayed(this,100)
+        }
+    }
     private val listener=object:Player.Listener{override fun onCues(group:CueGroup){cues=group.cues;render()}}
-    fun bind(p:Player?){if(player===p)return;player?.removeListener(listener);player=p;cues=emptyList();p?.addListener(listener);render()}
+    fun bind(p:Player?){if(player===p)return;player?.removeListener(listener);player=p;cues=emptyList();clearOffset();p?.addListener(listener);render()}
+    suspend fun setOffset(value:Int,selected:()->PlaybackSession.SubtitleFile?):Boolean{
+        if(value==0){clearOffset();return true}
+        val file=selected()?:return false
+        if(file.id!=fileId){
+            val parsed=withContext(Dispatchers.IO){
+                val bytes=java.io.ByteArrayOutputStream()
+                DataSourceInputStream(file.factory.createDataSource(),DataSpec(file.uri)).use{input->
+                    val buffer=ByteArray(8192)
+                    while(true){
+                        coroutineContext.ensureActive()
+                        val n=input.read(buffer)
+                        if(n<0)break
+                        require(bytes.size()+n<=512*1024)
+                        bytes.write(buffer,0,n)
+                    }
+                }
+                val all=mutableListOf<CuesWithTiming>()
+                val parser=DefaultSubtitleParserFactory().create(Format.Builder().setSampleMimeType(file.mime).build())
+                parser.parse(bytes.toByteArray(),SubtitleParser.OutputOptions.allCues()){cue->
+                    require(all.size<8000)
+                    if(cue.endTimeUs>cue.startTimeUs&&cue.startTimeUs>=0L)all.add(cue)
+                }
+                all.sortedBy{it.startTimeUs}
+            }
+            if(parsed.isEmpty()||selected()?.id!=file.id)return false
+            shifted=parsed
+            var end=0L
+            prefixEnd=LongArray(parsed.size){i->end=maxOf(end,parsed[i].endTimeUs);end}
+            fileId=file.id
+        }
+        activeFile=selected
+        offsetMs=value.coerceIn(-10000,10000)
+        handler.removeCallbacks(tick)
+        tick.run()
+        render()
+        return true
+    }
+    private fun selectCues(timeUs:Long):List<Cue>{
+        var i=shifted.binarySearchBy(timeUs){it.startTimeUs}
+        if(i<0)i=-i-2 else while(i+1<shifted.size&&shifted[i+1].startTimeUs==timeUs)i++
+        if(i<0||prefixEnd[i]<=timeUs)return emptyList()
+        return buildList {
+            while(i>=0&&prefixEnd[i]>timeUs){
+                if(shifted[i].endTimeUs>timeUs)addAll(shifted[i].cues)
+                i--
+            }
+        }.distinct()
+    }
+    fun clearOffset(){
+        handler.removeCallbacks(tick);offsetMs=0;activeFile=null;fileId="";shifted=emptyList();prefixEnd=LongArray(0);result=emptyList();render()
+    }
     fun apply(value:PlaybackSettings){settings=value;view.subtitleView?.let{style(it,value)};render()}
     fun controls(visible:Boolean){controls=visible;render()}
     fun seeking(visible:Boolean){seeking=visible;render()}
     private fun render(){val target=view.subtitleView?:return
         val bottom=maxOf(settings.subtitleBottom/100f,if(controls)0.30f else 0f,if(seeking)0.28f else 0f)
         target.setBottomPaddingFraction(bottom)
-        target.setCues(cues.map{adjust(it,bottom,settings.customSubtitles,controls||seeking)})
+        target.setCues((if(offsetMs==0)cues else result).map{adjust(it,bottom,settings.customSubtitles,controls||seeking)})
     }
-    override fun close(){player?.removeListener(listener);player=null;cues=emptyList()}
+    override fun close(){player?.removeListener(listener);player=null;cues=emptyList();clearOffset()}
     companion object {
         internal fun adjust(cue:Cue,bottom:Float,custom:Boolean,overlay:Boolean):Cue {
             if(cue.bitmap!=null||!custom&&!overlay)return cue

@@ -54,6 +54,7 @@ class UpdateHubUiTest {
             press(f,KeyEvent.KEYCODE_BACK);focused(f,"add-repo");passed("repository_add_is_optional_footer_and_back_keeps_origin")
             press(f,KeyEvent.KEYCODE_BACK);focused(f,"add")
             f.main{center().select("installed")};f.waitFor{center().keys().size==3};assertFalse(center().keys().any{it.endsWith("/r002")})
+            f.main{assertEquals(listOf("P002","P003","P004"),center().titles())}
             press(f,KeyEvent.KEYCODE_BACK);focused(f,"installed");passed("installed_page_groups_resolvers_under_sites")
             f.main{center().select("updates")};f.waitFor{center().keys()==listOf("application")}
             f.main{center().select("application")};f.waitFor{f.tag("updates:update-application")!=null}
@@ -96,6 +97,7 @@ class UpdateHubUiTest {
             f.main{assertNull(f.activity.noticePopupForTest());f.activity.onBackPressed()};f.waitFor{f.activity.noticePopupForTest()?.showing==true}
             passed("notice_waits_until_settings_are_closed")
             var panel=f.activity.noticePopupForTest()!!.panelForTest()
+            f.main{assertEquals("P005",panel.messageForTest().lines()[1])}
             val choices=listOf("notice-install","notice-inspect","notice-later","notice-ignore")
             f.waitFor{panel.focusedKey()==choices.first()}
             for(key in choices.drop(1)){press(f,KeyEvent.KEYCODE_DPAD_RIGHT);f.waitFor{panel.focusedKey()==key}}
@@ -111,11 +113,12 @@ class UpdateHubUiTest {
             val until=UpdateNoticeStore(f.context).value.later.getValue(token);assertTrue(until-System.currentTimeMillis() in 86390000L..86400000L)
             f.main{f.activity.noticesForTest(false);f.activity.noticesForTest()};delay(1600);f.main{assertNull(f.activity.noticePopupForTest())};passed("later_saves_twenty_four_hour_snooze")
             f.main{f.activity.noticesForTest(false)};m.notices.update{NoticeState()}
-            val release=UpdateProtocol.Release(39,"Local UI test",23,"https://fixture.example/update.apk",1,"0".repeat(64),"1".repeat(64),"")
-            val offer=UpdateNotice(NoticeKind.APPLICATION,listOf("app:39"),release=release);var routed:UpdateRoute?=null
+            val release=UpdateProtocol.Release(m.installedCode+1,"Local UI test",23,"https://fixture.example/update.apk",1,"0".repeat(64),"1".repeat(64),"")
+            val appToken="app:${release.code}"
+            val offer=UpdateNotice(NoticeKind.APPLICATION,listOf(appToken),release=release);var routed:UpdateRoute?=null
             f.main{popup=UpdateNoticePopup(f.activity,uiScope,m.notices,offer,{routed=it})}
             f.waitFor{popup?.panelForTest()?.focusedKey()=="notice-install"};f.main{popup!!.panelForTest().select("notice-install")}
-            f.waitFor{routed!=null};assertEquals(UpdatePage.APPLICATION,routed!!.page);assertTrue(routed!!.downloadApplication);assertEquals(39,routed!!.applicationCode)
+            f.waitFor{routed!=null};assertEquals(UpdatePage.APPLICATION,routed!!.page);assertTrue(routed!!.downloadApplication);assertEquals(release.code,routed!!.applicationCode)
             passed("application_update_choice_routes_exact_version_without_fabricated_download")
             delay(200);f.waitFor{f.activity.hasWindowFocus()};routed=null;m.notices.update{NoticeState()}
             val pluginOffer=UpdateNotice(NoticeKind.NEW_PLUGINS,listOf(token),catalog.fresh)
@@ -126,7 +129,7 @@ class UpdateHubUiTest {
             state.value=DistributionStatus(release=release,appCheck=CheckState.AVAILABLE)
             f.main{f.activity.noticesForTest()};f.waitFor{f.activity.noticePopupForTest()?.showing==true}
             f.main{f.activity.noticePopupForTest()!!.panelForTest().select("notice-ignore")};f.waitFor{f.activity.noticePopupForTest()==null}
-            assertTrue("app:39" in UpdateNoticeStore(f.context).value.ignored);assertFalse(token in m.notices.value.ignored);passed("application_ignore_does_not_disable_plugin_notices")
+            assertTrue(appToken in UpdateNoticeStore(f.context).value.ignored);assertFalse(token in m.notices.value.ignored);passed("application_ignore_does_not_disable_plugin_notices")
             m.notices.update{NoticeState()};f.main{f.activity.noticesForTest(false);f.activity.noticesForTest()};f.waitFor{f.activity.noticePopupForTest()?.showing==true}
             f.main{f.activity.noticePopupForTest()!!.panelForTest().select("notice-inspect")};f.waitFor{f.tag("updates:update-application")!=null}
             f.main{assertTrue(f.tag("updates:update-application").isEnabled);assertNull(f.activity.noticePopupForTest())};passed("inspect_opens_single_update_action_inside_classic_settings")

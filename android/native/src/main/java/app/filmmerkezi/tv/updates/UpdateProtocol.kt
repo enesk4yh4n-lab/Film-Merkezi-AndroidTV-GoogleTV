@@ -52,6 +52,7 @@ object UpdateProtocol {
         val pid=id(o.getString("id"));val v=version(o.getString("version"));val type=o.getString("type");require(type in listOf("site","resolver"))
         val entry=o.getString("entryClass");require(entry.matches(Regex("app\\.filmmerkezi\\.addon\\.[A-Za-z0-9_.$]+")))
         val site=o.optJSONObject("site");require((type=="site")== (site!=null));site?.let{id(it.getString("id"));text(it.getString("name"));java.net.URI(it.getString("base")).let{u->require(u.scheme=="https"&&u.host!=null&&u.rawUserInfo==null&&u.port==-1&&(u.rawPath.isNullOrEmpty()||u.rawPath=="/"))}}
+        site?.let{app.filmmerkezi.tv.core.CatalogSection.fromManifest(it)}
         val deps=o.optJSONArray("dependencies")?:JSONArray();require(deps.length()<=16)
         val dependencies=(0 until deps.length()).map{i->val d=deps.getJSONObject(i);Dependency(hash(d.getString("publisher")),id(d.getString("id")),version(d.getString("minVersion")),version(d.getString("maxVersion"))).also{require(compare(it.min,it.max)<0)}}
         require(dependencies.map{it.publisher+"/"+it.id}.distinct().size==dependencies.size)

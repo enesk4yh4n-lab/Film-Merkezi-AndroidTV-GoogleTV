@@ -43,7 +43,7 @@
     <string name="settings_sleep_finished">Uyku zamanlayıcısı doldu.</string>
     <string name="settings_buffer">Tampon profili</string><string name="settings_buffer_low">Düşük bellek</string><string name="settings_buffer_long">Uzun tampon</string>
     <string name="settings_next_playback">Bir sonraki oynatmada uygulanır. Çalışan motor değişmez.</string>
-    <string name="settings_cache">Görsel önbelleği</string><string name="settings_clear_cache">Görsel önbelleğini temizle</string>
+    <string name="settings_cache">Önbellek</string><string name="settings_clear_cache">Önbelleği temizle</string>
     <string name="settings_clear_search">Arama geçmişini temizle</string><string name="settings_clear_history">İzleme geçmişi ve devam kayıtlarını temizle</string>
     <string name="settings_clear_history_help">Listem, takip edilen diziler ve elle bölüm işaretleri korunur.</string>
     <string name="settings_clear_overrides">İçeriğe özel tercihleri sıfırla</string><string name="settings_reset">Ayarları varsayılana döndür</string>
@@ -60,8 +60,8 @@
     <string name="settings_operation_error">İşlem tamamlanamadı. Yeniden deneyebilirsin.</string>
     <string name="settings_connection_failed">Bağlantı kurulamadı / süre doldu</string>
     <string name="settings_connection_help">Yalnız açık katalog/kaynak sitelerine istek gönderir. HTTP yanıtı, video oynatma doğrulaması değildir.</string>
-    <string name="settings_cache_size">Disk: %1$.1f MiB / 24 MiB</string>
-    <string name="settings_clear_cache_help">Yalnız indirilen afiş önbelleği ve görsel belleği temizlenir. İzleme kayıtları korunur.</string>
+    <string name="settings_cache_size">Disk: %1$.1f MiB / 27 MiB</string>
+    <string name="settings_clear_cache_help">Katalog ve afiş önbellekleri temizlenir. İzleme kayıtları korunur.</string>
     <string name="settings_clear_search_help">Kaydedilmiş arama sorguları silinir. Diğer kayıtlar korunur.</string>
     <string name="settings_clear_overrides_help">Hatırlanan ses, altyazı ve kalite tercihleri kaldırılır. İzleme konumu ve Listem korunur.</string>
     <string name="settings_reset_help">Genel ayarlar varsayılana döner. İçeriğe özel tercihler, Listem, takipler ve izleme kayıtları korunur.</string>

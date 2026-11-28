@@ -16,12 +16,12 @@ internal fun SourcePool.withResolutionFailures(failures:Map<String,String>):Sour
 }
 
 class SourcePoolService(private val repository:CatalogRepository,private val works:WorkStore,private val discovery:AlternativeDiscovery,private val allowed:(String)->Boolean={true},private val hideAdult:()->Boolean={false}){
-    fun episode(item:UnifiedItem,crossSite:Boolean,gate:suspend()->Unit={}):Flow<SourcePool> =
+    fun episode(item:UnifiedItem,crossSite:Boolean,gate:suspend()->Unit={},force:Boolean=false):Flow<SourcePool> =
         EpisodeSourcePool.observe(item.copy(alternatives=item.alternatives.filter{allowed(it.ref.siteId)}),crossSite,{c->
             if(!allowed(c.ref.siteId))throw DataFailure(FailureKind.ACCESS,"Bu sitenin kaynakları kapalı","site-settings")
             repository.detail(c).also{if(hideAdult()&&AdultContent.blocked(it.card))throw DataFailure(FailureKind.ACCESS,"Yetişkin filtresi","adult-filter")}
-        },{known->observe(item.card,emptyList(),true,gate,known)},gate)
-    fun observe(card:Card,initial:List<SourceOption>,crossSite:Boolean,gate:suspend()->Unit={},knownEpisodes:Set<String> = emptySet()):Flow<SourcePool> = flow{
+        },{known->observe(item.card,emptyList(),true,gate,known,force)},gate)
+    fun observe(card:Card,initial:List<SourceOption>,crossSite:Boolean,gate:suspend()->Unit={},knownEpisodes:Set<String> = emptySet(),force:Boolean=false):Flow<SourcePool> = flow{
         val options=initial.filter{allowed(it.content.siteId)}.map{it.scoped()}.toMutableList();val loaded=mutableSetOf(card.ref.siteId+":"+card.ref.pageUrl)
         emit(SourcePool(options.toList(),crossSite))
         if(!crossSite)return@flow
@@ -33,7 +33,7 @@ class SourcePoolService(private val repository:CatalogRepository,private val wor
                 ?:return@flow emit(SourcePool(options.toList(),false,"Dizi kimliği bulunamadı"))
         }else card
         val errors=mutableListOf<SiteFailure>()
-        val finished=withTimeoutOrNull(90000){discovery.discover(target,background=true,gate=gate).collect{found->
+        val finished=withTimeoutOrNull(90000){discovery.discover(target,force=force,background=true,gate=gate).collect{found->
             for(variant in found.item.alternatives){
                 if(!allowed(variant.ref.siteId)||hideAdult()&&AdultContent.blocked(found.item))continue
                 val source=variant.ref.siteId+":"+variant.ref.pageUrl

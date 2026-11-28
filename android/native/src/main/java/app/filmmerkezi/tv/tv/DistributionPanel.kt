@@ -15,7 +15,9 @@ import kotlinx.coroutines.flow.combine
 import org.json.JSONObject
 
 /** Single update flow embedded in Options. Dialogs are limited to input and confirmation. */
-internal class DistributionPanel(private val activity:Activity,parentScope:CoroutineScope,private val playing:()->Boolean,left:()->Unit={},up:()->Unit=left) {
+internal class DistributionPanel(private val activity:Activity,parentScope:CoroutineScope,private val playing:()->Boolean,left:()->Unit={},up:()->Unit=left,
+    private val setupExit:(()->Unit)?=null,private val setupInstalled:(()->Unit)?=null,private val setupTrusted:(()->Unit)?=null,
+    private val setupApplied:(()->Unit)?=null) {
     private val lifetime=SupervisorJob(parentScope.coroutineContext[Job])
     private val scope=CoroutineScope(parentScope.coroutineContext+lifetime)
     private val manager=DistributionManager.get(activity)
@@ -24,14 +26,14 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     private var returnPage:(()->Unit)?=null
     private var generation=0
     private var observer:Job?=null
-    private var download:Job?=null
     private var work:Job?=null
     private var dialog:ClassicDialog?=null
     private val selected=linkedSetOf<String>()
     private var noticePopup:UpdateNoticePopup?=null
     private fun s(id:Int)=activity.getString(id)
     private fun display(builder:ClassicDialog.Builder){dialog?.dismiss();dialog=builder.show()}
-    private fun problemText(e:Throwable)=if(e is UpdateHttpFailure&&e.rateLimited)e.message else s(when(UpdateProblem.classify(e)){
+    private fun problemText(e:Throwable)=if(e is UpdateHttpFailure&&e.rateLimited)e.message else problemText(UpdateProblem.classify(e))
+    private fun problemText(problem:UpdateProblem)=s(when(problem){
         UpdateProblem.NETWORK->R.string.updates_error_network
         UpdateProblem.TIMEOUT->R.string.updates_error_timeout
         UpdateProblem.INTEGRITY->R.string.updates_error_integrity
@@ -52,14 +54,20 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
         observer?.cancel();generation++;returnPage=parent?.let{{it();view.requestKey(key)}}
         view.page(title,parent!=null);view.onBack={back()};return view
     }
-    fun canLeave()=download?.isActive!=true
     fun back():Boolean {
         if(dialog?.isShowing==true){dialog?.dismiss();return true}
-        if(!canLeave()){display(ClassicDialog.Builder(activity).setMessage(R.string.updates_cancel_download_confirm).setPositiveButton(R.string.tv_cancel){_,_->download?.cancel()}.setNegativeButton(R.string.updates_keep_downloading,null));return true}
         work?.cancel();work=null
         returnPage?.let{it();return true};return false
     }
     fun dispose(){generation++;noticePopup?.close();dialog?.dismiss();lifetime.cancel()}
+    fun openSetupRepositories(){
+        repositoryChoices(show(s(R.string.updates_add_repository),setupExit,"search"))
+    }
+    fun openSetupPackages(){when{
+        manager.store.snapshot().has("pending")->ready()
+        manager.pluginInstall.value.busy||manager.pluginInstall.value.failure!=null||manager.store.hasInstallJob->showInstallJob()
+        else->addPlugins()
+    }}
     internal fun dialogForTest()=dialog
     private fun applicationStatus(v:DistributionStatus):String=when(v.appCheck){
         CheckState.UNCHECKED->s(R.string.updates_app_unchecked)
@@ -76,10 +84,15 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
             checks.isNotEmpty()&&checks.all{it.state==CheckState.CURRENT}->activity.getString(R.string.updates_repos_checked,checked)
             else->s(R.string.updates_repos_unchecked)}
     }
-    fun open(){val p=show(s(R.string.updates_title));p.loading(true);observer=scope.launch{combine(manager.status,manager.store.revision){v,_->v}.collectLatest{v->
-        val catalog=withContext(Dispatchers.IO){try{manager.catalog()}catch(e:CancellationException){throw e}catch(e:Exception){manager.recordIssue(e);null}}
+    fun open(){val p=show(s(R.string.updates_title));p.loading(true);observer=scope.launch{combine(manager.status,manager.store.revision,manager.pluginInstall){v,_,run->v to run}.collectLatest{(v,run)->
+        val (catalog,job)=withContext(Dispatchers.IO){
+            val catalog=try{manager.catalog()}catch(e:CancellationException){throw e}catch(e:Exception){manager.recordIssue(e);null}
+            catalog to installer.jobSummary()
+        }
         p.loading(false)
         val rows=buildList{
+            if(run.busy||run.failure!=null||job.items.isNotEmpty())add(ClassicRow("install-job",s(if(run.busy)R.string.install_in_progress else R.string.setup_install_pending),
+                installCount(job,run)))
             add(ClassicRow("add",s(R.string.hub_catalog),catalog?.let{activity.getString(R.string.hub_catalog_count,it.availableCount,it.fresh.size)}?:s(R.string.updates_inventory_failed)))
             add(ClassicRow("installed",s(R.string.hub_installed)+(catalog?.let{" · "+it.installedCount}?:""),if(catalog==null)s(R.string.updates_inventory_failed)else s(R.string.hub_installed_help)))
             add(ClassicRow("updates",s(R.string.hub_updates),applicationStatus(v)+" · "+(catalog?.let{activity.getString(R.string.hub_update_count,it.updates.size)}?:s(R.string.updates_inventory_failed))))
@@ -95,23 +108,25 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
             "add"->addPlugins()
             "technical"->technical()
             "apply"->if(idle())ready()
+            "install-job"->showInstallJob()
         }}
     }}}
     fun navigate(route:UpdateRoute){if(route.install.isNotEmpty()){addPlugins();installKeys(route.install);return}
         when(route.page){UpdatePage.HOME->open();UpdatePage.CATALOG->addPlugins();UpdatePage.INSTALLED->installed();UpdatePage.UPDATES->updates();UpdatePage.APPLICATION->{application();if(route.downloadApplication&&manager.status.value.release?.code==route.applicationCode)updateApplication()};UpdatePage.REPOSITORIES->repositories();UpdatePage.ADVANCED->technical()}}
     private fun summary(c:PluginCatalog)=activity.getString(R.string.hub_summary,c.repositoryCount,c.availableCount,c.installedCount)+(if(c.errors.isEmpty())""else"\n"+activity.getString(R.string.hub_repository_errors,c.errors.size))
-    private fun addPlugins(){val p=show(s(R.string.hub_catalog),::open,"add");p.loading(true)
+    private fun addPlugins(){val p=show(s(R.string.hub_catalog),setupExit?: ::open,"add");p.loading(true)
         observer=scope.launch{combine(manager.store.revision,manager.status){_,v->v}.collectLatest{
             val catalog=withContext(Dispatchers.IO){manager.catalog()};p.loading(false)
             val available=catalog.plugins.filter{it.compatible&&!it.ready&&(it.fresh||it.update)}.map{it.key}.toSet();selected.retainAll(available)
             if(catalog.repositoryCount==0){repositoryChoices(p);return@collectLatest}
             val rows=catalog.plugins.map{plugin->val reason=when{!plugin.enabled->s(R.string.updates_plugin_repository_off);plugin.entry.minApp>manager.installedCode->s(R.string.updates_plugin_newer_app);plugin.ready->s(R.string.updates_plugin_prepared);plugin.update->s(R.string.updates_plugin_update);plugin.installed!=null->s(R.string.hub_already_installed);else->s(R.string.hub_can_install)}
-                ClassicRow("catalog:"+plugin.key,plugin.entry.name,plugin.entry.version+" · "+reason+"\n"+plugin.repositoryName,selected=plugin.key in selected,enabled=plugin.key in available)}
+                ClassicRow("catalog:"+plugin.key,pluginCode(plugin.entry.id),plugin.entry.version+" · "+reason+"\n"+plugin.repositoryName,selected=plugin.key in selected,enabled=plugin.key in available)}
             p.update(rows,actions=listOf(
                 ClassicAction("install-selected",if(catalog.pending)s(R.string.hub_finish_install)else activity.getString(R.string.hub_install_selected,selected.size),enabled=catalog.pending||selected.isNotEmpty()){if(catalog.pending)ready()else installKeys(selected.toList())},
                 ClassicAction("select-all",s(if(selected.containsAll(available)&&available.isNotEmpty())R.string.hub_deselect else R.string.hub_select_all),enabled=available.isNotEmpty()){
                     if(selected.containsAll(available))selected.clear()else selected.addAll(available);addPlugins();view.requestKey("select-all")},
                 ClassicAction("add-repo",s(R.string.updates_add_repository)){addRepository()},
+                *listOfNotNull(setupInstalled?.let{action->ClassicAction("setup-later",s(R.string.updates_later),run=action)}).toTypedArray(),
                 ClassicAction("refresh-catalog",s(R.string.hub_refresh)){refreshCatalog()}
             ),message=summary(catalog)+(if(catalog.plugins.isEmpty())"\n"+s(R.string.updates_empty_repository)else "")){key->
                 val id=key.removePrefix("catalog:");if(id in selected)selected.remove(id)else selected.add(id);addPlugins();view.requestKey(key)
@@ -127,18 +142,18 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     }
     private fun addRepository(){val p=show(s(R.string.updates_add_repository),::addPlugins,if(manager.store.repositoryCount==0)"search"else"add-repo");repositoryChoices(p)}
     private fun refreshCatalog(){launchWork{val errors=mutableListOf<String>();for(repo in manager.repositories().filter{it.optBoolean("enabled",true)})try{manager.refresh(repo.getString("key"))}catch(e:CancellationException){throw e}catch(e:Exception){errors.add(repo.getString("name"))};addPlugins();if(errors.isNotEmpty())notice(activity.getString(R.string.hub_repository_errors,errors.size))}}
-    private fun installKeys(keys:List<String>){if(!idle())return;launchWork{
-        val plan=withContext(Dispatchers.IO){val catalog=manager.catalog();val choices=catalog.plugins.filter{it.key in keys&&it.compatible&&!it.ready&&(it.fresh||it.update)}
+    private fun installKeys(keys:List<String>,parent:()->Unit=::addPlugins)=prepareInstall(parent,"install-selected"){
+        val catalog=manager.catalog();val choices=catalog.plugins.filter{it.key in keys&&it.compatible&&!it.ready&&(it.fresh||it.update)}
             require(choices.isNotEmpty()){s(R.string.hub_selection_changed)}
             val all=linkedMapOf<String,PackageInstaller.Candidate>();for(plugin in choices)for(candidate in installer.plan(plugin.repository,plugin.entry.id)){
                 val old=all[candidate.identity];require(old==null||old.manifest.version==candidate.manifest.version){s(R.string.updates_error_conflict)};all[candidate.identity]=candidate
-            };all.values.toList()};confirmInstall(plan)
-    }}
+            };all.values.toList()
+    }
     private fun updates(){val p=show(s(R.string.hub_updates),::open,"updates");observer=scope.launch{combine(manager.status,manager.store.revision){v,_->v}.collectLatest{v->
         val catalog=withContext(Dispatchers.IO){manager.catalog()};val rows=listOf(ClassicRow("application",s(R.string.updates_application),applicationStatus(v)))+
-            catalog.updates.map{ClassicRow("update:"+it.key,it.entry.name,it.installed!!.module.version+" → "+it.entry.version)}+
+            catalog.updates.map{ClassicRow("update:"+it.key,pluginCode(it.entry.id),it.installed!!.module.version+" → "+it.entry.version)}+
             if(catalog.pending)listOf(ClassicRow("apply",s(R.string.hub_finish_install),s(R.string.updates_ready_help)))else emptyList()
-        p.update(rows,actions=listOf(ClassicAction("check",s(R.string.updates_check),enabled=!v.busy){launchWork{manager.check()}},ClassicAction("update-all",s(R.string.hub_update_all),enabled=catalog.updates.isNotEmpty()){installKeys(catalog.updates.map{it.key})}),message=if(v.busy)s(R.string.updates_check_running)else activity.getString(R.string.hub_update_count,catalog.updates.size)){key->when(key){"application"->application();"apply"->ready();else->installKeys(listOf(key.removePrefix("update:")))}}
+        p.update(rows,actions=listOf(ClassicAction("check",s(R.string.updates_check),enabled=!v.busy){launchWork{manager.check()}},ClassicAction("update-all",s(R.string.hub_update_all),enabled=catalog.updates.isNotEmpty()){installKeys(catalog.updates.map{it.key},::updates)}),message=if(v.busy)s(R.string.updates_check_running)else activity.getString(R.string.hub_update_count,catalog.updates.size)){key->when(key){"application"->application();"apply"->ready();else->installKeys(listOf(key.removePrefix("update:")),::updates)}}
     }}}
     private fun technical(){val p=show(s(R.string.updates_technical),::open,"technical");val state=manager.store.snapshot()
         p.update(buildList{
@@ -190,7 +205,7 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     }
     private fun trust(probe:RepositoryProbe){display(ClassicDialog.Builder(activity).setTitle(R.string.updates_probe)
         .setMessage(activity.getString(R.string.updates_trust_message,probe.index.name,probe.fingerprint,probe.index.packages.filter{it.type=="site"&&it.minApp<=manager.installedCode}.map{it.id}.distinct().size))
-        .setPositiveButton(R.string.updates_trust){_,_->launchWork{manager.trust(probe);addPlugins()
+        .setPositiveButton(R.string.updates_trust){_,_->launchWork{manager.trust(probe);if(setupTrusted!=null){setupTrusted.invoke();return@launchWork};addPlugins()
             val catalog=withContext(Dispatchers.IO){manager.catalog()};val items=catalog.fresh.filter{it.repository==probe.fingerprint+"/"+probe.index.id&&manager.notices.policyState().permits(it.token,NoticeKind.NEW_PLUGINS,System.currentTimeMillis())}
             repeat(5){if(!activity.hasWindowFocus())delay(100)}
             if(items.isNotEmpty()&&activity.hasWindowFocus()&&!activity.isFinishing&&!playing()){noticePopup?.close();noticePopup=UpdateNoticePopup(activity,scope,manager.notices,UpdateNotice(NoticeKind.NEW_PLUGINS,items.map{it.token},items)){route->navigate(route)}}
@@ -206,30 +221,32 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
             ClassicRow("address",s(R.string.updates_change_address),repo.getString("url")),
             ClassicRow("remove",s(R.string.updates_remove_repository)),
             ClassicRow("all",s(R.string.updates_install_sites),enabled=enabled&&entries.any{it.type=="site"&&it.minApp<=manager.installedCode})
-        )+entries.filter{it.type=="site"}.map{e->val current=active.optJSONObject(repo.getString("fingerprint")+"/"+e.id)?.let{UpdateProtocol.module(it.getString("manifest").toByteArray()).version};ClassicRow("package:"+e.id,e.name+" · "+e.version,when{e.minApp>manager.installedCode->s(R.string.updates_plugin_newer_app);current==null->s(R.string.updates_plugin_not_installed);UpdateProtocol.compare(e.version,current)>0->s(R.string.updates_plugin_update);else->s(R.string.updates_plugin_current)})},message=if(entries.none{it.type=="site"})s(R.string.updates_empty_repository)else s(R.string.updates_resolvers_automatic)){key->
+        )+entries.filter{it.type=="site"}.map{e->val current=active.optJSONObject(repo.getString("fingerprint")+"/"+e.id)?.let{UpdateProtocol.module(it.getString("manifest").toByteArray()).version};ClassicRow("package:"+e.id,pluginCode(e.id),e.version+" · "+when{e.minApp>manager.installedCode->s(R.string.updates_plugin_newer_app);current==null->s(R.string.updates_plugin_not_installed);UpdateProtocol.compare(e.version,current)>0->s(R.string.updates_plugin_update);else->s(R.string.updates_plugin_current)})},message=if(entries.none{it.type=="site"})s(R.string.updates_empty_repository)else s(R.string.updates_resolvers_automatic)){key->
             val id=repo.getString("key")
             when(key){
                 "refresh"->launchWork{manager.refresh(id);repository(manager.repositories().single{it.getString("key")==id})}
                 "enabled"->if(idle())launchWork{manager.setRepositoryEnabled(id,!enabled);repository(manager.repositories().single{it.getString("key")==id})}
                 "address"->prompt(R.string.updates_change_address,R.string.updates_address_hint){url->launchWork{manager.changeAddress(id,url);repository(manager.repositories().single{it.getString("key")==id})}}
                 "remove"->if(idle())display(ClassicDialog.Builder(activity).setMessage(R.string.updates_remove_repository).setPositiveButton(android.R.string.ok){_,_->launchWork{manager.removeRepository(id);repositories()}}.setNegativeButton(R.string.tv_cancel,null))
-                else->if(key!="all")availablePlugin(repo,entries.single{it.id==key.removePrefix("package:")})else if(idle())launchWork{
+                else->if(key!="all")availablePlugin(repo,entries.single{it.id==key.removePrefix("package:")})else prepareInstall({repository(repo)},"all"){
                     val requested=entries.filter{it.type=="site"&&it.minApp<=manager.installedCode}.map{it.id}
                     val plan=mutableMapOf<String,PackageInstaller.Candidate>()
-                    for(pluginId in requested)for(c in withContext(Dispatchers.IO){installer.plan(id,pluginId)}){val old=plan[c.identity];require(old==null||old.manifest.version==c.manifest.version){"Bağımlılıklar aynı sürümde uzlaşmıyor"};plan[c.identity]=c}
-                    confirmInstall(plan.values.toList())
+                    for(pluginId in requested)for(c in installer.plan(id,pluginId)){val old=plan[c.identity];require(old==null||old.manifest.version==c.manifest.version){"Bağımlılıklar aynı sürümde uzlaşmıyor"};plan[c.identity]=c}
+                    plan.values.toList()
                 }
             }
         }
     }
     private fun availablePlugin(repo:JSONObject,entry:UpdateProtocol.Entry){
-        val p=show(entry.name,{repository(repo)},"package:"+entry.id)
+        val p=show(pluginCode(entry.id),{repository(repo)},"package:"+entry.id)
         val key=repo.getString("fingerprint")+"/"+entry.id
         inventoryPage(p){inventory->val installed=inventory.providers.firstOrNull{it.key==key}
         val canInstall=repo.optBoolean("enabled",true)&&entry.minApp<=manager.installedCode
         p.update(listOf(ClassicRow("version",s(R.string.updates_plugin_version),entry.version,enabled=false))+
             (installed?.let{groupRows(it)}?:emptyList()),actions=listOf(
-                ClassicAction("prepare",s(if(installed==null)R.string.updates_plugin_install else R.string.updates_plugin_update_action),enabled=canInstall){if(idle())launchWork{confirmInstall(withContext(Dispatchers.IO){installer.plan(repo.getString("key"),entry.id)})}}
+                ClassicAction("prepare",s(if(installed==null)R.string.updates_plugin_install else R.string.updates_plugin_update_action),enabled=canInstall){
+                    prepareInstall({availablePlugin(repo,entry)},"prepare"){installer.plan(repo.getString("key"),entry.id)}
+                }
             ),message=when{!repo.optBoolean("enabled",true)->s(R.string.updates_plugin_repository_off);entry.minApp>manager.installedCode->s(R.string.updates_plugin_newer_app);else->s(R.string.updates_resolvers_automatic)})}
     }
     private fun pluginState(group:PluginGroup)=s(when(group.state){
@@ -243,55 +260,131 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     })
     private fun groupRows(group:PluginGroup)=listOf(ClassicRow("active-version",s(R.string.updates_plugin_active_version),group.active?.module?.version?:s(R.string.updates_plugin_not_installed),enabled=false))+
         (group.prepared?.let{listOf(ClassicRow("prepared-version",s(R.string.updates_plugin_ready_version),it.module.version,enabled=false))}?:emptyList())+
-        group.resolvers.map{ClassicRow("resolver:"+it.key,it.module.name,it.module.version,enabled=false)}+
-        group.missingResolvers.map{ClassicRow("missing:"+it,it,s(R.string.updates_plugin_missing_resolver),enabled=false)}
-    private fun confirmInstall(plan:List<PackageInstaller.Candidate>){display(ClassicDialog.Builder(activity).setTitle(R.string.hub_install_title).setMessage(plan.filter{it.manifest.type=="site"}.joinToString("\n"){it.manifest.name+" · "+it.manifest.version+it.replaces.joinToString(""){key->"\n"+activity.getString(R.string.updates_replaces_package,key.substringAfter('/'))}}+"\n\n"+s(R.string.hub_install_help))
+        group.resolvers.map{ClassicRow("resolver:"+it.key,pluginCode(it.module.id),it.module.version,enabled=false)}+
+        group.missingResolvers.map{ClassicRow("missing:"+it,pluginCode(it),s(R.string.updates_plugin_missing_resolver),enabled=false)}
+    private fun prepareInstall(parent:()->Unit,key:String,plan:suspend()->List<PackageInstaller.Candidate>){
+        if(!idle()||work?.isActive==true)return
+        if(manager.pluginInstall.value.busy||manager.store.hasInstallJob){showInstallJob();return}
+        val p=show(s(R.string.setup_install_pending),parent,key)
+        p.loading(true);p.update(emptyList(),message=s(R.string.install_preparing));p.focusFirst()
+        val token=generation
+        launchWork{
+            val candidates=try{withContext(Dispatchers.IO){plan()}}catch(e:CancellationException){throw e}catch(e:Exception){
+                if(token==generation){parent();view.requestKey(key);error(e)}
+                return@launchWork
+            }
+            if(token!=generation)return@launchWork
+            p.loading(false)
+            p.update(emptyList(),actions=listOf(ClassicAction("continue",s(R.string.hub_confirm_install)){confirmInstall(candidates)}),
+                message=s(R.string.install_confirm_prepared))
+            confirmInstall(candidates)
+        }
+    }
+
+    private fun confirmInstall(plan:List<PackageInstaller.Candidate>){display(ClassicDialog.Builder(activity).setTitle(R.string.hub_install_title).setMessage(plan.filter{it.manifest.type=="site"}.joinToString("\n"){pluginCode(it.manifest.id)+" · "+it.manifest.version+it.replaces.joinToString(""){key->"\n"+activity.getString(R.string.updates_replaces_package,pluginCode(key))}}+"\n\n"+s(R.string.hub_install_help))
         .setPositiveButton(R.string.hub_confirm_install){_,_->
-            val p=show(s(R.string.updates_download));val token=generation
-            val latest=java.util.concurrent.atomic.AtomicReference(InstallProgress(InstallPhase.DOWNLOADING,"",0,plan.sumOf{it.manifest.size.toLong()}))
-            fun progress(v:InstallProgress){if(token!=generation)return;p.progress(v.completed,v.total);p.update(emptyList(),actions=listOf(ClassicAction("cancel",s(R.string.tv_cancel)){back()}),message=s(if(v.phase==InstallPhase.DOWNLOADING)R.string.updates_phase_downloading else R.string.updates_phase_verifying)+"\n"+v.name+"\n${v.completed/1024} / ${v.total/1024} KiB")}
-            progress(latest.get());p.focusFirst()
-            download=scope.launch{try{withContext(Dispatchers.IO){installer.install(plan,onState={v->latest.set(v);scope.launch{progress(v)}})}
-                val until=android.os.SystemClock.elapsedRealtime()+500
-                while(!activity.hasWindowFocus()&&!activity.isFinishing&&android.os.SystemClock.elapsedRealtime()<until)delay(50)
-                InstallCompletion.finish({activity.hasWindowFocus()&&!activity.isFinishing&&!playing()},{installer.activate()},{DistributionRestart.run(activity)},{ready()})}
-                catch(e:CancellationException){if(latest.get().phase==InstallPhase.READY)ready()else{open();display(ClassicDialog.Builder(activity).setMessage(R.string.updates_download_cancelled).setPositiveButton(android.R.string.ok,null))};throw e}
-                catch(e:Exception){open();error(e)}}
-        }.setNegativeButton(R.string.tv_cancel,null))
+            if(idle()){manager.startPluginInstall(plan);showInstallJob()}
+        }.setNegativeButton(R.string.tv_cancel){_,_->returnPage?.invoke()})
+    }
+
+    private fun installCount(job:InstallJobSummary,run:PluginInstallRun):String {
+        val total=if(job.total>0)job.total else run.plannedProviders
+        return if(total==0)"" else activity.getString(R.string.install_count,job.completed,total,job.percent)
+    }
+
+    private fun showInstallJob(){
+        val p=show(s(R.string.setup_install_pending),setupExit?: ::open,"install-job")
+        val run=manager.pluginInstall.value
+        val count=installCount(InstallJobSummary(emptyList()),run)
+        if(count.isNotBlank())p.installProgress(0,count)else p.loading(true)
+        val initialActions=if(run.busy)listOf(ClassicAction("background",s(R.string.install_background)){setupInstalled?.invoke()?:open()})else emptyList()
+        p.update(emptyList(),actions=initialActions,message=listOf(count,s(R.string.install_preparing)).filter(String::isNotBlank).joinToString("\n"));p.focusContent()
+        observer=scope.launch{combine(manager.pluginInstall,manager.store.revision){run,_->run}.collectLatest{run->
+            val (job,pending)=withContext(Dispatchers.IO){installer.jobSummary() to manager.store.snapshot().has("pending")}
+            val total=if(job.total>0)job.total else run.plannedProviders
+            val count=installCount(job,run)
+            if(total>0)p.installProgress(job.percent,count)else p.loading(run.busy)
+            val step=run.step
+            val phase=when{
+                run.busy&&step!=null->s(if(step.phase==InstallPhase.DOWNLOADING)R.string.updates_phase_downloading else R.string.updates_phase_verifying)+" · "+pluginCode(step.key)
+                run.busy->s(R.string.install_preparing)
+                run.failure!=null->problemText(run.failure)
+                pending||job.complete->s(R.string.install_verified)
+                job.items.any{it.status=="failed"}->s(R.string.install_incomplete)
+                else->s(R.string.setup_install_waiting)
+            }
+            val rows=job.items.map{item->
+                val state=when{
+                    item.key in job.readyKeys->s(R.string.install_package_verified)
+                    run.busy&&step?.key==item.key->s(if(step.phase==InstallPhase.DOWNLOADING)R.string.updates_phase_downloading else R.string.updates_phase_verifying)
+                    item.status=="failed"->item.httpCode?.let{activity.getString(R.string.install_http_error,it)}
+                        ?:item.problem?.let(::problemText)?:s(R.string.updates_operation_failed)
+                    item.status=="ready"->s(R.string.install_waiting_dependency)
+                    else->s(R.string.setup_install_waiting)
+                }
+                ClassicRow(item.key,pluginCode(item.key),state,enabled=false)
+            }
+            val actions=buildList{
+                if(run.busy)add(ClassicAction("background",s(R.string.install_background)){setupInstalled?.invoke()?:open()})
+                else{
+                    if(pending)add(ClassicAction("apply",s(R.string.install_apply_restart)){if(idle())ready()})
+                    else{
+                        if(!job.complete&&(job.items.isNotEmpty()||run.plannedProviders>0))
+                            add(ClassicAction("retry",s(R.string.setup_install_retry)){if(idle())manager.startPluginInstall()})
+                        if(job.completed>0)add(ClassicAction("continue",s(if(job.complete)R.string.install_apply_restart else R.string.setup_install_ready)){
+                            if(idle())launchWork{
+                                if(job.complete){
+                                    withContext(Dispatchers.IO){installer.stageReady();installer.activate()}
+                                    setupApplied?.invoke();restart()
+                                }else{withContext(Dispatchers.IO){installer.stageReady()};ready()}
+                            }
+                        })
+                    }
+                    add(ClassicAction("later",s(R.string.updates_later)){setupInstalled?.invoke()?:open()})
+                    if(job.items.isNotEmpty())add(ClassicAction("cancel",s(R.string.setup_install_discard)){display(ClassicDialog.Builder(activity)
+                        .setMessage(R.string.setup_install_discard_confirm).setPositiveButton(android.R.string.ok){_,_->
+                            launchWork{withContext(Dispatchers.IO){installer.cancelJob()};setupExit?.invoke()?:open()}
+                        }.setNegativeButton(R.string.tv_cancel,null))})
+                }
+            }
+            p.update(rows,actions,message=listOf(count,phase).filter{it.isNotBlank()}.joinToString("\n"))
+        }}
     }
     private fun ready(){val p=show(s(R.string.updates_phase_ready),::open,"apply");inventoryPage(p){inventory->val groups=inventory.providers.filter{it.state==PluginState.READY||it.state==PluginState.REMOVAL_READY}
-        p.update(groups.map{ClassicRow(it.key,it.current.module.name,pluginState(it),enabled=false)},actions=listOf(
-            ClassicAction("apply",s(R.string.hub_finish_install)){if(idle())launchWork{if(!manager.store.restartRequired)installer.activate();restart()}},
-            ClassicAction("later",s(R.string.updates_later)){open()}
+        p.update(groups.map{ClassicRow(it.key,pluginCode(it.current.module.id),pluginState(it),enabled=false)},actions=listOf(
+            ClassicAction("apply",s(R.string.install_apply_restart)){if(idle())launchWork{withContext(Dispatchers.IO){if(!manager.store.restartRequired)installer.activate()};setupApplied?.invoke();restart()}},
+            ClassicAction("later",s(R.string.updates_later)){setupInstalled?.invoke()?:open()}
         ),message=s(if(manager.store.restartRequired)R.string.hub_restart_help else R.string.updates_ready_help));p.focusFirst()}
     }
     private fun installed(){val p=show(s(R.string.updates_installed),::open,"installed");inventoryPage(p){inventory->
-        p.update(inventory.providers.map{g->ClassicRow(g.key,g.current.module.name,pluginState(g)+" · "+g.current.module.version)},
+        p.update(inventory.providers.map{g->ClassicRow(g.key,pluginCode(g.current.module.id),pluginState(g)+" · "+g.current.module.version)},
             actions=if(inventory.unusedResolvers.isEmpty())emptyList()else listOf(ClassicAction("unused-resolvers",s(R.string.updates_unused_resolvers)){unusedResolvers()}),
             message=if(inventory.providers.isEmpty())s(R.string.updates_no_plugins)else s(R.string.updates_resolvers_in_details)){key->installedPlugin(inventory.providers.single{it.key==key})}}
     }
-    private fun installedPlugin(group:PluginGroup){val p=show(group.current.module.name,::installed,group.key)
+    private fun installedPlugin(group:PluginGroup){val p=show(pluginCode(group.current.module.id),::installed,group.key)
         p.update(groupRows(group),actions=buildList{
             val repo=manager.repositories().firstOrNull{it.getString("key")==group.current.repo}
             if(group.state in listOf(PluginState.READY,PluginState.REMOVAL_READY))add(ClassicAction("apply",s(R.string.updates_phase_ready)){ready()})
             else if(group.available!=null&&repo!=null&&repo.optBoolean("enabled",true)&&group.available.minApp<=manager.installedCode)
-                add(ClassicAction("update",s(R.string.updates_plugin_update_action)){if(idle())launchWork{confirmInstall(withContext(Dispatchers.IO){installer.plan(group.current.repo,group.current.module.id)})}})
+                add(ClassicAction("update",s(R.string.updates_plugin_update_action)){
+                    prepareInstall({installedPlugin(group)},"update"){installer.plan(group.current.repo,group.current.module.id)}
+                })
             if(group.state!=PluginState.REMOVAL_READY)add(ClassicAction("remove",s(R.string.updates_remove)){removal(group.key)})
         },message=pluginState(group))
     }
     private fun unusedResolvers(){val p=show(s(R.string.updates_unused_resolvers),::installed,"unused-resolvers");inventoryPage(p){inventory->val entries=inventory.unusedResolvers
-        p.update(entries.map{ClassicRow(it.key,it.module.name,it.module.version)},message=s(R.string.updates_unused_resolvers_help)){key->
+        p.update(entries.map{ClassicRow(it.key,pluginCode(it.module.id),it.module.version)},message=s(R.string.updates_unused_resolvers_help)){key->
             removal(key)}}
     }
     private fun removal(key:String){if(!idle())return;launchWork{
         val plan=withContext(Dispatchers.IO){installer.removalPlan(key)}
         val message=buildList{
             add(s(R.string.updates_remove_package_confirm))
-            if(plan.unused.isNotEmpty())add(s(R.string.updates_remove_unused_help)+"\n"+plan.unused.joinToString("\n"){it.module.name})
-            if(plan.shared.isNotEmpty())add(s(R.string.updates_remove_shared_help)+"\n"+plan.shared.joinToString("\n"){it.module.name})
+            if(plan.unused.isNotEmpty())add(s(R.string.updates_remove_unused_help)+"\n"+plan.unused.joinToString("\n"){pluginCode(it.module.id)})
+            if(plan.shared.isNotEmpty())add(s(R.string.updates_remove_shared_help)+"\n"+plan.shared.joinToString("\n"){pluginCode(it.module.id)})
         }.joinToString("\n\n")
         fun remove(includeUnused:Boolean){launchWork{withContext(Dispatchers.IO){installer.remove(plan,includeUnused)};ready()}}
-        val window=ClassicDialog.Builder(activity).setTitle(plan.name).setMessage(message)
+        val window=ClassicDialog.Builder(activity).setTitle(pluginCode(plan.key)).setMessage(message)
             .setPositiveButton(if(plan.unused.isEmpty())R.string.updates_remove else R.string.updates_remove_together){_,_->remove(plan.unused.isNotEmpty())}
             .setNegativeButton(R.string.tv_cancel,null)
         if(plan.unused.isNotEmpty())window.setNeutralButton(R.string.updates_remove_only){_,_->remove(false)}

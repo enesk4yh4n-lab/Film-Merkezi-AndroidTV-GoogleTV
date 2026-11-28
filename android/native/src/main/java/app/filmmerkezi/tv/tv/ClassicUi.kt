@@ -64,7 +64,8 @@ internal object ClassicUi {
             setTextSize(TypedValue.COMPLEX_UNIT_PX,u(c,8f).toFloat());setPadding(0,0,0,0)
         },841f,45f,92f,20f)
         val tabs=listOf(Triple(TvScreen.HOME,R.string.tv_home,R.id.tv_nav_home),Triple(TvScreen.MOVIES,R.string.tv_movies,R.id.tv_nav_movies),
-            Triple(TvScreen.SERIES,R.string.tv_series,R.id.tv_nav_series),Triple(TvScreen.DISCOVER,R.string.classic_discover,R.id.tv_nav_discover),
+            Triple(TvScreen.SERIES,R.string.tv_series,R.id.tv_nav_series),Triple(TvScreen.ANIMATION,R.string.catalog_animation,R.id.tv_nav_animation),
+            Triple(TvScreen.DRAMA_SHORT,R.string.catalog_drama_short,R.id.tv_nav_drama_short),Triple(TvScreen.DISCOVER,R.string.classic_discover,R.id.tv_nav_discover),
             Triple(TvScreen.LIBRARY,R.string.tv_my_list,R.id.tv_nav_library),Triple(TvScreen.HISTORY,R.string.tv_history,R.id.tv_nav_history))
         val navigation=linkedMapOf<TvScreen,Button>();var x=36f
         for((s,title,id)in tabs){if(!allowed(s))continue
@@ -75,7 +76,7 @@ internal object ClassicUi {
                 setPadding(u(c,8f),0,u(c,8f),0)
                 setOnKeyListener{_,key,event->if(event.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_DOWN){down();true}else false}
             }
-            val width=if(s==TvScreen.HOME)86f else 64f
+            val width=when(s){TvScreen.HOME->86f;TvScreen.ANIMATION->111f;TvScreen.DRAMA_SHORT->100f;else->64f}
             put(b,x,54f,width,32f);navigation[s]=b
             if(active)put(View(c).apply{setBackgroundColor(gold)},x,83f,width,1.5f)
             x+=width+11f

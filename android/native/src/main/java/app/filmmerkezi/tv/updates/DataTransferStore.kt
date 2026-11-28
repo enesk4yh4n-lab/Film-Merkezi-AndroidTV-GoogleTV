@@ -27,7 +27,9 @@ class DataTransferStore(private val context:Context,private val namespace:String
     private fun typed(value:Any?):JSONObject=JSONObject().apply{when(value){null->put("t",0);is ByteArray->put("t",4).put("v",Base64.getEncoder().encodeToString(value));is Set<*>->put("t",5).put("v",JSONArray(value.toList()));is Int->put("t",6).put("v",value);is Long->put("t",1).put("v",value);is Float->put("t",7).put("v",value.toDouble());is Double->put("t",2).put("v",value);is Boolean->put("t",8).put("v",value);is String->put("t",3).put("v",value);else->error("Kayıt türü desteklenmiyor")}}
     private fun preferenceSnapshot()=JSONObject().apply{for(name in PREFERENCES)put(name,JSONObject().apply{prefs(name).all.forEach{(key,value)->put(key,typed(value))}})}
     private fun restorePreferences(values:JSONObject){for(name in PREFERENCES){val fields=values.optJSONObject(name)?:JSONObject();val e=prefs(name).edit().clear()
+        val keepAdultFilter=name=="film-settings"&&prefs("adult-pin").contains("digest")&&prefs(name).all["hideAdult"]!=false
         for(k in fields.keys()){require(k.length<=200);val v=fields.getJSONObject(k);when(v.getInt("t")){1->e.putLong(k,v.getLong("v"));2,7->e.putFloat(k,v.getDouble("v").toFloat());3->e.putString(k,v.getString("v"));5->{val a=v.getJSONArray("v");e.putStringSet(k,(0 until a.length()).map{a.getString(it)}.toSet())};6->e.putInt(k,v.getInt("v"));8->e.putBoolean(k,v.getBoolean("v"));else->error("Tercih türü geçersiz")}}
+        if(keepAdultFilter)e.putBoolean("hideAdult",true)
         check(e.commit()){ "Aktarılan ayarlar kaydedilemedi" }
     }}
     suspend fun export():File=withContext(Dispatchers.IO){

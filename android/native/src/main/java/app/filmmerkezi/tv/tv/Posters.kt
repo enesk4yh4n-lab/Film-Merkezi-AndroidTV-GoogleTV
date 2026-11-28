@@ -38,6 +38,7 @@ internal object Posters {
         initialized=true
     }
     fun load(view:ImageView,card:Card?,width:Int,height:Int) {
+        if(!app.filmmerkezi.tv.settings.SettingsRepository.get(view.context).value.showPosters){clear(view);return}
         val model=card?.poster?.takeIf{it.startsWith("https://")}?.let{
             val site=Sites.get(card.ref.siteId)
             GlideUrl(app.filmmerkezi.tv.core.SiteAddresses.rebase(it,site),LazyHeaders.Builder().addHeader("Referer",site.base+"/").build())

@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.collect
 internal class SettingsScreen(c:android.app.Activity,private val scope:CoroutineScope,private val repository:SettingsRepository,
     private val close:()->Unit,private val maintenance:SettingsMaintenance,private val sleepState:()->Int={0},private val setSleep:(Int)->Unit={},initialCategory:String="general"):LinearLayout(c) {
     private val activity=c
+    private val pin=AdultPinPrompt(c,scope)
     private data class Row(val key:String,val title:String,val value:String="",val help:String="",val action:()->Unit)
     private var category="general";private var dialog:ClassicDialog?=null
     private val categoryViews=linkedMapOf<String,Button>()
@@ -34,6 +35,11 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
     private val preview=androidx.media3.ui.SubtitleView(c).apply{setBackgroundColor(android.graphics.Color.BLACK);isFocusable=false}
     private var active=true;private val observer:Job;private val registryObserver:Job
     private fun s(id:Int)=context.getString(id)
+    private fun sleepLabel(value:Int)=when(value){
+        -1->s(R.string.player_sleep_end)
+        0->s(R.string.settings_off)
+        else->context.getString(R.string.settings_minutes,value)
+    }
     private fun on(v:Boolean)=s(if(v)R.string.settings_on else R.string.settings_off)
     private fun u(v:Float)=ClassicUi.u(context,v)
     init {
@@ -77,7 +83,6 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
     private fun select(key:String,focus:Boolean){
         val changed=category!=key
         if(changed){focusRequest++;pendingOption=null}
-        if(changed&&updates?.canLeave()==false){updates?.view?.focusFirst();return}
         if(changed){updates?.let{it.dispose();contentHost.removeView(it.view)};updates=null}
         category=key;categoryViews.forEach{(k,b)->b.isSelected=k==key}
         regularOptions.visibility=if(key=="updates")GONE else VISIBLE
@@ -118,10 +123,32 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
                 row("font",R.string.settings_font,s(if(v.largeText)R.string.settings_large else R.string.settings_normal)){update{it.copy(largeText=!it.largeText)}}
                 row("exit",R.string.settings_exit,on(v.exitConfirmation)){update{it.copy(exitConfirmation=!it.exitConfirmation)}}
                 row("rows",R.string.settings_rows){showRows()}
+                row("language",R.string.setup_language,if(UiPreferences(activity).language=="en")"English" else "Türkçe"){
+                    val prefs=UiPreferences(activity)
+                    choose(R.string.setup_language,listOf("Türkçe","English"),if(prefs.language=="en")1 else 0){i->
+                        if(prefs.language(if(i==1)"en" else "tr"))activity.recreate()
+                    }
+                }
+                row("setup",R.string.setup_reopen){(activity as TvActivity).reopenSetup()}
             }
             "catalog"->{
                 row("merge",R.string.settings_merge,on(v.merge),s(R.string.settings_merge_help)){update{it.copy(merge=!it.merge)}}
-                row("adult",R.string.settings_adult,on(v.hideAdult),s(R.string.settings_adult_help)){update{it.copy(hideAdult=!it.hideAdult)}}
+                val modes=MatchingMode.entries
+                val modeLabels=listOf(R.string.catalog_match_strict,R.string.catalog_match_smart,R.string.catalog_match_flexible).map(::s)
+                row("matching",R.string.catalog_match,modeLabels[v.matchingMode.ordinal]){choose(R.string.catalog_match,modeLabels,v.matchingMode.ordinal){i->update{it.copy(matchingMode=modes[i])}}}
+                row("adult",R.string.settings_adult,on(v.hideAdult),s(R.string.settings_adult_help)){
+                    if(v.hideAdult)pin.requirePin{update{it.copy(hideAdult=false)}}else update{it.copy(hideAdult=true)}
+                }
+                row("adult-pin",if(pin.configured)R.string.pin_change else R.string.pin_new){pin.change(::draw)}
+                row("posters",R.string.catalog_posters,on(v.showPosters)){update{it.copy(showPosters=!it.showPosters)}}
+                row("suggestions",R.string.setup_search_suggestions,on(v.searchSuggestions)){update{it.copy(searchSuggestions=!it.searchSuggestions)}}
+                if(v.searchSuggestions){
+                    val sites=v.installedSites().filter{it.id !in v.disabledCatalog}
+                    row("suggestion-site",R.string.catalog_suggestion_site,sites.firstOrNull{it.id==v.suggestionSite}?.name?:s(R.string.catalog_suggestion_unselected)){
+                        if(sites.isNotEmpty())choose(R.string.catalog_suggestion_site,sites.map{it.name},sites.indexOfFirst{it.id==v.suggestionSite}){i->update{it.copy(suggestionSite=sites[i].id)}}
+                    }
+                }
+                row("following",R.string.fm_following){(activity as TvActivity).openFollowing()}
                 row("site-management",R.string.site_manager_title,help=s(R.string.site_manager_help)){manageSites()}
                 v.installedSites().forEach{site->val id=site.id;rows.add(Row("site:$id",site.name,context.getString(R.string.settings_site_state,on(id !in v.disabledCatalog),on(v.sourceAllowed(id)))){site(id)})}
             }
@@ -148,16 +175,22 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
                 row("history",R.string.settings_clear_history,help=s(R.string.settings_clear_history_help)){confirm("history",R.string.settings_clear_history,R.string.settings_clear_history_help)}
                 row("overrides",R.string.settings_clear_overrides){confirm("overrides",R.string.settings_clear_overrides,R.string.settings_clear_overrides_help)}
                 row("reset",R.string.settings_reset){confirm("reset",R.string.settings_reset,R.string.settings_reset_help)}
+                row("reset-all",R.string.setup_reset_all){(activity as TvActivity).confirmFullReset()}
             }
             "playback"->{
+                val profiles=SourceScanProfile.entries
+                val profileNames=listOf(R.string.player_scan_selected,R.string.player_scan_backup,R.string.player_scan_menu).map(::s)
+                row("source-scan",R.string.player_scan_profile,profileNames[v.sourceScan.ordinal]){
+                    choose(R.string.player_scan_profile,profileNames,v.sourceScan.ordinal){i->update{it.copy(sourceScan=profiles[i])}}
+                }
                 row("automatic",R.string.pool_automatic,on(v.automaticSources)){update{it.copy(automaticSources=!it.automaticSources)}}
                 row("cross",R.string.pool_cross_site,on(v.crossSiteSources)){update{it.copy(crossSiteSources=!it.crossSiteSources)}}
                 val entries=listOf("ASK","RESUME","RESTART");val labels=listOf(R.string.settings_ask,R.string.settings_resume,R.string.settings_restart).map(::s)
                 row("entry",R.string.settings_entry,labels[entries.indexOf(v.entry)]){choose(R.string.settings_entry,labels,entries.indexOf(v.entry)){i->update{it.copy(entry=entries[i])}}}
                 row("resume-rewind",R.string.settings_rewind_resume,context.getString(R.string.settings_seconds,v.resumeRewind)){val values=listOf(0,5,10);choose(R.string.settings_rewind_resume,values.map{context.getString(R.string.settings_seconds,it)},values.indexOf(v.resumeRewind)){i->update{it.copy(resumeRewind=values[i])}}}
                 row("next",R.string.tv_player_autonext,on(v.autoNext)){update{it.copy(autoNext=!it.autoNext)}}
-                row("sleep",R.string.settings_sleep,if(sleepState()==0)s(R.string.settings_off)else context.getString(R.string.settings_minutes,sleepState()),s(R.string.settings_sleep_help)){
-                    val values=listOf(0,30,60,90,120);choose(R.string.settings_sleep,values.map{if(it==0)s(R.string.settings_off)else context.getString(R.string.settings_minutes,it)},values.indexOf(sleepState()).coerceAtLeast(0)){i->setSleep(values[i]);draw()}
+                row("sleep",R.string.settings_sleep,sleepLabel(sleepState()),s(R.string.settings_sleep_help)){
+                    val values=listOf(0,15,30,60,90,120,-1);choose(R.string.settings_sleep,values.map(::sleepLabel),values.indexOf(sleepState()).coerceAtLeast(0)){i->setSleep(values[i]);draw()}
                 }
             }
             "video"->{
@@ -169,6 +202,7 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
                 row("sizing",R.string.settings_sizing,names[sizing.indexOf(v.player.sizing)]){choose(R.string.settings_sizing,names,sizing.indexOf(v.player.sizing)){i->update{it.copy(player=it.player.copy(sizing=sizing[i]))}}}
             }
             "audio"->{
+                row("remember-tracks",R.string.player_remember_tracks,on(v.rememberTracks)){update{it.copy(rememberTracks=!it.rememberTracks)}}
                 row("source-audio",R.string.settings_source_audio,on(v.player.sourceAudio)){update{it.copy(player=it.player.copy(sourceAudio=!it.player.sourceAudio))}}
                 row("audio",R.string.settings_audio_first,languageName(v.player.audio)){chooseLanguage(R.string.settings_audio_first,v.player.audio){lang->update{it.copy(player=it.player.copy(audio=lang))}}}
                 row("second-audio",R.string.settings_audio_second,languageName(v.player.secondAudio)){chooseLanguage(R.string.settings_audio_second,v.player.secondAudio){lang->update{it.copy(player=it.player.copy(secondAudio=lang))}}}
@@ -300,7 +334,7 @@ internal class SettingsScreen(c:android.app.Activity,private val scope:Coroutine
     }
     fun back(){if(dialog?.isShowing==true){dialog?.dismiss();return};if(category=="updates"&&updates?.back()==true)return;dispose();close()}
     internal fun dialogForTest()=updates?.dialogForTest()?.takeIf{it.isShowing}?:dialog
-    fun dispose(){active=false;observer.cancel();registryObserver.cancel();updates?.dispose();task?.cancel();dialog?.dismiss()}
+    fun dispose(){active=false;observer.cancel();registryObserver.cancel();updates?.dispose();task?.cancel();dialog?.dismiss();pin.close()}
     internal fun updateCenterForTest()=updates?.view
     fun openUpdate(route:app.filmmerkezi.tv.updates.UpdateRoute){select("updates",false);updates?.navigate(route);updates?.view?.focusContent()}
     private inner class Holder(val box:LinearLayout,val title:TextView,val value:TextView,val help:TextView):RecyclerView.ViewHolder(box)

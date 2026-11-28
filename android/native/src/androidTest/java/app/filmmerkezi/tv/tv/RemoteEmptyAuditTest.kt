@@ -30,8 +30,10 @@ class RemoteEmptyAuditTest {
                 TvActivity.forceSetupForTests=mode=="setup"
                 f.start(AppSettings(disabledCatalog=if(mode=="disabled")Sites.all.map{it.id}.toSet()else emptySet()),data,configured=mode!="setup")
                 if(mode=="setup"){
-                    for(key in listOf(KeyEvent.KEYCODE_DPAD_LEFT,KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_DPAD_RIGHT,KeyEvent.KEYCODE_DPAD_DOWN)){key(key);f.main{assertEquals(R.id.classic_setup_start,f.activity.currentFocus?.id)}}
-                    key(KeyEvent.KEYCODE_DPAD_CENTER);f.waitFor{f.activity.findViewById<View>(R.id.tv_query)!=null}
+                    for(key in listOf(KeyEvent.KEYCODE_DPAD_LEFT,KeyEvent.KEYCODE_DPAD_UP,KeyEvent.KEYCODE_DPAD_RIGHT,KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_UP)){
+                        key(key);f.main{assertTrue(f.activity.currentFocus?.isShown==true)}
+                    }
+                    key(KeyEvent.KEYCODE_DPAD_CENTER);f.waitFor{UiPreferences(f.context).step==1}
                 }else{
                     f.main{f.activity.findViewById<View>(R.id.tv_nav_movies).requestFocus()};key(KeyEvent.KEYCODE_DPAD_CENTER);key(KeyEvent.KEYCODE_DPAD_DOWN);key(KeyEvent.KEYCODE_DPAD_DOWN)
                     f.waitFor(4000){f.activity.findViewById<View>(R.id.tv_content)?.hasFocus()==true}

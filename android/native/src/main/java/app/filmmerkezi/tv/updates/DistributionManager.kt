@@ -19,6 +19,9 @@ class DistributionManager private constructor(private val context:Context) {
     val notices=UpdateNoticeStore(context)
     private val discovery=RepositoryDiscovery({url,limit->transport.bytes(url,limit,10000)})
     private val scope=CoroutineScope(SupervisorJob()+Dispatchers.IO)
+    private val installRun=MutableStateFlow(PluginInstallRun())
+    internal val pluginInstall=installRun.asStateFlow()
+    @Volatile private var unrecordedInstall:List<PackageInstaller.Candidate>?=null
     private val operation=Mutex()
     private var foregroundJob:Job?=null
     @Volatile private var inventoryCache:Pair<Long,PluginInventory>?=null
@@ -27,6 +30,22 @@ class DistributionManager private constructor(private val context:Context) {
     private val state=MutableStateFlow(DistributionStatus(message=store.failure?:store.snapshot().optString("runtimeError")))
     @Volatile var lastIssue:String="";private set
     fun recordIssue(error:Throwable){lastIssue=(error.message?:error.javaClass.simpleName).take(2000)}
+    @Synchronized internal fun startPluginInstall(plan:List<PackageInstaller.Candidate>?=null) {
+        if(installRun.value.busy)return
+        val toRecord=plan?:unrecordedInstall
+        unrecordedInstall=toRecord
+        val planned=toRecord?.count{it.manifest.type=="site"}?:0
+        installRun.value=PluginInstallRun(busy=true,plannedProviders=planned)
+        scope.launch{
+            val installer=PackageInstaller(this@DistributionManager)
+            var failure:UpdateProblem?=null
+            try{
+                if(toRecord!=null){installer.beginJob(toRecord);unrecordedInstall=null}
+                installer.downloadJob{step->installRun.update{it.copy(step=step)}}
+            }catch(e:CancellationException){throw e}catch(e:Exception){recordIssue(e);failure=UpdateProblem.classify(e)}
+            finally{installRun.value=PluginInstallRun(plannedProviders=if(unrecordedInstall==null)0 else planned,failure=failure)}
+        }
+    }
     val status:StateFlow<DistributionStatus> = state.asStateFlow()
     fun readyApk():File?=state.value.release?.let{release->state.value.apk?.takeIf{it.name=="application-${release.code}.apk"&&it.exists()}}
     private val key=context.assets.open("update-public-key.txt").bufferedReader().use{it.readText().trim()}

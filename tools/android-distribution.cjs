@@ -20,10 +20,25 @@ function validateManifest(meta){
  assert(Number.isInteger(meta.minAppVersionCode)&&meta.minAppVersionCode>0&&Number.isInteger(meta.minSdk)&&meta.minSdk>=23,'Invalid application compatibility');
  assert(/^app\.filmmerkezi\.addon\.[A-Za-z0-9_.$]+$/.test(meta.entryClass),'Invalid entry class');
  assert((meta.type==='site')===!!meta.site,'Site metadata is required only for site packages');
- if(meta.site){const u=new URL(meta.site.base);assert(id(meta.site.id)&&typeof meta.site.name==='string'&&u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&u.pathname==='/'&&!u.search&&!u.hash,'Invalid site metadata');}
+ if(meta.site){const u=new URL(meta.site.base);assert(id(meta.site.id)&&typeof meta.site.name==='string'&&u.protocol==='https:'&&!u.username&&!u.password&&!u.port&&u.pathname==='/'&&!u.search&&!u.hash,'Invalid site metadata');if(Object.hasOwn(meta.site,'catalogSections'))validateCatalogSections(meta.site.catalogSections);}
  assert(Array.isArray(meta.origins)&&meta.origins.length>0&&meta.origins.length<=256&&meta.origins.every(s=>/^https:\/\/(?:\*\.)?[a-z0-9][a-z0-9.{}-]+$/.test(s)),'Invalid closed network origins');
  assert(Array.isArray(meta.dependencies)&&meta.dependencies.length<=16,'Invalid dependencies');
  const seen=new Set();for(const d of meta.dependencies){const k=d.publisher+'/'+d.id;assert(/^[a-f0-9]{64}$/.test(d.publisher)&&id(d.id)&&version(d.minVersion)&&version(d.maxVersion)&&compare(d.minVersion,d.maxVersion)<0&&!seen.has(k),'Invalid dependency range');seen.add(k);}
+}
+function validateCatalogSections(sections){
+ const object=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
+ assert(object(sections),'Invalid catalog sections');
+ for(const [section,routes] of Object.entries(sections)){
+  assert(['ANIMATION','DRAMA_SHORT'].includes(section)&&Array.isArray(routes)&&routes.length>=1&&routes.length<=4,'Invalid catalog section');
+  const seen=new Set();
+  for(const route of routes){
+   assert(object(route)&&Object.keys(route).every(key=>['path','kinds','pageParameter'].includes(key)),'Invalid catalog route');
+   assert(typeof route.path==='string'&&route.path.length<=180&&/^\/(?:[A-Za-z0-9_-]+\/)*[A-Za-z0-9_-]+\/?$/.test(route.path)&&!/[\r\n]/.test(route.path),'Invalid catalog route path');
+   const normalized=route.path.replace(/\/$/,'');assert(!seen.has(normalized),'Duplicate catalog route');seen.add(normalized);
+   if(Object.hasOwn(route,'kinds')) assert(Array.isArray(route.kinds)&&route.kinds.length>=1&&route.kinds.length<=2&&new Set(route.kinds).size===route.kinds.length&&route.kinds.every(x=>['MOVIE','SERIES'].includes(x)),'Invalid catalog kinds');
+   if(Object.hasOwn(route,'pageParameter'))assert(typeof route.pageParameter==='string'&&/^[A-Za-z][A-Za-z0-9_]{0,31}$/.test(route.pageParameter)&&!/[\r\n]/.test(route.pageParameter),'Invalid catalog page parameter');
+  }
+ }
 }
 function validateJar(zip){
  assert(zip.length<=4194304&&zip.length>=22,'Package size budget');let end=-1;

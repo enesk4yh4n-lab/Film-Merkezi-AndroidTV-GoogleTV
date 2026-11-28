@@ -20,7 +20,7 @@ interface SiteProvider {
 }
 
 /** Failure in one provider cannot cancel successful providers. Unified mode is always on. */
-class CatalogRepository(private val network:WebTransport,private val works:WorkStore?=null,private val requestOptions:()->CatalogRequestOptions={CatalogRequestOptions()},private val metadataSites:()->Set<String> = {requestOptions().sites.toSet()}) {
+class CatalogRepository(private val network:WebTransport,private val works:WorkStore?=null,private val requestOptions:()->CatalogRequestOptions={CatalogRequestOptions()},private val metadataSites:()->Set<String> = {requestOptions().sites.toSet()},private val snapshots:CatalogSnapshots?=null) {
     private val parsing=Dispatchers.Default.limitedParallelism(1)
     private var providerRevision=-1L
     private var providerSnapshot:Map<String,NativeSiteProvider> = emptyMap()
@@ -31,49 +31,77 @@ class CatalogRepository(private val network:WebTransport,private val works:WorkS
     private val cache=object:LinkedHashMap<String,Pair<Long,UnifiedPage>>(8,0.75f,true) {
         override fun removeEldestEntry(eldest:MutableMap.MutableEntry<String,Pair<Long,UnifiedPage>>?)=size>6
     }
-    private val siteSlots=Semaphore(2)
+    private val siteSlots=CatalogQueue()
+    private val availability=CatalogAvailability()
+    fun pausedFor(id:String)=availability.remaining(id)
+    fun retrySite(id:String){availability.reset(id);invalidatePages()}
+    fun invalidatePages(){synchronized(cache){cache.clear();trimGeneration++}}
+
+    suspend fun suggest(siteId:String,query:String):List<Card> = siteSlots.withSlot {
+        if(siteId !in requestOptions().sites||pausedFor(siteId)>0)return@withSlot emptyList()
+        withTimeoutOrNull(8000){provider(siteId).suggest(query).filter{!requestOptions().hideAdult||!AdultContent.blocked(it)}.take(8)}.orEmpty()
+    }
     private var trimGeneration=0L
     suspend fun search(query:String,cursors:Map<String,PageCursor> = emptyMap()):UnifiedPage = observeSearch(query,cursors).last()
     suspend fun browse(kind:ContentKind=ContentKind.MOVIE,cursors:Map<String,PageCursor> = emptyMap()):UnifiedPage = observeBrowse(kind,cursors).last()
     fun observeSearch(query:String,cursors:Map<String,PageCursor> = emptyMap(),siteId:String?=null):Flow<UnifiedPage> =
         unified("search:$siteId:$query:$cursors",cursors,siteId,query){p,c->p.search(query,c)}
     fun observeBrowse(kind:ContentKind=ContentKind.MOVIE,cursors:Map<String,PageCursor> = emptyMap(),siteId:String?=null):Flow<UnifiedPage> =
-        unified("browse:$siteId:$kind:$cursors",cursors,siteId){p,c->p.browse(kind,c)}
+        unified("browse:$siteId:$kind:$cursors",cursors,siteId,persist=true){p,c->p.browse(kind,c)}
     fun observeFiltered(q:CatalogQuery,cursors:Map<String,PageCursor> = emptyMap(),siteId:String?=null):Flow<UnifiedPage>{
         val budget=java.util.concurrent.atomic.AtomicInteger(12)
-        return unified("filtered:$siteId:${q.signature}:$cursors",cursors,siteId){p,c->p.filtered(q,c,check={budget.getAndDecrement()>0})}
+        return unified("filtered:$siteId:${q.signature}:$cursors",cursors,siteId,persist=true){p,c->p.filtered(q,c,check={budget.getAndDecrement()>0})}
     }
-    private fun unified(key:String,cursors:Map<String,PageCursor>,siteId:String?,query:String?=null,read:suspend(NativeSiteProvider,PageCursor?)->CatalogPage):Flow<UnifiedPage> = channelFlow {
+    fun observeSection(section:CatalogSection,cursors:Map<String,PageCursor> = emptyMap(),siteId:String?=null):Flow<UnifiedPage> =
+        unified("section:$section:$siteId:$cursors",cursors,siteId,eligible={section.routes(it).isNotEmpty()},verifyDetails=false,persist=true){p,c->p.section(section,c)}
+    private fun unified(key:String,cursors:Map<String,PageCursor>,siteId:String?,query:String?=null,
+        eligible:(String)->Boolean={true},verifyDetails:Boolean=true,persist:Boolean=false,read:suspend(NativeSiteProvider,PageCursor?)->CatalogPage):Flow<UnifiedPage> = channelFlow {
         val options=requestOptions()
-        val selected=options.sites.mapNotNull(providers::get).filter{siteId==null||it.site.id==siteId}
+        val selected=options.sites.filter{(siteId==null||it==siteId)&&eligible(it)}.mapNotNull(providers::get)
         val cacheKey=key+":"+options.signature+":"+Sites.revision
         if(cursors.keys.any{id->selected.none{it.site.id==id}})throw DataFailure(FailureKind.PARSE,"Devam bağlantısı seçili siteye ait değil","pagination")
         val requested=selected.filter{cursors.isEmpty()||cursors.containsKey(it.site.id)}
         val (generation,hit)=synchronized(cache){trimGeneration to cache[cacheKey]?.takeIf{System.currentTimeMillis()-it.first<60000}?.second}
         if(hit!=null){send(hit.copy(items=CatalogPresentation.project(if(works==null)hit.items else works.refresh(hit.items.flatMap{it.alternatives}),options,hit.items.flatMap{it.alternatives}.map{it.ref.id}.toSet())));return@channelFlow}
+        val eligibleIds=requested.map{it.site.id}.toSet()
+        val diskKey=if(snapshots!=null&&persist&&cursors.isEmpty()&&requested.isNotEmpty()){
+            val stamp=requested.joinToString("|"){it.site.id+"="+it.site.base+"@"+Sites.catalogRevision(it.site.id)}
+            app.filmmerkezi.tv.updates.UpdateProtocol.sha("$key:${options.signature}:$stamp".toByteArray(Charsets.UTF_8))
+        }else null
+        val diskGeneration=snapshots?.generation?:0L
+        val saved=diskKey?.let{CatalogPresentation.project(snapshots!!.read(it,eligibleIds),options)}.orEmpty()
         val rows=linkedMapOf<String,CatalogPage>();val failures=linkedMapOf<String,SiteFailure>();val lock=Mutex()
         var latest=UnifiedPage(emptyList(),emptyMap(),emptyList(),requestedSites=requested.size)
-        send(latest)
+        suspend fun publish(page:UnifiedPage,finished:Boolean=false){
+            val keepSaved=saved.isNotEmpty()&&page.items.isEmpty()&&(!finished||page.failures.isNotEmpty()||page.coverage.any{it.local.contains("section")})
+            send(if(keepSaved)page.copy(items=saved,next=emptyMap(),cached=true)else page)
+        }
+        publish(latest)
         suspend fun snapshot()=UnifiedPage(withContext(parsing){CatalogMerge.pages(rows)}.let{items->works?.observe(items.flatMap{it.alternatives})?:items}.let{CatalogPresentation.project(it,options,rows.values.flatMap{it.cards}.map{it.ref.id}.toSet())},
             rows.mapNotNull{(id,r)->r.next?.let{id to it}}.toMap(),failures.values.toList(),
             rows.mapValues{it.value.cards.size},rows.size+failures.size,requested.size,rows.values.mapNotNull{it.coverage}).also{latest=it}
         supervisorScope {
             requested.forEach { p -> launch {
                 // Waiting for a slot is outside the per-site deadline.
-                siteSlots.withPermit {
-                    var row:CatalogPage?=null;var failure:SiteFailure?=null
-                    try { row=withTimeout(20000){read(p,cursors[p.site.id])} }
-                    catch(e:CancellationException){if(e is TimeoutCancellationException)failure=SiteFailure(p.site.id,FailureKind.TIMEOUT,"Site zaman aşımı")else throw e}
-                    catch(e:Exception){failure=SiteFailure(p.site.id,(e as? DataFailure)?.kind?:FailureKind.PARSE,e.message?:"Site hatası",(e as? DataFailure)?.httpCode)}
-                    lock.withLock {
-                        row?.let{rows[p.site.id]=it};failure?.let{failures[p.site.id]=it}
-                        val result=snapshot()
-                        send(result)
+                val (row,failure)=siteSlots.withSlot {
+                    var result:CatalogPage?=null;var error:SiteFailure?=null
+                    val ticket=availability.request(p.site.id)
+                    if(ticket==null)error=SiteFailure(p.site.id,FailureKind.ACCESS,"Site geçici olarak bekletiliyor")
+                    else{
+                        try { result=withTimeout(20000){read(p,cursors[p.site.id])} }
+                        catch(e:CancellationException){if(e is TimeoutCancellationException)error=SiteFailure(p.site.id,FailureKind.TIMEOUT,"Site zaman aşımı")else throw e}
+                        catch(e:Exception){error=SiteFailure(p.site.id,(e as? DataFailure)?.kind?:FailureKind.PARSE,e.message?:"Site hatası",(e as? DataFailure)?.httpCode)}
+                        availability.result(ticket,error)
                     }
+                    result to error
+                }
+                lock.withLock {
+                    row?.let{rows[p.site.id]=it};failure?.let{failures[p.site.id]=it}
+                    publish(snapshot())
                 }
             } }
         }
-        if(works!=null&&options.merge){
+        if(verifyDetails&&works!=null&&options.merge){
             val attempted=mutableSetOf<String>();val eligible=rows.values.flatMap{it.cards}.map{it.ref.id}.toSet()
             withTimeoutOrNull(20000){supervisorScope{repeat(2){launch{
                 while(isActive){
@@ -81,18 +109,19 @@ class CatalogRepository(private val network:WebTransport,private val works:WorkS
                         if(attempted.size>=12)null else withContext(parsing){ContentIdentity.verificationCandidates(latest.items.flatMap{it.alternatives}.filter{it.ref.id in eligible},query,eligible.size)}
                             .firstOrNull{it.ref.id !in attempted}?.also{attempted.add(it.ref.id)}
                     }?:break
-                    siteSlots.withPermit{
-                        try{val checked=provider(c.ref.siteId).detail(c).card;lock.withLock{
+                    try{val checked=siteSlots.withSlot{provider(c.ref.siteId).detail(c).card};lock.withLock{
                             val row=rows[c.ref.siteId]?:return@withLock
-                            rows[c.ref.siteId]=row.copy(cards=row.cards.map{if(it.ref.id==c.ref.id)checked else it});send(snapshot())
-                        }}catch(e:CancellationException){throw e}catch(_:Exception){}
-                    }
+                            rows[c.ref.siteId]=row.copy(cards=row.cards.map{if(it.ref.id==c.ref.id)checked else it});publish(snapshot())
+                    }}catch(e:CancellationException){throw e}catch(_:Exception){}
                 }
             }}}}
         }
         val result=snapshot()
-        synchronized(cache){if(generation==trimGeneration)cache[cacheKey]=System.currentTimeMillis() to result}
-        send(result)
+        if(result.failures.isEmpty()&&result.coverage.none{"section" in it.local}){
+            val stillCurrent=synchronized(cache){if(generation==trimGeneration){cache[cacheKey]=System.currentTimeMillis() to result;true}else false}
+            publish(result,finished=true)
+            if(stillCurrent&&diskKey!=null)snapshots?.write(diskKey,result.items,diskGeneration)
+        }else publish(result,finished=true)
     }
     suspend fun collections():List<Card> {
         val result=mutableListOf<Card>()
@@ -146,5 +175,5 @@ class CatalogRepository(private val network:WebTransport,private val works:WorkS
         val merged=EpisodeMerge.combine(results.map{it.first},group.identity,card.ref.siteId,discoveryFailures+results.mapNotNull{it.second})
         return merged.copy(seasons=(merged.seasons+results.flatMap{it.third}).filter{it in 1..1000}.distinct().sorted())
     }
-    fun trim(){synchronized(cache){trimGeneration++;cache.clear()};synchronized(seasonSearches){seasonSearches.clear()};providers.values.forEach{it.trim()}}
+    fun trim(){invalidatePages();synchronized(seasonSearches){seasonSearches.clear()};providers.values.forEach{it.trim()}}
 }

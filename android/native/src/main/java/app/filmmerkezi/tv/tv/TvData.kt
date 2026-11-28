@@ -19,6 +19,13 @@ interface TvData {
     fun browseSite(siteId:String,kind:ContentKind,cursors:Map<String,PageCursor> = emptyMap()):Flow<UnifiedPage> = browse(kind,cursors)
     fun searchSite(siteId:String,query:String,cursors:Map<String,PageCursor> = emptyMap()):Flow<UnifiedPage> = search(query,cursors)
     fun filteredBrowse(siteId:String,query:CatalogQuery,cursors:Map<String,PageCursor> = emptyMap()):Flow<UnifiedPage> = browseSite(siteId,query.kind,cursors)
+    fun section(siteId:String,section:CatalogSection,cursors:Map<String,PageCursor> = emptyMap()):Flow<UnifiedPage> = flowOf(UnifiedPage(emptyList(),emptyMap(),emptyList()))
+    suspend fun suggestions(siteId:String,query:String):List<Card> = emptyList()
+    fun pausedFor(siteId:String):Long=0L
+    fun retrySite(siteId:String){}
+    fun invalidateCatalog(){}
+    suspend fun catalogCacheBytes():Long=0L
+    suspend fun clearCatalogCache(){}
     suspend fun filterOptions(siteId:String):FilterOptions=FilterOptions()
     suspend fun detail(card:Card):Detail
     suspend fun episodes(card:Card):List<Episode>
@@ -38,6 +45,8 @@ interface TvData {
     fun sourcePool(card:Card,initial:List<SourceOption>,crossSite:Boolean,gate:suspend()->Unit={}):Flow<SourcePool> = flowOf(SourcePool(initial.map{it.scoped()},false))
     fun episodeSourcePool(item:UnifiedItem,crossSite:Boolean,gate:suspend()->Unit={}):Flow<SourcePool> =
         EpisodeSourcePool.observe(item,crossSite,::detail,{sourcePool(item.card,emptyList(),crossSite,gate)},gate)
+    fun refreshSourcePool(card:Card,item:UnifiedItem?,initial:List<SourceOption>,crossSite:Boolean,gate:suspend()->Unit):Flow<SourcePool> =
+        if(item!=null)episodeSourcePool(item,crossSite,gate)else sourcePool(card,initial,crossSite,gate)
     suspend fun resolve(option:SourceOption):ResolvedSource
     suspend fun records():List<LibraryRecord>
     suspend fun recordsPage(listedOnly:Boolean,offset:Int,limit:Int):List<LibraryRecord> =
@@ -61,7 +70,8 @@ internal class TvServices private constructor(context:Context):TvData {
     val settings=app.filmmerkezi.tv.settings.SettingsRepository.get(context)
     val network=ProviderNetwork(context)
     private val works=WorkStore(context)
-    private val repository=CatalogRepository(network,works,{settings.value.catalog()},{settings.value.installedSites().map{it.id}.filter{it !in settings.value.disabledCatalog||settings.value.sourceAllowed(it)}.toSet()})
+    private val snapshots=CatalogSnapshots(java.io.File(context.cacheDir,"catalog-pages-v1"))
+    private val repository=CatalogRepository(network,works,{settings.value.catalog()},{settings.value.installedSites().map{it.id}.filter{it !in settings.value.disabledCatalog||settings.value.sourceAllowed(it)}.toSet()},snapshots)
     private val discovery=AlternativeDiscovery(repository,works){settings.value.installedSites().map{it.id}.filter{settings.value.sourceAllowed(it)}}
     private val pools=SourcePoolService(repository,works,discovery,{settings.value.sourceAllowed(it)},{settings.value.hideAdult})
     val resolver=SourceResolver(network)
@@ -93,6 +103,13 @@ internal class TvServices private constructor(context:Context):TvData {
     override fun browseSite(siteId:String,kind:ContentKind,cursors:Map<String,PageCursor>)=repository.observeBrowse(kind,cursors,siteId.ifBlank{null})
     override fun searchSite(siteId:String,query:String,cursors:Map<String,PageCursor>)=repository.observeSearch(query,cursors,siteId.ifBlank{null})
     override fun filteredBrowse(siteId:String,query:CatalogQuery,cursors:Map<String,PageCursor>)=repository.observeFiltered(query,cursors,siteId.ifBlank{null})
+    override fun section(siteId:String,section:CatalogSection,cursors:Map<String,PageCursor>)=repository.observeSection(section,cursors,siteId.ifBlank{null})
+    override suspend fun suggestions(siteId:String,query:String)=repository.suggest(siteId,query)
+    override fun pausedFor(siteId:String)=repository.pausedFor(siteId)
+    override fun retrySite(siteId:String)=repository.retrySite(siteId)
+    override fun invalidateCatalog()=repository.invalidatePages()
+    override suspend fun catalogCacheBytes()=snapshots.bytes()
+    override suspend fun clearCatalogCache(){repository.invalidatePages();snapshots.clear()}
     override suspend fun filterOptions(siteId:String):FilterOptions=coroutineScope{
         val providers=settings.value.catalog().sites.map(repository::provider).filter{siteId.isBlank()||it.site.id==siteId}
         val options=providers.map{p->async{try{withTimeoutOrNull(10000){p.options()}?:FilterOptions()}catch(e:CancellationException){throw e}catch(_:Exception){FilterOptions()}}}.awaitAll()
@@ -142,6 +159,13 @@ internal class TvServices private constructor(context:Context):TvData {
     override fun discoverAlternatives(card:Card,force:Boolean)=discovery.discover(card,force)
     override fun sourcePool(card:Card,initial:List<SourceOption>,crossSite:Boolean,gate:suspend()->Unit)=pools.observe(card,initial,crossSite,gate)
     override fun episodeSourcePool(item:UnifiedItem,crossSite:Boolean,gate:suspend()->Unit)=pools.episode(item,crossSite,gate)
+    override fun refreshSourcePool(card:Card,item:UnifiedItem?,initial:List<SourceOption>,crossSite:Boolean,gate:suspend()->Unit)=
+        if(item!=null)pools.episode(item,crossSite,gate,force=true)else flow{
+            val local=if(settings.value.sourceAllowed(card.ref.siteId))repository.detail(card).let{detail->
+                if(settings.value.hideAdult&&AdultContent.blocked(detail.card))emptyList()else detail.options
+            }else emptyList()
+            pools.observe(card,(local+initial).distinctBy{it.scoped().id},crossSite,gate,force=true).collect{emit(it)}
+        }
     override suspend fun resolve(option:SourceOption):ResolvedSource {
         if(!settings.value.sourceAllowed(option.content.siteId))throw DataFailure(FailureKind.ACCESS,"Bu sitenin kaynakları ayarlardan kapatılmış","site-settings")
         works.sourceCard(option.content)?.let{checkVisible(it)}
@@ -172,8 +196,10 @@ internal class TvServices private constructor(context:Context):TvData {
     }
 }
 
-enum class TvScreen { HOME,MOVIES,SERIES,DISCOVER,SEARCH,LIBRARY,HISTORY,DETAIL,ABOUT }
-data class TvNav(val screen:TvScreen=TvScreen.HOME,val item:UnifiedItem?=null,val query:String="",val season:Int=0,val episodePage:Int=0,val history:Boolean=false,val libraryPage:Int=0,val searchType:SearchType=SearchType.ALL,val searchPage:Int=0)
+enum class TvScreen { HOME,MOVIES,SERIES,DISCOVER,SEARCH,LIBRARY,HISTORY,DETAIL,ABOUT,ANIMATION,DRAMA_SHORT,FOLLOWING;
+    val section get()=when(this){ANIMATION->CatalogSection.ANIMATION;DRAMA_SHORT->CatalogSection.DRAMA_SHORT;else->null}
+}
+data class TvNav(val screen:TvScreen=TvScreen.HOME,val item:UnifiedItem?=null,val query:String="",val season:Int=-1,val episodePage:Int=0,val history:Boolean=false,val libraryPage:Int=0,val searchType:SearchType=SearchType.ALL,val searchPage:Int=0)
 data class TvTile(val key:String,val label:String,val item:UnifiedItem?=null,val action:String="",val positionMs:Long=0,val durationMs:Long=0)
 data class TvSection(val id:Long,val title:String,val tiles:List<TvTile>)
 

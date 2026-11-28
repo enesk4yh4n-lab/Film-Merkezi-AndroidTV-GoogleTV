@@ -23,6 +23,7 @@ class DistributionStore(context:Context,name:String="distribution") {
     fun snapshot()=JSONObject(current.toString())
     val repositoryCount get()=current.getJSONObject("repositories").length()
     val restartRequired get()=current.optBoolean("needsBoot")||current.optBoolean("bootPending")
+    internal val hasInstallJob get()=(current.optJSONObject("installJob")?.length()?:0)>0
     suspend fun commit(change:(JSONObject)->Unit)=lock.withLock{
         check(failure==null){failure.orEmpty()};val next=snapshot();change(next);val bytes=next.toString().toByteArray(Charsets.UTF_8);require(bytes.size<=2*1024*1024)
         val stream=file.startWrite();try{stream.write(bytes);file.finishWrite(stream);current=next;changes.value++}catch(e:Throwable){file.failWrite(stream);throw e}

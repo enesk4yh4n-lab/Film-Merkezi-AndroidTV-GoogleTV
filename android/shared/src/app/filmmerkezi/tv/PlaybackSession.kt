@@ -46,6 +46,7 @@ internal class PlaybackSession(
         // TLS close_notify can perform socket I/O, including ConnectionPool.evictAll().
         // Retired transports are never closed by the UI/Media3 application looper.
         private val transportCleanup = Executors.newSingleThreadExecutor { task -> Thread(task, "FilmMediaCleanup").apply { isDaemon = true } }
+        private val sidecarTrackId=Regex("^(?:[0-9]+:)*(fm-sidecar:[0-9]+:[0-9]+)$")
     }
     interface Listener {
         fun onEngineChanged(player: ExoPlayer?)
@@ -53,6 +54,8 @@ internal class PlaybackSession(
         fun onEnded() {}
         fun onTracksAvailable() {}
         fun onSourcesExhausted(message:String) {}
+        fun onFirstFrame() {}
+        fun describeResolutionError(error: Throwable): String? = null
     }
     fun interface SourceLookup {
         /** Starts asynchronous metadata work. Closing must cancel it without blocking. */
@@ -66,25 +69,58 @@ internal class PlaybackSession(
     var crossSiteSources=true
     private var discoveryPending=false
     private var waitingForSources=false
+    private var automaticSwitchPending = false
     private val handler = Handler(Looper.getMainLooper())
     private val guard = PlaybackGuard(startupTimeoutMs, stallTimeoutMs)
     private var sources = emptyList<JSONObject>()
     private var originals=emptyList<JSONObject>()
+    private var previousSource:String?=null
+    private var currentSourceId:String?=null
+    data class SubtitleFile(val id:String,val uri:android.net.Uri,val mime:String,val factory:androidx.media3.datasource.DataSource.Factory)
+    private var subtitleFiles=emptyMap<String,SubtitleFile>()
+    var navigation=PlaybackNavigation.empty
+        private set
+    private var previewFactory:androidx.media3.datasource.DataSource.Factory?=null
+    data class PreviewFile(val preview:VideoPreview,val factory:androidx.media3.datasource.DataSource.Factory)
+    fun previewAt(time:Long):PreviewFile? {
+        val factory=previewFactory?:return null
+        return navigation.previews.lastOrNull{time>=it.start&&time<it.end}?.let{PreviewFile(it,factory)}
+    }
+    fun selectedSubtitleFile():SubtitleFile? {
+        val groups=player?.currentTracks?.groups?:return null
+        for(group in groups)if(group.type==C.TRACK_TYPE_TEXT){
+            for(i in 0 until group.length)if(group.isTrackSelected(i)){
+                // Media3 prefixes format IDs with the child index when sources are merged.
+                val id=sidecarTrackId.matchEntire(group.getTrackFormat(i).id.orEmpty())?.groupValues?.get(1)
+                subtitleFiles[id]?.let{return it}
+            }
+        }
+        return null
+    }
+    var loopStart:Long?=null
+        private set
+    var loopEnd:Long?=null
+        private set
+    private var speed=1f
     private val refreshed=mutableSetOf<Int>()
     private val refreshAt=mutableMapOf<Int,Long>()
     private var refreshes=0
     private var selector:DefaultTrackSelector?=null
     private val device by lazy{PlaybackDevicePolicy(context.applicationContext)}
-    private var audioLanguage="tr"
-    private var textLanguage="tr"
-    private var textEnabled=true
+    private data class TrackLanguage(val language:String,val role:Int)
+    private val sessionLanguages=mutableMapOf<Int,TrackLanguage>()
+    private var subtitleChoice:SubtitlePolicy?=null
+    private val subtitlePolicy get()=subtitleChoice?:configuredSettings.subtitles
+    private val textEnabled get()=subtitlePolicy!=SubtitlePolicy.OFF
+    private val audioLanguage get()=sessionLanguages[C.TRACK_TYPE_AUDIO]?.language?:configuredSettings.audio
+    private val textLanguage get()=sessionLanguages[C.TRACK_TYPE_TEXT]?.language?:configuredSettings.text
+    private val preferSourceAudio get()=configuredSettings.sourceAudio&&sessionLanguages[C.TRACK_TYPE_AUDIO]==null
     private var qualityHeight=0
     private var configuredSettings=PlaybackSettings()
     private var sessionBuffer=BufferProfile.AUTO
     private val bufferTargetBytes get() = sessionBuffer.targetBytes(Runtime.getRuntime().maxMemory())
     var candidateAllowed:(JSONObject)->Boolean={true}
     private val manual=mutableMapOf<Int,Pair<TrackGroup,Int>>()
-    private var sourceChanged=false
     private var endedNotified=false
     private var lastDiagnosticMs=0L
     internal data class TrackChoice(val revision:Long,val group:TrackGroup,val index:Int,val format:Format,val selected:Boolean,val variantId:String?=null)
@@ -100,6 +136,7 @@ internal class PlaybackSession(
     private var suspended = false
     private var terminal = false
     private var position = 0L
+    private var knownDuration = 0L
     private var wantedToPlay = true
     private var attemptHadProgress = false
     private var attemptPrepared = false
@@ -108,6 +145,8 @@ internal class PlaybackSession(
     private var firstFrameMs: Long? = null
     private var terminalError: String? = null
     private var lastFailure: String? = null
+    private var lastFailureSummary: String? = null
+    private var lastFailurePosition: Long? = null
     private var httpCode: Int? = null
     private var headerVariant: String? = null
     private var rebufferCount = 0
@@ -129,6 +168,8 @@ internal class PlaybackSession(
     private val ticker = object : Runnable {
         override fun run() {
             val p = player ?: return
+            val a=loopStart;val b=loopEnd
+            if(a!=null&&b!=null&&p.isPlaying&&p.currentPosition>=b&&p.isCurrentMediaItemSeekable)p.seekTo(a)
             if(diagnosticsEnabled&&SystemClock.elapsedRealtime()-lastDiagnosticMs>=15000){
                 lastDiagnosticMs=SystemClock.elapsedRealtime();event("metrics")
             }
@@ -161,11 +202,10 @@ internal class PlaybackSession(
             val f=player?.currentTracks?.groups?.firstOrNull{it.mediaTrackGroup==selected.first}?.let{trackFormat(it,selected.second)}?:return false
             return PlaybackPreferencePolicy.matches(f.language,language)&&(role==null||f.roleFlags==role)
         }
-        if((audioLanguage!=value.audio||configuredSettings.sourceAudio!=value.sourceAudio||configuredSettings.audioRole!=value.audioRole)&&!matches(C.TRACK_TYPE_AUDIO,value.audio,value.audioRole))manual.remove(C.TRACK_TYPE_AUDIO)
-        if((textLanguage!=value.text||configuredSettings.subtitles!=value.subtitles||configuredSettings.textRole!=value.textRole)&&!matches(C.TRACK_TYPE_TEXT,value.text,value.textRole))manual.remove(C.TRACK_TYPE_TEXT)
-        if(value.subtitles==SubtitlePolicy.OFF)manual.remove(C.TRACK_TYPE_TEXT)
+        if(C.TRACK_TYPE_AUDIO !in sessionLanguages&&(configuredSettings.audio!=value.audio||configuredSettings.sourceAudio!=value.sourceAudio||configuredSettings.audioRole!=value.audioRole)&&!matches(C.TRACK_TYPE_AUDIO,value.audio,value.audioRole))manual.remove(C.TRACK_TYPE_AUDIO)
+        if(subtitleChoice==null&&(configuredSettings.text!=value.text||configuredSettings.subtitles!=value.subtitles||configuredSettings.textRole!=value.textRole)&&!matches(C.TRACK_TYPE_TEXT,value.text,value.textRole))manual.remove(C.TRACK_TYPE_TEXT)
         if(qualityHeight!=value.preferredHeight)manual.remove(C.TRACK_TYPE_VIDEO)
-        configuredSettings=value;audioLanguage=value.audio;textLanguage=value.text;qualityHeight=value.preferredHeight;textEnabled=value.subtitles!=SubtitlePolicy.OFF
+        configuredSettings=value;qualityHeight=value.preferredHeight
         player?.currentTracks?.let(::applySafeTracks)
     }
     fun setPlaying(value:Boolean){
@@ -205,18 +245,23 @@ internal class PlaybackSession(
             val source=JSONObject(sources[recovery.index].toString())
             qualityHeight=choice?.format?.height?.coerceAtLeast(0)?:0
             if(choice==null)source.remove("variantId")else source.put("variantId",choice.variantId)
-            player?.let{if(attemptPrepared){position=it.currentPosition;wantedToPlay=it.playWhenReady}}
+            position=retainedPosition()
             triedVariants.clear();sources=sources.toMutableList().apply{set(recovery.index,source)}
             loadCurrent(R.string.player_switching);return true
         }
-        if(type==C.TRACK_TYPE_TEXT)textEnabled=choice!=null
+        if(type==C.TRACK_TYPE_TEXT)subtitleChoice=if(choice==null)SubtitlePolicy.OFF else SubtitlePolicy.ON
         if(type==C.TRACK_TYPE_VIDEO)qualityHeight=choice?.format?.height?.coerceAtLeast(0)?:0
-        if(type==C.TRACK_TYPE_AUDIO&&choice!=null)audioLanguage=choice.format.language.orEmpty().ifBlank{audioLanguage}
-        if(type==C.TRACK_TYPE_AUDIO&&choice==null)audioLanguage=configuredSettings.audio
-        if(type==C.TRACK_TYPE_TEXT&&choice!=null)textLanguage=choice.format.language.orEmpty().ifBlank{textLanguage}
+        if(type==C.TRACK_TYPE_AUDIO||type==C.TRACK_TYPE_TEXT){
+            val language=PlaybackPreferencePolicy.normalizedLanguage(choice?.format?.language)
+            if(choice!=null&&language.matches(Regex("[a-z]{2,3}"))&&language!="und")sessionLanguages[type]=TrackLanguage(language,choice.format.roleFlags)
+            else sessionLanguages.remove(type)
+        }
         if(choice==null)manual.remove(type)else manual[type]=choice.group to choice.index
         player?.currentTracks?.let(::applySafeTracks);event("track-selection")
         return true
+    }
+    fun clearSessionTracks(){
+        mainThread();manual.clear();sessionLanguages.clear();subtitleChoice=null
     }
     private fun automaticVideo()=qualityHeight==0&&manual[C.TRACK_TYPE_VIDEO]==null
     private fun autoAllowed(f:Format)=PlaybackPreferencePolicy.autoVideoAllowed(f.height,f.frameRate,configuredSettings.copy(preferredHeight=if(automaticVideo())0 else qualityHeight.coerceAtLeast(1)))
@@ -234,18 +279,20 @@ internal class PlaybackSession(
             var eligible=groups.associateWith{g->(0 until g.length).filter{device.allows(g.getTrackFormat(it),g.isTrackSupported(it))&&
                 (type!=C.TRACK_TYPE_VIDEO||!automaticVideo()||autoAllowed(g.getTrackFormat(it)))}}
             if(type==C.TRACK_TYPE_TEXT)eligible=eligible.mapValues{(g,indices)->indices.filter{i->
-                manual[type]!=null||PlaybackPreferencePolicy.subtitleAllowed(configuredSettings.subtitles,chosenAudio,g.getTrackFormat(i).selectionFlags and C.SELECTION_FLAG_FORCED!=0)}}
+                PlaybackPreferencePolicy.subtitleAllowed(subtitlePolicy,chosenAudio,g.getTrackFormat(i).selectionFlags and C.SELECTION_FLAG_FORCED!=0)}}
             val wanted=manual[type]?.takeIf{(group,index)->eligible.entries.any{it.key.mediaTrackGroup==group&&index in it.value}}
             val lang=if(type==C.TRACK_TYPE_AUDIO)audioLanguage else textLanguage
             fun language(value:String?)=PlaybackPreferencePolicy.matches(value,lang)
-            val role=if(type==C.TRACK_TYPE_AUDIO)configuredSettings.audioRole else configuredSettings.textRole
+            val role=sessionLanguages[type]?.role?:if(type==C.TRACK_TYPE_AUDIO)configuredSettings.audioRole else configuredSettings.textRole
+            fun preferredGroup()=groups.firstOrNull{g->eligible.getValue(g).any{index->val f=trackFormat(g,index);language(f.language)&&f.roleFlags==role}}
+                ?:groups.firstOrNull{g->eligible.getValue(g).any{language(trackFormat(g,it).language)}}
             val group=if(wanted!=null)groups.first{it.mediaTrackGroup==wanted.first}
                 else if(type==C.TRACK_TYPE_VIDEO)groups.filter{eligible.getValue(it).isNotEmpty()}.maxByOrNull{g->
                     val heights=eligible.getValue(g).map{g.getTrackFormat(it).height}
                     if(qualityHeight>0)heights.filter{it in 1..qualityHeight}.maxOrNull()?:-(heights.filter{it>0}.minOrNull()?:Int.MAX_VALUE) else heights.maxOrNull()?:-1}
-                else if(type==C.TRACK_TYPE_TEXT)groups.firstOrNull{g->eligible.getValue(g).any{language(trackFormat(g,it).language)}}
-                else (if(type==C.TRACK_TYPE_AUDIO&&configuredSettings.sourceAudio)null else groups.firstOrNull{g->eligible.getValue(g).any{language(trackFormat(g,it).language)}})
-                    ?:(if(type==C.TRACK_TYPE_AUDIO&&!configuredSettings.sourceAudio)groups.firstOrNull{g->eligible.getValue(g).any{PlaybackPreferencePolicy.matches(trackFormat(g,it).language,configuredSettings.secondAudio)}}else null)
+                else if(type==C.TRACK_TYPE_TEXT)preferredGroup()
+                else (if(preferSourceAudio)null else preferredGroup())
+                    ?:(if(!preferSourceAudio)groups.firstOrNull{g->eligible.getValue(g).any{PlaybackPreferencePolicy.matches(trackFormat(g,it).language,configuredSettings.secondAudio)}}else null)
                     ?:groups.firstOrNull{it.isSelected&&eligible.getValue(it).isNotEmpty()}?:groups.firstOrNull{eligible.getValue(it).isNotEmpty()}
             for(g in groups){
                 var indices=if(g==group)eligible.getValue(g)else emptyList()
@@ -253,8 +300,8 @@ internal class PlaybackSession(
                 else if(type==C.TRACK_TYPE_VIDEO&&qualityHeight>0&&indices.isNotEmpty()){
                     val best=indices.map{g.getTrackFormat(it).height}.filter{it in 1..qualityHeight}.maxOrNull()?:indices.map{g.getTrackFormat(it).height}.filter{it>0}.minOrNull()
                     if(best!=null)indices=indices.filter{g.getTrackFormat(it).height==best}
-                }else if(type!=C.TRACK_TYPE_VIDEO&&!(type==C.TRACK_TYPE_AUDIO&&configuredSettings.sourceAudio)&&indices.any{language(trackFormat(g,it).language)})indices=indices.filter{language(trackFormat(g,it).language)}
-                if(role!=null&&indices.any{g.getTrackFormat(it).roleFlags==role})indices=indices.filter{g.getTrackFormat(it).roleFlags==role}
+                }else if(type!=C.TRACK_TYPE_VIDEO&&!(type==C.TRACK_TYPE_AUDIO&&preferSourceAudio)&&indices.any{language(trackFormat(g,it).language)})indices=indices.filter{language(trackFormat(g,it).language)}
+                if(wanted==null&&role!=null&&indices.any{g.getTrackFormat(it).roleFlags==role})indices=indices.filter{g.getTrackFormat(it).roleFlags==role}
                 if(type==C.TRACK_TYPE_AUDIO&&indices.isNotEmpty())chosenAudio=trackFormat(g,indices.first()).language
                 b.addOverride(TrackSelectionOverride(g.mediaTrackGroup,indices))
             }
@@ -268,22 +315,41 @@ internal class PlaybackSession(
     private fun sourceState(state:String,reason:String=""){originals.getOrNull(recovery.index)?.optString("id")?.let{sourceStates[it]=state to reason}}
     fun sourceEntries():List<SourceEntry>{mainThread();return originals.mapIndexed{i,s->
         val id=s.optString("id");val status=sourceStates[id]
-        SourceEntry(id,s.optString("label"),i==recovery.index,if(i==recovery.index&&firstFrame)if(player?.playWhenReady==true)"playing"else "paused"else status?.first?:"untried",status?.second.orEmpty())}}
+        SourceEntry(id,s.optString("label"),i==recovery.index,if(i==recovery.index&&firstFrame&&status?.first!="failed")if(player?.playWhenReady==true)"playing"else "paused"else status?.first?:"untried",status?.second.orEmpty())}}
     fun chooseSource(id:String)=chooseSource(originals.indexOfFirst{it.optString("id")==id})
+    fun hasPreviousSource()=previousSource?.let{id->originals.any{it.optString("id")==id}}==true
+    fun returnToPrevious()=previousSource?.let(::chooseSource)==true
+    fun setSpeed(value:Float){
+        mainThread()
+        speed=value.coerceIn(0.5f,2f)
+        player?.setPlaybackSpeed(speed)
+    }
+    fun markLoop():Boolean {
+        val p=player?.takeIf{it.isCurrentMediaItemSeekable&&it.duration>0}?:return false
+        val position=p.currentPosition
+        val a=loopStart
+        if(a==null||loopEnd!=null){loopStart=position;loopEnd=null;return true}
+        if(position-a<1000L)return false
+        loopEnd=position;p.seekTo(a);return true
+    }
+    fun clearLoop(){loopStart=null;loopEnd=null}
     fun appendCandidates(candidates:List<JSONObject>,pending:Boolean){
         mainThread();discoveryPending=pending
         val added=candidates.filter{c->originals.none{it.optString("id")==c.optString("id")}}.distinctBy{it.optString("id")}.take((1024-originals.size).coerceAtLeast(0))
         val first=sources.size
         if(added.isNotEmpty()){originals=originals+added.map{JSONObject(it.toString())};sources=sources+added.map{JSONObject(it.toString())};recovery.extend(sources.size)}
         if(waitingForSources){
-            if(added.isNotEmpty()){waitingForSources=false;recovering=false;terminal=false;switches++;recovery.select(first);createEngine();loadCurrent(R.string.player_switching)}
-            else if(!pending){waitingForSources=false;recovering=false;terminal=true;listener.onSourcesExhausted(lastFailure?:"Kaynak bulunamadı")}
+            val next=if(automaticSources&&crossSiteSources&&!suspended)(first until sources.size).firstOrNull{candidateAllowed(originals[it])}else null
+            if(next!=null){waitingForSources=false;recovering=false;recovery.select(next);if(player==null)createEngine();switchAutomatically()}
+            else if(!pending||!automaticSources||!crossSiteSources)stopAfterFailure(R.string.player_source_failed)
         }
     }
     fun chooseSource(index:Int):Boolean {
         mainThread();if(index !in sources.indices)return false
-        player?.let{if(attemptPrepared){position=it.currentPosition;wantedToPlay=it.playWhenReady}}
-        recovery.select(index);triedVariants.clear();terminal=false;terminalError=null;recovering=false;sourceChanged=true
+        if(recovery.index!=index)previousSource=originals.getOrNull(recovery.index)?.optString("id")
+        position=retainedPosition()
+        automaticSwitchPending=false
+        recovery.select(index);triedVariants.clear();terminal=false;terminalError=null;recovering=false;waitingForSources=false
         // A previously resolved signed URL must be refreshed when the user returns to it.
         if(originals[index].has("lazyOptionId"))sources=sources.toMutableList().apply{set(index,JSONObject(originals[index].toString()))}
         if(player==null)createEngine()
@@ -291,18 +357,19 @@ internal class PlaybackSession(
     }
     fun start(candidates: List<JSONObject>, http: OkHttpClient, fixture: String? = null, lookup:SourceLookup?=null, resumePositionMs:Long=0) {
         mainThread(); val oldBuffer=sessionBuffer;stopPlayback();if(oldBuffer!=configuredSettings.buffer)destroyEngine();sessionBuffer=configuredSettings.buffer
+        previousSource=null;currentSourceId=null;clearLoop();setSpeed(1f)
         require(candidates.isNotEmpty()) { "No playback source" }
         // A bad page must not create an unbounded retry list. Keep all actual alternatives, up to 16.
         sources = candidates.take(1024).map { JSONObject(it.toString()) }
-        sourceStates.clear();triedVariants.clear();originals=sources.map{JSONObject(it.toString())};refreshed.clear();refreshAt.clear();refreshes=0;endedNotified=false;sourceChanged=false
+        sourceStates.clear();triedVariants.clear();originals=sources.map{JSONObject(it.toString())};refreshed.clear();refreshAt.clear();refreshes=0;endedNotified=false
         sourceLookup=lookup;discoveryPending=false;waitingForSources=false
         // Cookies and measured header policy are shared, execution/pool lifetime is owned here.
         // Closing a parser/JS runtime must not shut down active segment downloads.
         client = http.newBuilder().dispatcher(okhttp3.Dispatcher())
             .connectionPool(okhttp3.ConnectionPool(3, 1, TimeUnit.MINUTES)).build()
         fixtureBase = fixture; recovery = PlaybackRecovery(sources.size)
-        position = resumePositionMs.coerceAtLeast(0); wantedToPlay = true; suspended = false; terminal = false
-        terminalError = null; lastFailure = null; switches = 0; restarts = 0; enginesCreated = 0; engineInstancesUsed = 0
+        position = resumePositionMs.coerceAtLeast(0); knownDuration=0; wantedToPlay = true; suspended = false; terminal = false
+        terminalError = null; lastFailure = null; lastFailureSummary=null; lastFailurePosition=null; switches = 0; restarts = 0; enginesCreated = 0; engineInstancesUsed = 0
         rebufferCount = 0; rebufferMs = 0; droppedFrames = 0; audioUnderruns = 0; transferBytes = 0; transferMs = 0
         events.clear()
         if (player == null) createEngine() else {
@@ -338,10 +405,11 @@ internal class PlaybackSession(
             .setBandwidthMeter(bandwidth).setSeekBackIncrementMs(10000).setSeekForwardIncrementMs(10000)
             .setAudioAttributes(AudioAttributes.Builder().setUsage(C.USAGE_MEDIA).setContentType(C.AUDIO_CONTENT_TYPE_MOVIE).build(), true)
             .setHandleAudioBecomingNoisy(true).build().also { p ->
+                p.setPlaybackSpeed(speed)
                 p.setForegroundMode(true)
                 p.addListener(object : Player.Listener {
                     override fun onPlayWhenReadyChanged(playWhenReady:Boolean,reason:Int){
-                        if(active&&p===player)wantedToPlay=playWhenReady
+                        if(active&&attemptPrepared&&p===player)wantedToPlay=playWhenReady
                     }
                     override fun onTracksChanged(tracks: Tracks) {
                         if (!active || p !== player || tracks != p.currentTracks) return
@@ -368,14 +436,24 @@ internal class PlaybackSession(
                             fail(PlaybackRecovery.Failure.AUDIO, "No supported audio track", R.string.player_audio_unsupported)
                     }
                     override fun onPositionDiscontinuity(old: Player.PositionInfo, new: Player.PositionInfo, reason: Int) {
-                        if (reason == Player.DISCONTINUITY_REASON_SEEK) guard.reset(SystemClock.elapsedRealtime(), p.currentPosition, p.videoDecoderCounters?.renderedOutputBufferCount ?: 0)
+                        if (reason == Player.DISCONTINUITY_REASON_SEEK&&attemptPrepared&&new.mediaItem?.mediaId=="attempt-$attempt") {
+                            position=new.positionMs.coerceAtLeast(0)
+                            guard.reset(SystemClock.elapsedRealtime(),position,p.videoDecoderCounters?.renderedOutputBufferCount?:0)
+                        }
                     }
                     override fun onPlaybackStateChanged(state: Int) {
                         if(!active||p!==player||p.playbackState!=state)return
                         val now = SystemClock.elapsedRealtime()
                         if (state == Player.STATE_BUFFERING && firstFrame && rebufferStarted == 0L) { rebufferCount++; rebufferStarted = now; event("rebuffer") }
                         if (state != Player.STATE_BUFFERING) finishRebuffer()
-                        if (state == Player.STATE_ENDED&&!endedNotified) {endedNotified=true;event("ended");handler.post{if(active&&p===player&&p.playbackState==Player.STATE_ENDED)listener.onEnded()}}
+                        if(state==Player.STATE_ENDED&&loopEnd!=null&&loopStart!=null&&p.isCurrentMediaItemSeekable){
+                            p.seekTo(checkNotNull(loopStart));p.play();return
+                        }
+                        if(state==Player.STATE_ENDED&&attemptPrepared&&!endedNotified){
+                            if(!firstFrame){fail(PlaybackRecovery.Failure.FORMAT,"Source ended without displaying video",R.string.player_no_picture);return}
+                            endedNotified=true;val endedAttempt=attempt;event("ended")
+                            handler.post{if(active&&p===player&&attempt==endedAttempt&&p.playbackState==Player.STATE_ENDED)listener.onEnded()}
+                        }
                     }
                 })
                 p.addAnalyticsListener(object : AnalyticsListener {
@@ -386,9 +464,16 @@ internal class PlaybackSession(
                     }
                     override fun onRenderedFirstFrame(time:AnalyticsListener.EventTime,output:Any,renderTimeMs:Long){
                         if(!belongs(time))return
-                        if(!firstFrame)firstFrameMs=SystemClock.elapsedRealtime()-attemptStartedMs
+                        val fresh=!firstFrame
+                        if(fresh)firstFrameMs=SystemClock.elapsedRealtime()-attemptStartedMs
                         firstFrame=true;attemptHadProgress=true;guard.reset(SystemClock.elapsedRealtime(),p.currentPosition)
-                        listener.onMessage(R.string.player_source,label());refreshed.remove(recovery.index)
+                        if(p.duration>0)knownDuration=p.duration
+                        if(fresh){
+                            listener.onFirstFrame()
+                            listener.onMessage(if(automaticSwitchPending&&p.playWhenReady)R.string.player_switch_success else R.string.player_source,label())
+                            automaticSwitchPending=false
+                        }
+                        refreshed.remove(recovery.index)
                     }
                     override fun onPlayerError(time:AnalyticsListener.EventTime,error:PlaybackException) {
                         // One ExoPlayer is reused. A previous decoder can report its error
@@ -402,7 +487,12 @@ internal class PlaybackSession(
                             error.errorCode in 3000..3999 -> PlaybackRecovery.Failure.FORMAT
                             else -> PlaybackRecovery.Failure.NETWORK
                         }
-                        fail(reason, (error.errorCodeName + ": " + causes.joinToString(" | ") { it.javaClass.simpleName + ": " + it.message }).take(1600), R.string.player_source_failed)
+                        val userMessage=when(error.errorCode){
+                            PlaybackException.ERROR_CODE_DECODING_FORMAT_UNSUPPORTED,
+                            PlaybackException.ERROR_CODE_DECODING_FORMAT_EXCEEDS_CAPABILITIES->R.string.player_failure_unsupported_device
+                            else->R.string.player_source_failed
+                        }
+                        fail(reason, (error.errorCodeName + ": " + causes.joinToString(" | ") { it.javaClass.simpleName + ": " + it.message }).take(1600), userMessage)
                     }
                     override fun onVideoInputFormatChanged(time: AnalyticsListener.EventTime, format: Format, reuse: DecoderReuseEvaluation?) {
                         if (!active || p !== player || time.timeline.isEmpty) return
@@ -447,7 +537,9 @@ internal class PlaybackSession(
     }
     private fun label() = sources.getOrNull(recovery.index)?.optString("label").orEmpty()
     private fun loadCurrent(message: Int = R.string.player_preparing) {
+        subtitleFiles=emptyMap();navigation=PlaybackNavigation.empty;previewFactory=null
         val p = player ?: return
+        handler.removeCallbacks(ticker);handler.postDelayed(ticker,500)
         val available=PlaybackVariants.all(sources[recovery.index]).filter{device.allows(PlaybackVariants.format(it),true)}
         if(qualityHeight>0&&available.isNotEmpty()&&available.none{it.optInt("height")==qualityHeight})qualityHeight=0
         val source = PlaybackVariants.prepare(sources[recovery.index],qualityHeight){device.allows(PlaybackVariants.format(it),true)&&(!automaticVideo()||autoAllowed(PlaybackVariants.format(it)))}
@@ -472,7 +564,8 @@ internal class PlaybackSession(
                 handler.post {
                     if(attempt!=token || suspended || terminal || !active)return@post
                     pendingLookup=null;resolving=false
-                    if(error!=null || resolved==null){fail(PlaybackRecovery.Failure.FORMAT,"Resolve: "+(error?.message?:"No source"),R.string.player_source_failed)}
+                    if(error!=null || resolved==null){fail(PlaybackRecovery.Failure.FORMAT,"Resolve: "+(error?.message?:"No source"),R.string.player_source_failed,
+                        explanation=error?.let(listener::describeResolutionError))}
                     else {
                         sources=sources.toMutableList().apply{set(recovery.index,JSONObject(resolved.toString()))}
                         loadCurrent(message)
@@ -497,19 +590,30 @@ internal class PlaybackSession(
         val http = PlaybackHttpPolicy.client(source, checkNotNull(client)) { value -> handler.post { if (token == attempt) headerVariant = value } }
             .newBuilder().connectTimeout(8, TimeUnit.SECONDS).readTimeout(12, TimeUnit.SECONDS).writeTimeout(12, TimeUnit.SECONDS).callTimeout(0, TimeUnit.MILLISECONDS).build()
         val ds = OkHttpDataSource.Factory(http).setDefaultRequestProperties(headers)
+        navigation=PlaybackNavigation.read(source)
+        previewFactory=ds
         val factory = DefaultMediaSourceFactory(ds).setLoadErrorHandlingPolicy(PlaybackLoadPolicy())
         val mime = when {fixtureBase!=null||source.optString("type")=="hls"->MimeTypes.APPLICATION_M3U8
             source.optString("type")=="mp4"->MimeTypes.VIDEO_MP4
             source.optString("type")=="webm"->MimeTypes.VIDEO_WEBM
             source.optString("type")=="dash"->MimeTypes.APPLICATION_MPD
             else->null}
+        val activeId=source.optString("id")
+        if(currentSourceId!=null&&currentSourceId!=activeId)previousSource=currentSourceId
+        currentSourceId=activeId
+        val files=mutableMapOf<String,SubtitleFile>()
         val subtitles=source.optJSONArray("subtitles")?.let{list->(0 until list.length()).mapNotNull{i->
             val sub=list.optJSONObject(i)?:return@mapNotNull null
             val uri=sub.optString("url").toHttpUrlOrNull()?:return@mapNotNull null
-            MediaItem.SubtitleConfiguration.Builder(android.net.Uri.parse(uri.toString()))
-                .setMimeType(if(sub.optString("format")=="srt")MimeTypes.APPLICATION_SUBRIP else MimeTypes.TEXT_VTT)
+            val androidUri=android.net.Uri.parse(uri.toString())
+            val id="fm-sidecar:$token:$i"
+            val fileMime=if(sub.optString("format")=="srt")MimeTypes.APPLICATION_SUBRIP else MimeTypes.TEXT_VTT
+            if(sub.optString("format") in setOf("srt","vtt","webvtt"))files[id]=SubtitleFile(id,androidUri,fileMime,ds)
+            MediaItem.SubtitleConfiguration.Builder(androidUri)
+                .setMimeType(fileMime).setId(id)
                 .setLanguage(sub.optString("language").ifBlank{sub.optString("lang")}).setLabel(sub.optString("label")).build()
         }}?:emptyList()
+        subtitleFiles=files
         val item = MediaItem.Builder().setMediaId("attempt-$token").setUri(url).setMimeType(mime).setSubtitleConfigurations(subtitles).build()
         event("prepare", source.optString("id")); listener.onMessage(message, label())
         attemptPrepared=true
@@ -521,15 +625,45 @@ internal class PlaybackSession(
     private fun finishRebuffer() {
         if (rebufferStarted != 0L) { rebufferMs += SystemClock.elapsedRealtime() - rebufferStarted; rebufferStarted = 0;event("rebuffer-end") }
     }
-    private fun fail(reason: PlaybackRecovery.Failure, message: String, userMessage: Int) {
-        sourceState("failed",message.take(240))
+    private fun retainedPosition():Long {
+        val p=player?:return position
+        if(!attemptPrepared||p.currentMediaItem?.mediaId!="attempt-$attempt")return position
+        return if(firstFrame)p.currentPosition.coerceAtLeast(0)else maxOf(position,p.currentPosition)
+    }
+    fun durationMs():Long=player?.duration?.takeIf{it>0&&attemptPrepared&&firstFrame}?:knownDuration
+    private fun parkFailedAttempt(){
+        knownDuration=durationMs()
+        attemptPrepared=false;firstFrame=false
+        handler.removeCallbacks(ticker)
+        player?.let{it.stop();it.clearMediaItems()}
+    }
+    private fun stopAfterFailure(userMessage:Int){
+        waitingForSources=false;terminal=true;recovering=false;terminalError=lastFailure
+        automaticSwitchPending=false
+        parkFailedAttempt()
+        listener.onMessage(userMessage,label())
+        listener.onSourcesExhausted(lastFailureSummary?:context.getString(R.string.player_source_failed))
+    }
+    private fun switchAutomatically() {
+        automaticSwitchPending=true
+        switches++
+        loadCurrent(R.string.player_switching)
+    }
+    private fun fail(reason: PlaybackRecovery.Failure, message: String, userMessage: Int, explanation: String? = null) {
         if (recovering || suspended || terminal || !active) return
         recovering = true; val token = attempt
+        val summary=explanation?:when(reason){
+            PlaybackRecovery.Failure.HTTP->httpCode?.let{PlaybackFailureText.http(context,it)}?:context.getString(R.string.player_failure_http)
+            PlaybackRecovery.Failure.NETWORK->context.getString(R.string.player_failure_network)
+            PlaybackRecovery.Failure.FORMAT->if(userMessage==R.string.player_source_failed)context.getString(R.string.player_failure_format)else context.getString(userMessage)
+            PlaybackRecovery.Failure.DECODER->context.getString(if(userMessage==R.string.player_source_failed)R.string.player_failure_decoder else userMessage)
+            else->context.getString(userMessage)
+        }
+        lastFailureSummary=summary;sourceState("failed",summary)
         lastFailure = message; event("failure", reason.name + ": " + message)
-        val p = player
         // Zero while a new media source is preparing must not erase a valid resume point.
-        if (firstFrame || (p?.currentPosition ?: 0) > 0) position = p?.currentPosition ?: position
-        if(attemptPrepared)wantedToPlay = p?.playWhenReady ?: wantedToPlay
+        position=retainedPosition()
+        lastFailurePosition=position
         handler.post {
             if (attempt != token || suspended || terminal || !active) return@post
             finishRebuffer()
@@ -552,18 +686,16 @@ internal class PlaybackSession(
                 }
             }
             val currentSite=originals[recovery.index].optString("id").substringBefore('|')
-            val previousIndex=recovery.index
-            var action=recovery.failed(reason,attemptHadProgress,automaticSources)
-            while(!crossSiteSources&&action==PlaybackRecovery.Action.NEXT&&originals[recovery.index].optString("id").substringBefore('|')!=currentSite)action=recovery.failed(reason,false,automaticSources)
-            if(action==PlaybackRecovery.Action.STOP&&originals[recovery.index].optString("id").substringBefore('|')!=currentSite)recovery.select(previousIndex)
+            val action=recovery.failed(reason,attemptHadProgress,automaticSources){index->
+                val option=originals[index]
+                candidateAllowed(option)&&(crossSiteSources||option.optString("id").substringBefore('|')==currentSite)
+            }
             when (action) {
                 PlaybackRecovery.Action.RETRY -> { restarts++; loadCurrent(R.string.player_retrying) }
-                PlaybackRecovery.Action.NEXT -> { switches++; loadCurrent(R.string.player_switching) }
+                PlaybackRecovery.Action.NEXT -> switchAutomatically()
                 PlaybackRecovery.Action.STOP -> {
-                    if(automaticSources&&crossSiteSources&&discoveryPending){waitingForSources=true;recovering=true;destroyEngine();return@post}
-                    terminal = true; recovering = false; terminalError = message; destroyEngine()
-                    listener.onMessage(userMessage, label())
-                    listener.onSourcesExhausted(message)
+                    if(automaticSources&&crossSiteSources&&discoveryPending){waitingForSources=true;parkFailedAttempt();return@post}
+                    stopAfterFailure(userMessage)
                 }
             }
         }
@@ -571,13 +703,15 @@ internal class PlaybackSession(
     fun suspendPlayback() {
         mainThread()
         if (!active) { destroyEngine(); return }
-        if (suspended || terminal) return
-        if(attemptPrepared)player?.let { position = it.currentPosition; wantedToPlay = it.playWhenReady }
+        if (suspended) return
+        position=retainedPosition()
         suspended = true; attempt++; pendingLookup?.close();pendingLookup=null;resolving=false; recovering = false; event("suspend"); finishRebuffer(); destroyEngine()
     }
     fun resumePlayback() {
-        mainThread(); if (!active || !suspended || terminal) return
-        suspended = false; event("resume"); createEngine(); loadCurrent()
+        mainThread(); if (!active || !suspended) return
+        suspended = false
+        if(terminal||waitingForSources)return
+        event("resume"); createEngine(); loadCurrent()
     }
     private fun destroyEngine() {
         handler.removeCallbacks(ticker)
@@ -585,12 +719,14 @@ internal class PlaybackSession(
     }
     fun trimIdle() { mainThread(); if (!active) destroyEngine() }
     fun stopPlayback() {
+        navigation=PlaybackNavigation.empty;previewFactory=null;subtitleFiles=emptyMap()
         mainThread(); attempt++; pendingLookup?.close();pendingLookup=null;resolving=false;sourceLookup=null
         handler.removeCallbacksAndMessages(null); finishRebuffer()
         player?.stop(); player?.clearMediaItems()
         sources = emptyList()
+        automaticSwitchPending=false
         firstFrame=false;firstFrameMs=null;attemptPrepared=false;attemptHadProgress=false;waitingForSources=false;discoveryPending=false;terminalError=null
-        originals=emptyList();manual.clear()
+        originals=emptyList();clearSessionTracks()
         val retired = client; client = null
         if (retired != null) transportCleanup.execute {
             try { retired.dispatcher.cancelAll(); retired.connectionPool.evictAll() }
@@ -601,16 +737,17 @@ internal class PlaybackSession(
     }
     fun snapshot(): JSONObject {
         mainThread(); val p = player
-        return objectOf("firstFrame" to firstFrame, "positionMs" to (p?.currentPosition ?: position), "isPlaying" to (p?.isPlaying ?: false),
+        return objectOf("firstFrame" to firstFrame, "positionMs" to retainedPosition(), "isPlaying" to (p?.isPlaying ?: false),
             "width" to (p?.videoSize?.width ?: 0), "height" to (p?.videoSize?.height ?: 0),
             "state" to p?.playbackState, "playWhenReady" to (p?.playWhenReady ?: wantedToPlay), "bufferedMs" to (p?.totalBufferedDuration ?: 0), "firstFrameMs" to firstFrameMs,
             "renderedBuffers" to (p?.videoDecoderCounters?.renderedOutputBufferCount ?: 0), "audioRenderedBuffers" to (p?.audioDecoderCounters?.renderedOutputBufferCount ?: 0),
             "audioMime" to p?.audioFormat?.sampleMimeType, "videoCodec" to videoCodec, "videoDecoder" to videoDecoder, "videoCapabilityProbe" to videoCapabilityProbe,
             "rebufferCount" to rebufferCount, "rebufferMs" to (rebufferMs + if (rebufferStarted != 0L) SystemClock.elapsedRealtime() - rebufferStarted else 0),
             "httpStatus" to httpCode, "headerVariant" to headerVariant, "error" to terminalError, "lastFailure" to lastFailure,
+            "lastFailurePositionMs" to lastFailurePosition,
             "sourceIndex" to recovery.index, "sourceId" to sources.getOrNull(recovery.index)?.optString("id"),"sourceCount" to originals.size,
             "sourceSwitches" to switches, "sourceRestarts" to restarts, "enginesCreated" to enginesCreated,
-            "sourceRefreshes" to refreshes,"bufferProfile" to sessionBuffer.name,"automaticQuality" to automaticQuality,"subtitlePolicy" to configuredSettings.subtitles.name,
+            "sourceRefreshes" to refreshes,"bufferProfile" to sessionBuffer.name,"automaticQuality" to automaticQuality,"subtitlePolicy" to subtitlePolicy.name,
             "bufferTargetBytes" to bufferTargetBytes,
             "diagnosticsEnabled" to diagnosticsEnabled,
             "engineInstancesUsed" to engineInstancesUsed, "engineIdentity" to p?.let(System::identityHashCode), "suspended" to suspended, "resolving" to resolving,

@@ -9,6 +9,8 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+enum class SourceScanProfile { SELECTED, BACKUP, MENU }
+
 data class AppSettings(
     val startScreen:String="HOME",val largeText:Boolean=false,val exitConfirmation:Boolean=true,
     val hiddenRows:Set<String> = emptySet(),val rowOrder:List<String> = listOf("continue","following","movies","series","library"),
@@ -16,10 +18,12 @@ data class AppSettings(
     val siteOrder:List<String> = Sites.all.map{it.id},val selectedSite:String="",
     val automaticSources:Boolean=true,val crossSiteSources:Boolean=true,val autoNext:Boolean=true,
     val entry:String="ASK",val resumeRewind:Int=5,val diagnostics:Boolean=false,
-    val player:PlaybackSettings=PlaybackSettings(),val siteAddresses:Map<String,SiteAddress> = emptyMap()
+    val player:PlaybackSettings=PlaybackSettings(),val siteAddresses:Map<String,SiteAddress> = emptyMap(),
+    val searchSuggestions:Boolean=false,val suggestionSite:String="",val showPosters:Boolean=true,
+    val matchingMode:MatchingMode=MatchingMode.SMART,val rememberTracks:Boolean=true,val sourceScan:SourceScanProfile=SourceScanProfile.BACKUP
 ) {
     fun installedSites()=Sites.orderedInstalled(siteOrder)
-    fun catalog()=CatalogRequestOptions(merge,hideAdult,installedSites().map{it.id}.filter{it !in disabledCatalog})
+    fun catalog()=CatalogRequestOptions(merge,hideAdult,installedSites().map{it.id}.filter{it !in disabledCatalog},matchingMode)
     fun sourceAllowed(id:String)=Sites.isInstalled(id)&&id !in disabledSources
 }
 
@@ -53,10 +57,15 @@ object SettingsCodec {
                 en(values.s("sizing","FIT"),VideoSizing.FIT),en(values.s("buffer","AUTO"),BufferProfile.AUTO),
                 values.i("seekSeconds",10).takeIf{it in listOf(5,10,15,30)}?:10,values.b("accelerate",true),values.i("controlsSeconds",5).takeIf{it in listOf(0,3,5,10)}?:5,
                 values.b("customSubtitles",false),values.i("subtitleSize",1).coerceIn(0,3),values.b("subtitleYellow",false),values.b("subtitleOutline",true),
-                values.i("subtitleBackground",0).coerceIn(0,2),values.i("subtitleBottom",8).takeIf{it in listOf(5,8,12,16)}?:8),SiteAddresses.decode(values["siteAddresses"]))
+                values.i("subtitleBackground",0).coerceIn(0,2),values.i("subtitleBottom",8).takeIf{it in listOf(5,8,12,16)}?:8),SiteAddresses.decode(values["siteAddresses"]),
+            searchSuggestions=values.b("searchSuggestions",false),suggestionSite=values.s("suggestionSite",""),
+            showPosters=values.b("showPosters",true),matchingMode=en(values.s("matchingMode","SMART"),MatchingMode.SMART),
+            rememberTracks=values.b("rememberTracks",true),sourceScan=en(values.s("sourceScan","BACKUP"),SourceScanProfile.BACKUP))
     }
     fun fields(v:AppSettings):Map<String,Any> = linkedMapOf(
-        "schema" to 3,"siteAddresses" to SiteAddresses.encode(v.siteAddresses),"startScreen" to v.startScreen,"largeText" to v.largeText,"exitConfirmation" to v.exitConfirmation,
+        "schema" to 3,"searchSuggestions" to v.searchSuggestions,"suggestionSite" to v.suggestionSite,"showPosters" to v.showPosters,
+        "matchingMode" to v.matchingMode.name,"rememberTracks" to v.rememberTracks,"sourceScan" to v.sourceScan.name,
+        "siteAddresses" to SiteAddresses.encode(v.siteAddresses),"startScreen" to v.startScreen,"largeText" to v.largeText,"exitConfirmation" to v.exitConfirmation,
         "hiddenRows" to v.hiddenRows,"rowOrder" to v.rowOrder.joinToString("|"),"merge" to v.merge,"hideAdult" to v.hideAdult,
         "disabledCatalog" to v.disabledCatalog,"disabledSources" to v.disabledSources,"siteOrder" to v.siteOrder.joinToString("|"),"selectedSite" to v.selectedSite,
         "automaticSources" to v.automaticSources,"crossSiteSources" to v.crossSiteSources,"autoNext" to v.autoNext,"entry" to v.entry,"resumeRewind" to v.resumeRewind,"diagnostics" to v.diagnostics,

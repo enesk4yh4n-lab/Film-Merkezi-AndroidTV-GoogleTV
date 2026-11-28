@@ -9,7 +9,7 @@ import app.filmmerkezi.tv.R
 /** Recycled update pages embedded in the Classic options screen, without another window. */
 internal class UpdateCenterView(private val activity:Activity,private val left:()->Unit,private val up:()->Unit=left):LinearLayout(activity) {
     private val title=ClassicUi.text(activity,"",21f,bold=true)
-    private val status=ClassicUi.text(activity,"",12f,ClassicUi.muted).apply{maxLines=4}
+    private val status=ClassicUi.text(activity,"",12f,ClassicUi.muted).apply{maxLines=4;tag="updates:status"}
     private val progress=ProgressBar(activity,null,android.R.attr.progressBarStyleHorizontal).apply{isIndeterminate=true;visibility=GONE;tag="updates:loading"}
     private val back=ClassicUi.button(activity,activity.getString(R.string.tv_back)){onBack?.invoke()}.apply{tag="updates:back"}
     private val list=RecyclerView(activity).apply{layoutManager=LinearLayoutManager(activity);itemAnimator=null;setItemViewCacheSize(3);overScrollMode=View.OVER_SCROLL_NEVER}
@@ -83,11 +83,18 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
         if(pageId.isNotEmpty())positions[pageId]=Position(list.layoutManager?.onSaveInstanceState(),resumeFocus)
         rendering++;pageId=value;val saved=positions[value];restoreScroll=saved?.scroll;restoreFocus=saved?.focus;resumeFocus=saved?.focus
         title.text=value;back.visibility=if(nested)VISIBLE else GONE;preferred=null;loading(false)
+        progress.contentDescription=null;progress.progressTintList=null;progress.layoutParams=progress.layoutParams.apply{height=u(3f)}
         val count=rows.size;rows=emptyList();choose={};if(count>0)adapter.notifyItemRangeRemoved(0,count)
         actions=emptyList();footer.removeAllViews();status.text="";status.visibility=GONE
     }
     fun loading(value:Boolean){progress.isIndeterminate=true;progress.visibility=if(value)VISIBLE else GONE}
     fun progress(completed:Long,total:Long){progress.isIndeterminate=total<=0;progress.max=1000;progress.progress=if(total>0)(completed.coerceIn(0,total)*1000/total).toInt()else 0;progress.visibility=VISIBLE}
+    fun installProgress(percent:Int,description:String){
+        progress.isIndeterminate=false;progress.max=100;progress.progress=percent;progress.visibility=VISIBLE
+        progress.contentDescription=description
+        progress.progressTintList=android.content.res.ColorStateList.valueOf(ClassicUi.gold)
+        if(progress.layoutParams.height!=u(6f))progress.layoutParams=progress.layoutParams.apply{height=u(6f)}
+    }
     fun update(values:List<ClassicRow>,actions:List<ClassicAction> = emptyList(),message:String="",click:(String)->Unit={}) {
         val serial=++rendering;val navigation=focusRevision;val focused=findFocus()?.tag as? String;val inside=hasFocus();val previous=rows
         val saved=list.layoutManager?.onSaveInstanceState()

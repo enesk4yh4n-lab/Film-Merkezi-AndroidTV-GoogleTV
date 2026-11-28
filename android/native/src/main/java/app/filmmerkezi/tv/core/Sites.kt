@@ -34,13 +34,15 @@ data class SiteSpec(
     }
 }
 
+internal data class CatalogPluginMetadata(val revision:String,val sections:Map<CatalogSection,List<SectionRoute>>?)
+
 object Sites {
     /** Optional historical fixture/migration source set. The normal APK has no site inventory. */
     val defaults: List<SiteSpec> = runCatching {
         @Suppress("UNCHECKED_CAST")
         (Class.forName("app.filmmerkezi.tv.core.LegacySites").getMethod("definitions").invoke(null) as List<SiteSpec>)
     }.getOrDefault(emptyList())
-    private data class Configuration(val addresses:Map<String,SiteAddress>,val sites:List<SiteSpec>,val revision:Long)
+    private data class Configuration(val addresses:Map<String,SiteAddress>,val sites:List<SiteSpec>,val revision:Long,val catalog:Map<String,CatalogPluginMetadata> = emptyMap())
     private var templates=defaults
     @Volatile private var available:Set<String> = defaults.map{it.id}.toSet()
     @Volatile private var configuration=Configuration(emptyMap(),defaults,0)
@@ -53,11 +55,14 @@ object Sites {
         val active=all.associateBy{it.id}
         return (order+active.keys).distinct().mapNotNull(active::get)
     }
-    @Synchronized fun installed(sites:List<SiteSpec>){templates=(sites+defaults).distinctBy{it.id};available=sites.map{it.id}.toSet();configuration=Configuration(configuration.addresses,templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},configuration.revision+1);installedState.value=all}
-    @Synchronized fun updateMetadata(site:SiteSpec){templates=(listOf(site)+templates).distinctBy{it.id};configuration=Configuration(configuration.addresses,templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},configuration.revision+1);installedState.value=all}
-    @Synchronized fun remember(sites:List<SiteSpec>){templates=(templates+sites).distinctBy{it.id};configuration=Configuration(configuration.addresses,templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},configuration.revision+1);installedState.value=all}
+    fun installed(sites:List<SiteSpec>)=installed(sites,emptyMap())
+    @Synchronized internal fun installed(sites:List<SiteSpec>,catalog:Map<String,CatalogPluginMetadata>){templates=(sites+defaults).distinctBy{it.id};available=sites.map{it.id}.toSet();configuration=configuration.copy(sites=templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},revision=configuration.revision+1,catalog=catalog);installedState.value=all}
+    @Synchronized fun updateMetadata(site:SiteSpec){templates=(listOf(site)+templates).distinctBy{it.id};configuration=configuration.copy(sites=templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},revision=configuration.revision+1);installedState.value=all}
+    @Synchronized fun remember(sites:List<SiteSpec>){templates=(templates+sites).distinctBy{it.id};configuration=configuration.copy(sites=templates.map{SiteAddresses.apply(it,configuration.addresses[it.id])},revision=configuration.revision+1);installedState.value=all}
     val revision:Long get()=configuration.revision
-    @Synchronized fun configure(addresses:Map<String,SiteAddress>){if(addresses!=configuration.addresses){configuration=Configuration(addresses.toMap(),templates.map{SiteAddresses.apply(it,addresses[it.id])},configuration.revision+1);installedState.value=all}}
+    @Synchronized fun configure(addresses:Map<String,SiteAddress>){if(addresses!=configuration.addresses){configuration=configuration.copy(addresses=addresses.toMap(),sites=templates.map{SiteAddresses.apply(it,addresses[it.id])},revision=configuration.revision+1);installedState.value=all}}
+    internal fun declaredSections(id:String)=configuration.catalog[id]?.sections
+    internal fun catalogRevision(id:String)=configuration.catalog[id]?.revision.orEmpty()
     fun current(site:SiteSpec)=SiteAddresses.apply(site,configuration.addresses[site.id])
     fun default(id:String)=templates.singleOrNull{it.id==id}?:throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")
     fun get(id: String): SiteSpec = known.singleOrNull { it.id == id } ?: throw DataFailure(FailureKind.PARSE,"Bilinmeyen site: $id")

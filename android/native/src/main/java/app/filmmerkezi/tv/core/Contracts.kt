@@ -37,7 +37,7 @@ object Contracts {
     fun option(v:SourceOption)=JSONObject().put("id",v.id).put("content",ref(v.content)).put("label",v.label).put("url",v.url)
         .put("extractor",v.extractor).put("state",v.state.name.lowercase(Locale.ROOT)).put("reason",v.reason).put("fields",JSONObject(v.fields))
     fun cursor(v:PageCursor)=JSONObject().put("siteId",v.siteId).put("url",v.url).put("page",v.page).put("fields",JSONObject(v.fields))
-    fun source(v:ResolvedSource)=JSONObject().put("schemaVersion",VERSION).put("id",v.id).put("label",v.label).put("url",v.url)
+    fun source(v:ResolvedSource)=JSONObject().putOpt("navigation",v.navigation).put("schemaVersion",VERSION).put("id",v.id).put("label",v.label).put("url",v.url)
         .put("type",v.type.name.lowercase(Locale.ROOT)).put("referer",v.referer).put("userAgent",v.userAgent).put("cookie",v.cookie)
         .put("headers",JSONObject(v.headers)).put("subtitles",JSONArray(v.subtitles.map{s->JSONObject().put("url",s.url).put("label",s.label).put("language",s.language).put("format",s.format)}))
         .put("playbackRequirements",JSONArray(v.playbackRequirements.toList())).put("expiresAt",v.expiresAt?:JSONObject.NULL)

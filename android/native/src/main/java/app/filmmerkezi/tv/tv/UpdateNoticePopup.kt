@@ -21,7 +21,7 @@ internal class UpdateNoticePopup(private val activity:Activity,private val scope
     private fun draw(){val body=buildList{
         add(if(notice.kind==NoticeKind.APPLICATION)activity.getString(R.string.hub_notice_app_version,notice.release!!.name)
             else activity.getString(if(notice.kind==NoticeKind.NEW_PLUGINS)R.string.hub_notice_new_count else R.string.hub_notice_updates_count,notice.plugins.size))
-        if(notice.plugins.isNotEmpty()){add(notice.plugins.take(3).joinToString(" · "){it.entry.name});if(notice.plugins.size>3)add(activity.getString(R.string.hub_notice_more,notice.plugins.size-3))}
+        if(notice.plugins.isNotEmpty()){add(notice.plugins.take(3).joinToString(" · "){pluginCode(it.entry.id)});if(notice.plugins.size>3)add(activity.getString(R.string.hub_notice_more,notice.plugins.size-3))}
         add(activity.getString(if(failed)R.string.hub_notice_save_error else R.string.hub_notice_later_help))
     }.joinToString("\n")
         window.update(emptyList(),listOf(

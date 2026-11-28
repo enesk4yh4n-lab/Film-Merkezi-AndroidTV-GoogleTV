@@ -2,6 +2,9 @@ package app.filmmerkezi.tv.updates
 
 import org.json.JSONArray
 import org.json.JSONObject
+import app.filmmerkezi.tv.core.CatalogPluginMetadata
+import app.filmmerkezi.tv.core.CatalogSection
+import app.filmmerkezi.tv.core.Sites
 
 /** Validates the whole next set before switching any active package. */
 object PackageSets {
@@ -20,12 +23,22 @@ object PackageSets {
         .sortedWith(compareBy<UpdateProtocol.Module>{Regex("^p(\\d{3})$").matchEntire(it.id)?.groupValues?.get(1)?.toIntOrNull()?:Int.MAX_VALUE}.thenBy{it.id})
         .map{app.filmmerkezi.tv.core.PluginWire.site(it.site!!)}
     fun activeSites(state:JSONObject,modules:Map<String,UpdateProtocol.Module>):List<app.filmmerkezi.tv.core.SiteSpec> {
+        return orderedSites(activeModules(state,modules))
+    }
+    internal fun registerSites(state:JSONObject,modules:Map<String,UpdateProtocol.Module>){
+        val active=activeModules(state,modules)
+        val metadata=active.mapNotNull{m->m.site?.let{
+            it.getString("id") to CatalogPluginMetadata(m.id+"@"+m.version+":"+m.hash,CatalogSection.fromManifest(it))
+        }}.toMap()
+        Sites.installed(orderedSites(active),metadata)
+    }
+    private fun activeModules(state:JSONObject,modules:Map<String,UpdateProtocol.Module>):List<UpdateProtocol.Module>{
         val packages=state.getJSONObject("packages")
         val enabled=modules.keys.filter{packages.optJSONObject(it)?.optBoolean("enabled",true)==true}.toMutableSet()
         do {val unavailable=enabled.filter{key->modules.getValue(key).dependencies.any{it.publisher+"/"+it.id !in enabled}}
             enabled.removeAll(unavailable.toSet())
         } while(unavailable.isNotEmpty())
-        return orderedSites(modules.filterKeys{it in enabled}.values)
+        return enabled.map(modules::getValue)
     }
     fun validate(state:JSONObject, set:JSONObject, appCode:Int, api:Int):Map<String,UpdateProtocol.Module> {
         require(set.length()<=64){"64 kurulu paket sınırı"}

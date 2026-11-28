@@ -10,15 +10,16 @@ internal class PlaybackRecovery(private var sourceCount: Int) {
         private set
     fun select(selected:Int){require(selected in 0 until sourceCount);index=selected;retryCount=0}
     fun extend(count:Int){require(count>=sourceCount);sourceCount=count}
-    fun failed(reason: Failure, hadProgress: Boolean,allowNext:Boolean=true): Action {
+    fun failed(reason: Failure, hadProgress: Boolean,allowNext:Boolean=true,eligible:(Int)->Boolean={true}): Action {
         // The loader already retries transient HTTP failures. One session restart is allowed
         // only after playback made progress, never an endless retry of a dead startup URL.
         if (hadProgress && retryCount == 0 && reason in setOf(Failure.NETWORK, Failure.STALL)) {
             retryCount++
             return Action.RETRY
         }
-        if (!allowNext || index + 1 >= sourceCount) return Action.STOP
-        index++; retryCount = 0
+        if (!allowNext) return Action.STOP
+        index = (index + 1 until sourceCount).firstOrNull(eligible) ?: return Action.STOP
+        retryCount = 0
         return Action.NEXT
     }
 }

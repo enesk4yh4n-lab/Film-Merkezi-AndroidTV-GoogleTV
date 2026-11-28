@@ -11,7 +11,7 @@
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.updates" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/update_file_paths" />
         </provider>
-        <activity android:name=".updates.RestartActivity" android:exported="false" android:process=":restart" android:taskAffinity="app.filmmerkezi.tv.restart" android:excludeFromRecents="true" />
+        <activity android:name=".updates.RestartActivity" android:exported="false" android:process=":restart" android:taskAffinity="${applicationId}.restart" android:excludeFromRecents="true" />
         <service android:name=".updates.PluginWorkerService" android:process=":plugins" android:exported="false" />
         <activity android:name=".NativeMainActivity" android:screenOrientation="landscape" android:exported="false"/>
         <activity android:name=".tv.TvActivity" android:label="@string/native_app_name"

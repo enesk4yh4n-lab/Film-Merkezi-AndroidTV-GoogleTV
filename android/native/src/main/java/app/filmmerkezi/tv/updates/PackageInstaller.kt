@@ -56,7 +56,22 @@ class PackageInstaller(private val manager:DistributionManager) {
         val objects=File(manager.store.directory,"objects").apply{mkdirs()};val state=manager.store.snapshot();val staged=JSONObject((state.optJSONObject("pending")?:state.getJSONObject("packages")).toString())
         val replacements=PackageSets.replacedProviders(staged,plan.associate{it.identity to it.manifest})
         for(c in plan){require(c.replaces.toSet()==replacements[c.identity].orEmpty().toSet()){"Kurulum planı değişti; yeniden seçin."};c.replaces.forEach{staged.remove(it)}}
-        for(c in plan){val m=c.manifest;val target=File(objects,m.hash+".jar")
+        for(c in plan){val m=c.manifest
+            fetch(c,objects,completed,total,progress,onState)
+            staged.put(c.identity,record(c))
+            completed+=m.size
+        }
+        commitStaged(state,staged)
+        onState(InstallProgress(InstallPhase.READY,"",total,total))
+    }
+    private fun record(c:Candidate)=JSONObject().put("repo",c.repo.getString("key"))
+        .put("manifest",c.raw.toString(Charsets.UTF_8)).put("signature",c.signature)
+        .put("artifact",c.manifest.hash).put("enabled",true)
+
+    private suspend fun fetch(c:Candidate,objects:File,completed:Long,total:Long,
+        progress:(String,Long)->Unit,onState:(InstallProgress)->Unit){
+            val m=c.manifest
+            val target=File(objects,m.hash+".jar")
             if(!target.exists()||target.length()!=m.size.toLong()||UpdateProtocol.sha(target.readBytes())!=m.hash){
                 val used=objects.listFiles().orEmpty().sumOf{it.length()};require(used+m.size<=64L*1024*1024){"Eklenti alanı dolu; önce kullanılmayan paketleri kaldırın"}
                 val temporary=File(objects,"download-${m.hash}.jar")
@@ -64,13 +79,145 @@ class PackageInstaller(private val manager:DistributionManager) {
             }
             currentCoroutineContext().ensureActive();onState(InstallProgress(InstallPhase.VERIFYING,m.name,completed+m.size,total))
             validateJar(target);require(target.setReadOnly()){"Paket salt okunur yapılamadı"}
-            staged.put(c.identity,JSONObject().put("repo",c.repo.getString("key")).put("manifest",c.raw.toString(Charsets.UTF_8)).put("signature",c.signature).put("artifact",m.hash).put("enabled",true))
-            completed+=m.size
-        }
+    }
+    private suspend fun commitStaged(state:JSONObject,staged:JSONObject,remaining:JSONObject?=null,finishJob:Boolean=false){
         PackageSets.validate(state,staged,manager.installedCode,Build.VERSION.SDK_INT)
         currentCoroutineContext().ensureActive()
-        withContext(NonCancellable){manager.store.commit{current->require(current.getJSONObject("packages").toString()==state.getJSONObject("packages").toString()){ "Kurulum sirasinda paket seti degisti; tekrar deneyin" };require(current.optJSONObject("pending")?.toString()==state.optJSONObject("pending")?.toString()){ "Hazir paket seti degisti; tekrar deneyin" };PackageSets.validate(current,staged,manager.installedCode,Build.VERSION.SDK_INT);current.put("pending",staged)};onState(InstallProgress(InstallPhase.READY,"",total,total))}
+        withContext(NonCancellable){manager.store.commit{current->require(current.getJSONObject("packages").toString()==state.getJSONObject("packages").toString()){ "Kurulum sirasinda paket seti degisti; tekrar deneyin" };require(current.optJSONObject("pending")?.toString()==state.optJSONObject("pending")?.toString()){ "Hazir paket seti degisti; tekrar deneyin" };PackageSets.validate(current,staged,manager.installedCode,Build.VERSION.SDK_INT);current.put("pending",staged)
+            if(finishJob){if(remaining==null)current.remove("installJob")else current.put("installJob",remaining)}
+        }}
     }
+
+    data class JobItem(val key:String,val name:String,val status:String)
+
+    fun job():List<JobItem> {
+        val entries=manager.store.snapshot().optJSONObject("installJob")?:return emptyList()
+        return entries.keys().asSequence().map{key->val entry=entries.getJSONObject(key)
+            JobItem(key,entry.getString("name"),entry.getString("status"))}.toList()
+    }
+
+    internal fun jobSummary():InstallJobSummary {
+        val state=manager.store.snapshot()
+        val entries=state.optJSONObject("installJob")?:return InstallJobSummary(emptyList())
+        val items=entries.keys().asSequence().map{key->
+            val entry=entries.getJSONObject(key)
+            val metadata=JSONObject(entry.getString("manifest"))
+            val dependencies=metadata.optJSONArray("dependencies")?.let{a->List(a.length()){index->
+                val d=a.getJSONObject(index);d.getString("publisher")+"/"+d.getString("id")
+            }}.orEmpty()
+            val problem=UpdateProblem.entries.firstOrNull{it.name==entry.optString("problem")}
+            InstallJobItem(key,entry.getString("name"),entry.getString("status"),metadata.optString("type")=="site",dependencies,problem,
+                entry.optInt("httpCode").takeIf{it in 400..599})
+        }.toList()
+        val available=(state.optJSONObject("pending")?:state.getJSONObject("packages")).keys().asSequence().toSet()
+        return InstallJobSummary(items,available)
+    }
+
+    suspend fun beginJob(plan:List<Candidate>)=mutex.withLock {
+        require(plan.isNotEmpty()&&plan.size<=64&&plan.map{it.identity}.distinct().size==plan.size)
+        val entries=JSONObject()
+        for(c in plan)entries.put(c.identity,record(c).put("name",c.manifest.name)
+            .put("status","waiting").put("replaces",JSONArray(c.replaces)))
+        manager.store.commit{state->
+            require(!state.has("installJob")&&!state.has("pending")&&!manager.store.restartRequired)
+            val staged=JSONObject(state.getJSONObject("packages").toString())
+            val replacements=PackageSets.replacedProviders(staged,plan.associate{it.identity to it.manifest})
+            for(c in plan){
+                require(c.replaces.toSet()==replacements[c.identity].orEmpty().toSet()){"Kurulum planı değişti; yeniden seçin."}
+                requireNotOlder(staged,c)
+                c.replaces.forEach{staged.remove(it)}
+                staged.put(c.identity,record(c))
+            }
+            PackageSets.validate(state,staged,manager.installedCode,Build.VERSION.SDK_INT)
+            state.put("installJob",entries)
+        }
+    }
+
+    private fun requireNotOlder(set:JSONObject,c:Candidate){
+        val existing=set.optJSONObject(c.identity)?:return
+        val raw=existing.getString("manifest").toByteArray(Charsets.UTF_8)
+        val previous=UpdateProtocol.module(raw)
+        val comparison=UpdateProtocol.compare(c.manifest.version,previous.version)
+        require(comparison>0||comparison==0&&raw.contentEquals(c.raw)){"Kurulu paket sürümü değişti; yeniden seçin."}
+    }
+
+    private fun readJob(state:JSONObject,entries:JSONObject):List<Candidate> {
+        val repositories=state.getJSONObject("repositories")
+        return entries.keys().asSequence().map{key->
+            val e=entries.getJSONObject(key)
+            val repo=repositories.getJSONObject(e.getString("repo"))
+            require(repo.optBoolean("enabled",true)){"Depo kapalı"}
+            val raw=e.getString("manifest").toByteArray(Charsets.UTF_8)
+            val signature=e.getString("signature")
+            UpdateProtocol.verify(raw,signature,repo.getString("publicKey"))
+            val module=UpdateProtocol.module(raw)
+            require(module.hash==e.getString("artifact")&&module.minApp<=manager.installedCode&&module.minSdk<=Build.VERSION.SDK_INT)
+            Candidate(repo,module,raw,signature,e.getJSONArray("replaces").let{a->List(a.length()){a.getString(it)}}).also{require(it.identity==key)}
+        }.toList()
+    }
+
+    internal suspend fun downloadJob(onState:(InstallJobStep)->Unit)=mutex.withLock {
+        val state=manager.store.snapshot()
+        val entries=state.getJSONObject("installJob")
+        val plan=readJob(state,entries)
+        val objects=File(manager.store.directory,"objects").apply{mkdirs()}
+        collectGarbage()
+        for(c in plan){
+            val entry=entries.getJSONObject(c.identity)
+            val target=File(objects,c.manifest.hash+".jar")
+            if(entry.optString("status")=="ready"&&target.length()==c.manifest.size.toLong()&&UpdateProtocol.sha(target.readBytes())==c.manifest.hash)continue
+            var failure:UpdateProblem?=null
+            var httpCode:Int?=null
+            val status=try{
+                fetch(c,objects,0,c.manifest.size.toLong(),{_,_->}){update->
+                    onState(InstallJobStep(c.identity,c.manifest.name,update.phase))
+                }
+                "ready"
+            }catch(e:CancellationException){throw e}catch(e:Exception){manager.recordIssue(e);failure=UpdateProblem.classify(e);httpCode=(e as? UpdateHttpFailure)?.code;"failed"}
+            manager.store.commit{state->state.getJSONObject("installJob").getJSONObject(c.identity).put("status",status).put("problem",failure?.name).put("httpCode",httpCode)}
+        }
+    }
+
+    suspend fun stageReady()=mutex.withLock {
+        val state=manager.store.snapshot()
+        require(!manager.store.restartRequired)
+        val entries=state.getJSONObject("installJob")
+        val plan=readJob(state,entries).associateBy{it.identity}
+        val existing=state.optJSONObject("pending")?:state.getJSONObject("packages")
+        val staged=JSONObject(existing.toString())
+        val used=mutableSetOf<String>()
+        for(root in plan.values.filter{it.manifest.type=="site"}){
+            val needed=linkedSetOf<String>()
+            fun add(c:Candidate):Boolean {
+                if(c.identity in needed)return true
+                val file=File(manager.store.directory,"objects/"+c.manifest.hash+".jar")
+                if(entries.getJSONObject(c.identity).optString("status")!="ready"||file.length()!=c.manifest.size.toLong()||
+                    UpdateProtocol.sha(file.readBytes())!=c.manifest.hash)return false
+                needed.add(c.identity)
+                return c.manifest.dependencies.all{d->
+                    val key=d.publisher+"/"+d.id
+                    plan[key]?.let(::add)?:existing.optJSONObject(key)?.let{
+                        d.accepts(UpdateProtocol.module(it.getString("manifest").toByteArray(Charsets.UTF_8)).version)
+                    }?:false
+                }
+            }
+            if(!add(root))continue
+            val next=JSONObject(staged.toString())
+            for(key in needed){val c=plan.getValue(key)
+                requireNotOlder(next,c)
+                c.replaces.forEach{next.remove(it)}
+                next.put(key,record(c))
+            }
+            if(runCatching{PackageSets.validate(state,next,manager.installedCode,Build.VERSION.SDK_INT)}.isFailure)continue
+            for(key in needed){val c=plan.getValue(key);c.replaces.forEach{staged.remove(it)};staged.put(key,record(c))}
+            used.addAll(needed)
+        }
+        require(used.isNotEmpty()){ "Bağımlılıklarıyla birlikte hazır eklenti yok" }
+        used.forEach{entries.remove(it)}
+        commitStaged(state,staged,entries.takeIf{it.length()>0},true)
+    }
+
+    suspend fun cancelJob()=mutex.withLock { manager.store.commit{it.remove("installJob")} }
     fun validateJar(file:File){
         ZipFile(file).use{zip->val entries=zip.entries().asSequence().toList();require(entries.size in 1..64&&entries.any{it.name=="classes.dex"}){"Geçerli Kotlin/DEX paketi değil"}
             var total=0L;for(e in entries){UpdateProtocol.path(e.name.trimEnd('/'));require(!e.name.endsWith(".so")&&!e.name.startsWith("lib/")){"Native ikili eklentiyle kurulamaz"};if(e.isDirectory)continue
@@ -87,7 +234,7 @@ class PackageInstaller(private val manager:DistributionManager) {
     suspend fun clearPending(){manager.store.commit{it.remove("pending")}}
     fun collectGarbage(){
         val state=manager.store.snapshot();val referenced=mutableSetOf<String>()
-        for(name in listOf("packages","pending","previous")){val set=state.optJSONObject(name)?:continue;set.keys().forEach{referenced.add(set.getJSONObject(it).getString("artifact")+".jar")}}
+        for(name in listOf("packages","pending","previous","installJob")){val set=state.optJSONObject(name)?:continue;set.keys().forEach{referenced.add(set.getJSONObject(it).getString("artifact")+".jar")}}
         File(manager.store.directory,"objects").listFiles().orEmpty().filter{it.isFile&&it.name !in referenced&&(it.name.matches(Regex("[a-f0-9]{64}\\.jar"))||it.name.matches(Regex("download-[a-f0-9]{64}\\.jar")))}.forEach{require(it.delete()){"Kullanılmayan paket temizlenemedi"}}
     }
     suspend fun cleanup():Long=mutex.withLock{val before=File(manager.store.directory,"objects").listFiles().orEmpty().sumOf{it.length()};collectGarbage();before-File(manager.store.directory,"objects").listFiles().orEmpty().sumOf{it.length()}}

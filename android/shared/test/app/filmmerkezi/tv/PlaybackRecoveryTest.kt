@@ -23,6 +23,15 @@ class PlaybackRecoveryTest {
         assertEquals(PlaybackRecovery.Action.STOP, r.failed(PlaybackRecovery.Failure.NETWORK, false))
         assertEquals(0, r.retryCount)
     }
+    @Test fun manualModeStopsAndAutomaticModeSkipsDisabledCandidates(){
+        val r=PlaybackRecovery(4)
+        assertEquals(PlaybackRecovery.Action.STOP,r.failed(PlaybackRecovery.Failure.HTTP,true,allowNext=false){error("Unexpected candidate lookup")})
+        assertEquals(0,r.index)
+        assertEquals(PlaybackRecovery.Action.NEXT,r.failed(PlaybackRecovery.Failure.HTTP,true){it==2})
+        assertEquals(2,r.index)
+        assertEquals(PlaybackRecovery.Action.STOP,r.failed(PlaybackRecovery.Failure.HTTP,true){false})
+        assertEquals(2,r.index)
+    }
     @Test fun startupUsesElapsedTimeRatherThanSampleCount() {
         val g = PlaybackGuard(20000, 30000); g.reset(1000)
         assertNull(g.observe(20999, true, false, 0, 0))
