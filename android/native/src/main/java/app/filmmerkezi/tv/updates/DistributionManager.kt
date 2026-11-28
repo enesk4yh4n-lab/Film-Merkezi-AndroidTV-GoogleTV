@@ -10,12 +10,22 @@ import kotlinx.coroutines.sync.withLock
 import org.json.*
 import java.io.File
 
-data class DistributionStatus(val release:UpdateProtocol.Release?=null,val busy:Boolean=false,val message:String="",val bytes:Long=0,val apk:File?=null,val checkedAt:Long=0,val moduleUpdates:Int=0,
+data class DistributionStatus(val release:UpdateProtocol.Release?=null,val busy:Boolean=false,val message:String="",val apk:File?=null,val checkedAt:Long=0,val moduleUpdates:Int=0,
     val appCheck:CheckState=CheckState.UNCHECKED,val appError:String="",val repositoryChecks:Map<String,RepositoryCheck> = emptyMap(),val pluginError:String="")
+internal enum class ApkDownloadPhase { IDLE, STARTING, DOWNLOADING, VERIFYING, READY, CANCELLED, FAILED }
+internal data class ApkDownload(
+    val code:Int=0,
+    val phase:ApkDownloadPhase=ApkDownloadPhase.IDLE,
+    val bytes:Long=0,
+    val total:Long=0,
+    val failure:UpdateProblem?=null,
+){
+    val running get()=phase in setOf(ApkDownloadPhase.STARTING,ApkDownloadPhase.DOWNLOADING,ApkDownloadPhase.VERIFYING)
+    val percent get()=if(total>0)(100*bytes.coerceIn(0,total)/total).toInt()else 0
+}
 data class RepositoryProbe(val url:String,val raw:ByteArray,val signature:String,val index:UpdateProtocol.Index){val fingerprint get()=UpdateProtocol.fingerprint(index.publicKey)}
-class DistributionManager private constructor(private val context:Context) {
+class DistributionManager internal constructor(private val context:Context,val transport:UpdateTransport=UpdateTransport(context)) {
     val store=DistributionStore(context)
-    val transport=UpdateTransport(context)
     val notices=UpdateNoticeStore(context)
     private val discovery=RepositoryDiscovery({url,limit->transport.bytes(url,limit,10000)})
     private val scope=CoroutineScope(SupervisorJob()+Dispatchers.IO)
@@ -24,6 +34,9 @@ class DistributionManager private constructor(private val context:Context) {
     @Volatile private var unrecordedInstall:List<PackageInstaller.Candidate>?=null
     private val operation=Mutex()
     private var foregroundJob:Job?=null
+    private var apkJob:Job?=null
+    private val apkRun=MutableStateFlow(ApkDownload())
+    internal val apkDownload=apkRun.asStateFlow()
     @Volatile private var inventoryCache:Pair<Long,PluginInventory>?=null
     @Volatile private var catalogCache:Pair<Long,PluginCatalog>?=null
     val installedCode=context.packageManager.getPackageInfo(context.packageName,0).versionCode
@@ -54,7 +67,8 @@ class DistributionManager private constructor(private val context:Context) {
         private var singleton:DistributionManager?=null
         fun get(context:Context)=synchronized(this){singleton?:DistributionManager(context.applicationContext).also{singleton=it}}
     }
-    @Synchronized fun foreground(playing:Boolean){if(!playing&&!state.value.busy&&foregroundJob?.isActive!=true&&System.currentTimeMillis()-state.value.checkedAt>=1800000)foregroundJob=scope.launch{
+    @Synchronized fun foreground(playing:Boolean){if(playing){foregroundJob?.cancel();return}
+        if(!apkRun.value.running&&!state.value.busy&&foregroundJob?.isActive!=true&&System.currentTimeMillis()-state.value.checkedAt>=1800000)foregroundJob=scope.launch{
         try{check()}catch(e:CancellationException){throw e}catch(e:Exception){recordIssue(e);state.update{it.copy(busy=false,pluginError=e.message.orEmpty())}}
     }}
     suspend fun check()=operation.withLock{
@@ -67,19 +81,50 @@ class DistributionManager private constructor(private val context:Context) {
             release
         },refresh={refresh(it)},count={availableUpdates()},emit={state.value=it})
     }
-    suspend fun downloadApk()=operation.withLock{
-        val release=checkNotNull(state.value.release);require(Build.VERSION.SDK_INT>=release.minSdk){"Bu Android sürümü yeni APK'yı desteklemiyor"}
-        val file=File(store.directory,"application-${release.code}.apk");state.value=state.value.copy(busy=true,message="APK indiriliyor",bytes=0)
+    @OptIn(DelicateCoroutinesApi::class)
+    @Synchronized internal fun startApkDownload():Job?{
+        if(apkJob?.isCompleted==false)return apkJob
+        val release=state.value.release?:return null
+        if(readyApk()!=null)return null
+        val initial=ApkDownload(release.code,ApkDownloadPhase.STARTING,total=release.size.toLong())
+        apkRun.value=initial
+        return scope.launch(start=CoroutineStart.ATOMIC){transferApk(release,initial)}.also{apkJob=it}
+    }
+    @Synchronized internal fun cancelApkDownload(){apkJob?.cancel()}
+    suspend fun downloadApk(){startApkDownload()?.join()}
+
+    private suspend fun transferApk(release:UpdateProtocol.Release,initial:ApkDownload){
+        val file=File(store.directory,"application-${release.code}.apk")
+        var staging:File?=null
+        var outcome=initial.copy(phase=ApkDownloadPhase.CANCELLED)
         try{
-            transport.download(release.url,file,release.size,release.hash){n->state.value=state.value.copy(bytes=n)}
-            val info=context.packageManager.getPackageArchiveInfo(file.path,PackageManager.GET_SIGNATURES)?:error("APK okunamadı")
-            require(info.packageName==context.packageName&&info.versionCode==release.code){"APK kimliği/sürümü eşleşmiyor"}
-            require(info.signatures?.any{UpdateProtocol.sha(it.toByteArray())==release.certificate}==true){"APK imzası yayın bildirimiyle eşleşmiyor"}
-            val own=context.packageManager.getPackageInfo(context.packageName,PackageManager.GET_SIGNATURES).signatures.orEmpty().map{UpdateProtocol.sha(it.toByteArray())}
-            require(release.certificate in own){"Bu deneme kurulumundan kalıcı imzaya geçiş gerekiyor. Önce kayıtları dışa aktarın; uygulamayı kaldırarak devam etmeyin."}
-            state.value=state.value.copy(apk=file,message="APK doğrulandı; kurulum için hazır")
-        }catch(e:CancellationException){throw e}catch(e:Exception){file.delete();state.value=state.value.copy(message=e.message?:"İndirme başarısız",apk=null)}
-        finally{state.value=state.value.copy(busy=false)}
+            operation.withLock{
+                require(state.value.release==release){"Yeni sürüm bildirimi değişti"}
+                require(Build.VERSION.SDK_INT>=release.minSdk){"Bu Android sürümü yeni APK'yı desteklemiyor"}
+                check(store.directory.isDirectory||store.directory.mkdirs()){"APK indirme klasörü açılamadı"}
+                val partial=File.createTempFile("application-${release.code}-",".partial.apk",store.directory).also{staging=it}
+                transport.download(release.url,partial,release.size,release.hash,verifying={
+                    apkRun.update{if(it.running)it.copy(phase=ApkDownloadPhase.VERIFYING)else it}
+                }){n->apkRun.update{if(it.running)it.copy(phase=ApkDownloadPhase.DOWNLOADING,bytes=n)else it}}
+                currentCoroutineContext().ensureActive()
+                val info=context.packageManager.getPackageArchiveInfo(partial.path,PackageManager.GET_SIGNATURES)?:error("APK okunamadı")
+                require(info.packageName==context.packageName&&info.versionCode==release.code){"APK kimliği/sürümü eşleşmiyor"}
+                require(info.signatures?.any{UpdateProtocol.sha(it.toByteArray())==release.certificate}==true){"APK imzası yayın bildirimiyle eşleşmiyor"}
+                val own=context.packageManager.getPackageInfo(context.packageName,PackageManager.GET_SIGNATURES).signatures.orEmpty().map{UpdateProtocol.sha(it.toByteArray())}
+                require(release.certificate in own){"Bu deneme kurulumundan kalıcı imzaya geçiş gerekiyor. Önce kayıtları dışa aktarın; uygulamayı kaldırarak devam etmeyin."}
+                currentCoroutineContext().ensureActive()
+                check(partial.renameTo(file)){"Doğrulanmış APK kaydedilemedi"}
+                state.update{it.copy(apk=file,message="APK doğrulandı; kurulum için hazır")}
+                outcome=initial.copy(phase=ApkDownloadPhase.READY,bytes=initial.total)
+            }
+        }catch(e:CancellationException){throw e}catch(e:Exception){
+            recordIssue(e)
+            state.update{it.copy(message=e.message?:"İndirme başarısız",apk=null)}
+            outcome=initial.copy(phase=ApkDownloadPhase.FAILED,failure=UpdateProblem.classify(e))
+        }finally{
+            staging?.delete()
+            apkRun.value=outcome
+        }
     }
     fun repositories():List<JSONObject>{val o=store.snapshot().getJSONObject("repositories");return o.keys().asSequence().map{o.getJSONObject(it)}.toList()}
     fun inventory():PluginInventory {val revision=store.revision.value;inventoryCache?.takeIf{it.first==revision}?.let{return it.second}

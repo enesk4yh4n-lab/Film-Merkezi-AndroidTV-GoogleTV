@@ -17,9 +17,10 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 /** No browser/WebView, app credentials or site cookies are used for distribution. */
-class UpdateTransport(context:Context) {
+class UpdateTransport internal constructor(context:Context,clientOverride:OkHttpClient?) {
+    constructor(context:Context):this(context,null)
     private val slots=Semaphore(2)
-    private val client=LegacyTls.configure(context,OkHttpClient.Builder()).followRedirects(false).followSslRedirects(false)
+    private val client=clientOverride?:LegacyTls.configure(context,OkHttpClient.Builder()).followRedirects(false).followSslRedirects(false)
         .cache(Cache(File(context.cacheDir,"distribution-http"),2L*1024*1024))
         .connectTimeout(10,TimeUnit.SECONDS).readTimeout(20,TimeUnit.SECONDS).callTimeout(120,TimeUnit.SECONDS)
         .dns(object:Dns{override fun lookup(hostname:String):List<InetAddress> = Dns.SYSTEM.lookup(hostname).also{values->
@@ -43,10 +44,10 @@ class UpdateTransport(context:Context) {
         }
     }
     suspend fun bytes(url:String,limit:Int=65536,timeoutMs:Long=30000):ByteArray = transfer(url,limit,null,null,timeoutMs){}
-    suspend fun download(url:String,target:File,size:Int,hash:String,progress:(Long)->Unit={}) {
-        transfer(url,size,target,hash,120000,progress);if(target.length()!=size.toLong()){target.delete();error("İndirilen dosyanın boyutu eşleşmiyor")}
+    suspend fun download(url:String,target:File,size:Int,hash:String,verifying:()->Unit={},progress:(Long)->Unit={}) {
+        transfer(url,size,target,hash,120000,verifying,progress);if(target.length()!=size.toLong()){target.delete();error("İndirilen dosyanın boyutu eşleşmiyor")}
     }
-    private suspend fun transfer(url:String,limit:Int,target:File?,hash:String?,timeoutMs:Long,progress:(Long)->Unit):ByteArray=slots.withPermit {
+    private suspend fun transfer(url:String,limit:Int,target:File?,hash:String?,timeoutMs:Long,verifying:()->Unit={},progress:(Long)->Unit):ByteArray=slots.withPermit {
         require(timeoutMs in 1..120000)
         suspendCancellableCoroutine { cont ->
             var active:Call?=null;var closed:Response?=null
@@ -66,14 +67,16 @@ class UpdateTransport(context:Context) {
                                 require(r.body.contentLength()<=limit){"Dosya boyut sınırını aştı"}
                                 val digest=MessageDigest.getInstance("SHA-256");val memory=if(target==null)ByteArrayOutputStream()else null
                                 target?.parentFile?.mkdirs();val output=target?.outputStream()?.also{if(target.extension=="jar")require(target.setReadOnly()){"Paket salt okunur yapılamadı"}}?:memory!!
-                                var count=0L;var reported=0L
+                                var count=0L;var lastReport=0L
                                 output.use{out->r.body.byteStream().use{input->val buffer=ByteArray(32768);while(true){
                                     if(!cont.isActive)throw IOException("İndirme iptal edildi")
                                     val n=input.read(buffer);if(n<0)break;count+=n;require(count<=limit){"Dosya boyut sınırını aştı"};digest.update(buffer,0,n);out.write(buffer,0,n)
-                                    if(count-reported>=262144){progress(count);reported=count}
+                                    val now=android.os.SystemClock.elapsedRealtime()
+                                    if(lastReport==0L||now-lastReport>=250){progress(count);lastReport=now}
                                 }}}
+                                progress(count);verifying()
                                 if(hash!=null)require(digest.digest().joinToString(""){"%02x".format(it.toInt()and 255)}==hash){"Dosya özeti eşleşmiyor"}
-                                progress(count);if(cont.isActive)cont.resume(memory?.toByteArray()?:ByteArray(0))
+                                if(cont.isActive)cont.resume(memory?.toByteArray()?:ByteArray(0))
                             }}catch(e:Exception){target?.delete();if(cont.isActive)cont.resumeWithException(e)}
                         }
                     })

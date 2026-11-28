@@ -19,6 +19,6 @@ Araç APK imzasını apksigner ile doğrular; paket/sürüm/minSdk bilgisini ger
 
 5. Son olarak `update.json` ve `update.sig` dosyalarını ana deponun köküne birlikte commit/push edin. Feed'in imzası özgün baytları kapsar; satır sonunu veya notları sonradan değiştirmeyin. Aynı versionCode farklı feed kabul edilmez; düzeltme de yeni sürüm gerektirir.
 
-Uygulama açıldığında/öndeyken, oynatma dışında en fazla 30 dakikada bir kontrol edilir. Güncelleme görünür; indirme ve kurulum kullanıcı seçimiyle yapılır. Elle “Kontrol et” bekleme süresini aşar. GitHub kontrolü yokken indirme/kurulum başlamaz. Yeni izin gerekiyorsa Android'in sistem kurulum ekranı geçerlidir; APK bu onayı atlamaz.
+Uygulama açıldığında veya öndeyken, oynatma dışında en fazla 30 dakikada bir kontrol edilir. Kullanıcı **İndir** düğmesiyle aktarımı başlatır ve ilerlemeyi Güncelleme Merkezi’nde izler. APK doğrulanınca **APK’yı kur** düğmesi Android’in kurulum ekranını açar. Elle **Kontrol et** bekleme süresini aşar. Kurulum için gereken izin Android’in sistem ekranında verilir.
 
 Deneme anahtarlı 0.11.5, kalıcı imzalı APK'yı üzerine kuramaz. [İlk geçiş yedeği](android-signing-migration.md) gerekir. Sonraki sürümlerde aynı kalıcı sertifika kullanıldığından normal üzerine kurulum yapılır.

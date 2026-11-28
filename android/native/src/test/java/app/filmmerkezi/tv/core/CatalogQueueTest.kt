@@ -5,6 +5,29 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class CatalogQueueTest {
+    @Test fun playbackCancelsInFlightReadAndOnlyRestartsItOnReturn()=runBlocking{
+        val queue=CatalogQueue()
+        val first=CompletableDeferred<Unit>()
+        val parked=CompletableDeferred<Unit>()
+        var calls=0
+        val read=async {
+            queue.withSlot {
+                calls++
+                if(calls==1){
+                    first.complete(Unit)
+                    try{awaitCancellation()}finally{parked.complete(Unit)}
+                }
+                42
+            }
+        }
+        withTimeout(3000){first.await()}
+        queue.prioritizePlayback(true)
+        withTimeout(3000){parked.await()}
+        assertEquals(1,calls)
+        queue.prioritizePlayback(false)
+        assertEquals(42,withTimeout(3000){read.await()})
+        assertEquals(2,calls)
+    }
     @Test fun nextFreeSlotGoesToTheNewlyVisibleScreen()=runBlocking{
         val queue=CatalogQueue()
         val home=CatalogVisit(true)

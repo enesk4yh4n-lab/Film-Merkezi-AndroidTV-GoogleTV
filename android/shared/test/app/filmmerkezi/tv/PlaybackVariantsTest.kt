@@ -26,6 +26,18 @@ class PlaybackVariantsTest {
         assertEquals("720",s.getString("variantId"))
     }
     @Test fun ordinarySourcesAreUnchanged(){val source=JSONObject().put("url","https://cdn.example.test/master.m3u8");assertSame(source,PlaybackVariants.prepare(source,720));assertNull(PlaybackVariants.fallback(source,emptySet()))}
+    @Test fun temporaryNetworkFailureOnlyUsesAnEligibleLowerBitrate(){
+        val base=source()
+        val variants=base.getJSONArray("variants")
+        variants.getJSONObject(0).put("bitrate",1100000)
+        variants.getJSONObject(1).put("bitrate",350000)
+        variants.put(JSONObject().put("id","720-low").put("url","https://cdn.example.test/v720-low")
+            .put("height",720).put("bitrate",600000))
+        val active=PlaybackVariants.prepare(base,0)
+        assertEquals("720-low",PlaybackVariants.lowerBitrate(active,emptySet(),700000){true}?.getString("variantId"))
+        assertEquals("360",PlaybackVariants.lowerBitrate(active,emptySet(),400000){true}?.getString("variantId"))
+        assertNull(PlaybackVariants.lowerBitrate(active,setOf("360"),700000){it.optInt("height")<720})
+    }
     @Test fun equalHeightPrefersCombinedWhileExplicitSelectionRemainsStable(){
         val s=source();val a=s.getJSONArray("variants");val combined=a.getJSONObject(1)
         val separate=JSONObject(combined.toString()).put("id","360-separate").put("audioStreams",JSONArray().put(JSONObject().put("url","https://cdn.example.test/a")))

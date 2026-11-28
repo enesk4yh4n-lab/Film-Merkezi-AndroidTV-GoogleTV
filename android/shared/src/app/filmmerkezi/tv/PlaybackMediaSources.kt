@@ -41,6 +41,7 @@ internal object PlaybackVariants {
     }
     fun format(v:JSONObject):Format=Format.Builder().setId(v.optString("id"))
         .setSampleMimeType(MimeTypes.getVideoMediaMimeType(v.optString("codec"))?:if(v.optString("mimeType")=="video/webm")MimeTypes.VIDEO_VP9 else MimeTypes.VIDEO_H264)
+        .setAverageBitrate(v.optInt("bitrate").takeIf{it>0}?:Format.NO_VALUE)
         .setCodecs(v.optString("codec").takeIf{it.isNotBlank()}).setHeight(v.optInt("height"))
         .setWidth(v.optInt("width").takeIf{it>0}?:Format.NO_VALUE).setFrameRate(v.optInt("fps").takeIf{it>0}?.toFloat()?:Format.NO_VALUE.toFloat()).build()
     fun prepare(source:JSONObject,height:Int,allowed:(JSONObject)->Boolean={true}):JSONObject {
@@ -54,4 +55,13 @@ internal object PlaybackVariants {
         .filter{it.optJSONArray("audioStreams")?.length()!=null&&it.getJSONArray("audioStreams").length()==0
             &&it.optString("id")!=source.optString("variantId")&&it.optString("id") !in tried}
         .maxByOrNull{it.optInt("height")}?.let{apply(source,it)}
+
+    fun lowerBitrate(source:JSONObject,tried:Set<String>,budget:Long,allowed:(JSONObject)->Boolean):JSONObject? {
+        val rows=all(source)
+        val bitrate=rows.firstOrNull{it.optString("id")==source.optString("variantId")}?.optInt("bitrate")?:0
+        if(bitrate<=0)return null
+        val lower=rows.filter{it.optInt("bitrate") in 1 until bitrate&&it.optString("id") !in tried&&allowed(it)}
+        return (lower.filter{it.optInt("bitrate")<=budget}.maxByOrNull{it.optInt("bitrate")}
+            ?:lower.minByOrNull{it.optInt("bitrate")})?.let{apply(source,it)}
+    }
 }

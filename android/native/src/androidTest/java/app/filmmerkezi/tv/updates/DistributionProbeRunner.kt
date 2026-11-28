@@ -23,6 +23,7 @@ class DistributionProbeRunner:Instrumentation() {
                 "playback"->PublicationPlaybackTest().signedModulesAndMedia3PreserveCookieHeadersAndProgress()
                 "pilot"->PilotWorkerTest().signaturesDependenciesAndFourCatalogsLoadInRealWorker()
                 "signed-release-set"->PilotWorkerTest().publishedSetStartsInTheWorker()
+                "signed-poster-updates"->PilotWorkerTest().productionPosterSetStartsInTheWorker()
                 "signed-catalog-updates"->PilotWorkerTest().signedCatalogUpdatesReadRecordedPages()
                 "tracked-catalogs"->TrackedWorkerTest().catalogs()
                 "tracked-playback"->TrackedWorkerTest().livePlayback()

@@ -1,6 +1,9 @@
 package app.filmmerkezi.tv.tv
 
 import android.content.Context
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.LayerDrawable
+import android.view.Gravity
 import android.widget.ImageView
 import app.filmmerkezi.tv.R
 import app.filmmerkezi.tv.core.Card
@@ -43,14 +46,29 @@ internal object Posters {
             val site=Sites.get(card.ref.siteId)
             GlideUrl(app.filmmerkezi.tv.core.SiteAddresses.rebase(it,site),LazyHeaders.Builder().addHeader("Referer",site.base+"/").build())
         }
+        val fallback=placeholder(view,width,height)
         Glide.with(view).asBitmap().load(model).override(width,height).centerCrop()
             .format(DecodeFormat.PREFER_RGB_565).disallowHardwareConfig()
             .diskCacheStrategy(DiskCacheStrategy.RESOURCE).dontAnimate()
-            .placeholder(R.drawable.tv_poster).error(R.drawable.tv_poster).into(view)
+            .placeholder(fallback).error(fallback).fallback(fallback).into(view)
+    }
+    private fun placeholder(view:ImageView,width:Int,height:Int):LayerDrawable {
+        val logo=checkNotNull(view.context.getDrawable(R.drawable.classic_logo))
+        val size=(minOf(width,height)*0.40f).toInt().coerceAtLeast(1)
+        return object:LayerDrawable(arrayOf(ColorDrawable(0xFF1D2B3D.toInt()),logo)){
+            override fun getIntrinsicWidth()=-1
+            override fun getIntrinsicHeight()=-1
+        }.apply{
+            setLayerSize(1,size,size)
+            setLayerGravity(1,Gravity.CENTER)
+        }
     }
     // RecyclerView may unbind after Activity.onDestroy; use the application manager.
     // Glide.clear locates the request's owning manager even when it is another one.
-    fun clear(view:ImageView){Glide.with(view.context.applicationContext).clear(view);view.setImageResource(R.drawable.tv_poster)}
+    fun clear(view:ImageView){
+        Glide.with(view.context.applicationContext).clear(view)
+        view.setImageDrawable(placeholder(view,view.width.takeIf{it>0}?:view.dp(123),view.height.takeIf{it>0}?:view.dp(152)))
+    }
     fun trim(context:Context,level:Int){if(initialized){
         if(level==android.content.ComponentCallbacks2.TRIM_MEMORY_RUNNING_LOW||
             level==android.content.ComponentCallbacks2.TRIM_MEMORY_RUNNING_CRITICAL||

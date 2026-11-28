@@ -52,7 +52,9 @@ class NewPipeYoutube(private val network:WebTransport):YoutubeResolver {
                         .distinctBy{it.audioLocale?.language.orEmpty()+it.audioTrackId.orEmpty()}.take(2)
                         .map{MediaAudio(it.content,it.audioLocale?.language.orEmpty(),it.audioTrackName.orEmpty(),it.format?.mimeType?:"audio/mp4")}
                     val variants=(info.videoOnlyStreams+info.videoStreams).filter{it.isUrl&&it.format in listOf(MediaFormat.MPEG_4,MediaFormat.WEBM)&&(!it.isVideoOnly||audio.isNotEmpty())}
-                        .map{MediaVariant(it.itag.toString(),it.content,it.height,it.width,if(it.isVideoOnly)audio else emptyList(),it.codec.orEmpty(),it.fps,it.format?.mimeType?:"video/mp4")}
+                        .map{stream->MediaVariant(stream.itag.toString(),stream.content,stream.height,stream.width,
+                            if(stream.isVideoOnly)audio else emptyList(),stream.codec.orEmpty(),stream.fps,stream.format?.mimeType?:"video/mp4")
+                            .also{it.bitrate=stream.bitrate.coerceAtLeast(0)}}
                     val subtitles=runCatching{extractor.getSubtitles(MediaFormat.VTT)}.getOrDefault(emptyList()).filter{it.isUrl&&publicUrl(it.content)?.startsWith("https://")==true}
                         .map{Subtitle(it.content,it.displayLanguageName,it.languageTag,"vtt")}
                     owner.ensureActive()

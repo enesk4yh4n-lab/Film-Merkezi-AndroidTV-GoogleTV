@@ -88,6 +88,7 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
         actions=emptyList();footer.removeAllViews();status.text="";status.visibility=GONE
     }
     fun loading(value:Boolean){progress.isIndeterminate=true;progress.visibility=if(value)VISIBLE else GONE}
+    fun message(value:String){status.text=value;status.visibility=if(value.isBlank())GONE else VISIBLE}
     fun progress(completed:Long,total:Long){progress.isIndeterminate=total<=0;progress.max=1000;progress.progress=if(total>0)(completed.coerceIn(0,total)*1000/total).toInt()else 0;progress.visibility=VISIBLE}
     fun installProgress(percent:Int,description:String){
         progress.isIndeterminate=false;progress.max=100;progress.progress=percent;progress.visibility=VISIBLE
@@ -98,7 +99,7 @@ internal class UpdateCenterView(private val activity:Activity,private val left:(
     fun update(values:List<ClassicRow>,actions:List<ClassicAction> = emptyList(),message:String="",click:(String)->Unit={}) {
         val serial=++rendering;val navigation=focusRevision;val focused=findFocus()?.tag as? String;val inside=hasFocus();val previous=rows
         val saved=list.layoutManager?.onSaveInstanceState()
-        choose=click;rows=values;status.text=message;status.visibility=if(message.isBlank())GONE else VISIBLE
+        choose=click;rows=values;message(message)
         val diff=DiffUtil.calculateDiff(object:DiffUtil.Callback(){override fun getOldListSize()=previous.size;override fun getNewListSize()=values.size
             override fun areItemsTheSame(a:Int,b:Int)=previous[a].key==values[b].key
             override fun areContentsTheSame(a:Int,b:Int)=previous[a]==values[b]})

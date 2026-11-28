@@ -112,7 +112,7 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
         }}
     }}}
     fun navigate(route:UpdateRoute){if(route.install.isNotEmpty()){addPlugins();installKeys(route.install);return}
-        when(route.page){UpdatePage.HOME->open();UpdatePage.CATALOG->addPlugins();UpdatePage.INSTALLED->installed();UpdatePage.UPDATES->updates();UpdatePage.APPLICATION->{application();if(route.downloadApplication&&manager.status.value.release?.code==route.applicationCode)updateApplication()};UpdatePage.REPOSITORIES->repositories();UpdatePage.ADVANCED->technical()}}
+        when(route.page){UpdatePage.HOME->open();UpdatePage.CATALOG->addPlugins();UpdatePage.INSTALLED->installed();UpdatePage.UPDATES->updates();UpdatePage.APPLICATION->{application();if(route.downloadApplication&&manager.status.value.release?.code==route.applicationCode)downloadApplication()};UpdatePage.REPOSITORIES->repositories();UpdatePage.ADVANCED->technical()}}
     private fun summary(c:PluginCatalog)=activity.getString(R.string.hub_summary,c.repositoryCount,c.availableCount,c.installedCount)+(if(c.errors.isEmpty())""else"\n"+activity.getString(R.string.hub_repository_errors,c.errors.size))
     private fun addPlugins(){val p=show(s(R.string.hub_catalog),setupExit?: ::open,"add");p.loading(true)
         observer=scope.launch{combine(manager.store.revision,manager.status){_,v->v}.collectLatest{
@@ -184,13 +184,47 @@ internal class DistributionPanel(private val activity:Activity,parentScope:Corou
     }.distinct().joinToString("\n\n").take(4000)
         display(ClassicDialog.Builder(activity).setTitle(R.string.updates_diagnostics).setMessage(errors.ifBlank{s(R.string.updates_no_diagnostics)}).setPositiveButton(android.R.string.ok,null))
     }
-    private fun application(){val p=show(s(R.string.updates_application),::updates,"application");observer=scope.launch{manager.status.collectLatest{v->
-        val operation=when{v.busy&&v.bytes>0->s(R.string.updates_phase_downloading)+" · ${v.bytes/1024} KiB";v.apk!=null->s(R.string.updates_apk_ready);v.message.isNotBlank()->problemText(IllegalStateException(v.message));else->""}
-        if(v.busy){if(v.bytes>0)p.progress(v.bytes,v.release?.size?.toLong()?:0)else p.loading(true)}else p.loading(false)
-        p.update(listOf(ClassicRow("update-application",s(if(manager.readyApk()!=null)R.string.hub_finish_application else R.string.hub_update_application),enabled=v.release!=null&&!v.busy)),message=listOf(applicationStatus(v),operation,v.release?.notes?:s(R.string.updates_no_application)).filter{it.isNotBlank()}.joinToString("\n")){updateApplication()}
-    }}}
-    private fun updateApplication(){if(!idle())return;if(manager.readyApk()!=null){installApk();return};if(manager.status.value.release==null)return
-        launchWork{withContext(Dispatchers.IO){manager.downloadApk()};if(manager.readyApk()!=null&&activity.hasWindowFocus()&&!activity.isFinishing&&!playing())installApk()}
+    private fun application(){
+        val p=show(s(R.string.updates_application),::updates,"application")
+        observer=scope.launch{
+            var actions:List<ClassicRow>?=null
+            combine(manager.status,manager.apkDownload){status,operation->status to operation}.collect{(v,operation)->
+                val run=operation.takeIf{it.code==v.release?.code}?:ApkDownload()
+                val ready=manager.readyApk()!=null&&!run.running
+                val info=when(run.phase){
+                    ApkDownloadPhase.STARTING->s(R.string.apk_download_starting)
+                    ApkDownloadPhase.DOWNLOADING->activity.getString(R.string.apk_download_progress,run.percent,
+                        run.bytes/(1024.0*1024),run.total/(1024.0*1024))
+                    ApkDownloadPhase.VERIFYING->s(R.string.apk_download_verifying)
+                    ApkDownloadPhase.CANCELLED->s(R.string.apk_download_cancelled)
+                    ApkDownloadPhase.FAILED->problemText(run.failure?:UpdateProblem.OTHER)
+                    else->if(ready)s(R.string.updates_apk_ready)else ""
+                }
+                val rows=buildList{
+                    if(run.running)add(ClassicRow("cancel-apk",s(R.string.apk_download_cancel_action)))
+                    else if(!ready)add(ClassicRow("update-application",s(if(run.phase==ApkDownloadPhase.FAILED||run.phase==ApkDownloadPhase.CANCELLED)
+                        R.string.apk_download_retry else R.string.updates_download),enabled=v.release!=null&&!v.busy))
+                    add(ClassicRow("install-apk",s(R.string.updates_install),enabled=ready))
+                }
+                val message=listOf(applicationStatus(v),info,v.release?.notes?:s(R.string.updates_no_application)).filter(String::isNotBlank).joinToString("\n")
+                if(rows!=actions){
+                    actions=rows
+                    p.update(rows,message=message){key->when(key){
+                        "cancel-apk"->manager.cancelApkDownload()
+                        "update-application"->downloadApplication()
+                        "install-apk"->if(idle())installApk()
+                    }}
+                }else p.message(message)
+                when(run.phase){
+                    ApkDownloadPhase.DOWNLOADING->p.installProgress(run.percent,info)
+                    ApkDownloadPhase.STARTING,ApkDownloadPhase.VERIFYING->p.loading(true)
+                    else->p.loading(false)
+                }
+            }
+        }
+    }
+    private fun downloadApplication(){
+        if(idle()) manager.startApkDownload()
     }
     private fun installApk(){
         if(Build.VERSION.SDK_INT>=26&&!activity.packageManager.canRequestPackageInstalls()){

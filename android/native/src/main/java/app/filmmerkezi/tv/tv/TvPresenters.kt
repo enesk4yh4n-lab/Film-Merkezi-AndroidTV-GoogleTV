@@ -15,7 +15,9 @@ private fun View.cp(value:Int)=ClassicUi.u(context,value.toFloat())
 
 class PosterPresenter:Presenter() {
     class Holder(val box:LinearLayout,val image:ImageView,val title:TextView,val meta:TextView,val progress:ProgressBar,
-        val badges:LinearLayout,val dubbed:ImageView,val subbed:ImageView,val sites:TextView):ViewHolder(box)
+        val badges:LinearLayout,val dubbed:ImageView,val subbed:ImageView,val sites:TextView):ViewHolder(box){
+        var poster:app.filmmerkezi.tv.core.Card?=null
+    }
     override fun onCreateViewHolder(parent:ViewGroup):ViewHolder {
         val c=parent.context
         fun cp(v:Int)=ClassicUi.u(c,v.toFloat())
@@ -54,31 +56,53 @@ class PosterPresenter:Presenter() {
         h.box.contentDescription=tile.label+" · "+ids.joinToString{app.filmmerkezi.tv.core.Sites.get(it).name}
         h.progress.visibility=if(tile.positionMs>0&&tile.durationMs>0)View.VISIBLE else View.INVISIBLE
         h.progress.progress=if(tile.durationMs>0)(tile.positionMs*100/tile.durationMs).coerceIn(0,100).toInt()else 0
-        Posters.load(h.image,c,h.box.cp(123),h.box.cp(152))
+        h.poster=c
+        if(h.box.isAttachedToWindow)loadPoster(h)
     }
-    override fun onUnbindViewHolder(viewHolder:ViewHolder){val h=viewHolder as Holder;Posters.clear(h.image);h.box.tag=null;h.box.contentDescription=null;h.title.text="";h.meta.text=""}
+    private fun loadPoster(h:Holder)=Posters.load(h.image,h.poster,h.box.cp(123),h.box.cp(152))
+    override fun onViewAttachedToWindow(holder:ViewHolder){super.onViewAttachedToWindow(holder);loadPoster(holder as Holder)}
+    override fun onViewDetachedFromWindow(holder:ViewHolder){Posters.clear((holder as Holder).image);super.onViewDetachedFromWindow(holder)}
+    override fun onUnbindViewHolder(viewHolder:ViewHolder){val h=viewHolder as Holder;h.poster=null;Posters.clear(h.image);h.box.tag=null;h.box.contentDescription=null;h.title.text="";h.meta.text=""}
 }
 
-private class ClassicRowHeader(private val move:(Long,Int)->Unit):RowHeaderPresenter(){
-    class Holder(view:FrameLayout,val label:TextView,val previous:Button,val next:Button):RowHeaderPresenter.ViewHolder(view)
-    override fun onCreateViewHolder(parent:ViewGroup):Presenter.ViewHolder {
-        val c=parent.context;val frame=FrameLayout(c).apply{layoutParams=ViewGroup.LayoutParams(cp(886),cp(36))}
-        val label=ClassicUi.text(c,"",15.5f,bold=true)
-        frame.addView(label,FrameLayout.LayoutParams(-1,frame.cp(24)).apply{topMargin=frame.cp(4)})
-        val previous=ClassicUi.button(c,"‹"){}.apply{setPadding(0,0,0,0);setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX,frame.cp(16).toFloat())}
-        val next=ClassicUi.button(c,"›"){}.apply{setPadding(0,0,0,0);setTextSize(android.util.TypedValue.COMPLEX_UNIT_PX,frame.cp(16).toFloat())}
-        frame.addView(previous,FrameLayout.LayoutParams(frame.cp(27),frame.cp(23),Gravity.RIGHT or Gravity.TOP).apply{rightMargin=frame.cp(34);topMargin=frame.cp(2)})
-        frame.addView(next,FrameLayout.LayoutParams(frame.cp(27),frame.cp(23),Gravity.RIGHT or Gravity.TOP).apply{rightMargin=frame.cp(0);topMargin=frame.cp(2)})
-        return Holder(frame,label,previous,next)
+private class ClassicRowHeader:RowHeaderPresenter(){
+    override fun onCreateViewHolder(parent:ViewGroup):Presenter.ViewHolder =
+        RowHeaderPresenter.ViewHolder(ClassicUi.text(parent.context,"",15.5f,bold=true).apply{
+            layoutParams=ViewGroup.LayoutParams(cp(886),cp(27))
+            gravity=Gravity.CENTER_VERTICAL
+        })
+    override fun onBindViewHolder(holder:Presenter.ViewHolder,item:Any?){
+        (holder.view as TextView).text=(item as ListRow).headerItem?.name.orEmpty()
     }
-    override fun onBindViewHolder(viewHolder:Presenter.ViewHolder,item:Any?){val h=viewHolder as Holder;val row=item as ListRow
-        h.label.text=row.headerItem?.name.orEmpty();h.previous.tag="home-row:${row.headerItem.id}:previous";h.next.tag="home-row:${row.headerItem.id}:next"
-        h.previous.setOnClickListener{move(row.headerItem.id,-1)};h.next.setOnClickListener{move(row.headerItem.id,1)};h.view.alpha=1f
-        h.previous.setOnKeyListener{_,key,e->if(key==KeyEvent.KEYCODE_DPAD_LEFT||key==KeyEvent.KEYCODE_DPAD_RIGHT){if(e.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_RIGHT)h.next.requestFocus();true}else false}
-        h.next.setOnKeyListener{_,key,e->if(key==KeyEvent.KEYCODE_DPAD_LEFT||key==KeyEvent.KEYCODE_DPAD_RIGHT){if(e.action==KeyEvent.ACTION_DOWN&&key==KeyEvent.KEYCODE_DPAD_LEFT)h.previous.requestFocus();true}else false}
-    }
-    override fun onUnbindViewHolder(viewHolder:Presenter.ViewHolder){val h=viewHolder as Holder;h.label.text="";h.previous.setOnClickListener(null);h.next.setOnClickListener(null)}
+    override fun onUnbindViewHolder(holder:Presenter.ViewHolder){(holder.view as TextView).text=""}
     override fun onSelectLevelChanged(holder:RowHeaderPresenter.ViewHolder){holder.view.alpha=1f}
+}
+
+private class CatalogRowAction:Presenter(){
+    override fun onCreateViewHolder(parent:ViewGroup)=ViewHolder(
+        ClassicUi.text(parent.context,"",12f,ClassicUi.muted).apply{
+            layoutParams=ViewGroup.LayoutParams(cp(165),cp(39))
+            gravity=Gravity.CENTER
+        })
+    override fun onBindViewHolder(holder:ViewHolder,item:Any?){
+        val tile=item as TvTile
+        val actionable=tile.action!="feed:wait"&&tile.action!="feed:empty"
+        (holder.view as TextView).apply{
+            text=tile.label
+            tag=tile.key
+            isFocusable=actionable
+            isFocusableInTouchMode=actionable
+            background=if(actionable)ClassicUi.focus(context) else null
+        }
+    }
+    override fun onUnbindViewHolder(holder:ViewHolder){holder.view.tag=null}
+}
+
+private class ShelfPresenters:PresenterSelector(){
+    private val card=PosterPresenter()
+    private val action=CatalogRowAction()
+    override fun getPresenter(item:Any?)=if((item as? TvTile)?.item==null)action else card
+    override fun getPresenters()=arrayOf<Presenter>(card,action)
 }
 
 /** Episode names remain visible below the detail header even on a 720p TV. */
@@ -120,10 +144,7 @@ class TvRowsFragment:RowsSupportFragment() {
         override fun onRowViewSelected(holder:RowPresenter.ViewHolder,selected:Boolean){super.onRowViewSelected(holder,selected);classicPadding(holder)}
         override fun onRowViewExpanded(holder:RowPresenter.ViewHolder,expanded:Boolean){super.onRowViewExpanded(holder,expanded);classicPadding(holder)}
         override fun onSelectLevelChanged(holder:RowPresenter.ViewHolder){super.onSelectLevelChanged(holder);classicPadding(holder)}
-    }.apply{setShadowEnabled(false);setSelectEffectEnabled(false);headerPresenter=ClassicRowHeader{row,delta->
-        val a=items[row];if(a!=null){val col=((columns[row]?:0)+delta*6).coerceIn(0,(a.size()-1).coerceAtLeast(0));columns[row]=col
-            setSelectedPosition(items.keys.indexOf(row),false,ListRowPresenter.SelectItemViewHolderTask(col))}
-    }}
+    }.apply{setShadowEnabled(false);setSelectEffectEnabled(false);headerPresenter=ClassicRowHeader()}
     private val rows=ArrayObjectAdapter(rowPresenter)
     private val items=linkedMapOf<Long,ArrayObjectAdapter>()
     override fun onCreate(state:Bundle?){super.onCreate(state);adapter=rows
@@ -136,7 +157,7 @@ class TvRowsFragment:RowsSupportFragment() {
         val selectedTile=selectedRow?.let{id->items[id]?.let{a->(if((columns[id]?:0) in 0 until a.size())a[columns[id]?:0]else null)as? TvTile}}
         if(items.keys.toList()!=sections.map{it.id}){
             rows.clear();items.clear()
-            sections.forEach{s->val a=ArrayObjectAdapter(if(arguments?.getBoolean("compact")==true)EpisodePresenter()else PosterPresenter());items[s.id]=a;rows.add(ListRow(HeaderItem(s.id,s.title),a))}
+            sections.forEach{s->val a=if(arguments?.getBoolean("compact")==true)ArrayObjectAdapter(EpisodePresenter())else ArrayObjectAdapter(ShelfPresenters());items[s.id]=a;rows.add(ListRow(HeaderItem(s.id,s.title),a))}
         }
         sections.forEach{s->items.getValue(s.id).setItems(s.tiles,tileDiff)}
         if(selectedRow!=null&&selectedTile!=null){val section=sections.firstOrNull{it.id==selectedRow};val column=section?.tiles?.indexOfFirst{sameVisibleContent(selectedTile,it)}?:-1
@@ -152,21 +173,9 @@ class TvRowsFragment:RowsSupportFragment() {
     fun move(key:Int):Boolean {
         val focus=activity?.currentFocus?:return false
         if(verticalGridView?.hasFocus()!=true)return false
-        val header=focus.tag?.toString()?.startsWith("home-row:")==true
-        if(header&&key==KeyEvent.KEYCODE_DPAD_DOWN){
-            val id=items.keys.elementAtOrNull(selectedPosition)?:return false
-            fun horizontal(node:View?):HorizontalGridView?=when(node){is HorizontalGridView->node;is ViewGroup->(0 until node.childCount).firstNotNullOfOrNull{horizontal(node.getChildAt(it))};else->null}
-            horizontal(verticalGridView?.findViewHolderForAdapterPosition(selectedPosition)?.itemView)?.setSelectedPosition(columns[id]?:0,object:ViewHolderTask{
-                override fun run(holder:androidx.recyclerview.widget.RecyclerView.ViewHolder){holder.itemView.requestFocus()}
-            });return true
-        }
         var parent:ViewParent?=focus.parent
         while(parent!=null&&parent !is HorizontalGridView)parent=parent.parent
         val grid=parent as? HorizontalGridView?:return false
-        if(key==KeyEvent.KEYCODE_DPAD_UP){
-            val id=items.keys.elementAtOrNull(selectedPosition)?:return false
-            view?.findViewWithTag<View>("home-row:$id:previous")?.requestFocus();return true
-        }
         if(key!=KeyEvent.KEYCODE_DPAD_LEFT&&key!=KeyEvent.KEYCODE_DPAD_RIGHT)return false
         val at=grid.selectedPosition.coerceAtLeast(0);val last=(grid.adapter?.itemCount?:0)-1
         if(last<0)return true
@@ -253,9 +262,14 @@ class TvGridFragment:VerticalGridSupportFragment() {
             }
         })
     }
-    fun focusContent(){focusRequested=true;focusOrigin=activity?.currentFocus;applyRestoredFocus()}
+    fun focusContent():Boolean{
+        if(values.isEmpty())return false
+        focusRequested=true;focusOrigin=activity?.currentFocus;applyRestoredFocus()
+        return true
+    }
     fun restore(key:String){restoreKey=key;values.indexOfFirst{it.key==key}.takeIf{it>=0}?.let{selected=it};applyRestoredFocus()}
     fun atTop()=selected<columns
+    fun atBottom()=values.isNotEmpty()&&selected/columns==values.lastIndex/columns
     fun hasContentFocus()=vertical?.hasFocus()==true
     fun move(key:Int):Boolean {
         if(!hasContentFocus()||values.isEmpty())return false

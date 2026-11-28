@@ -40,7 +40,9 @@ enum class StreamType { HLS, MP4, DASH, WEBM }
 data class Subtitle(val url: String, val label: String = "Altyazı", val language: String = "", val format: String = "vtt")
 data class MediaProfile(val videoCodec: String? = null, val audioCodec: String? = null, val width: Int? = null, val height: Int? = null)
 data class MediaAudio(val url:String,val language:String="",val label:String="",val mimeType:String="audio/mp4")
-data class MediaVariant(val id:String,val url:String,val height:Int,val width:Int=0,val audio:List<MediaAudio> = emptyList(),val codec:String="",val fps:Int=0,val mimeType:String="video/mp4")
+data class MediaVariant(val id:String,val url:String,val height:Int,val width:Int=0,val audio:List<MediaAudio> = emptyList(),val codec:String="",val fps:Int=0,val mimeType:String="video/mp4"){
+    var bitrate:Int=0
+}
 data class SessionCookie(val name:String,val value:String,val domain:String,val path:String,val expiresAt:Long,val secure:Boolean,val httpOnly:Boolean,val hostOnly:Boolean)
 data class ResolvedSource(
     val id: String, val label: String, val url: String, val type: StreamType,

@@ -32,6 +32,12 @@
     <string name="updates_unused_resolvers">Unused resolvers</string>
     <string name="updates_unused_resolvers_help">No site in the prepared set uses these resolvers.</string>
     <string name="updates_phase_downloading">Downloading…</string>
+    <string name="apk_download_starting">Starting download…</string>
+    <string name="apk_download_progress">Downloading APK · %1$d%% · %2$.1f / %3$.1f MiB</string>
+    <string name="apk_download_verifying">Verifying APK…</string>
+    <string name="apk_download_cancel_action">Cancel</string>
+    <string name="apk_download_cancelled">APK download cancelled.</string>
+    <string name="apk_download_retry">Download again</string>
     <string name="updates_phase_verifying">Verifying…</string>
     <string name="updates_phase_ready">Changes are ready to activate</string>
     <string name="updates_apply_ready">Apply and restart</string>

@@ -13,6 +13,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Assert.assertNull
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -46,7 +48,7 @@ class CatalogNavigationCacheTest {
             fixture.start(customData=data)
             fixture.waitFor{homeMovies==1&&homeSeries==1&&fixture.tag(animation.workId)!=null}
             click(R.id.tv_nav_animation);fixture.waitFor{animationLoads==1}
-            click(R.id.tv_nav_movies);fixture.waitFor{movieLoads==1&&fixture.tag(animation.workId)!=null}
+            click(R.id.tv_nav_movies);fixture.waitFor{fixture.tag(animation.workId)!=null}
             click(R.id.tv_nav_animation)
             initialAnimation.complete(Unit)
             fixture.waitFor{fixture.tag(animation.workId)!=null}
@@ -58,13 +60,64 @@ class CatalogNavigationCacheTest {
             click(R.id.tv_nav_home);fixture.waitFor{fixture.tag(animation.workId)!=null}
             click(R.id.tv_nav_movies);fixture.waitFor{fixture.tag(animation.workId)!=null}
             click(R.id.tv_nav_drama_short);fixture.waitFor{fixture.tag(drama.workId)!=null}
-            fixture.main{assertEquals(listOf(1,1,1,1,1),listOf(homeMovies,homeSeries,movieLoads,animationLoads,dramaLoads))}
+            fixture.main{assertEquals(listOf(1,1,0,1,1),listOf(homeMovies,homeSeries,movieLoads,animationLoads,dramaLoads))}
             fixture.main{fixture.tag("catalog:responses").performClick();fixture.activity.classicOverlayForTest()!!.select("refresh")}
             fixture.waitFor{dramaLoads==2&&fixture.tag(drama.workId)!=null}
-            fixture.main{assertEquals(listOf(1,1,1,1,2),listOf(homeMovies,homeSeries,movieLoads,animationLoads,dramaLoads))}
+            fixture.main{assertEquals(listOf(1,1,0,1,2),listOf(homeMovies,homeSeries,movieLoads,animationLoads,dramaLoads))}
         }finally{
             initialAnimation.complete(Unit);fixture.close();Sites.installed(installed)
         }
+    }
+
+    @Test fun pendingHomeReadFeedsMovieGridWithoutMovingFocusAndMoreUsesLocalCards()=runBlocking{
+        val fixture=Settings110Fixture()
+        val installed=Sites.all
+        Sites.installed(Sites.defaults.filter{it.id=="filmcibaba"})
+        val base=RemoteAuditData().apply{includeRecords=false}
+        val late=CompletableDeferred<Unit>()
+        val cursor=PageCursor("filmcibaba","https://filmizle.ink/page/2/")
+        val cards=(1..60).map{i->
+            val card=Card(ContentRef("filmcibaba","https://filmizle.ink/performance-$i/",ContentKind.MOVIE),"Film $i",workId="performance:$i")
+            base.item(card)
+        }
+        var first=0;var next=0
+        val data=object:TvData by base{
+            override fun browseSite(siteId:String,kind:ContentKind,cursors:Map<String,PageCursor>)=flow {
+                if(kind!=ContentKind.MOVIE){emit(UnifiedPage(emptyList(),emptyMap(),emptyList()));return@flow}
+                if(cursors.isEmpty()){
+                    first++
+                    emit(UnifiedPage(cards.take(7),emptyMap(),emptyList(),completedSites=1,requestedSites=2))
+                    late.await()
+                    emit(UnifiedPage(cards.take(54),mapOf(cursor.siteId to cursor),emptyList(),completedSites=2,requestedSites=2))
+                }else{
+                    next++
+                    emit(UnifiedPage(cards.drop(54),emptyMap(),emptyList(),mapOf(cursor.siteId to 6),1,1))
+                }
+            }
+        }
+        fun count():Int {
+            val grid=fixture.activity.supportFragmentManager.findFragmentById(R.id.tv_content) as TvGridFragment
+            return checkNotNull(grid.adapter).size()
+        }
+        try{
+            fixture.start(customData=data)
+            fixture.waitFor{fixture.tag("performance:1")!=null}
+            fixture.main{
+                assertNull(fixture.tag("home-row:2:previous"))
+                fixture.activity.findViewById<View>(R.id.tv_nav_movies).performClick()
+            }
+            fixture.waitFor{count()==7}
+            fixture.main{assertTrue(fixture.activity.findViewById<View>(R.id.tv_nav_movies).hasFocus())}
+            late.complete(Unit)
+            fixture.waitFor{count()==18&&fixture.tag("feed:action")?.isShown==true}
+            fixture.main{assertEquals(1,first);assertTrue(fixture.activity.findViewById<View>(R.id.tv_nav_movies).hasFocus())}
+            for(expected in listOf(36,54,60)){
+                fixture.main{fixture.tag("feed:action").performClick()}
+                fixture.waitFor{count()==expected}
+                fixture.main{assertEquals(if(expected==60)1 else 0,next)}
+            }
+            fixture.screenshot("catalog-18-batch.png")
+        }finally{late.complete(Unit);fixture.close();Sites.installed(installed)}
     }
 
     @Test fun categoryExplainsUnsupportedFailedAndEmptyResults()=runBlocking{

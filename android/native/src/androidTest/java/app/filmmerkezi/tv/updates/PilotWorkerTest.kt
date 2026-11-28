@@ -52,6 +52,38 @@ class PilotWorkerTest {
             manager.store.commit{next->next.keys().asSequence().toList().forEach(next::remove);original.keys().forEach{next.put(it,original.get(it))}};ModuleRuntime.register(original)}
     }
     private fun payload(id:String):JSONObject = JSONObject().put("site",PluginWire.site(Sites.get(id)))
+    @Test fun localSignedPackagesChooseSmallPosterInWorker()=runBlocking {
+        val folder=File(context.getExternalFilesDir(null),"poster-repo-pilot")
+        org.junit.Assume.assumeTrue(File(folder,UpdateProtocol.INDEX).isFile)
+        withSet(folder=folder,block=::checkPosterSize)
+    }
+    fun productionPosterSetStartsInTheWorker()=runBlocking {
+        val folder=File(context.getExternalFilesDir(null),"poster-release-test")
+        withSet(folder=folder){client->
+            val set=manager.store.snapshot().getJSONObject("packages")
+            assertEquals(34,set.length())
+            val modules=set.keys().asSequence().associateWith{key->
+                UpdateProtocol.module(set.getJSONObject(key).getString("manifest").toByteArray())
+            }
+            val newSites=modules.values.filter{it.minApp==manager.installedCode}
+            assertEquals(15,newSites.size)
+            assertTrue(newSites.all{it.type=="site"})
+            for((key,module) in modules){
+                val siteId=modules.values.single{it.type=="site"&&it.id.drop(1)==module.id.drop(1)}.site!!.getString("id")
+                assertEquals(1,client.probe(key,payload(siteId)).getInt("sdk"))
+            }
+            checkPosterSize(client)
+        }
+    }
+    private suspend fun checkPosterSize(client:PluginWorkerClient) {
+        val id="filmcibaba"
+        val page=Sites.get(id).base
+        val html="""<article><a class="v100-card" href="/poster-fixture/">
+            <img src="/poster-1280.jpg" srcset="/poster-180.jpg 180w, /poster-320.jpg 320w, /poster-1280.jpg 1280w">
+            <h2 class="v100-title">Poster fixture</h2></a></article>"""
+        val result=PluginWire.page(client.call(id,"site","parseList",payload(id).put("body",html).put("url",page)))
+        assertEquals("$page/poster-320.jpg",result.cards.single().poster)
+    }
     fun signedCatalogUpdatesReadRecordedPages()=runBlocking {
         val folder=File(context.getExternalFilesDir(null),"catalog-release-test")
         withSet(folder=folder){client->

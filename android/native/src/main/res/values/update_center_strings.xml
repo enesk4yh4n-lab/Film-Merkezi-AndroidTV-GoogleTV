@@ -33,6 +33,12 @@
     <string name="updates_unused_resolvers">Kullanılmayan çözümleyiciler</string>
     <string name="updates_unused_resolvers_help">Bu çözümleyicileri hazırlanan paketteki hiçbir site kullanmıyor.</string>
     <string name="updates_phase_downloading">İndiriliyor…</string>
+    <string name="apk_download_starting">İndirme başlatılıyor…</string>
+    <string name="apk_download_progress">APK indiriliyor · %1$d%% · %2$.1f / %3$.1f MiB</string>
+    <string name="apk_download_verifying">APK doğrulanıyor…</string>
+    <string name="apk_download_cancel_action">İptal</string>
+    <string name="apk_download_cancelled">APK indirme iptal edildi.</string>
+    <string name="apk_download_retry">Yeniden indir</string>
     <string name="updates_phase_verifying">Doğrulanıyor…</string>
     <string name="updates_phase_ready">Değişiklikler etkinleştirmeye hazır</string>
     <string name="updates_apply_ready">Uygula ve yeniden başlat</string>

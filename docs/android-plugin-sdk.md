@@ -49,7 +49,7 @@ Her çağrı `site` metadata nesnesini içerir. Alanların tam dönüşümü [Pl
 | trim | site | `{}` |
 | resolve (resolver paketi) | site, option | oynatılabilir kaynak |
 
-Kart `schemaVersion`, `ref {siteId,pageUrl,kind}`, title ve isteğe bağlı metadata içerir. Kaynak `schemaVersion`, id, label, url, type (hls/mp4/dash/webm), referer, userAgent, cookie, headers, subtitles, playbackRequirements, mediaProfile, expiresAt, audioStreams ve variants taşır. Dizilerde sezon/bölüm numarası korunur. Başarısız yanıt boş başarılı liste diye dönülmez.
+Kart `schemaVersion`, `ref {siteId,pageUrl,kind}`, title ve isteğe bağlı metadata içerir. Katalog ve aramada `poster` için sitenin ilan ettiği uygun küçük afiş URL’si tercih edilir. Detay daha büyük bir URL döndürebilir. Kaynak `schemaVersion`, id, label, url, type (hls/mp4/dash/webm), referer, userAgent, cookie, headers, subtitles, playbackRequirements, mediaProfile, expiresAt, audioStreams ve variants taşır. Bir varyantta isteğe bağlı `bitrate` biliniyorsa bit/saniye olarak taşınabilir. Dizilerde sezon/bölüm numarası korunur. Başarısız yanıt boş başarılı liste diye dönülmez.
 
 Bölüm yanıtındaki isteğe bağlı `verifiedNumber: { season, number }`, sağlayıcının açıkça doğruladığı sezon ve bölüm koordinatlarını taşır. `season: 0` yalnız sağlayıcının özel bölüm olarak bildirdiği bölümde kullanılır. Kartın ham başlığı korunur ve numara uyuşmayan alternatif kaynaklar elenir.
 

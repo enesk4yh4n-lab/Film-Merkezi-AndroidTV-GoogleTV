@@ -68,8 +68,8 @@ class TvActivity:FragmentActivity() {
     private var series=movies
     private var library=emptyList<LibraryRecord>()
     private val feeds=mutableMapOf<TvScreen,UnifiedPage>()
-    // At most one provider page awaits presentation; unseen cards are never dropped.
-    private val pendingFeeds=mutableMapOf<TvScreen,List<UnifiedItem>>()
+    private val feedLimits=mutableMapOf<Pair<TvScreen,SearchType>,Int>()
+    private val firstPages by lazy { CatalogReads(scope) }
     private val catalogJobs=linkedMapOf<TvScreen,Job>()
     private val catalogVisits=mutableMapOf<TvScreen,CatalogVisit>()
     private val liveFeeds=mutableMapOf<TvScreen,UnifiedPage>()
@@ -79,6 +79,8 @@ class TvActivity:FragmentActivity() {
     private var searchQuery=""
     private val feedBusy get()=current.screen in catalogJobs
     private var renderedCatalog=emptyList<UnifiedItem>()
+    private var feedAction:Button?=null
+    private var feedActionLabel=0
     private var detailValue:Detail?=null
     private var episodeValues=emptyList<Episode>()
     private var declaredSeasons=emptyList<Int>()
@@ -199,7 +201,7 @@ class TvActivity:FragmentActivity() {
         scope.launch{while(isActive){delay(1000);if(sleepExpired()&&playback.active&&!finishBusy&&!exitOpen)finishForSleep()}}
         if(dataFactoryForTests==null){
             val distribution=app.filmmerkezi.tv.updates.DistributionManager.get(this)
-            scope.launch{while(isActive){if(foreground)distribution.foreground(playback.active);delay(60000)}}
+            scope.launch{while(isActive){if(foreground)distribution.foreground(playback.active||entryBusy||pendingCheckpoint!=null);delay(60000)}}
             startUpdateNotices()
         }
         scope.launch{var previous=settings.value;settings.changes.collect{v->
@@ -234,11 +236,15 @@ class TvActivity:FragmentActivity() {
     }
     internal suspend fun quiesceForDistribution(){
         check(!playback.active)
-        val pending=work.toList()+catalogJobs.values;cancelWork();cancelCatalogLoads();pending.joinAll()
+        val pending=work.toList()+catalogJobs.values+firstPages.cancelActive();cancelWork();cancelCatalogLoads();pending.joinAll()
         val sources=listOfNotNull(sourcePoolJob,sourceStartJob,sourceDeadlineJob,neighbourJob,entryJob)
         sources.forEach{it.cancel()};sources.joinAll()
     }
     private fun cancelWork(){generation++;work.forEach{it.cancel()};work.clear()}
+    private fun prioritizePlayback(active:Boolean){
+        services.prioritizePlayback(active)
+        if(dataFactoryForTests==null)app.filmmerkezi.tv.updates.DistributionManager.get(this).foreground(active||!foreground)
+    }
     private fun cancelCatalogLoad(screen:TvScreen){
         liveFeeds.remove(screen)
         catalogVisits.remove(screen)?.visible=false
@@ -246,7 +252,7 @@ class TvActivity:FragmentActivity() {
     }
     private fun cancelCatalogLoads(){catalogJobs.keys.toList().forEach(::cancelCatalogLoad)}
     private fun clearCatalogScreen(screen:TvScreen){
-        cancelCatalogLoad(screen);feeds.remove(screen);pendingFeeds.remove(screen)
+        cancelCatalogLoad(screen);feeds.remove(screen);feedLimits.keys.removeAll{it.first==screen}
         if(screen==TvScreen.HOME){homeLoaded.clear();movies=UnifiedPage(emptyList(),emptyMap(),emptyList());series=movies}
     }
     private fun catalogVisible(screen:TvScreen)=current.screen==screen&&!setupShowing&&settingsScreen==null&&!playback.active&&!isFinishing&&!isDestroyed
@@ -283,10 +289,11 @@ class TvActivity:FragmentActivity() {
         catalogVisits.forEach{(screen,visit)->visit.visible=screen==current.screen}
         val newScope=Triple(catalogPreferences.siteId,settings.value.catalog(),Sites.all)
         if(catalogScope!=newScope){
-            cancelCatalogLoads();feeds.clear();pendingFeeds.clear();clearCatalogScreen(TvScreen.HOME);catalogScope=newScope
+            cancelCatalogLoads();firstPages.clear();feeds.clear();feedLimits.clear();clearCatalogScreen(TvScreen.HOME);catalogScope=newScope
         }
+        firstPages.prioritize(visibleCatalogKeys())
         if(state.screen==TvScreen.SEARCH&&searchQuery!=state.query){clearCatalogScreen(TvScreen.SEARCH);searchQuery=state.query;focuses.remove(TvScreen.SEARCH)}
-        rows=null;grid=null;episodeGrid=null;firstContent=null;contentReturn=null;queryView=null;heroButton=null;heroCard=null;heroImage=null;homeHero=null;homeStatus=null
+        rows=null;grid=null;episodeGrid=null;firstContent=null;feedAction=null;feedActionLabel=0;contentReturn=null;queryView=null;heroButton=null;heroCard=null;heroImage=null;homeHero=null;homeStatus=null
         supportFragmentManager.findFragmentById(R.id.tv_content)?.let{supportFragmentManager.beginTransaction().remove(it).commitNow()}
         if(::ui.isInitialized)host.removeView(ui)
         ui=LinearLayout(this).apply{orientation=LinearLayout.VERTICAL;setBackgroundColor(canvasColor)}
@@ -405,7 +412,8 @@ class TvActivity:FragmentActivity() {
         if(kinds.isNotEmpty()&&settings.value.catalog().sites.isNotEmpty())launchCatalogLoad(TvScreen.HOME){
             supervisorScope { kinds.forEach{kind->launch{
                 try{
-                    data.browseSite(site,kind).distinctUntilChanged().collect{page->
+                    val query=CatalogQuery(kind)
+                    firstPages.observe(browseKey(site,query)){data.browseSite(site,kind)}.distinctUntilChanged().collect{page->
                         if(kind==ContentKind.MOVIE)movies=page else series=page
                         if(catalogVisible(TvScreen.HOME))refreshHomeView?.invoke()
                     }
@@ -426,7 +434,7 @@ class TvActivity:FragmentActivity() {
         }
         fun shelf(values:List<TvTile>,more:String,kind:ContentKind?=null):List<TvTile>{
             if(values.isNotEmpty())return values.take(TvPolicy.ROW_CARDS)+TvTile("more:$more",getString(R.string.tv_more),action=more)
-            if(kind !in homeLoaded)return listOf(statusTile(R.string.tv_loading,more))
+            if(kind !in homeLoaded)return listOf(statusTile(R.string.tv_loading,"feed:wait"))
             val page=if(kind==ContentKind.MOVIE)movies else series
             return listOf(if(page.failures.isEmpty())statusTile(R.string.tv_no_results,more)else statusTile(R.string.tv_retry))
         }
@@ -447,81 +455,112 @@ class TvActivity:FragmentActivity() {
     private fun catalog() {
         classicHeading(getString(if(current.screen==TvScreen.SERIES)R.string.tv_series else if(current.screen==TvScreen.DISCOVER)R.string.classic_discover else if(current.screen==TvScreen.ANIMATION)R.string.catalog_animation else if(current.screen==TvScreen.DRAMA_SHORT)R.string.catalog_drama_short else R.string.tv_movies),current.screen.section==null)
         gridContainer()
+        addFeedAction()
         val screen=current.screen
-        (liveFeeds[screen]?:feeds[screen])?.let(::showFeed)?:grid?.show(listOf(statusTile(R.string.tv_loading,"feed:wait")))
+        (liveFeeds[screen]?:feeds[screen])?.let(::showFeed)?:status.setText(R.string.tv_loading)
         if(feeds[screen]==null)loadFeed(false)
     }
     private fun loadFeed(more:Boolean) {
-        val state=current;val previous=feeds[state.screen]
-        if(feedBusy||settings.value.catalog().sites.isEmpty()){
-            if(!feedBusy)showFeed(UnifiedPage(emptyList(),emptyMap(),emptyList()))
-            return
+        val state=current;val previous=liveFeeds[state.screen]?:feeds[state.screen]
+        if(settings.value.catalog().sites.isEmpty()){if(!feedBusy)showFeed(UnifiedPage(emptyList(),emptyMap(),emptyList()));return}
+        val key=state.screen to state.searchType
+        if(more){
+            val page=previous?:return
+            val limit=feedLimit()
+            val count=selectedFeed(page).size
+            val target=minOf(limit,count)+TvPolicy.CATALOG_BATCH
+            if(count>limit){
+                feedLimits[key]=target
+                showFeed(page)
+                if(count>=target||feedBusy||page.next.isEmpty())return
+            }
+            if(feedBusy||page.next.isEmpty())return
+            feedLimits[key]=maxOf(TvPolicy.CATALOG_BATCH,target)
         }
-        if(more&&state.screen==TvScreen.SEARCH&&previous!=null){
-            val count=ClassicCatalogPolicy.apply(previous.items,classicFilter,classicSort).count{state.searchType.accepts(it)}
-            if((state.searchPage+1)*TvPolicy.GRID_CARDS<count){current=current.copy(searchPage=state.searchPage+1);grid?.resetSelection();showFeed(previous);return}
-        }
-        val pending=pendingFeeds[state.screen].orEmpty()
-        if(more&&pending.isNotEmpty()&&previous!=null){
-            val bounded=previous.copy(items=(previous.items+pending.take(TvPolicy.GRID_CARDS)).takeLast(TvPolicy.GRID_CARDS))
-            pendingFeeds[state.screen]=pending.drop(TvPolicy.GRID_CARDS)
-            feeds[state.screen]=bounded;showFeed(bounded);return
-        }
-        if(more&&previous?.next.isNullOrEmpty())return
+        if(feedBusy)return
         val cursors=if(more)previous!!.next else emptyMap()
         val old=if(more)previous!!.items else emptyList()
         status.setText(R.string.tv_loading)
-        val flow=catalogFlow(state,catalogPreferences.siteId,cursors)
+        val site=catalogPreferences.siteId
+        val query=screenQuery(state.screen)
+        val flow=if(more||state.screen==TvScreen.SEARCH)catalogFlow(state,site,cursors)
+            else firstPages.observe(feedKey(state.screen,site,query)){catalogFlow(state,site,query=query)}
         launchCatalogLoad(state.screen){
             var completed:UnifiedPage?=null
-            var overflow=emptyList<UnifiedItem>()
             flow.distinctUntilChanged().collect{page->
-                val incoming=if(state.screen==TvScreen.SEARCH)page.items else page.items.take(TvPolicy.GRID_CARDS)
-                val combined=if(old.isEmpty())page.copy(items=incoming) else withContext(Dispatchers.Default){
+                val combined=if(!more)page else withContext(Dispatchers.Default){
                     val options=settings.value.catalog()
-                    val cards=(old+incoming)
+                    val cards=old+page.items
                     page.copy(items=if(options.merge)CatalogPresentation.project(ContentIdentity.merge(cards.flatMap{it.alternatives}),options)
-                        else cards.distinctBy{it.displayKey.ifBlank{it.card.ref.id}})
+                        else cards.distinctBy{it.displayKey.ifBlank{it.card.ref.id}},
+                        next=cursors.filterKeys{it !in page.siteCounts} + page.next.filter{(id,next)->next!=cursors[id]})
                 }
-                overflow=if(state.screen==TvScreen.SEARCH)emptyList()else page.items.drop(TvPolicy.GRID_CARDS)
-                val bounded=if(state.screen==TvScreen.SEARCH)combined else combined.copy(items=combined.items.takeLast(TvPolicy.GRID_CARDS))
                 val previousItems=liveFeeds[state.screen]?.items?:previous?.items.orEmpty()
-                val result=if(catalogVisible(state.screen)&&grid?.hasContentFocus()==true)bounded.copy(items=stableContentOrder(previousItems,bounded.items))else bounded
+                val result=combined.copy(items=stableContentOrder(previousItems,combined.items))
                 completed=result
                 liveFeeds[state.screen]=result
                 if(catalogVisible(state.screen))showFeed(result)
             }
-            completed?.let{feeds[state.screen]=it;pendingFeeds[state.screen]=overflow}
+            completed?.let{feeds[state.screen]=it}
         }
     }
     private fun catalogQuery(kind:ContentKind=ContentKind.MOVIE)=CatalogQuery(kind,classicFilter.genre,classicFilter.yearFrom.takeIf{it>0},classicFilter.language,classicFilter.minimumRating,CatalogOrder.entries[classicSort.ordinal])
+    private fun screenQuery(screen:TvScreen)=catalogQuery(if(screen==TvScreen.SERIES)ContentKind.SERIES else ContentKind.MOVIE)
+    private fun browseKey(site:String,query:CatalogQuery)="$site:${query.signature}"
+    private fun feedKey(screen:TvScreen,site:String,query:CatalogQuery)=screen.section?.let{"$site:$it"}?:browseKey(site,query)
+    private fun homeKeys()=listOf(ContentKind.MOVIE,ContentKind.SERIES).map{browseKey(catalogPreferences.siteId,CatalogQuery(it))}.toSet()
+    private fun visibleCatalogKeys()=when(current.screen){
+        TvScreen.HOME->homeKeys()
+        TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER,TvScreen.ANIMATION,TvScreen.DRAMA_SHORT->setOf(feedKey(current.screen,catalogPreferences.siteId,screenQuery(current.screen)))
+        else->emptySet()
+    }
+    private fun feedLimit()=feedLimits[current.screen to current.searchType]?:TvPolicy.CATALOG_BATCH
+    private fun selectedFeed(page:UnifiedPage)=ClassicCatalogPolicy.apply(shown(page.items),
+        if(current.screen==TvScreen.SEARCH)classicFilter else ClassicFilter(),classicSort)
+        .filter{current.screen!=TvScreen.SEARCH||current.searchType.accepts(it)}
+    private fun addFeedAction(){
+        feedAction=button(""){}.apply{tag="feed:action";visibility=View.GONE}
+        body.addView(feedAction,LinearLayout.LayoutParams(dp(184),dp(31)).apply{gravity=Gravity.CENTER_HORIZONTAL;topMargin=dp(3)})
+    }
     private fun showFeed(page:UnifiedPage){
-        if(settings.value.catalog().sites.isEmpty()){grid?.show(listOf(statusTile(R.string.settings_disabled_sites,"settings")));status.setText(R.string.settings_disabled_sites);return}
+        if(settings.value.catalog().sites.isEmpty()){
+            grid?.show(emptyList());status.setText(R.string.settings_disabled_sites)
+            setFeedAction(R.string.settings_catalog){showSettings()};return
+        }
         val ordered=ClassicCatalogPolicy.apply(shown(page.items),if(current.screen==TvScreen.SEARCH)classicFilter else ClassicFilter(),classicSort)
-        val all=if(grid?.hasContentFocus()==true)stableContentOrder(renderedCatalog,ordered)else ordered
+        val all=stableContentOrder(renderedCatalog,ordered)
         renderedCatalog=all
         if(current.screen==TvScreen.SEARCH)updateSearchTabs(all)
         val selected=if(current.screen==TvScreen.SEARCH)all.filter{current.searchType.accepts(it)}else all
-        if(current.screen==TvScreen.SEARCH)current=current.copy(searchPage=current.searchPage.coerceAtMost(((selected.size-1).coerceAtLeast(0))/TvPolicy.GRID_CARDS))
-        val offset=if(current.screen==TvScreen.SEARCH)current.searchPage*TvPolicy.GRID_CARDS else 0
-        val localMore=selected.size>offset+TvPolicy.GRID_CARDS
-        val values=tiles(selected.drop(offset).take(TvPolicy.GRID_CARDS))
-        val more=localMore||page.next.isNotEmpty()||!pendingFeeds[current.screen].isNullOrEmpty()
-        val empty=when{
-            feedBusy->statusTile(R.string.tv_loading,"feed:wait")
-            current.screen.section!=null&&page.requestedSites==0->statusTile(R.string.catalog_section_unavailable,"settings")
-            current.screen.section!=null&&(page.failures.isNotEmpty()||page.coverage.any{"section" in it.local})->statusTile(R.string.catalog_section_failed)
-            current.screen.section!=null->statusTile(R.string.catalog_section_empty)
-            page.failures.isNotEmpty()->statusTile(R.string.tv_network_error)
-            else->statusTile(R.string.tv_no_results)
+        val values=tiles(selected.take(feedLimit()))
+        val localMore=selected.size>values.size
+        val more=localMore||page.next.isNotEmpty()
+        val section=current.screen.section!=null
+        val sectionFailed=section&&page.coverage.any{"section" in it.local}
+        grid?.show(values)
+        val message=when{
+            feedBusy&&values.isEmpty()&&!page.cached->getString(R.string.tv_loading)
+            !feedBusy&&values.isEmpty()&&section&&page.requestedSites==0->getString(R.string.catalog_section_unavailable)
+            !feedBusy&&values.isEmpty()&&section&&(sectionFailed||page.failures.isNotEmpty())->getString(R.string.catalog_section_failed)
+            !feedBusy&&values.isEmpty()&&page.failures.isEmpty()->getString(if(section)R.string.catalog_section_empty else R.string.tv_no_results)
+            else->pageStatus(page,values.size)
         }
-        grid?.show(buildList{
-            if(current.screen==TvScreen.SEARCH&&current.searchPage>0)add(TvTile("feed:previous",getString(R.string.tv_previous),action="feed:previous"))
-            if(values.isEmpty())add(empty)else addAll(values)
-            if(feedBusy&&values.isNotEmpty())add(statusTile(R.string.tv_loading,"feed:wait"))
-            if(!feedBusy&&more)add(TvTile("feed:more",getString(R.string.tv_more),action="feed:more"))
-        })
-        status.text=pageStatus(page,values.size)+if(page.coverage.any{it.partial})" · "+getString(R.string.fm_partial_scope,page.coverage.count{it.partial})else ""
+        status.text=message+if(page.coverage.any{it.partial})" · "+getString(R.string.fm_partial_scope,page.coverage.count{it.partial})else ""
+        when{
+            localMore||!feedBusy&&more->setFeedAction(R.string.tv_more){loadFeed(true)}
+            feedBusy&&feedAction?.hasFocus()==true->setFeedAction(R.string.tv_more){}
+            !feedBusy&&(page.failures.isNotEmpty()||sectionFailed)->setFeedAction(R.string.tv_retry){refreshCatalogScreen()}
+            else->setFeedAction(0){}
+        }
+    }
+    private fun setFeedAction(label:Int,action:()->Unit){
+        val control=feedAction?:return
+        if(label==0&&control.hasFocus()){
+            if(grid?.focusContent()==true)Unit else (navigation[current.screen]?:navigation[TvScreen.HOME])?.requestFocus()
+        }
+        if(label!=feedActionLabel&&label!=0)control.setText(label)
+        feedActionLabel=label;control.visibility=if(label==0)View.GONE else View.VISIBLE
+        control.setOnClickListener{action()}
     }
     private fun sortLabels()=arrayOf(getString(R.string.classic_default_order),getString(R.string.classic_newest_order),getString(R.string.classic_rating_order),getString(R.string.classic_title_order))
     private fun classicHeading(title:String,filters:Boolean=true){
@@ -548,10 +587,19 @@ class TvActivity:FragmentActivity() {
     }
     private fun reloadFiltered(){
         listOf(TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER).forEach(::clearCatalogScreen)
+        renderedCatalog=emptyList()
+        firstPages.prioritize(visibleCatalogKeys())
         refreshClassicResults()
     }
     private fun refreshCatalogScreen(){
-        clearCatalogScreen(current.screen);data.invalidateCatalog();render(current)
+        val keys=visibleCatalogKeys()
+        firstPages.invalidate(keys)
+        val seen=TvScreen.entries.filter{it!=TvScreen.HOME&&it!=TvScreen.SEARCH&&
+            feedKey(it,catalogPreferences.siteId,screenQuery(it)) in keys}
+            .filter{it in setOf(TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER,TvScreen.ANIMATION,TvScreen.DRAMA_SHORT)}
+        (seen+current.screen).distinct().forEach(::clearCatalogScreen)
+        if(current.screen!=TvScreen.HOME&&keys.any{it in homeKeys()})clearCatalogScreen(TvScreen.HOME)
+        data.invalidateCatalog();render(current)
     }
     private fun refreshClassicResults(){
         findViewById<Button>(R.id.classic_sort)?.text=getString(R.string.classic_sort,sortLabels()[classicSort.ordinal])
@@ -767,10 +815,10 @@ class TvActivity:FragmentActivity() {
         }
     }
     private fun search() {
-        classicHeading(if(current.query.isBlank())getString(R.string.tv_search)else getString(R.string.ux_search_title,current.query));gridContainer()
+        classicHeading(if(current.query.isBlank())getString(R.string.tv_search)else getString(R.string.ux_search_title,current.query));gridContainer();addFeedAction()
         if(current.query.isNotBlank()){
             (liveFeeds[TvScreen.SEARCH]?:feeds[TvScreen.SEARCH])?.let(::showFeed)
-                ?:grid?.show(listOf(statusTile(R.string.tv_loading,"feed:wait")))
+                ?:status.setText(R.string.tv_loading)
             if(feeds[TvScreen.SEARCH]==null)loadFeed(false)
         }else{
             status.setText(R.string.tv_search_prompt)
@@ -778,10 +826,11 @@ class TvActivity:FragmentActivity() {
             launchScreen{t->val history=data.searches();if(active(t)&&history.isNotEmpty())grid?.show(history.take(20).map{TvTile("query:$it",it,action="query:$it")})}
         }
     }
-    private fun catalogFlow(state:TvNav,site:String,cursors:Map<String,PageCursor> = emptyMap())=when {
+    private fun catalogFlow(state:TvNav,site:String,cursors:Map<String,PageCursor> = emptyMap(),query:CatalogQuery=screenQuery(state.screen))=when {
         state.screen==TvScreen.SEARCH->data.searchSite(site,state.query,cursors)
         state.screen.section!=null->data.section(site,checkNotNull(state.screen.section),cursors)
-        else->data.filteredBrowse(site,catalogQuery(if(state.screen==TvScreen.SERIES)ContentKind.SERIES else ContentKind.MOVIE),cursors)
+        query==CatalogQuery(query.kind)->data.browseSite(site,query.kind,cursors)
+        else->data.filteredBrowse(site,query,cursors)
     }
 
     private fun retryCatalogSite(id:String){
@@ -1232,7 +1281,7 @@ class TvActivity:FragmentActivity() {
     private fun requestStart(detail:Detail,episode:UnifiedItem?=null,restart:Boolean=false){
         if(settings.value.hideAdult&&AdultContent.blocked(detail.card)){sourceProblem(getString(R.string.settings_filtered));return}
         if(pendingCheckpoint!=null||finishBusy||entryBusy)return
-        cancelCatalogLoads();entryBusy=true;sourceEpisode=episode;val revision=++entryRevision
+        cancelCatalogLoads();entryBusy=true;prioritizePlayback(true);sourceEpisode=episode;val revision=++entryRevision
         entryJob=scope.launch{
             var opened:PlaybackCheckpoint?=null;var handedOff=false
             try{
@@ -1259,7 +1308,7 @@ class TvActivity:FragmentActivity() {
         }catch(e:CancellationException){throw e}catch(e:Exception){sourceProblem(getString(R.string.ux_storage_retry))}
         finally{
             if(!handedOff)opened?.let{cp->services.storageScope.launch{try{data.abandonPlayback(cp)}catch(_:Exception){android.util.Log.e("FilmStorage","Unused entry checkpoint")}}}
-            if(revision==entryRevision){entryBusy=false;if(!handedOff)sourceEpisode=null}
+            if(revision==entryRevision){entryBusy=false;if(!handedOff){sourceEpisode=null;if(!playback.active)prioritizePlayback(false)}}
         }}
     }
     private fun cancelEntry()=cancelEntry(true)
@@ -1268,7 +1317,7 @@ class TvActivity:FragmentActivity() {
         cancelSources();initialSourceDetail=null;sourceEpisode=null;classicOverlay?.close()
         val cp=pendingCheckpoint;pendingCheckpoint=null
         if(cp!=null)services.storageScope.launch{try{data.abandonPlayback(cp)}catch(e:Exception){android.util.Log.e("FilmStorage","Entry checkpoint",e)}}
-        if(!playback.active){Glide.with(this@TvActivity).resumeRequestsRecursive();ui.visibility=View.VISIBLE;if(restore&&foreground)render(current)}
+        if(!playback.active){prioritizePlayback(false);Glide.with(this@TvActivity).resumeRequestsRecursive();ui.visibility=View.VISIBLE;if(restore&&foreground)render(current)}
     }
     private fun requestExit(){
         if(!playback.active){if(pendingCheckpoint!=null||entryBusy)cancelEntry();return}
@@ -1307,7 +1356,7 @@ class TvActivity:FragmentActivity() {
             data.finishPlayback(cp,mode,position,duration)
             checkpoint=null;exitOpen=false;adultBlocked=false;sleepMinutes=0;sleepDeadline=0;classicOverlay?.close();cancelSources();playerControls?.close();mediaButtons.close()
             settingsScreen?.let{it.dispose();host.removeView(it)};settingsScreen=null
-            playback.stopPlayback();playingCard=null;sourceEpisode=null;Glide.with(this@TvActivity).resumeRequestsRecursive();render(current);firstContent?.requestFocus()
+            playback.stopPlayback();playingCard=null;sourceEpisode=null;prioritizePlayback(false);Glide.with(this@TvActivity).resumeRequestsRecursive();render(current);firstContent?.requestFocus()
         }catch(e:CancellationException){throw e}catch(e:Exception){drawExit(getString(R.string.ux_storage_retry))}finally{finishBusy=false}}
     }
     private fun applyPlayerSettings(){
@@ -1382,7 +1431,6 @@ class TvActivity:FragmentActivity() {
             tile.action=="series"->navigate(TvNav(TvScreen.SERIES))
             tile.action=="library"->navigate(TvNav(TvScreen.LIBRARY))
             tile.action=="feed:more"->loadFeed(true)
-            tile.action=="feed:previous"->{current=current.copy(searchPage=(current.searchPage-1).coerceAtLeast(0));grid?.resetSelection();feeds[TvScreen.SEARCH]?.let(::showFeed)}
             tile.action=="feed:wait"->Unit
             tile.action=="retry"&&(current.screen==TvScreen.HOME||current.screen==TvScreen.SEARCH&&current.query.isNotBlank()||
                 current.screen in setOf(TvScreen.MOVIES,TvScreen.SERIES,TvScreen.DISCOVER,TvScreen.ANIMATION,TvScreen.DRAMA_SHORT))->refreshCatalogScreen()
@@ -1398,7 +1446,8 @@ class TvActivity:FragmentActivity() {
     }
     private fun showError(){
         status.setText(R.string.tv_network_error)
-        grid?.show(listOf(statusTile(R.string.tv_retry)))
+        if(feedAction!=null)setFeedAction(R.string.tv_retry){refreshCatalogScreen()}
+        else grid?.show(listOf(statusTile(R.string.tv_retry)))
         if(rows==null&&grid==null)body.addView(button(getString(R.string.tv_retry)){render(current)}.also{firstContent=it})
     }
     private fun focusAboveContent(fromGrid:Boolean=false){
@@ -1422,7 +1471,7 @@ class TvActivity:FragmentActivity() {
         val collections=findViewById<View>(R.id.fm_collections)
         fun go(target:View?):Boolean{target?.takeIf{it.isShown&&it.isFocusable}?.requestFocus();return true}
         fun down():Boolean{if(focus!==firstContent)contentReturn=focus;focusAboveContent();return true}
-        fun cards():Boolean{if(grid!=null)grid?.focusContent()else focusContent();return true}
+        fun cards():Boolean{if(grid?.focusContent()!=true){if(feedAction?.isShown==true)feedAction?.requestFocus()else if(grid==null)focusContent()};return true}
         // Home has Sort above Site responses; catalog/search screens have the reverse layout.
         // Follow their current on-screen positions rather than imposing a shared hard-coded order.
         val column=listOfNotNull(sites,sort,responses).filter{it.isShown&&it.isFocusable}.sortedBy{node->IntArray(2).also{node.getLocationOnScreen(it)}[1]}
@@ -1458,6 +1507,12 @@ class TvActivity:FragmentActivity() {
             KeyEvent.KEYCODE_DPAD_RIGHT->go(chips.getOrNull(chip+1)?:filters?:sort)
             else->false}
         if(focus===added||focus===collections)return when(key){KeyEvent.KEYCODE_DPAD_UP->go(contentReturn?.takeIf{it.isShown}?:navigation[current.screen]?:nav.firstOrNull());KeyEvent.KEYCODE_DPAD_DOWN->cards();KeyEvent.KEYCODE_DPAD_LEFT->go(added);KeyEvent.KEYCODE_DPAD_RIGHT->go(if(focus===added)collections?:filters else filters);else->false}
+        if(focus===feedAction)return when(key){
+            KeyEvent.KEYCODE_DPAD_UP->{if(grid?.focusContent()!=true)focusAboveContent(true);true}
+            KeyEvent.KEYCODE_DPAD_DOWN,KeyEvent.KEYCODE_DPAD_LEFT,KeyEvent.KEYCODE_DPAD_RIGHT->true
+            else->false
+        }
+        if(key==KeyEvent.KEYCODE_DPAD_DOWN&&grid?.atBottom()==true&&grid?.hasContentFocus()==true&&feedAction?.isShown==true)return go(feedAction)
         if(rows?.move(key)==true)return true
         if(key==KeyEvent.KEYCODE_DPAD_UP){
             val inContent=findViewById<View>(R.id.tv_content)?.hasFocus()==true
@@ -1469,7 +1524,8 @@ class TvActivity:FragmentActivity() {
     }
     private fun focusContent(){
         if(firstContent?.isShown==true){firstContent?.requestFocus();return}
-        if(episodeGrid!=null)episodeGrid?.focusContent()else if(rows!=null)rows?.focusContent()else if(grid!=null)grid?.focusContent()else navigation[current.screen]?.requestFocus()
+        if(episodeGrid!=null)episodeGrid?.focusContent()else if(rows!=null)rows?.focusContent()
+        else if(grid?.focusContent()!=true){if(feedAction?.isShown==true)feedAction?.requestFocus()else navigation[current.screen]?.requestFocus()}
     }
     // Framework Activity override: route TV keys before child views consume them.
     // Core's legacy ComponentActivity marks its implementation library-restricted.
@@ -1506,7 +1562,7 @@ class TvActivity:FragmentActivity() {
             checkpoint?.takeIf{it.token!=cp.token}?.let{previous->data.finishPlayback(previous,PlaybackFinish.SAVE,playback.snapshot().optLong("positionMs"),playback.durationMs())}
         }catch(e:Exception){sourceProblem(getString(R.string.ux_storage_retry));return}
         checkpoint=cp;pendingCheckpoint=null;initialSourceDetail=null;classicOverlay?.close()
-        nextCountdown?.cancel();playerControls?.close();cancelWork();cancelCatalogLoads();playback.stopPlayback();playingCard=card
+        nextCountdown?.cancel();playerControls?.close();cancelWork();cancelCatalogLoads();prioritizePlayback(true);playback.stopPlayback();playingCard=card
         subtitleAppearance?.clearOffset();playbackHasFrame=false;preparedBackup=false;explicitSourceScan=false
         ensurePlayerView()
         ui.visibility=View.GONE
@@ -1698,10 +1754,10 @@ class TvActivity:FragmentActivity() {
         if(hasFocus)window.decorView.systemUiVisibility=View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
     }
     override fun onResume(){super.onResume();foreground=true;if(android.os.Build.VERSION.SDK_INT<=23)playback.resumePlayback()
-        if(dataFactoryForTests==null)app.filmmerkezi.tv.updates.DistributionManager.get(this).foreground(playback.active)
+        if(dataFactoryForTests==null)app.filmmerkezi.tv.updates.DistributionManager.get(this).foreground(playback.active||entryBusy||pendingCheckpoint!=null)
     }
     override fun onPause(){if(android.os.Build.VERSION.SDK_INT<=23){foreground=false;saveProgress();playback.suspendPlayback()};super.onPause()}
-    override fun onStop(){foreground=false;updateNotices?.hide();if(!finishBusy&&(pendingCheckpoint!=null||entryBusy))cancelEntry(false);cancelSources();nextCountdown?.cancel();nextEpisodeJob?.cancel();playerControls?.close();cancelWork();cancelCatalogLoads();saveProgress();if(android.os.Build.VERSION.SDK_INT>=24)playback.suspendPlayback();super.onStop()}
+    override fun onStop(){foreground=false;updateNotices?.hide();if(!finishBusy&&(pendingCheckpoint!=null||entryBusy))cancelEntry(false);cancelSources();nextCountdown?.cancel();nextEpisodeJob?.cancel();playerControls?.close();cancelWork();cancelCatalogLoads();firstPages.cancelActive();saveProgress();if(android.os.Build.VERSION.SDK_INT>=24)playback.suspendPlayback();super.onStop()}
     override fun onTrimMemory(level:Int){
         super.onTrimMemory(level)
         if(::services.isInitialized)Posters.trim(this,level)
@@ -1709,12 +1765,13 @@ class TvActivity:FragmentActivity() {
         // Preserve the current screen's active pagination state; evict other screens.
         if(level==TRIM_MEMORY_UI_HIDDEN||level<TRIM_MEMORY_RUNNING_LOW)return
         if(::services.isInitialized)services.trim()
+        firstPages.trimTo(2)
         (catalogJobs.keys+feeds.keys+TvScreen.HOME).distinct().filter{it!=current.screen}.forEach(::clearCatalogScreen)
         if(current.screen!=TvScreen.DETAIL){detailValue=null;episodeValues=emptyList()}
         if(current.screen!=TvScreen.HOME&&current.screen!=TvScreen.DETAIL)library=emptyList()
     }
     override fun onLowMemory(){super.onLowMemory();onTrimMemory(android.content.ComponentCallbacks2.TRIM_MEMORY_COMPLETE)}
-    override fun onDestroy(){setupView?.dispose();subtitleAppearance?.close();settingsScreen?.dispose();classicOverlay?.close();neighbourJob?.cancel();cancelSources();cancelWork();nextEpisodeJob?.cancel();playerControls?.close();mediaButtons.close();dialog?.dismiss();saveProgress();playback.close();heroImage?.let{Posters.clear(it)};scope.cancel();super.onDestroy()}
+    override fun onDestroy(){setupView?.dispose();subtitleAppearance?.close();settingsScreen?.dispose();classicOverlay?.close();neighbourJob?.cancel();cancelSources();cancelWork();nextEpisodeJob?.cancel();playerControls?.close();mediaButtons.close();dialog?.dismiss();saveProgress();playback.close();prioritizePlayback(false);heroImage?.let{Posters.clear(it)};scope.cancel();super.onDestroy()}
     override fun onSaveInstanceState(out:Bundle){
         out.putString("searchType",current.searchType.name);out.putInt("searchPage",current.searchPage)
         out.putBoolean("interfaceSetup",setupShowing)

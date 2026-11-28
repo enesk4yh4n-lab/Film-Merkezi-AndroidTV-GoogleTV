@@ -676,10 +676,15 @@ internal class PlaybackSession(
                 event("refresh-expired-source");loadCurrent(R.string.player_refreshing);return@post
             }
             val currentSource=sources[recovery.index]
-            if(automaticSources&&PlaybackVariants.all(currentSource).isNotEmpty()){
+            if(automaticSources&&automaticVideo()&&PlaybackVariants.all(currentSource).isNotEmpty()){
                 val sourceId=currentSource.optString("id")
                 triedVariants.add(sourceId+"|"+currentSource.optString("variantId"))
-                val fallback=PlaybackVariants.fallback(currentSource,triedVariants.filter{it.startsWith(sourceId+"|")}.map{it.substringAfterLast('|')}.toSet()){device.allows(PlaybackVariants.format(it),true)&&(!automaticVideo()||autoAllowed(PlaybackVariants.format(it)))}
+                val tried=triedVariants.filter{it.startsWith(sourceId+"|")}.map{it.substringAfterLast('|')}.toSet()
+                val allowed:(JSONObject)->Boolean={val format=PlaybackVariants.format(it);device.allows(format,true)&&autoAllowed(format)}
+                val congested=reason==PlaybackRecovery.Failure.NETWORK||reason==PlaybackRecovery.Failure.STALL||reason==PlaybackRecovery.Failure.STARTUP
+                val fallback=if(congested)PlaybackVariants.lowerBitrate(currentSource,tried,
+                    if(transferMs>0)transferBytes*5600/transferMs else 700_000,allowed)
+                    else PlaybackVariants.fallback(currentSource,tried,allowed)
                 if(fallback!=null){
                     sources=sources.toMutableList().apply{set(recovery.index,fallback)};restarts++
                     event("combined-source-fallback");loadCurrent(R.string.player_retrying);return@post

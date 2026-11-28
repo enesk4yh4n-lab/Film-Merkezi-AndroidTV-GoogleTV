@@ -97,6 +97,7 @@ internal class TvServices private constructor(context:Context):TvData {
     private val recommendationPrefs=context.applicationContext.getSharedPreferences("recommendations",Context.MODE_PRIVATE)
     private val recommendationService=RecommendationService(repository,works){settings.value.catalog()}
     val storageScope=CoroutineScope(SupervisorJob()+Dispatchers.IO.limitedParallelism(1))
+    fun prioritizePlayback(active:Boolean)=repository.prioritizePlayback(active)
     override val storageWarning:Boolean get()=library.hasUnreadableRecords
     override fun browse(kind:ContentKind,cursors:Map<String,PageCursor>)=repository.observeBrowse(kind,cursors)
     override fun search(query:String,cursors:Map<String,PageCursor>)=repository.observeSearch(query,cursors)
@@ -211,7 +212,8 @@ object TvPolicy {
         val seconds=m.groupValues[3].toLongOrNull()?:0
         return (h*60+min+seconds/60).takeIf{it>0}
     }
-    const val ROW_CARDS=20
+    const val CATALOG_BATCH=18
+    const val ROW_CARDS=CATALOG_BATCH
     const val GRID_CARDS=120
     const val EPISODE_PAGE=24
     fun continuing(records:List<LibraryRecord>)=records.filter{it.positionMs>=10000&&(it.durationMs<=0||it.positionMs<it.durationMs*95/100)}.sortedByDescending{it.playbackUpdatedAt}
