@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
   "packageName": "app.filmmerkezi.tv",
-  "versionCode": 41,
-  "versionName": "0.13.2",
+  "versionCode": 42,
+  "versionName": "0.13.3",
   "minSdk": 23,
-  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.13.2/Film-Merkezi-Android-TV-0.13.2.apk",
-  "size": 5585161,
-  "sha256": "64d024709e4f99309dd0d66b4761a39ab3f7215247b34efe10a5ff82c4390cf8",
+  "url": "https://github.com/enesk4yh4n-lab/Film-Merkezi-AndroidTV-GoogleTV/releases/download/v0.13.3/Film-Merkezi-Android-TV-0.13.3.apk",
+  "size": 5593353,
+  "sha256": "a1037fe8e30aa508ff801f260db421fc656f9b4d7bc10879b212bf5443b47a53",
   "certificateSha256": "73753d46c206a8f651067541b12f5e038a5d207cca4bee21f8f984a27ed197ed",
-  "notes": "- Katalog sekmeleri ilk taramayı paylaşıyor. Sonuçlar 18 kartla başlıyor ve yeni yanıtlar kumanda odağını koruyor.\n- Klasik katalogda oklar kaldırıldı. Afiş yüklenirken Film Merkezi logosu görünüyor ve uygun küçük afişler tercih ediliyor.\n- Oynatma başlarken bağlantı önceliği videoya veriliyor. Uygun kaynaklarda otomatik seçim daha düşük bit hızlı varyanta geçebiliyor.\n- Güncelleme Merkezi APK indirmesini yüzdeyle gösteriyor. Doğrulama tamamlanınca **APK’yı kur** düğmesi etkinleşiyor."
+  "notes": "- İlk kurulumda depo araması otomatik açılıyor. Depoyu seçebilir, adresle ekleyebilir veya bu adımı atlayabilirsiniz.\n- Kurulabilir eklentiler seçili geliyor. Yükle düğmesiyle tek adımda kurulum tamamlanıyor ve Film Merkezi yeniden açılıyor.\n- Ana Sayfa’ya Çizgi Film/Anime ve Drama/Short satırları eklendi.\n- Tüm Siteler ve Site Yanıtları P kodlarını gösteriyor. Kurulu eklenti toplamı ve geçerli kataloğa katılanların sayısı ayrı görünüyor."
 }
